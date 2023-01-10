@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class PerspectiveToggle : MonoBehaviour
 {
-    #region private Variables
+    #region Editor Fields
+
+    [SerializeField] private GameObject _collosal = null;
+    [SerializeField] private GameObject[] _everythingElse = null;
+
+    #endregion
+
+    #region Private Variables
 
     private CameraManager _cameraManager;
 
@@ -30,6 +37,7 @@ public class PerspectiveToggle : MonoBehaviour
     {
         if (other.gameObject.GetComponent<Ship>() == null) { return; }
 
+
         StartCoroutine(OthoPerspectiveToggle(false));
     }
 
@@ -39,6 +47,13 @@ public class PerspectiveToggle : MonoBehaviour
     {
         TimelinesManager.Instance.CameraFadeTimeline.Play();
         yield return new WaitForSeconds(0.5f);
+
+        for (int i = 0; i < _everythingElse.Length; i++)
+        {
+            _everythingElse[i].SetActive(boolean);
+        }
+
+        _collosal.SetActive(!boolean);
         _cameraManager.CullingMaskToggle(boolean);
     }
 }

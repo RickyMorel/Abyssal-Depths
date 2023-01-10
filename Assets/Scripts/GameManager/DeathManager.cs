@@ -10,6 +10,13 @@ public class DeathManager : MonoBehaviour
 
     private ShipHealth _shipHealth;
     private float _timeSinceDeath;
+    private bool _isInSafeZone = false;
+
+    #endregion
+
+    #region Getters & Setters
+
+    public bool IsInSafeZone { get { return _isInSafeZone; } set { _isInSafeZone = value; } }
 
     #endregion
 
@@ -22,7 +29,7 @@ public class DeathManager : MonoBehaviour
 
     private void Update()
     {
-        if (!_shipHealth.IsDead()) { UpdateDeathTime(-1f); return; }
+        if (!_shipHealth.IsDead() || IsInSafeZone) { UpdateDeathTime(-1f); return; }
 
         UpdateDeathTime(1f);
 

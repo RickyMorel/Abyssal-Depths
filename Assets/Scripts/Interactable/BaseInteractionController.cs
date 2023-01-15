@@ -19,6 +19,7 @@ public class BaseInteractionController : MonoBehaviour
     protected Interactable _currentInteractable;
 
     protected bool _isUsing = false;
+    protected bool _isFixing = false;
     protected Vector3 _moveDirection;
     protected float _timeSinceLastInteraction;
 
@@ -33,6 +34,7 @@ public class BaseInteractionController : MonoBehaviour
     #region Getters & Setters
 
     public bool IsUsing { get { return _isUsing; } set { _isUsing = value; } }
+    public bool IsFixing { get { return _isFixing; } set { _isFixing = value; } }
     public Vector3 MoveDirection { get { return _moveDirection; } set { _moveDirection = value; } }
 
     #endregion
@@ -82,6 +84,9 @@ public class BaseInteractionController : MonoBehaviour
 
         if (_currentInteractable.CurrentPlayer == this) { return; }
 
+        //if you can't use the interactable while it's broken, return
+        if(!_currentInteractable.CanUse && !IsFixing) { return; }
+
         float singleUseDuration = customDuration == -1 ? _currentInteractable.SingleUseTime : customDuration;
 
         SetInteraction((int)_currentInteractable.InteractionType, _currentInteractable.PlayerPositionTransform);
@@ -89,6 +94,8 @@ public class BaseInteractionController : MonoBehaviour
         if (_playerCarryController != null) { _playerCarryController.DropAllItems(); }
 
         if (_currentInteractable.IsSingleUse) { Invoke(nameof(CheckExitInteraction), singleUseDuration); }
+
+        Debug.Log("HandleInteraction");
     }
 
     public virtual void SetCurrentInteractable(Interactable interactable)
@@ -119,5 +126,8 @@ public class BaseInteractionController : MonoBehaviour
         transform.rotation = playerPositionTransform.rotation;
 
         _timeSinceLastInteraction = 0f;
+
+        //Every time player uninteracts, set isFixing false
+        if(interactionType == 0) { _isFixing = false; }
     }
 }

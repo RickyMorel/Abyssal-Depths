@@ -60,6 +60,8 @@ public class Booster : RotationalInteractable
     public override void Update()
     {
         base.Update();
+
+        if(CanUse == false) { return; }
        
         if (_currentPlayer == null) { SetIsBoosting(false); return; }
         

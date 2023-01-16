@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Booster : RotationalInteractable
 {
@@ -24,6 +25,9 @@ public class Booster : RotationalInteractable
     private bool _isBoosting = false;
     private int _currentGear = 0;
     private bool _recentlyChangedGear = false;
+    [SerializeField] private float _timeUntilStutter;
+    [SerializeField] private bool _isStuttering = false;
+    [SerializeField] private bool _canStutter = true;
 
     #endregion
 
@@ -60,6 +64,8 @@ public class Booster : RotationalInteractable
     public override void Update()
     {
         base.Update();
+
+        if (IsBroken()) { _timeUntilStutter += Time.deltaTime; }
 
         if(CanUse == false) { return; }
        
@@ -134,12 +140,34 @@ public class Booster : RotationalInteractable
     {
         if (!_isBoosting || _recentlyChangedGear) { return; }
 
+        if (IsBroken()) 
+        { 
+            if (_canStutter) { StartCoroutine(SetStutter()); }
+        }
+
+        if (_isStuttering) { return; }
+
         _boosterParticle.Play();
 
         _rb.AddForce(-(RotatorTransform.transform.up * _acceleration * _rb.mass));
 
         _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, Ship.Instance.TopSpeed);
     }
+
+    private IEnumerator SetStutter()
+    {
+        _canStutter = false;
+        _isStuttering = true;
+
+        yield return new WaitForSeconds(Random.Range(0.2f, 0.8f));
+
+        _isStuttering = false;
+
+        yield return new WaitForSeconds(Random.Range(0.3f, 1f));
+
+        _canStutter = true;
+    }
+
 }
 
 #region Helper Classes

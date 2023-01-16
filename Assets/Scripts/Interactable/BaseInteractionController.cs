@@ -94,8 +94,6 @@ public class BaseInteractionController : MonoBehaviour
         if (_playerCarryController != null) { _playerCarryController.DropAllItems(); }
 
         if (_currentInteractable.IsSingleUse) { Invoke(nameof(CheckExitInteraction), singleUseDuration); }
-
-        Debug.Log("HandleInteraction");
     }
 
     public virtual void SetCurrentInteractable(Interactable interactable)

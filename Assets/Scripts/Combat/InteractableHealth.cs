@@ -137,10 +137,15 @@ public class InteractableHealth : Damageable
             _particleSpawnTransform.localPosition.y,
             _particleSpawnTransform.localPosition.z);
 
-        if (_canUseWhenBroken == false) { _interactable.CanUse = false; }
-        else { _interactable.CanUse = true; }
-
-        _interactable.RemoveCurrentPlayer();
+        if (_canUseWhenBroken == false) 
+        {
+            _interactable.CanUse = false; 
+            _interactable.RemoveCurrentPlayer();
+        }
+        else 
+        {
+            _interactable.CanUse = true;
+        }
 
         _prevInteractableState = new PrevInteractableState(_interactable.InteractionType, _interactable.IsSingleUse, _interactable.Outline.OutlineColor);
         _interactable.InteractionType = InteractionType.Fixing;

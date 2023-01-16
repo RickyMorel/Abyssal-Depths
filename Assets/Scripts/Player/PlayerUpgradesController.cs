@@ -88,6 +88,8 @@ public class PlayerUpgradesController : MonoBehaviour
     {
         if (!_interactionController.CurrentInteractable.IsBroken()) { HandleUpgrade(); return false; }
 
+        if (_interactionController.IsInteracting()) { return false; }
+
         _interactionController.IsFixing = true;
 
         _interactionController.HandleInteraction();

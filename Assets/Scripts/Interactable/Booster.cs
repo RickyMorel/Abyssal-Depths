@@ -25,9 +25,8 @@ public class Booster : RotationalInteractable
     private bool _isBoosting = false;
     private int _currentGear = 0;
     private bool _recentlyChangedGear = false;
-    [SerializeField] private float _timeUntilStutter;
-    [SerializeField] private bool _isStuttering = false;
-    [SerializeField] private bool _canStutter = true;
+    private bool _isStuttering = false;
+    private bool _canStutter = true;
 
     #endregion
 
@@ -64,8 +63,6 @@ public class Booster : RotationalInteractable
     public override void Update()
     {
         base.Update();
-
-        if (IsBroken()) { _timeUntilStutter += Time.deltaTime; }
 
         if(CanUse == false) { return; }
        
@@ -163,7 +160,7 @@ public class Booster : RotationalInteractable
 
         _isStuttering = false;
 
-        yield return new WaitForSeconds(Random.Range(0.3f, 1f));
+        yield return new WaitForSeconds(Random.Range(0.3f, 2f));
 
         _canStutter = true;
     }

@@ -22,6 +22,7 @@ public class Interactable : MonoBehaviour
 
     #region Private Variables
 
+    private InteractableHealth _interactableHealth;
     private Outline _outline;
     private bool _canUse = true;
 
@@ -46,6 +47,7 @@ public class Interactable : MonoBehaviour
     public Transform PlayerPositionTransform => _playerPositionTransform;
     public BaseInteractionController CurrentPlayer => _currentPlayer;
     public float SingleUseTime => _singleUseTime;
+    public InteractableHealth InteractableHealth => _interactableHealth;
     public Outline Outline => _outline;
 
     public event Action OnInteract;
@@ -57,6 +59,7 @@ public class Interactable : MonoBehaviour
 
     public virtual void Awake()
     {
+        _interactableHealth = GetComponent<InteractableHealth>();
         _outline = GetComponent<Outline>();
 
         _outline.enabled = false;
@@ -111,4 +114,11 @@ public class Interactable : MonoBehaviour
     }
 
     #endregion
+
+    public bool IsBroken()
+    {
+        if(_interactableHealth == null) { return false; }
+
+        return _interactableHealth.IsDead();
+    }
 }

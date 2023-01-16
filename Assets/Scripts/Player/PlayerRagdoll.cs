@@ -31,10 +31,20 @@ public class PlayerRagdoll : MonoBehaviour
 
     private void Start()
     {
+        LockZPos();
         EnableRagdoll(false);
     }
 
     #endregion
+
+    private void LockZPos()
+    {
+        foreach (Collider collider in _colliders)
+        {
+            Rigidbody rb = collider.GetComponent<Rigidbody>();
+            rb.constraints = RigidbodyConstraints.FreezePositionZ;
+        }
+    }
 
     public void EnableRagdoll(bool isEnabled)
     {

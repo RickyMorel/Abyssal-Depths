@@ -9,6 +9,7 @@ public class InteractableHealth : Damageable
 
     [SerializeField] private CraftingRecipy _fixCost;
     [SerializeField] private float _timeToFix = 8f;
+    [SerializeField] private bool _canUseWhenBroken = false;
     [SerializeField] private Transform _particleSpawnTransform;
 
     #endregion
@@ -50,6 +51,8 @@ public class InteractableHealth : Damageable
     {
         if(_interactable.CurrentPlayer == null) { return; }
 
+        if(_interactable.CurrentPlayer.IsFixing == false) { return; }
+
         if (!IsDead()) { return; }
 
         if (!CraftingManager.CanCraft(_fixCost)) { _interactable.RemoveCurrentPlayer(); return; }
@@ -89,14 +92,22 @@ public class InteractableHealth : Damageable
 
         if (!CraftingManager.CanCraft(_fixCost)) { return; }
 
+        if (_interactable.CurrentPlayer == null) { return; }
+
+        if (_interactable.CurrentPlayer.IsFixing == false) { return; }
+
         _timeSpentFixing = 0f;
 
         _currentRepairPopup = RepairPopup.Create(transform, _particleSpawnTransform.localPosition, _timeToFix - _timeSpentFixing).gameObject;
+
+        _interactable.CanUse = false;
     }
 
     private void TryStopFix()
     {
         if (_currentRepairPopup != null) { Destroy(_currentRepairPopup); }
+
+        if (_canUseWhenBroken) { _interactable.CanUse = true; }
     }
 
     public void FixInteractable()
@@ -120,15 +131,21 @@ public class InteractableHealth : Damageable
     {
         base.Die();
 
-        _currentParticles = Instantiate(GameAssetsManager.Instance.InteractableFriedParticles, transform);
+        _currentParticles = Instantiate(Ship.Instance.ShipStatsSO.InteractableFriedParticles.gameObject, transform);
         _currentParticles.transform.localPosition = new Vector3(
             _particleSpawnTransform.localPosition.x,
             _particleSpawnTransform.localPosition.y,
             _particleSpawnTransform.localPosition.z);
 
-        _interactable.CanUse = false;
-
-        _interactable.RemoveCurrentPlayer();
+        if (_canUseWhenBroken == false) 
+        {
+            _interactable.CanUse = false; 
+            _interactable.RemoveCurrentPlayer();
+        }
+        else 
+        {
+            _interactable.CanUse = true;
+        }
 
         _prevInteractableState = new PrevInteractableState(_interactable.InteractionType, _interactable.IsSingleUse, _interactable.Outline.OutlineColor);
         _interactable.InteractionType = InteractionType.Fixing;

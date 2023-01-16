@@ -37,7 +37,12 @@ public class PlayerUpgradesController : MonoBehaviour
 
     private void HandleInteractableTinker()
     {
-        if(_playerCarryController.CurrentSingleItem == null) { return; }
+        if (_interactionController.CurrentInteractable == null) { return; }
+
+        //If item needs to be fixed, fix first
+        if (HandleFix()) { return; }
+
+        if (_playerCarryController.CurrentSingleItem == null) { return; }
 
         if (_playerCarryController.CurrentSingleItem is UpgradeChip)
         {
@@ -51,8 +56,6 @@ public class PlayerUpgradesController : MonoBehaviour
 
     private void HandleRemoveUpgrades()
     {
-        if (_interactionController.CurrentInteractable == null) { return; }
-
         if ((_interactionController.CurrentInteractable is Upgradable) == false) { return; }
 
         Upgradable upgradable = _interactionController.CurrentInteractable as Upgradable;
@@ -67,8 +70,6 @@ public class PlayerUpgradesController : MonoBehaviour
     //This calls when the player presses the upgrade button
     private void HandleUpgrade()
     {
-        if (_interactionController.CurrentInteractable == null) { return; }
-
         if ((_interactionController.CurrentInteractable is Upgradable) == false) { return; }
 
         Upgradable upgradable = _interactionController.CurrentInteractable as Upgradable;
@@ -81,5 +82,18 @@ public class PlayerUpgradesController : MonoBehaviour
             _playerCarryController.CurrentSingleItem = null;
             Destroy(_playerCarryController.CurrentSingleObjInstance.gameObject);
         }
+    }
+
+    private bool HandleFix()
+    {
+        if (!_interactionController.CurrentInteractable.IsBroken()) { HandleUpgrade(); return false; }
+
+        if (_interactionController.IsInteracting()) { return false; }
+
+        _interactionController.IsFixing = true;
+
+        _interactionController.HandleInteraction();
+
+        return true;
     }
 }

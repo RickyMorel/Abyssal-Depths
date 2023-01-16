@@ -71,6 +71,9 @@ public class Upgradable : Interactable
 
     public bool TryUpgrade(UpgradeChip upgradeChip)
     {
+        //If the interactable is broken, return false
+        if(TryGetComponent<InteractableHealth>(out InteractableHealth interactableHealth)) { if (interactableHealth.IsDead()) return false; }
+
         int socketIndex = -1;
         bool foundEmptySocket = false;
 

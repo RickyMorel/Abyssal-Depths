@@ -8,7 +8,6 @@ public class ShipLandingController : MonoBehaviour
 
     [Header("Components")]
     [SerializeField] private Booster _booster;
-    [SerializeField] private Collider[] _landingGearColliders;
 
     [Header("Landing Gear")]
     [SerializeField] private Transform _landingGearTransform;
@@ -19,15 +18,10 @@ public class ShipLandingController : MonoBehaviour
 
     #region Private Variables
 
-    private enum LandingGearState
-    {
-        Up,
-        Between,
-        Down
-    }
     private LandingGearState _isWantedDeployed = LandingGearState.Down;
     private LandingGearState _isLandingGearDeployed = LandingGearState.Down;
     private LandingGearState _previousState = LandingGearState.Down;
+    private float _offsetLandingGearPosition = 0.3f;
 
     #endregion
 
@@ -61,8 +55,10 @@ public class ShipLandingController : MonoBehaviour
 
         if (_isWantedDeployed != LandingGearState.Between)
         {
-            if (_landingGearTransform.localPosition.y <= _landingGearDeployedYPos + 0.3f && _isWantedDeployed == LandingGearState.Up) { _landingGearTransform.localPosition = new Vector3(_landingGearTransform.localPosition.x, _landingGearDeployedYPos, _landingGearTransform.localPosition.z); _isLandingGearDeployed = LandingGearState.Up; }
-            else if (_landingGearTransform.localPosition.y >= _landingGearStoredYPos - 0.3f && _isWantedDeployed == LandingGearState.Down) { _landingGearTransform.localPosition = new Vector3(_landingGearTransform.localPosition.x, _landingGearStoredYPos, _landingGearTransform.localPosition.z); _isLandingGearDeployed = LandingGearState.Down; }
+            //When the landing gear is  deploying, it never actually reaches the StoredYPos nor the DeployedYPos, so in order to offset that, check that the landing gear has almost reached its destination, have it snap to its desired location.
+            //To decide when to snap it, use the _offset variable, the smaller the number, it appears smoother, but it also takes longer as the way the landing currently works makes it so that the closer it is to its destination, the slower it gets.
+            if (_landingGearTransform.localPosition.y <= _landingGearDeployedYPos + _offsetLandingGearPosition && _isWantedDeployed == LandingGearState.Up) { _landingGearTransform.localPosition = new Vector3(_landingGearTransform.localPosition.x, _landingGearDeployedYPos, _landingGearTransform.localPosition.z); _isLandingGearDeployed = LandingGearState.Up; }
+            else if (_landingGearTransform.localPosition.y >= _landingGearStoredYPos - _offsetLandingGearPosition && _isWantedDeployed == LandingGearState.Down) { _landingGearTransform.localPosition = new Vector3(_landingGearTransform.localPosition.x, _landingGearStoredYPos, _landingGearTransform.localPosition.z); _isLandingGearDeployed = LandingGearState.Down; }
         }
         else
         {
@@ -95,5 +91,12 @@ public class ShipLandingController : MonoBehaviour
         else if (state == LandingGearState.Down) { state = LandingGearState.Up; }
 
         return state;
+    }
+
+    private enum LandingGearState
+    {
+        Up,
+        Between,
+        Down
     }
 }

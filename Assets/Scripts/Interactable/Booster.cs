@@ -94,7 +94,7 @@ public class Booster : RotationalInteractable
     {
         _recentlyChangedGear = true;
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(Ship.Instance.BoostTimeAfterGearChange);
 
         _recentlyChangedGear = false;
     }

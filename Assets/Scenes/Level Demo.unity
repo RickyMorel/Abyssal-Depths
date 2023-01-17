@@ -109,7 +109,7 @@ NavMeshSettings:
     agentRadius: 0.35
     agentHeight: 2
     agentSlope: 60
-    agentClimb: 1.81
+    agentClimb: 2
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 06d889dd071241b469ff45b423127cf3, type: 2}
 --- !u!1001 &6676551
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -664,6 +664,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cfab57151a7cda643b55453339523b08, type: 3}
+--- !u!224 &123040849 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4013279626803099188, guid: cfab57151a7cda643b55453339523b08, type: 3}
+  m_PrefabInstance: {fileID: 123040848}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &123040850 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4018055125629193142, guid: cfab57151a7cda643b55453339523b08, type: 3}
+  m_PrefabInstance: {fileID: 123040848}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &123040851 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4990981086270024953, guid: cfab57151a7cda643b55453339523b08, type: 3}
+  m_PrefabInstance: {fileID: 123040848}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &123040852 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7870467391451511417, guid: cfab57151a7cda643b55453339523b08, type: 3}
+  m_PrefabInstance: {fileID: 123040848}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &123040853 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5533467754158835311, guid: cfab57151a7cda643b55453339523b08, type: 3}
+  m_PrefabInstance: {fileID: 123040848}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &167689039
 GameObject:
   m_ObjectHideFlags: 0
@@ -833,7 +870,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7427312714443020341, guid: 449b3ecaff40e5442804d27fda74d434, type: 3}
       propertyPath: m_Name
-      value: Minable Rock (7)
+      value: Coal Rock
       objectReference: {fileID: 0}
     - target: {fileID: 7429058020557803995, guid: 449b3ecaff40e5442804d27fda74d434, type: 3}
       propertyPath: m_RootOrder
@@ -1303,7 +1340,7 @@ GameObject:
   - component: {fileID: 592018353}
   - component: {fileID: 592018352}
   - component: {fileID: 592018351}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: EnemyFovZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1438,7 +1475,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7427312714443020341, guid: 449b3ecaff40e5442804d27fda74d434, type: 3}
       propertyPath: m_Name
-      value: Minable Rock (3)
+      value: Coal Rock
       objectReference: {fileID: 0}
     - target: {fileID: 7429058020557803995, guid: 449b3ecaff40e5442804d27fda74d434, type: 3}
       propertyPath: m_RootOrder
@@ -1570,7 +1607,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7427312714443020341, guid: 449b3ecaff40e5442804d27fda74d434, type: 3}
       propertyPath: m_Name
-      value: Minable Rock (4)
+      value: Coal Rock
       objectReference: {fileID: 0}
     - target: {fileID: 7429058020557803995, guid: 449b3ecaff40e5442804d27fda74d434, type: 3}
       propertyPath: m_RootOrder
@@ -1635,7 +1672,7 @@ GameObject:
   - component: {fileID: 770727949}
   - component: {fileID: 770727948}
   - component: {fileID: 770727947}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: EnemyFovZone (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1731,7 +1768,7 @@ Transform:
   - {fileID: 770727950}
   - {fileID: 1078816302}
   m_Father: {fileID: 1795756473}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &854914793
 PrefabInstance:
@@ -1807,7 +1844,7 @@ GameObject:
   - component: {fileID: 866202811}
   - component: {fileID: 866202810}
   - component: {fileID: 866202809}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: EnemyFovZone (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2122,7 +2159,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 23800000, guid: cad0414fbf7902c428aac78ac05c468c, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: cb892047079e1094ba2a10ea0437e031, type: 2}
 --- !u!23 &995510251
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2181,11 +2218,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 995510249}
   m_LocalRotation: {x: -0.70710564, y: -0, z: -0, w: 0.707108}
-  m_LocalPosition: {x: 350.27698, y: 23.625702, z: 2.4458761}
-  m_LocalScale: {x: 135.94606, y: 59.646, z: 59.646}
+  m_LocalPosition: {x: 541, y: -350, z: 0}
+  m_LocalScale: {x: 135.94606, y: 59.646015, z: 59.646015}
   m_Children: []
-  m_Father: {fileID: 1795756473}
-  m_RootOrder: 2
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1001 &1007714466
 PrefabInstance:
@@ -2196,7 +2233,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7427312714443020341, guid: 449b3ecaff40e5442804d27fda74d434, type: 3}
       propertyPath: m_Name
-      value: Minable Rock (6)
+      value: Coal Rock
       objectReference: {fileID: 0}
     - target: {fileID: 7429058020557803995, guid: 449b3ecaff40e5442804d27fda74d434, type: 3}
       propertyPath: m_RootOrder
@@ -2320,7 +2357,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7427312714443020341, guid: 449b3ecaff40e5442804d27fda74d434, type: 3}
       propertyPath: m_Name
-      value: Minable Rock (5)
+      value: Coal Rock
       objectReference: {fileID: 0}
     - target: {fileID: 7429058020557803995, guid: 449b3ecaff40e5442804d27fda74d434, type: 3}
       propertyPath: m_RootOrder
@@ -2750,7 +2787,7 @@ GameObject:
   - component: {fileID: 1078816301}
   - component: {fileID: 1078816300}
   - component: {fileID: 1078816299}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: EnemyFovZone (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2911,7 +2948,7 @@ Transform:
   - {fileID: 2087408343}
   - {fileID: 1800711134}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1165025766
 GameObject:
@@ -2943,7 +2980,7 @@ Transform:
   - {fileID: 1066966250}
   - {fileID: 70104400}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1197942390
 PrefabInstance:
@@ -3864,7 +3901,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7427312714443020341, guid: 449b3ecaff40e5442804d27fda74d434, type: 3}
       propertyPath: m_Name
-      value: Minable Rock (1)
+      value: Coal Rock
       objectReference: {fileID: 0}
     - target: {fileID: 7429058020557803995, guid: 449b3ecaff40e5442804d27fda74d434, type: 3}
       propertyPath: m_RootOrder
@@ -4684,11 +4721,10 @@ Transform:
   m_Children:
   - {fileID: 1941000766}
   - {fileID: 1781100315}
-  - {fileID: 995510253}
   - {fileID: 773240463}
   - {fileID: 1887780318}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1799494343
 PrefabInstance:
@@ -4835,7 +4871,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7427312714443020341, guid: 449b3ecaff40e5442804d27fda74d434, type: 3}
       propertyPath: m_Name
-      value: Minable Rock
+      value: Coal Rock
       objectReference: {fileID: 0}
     - target: {fileID: 7429058020557803995, guid: 449b3ecaff40e5442804d27fda74d434, type: 3}
       propertyPath: m_RootOrder
@@ -4897,7 +4933,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7427312714443020341, guid: 449b3ecaff40e5442804d27fda74d434, type: 3}
       propertyPath: m_Name
-      value: Minable Rock (2)
+      value: Coal Rock
       objectReference: {fileID: 0}
     - target: {fileID: 7429058020557803995, guid: 449b3ecaff40e5442804d27fda74d434, type: 3}
       propertyPath: m_RootOrder
@@ -4984,7 +5020,7 @@ Transform:
   - {fileID: 1453314805}
   - {fileID: 1044381231}
   m_Father: {fileID: 1795756473}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1893688658
 PrefabInstance:
@@ -6259,5 +6295,25 @@ PrefabInstance:
       propertyPath: _contentTransform
       value: 
       objectReference: {fileID: 271422105}
+    - target: {fileID: 8430575401598289310, guid: 3ca6a68da565ad540b85293521b91cd1, type: 3}
+      propertyPath: _itemNameText
+      value: 
+      objectReference: {fileID: 123040853}
+    - target: {fileID: 8430575401598289310, guid: 3ca6a68da565ad540b85293521b91cd1, type: 3}
+      propertyPath: _craftingPanel
+      value: 
+      objectReference: {fileID: 123040850}
+    - target: {fileID: 8430575401598289310, guid: 3ca6a68da565ad540b85293521b91cd1, type: 3}
+      propertyPath: _contentTransform
+      value: 
+      objectReference: {fileID: 123040849}
+    - target: {fileID: 8430575401598289310, guid: 3ca6a68da565ad540b85293521b91cd1, type: 3}
+      propertyPath: _itemDescriptionText
+      value: 
+      objectReference: {fileID: 123040852}
+    - target: {fileID: 8430575401598289310, guid: 3ca6a68da565ad540b85293521b91cd1, type: 3}
+      propertyPath: _ingredientsContentTransform
+      value: 
+      objectReference: {fileID: 123040851}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ca6a68da565ad540b85293521b91cd1, type: 3}

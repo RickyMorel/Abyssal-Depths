@@ -7,6 +7,7 @@ public class ShipStatsSO : ScriptableObject
 {
     [Header("Locomotion")]
     public float TopSpeed = 60f;
+    public float BoostTimeAfterGearChange = 0.5f;
 
     [Header("Combat")]
     public int MaxHealth = 500;

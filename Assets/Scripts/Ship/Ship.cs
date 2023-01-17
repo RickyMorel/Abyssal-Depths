@@ -15,6 +15,7 @@ public class Ship : MonoBehaviour
     private ShipHealth _health;
 
     private float _topSpeed;
+    private float _boostTimeAfterGearChange;
     private float _timeTillDeath;
 
     #endregion
@@ -24,6 +25,7 @@ public class Ship : MonoBehaviour
     public static Ship Instance { get { return _instance; } }
     public ShipStatsSO ShipStatsSO => _shipStatsSO;
     public float TopSpeed => _topSpeed;
+    public float BoostTimeAfterGearChange => _boostTimeAfterGearChange;
     public float TimeTillDeath => _timeTillDeath;
 
     #endregion
@@ -50,6 +52,7 @@ public class Ship : MonoBehaviour
     private void SetShipStats()
     {
         _topSpeed = _shipStatsSO.TopSpeed;
+        _boostTimeAfterGearChange = _shipStatsSO.BoostTimeAfterGearChange;
         _timeTillDeath = _shipStatsSO.TimeTillDeath;
         _health.SetMaxHealth(_shipStatsSO.MaxHealth);
         _health.MinCrashSpeed = _shipStatsSO.MinCrashSpeed;

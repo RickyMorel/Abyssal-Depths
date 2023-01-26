@@ -4,36 +4,29 @@ using UnityEngine;
 
 public class ConstantLaser : WeaponShoot
 {
-    #region Private Variables
+    #region Unity Loops
 
-    private bool _isShooting = false;
-    private GameObject _laserBeam;
+    public override void Start()
+    {
+        base.Start();
+
+        _weapon.ProjectilePrefab.SetActive(false);
+    }
 
     #endregion
 
+
     public override void CheckShootInput()
     {
-        if (_weapon.CurrentPlayer.IsUsing)
+        if (_weapon.CurrentPlayer.IsUsing && !_weapon.ProjectilePrefab.activeSelf)
         {
-            Shoot();
+            _weapon.ProjectilePrefab.SetActive(true);
+            Debug.Log(_weapon.CurrentPlayer);
         }
-        else 
+        else if (!_weapon.CurrentPlayer.IsUsing && _weapon.ProjectilePrefab.activeSelf)
         {
-            _laserBeam.transform.SetParent(null);
-            Destroy(_laserBeam);
-            _isShooting = false;
+            _weapon.ProjectilePrefab.SetActive(false);
         }
-    }
 
-    public override void Shoot()
-    {
-        if (!_isShooting) 
-        { 
-            _laserBeam = Instantiate(_weapon.ProjectilePrefab, _weapon.ShootTransforms[0].position, _weapon.TurretHead.rotation);
-            _laserBeam.transform.SetParent(_weapon.TurretHead);
-            _isShooting = true;
-        }
-        else { return; }
     }
-
 }

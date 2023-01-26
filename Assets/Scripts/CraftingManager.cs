@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System.Linq;
+using UnityEngine.Analytics;
 
 public class CraftingManager : MonoBehaviour
 {
@@ -103,6 +104,7 @@ public class CraftingManager : MonoBehaviour
 
         foreach (CraftingRecipy craftable in _craftingRecipyList)
         {
+            if (craftable.IsRepair) { continue; }
             GameObject itemUI = Instantiate(_craftingItemUIPrefab, _contentTransform);
             itemUI.GetComponent<CraftingItemUI>().Initialize(craftable, _currentPlayer, _currentCraftingStation);
         }

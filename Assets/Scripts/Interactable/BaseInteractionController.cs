@@ -16,7 +16,7 @@ public class BaseInteractionController : MonoBehaviour
     protected Animator _anim;
     protected Rigidbody _rb;
     private NavMeshAgent _agent;
-    protected Interactable _currentInteractable;
+    [SerializeField] protected Interactable _currentInteractable;
 
     protected bool _isUsing = false;
     protected bool _isFixing = false;

@@ -7,6 +7,7 @@ public class CraftingRecipy : ScriptableObject
 {
     public ItemQuantity CraftedItem;
     public List<ItemQuantity> CraftingIngredients = new List<ItemQuantity>();
+    public bool IsRepair = false;
 }
 
 #region Helper Classes

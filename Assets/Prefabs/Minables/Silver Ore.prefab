@@ -92,8 +92,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8327275821192837689}
   - component: {fileID: 8330006032028201936}
-  - component: {fileID: 1004628348235629310}
   - component: {fileID: 8331478518776697141}
+  - component: {fileID: 2428409597197083372}
   m_Layer: 6
   m_Name: Silver Ore
   m_TagString: Untagged
@@ -132,19 +132,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 8
   m_CollisionDetection: 0
---- !u!135 &1004628348235629310
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8330006032028201943}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 3.843483
-  m_Center: {x: -0.26, y: 0.03, z: 0}
 --- !u!114 &8331478518776697141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,3 +150,17 @@ MonoBehaviour:
   _canLoot: 0
   _damageForce: 10
   _maxHealth: 12
+--- !u!64 &2428409597197083372
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8330006032028201943}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 1d4381c34363cde458743078c5f69835, type: 3}

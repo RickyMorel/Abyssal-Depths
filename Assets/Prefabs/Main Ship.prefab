@@ -1677,9 +1677,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _booster: {fileID: 9069357054160412226}
-  _landingGearColliders:
-  - {fileID: 5877842456878155303}
-  - {fileID: 3068541795191308855}
   _landingGearTransform: {fileID: 5877842458093419634}
   _landingGearStoredYPos: 3
   _landingGearDeployedYPos: -5
@@ -1739,7 +1736,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5044816371747086564}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -63.64, y: -136.54, z: -4}
+  m_LocalPosition: {x: 0, y: 0, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 814913623439911441}
@@ -8163,7 +8160,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.777311, y: 1}
+    m_SensorSize: {x: 1.7765273, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -11525,6 +11522,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1052606829067686161, guid: 5e8f1228615f10c42bba675e29144b11, type: 3}
+      propertyPath: _rotationSpeed
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 1052606829067686161, guid: 5e8f1228615f10c42bba675e29144b11, type: 3}
       propertyPath: _pivotTransform
       value: 
       objectReference: {fileID: 6966078651353121503}
@@ -11616,7 +11617,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4237167444813469774, guid: 0268da4a0a01eb24fb94608c81bd4599, type: 3}
       propertyPath: _boostTopSpeed
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4237167444813469774, guid: 0268da4a0a01eb24fb94608c81bd4599, type: 3}
       propertyPath: _rotationSpeed
@@ -11628,7 +11629,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4237167444813469774, guid: 0268da4a0a01eb24fb94608c81bd4599, type: 3}
       propertyPath: _normalTopSpeed
-      value: 0.7
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4237167444813469774, guid: 0268da4a0a01eb24fb94608c81bd4599, type: 3}
       propertyPath: _pivotTransform

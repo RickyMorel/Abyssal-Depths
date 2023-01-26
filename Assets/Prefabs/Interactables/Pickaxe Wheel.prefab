@@ -245,17 +245,19 @@ MonoBehaviour:
   _isAIOnlyInteractable: 0
   _isSingleUse: 0
   _singleUseTime: 0.5
+  _upgradeSocketObjs: []
   _upgrades:
   - UpgradeMesh: {fileID: 4236485090595187587}
-    CraftingRecipy: {fileID: 11400000, guid: d319920631389c1479433087dd1f2747, type: 2}
-  _upgradesCanvas: {fileID: 0}
-  _upgradeParticles: {fileID: 0}
+    Projectile: {fileID: 0}
+    ShootTransform: []
+    _socket_1_ChipType: 0
+    _socket_2_ChipType: 0
+  _chipDropTransform: {fileID: 0}
   _rotationSpeed: 1
   _pivotTransform: {fileID: 0}
-  _currentAngle: 0
   RotatorTransform: {fileID: 0}
   _pickaxeDrag: 2
-  _normalTopSpeed: 0.2
-  _boostTopSpeed: 3
+  _normalTopSpeed: 1.5
+  _boostTopSpeed: 5
   _damageMultiplier: 5
   _pickaxeBoostParticles: {fileID: 0}

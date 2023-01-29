@@ -171,6 +171,8 @@ public class Damageable : MonoBehaviour
 
         OnDamaged?.Invoke(damageType);
 
+        DamagePopup.Create(transform.position, (int)finalDamage, isWeak);
+
         if (_damageParticles != null && damageType != DamageType.None) { _damageParticles.Play(); }
 
         if (_currentHealth == 0)

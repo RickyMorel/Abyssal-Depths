@@ -8,13 +8,13 @@ public class PlayerHealth : Damageable
     #region Editor Fields
 
     [SerializeField] private float _hurtTime = 5f;
+    [SerializeField] private Renderer _mesh;
 
     #endregion
 
     #region Private Variables
 
     private bool _isHurt;
-    private Renderer _mesh;
 
     #endregion
 
@@ -26,13 +26,16 @@ public class PlayerHealth : Damageable
 
     #endregion
 
+    private void Awake()
+    {
+        _mesh = GetComponentInChildren<MeshRenderer>();
+        if (_mesh == null) { _mesh = GetComponentInChildren<SkinnedMeshRenderer>(); }
+    }
+
     //This is for the child classes
     public virtual void Start()
     {
         base.Start();
-
-        _mesh = GetComponentInChildren<MeshRenderer>();
-        if(_mesh == null) { _mesh = GetComponentInChildren<SkinnedMeshRenderer>(); }
     }
 
     public virtual void Hurt(DamageType damageType)

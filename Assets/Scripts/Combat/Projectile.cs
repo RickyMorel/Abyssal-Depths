@@ -17,7 +17,7 @@ public class Projectile : MonoBehaviour
     #region Private Varaibles
 
     private Rigidbody _rb;
-    private ParticleSystem _particles;
+    protected ParticleSystem _particles;
 
     #endregion
 
@@ -42,7 +42,7 @@ public class Projectile : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
     }
 
-    private void Start()
+    public virtual void Start()
     {
         _rb.AddForce(transform.forward * _speed, ForceMode.Impulse);
 

@@ -7,6 +7,7 @@ public class TimelinesManager : MonoBehaviour
 {
     #region Editor Fields
 
+    [Header("Ship Fast Travel")]
     [SerializeField] private PlayableDirector _startFastTravelTimeline;
     [SerializeField] private PlayableDirector _endFastTravelTimeline;
     [SerializeField] private PlayableDirector _cameraFadeTimeline;
@@ -14,6 +15,12 @@ public class TimelinesManager : MonoBehaviour
     [SerializeField] private ParticleSystem _blackHoleParticle;
 
     [SerializeField] private GameObject _mainShipParentForTheTimeline;
+
+    [Header("Constant Laser Shooting")]
+    [SerializeField] private PlayableDirector _startConstantLaserTimeline;
+    [SerializeField] private PlayableDirector _endConstantLaserTimeline;
+
+    [SerializeField] private ParticleSystem _laserBallParticle;
 
     #endregion
 
@@ -34,6 +41,11 @@ public class TimelinesManager : MonoBehaviour
     public ParticleSystem BlackHoleParticle => _blackHoleParticle;
 
     public GameObject MainShipParentForTheTimeline => _mainShipParentForTheTimeline;
+
+    public PlayableDirector StartConstantLaserTimeline => _startConstantLaserTimeline;
+    public PlayableDirector EndConstantLaserTimeline => _endConstantLaserTimeline;
+
+    public ParticleSystem LaserBallParticle => _laserBallParticle;
 
     #endregion
 

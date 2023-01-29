@@ -323,7 +323,7 @@ public class Damageable : MonoBehaviour
 
     #region UI
 
-    public void UpdateHealthUI()
+    public virtual void UpdateHealthUI()
     {
         if(_healthBarImage == null) { return; }
 

@@ -14,6 +14,7 @@ public class PlayerHealth : Damageable
     #region Private Variables
 
     private bool _isHurt;
+    private Renderer _mesh;
 
     #endregion
 
@@ -29,6 +30,9 @@ public class PlayerHealth : Damageable
     public virtual void Start()
     {
         base.Start();
+
+        _mesh = GetComponentInChildren<MeshRenderer>();
+        if(_mesh == null) { _mesh = GetComponentInChildren<SkinnedMeshRenderer>(); }
     }
 
     public virtual void Hurt(DamageType damageType)
@@ -45,5 +49,12 @@ public class PlayerHealth : Damageable
         yield return new WaitForSeconds(_hurtTime);
 
         _isHurt = false;
+    }
+
+    public override void UpdateHealthUI()
+    {
+        if(_mesh == null) { Debug.LogError("Need to assign mesh with blood shader!: " + gameObject.name); return; }
+
+        _mesh.material.SetFloat("Blood", 1 - (CurrentHealth / MaxHealth));
     }
 }

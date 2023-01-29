@@ -177,6 +177,10 @@ public class PlayerStateMachine : BaseStateMachine
         float cappedSpeed = _currentSpeed / 20;
         float zMovement = CameraManager.Instance.IsInOrthoMode ? 0f : _playerInput.MoveDirection.y * cappedSpeed;
         _moveDirection = new Vector3(_playerInput.MoveDirection.x * cappedSpeed, 0f, zMovement);
+
+        //Caps players movement on Z axis
+        if (!WalkPlaneVisual.Instance.IsWithinBounds(transform.position + _moveDirection)) { _moveDirection.z = 0; }
+
         transform.position += _moveDirection;
     }
 

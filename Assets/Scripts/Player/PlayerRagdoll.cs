@@ -70,6 +70,18 @@ public class PlayerRagdoll : MonoBehaviour
         if (_agent != null) { _agent.enabled = !isEnabled; }
     }
 
+    public Transform GetHeadTransform()
+    {
+        foreach (Collider collider in _colliders)
+        {
+            if (!collider.gameObject.name.Contains("Head")) { continue; }
+
+            return collider.transform;
+        }
+
+        return null;
+    }
+
     private void PlayDeathAnimation()
     {
         _anim.SetBool("IsDead", true);

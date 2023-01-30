@@ -11,8 +11,8 @@ public class CameraManager : MonoBehaviour
 
     private static CameraManager _instance;
 
-    [SerializeField] private CinemachineBrain[] _cameras;
-    [SerializeField] private CinemachineVirtualCamera[] _vCams;
+    private CinemachineBrain[] _cameras;
+    private CinemachineVirtualCamera[] _vCams;
     
     private GameObject _perspectiveCamera;
     private bool _isInOrthoMode = false;

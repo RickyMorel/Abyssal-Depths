@@ -11,6 +11,7 @@ public class PlayerJoinManager : MonoBehaviour
     #region Editor Fields
 
     [SerializeField] private GameObject _playerPrefab;
+    [SerializeField] private Transform _spawnPos;
 
     #endregion
 
@@ -45,7 +46,7 @@ public class PlayerJoinManager : MonoBehaviour
 
     public void SpawnPlayer(Player playerInputs, int playerID)
     {
-        GameObject player = Instantiate(_playerPrefab, transform.position, Quaternion.identity);
+        GameObject player = Instantiate(_playerPrefab, _spawnPos.position, Quaternion.identity);
         PlayerInputHandler playerInput = player.GetComponentInChildren<PlayerInputHandler>();
         _playerInputs.Add(playerInput);
         playerInput.OnTrySpawn += HandleSpawn;
@@ -71,15 +72,15 @@ public class PlayerJoinManager : MonoBehaviour
 
     private void TransportToSpawnLocation(PlayerInputHandler playerInput)
     {
-        if (_amountOfPlayersActive == 1)
+        if (_amountOfPlayersActive == 2)
         {
             StartCoroutine(PlayerJoinAnimation(0, playerInput));
         }
-        else if (_amountOfPlayersActive == 2)
+        else if (_amountOfPlayersActive == 3)
         {
             StartCoroutine(PlayerJoinAnimation(1, playerInput));
         }
-        else if (_amountOfPlayersActive == 3)
+        else if (_amountOfPlayersActive == 4)
         {
             StartCoroutine(PlayerJoinAnimation(2, playerInput));
         }

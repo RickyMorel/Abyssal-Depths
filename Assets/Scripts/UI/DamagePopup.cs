@@ -28,11 +28,11 @@ public class DamagePopup : MonoBehaviour
 
     #region Public Properties
 
-    public static DamagePopup Create(Vector3 position, int damage, bool isCriticalHit)
+    public static DamagePopup Create(Vector3 position, int damage, bool isCriticalHit, bool isSmall = true)
     {
         GameObject damagePopupObj = Instantiate(GameAssetsManager.Instance.DamagePopup, position, Quaternion.identity);
         DamagePopup damagePopup = damagePopupObj.GetComponent<DamagePopup>();
-        damagePopup.Setup((int)damage, isCriticalHit);
+        damagePopup.Setup((int)damage, isCriticalHit, isSmall);
 
         return damagePopup;
     }
@@ -80,10 +80,11 @@ public class DamagePopup : MonoBehaviour
         if(_textColor.a < 0) { Destroy(gameObject); }
     }
 
-    public void Setup(int damageAmount, bool isCriticalHit)
+    public void Setup(int damageAmount, bool isCriticalHit, bool isSmall)
     {
         _damageText.text = damageAmount.ToString();
-        _damageText.fontSize = isCriticalHit ? 45 : 36;
+        float fontDivider = isSmall ? 3.5f : 1f;
+        _damageText.fontSize = isCriticalHit ? 45 / fontDivider : 36 / fontDivider;
         _textColor = isCriticalHit ? _criticalTextColor : _normalTextColor;
         _damageText.color = _textColor;
         _disappearTimer = DISSAPEAR_TIMER_MAX;

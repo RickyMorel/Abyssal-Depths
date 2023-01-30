@@ -60,4 +60,29 @@ public class PlayerHealth : Damageable
 
         _mesh.material.SetFloat("Blood", 1 - (CurrentHealth / MaxHealth));
     }
+
+    public override void Die()
+    {
+        base.Die();
+
+        StartCoroutine(DissolveCoroutine());
+    }
+
+    private IEnumerator DissolveCoroutine()
+    {
+        yield return new WaitForSeconds(2f);
+
+        float currentTime = 0f;
+        float duration = 1f;
+
+        while (currentTime <= duration)
+        {
+            currentTime += Time.deltaTime;
+            float t = currentTime / duration;
+            float value = Mathf.Lerp(1, 0, t);
+            _mesh.material.SetFloat("Dissolve", 1 - value);
+
+            yield return null;
+        }
+    }
 }

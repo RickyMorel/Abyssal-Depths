@@ -16,12 +16,6 @@ public class TimelinesManager : MonoBehaviour
 
     [SerializeField] private GameObject _mainShipParentForTheTimeline;
 
-    [Header("Constant Laser Shooting")]
-    [SerializeField] private PlayableDirector _startConstantLaserTimeline;
-    [SerializeField] private PlayableDirector _endConstantLaserTimeline;
-
-    [SerializeField] private ParticleSystem _laserBallParticle;
-
     #endregion
 
     #region Private Variables
@@ -41,11 +35,6 @@ public class TimelinesManager : MonoBehaviour
     public ParticleSystem BlackHoleParticle => _blackHoleParticle;
 
     public GameObject MainShipParentForTheTimeline => _mainShipParentForTheTimeline;
-
-    public PlayableDirector StartConstantLaserTimeline => _startConstantLaserTimeline;
-    public PlayableDirector EndConstantLaserTimeline => _endConstantLaserTimeline;
-
-    public ParticleSystem LaserBallParticle => _laserBallParticle;
 
     #endregion
 

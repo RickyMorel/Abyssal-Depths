@@ -20,9 +20,6 @@ public class ConstantLaser : WeaponShoot
         _laserBeam = Instantiate(_weapon.ProjectilePrefab, _weapon.ShootTransforms[0].position, _weapon.TurretHead.rotation);
 
         _laserBeam.transform.GetChild(0).gameObject.SetActive(false);
-
-        TimelinesManager.Instance.LaserBallParticle.transform.SetParent(_laserBeam.transform);
-        TimelinesManager.Instance.LaserBallParticle.gameObject.transform.localPosition = new Vector3(0, 0, 2.61f);
     }
 
     #endregion
@@ -45,9 +42,7 @@ public class ConstantLaser : WeaponShoot
     IEnumerator ShootLaserBeam()
     {
         _shootLaserState = ShootLaserState.WaitingPhase;
-        TimelinesManager.Instance.StartConstantLaserTimeline.Play();
-        TimelinesManager.Instance.LaserBallParticle.Play();
-        yield return new WaitForSeconds((float)TimelinesManager.Instance.StartConstantLaserTimeline.duration);
+        yield return new WaitForSeconds(1);
         _laserBeam.transform.GetChild(0).gameObject.SetActive(true);
         _shootLaserState = ShootLaserState.CanStop;
     }
@@ -55,10 +50,8 @@ public class ConstantLaser : WeaponShoot
     IEnumerator StopLaserBeam()
     {
         _shootLaserState = ShootLaserState.WaitingPhase;
-        TimelinesManager.Instance.EndConstantLaserTimeline.Play();
         _laserBeam.transform.GetChild(0).gameObject.SetActive(false);
-        yield return new WaitForSeconds((float)TimelinesManager.Instance.StartConstantLaserTimeline.duration);
-        TimelinesManager.Instance.LaserBallParticle.Stop();
+        yield return new WaitForSeconds(1);
         _shootLaserState = ShootLaserState.CanShoot;
     }
 

@@ -394,7 +394,7 @@ ParticleSystem:
   emitterVelocityMode: 0
   looping: 1
   prewarm: 1
-  playOnAwake: 0
+  playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -19371,6 +19371,10 @@ PlayableDirector:
   m_SceneBindings:
   - key: {fileID: 8174589335229246329, guid: 78a87172173e65a409175244af8bd24a, type: 2}
     value: {fileID: 1662393593869240167}
+  - key: {fileID: 6749130598155860718, guid: 78a87172173e65a409175244af8bd24a, type: 2}
+    value: {fileID: 8424228084414413471}
+  - key: {fileID: -2489415425752363550, guid: 78a87172173e65a409175244af8bd24a, type: 2}
+    value: {fileID: 3356232026529221664}
   m_ExposedReferences:
     m_References: []
 --- !u!1 &3356232026529221664
@@ -19384,6 +19388,7 @@ GameObject:
   - component: {fileID: 3312711910109319746}
   - component: {fileID: 8519855702434555956}
   - component: {fileID: 7800747549895133913}
+  - component: {fileID: 498863213}
   m_Layer: 25
   m_Name: FX_Blackhole_Dots
   m_TagString: Untagged
@@ -19422,7 +19427,7 @@ ParticleSystem:
   emitterVelocityMode: 0
   looping: 1
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -24182,6 +24187,25 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!95 &498863213
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3356232026529221664}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3852162812249718933
 GameObject:
   m_ObjectHideFlags: 0
@@ -24518,6 +24542,10 @@ PlayableDirector:
     value: {fileID: 1662393593869240167}
   - key: {fileID: -2506883751539100274, guid: 4722823ca45c6364e9e658198e9e9915, type: 2}
     value: {fileID: 1662393593869240167}
+  - key: {fileID: -4589034158899055184, guid: 4722823ca45c6364e9e658198e9e9915, type: 2}
+    value: {fileID: 8424228084414413471}
+  - key: {fileID: 5464857839679932114, guid: 4722823ca45c6364e9e658198e9e9915, type: 2}
+    value: {fileID: 3356232026529221664}
   m_ExposedReferences:
     m_References: []
 --- !u!1 &7577246896416600909
@@ -24593,6 +24621,7 @@ GameObject:
   - component: {fileID: 2983544781871634783}
   - component: {fileID: 6647731875576529662}
   - component: {fileID: 8774471795951675101}
+  - component: {fileID: 1976041676}
   m_Layer: 25
   m_Name: FX_Blackhole_Edge
   m_TagString: Untagged
@@ -24631,7 +24660,7 @@ ParticleSystem:
   emitterVelocityMode: 0
   looping: 1
   prewarm: 1
-  playOnAwake: 0
+  playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -29260,6 +29289,25 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!95 &1976041676
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8424228084414413471}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &8298710351486544151
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29325,6 +29373,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22ec3df1c4cad9042bc86f9a412e3368, type: 3}
+--- !u!4 &1904559158525941805 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7585376163004002618, guid: 22ec3df1c4cad9042bc86f9a412e3368, type: 3}
+  m_PrefabInstance: {fileID: 8298710351486544151}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1904559158525941804 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7585376163004002619, guid: 22ec3df1c4cad9042bc86f9a412e3368, type: 3}
@@ -29336,8 +29389,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf38b3f658fc4dd448ded264a73a7d60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &1904559158525941805 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7585376163004002618, guid: 22ec3df1c4cad9042bc86f9a412e3368, type: 3}
-  m_PrefabInstance: {fileID: 8298710351486544151}
-  m_PrefabAsset: {fileID: 0}

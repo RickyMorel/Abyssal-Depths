@@ -21,7 +21,7 @@ public class PlayerJoinManager : MonoBehaviour
     private PlayerJoinNPC[] _playerJoinNPC;
 
     private int _playerJoinNPCIndex = -1;
-    [SerializeField] private int _amountOfPlayersActive = 0;
+    private int _amountOfPlayersActive = 0;
 
     #endregion
 

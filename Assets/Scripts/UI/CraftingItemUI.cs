@@ -55,12 +55,9 @@ public class CraftingItemUI : ItemUI, IPointerEnterHandler
 
     public override void OnClick()
     {
-        Debug.Log("OnClick Crafting Item UI");
         if (!_gotClicked) { return; }
 
         _gotClicked = false;
-
-        Debug.Log("GotClicked! Crafting Item UI");
 
         _currentCraftingStation.TryCraft(CraftingRecipy);
     }

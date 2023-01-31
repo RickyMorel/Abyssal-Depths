@@ -69,10 +69,9 @@ public class PlayerHealth : Damageable
             GameObject stunHitParticles = Instantiate(GameAssetsManager.Instance.StunnedParticles[0], wantedTransform.position, wantedTransform.rotation);
 
             //Play looping stun particles
-            if (_stunnedParticleInstance == null)
-            {
-                _stunnedParticleInstance = Instantiate(GameAssetsManager.Instance.StunnedParticles[1], wantedTransform);
-            }
+            if (_stunnedParticleInstance != null) { return; }
+
+            _stunnedParticleInstance = Instantiate(GameAssetsManager.Instance.StunnedParticles[1], wantedTransform);
         }
         else
         {

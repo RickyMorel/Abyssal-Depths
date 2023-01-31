@@ -35,7 +35,6 @@ public class BaseCamera : MonoBehaviour
 
     private IEnumerator ProcessShake(float shakeAmplitude, float shakeFrecuency, float shakeTiming)
     {
-        Debug.Log("ProcessShake");
         Noise(shakeAmplitude, shakeFrecuency);
         yield return new WaitForSeconds(shakeTiming);
         Noise(0, 0);

@@ -41,6 +41,8 @@ public class AttackHitBox : MonoBehaviour
             AIHealth aiHealth = (AIHealth)enemyHealth;
             if (aiHealth.CanKill) { enemyHealth.Damage(20, DamageType.Base); }
             else { aiHealth.Hurt(DamageType.Base); }
+
+            _ownHealth.GetComponent<PlayerComponents>()?.PlayerCamera.ShakeCamera(2f, 50f, 0.2f);
         }
 
         if (_isFriendlyToPlayers) { return; }
@@ -48,7 +50,8 @@ public class AttackHitBox : MonoBehaviour
         if (enemyHealth is PlayerHealth) 
         { 
             PlayerHealth playerHealth = enemyHealth as PlayerHealth;
-            playerHealth.Hurt(DamageType.Base); 
+            playerHealth.Hurt(DamageType.Base);
+            _ownHealth.GetComponent<PlayerComponents>()?.PlayerCamera.ShakeCamera(2f, 50f, 0.2f);
         }
 
         if (enemyHealth is ShipHealth)

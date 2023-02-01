@@ -13969,9 +13969,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6096375070680161070}
-  - component: {fileID: 5911522910635515639}
-  - component: {fileID: 8973245836584689200}
-  - component: {fileID: 7609266434535856333}
   m_Layer: 25
   m_Name: Constant Laser
   m_TagString: Untagged
@@ -13995,50 +13992,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &5911522910635515639
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1912844457804034903}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 5, y: 0.10378206, z: 29.773512}
-  m_Center: {x: 0, y: -0.0012436509, z: 14.686755}
---- !u!54 &8973245836584689200
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1912844457804034903}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &7609266434535856333
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1912844457804034903}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92ee53500a915224d82f839300ec587b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _speed: 0
-  _damage: 20
-  _damageType: 3
 --- !u!1 &2671047453195774568
 GameObject:
   m_ObjectHideFlags: 0
@@ -23824,8 +23777,11 @@ GameObject:
   - component: {fileID: 693623460323972411}
   - component: {fileID: 8422052634184711940}
   - component: {fileID: 261103615105692785}
+  - component: {fileID: 3811594797507814880}
+  - component: {fileID: 5714458648983481163}
+  - component: {fileID: 1123309372059261939}
   m_Layer: 25
-  m_Name: FX_LazerBeam_01
+  m_Name: LaserBeam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28646,6 +28602,51 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!54 &3811594797507814880
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6202776513481915234}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &5714458648983481163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6202776513481915234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92ee53500a915224d82f839300ec587b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 0
+  _dealDamageAfterSeconds: 0.5
+  _damage: 20
+  _damageType: 3
+--- !u!65 &1123309372059261939
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6202776513481915234}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.8601341, y: 0.097467706, z: 8.94422}
+  m_Center: {x: 0.010184447, y: -0.011879663, z: 4.2753754}
 --- !u!1 &7300056672843090130
 GameObject:
   m_ObjectHideFlags: 0

@@ -25,6 +25,7 @@ public class Upgradable : Interactable
     #region Public Properties
 
     public event Action<Upgrade> OnUpgradeMesh;
+    public UpgradeChip[] UpgradeSockets => _upgradeSockets;
 
     #endregion
 

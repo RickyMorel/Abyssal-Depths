@@ -26,7 +26,7 @@ public class Damageable : MonoBehaviour
 
     #region Private Variables
 
-    private float _currentHealth;
+    [SerializeField] private float _currentHealth;
 
     [ColorUsageAttribute(false, true)] private Color _originalColor;
 
@@ -188,8 +188,7 @@ public class Damageable : MonoBehaviour
 
         if (_damageParticles != null && damageType != DamageType.None) { _damageParticles.Play(); }
 
-        if (_currentHealth == 0)
-            Die();
+        if (_currentHealth == 0) { Die(); }
     }
 
     public virtual void Die()

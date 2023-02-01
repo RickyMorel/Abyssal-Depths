@@ -59,7 +59,7 @@ public class AIHealth : PlayerHealth
 
     public override void Hurt(DamageType damageType)
     {
-        base.Hurt(damageType);
+        if (CanKill == false) { base.Hurt(damageType); }
 
         CheckIfLowHealth();
         CheckIfScared();

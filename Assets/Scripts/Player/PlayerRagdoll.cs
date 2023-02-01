@@ -85,6 +85,7 @@ public class PlayerRagdoll : MonoBehaviour
     private void PlayDeathAnimation()
     {
         _anim.SetBool("IsDead", true);
+        Debug.Log("PlayDeathAnimation");
         DisableMovement(true, false);
     }
 }

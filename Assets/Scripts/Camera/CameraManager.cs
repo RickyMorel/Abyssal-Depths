@@ -94,12 +94,20 @@ public class CameraManager : MonoBehaviour
         if (index == 0)
         {
             _vCams[0].gameObject.layer = 29;
+            //Turn On Layer
+            _cameras[1].OutputCamera.cullingMask |= 1 << LayerMask.NameToLayer("Player2Cam");
+            //Turn Off Layer
+            _cameras[1].OutputCamera.cullingMask &= ~(1 << LayerMask.NameToLayer("Player1Cam"));
+
             _cameras[1].OutputCamera.rect = new Rect(0, 0.5f, 1, 0.5f);
             _cameras[0].OutputCamera.rect = new Rect(0, 0, 1, 0.5f);
         }
         else if (index == 1)
         {
             _vCams[0].gameObject.layer = 30;
+            _cameras[2].OutputCamera.cullingMask |= 1 << LayerMask.NameToLayer("Player3Cam");
+            _cameras[2].OutputCamera.cullingMask &= ~(1 << LayerMask.NameToLayer("Player1Cam"));
+
             _cameras[2].OutputCamera.rect = new Rect(0, 0.5f, 0.5f, 0.5f);
             _cameras[1].OutputCamera.rect = new Rect(0.5f, 0.5f, 0.5f, 0.5f);
             _cameras[0].OutputCamera.rect = new Rect(0, 0, 1, 0.5f);
@@ -107,6 +115,9 @@ public class CameraManager : MonoBehaviour
         else if (index == 2)
         {
             _vCams[0].gameObject.layer = 31;
+            _cameras[3].OutputCamera.cullingMask |= 1 << LayerMask.NameToLayer("Player4Cam");
+            _cameras[3].OutputCamera.cullingMask &= ~(1 << LayerMask.NameToLayer("Player1Cam"));
+
             _cameras[3].OutputCamera.rect = new Rect(0, 0.5f, 0.5f, 0.5f);
             _cameras[2].OutputCamera.rect = new Rect(0.5f, 0.5f, 0.5f, 0.5f);
             _cameras[1].OutputCamera.rect = new Rect(0, 0, 0.5f, 0.5f);

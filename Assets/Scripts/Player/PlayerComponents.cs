@@ -10,6 +10,7 @@ public class PlayerComponents : MonoBehaviour
     [SerializeField] private Animator _anim;
     [SerializeField] private PlayerInputHandler _playerInputHandler;
     [SerializeField] private PlayerInteractionController _playerInteractionController;
+    [SerializeField] private PlayerCamera _playerCamera;
 
     #endregion
 
@@ -19,6 +20,7 @@ public class PlayerComponents : MonoBehaviour
     public Animator Anim => _anim;
     public PlayerInputHandler PlayerInputHandler => _playerInputHandler;
     public PlayerInteractionController PlayerInteractionController => _playerInteractionController;
+    public PlayerCamera PlayerCamera => _playerCamera;
 
     #endregion
 }

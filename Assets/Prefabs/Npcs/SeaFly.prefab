@@ -215,7 +215,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3455716032564154233
 RectTransform:
   m_ObjectHideFlags: 0
@@ -21740,9 +21740,8 @@ MonoBehaviour:
   _maxHealth: 100
   _healthBarImage: {fileID: 3455716033785055648}
   _damageParticles: {fileID: 4862373215728599882}
-  _colorChangeRenderer: {fileID: 0}
-  _redHDR: {r: 2, g: 0, b: 0, a: 0}
   _hurtTime: 5
+  _mesh: {fileID: 0}
   _canKill: 1
 --- !u!114 &7153336119383687667
 MonoBehaviour:
@@ -21770,6 +21769,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentInteraction: 0
+  _currentInteractable: {fileID: 0}
 --- !u!114 &7153336119383687657
 MonoBehaviour:
   m_ObjectHideFlags: 0

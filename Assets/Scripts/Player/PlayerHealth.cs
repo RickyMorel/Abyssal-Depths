@@ -8,12 +8,14 @@ public class PlayerHealth : Damageable
     #region Editor Fields
 
     [SerializeField] private float _hurtTime = 5f;
+    [SerializeField] private Renderer _mesh;
 
     #endregion
 
     #region Private Variables
 
     private bool _isHurt;
+    private GameObject _stunnedParticleInstance;
 
     #endregion
 
@@ -24,6 +26,12 @@ public class PlayerHealth : Damageable
     public event Action OnHurt;
 
     #endregion
+
+    private void Awake()
+    {
+        _mesh = GetComponentInChildren<MeshRenderer>();
+        if (_mesh == null) { _mesh = GetComponentInChildren<SkinnedMeshRenderer>(); }
+    }
 
     //This is for the child classes
     public virtual void Start()
@@ -41,9 +49,65 @@ public class PlayerHealth : Damageable
     private IEnumerator HurtCoroutine()
     {
         _isHurt = true;
+        
+        EnableStunFX(true);
 
         yield return new WaitForSeconds(_hurtTime);
 
+        EnableStunFX(false);
+
         _isHurt = false;
+    }
+
+    private void EnableStunFX(bool enable)
+    {
+        if (enable)
+        {
+            Transform wantedTransform = GetComponent<PlayerRagdoll>() ? GetComponent<PlayerRagdoll>().GetHeadTransform() : transform;
+
+            //Play initial hit particles
+            GameObject stunHitParticles = Instantiate(GameAssetsManager.Instance.StunnedParticles[0], wantedTransform.position, wantedTransform.rotation);
+
+            //Play looping stun particles
+            if (_stunnedParticleInstance != null) { return; }
+
+            _stunnedParticleInstance = Instantiate(GameAssetsManager.Instance.StunnedParticles[1], wantedTransform);
+        }
+        else
+        {
+            _stunnedParticleInstance.GetComponent<ParticleSystem>().Stop();
+        }
+    }
+
+    public override void UpdateHealthUI()
+    {
+        if(_mesh == null) { Debug.LogError("Need to assign mesh with blood shader!: " + gameObject.name); return; }
+
+        _mesh.material.SetFloat("Blood", 1 - (CurrentHealth / MaxHealth));
+    }
+
+    public override void Die()
+    {
+        base.Die();
+
+        StartCoroutine(DissolveCoroutine());
+    }
+
+    private IEnumerator DissolveCoroutine()
+    {
+        yield return new WaitForSeconds(2f);
+
+        float currentTime = 0f;
+        float duration = 1f;
+
+        while (currentTime <= duration)
+        {
+            currentTime += Time.deltaTime;
+            float t = currentTime / duration;
+            float value = Mathf.Lerp(1, 0, t);
+            _mesh.material.SetFloat("Dissolve", 1 - value);
+
+            yield return null;
+        }
     }
 }

@@ -16,7 +16,7 @@ public class Upgradable : Interactable
 
     #region Private Variables
 
-    private UpgradeChip[] _upgradeSockets = { null, null };
+     private UpgradeChip[] _upgradeSockets = { null, null };
     private List<GameObject> _chipInstances = new List<GameObject>();
     protected Upgrade _selectedUpgrade;
 
@@ -25,6 +25,7 @@ public class Upgradable : Interactable
     #region Public Properties
 
     public event Action<Upgrade> OnUpgradeMesh;
+    public UpgradeChip[] UpgradeSockets => _upgradeSockets;
 
     #endregion
 

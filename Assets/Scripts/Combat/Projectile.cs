@@ -20,6 +20,7 @@ public class Projectile : MonoBehaviour
     private Rigidbody _rb;
     protected ParticleSystem _particles;
     protected bool _destroyOnHit = true;
+    protected Weapon _weapon;
 
     #endregion
 

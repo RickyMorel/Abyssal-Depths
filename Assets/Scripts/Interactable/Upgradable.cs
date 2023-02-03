@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 public class Upgradable : Interactable
 {
@@ -18,6 +19,7 @@ public class Upgradable : Interactable
 
     private UpgradeChip[] _upgradeSockets = { null, null };
     private List<GameObject> _chipInstances = new List<GameObject>();
+    private InteractableHealth _health;
     protected Upgrade _selectedUpgrade;
 
     #endregion
@@ -26,26 +28,40 @@ public class Upgradable : Interactable
 
     public event Action<Upgrade> OnUpgradeMesh;
     public UpgradeChip[] UpgradeSockets => _upgradeSockets;
+    public float? CurrentHealth => _health?.CurrentHealth;
 
     #endregion
 
-    #region Unity Loops
-
-    public virtual void Start()
+    public override void Awake()
     {
-        //TODO: read current level from save data
+        base.Awake();
 
-        EnableUpgradeMesh();
+        _health = GetComponent<InteractableHealth>();
     }
 
-    #endregion
+    public virtual void Start() { }
 
     public void LoadChips(UpgradeChip[] allChips, SaveData.UpgradableData upgradableData)
     {
-        //foreach (SaveData.UpgradableData upgradeData in upgradableData)
-        //{
-        //    if(upgradeData.Socket1ChipId != )
-        //}
+        //Debug.Log("Try Load 1 : " + upgradableData.Socket1ChipId);
+        //Debug.Log("Try Load 2 : " + upgradableData.Socket2ChipId);
+        Debug.Log($"lOAD hEALTH {gameObject.name}: " + upgradableData.CurrentHealth);
+
+        foreach (UpgradeChip chip in allChips)
+        {
+            if (upgradableData.Socket1ChipId != chip.Id) { continue; }
+
+            LoadUpgrade(chip, 0);
+        }
+
+        foreach (UpgradeChip chip in allChips)
+        {
+            if (upgradableData.Socket2ChipId != chip.Id) { continue; }
+
+            LoadUpgrade(chip, 1);
+        }
+
+        _health.SetHealth((int)upgradableData.CurrentHealth);
     }
 
     public void RemoveUpgrades()
@@ -104,6 +120,13 @@ public class Upgradable : Interactable
         Upgrade(upgradeChip, socketIndex);
 
         return true;
+    }
+
+    public void LoadUpgrade(UpgradeChip upgradeChip, int socketIndex)
+    {
+        _upgradeSockets[socketIndex] = upgradeChip;
+
+        Upgrade(upgradeChip, socketIndex);
     }
 
     public void Upgrade(UpgradeChip upgradeChip, int socketIndex)

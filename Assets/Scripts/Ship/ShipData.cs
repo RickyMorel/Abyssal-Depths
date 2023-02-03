@@ -7,10 +7,17 @@ public class ShipData : MonoBehaviour
     public Upgradable Booster;
     public Upgradable[] Weapons;
 
-    private void Awake()
+    private void Start()
+    {
+        LoadChips();
+    }
+
+    private void LoadChips()
     {
         UpgradeChip[] allChips = Resources.LoadAll<UpgradeChip>("ScriptableObjs/Chips");
         SaveData saveData = SaveSystem.Load();
+
+        Booster.LoadChips(allChips, saveData.BoosterData);
 
         for (int i = 0; i < Weapons.Length; i++)
         {

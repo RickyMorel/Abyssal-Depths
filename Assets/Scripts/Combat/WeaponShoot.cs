@@ -44,12 +44,14 @@ public class WeaponShoot : MonoBehaviour
         if (_timeBetweenShots > _timeSinceLastShot) { return; }
 
         _timeSinceLastShot = 0f;
-        Instantiate(_weapon.ProjectilePrefab, _weapon.ShootTransforms[0].position, _weapon.TurretHead.rotation);
+        GameObject projectileInstance = Instantiate(_weapon.ProjectilePrefab, _weapon.ShootTransforms[0].position, _weapon.TurretHead.rotation);
+        projectileInstance.GetComponent<Projectile>().WeaponReference = _weapon;
     }
 
     public void ProjectileShootFromOtherBarrels(int shootNumber)
     {
-        Instantiate(_weapon.ProjectilePrefab, _weapon.ShootTransforms[shootNumber].position, _weapon.TurretHead.rotation);
+        GameObject projectileInstance = Instantiate(_weapon.ProjectilePrefab, _weapon.ShootTransforms[shootNumber].position, _weapon.TurretHead.rotation);
+        projectileInstance.GetComponent<Projectile>().WeaponReference = _weapon;
     }
 
     public void UpdateTime()

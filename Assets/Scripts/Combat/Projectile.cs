@@ -40,6 +40,7 @@ public class Projectile : MonoBehaviour
     #region Getters and Setters
 
     public ParticleSystem ProjectileParticles { get { return _particles; } set { _particles = value; } }
+    public Weapon WeaponReference { get { return _weapon; } set { _weapon = value; } }
 
     #endregion
 
@@ -57,7 +58,6 @@ public class Projectile : MonoBehaviour
         if (GetComponentInChildren<ParticleSystem>() == null) { return; }
 
         _particles = GetComponentInChildren<ParticleSystem>();
-
         Invoke(nameof(DestroySelf), 4f);
     }
 

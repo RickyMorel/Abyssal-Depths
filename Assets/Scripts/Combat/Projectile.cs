@@ -9,6 +9,7 @@ public class Projectile : MonoBehaviour
     #region Editor Fields
 
     [SerializeField] private float _speed;
+    [SerializeField] protected float _dealDamageAfterSeconds = 0;
     [SerializeField] private int _damage = 20;
     [SerializeField] private DamageType _damageType;
 
@@ -17,7 +18,8 @@ public class Projectile : MonoBehaviour
     #region Private Varaibles
 
     private Rigidbody _rb;
-    private ParticleSystem _particles;
+    protected ParticleSystem _particles;
+    protected bool _destroyOnHit = true;
 
     #endregion
 
@@ -26,6 +28,11 @@ public class Projectile : MonoBehaviour
     public int Damage => _damage;
 
     public DamageType DamageType => _damageType;
+
+    public bool DestroyOnHit => _destroyOnHit;
+
+    public float DealDamageAfterSeconds => _dealDamageAfterSeconds;
+
 
     #endregion
 
@@ -42,7 +49,7 @@ public class Projectile : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
     }
 
-    private void Start()
+    public virtual void Start()
     {
         _rb.AddForce(transform.forward * _speed, ForceMode.Impulse);
 

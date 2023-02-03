@@ -65,6 +65,8 @@ public class PlayerHealth : Damageable
         {
             Transform wantedTransform = GetComponent<PlayerRagdoll>() ? GetComponent<PlayerRagdoll>().GetHeadTransform() : transform;
 
+            if (wantedTransform == null) { return; }
+
             //Play initial hit particles
             GameObject stunHitParticles = Instantiate(GameAssetsManager.Instance.StunnedParticles[0], wantedTransform.position, wantedTransform.rotation);
 
@@ -75,6 +77,8 @@ public class PlayerHealth : Damageable
         }
         else
         {
+            if(_stunnedParticleInstance == null) { return; }
+
             _stunnedParticleInstance.GetComponent<ParticleSystem>().Stop();
         }
     }

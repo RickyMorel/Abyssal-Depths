@@ -9,7 +9,6 @@ public class WeaponShoot : MonoBehaviour
     protected Weapon _weapon;
     protected float _timeSinceLastShot;
     
-
     #endregion
 
     #region Editor Fields

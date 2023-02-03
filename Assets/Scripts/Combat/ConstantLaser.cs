@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class ConstantLaser : WeaponShoot
 {
+    #region Editor Fields
+
+    [SerializeField] private float _laserBallSize;
+
+    #endregion
+
     #region Private Variables
 
     private GameObject _constantLaser;
@@ -23,6 +29,7 @@ public class ConstantLaser : WeaponShoot
         _constantLaser = Instantiate(_weapon.ProjectilePrefab, _weapon.ShootTransforms[0].position, _weapon.TurretHead.rotation);
         _laserBeam = _constantLaser.transform.GetChild(0).gameObject;
         _laserBall = _constantLaser.transform.GetChild(1).gameObject;
+        _laserBall.transform.GetChild(1).gameObject.SetActive(false);
 
         _laserBeam.SetActive(false);
         _laserBall.transform.localScale = new Vector3(0, 0, 0);
@@ -32,17 +39,18 @@ public class ConstantLaser : WeaponShoot
     {
         base.Update();
 
-        if (_shootLaserState == ShootLaserState.ChargingUp && _laserBall.transform.localScale != new Vector3(1.5f, 1.5f, 1.5f))
+        if (_shootLaserState == ShootLaserState.ChargingUp && _laserBall.transform.localScale != new Vector3(_laserBallSize, _laserBallSize, _laserBallSize))
         {
             _laserBallScaleTime += Time.deltaTime;
-            _laserBall.transform.localScale = Vector3.Lerp(new Vector3(0, 0, 0), new Vector3(1.5f, 1.5f, 1.5f), _laserBallScaleTime);
+            _laserBall.transform.localScale = Vector3.Lerp(new Vector3(0, 0, 0), new Vector3(_laserBallSize, _laserBallSize, _laserBallSize), _laserBallScaleTime);
+            _laserBall.transform.GetChild(1).gameObject.SetActive(true);
         }
         if (_shootLaserState == ShootLaserState.ChargingDown && _laserBall.transform.localScale != new Vector3(0, 0, 0))
         {
             _laserBallScaleTime -= Time.deltaTime;
-            _laserBall.transform.localScale = Vector3.Lerp(new Vector3(0, 0, 0), new Vector3(1.5f, 1.5f, 1.5f), _laserBallScaleTime);
+            _laserBall.transform.localScale = Vector3.Lerp(new Vector3(0, 0, 0), new Vector3(_laserBallSize, _laserBallSize, _laserBallSize), _laserBallScaleTime);
             
-            if (_laserBallScaleTime <= 0) { _shootLaserState = ShootLaserState.CanShoot; }
+            if (_laserBallScaleTime <= 0) { _shootLaserState = ShootLaserState.CanShoot; _laserBall.transform.GetChild(1).gameObject.SetActive(false); }
         }
     }
 

@@ -26,7 +26,7 @@ public class Damageable : MonoBehaviour
 
     #region Private Variables
 
-    [SerializeField] private float _currentHealth;
+    private float _currentHealth;
 
     [ColorUsageAttribute(false, true)] private Color _originalColor;
 

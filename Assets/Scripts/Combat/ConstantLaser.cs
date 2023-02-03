@@ -7,6 +7,7 @@ public class ConstantLaser : WeaponShoot
     #region Editor Fields
 
     [SerializeField] private float _laserBallSize;
+    [SerializeField] private float _scaleDuration;
 
     #endregion
 
@@ -15,7 +16,7 @@ public class ConstantLaser : WeaponShoot
     private GameObject _constantLaser;
     private GameObject _laserBeam;
     private GameObject _laserBall;
-    private ShootLaserState _shootLaserState = ShootLaserState.CanShoot;
+    private ShootLaserState _shootLaserState = ShootLaserState.CanShoot; 
     private float _laserBallScaleTime = 0;
 
     #endregion
@@ -42,9 +43,10 @@ public class ConstantLaser : WeaponShoot
         if (_shootLaserState == ShootLaserState.ChargingUp && _laserBall.transform.localScale != new Vector3(_laserBallSize, _laserBallSize, _laserBallSize))
         {
             _laserBallScaleTime += Time.deltaTime;
-            _laserBall.transform.localScale = Vector3.Lerp(new Vector3(0, 0, 0), new Vector3(_laserBallSize, _laserBallSize, _laserBallSize), _laserBallScaleTime);
+            _laserBall.transform.localScale = Vector3.Lerp(new Vector3(0, 0, 0), new Vector3(_laserBallSize, _laserBallSize, _laserBallSize), _laserBallScaleTime/_scaleDuration);
             _laserBall.transform.GetChild(1).gameObject.SetActive(true);
         }
+
         if (_shootLaserState == ShootLaserState.ChargingDown && _laserBall.transform.localScale != new Vector3(0, 0, 0))
         {
             _laserBallScaleTime -= Time.deltaTime;
@@ -62,13 +64,13 @@ public class ConstantLaser : WeaponShoot
         _constantLaser.transform.position = _weapon.TurretHead.transform.position;
 
         if (_weapon.CurrentPlayer.IsUsing && !_laserBeam.activeSelf && (_shootLaserState == ShootLaserState.CanShoot || _shootLaserState == ShootLaserState.ChargingUp)) { ShootLaserBeam(); }
-        else if (!_weapon.CurrentPlayer.IsUsing && _laserBeam.activeSelf && (_shootLaserState == ShootLaserState.CanStop || _shootLaserState == ShootLaserState.ChargingDown)) { StopLaserBeam(); }
+        else if (!_weapon.CurrentPlayer.IsUsing && _laserBeam.activeSelf && (_shootLaserState == ShootLaserState.CanStop || _shootLaserState == ShootLaserState.ChargingDown)) { StopLaserBeam(); _laserBallScaleTime = 1; }
     }
 
     private void ShootLaserBeam()
     {
         _shootLaserState = ShootLaserState.ChargingUp;
-        if (_laserBallScaleTime >= 1)
+        if (_laserBallScaleTime/_scaleDuration >= 1)
         {
             _laserBeam.SetActive(true);
             _shootLaserState = ShootLaserState.CanStop;

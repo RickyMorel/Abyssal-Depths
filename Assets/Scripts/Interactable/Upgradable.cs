@@ -40,6 +40,14 @@ public class Upgradable : Interactable
 
     #endregion
 
+    public void LoadChips(UpgradeChip[] allChips, SaveData.UpgradableData upgradableData)
+    {
+        //foreach (SaveData.UpgradableData upgradeData in upgradableData)
+        //{
+        //    if(upgradeData.Socket1ChipId != )
+        //}
+    }
+
     public void RemoveUpgrades()
     {
         if(_upgradeSockets[0] == null && _upgradeSockets[1] == null) { return; }

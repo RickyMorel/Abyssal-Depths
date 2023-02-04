@@ -58,9 +58,9 @@ public class ShipHealth : Damageable
         _boosterHealth.OnFix -= HandleFix;
     }
 
-    public override void OnTriggerEnter(Collider other)
+    public override void OnTriggerStay(Collider other)
     {
-        base.OnTriggerEnter(other);
+        base.OnTriggerStay(other);
 
         if((1<<other.gameObject.layer & _crashLayers) == 0) { return; }
         if(other.gameObject.GetComponent<Projectile>() != null) { return; }

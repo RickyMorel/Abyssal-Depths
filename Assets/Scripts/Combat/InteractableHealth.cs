@@ -62,9 +62,9 @@ public class InteractableHealth : Damageable
         if(_timeSpentFixing > _timeToFix) { FixInteractable(); }
     }
 
-    public override void OnTriggerEnter(Collider other)
+    public override void OnTriggerStay(Collider other)
     {
-        base.OnTriggerEnter(other);
+        base.OnTriggerStay(other);
 
         if(_interactable.Outline.enabled == false) { return; }
 

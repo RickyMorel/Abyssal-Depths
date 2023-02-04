@@ -59,6 +59,8 @@ public class Projectile : MonoBehaviour
 
         _particles = GetComponentInChildren<ParticleSystem>();
         Invoke(nameof(DestroySelf), 4f);
+
+        _damage = _damage * _weapon.UpgradeSockets[0].Level;
     }
 
     public void Initialize(string ownerTag)

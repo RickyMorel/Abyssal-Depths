@@ -108,7 +108,11 @@ public class ShipHealth : Damageable
 
     private void HandleUpdateHealth(int healthAdded)
     {
+        Debug.Log($"HandleUpdateHealth {gameObject.name}: " + healthAdded);
+
         _boosterHealth.SetHealth((int)CurrentHealth);
+
+        CheckFlickerRedLights();
     }
 
     private void HandleDamaged(DamageType damageType)

@@ -138,6 +138,8 @@ public class Damageable : MonoBehaviour
 
         UpdateHealthUI();
 
+        OnUpdateHealth?.Invoke(newHealth);
+
         if (IsDead())
             Die();
     }

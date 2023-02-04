@@ -9,7 +9,7 @@ public class ShipData : MonoBehaviour
 
     private void Start()
     {
-        LoadChips();
+        //LoadChips();
     }
 
     private void LoadChips()

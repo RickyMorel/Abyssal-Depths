@@ -39,7 +39,7 @@ public class Upgradable : Interactable
         _health = GetComponent<InteractableHealth>();
     }
 
-    public virtual void Start() { }
+    public virtual void Start() { EnableUpgradeMesh(); }
 
     public void LoadChips(UpgradeChip[] allChips, SaveData.UpgradableData upgradableData, ShipData shipData, bool isBooster)
     {

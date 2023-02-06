@@ -100,6 +100,8 @@ public class Weapon : Upgradable
 
     private bool DoesRotate()
     {
+        if(_selectedUpgrade == null) { return true; }
+
         //if is harpoon gun
         if (_selectedUpgrade._socket_1_ChipType == ChipType.Base && _selectedUpgrade._socket_1_ChipType == ChipType.Electric) { return true; }
         if (_selectedUpgrade._socket_1_ChipType == ChipType.Electric && _selectedUpgrade._socket_1_ChipType == ChipType.Base) { return true; }

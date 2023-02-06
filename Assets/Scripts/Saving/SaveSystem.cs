@@ -6,8 +6,6 @@ public static class SaveSystem
 {
     public static void Save()
     {
-        Debug.Log("Start save");
-
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/abyssalDepths.sav";
         FileStream stream = new FileStream(path, FileMode.Create);
@@ -17,6 +15,7 @@ public static class SaveSystem
         formatter.Serialize(stream, saveData);
         stream.Close();
 
+        //Left here on purpose
         Debug.Log("Saved! " + path);
     }
 

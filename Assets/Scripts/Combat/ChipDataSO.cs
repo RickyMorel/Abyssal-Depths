@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Data", menuName = "Stats/Ship", order = 1)]
-public class ShipStatsSO : ScriptableObject
+[CreateAssetMenu(fileName = "Data", menuName = "Stats/Chip", order = 1)]
+public class ChipDataSO : ScriptableObject
 {
     [Header("Locomotion")]
     public float TopSpeed = 60f;

@@ -13,6 +13,31 @@ public class SaveData
 
     public SaveData(ShipData shipData)
     {
+        SaveChipData(shipData);
+        SaveShipPosition(shipData);
+        SaveEnemyData(shipData);
+    }
+
+    private void SaveEnemyData(ShipData shipData)
+    {
+        AIStateMachine enemies[];
+
+        foreach (AIStateMachine enemy in enemies)
+        {
+            EnemyData
+        }
+    }
+
+    private void SaveShipPosition(ShipData shipData)
+    {
+        ShipPos[0] = shipData.transform.position.x;
+        ShipPos[1] = shipData.transform.position.y;
+        ShipPos[2] = shipData.transform.position.z;
+        CurrentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+    }
+
+    private void SaveChipData(ShipData shipData)
+    {
         string socket_1_id = shipData.Booster.UpgradeSockets[0] == null ? " " : shipData.Booster.UpgradeSockets[0].Id;
         string socket_2_id = shipData.Booster.UpgradeSockets[1] == null ? " " : shipData.Booster.UpgradeSockets[1].Id;
         float health = shipData.Booster.CurrentHealth == null ? 0 : shipData.Booster.CurrentHealth.Value;
@@ -27,11 +52,6 @@ public class SaveData
 
             WeaponDatas[i] = new UpgradableData(socket_w1_id, socket_w2_id, health_w);
         }
-
-        ShipPos[0] = shipData.transform.position.x;
-        ShipPos[1] = shipData.transform.position.y;
-        ShipPos[2] = shipData.transform.position.z;
-        CurrentSceneIndex = SceneManager.GetActiveScene().buildIndex;
     }
 
     [System.Serializable]
@@ -47,5 +67,18 @@ public class SaveData
             Socket2ChipId = socket2ChipId;
             CurrentHealth = health;
         }   
+    }
+
+    [System.Serializable]
+    public class EnemyData
+    {
+        public string EnemyId;
+        public int Health;
+        public float[] Position = { 0f, 0f, 0f };
+
+        public EnemyData(AIHealth aIHealth)
+        {
+           // EnemyId = aIHealth.id
+        }
     }
 }

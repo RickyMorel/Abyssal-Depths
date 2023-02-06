@@ -23,6 +23,7 @@ public class AIHealth : PlayerHealth
     #region Public Properties
 
     public bool CanKill => _canKill;
+    public string NpcId => 
 
     #endregion
 

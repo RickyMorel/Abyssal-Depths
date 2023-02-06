@@ -17,11 +17,11 @@ public class ShipData : MonoBehaviour
         UpgradeChip[] allChips = Resources.LoadAll<UpgradeChip>("ScriptableObjs/Chips");
         SaveData saveData = SaveSystem.Load();
 
-        Booster.LoadChips(allChips, saveData.BoosterData);
+        Booster.LoadChips(allChips, saveData.BoosterData, this, true);
 
         for (int i = 0; i < Weapons.Length; i++)
         {
-            Weapons[i].LoadChips(allChips, saveData.WeaponDatas[i]);
+            Weapons[i].LoadChips(allChips, saveData.WeaponDatas[i], this, false);
         }
     }
 

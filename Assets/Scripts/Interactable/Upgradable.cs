@@ -41,12 +41,8 @@ public class Upgradable : Interactable
 
     public virtual void Start() { }
 
-    public void LoadChips(UpgradeChip[] allChips, SaveData.UpgradableData upgradableData)
+    public void LoadChips(UpgradeChip[] allChips, SaveData.UpgradableData upgradableData, ShipData shipData, bool isBooster)
     {
-        //Debug.Log("Try Load 1 : " + upgradableData.Socket1ChipId);
-        //Debug.Log("Try Load 2 : " + upgradableData.Socket2ChipId);
-        Debug.Log($"lOAD hEALTH {gameObject.name}: " + upgradableData.CurrentHealth);
-
         foreach (UpgradeChip chip in allChips)
         {
             if (upgradableData.Socket1ChipId != chip.Id) { continue; }
@@ -61,7 +57,8 @@ public class Upgradable : Interactable
             LoadUpgrade(chip, 1);
         }
 
-        _health.SetHealth((int)upgradableData.CurrentHealth);
+        if (!isBooster) { _health.SetHealth((int)upgradableData.CurrentHealth); }
+        else { shipData.GetComponent<ShipHealth>().SetHealth((int)upgradableData.CurrentHealth); }
     }
 
     public void RemoveUpgrades()

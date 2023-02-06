@@ -62,10 +62,13 @@ public class Damageable : MonoBehaviour
 
     #region Unity Loops
 
-    public virtual void Start()
+    public virtual void Awake()
     {
         _currentHealth = _maxHealth;
+    }
 
+    public virtual void Start()
+    {
         FindMeshes();
 
         UpdateHealthUI();
@@ -149,9 +152,9 @@ public class Damageable : MonoBehaviour
     {
         _currentHealth = newHealth;
 
-        UpdateHealthUI();
-
         OnUpdateHealth?.Invoke(newHealth);
+
+        UpdateHealthUI();
 
         if (IsDead())
             Die();

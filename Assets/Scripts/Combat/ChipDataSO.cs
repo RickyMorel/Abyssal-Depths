@@ -2,23 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Data", menuName = "Stats/Chip", order = 1)]
+[CreateAssetMenu(fileName = "Data", menuName = "Combat/Chip")]
+
 public class ChipDataSO : ScriptableObject
 {
-    [Header("Locomotion")]
-    public float TopSpeed = 60f;
-    public float BoostTimeAfterGearChange = 0.5f;
+    public List<ChipData> ChipData = new List<ChipData>();
+}
 
-    [Header("Combat")]
-    public int MaxHealth = 500;
-    public float TimeTillDeath = 10f;
-
-    [Header("Crashing")]
-    public float MinCrashSpeed = 10f;
-    public float CrashDamageMultiplier = 10f;
-
-    [Header("Particle FX")]
-    public ParticleSystem ShipCrashParticles;
-    public ParticleSystem ShipEnemyDamageParticles;
-    public ParticleSystem InteractableFriedParticles;
+public class ChipData
+{
+    public int ChipLevel;
+    public float ShootAfterSeconds;
+    public int Damage;
+    public int DamageMultiplierWeakness;
+    public int DamageMultiplierResistance;
 }

@@ -11,6 +11,7 @@ public class ChipDataSO : ScriptableObject
 [System.Serializable]
 public class ChipData
 {
+    public ChipType Chiptype;
     public int ChipLevel;
     public float ShootAfterSeconds;
     public int Damage;

@@ -20,12 +20,12 @@ public class SaveData
 
     private void SaveEnemyData(ShipData shipData)
     {
-        AIStateMachine enemies[];
+        //AIStateMachine enemies[];
 
-        foreach (AIStateMachine enemy in enemies)
-        {
-            EnemyData
-        }
+        //foreach (AIStateMachine enemy in enemies)
+        //{
+
+        //}
     }
 
     private void SaveShipPosition(ShipData shipData)

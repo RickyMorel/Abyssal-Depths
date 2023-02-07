@@ -33,8 +33,10 @@ public class InteractableHealth : Damageable
 
     #region Unity Loops
 
-    private void Awake()
+    public override void Awake()
     {
+        base.Awake();
+
         _interactable = GetComponent<Interactable>();
 
         _interactable.OnInteract += TryStartFix;

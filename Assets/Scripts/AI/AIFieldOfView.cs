@@ -14,6 +14,8 @@ public class AIFieldOfView : MonoBehaviour
     {
         if(!other.TryGetComponent<Ship>(out Ship ship)) { return; }
 
+        Debug.Log("OnTrigger");
+
         foreach (AICombat ai in _enemyAiList)
         {
             ai.Aggro();

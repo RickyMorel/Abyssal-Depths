@@ -10,6 +10,7 @@ public class SaveData
     public UpgradableData[] WeaponDatas = { null, null, null, null };
     public float[] ShipPos = { 0f, 0f, 0f};
     public int CurrentSceneIndex;
+    public List<EnemyData> enemiesInScene = new List<EnemyData>();
 
     public SaveData(ShipData shipData)
     {
@@ -20,12 +21,13 @@ public class SaveData
 
     private void SaveEnemyData(ShipData shipData)
     {
-        //AIStateMachine enemies[];
+        AIHealth[] enemies = shipData.GetCurrentEnemyData();
 
-        //foreach (AIStateMachine enemy in enemies)
-        //{
-
-        //}
+        foreach (AIHealth enemy in enemies)
+        {
+            EnemyData enemyData = new EnemyData(enemy);
+            enemiesInScene.Add(enemyData);
+        }
     }
 
     private void SaveShipPosition(ShipData shipData)
@@ -73,12 +75,16 @@ public class SaveData
     public class EnemyData
     {
         public string EnemyId;
-        public int Health;
+        public float Health;
         public float[] Position = { 0f, 0f, 0f };
 
         public EnemyData(AIHealth aIHealth)
         {
-           // EnemyId = aIHealth.id
+            EnemyId = aIHealth.Id;
+            Health = aIHealth.CurrentHealth;
+            Position[0] = aIHealth.transform.position.x;
+            Position[1] = aIHealth.transform.position.y;
+            Position[2] = aIHealth.transform.position.z;
         }
     }
 }

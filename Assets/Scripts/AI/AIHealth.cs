@@ -8,6 +8,7 @@ public class AIHealth : PlayerHealth
 {
     #region Editor Fields
 
+    [SerializeField] private string _id;
     [SerializeField] private bool _canKill = false;
 
     #endregion
@@ -23,6 +24,7 @@ public class AIHealth : PlayerHealth
     #region Public Properties
 
     public bool CanKill => _canKill;
+    public string Id => _id;
 
     #endregion
 
@@ -54,7 +56,7 @@ public class AIHealth : PlayerHealth
         _rb.isKinematic = false;
         _rb.useGravity = true;
 
-        Invoke(nameof(DestroySelf), 10f);
+        Invoke(nameof(DisableSelf), 10f);
     }
 
     public override void Hurt(DamageType damageType)
@@ -92,8 +94,8 @@ public class AIHealth : PlayerHealth
         _interactionController.CheckExitInteraction();
     }
 
-    private void DestroySelf()
+    private void DisableSelf()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }

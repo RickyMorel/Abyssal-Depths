@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -28,7 +29,10 @@ public class ShipData : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
 
-        LoadChips();
+        SaveData saveData = SaveSystem.Load();
+
+        //LoadChips(saveData);
+        //LoadEnemies(saveData);
     }
 
     private void Update()
@@ -36,10 +40,9 @@ public class ShipData : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.K)) { SaveSystem.Save(); }
     }
 
-    private void LoadChips()
+    private void LoadChips(SaveData saveData)
     {
         UpgradeChip[] allChips = Resources.LoadAll<UpgradeChip>("ScriptableObjs/Chips");
-        SaveData saveData = SaveSystem.Load();
 
         //SceneManager.LoadScene(saveData.CurrentSceneIndex);
 
@@ -56,6 +59,24 @@ public class ShipData : MonoBehaviour
         SpawnPlayers();
     }
 
+    private void LoadEnemies(SaveData saveData)
+    {
+        if(saveData.enemiesInScene == null || saveData.enemiesInScene.Count < 1) { return; }
+
+        AIHealth[] currentEnemies = FindObjectsOfType<AIHealth>();
+
+        foreach (AIHealth currentEnemy in currentEnemies)
+        {
+            SaveData.EnemyData wantedEnemyData = saveData.enemiesInScene.Find(x => x.EnemyId == currentEnemy.Id);
+
+            if(wantedEnemyData == null) { continue; }
+
+            currentEnemy.SetHealth((int)wantedEnemyData.Health);
+            Vector3 savedPos = new Vector3(wantedEnemyData.Position[0], wantedEnemyData.Position[1], wantedEnemyData.Position[2]);
+            currentEnemy.transform.position = savedPos;
+        }
+    }
+
     private void SpawnPlayers()
     {
         PlayerComponents[] players = FindObjectsOfType<PlayerComponents>();
@@ -66,5 +87,10 @@ public class ShipData : MonoBehaviour
             player.transform.position = _playerSpawnPositions[spawnIndex].transform.position;
             spawnIndex = Mathf.Clamp(spawnIndex++, 0, _playerSpawnPositions.Count() - 1);
         }
+    }
+
+    public AIHealth[] GetCurrentEnemyData()
+    {
+        return FindObjectsOfType<AIHealth>(true);
     }
 }

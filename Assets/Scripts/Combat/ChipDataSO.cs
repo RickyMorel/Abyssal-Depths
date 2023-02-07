@@ -8,7 +8,7 @@ public class ChipDataSO : ScriptableObject
 {
     public List<ChipData> ChipData = new List<ChipData>();
 }
-
+[System.Serializable]
 public class ChipData
 {
     public int ChipLevel;

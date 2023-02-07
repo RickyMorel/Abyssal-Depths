@@ -36,6 +36,7 @@ public class Damageable : MonoBehaviour
     private float _timeSinceLastLaserShot = 0;
     private float _timeToResetLaserLevel = 2;
     private float _laserLevel;
+    private float _damageTimer = 0;
     private bool _isBeingElectrocuted = false;
 
     private ParticleSystem _fireParticles;
@@ -61,10 +62,13 @@ public class Damageable : MonoBehaviour
 
     #region Unity Loops
 
-    public virtual void Start()
+    public virtual void Awake()
     {
         _currentHealth = _maxHealth;
+    }
 
+    public virtual void Start()
+    {
         FindMeshes();
 
         UpdateHealthUI();
@@ -79,17 +83,29 @@ public class Damageable : MonoBehaviour
         ColorChangeForLaser();
     }
 
-    public virtual void OnTriggerEnter(Collider other)
+    public virtual void OnTriggerStay(Collider other)
     {
         if (!other.gameObject.TryGetComponent<Projectile>(out Projectile projectile)) { return; }
 
         if (IsOwnDamage(other)) { return; }
 
-        Damage(projectile.Damage, projectile.DamageType, false);
+        if (projectile.DestroyOnHit)
+        {
+            Damage(projectile.Damage, projectile.DamageType, false);
 
-        if (projectile.ProjectileParticles != null) { projectile.ProjectileParticles.transform.SetParent(null); }
+            if (projectile.ProjectileParticles != null) { projectile.ProjectileParticles.transform.SetParent(null); }
 
-        Destroy(projectile.gameObject);
+            Destroy(projectile.gameObject);
+        }
+        else
+        {
+            _damageTimer += Time.deltaTime;
+            if (_damageTimer >= projectile.DealDamageAfterSeconds)
+            {
+                Damage(projectile.Damage, projectile.DamageType, false);
+                _damageTimer = 0;
+            }
+        }
     }
 
     #endregion
@@ -136,6 +152,8 @@ public class Damageable : MonoBehaviour
     {
         _currentHealth = newHealth;
 
+        OnUpdateHealth?.Invoke(newHealth);
+
         UpdateHealthUI();
 
         if (IsDead())
@@ -175,8 +193,7 @@ public class Damageable : MonoBehaviour
 
         if (_damageParticles != null && damageType != DamageType.None) { _damageParticles.Play(); }
 
-        if (_currentHealth == 0)
-            Die();
+        if (_currentHealth == 0) { Die(); }
     }
 
     public virtual void Die()

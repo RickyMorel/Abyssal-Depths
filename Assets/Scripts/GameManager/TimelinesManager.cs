@@ -7,6 +7,7 @@ public class TimelinesManager : MonoBehaviour
 {
     #region Editor Fields
 
+    [Header("Ship Fast Travel")]
     [SerializeField] private PlayableDirector _startFastTravelTimeline;
     [SerializeField] private PlayableDirector _endFastTravelTimeline;
     [SerializeField] private PlayableDirector _cameraFadeTimeline;

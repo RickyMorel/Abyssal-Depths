@@ -29,7 +29,6 @@ public abstract class Inventory : MonoBehaviour
 
     #endregion
 
-
     #region UI
 
     public void EnableInventory(bool isEnabled, Chest chest, PlayerInputHandler currentPlayer)

@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Playables;
 
 [RequireComponent(typeof(SphereCollider))]
 public class ShipFastTravel : MonoBehaviour

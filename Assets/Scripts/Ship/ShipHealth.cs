@@ -35,9 +35,13 @@ public class ShipHealth : Damageable
 
     #region Unity Loops
 
-    private void Awake()
+    public override void Awake()
     {
-        _rb = GetComponent<Rigidbody>();
+        base.Awake();
+
+        OnUpdateHealth += HandleUpdateHealth;
+        OnDamaged += HandleDamaged;
+        _boosterHealth.OnFix += HandleFix;
 
         _boosterHealth.SetMaxHealth((int)MaxHealth);
     }
@@ -46,9 +50,7 @@ public class ShipHealth : Damageable
     {
         base.Start();
 
-        OnUpdateHealth += HandleUpdateHealth;
-        OnDamaged += HandleDamaged;
-        _boosterHealth.OnFix += HandleFix;
+        _rb = GetComponent<Rigidbody>();
     }
 
     private void OnDestroy()
@@ -58,9 +60,9 @@ public class ShipHealth : Damageable
         _boosterHealth.OnFix -= HandleFix;
     }
 
-    public override void OnTriggerEnter(Collider other)
+    public override void OnTriggerStay(Collider other)
     {
-        base.OnTriggerEnter(other);
+        base.OnTriggerStay(other);
 
         if((1<<other.gameObject.layer & _crashLayers) == 0) { return; }
         if(other.gameObject.GetComponent<Projectile>() != null) { return; }
@@ -109,6 +111,8 @@ public class ShipHealth : Damageable
     private void HandleUpdateHealth(int healthAdded)
     {
         _boosterHealth.SetHealth((int)CurrentHealth);
+
+        CheckFlickerRedLights();
     }
 
     private void HandleDamaged(DamageType damageType)

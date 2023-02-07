@@ -27,14 +27,16 @@ public class PlayerHealth : Damageable
 
     #endregion
 
-    private void Awake()
+    public override void Awake()
     {
+        base.Awake();
+
         _mesh = GetComponentInChildren<MeshRenderer>();
         if (_mesh == null) { _mesh = GetComponentInChildren<SkinnedMeshRenderer>(); }
     }
 
     //This is for the child classes
-    public virtual void Start()
+    public override void Start()
     {
         base.Start();
     }

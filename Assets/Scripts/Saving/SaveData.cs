@@ -11,6 +11,7 @@ public class SaveData
     public float[] ShipPos = { 0f, 0f, 0f};
     public int CurrentSceneIndex;
     public List<EnemyData> enemiesInScene = new List<EnemyData>();
+    public List<MinableData> _minablesInScene = new List<MinableData>();
     public List<ItemData> _mainInventory = new List<ItemData>();
 
     public SaveData(ShipData shipData)
@@ -19,13 +20,25 @@ public class SaveData
         SaveShipPosition(shipData);
         SaveEnemyData(shipData);
         SaveInventoryData(shipData);
+        SaveMinablesData(shipData);
+    }
+
+    private void SaveMinablesData(ShipData shipData)
+    {
+        Minable[] minables = shipData.GetCurrentMinableData();
+
+        foreach (Minable minable in minables)
+        {
+            MinableData minableData = new MinableData(minable);
+            _minablesInScene.Add(minableData);
+        }
     }
 
     private void SaveEnemyData(ShipData shipData)
     {
-        AIHealth[] enemies = shipData.GetCurrentEnemyData();
+        AIStateMachine[] enemies = shipData.GetCurrentEnemyData();
 
-        foreach (AIHealth enemy in enemies)
+        foreach (AIStateMachine enemy in enemies)
         {
             EnemyData enemyData = new EnemyData(enemy);
             enemiesInScene.Add(enemyData);
@@ -86,19 +99,32 @@ public class SaveData
     }
 
     [System.Serializable]
+    public class MinableData
+    {
+        public string Id;
+        public bool IsActive;
+
+        public MinableData(Minable minable)
+        {
+            Id = minable.Id;
+            IsActive = minable.gameObject.activeSelf;
+        }
+    }
+
+    [System.Serializable]
     public class EnemyData
     {
         public string EnemyId;
         public float Health;
         public float[] Position = { 0f, 0f, 0f };
 
-        public EnemyData(AIHealth aIHealth)
+        public EnemyData(AIStateMachine aIStateMachine)
         {
-            EnemyId = aIHealth.Id;
-            Health = aIHealth.CurrentHealth;
-            Position[0] = aIHealth.transform.position.x;
-            Position[1] = aIHealth.transform.position.y;
-            Position[2] = aIHealth.transform.position.z;
+            EnemyId = aIStateMachine.Id;
+            Health = aIStateMachine.GetComponent<AIHealth>().CurrentHealth;
+            Position[0] = aIStateMachine.transform.position.x;
+            Position[1] = aIStateMachine.transform.position.y;
+            Position[2] = aIStateMachine.transform.position.z;
         }
     }
 

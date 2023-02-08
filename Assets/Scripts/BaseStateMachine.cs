@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(BaseInteractionController))]
 [RequireComponent(typeof(PlayerRagdoll))]
 [RequireComponent(typeof(PlayerHealth))]
-public class BaseStateMachine : MonoBehaviour
+public class BaseStateMachine : MonoBehaviourID
 {
     #region Editor Fields
 

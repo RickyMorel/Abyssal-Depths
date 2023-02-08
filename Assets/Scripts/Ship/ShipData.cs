@@ -34,6 +34,7 @@ public class ShipData : MonoBehaviour
         LoadChips(saveData);
         LoadEnemies(saveData);
         LoadInventories(saveData);
+        LoadMinables(saveData);
     }
 
     private void Update()
@@ -68,19 +69,33 @@ public class ShipData : MonoBehaviour
         SpawnPlayers();
     }
 
+    private void LoadMinables(SaveData saveData)
+    {
+        Minable[] currentMinables = FindObjectsOfType<Minable>();
+
+        foreach (Minable minable in currentMinables)
+        {
+            SaveData.MinableData wantedMinable = saveData._minablesInScene.Find(x => x.Id == minable.Id);
+
+            if(wantedMinable == null) { return; }
+
+            minable.gameObject.SetActive(wantedMinable.IsActive);
+        }
+    }
+
     private void LoadEnemies(SaveData saveData)
     {
         if(saveData.enemiesInScene == null || saveData.enemiesInScene.Count < 1) { return; }
 
-        AIHealth[] currentEnemies = FindObjectsOfType<AIHealth>();
+        AIStateMachine[] currentEnemies = FindObjectsOfType<AIStateMachine>();
 
-        foreach (AIHealth currentEnemy in currentEnemies)
+        foreach (AIStateMachine currentEnemy in currentEnemies)
         {
             SaveData.EnemyData wantedEnemyData = saveData.enemiesInScene.Find(x => x.EnemyId == currentEnemy.Id);
 
             if(wantedEnemyData == null) { continue; }
 
-            currentEnemy.SetHealth((int)wantedEnemyData.Health);
+            currentEnemy.GetComponent<AIHealth>().SetHealth((int)wantedEnemyData.Health);
             Vector3 savedPos = new Vector3(wantedEnemyData.Position[0], wantedEnemyData.Position[1], wantedEnemyData.Position[2]);
             currentEnemy.transform.position = savedPos;
         }
@@ -98,8 +113,13 @@ public class ShipData : MonoBehaviour
         }
     }
 
-    public AIHealth[] GetCurrentEnemyData()
+    public AIStateMachine[] GetCurrentEnemyData()
     {
-        return FindObjectsOfType<AIHealth>(true);
+        return FindObjectsOfType<AIStateMachine>(true);
+    }
+
+    public Minable[] GetCurrentMinableData()
+    {
+        return FindObjectsOfType<Minable>(true);
     }
 }

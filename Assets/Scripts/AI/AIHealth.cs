@@ -8,7 +8,6 @@ public class AIHealth : PlayerHealth
 {
     #region Editor Fields
 
-    [SerializeField] private string _id;
     [SerializeField] private bool _canKill = false;
 
     #endregion
@@ -24,7 +23,6 @@ public class AIHealth : PlayerHealth
     #region Public Properties
 
     public bool CanKill => _canKill;
-    public string Id => _id;
 
     #endregion
 

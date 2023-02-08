@@ -11,12 +11,14 @@ public class SaveData
     public float[] ShipPos = { 0f, 0f, 0f};
     public int CurrentSceneIndex;
     public List<EnemyData> enemiesInScene = new List<EnemyData>();
+    public List<ItemData> _mainInventory = new List<ItemData>();
 
     public SaveData(ShipData shipData)
     {
         SaveChipData(shipData);
         SaveShipPosition(shipData);
         SaveEnemyData(shipData);
+        SaveInventoryData(shipData);
     }
 
     private void SaveEnemyData(ShipData shipData)
@@ -27,6 +29,18 @@ public class SaveData
         {
             EnemyData enemyData = new EnemyData(enemy);
             enemiesInScene.Add(enemyData);
+        }
+    }
+
+    private void SaveInventoryData(ShipData shipData)
+    {
+        Dictionary<Item, ItemQuantity> items = MainInventory.Instance.InventoryDictionary;
+
+        foreach (KeyValuePair<Item, ItemQuantity> item in items)
+        {
+            ItemData itemData = new ItemData(item.Value);
+
+            _mainInventory.Add(itemData);
         }
     }
 
@@ -85,6 +99,19 @@ public class SaveData
             Position[0] = aIHealth.transform.position.x;
             Position[1] = aIHealth.transform.position.y;
             Position[2] = aIHealth.transform.position.z;
+        }
+    }
+
+    [System.Serializable]
+    public class ItemData
+    {
+        public string Id;
+        public int Amount;
+
+        public ItemData(ItemQuantity itemQuantity)
+        {
+            Id = itemQuantity.Item.Id;
+            Amount = itemQuantity.Amount;
         }
     }
 }

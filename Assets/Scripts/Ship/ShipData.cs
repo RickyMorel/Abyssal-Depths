@@ -31,13 +31,22 @@ public class ShipData : MonoBehaviour
 
         SaveData saveData = SaveSystem.Load();
 
-        //LoadChips(saveData);
-        //LoadEnemies(saveData);
+        LoadChips(saveData);
+        LoadEnemies(saveData);
+        LoadInventories(saveData);
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.K)) { SaveSystem.Save(); }
+    }
+
+    private void LoadInventories(SaveData saveData)
+    {
+        if(saveData._mainInventory != null && saveData._mainInventory.Count > 0)
+        {
+            MainInventory.Instance.LoadSavedItems(saveData._mainInventory);
+        }
     }
 
     private void LoadChips(SaveData saveData)

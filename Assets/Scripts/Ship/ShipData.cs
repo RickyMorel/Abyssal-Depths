@@ -31,10 +31,10 @@ public class ShipData : MonoBehaviour
 
         SaveData saveData = SaveSystem.Load();
 
-        LoadChips(saveData);
+        LoadMinables(saveData);
         LoadEnemies(saveData);
         LoadInventories(saveData);
-        LoadMinables(saveData);
+        LoadChips(saveData);
     }
 
     private void Update()

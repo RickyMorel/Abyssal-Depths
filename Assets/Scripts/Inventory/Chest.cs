@@ -65,9 +65,7 @@ public class Chest : Interactable
 
         foreach (ItemPickup itemPrefab in playerCarryController.ItemsCarrying)
         {
-            ItemQuantity itemQuantity = new ItemQuantity();
-            itemQuantity.Item = itemPrefab.ItemSO;
-            itemQuantity.Amount = 1;
+            ItemQuantity itemQuantity = new ItemQuantity(itemPrefab.ItemSO, 1);
             MainInventory.Instance.AddItem(itemQuantity);
         }
 

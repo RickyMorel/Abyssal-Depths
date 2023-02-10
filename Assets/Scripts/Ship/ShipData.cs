@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -28,7 +29,12 @@ public class ShipData : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
 
-        LoadChips();
+        SaveData saveData = SaveSystem.Load();
+
+        LoadMinables(saveData);
+        LoadEnemies(saveData);
+        LoadInventories(saveData);
+        LoadChips(saveData);
     }
 
     private void Update()
@@ -36,10 +42,17 @@ public class ShipData : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.K)) { SaveSystem.Save(); }
     }
 
-    private void LoadChips()
+    private void LoadInventories(SaveData saveData)
+    {
+        if(saveData._mainInventory != null && saveData._mainInventory.Count > 0)
+        {
+            MainInventory.Instance.LoadSavedItems(saveData._mainInventory);
+        }
+    }
+
+    private void LoadChips(SaveData saveData)
     {
         UpgradeChip[] allChips = Resources.LoadAll<UpgradeChip>("ScriptableObjs/Chips");
-        SaveData saveData = SaveSystem.Load();
 
         //SceneManager.LoadScene(saveData.CurrentSceneIndex);
 
@@ -56,6 +69,38 @@ public class ShipData : MonoBehaviour
         SpawnPlayers();
     }
 
+    private void LoadMinables(SaveData saveData)
+    {
+        Minable[] currentMinables = FindObjectsOfType<Minable>();
+
+        foreach (Minable minable in currentMinables)
+        {
+            SaveData.MinableData wantedMinable = saveData._minablesInScene.Find(x => x.Id == minable.Id);
+
+            if(wantedMinable == null) { return; }
+
+            minable.gameObject.SetActive(wantedMinable.IsActive);
+        }
+    }
+
+    private void LoadEnemies(SaveData saveData)
+    {
+        if(saveData.enemiesInScene == null || saveData.enemiesInScene.Count < 1) { return; }
+
+        AIStateMachine[] currentEnemies = FindObjectsOfType<AIStateMachine>();
+
+        foreach (AIStateMachine currentEnemy in currentEnemies)
+        {
+            SaveData.EnemyData wantedEnemyData = saveData.enemiesInScene.Find(x => x.EnemyId == currentEnemy.Id);
+
+            if(wantedEnemyData == null) { continue; }
+
+            currentEnemy.GetComponent<AIHealth>().SetHealth((int)wantedEnemyData.Health);
+            Vector3 savedPos = new Vector3(wantedEnemyData.Position[0], wantedEnemyData.Position[1], wantedEnemyData.Position[2]);
+            currentEnemy.transform.position = savedPos;
+        }
+    }
+
     private void SpawnPlayers()
     {
         PlayerComponents[] players = FindObjectsOfType<PlayerComponents>();
@@ -66,5 +111,15 @@ public class ShipData : MonoBehaviour
             player.transform.position = _playerSpawnPositions[spawnIndex].transform.position;
             spawnIndex = Mathf.Clamp(spawnIndex++, 0, _playerSpawnPositions.Count() - 1);
         }
+    }
+
+    public AIStateMachine[] GetCurrentEnemyData()
+    {
+        return FindObjectsOfType<AIStateMachine>(true);
+    }
+
+    public Minable[] GetCurrentMinableData()
+    {
+        return FindObjectsOfType<Minable>(true);
     }
 }

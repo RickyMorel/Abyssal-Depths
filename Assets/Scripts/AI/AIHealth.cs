@@ -54,7 +54,7 @@ public class AIHealth : PlayerHealth
         _rb.isKinematic = false;
         _rb.useGravity = true;
 
-        Invoke(nameof(DestroySelf), 10f);
+        Invoke(nameof(DisableSelf), 10f);
     }
 
     public override void Hurt(DamageType damageType)
@@ -92,8 +92,8 @@ public class AIHealth : PlayerHealth
         _interactionController.CheckExitInteraction();
     }
 
-    private void DestroySelf()
+    private void DisableSelf()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }

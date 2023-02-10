@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public abstract class Inventory : MonoBehaviour
@@ -11,6 +13,7 @@ public abstract class Inventory : MonoBehaviour
     [SerializeField] private GameObject _inventoryItemUIPrefab;
     //This is temporary while we don't have an inventory system
     [SerializeField] private List<ItemQuantity> _preloadedItems = new List<ItemQuantity>();
+    [SerializeField] private List<ItemQuantity> _dictionaryItemsList = new List<ItemQuantity>();
     //
 
     #endregion
@@ -18,6 +21,7 @@ public abstract class Inventory : MonoBehaviour
     #region Private Variables
 
     private Dictionary<Item, ItemQuantity> _inventory = new Dictionary<Item, ItemQuantity>();
+    private Dictionary<string, Item> _itemDatabase = new Dictionary<string, Item>();
     private Chest _currentChest;
     private PlayerInputHandler _currentPlayer;
 
@@ -26,6 +30,7 @@ public abstract class Inventory : MonoBehaviour
     #region Public Properties
 
     public Dictionary<Item, ItemQuantity> InventoryDictionary => _inventory;
+    public event Action OnUpdatedInventory;
 
     #endregion
 
@@ -64,12 +69,52 @@ public abstract class Inventory : MonoBehaviour
 
     #endregion
 
+    public virtual void Awake()
+    {
+        GetItemDatabase();
+
+        OnUpdatedInventory += HandleUpdateInventory;
+    }
+
     //This is temporary while we don't have an inventory system
     private void Start()
     {
         AddItems(_preloadedItems);
     }
     //
+
+    private void OnDestroy()
+    {
+        OnUpdatedInventory -= HandleUpdateInventory;
+    }
+
+    private void GetItemDatabase()
+    {
+        Item[] allItems = Resources.LoadAll<Item>("ScriptableObjs/Items");
+
+        foreach (Item item in allItems)
+        {
+            _itemDatabase.Add(item.Id, item);
+        }
+    }
+
+    public void LoadSavedItems(List<SaveData.ItemData> loadedItems)
+    {
+        _inventory.Clear();
+
+        List<ItemQuantity> loadedItemsList = new List<ItemQuantity>();
+
+        foreach (SaveData.ItemData item in loadedItems)
+        {
+            if(!_itemDatabase.TryGetValue(item.Id, out Item wantedItem)) { continue; }
+
+            ItemQuantity itemQuantity = new ItemQuantity(wantedItem, item.Amount);
+
+            loadedItemsList.Add(itemQuantity);
+        }
+
+        AddItems(loadedItemsList);
+    }
 
     public virtual void AddItems(List<ItemQuantity> addedItems)
     {
@@ -89,6 +134,8 @@ public abstract class Inventory : MonoBehaviour
         {
             _inventory.Add(itemQuantity.Item, itemQuantity);
         }
+
+        OnUpdatedInventory?.Invoke();
     }
 
     public void RemoveItems(List<ItemQuantity> removedItems)
@@ -117,6 +164,18 @@ public abstract class Inventory : MonoBehaviour
         if (_inventory[itemQuantity.Item].Amount < 1)
             _inventory.Remove(itemQuantity.Item);
 
+        OnUpdatedInventory?.Invoke();
+
         LoadItems();
+    }
+
+    private void HandleUpdateInventory()
+    {
+        _dictionaryItemsList.Clear();
+
+        foreach (KeyValuePair<Item, ItemQuantity> item in _inventory)
+        {
+            _dictionaryItemsList.Add(item.Value);
+        }
     }
 }

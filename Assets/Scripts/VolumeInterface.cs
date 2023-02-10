@@ -41,13 +41,12 @@ public class VolumeInterface : MonoBehaviour
         
         if(_volume.profile.TryGet<Vignette>(out Vignette vignette)) { _vignette = vignette; }
 
-
-
         _originalVignetteIntensity = _vignette.intensity.value;
     }
 
     public void ChangeVignetteByPercentage(float newIntensityPercentage)
     {
+        Debug.Log("newIntensityPercentage: " + newIntensityPercentage);
         _vignette.intensity.Override(newIntensityPercentage);
     }
 

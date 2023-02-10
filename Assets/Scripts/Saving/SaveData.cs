@@ -13,6 +13,7 @@ public class SaveData
     public List<EnemyData> enemiesInScene = new List<EnemyData>();
     public List<MinableData> _minablesInScene = new List<MinableData>();
     public List<ItemData> _mainInventory = new List<ItemData>();
+    public List<ItemData> _shipInventory = new List<ItemData>();
 
     public SaveData(ShipData shipData)
     {
@@ -54,6 +55,15 @@ public class SaveData
             ItemData itemData = new ItemData(item.Value);
 
             _mainInventory.Add(itemData);
+        }
+
+        Dictionary<Item, ItemQuantity> shipItems = ShipInventory.Instance.InventoryDictionary;
+
+        foreach (KeyValuePair<Item, ItemQuantity> item in shipItems)
+        {
+            ItemData itemData = new ItemData(item.Value);
+
+            _shipInventory.Add(itemData);
         }
     }
 

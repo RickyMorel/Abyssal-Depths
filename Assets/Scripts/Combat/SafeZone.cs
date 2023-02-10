@@ -9,6 +9,8 @@ public class SafeZone : MonoBehaviour
         if (!other.gameObject.GetComponent<Ship>()) { return; }
 
         GameManager.Instance.DeathManager.IsInSafeZone = true;
+
+        ShipInventory.Instance.TransferAllItemsToNewInventory(MainInventory.Instance);
     }
 
     private void OnTriggerExit(Collider other)

@@ -77,7 +77,7 @@ public abstract class Inventory : MonoBehaviour
     }
 
     //This is temporary while we don't have an inventory system
-    private void Start()
+    public virtual void Start()
     {
         AddItems(_preloadedItems);
     }
@@ -86,6 +86,19 @@ public abstract class Inventory : MonoBehaviour
     private void OnDestroy()
     {
         OnUpdatedInventory -= HandleUpdateInventory;
+    }
+
+    public void TransferAllItemsToNewInventory(Inventory newInventory)
+    {
+        List<ItemQuantity> transferedItems = new List<ItemQuantity>();
+
+        foreach (KeyValuePair<Item, ItemQuantity> item in _inventory)
+        {
+            transferedItems.Add(item.Value);
+        }
+
+        newInventory.AddItems(transferedItems);
+        _inventory.Clear();
     }
 
     private void GetItemDatabase()

@@ -46,8 +46,7 @@ public class VolumeInterface : MonoBehaviour
 
     public void ChangeVignetteByPercentage(float newIntensityPercentage)
     {
-        Debug.Log("newIntensityPercentage: " + newIntensityPercentage);
-        _vignette.intensity.Override(newIntensityPercentage);
+        _vignette.intensity.Override(Mathf.Clamp(newIntensityPercentage, _originalVignetteIntensity, 1f));
     }
 
     public void ResetVignette()

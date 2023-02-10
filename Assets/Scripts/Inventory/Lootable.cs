@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Lootable : MonoBehaviour
+public class Lootable : MonoBehaviourID
 {
     #region Editor Fields
 
@@ -32,7 +32,8 @@ public class Lootable : MonoBehaviour
 
         _loot.Clear();
 
-        Destroy(gameObject);
+        if (this is Minable) { gameObject.SetActive(false); }
+        else { Destroy(gameObject); }
     }
 
     public void SetCanLoot(bool canLoot)

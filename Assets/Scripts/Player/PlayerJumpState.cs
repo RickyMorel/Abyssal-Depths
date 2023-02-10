@@ -30,7 +30,7 @@ public class PlayerJumpState : PlayerBaseState
 
     public override void CheckSwitchStates() 
     {
-        if (_context.PlayerHealth.IsHurt)
+        if (_context.PlayerHealth.IsHurt || _context.PlayerHealth.IsDead())
         {
             SwitchState(_factory.Ragdoll());
         }

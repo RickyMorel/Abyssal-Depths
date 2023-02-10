@@ -25,13 +25,6 @@ public class Minable : Lootable
         _currentHealth = _maxHealth;
     }
 
-    private void Update()
-    {
-        if (!Input.GetKeyDown(KeyCode.O)) { return; }
-
-        Damage(15f);
-    }
-
     #endregion
 
     public void Damage(float impactForce)

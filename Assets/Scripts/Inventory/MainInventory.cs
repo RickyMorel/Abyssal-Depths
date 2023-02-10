@@ -16,7 +16,7 @@ public class MainInventory : Inventory
 
     #endregion
 
-    private void Awake()
+    public override void Awake()
     {
         if (_instance != null && _instance != this)
         {
@@ -26,5 +26,7 @@ public class MainInventory : Inventory
         {
             _instance = this;
         }
+
+        base.Awake();
     }
 }

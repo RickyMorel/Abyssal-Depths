@@ -19,8 +19,7 @@ public class MonoBehaviourID : MonoBehaviour
     [ContextMenu("Force reset ID")]
     private void ResetId()
     {
-        _id.Value = Guid.NewGuid().ToString();
-        Debug.Log("Setting new ID on object: " + gameObject.name, gameObject);
+        _id.Value = gameObject.GetInstanceID().ToString();
     }
 
     //Need to check for duplicates when copying a gameobject/component

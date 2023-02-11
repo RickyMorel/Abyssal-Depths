@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,7 @@ public class ShipData : MonoBehaviour
         LoadEnemies(saveData);
         LoadInventories(saveData);
         LoadChips(saveData);
+        TryLoadDeathLoot(saveData);
     }
 
     private void Update()
@@ -42,11 +44,26 @@ public class ShipData : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.K)) { SaveSystem.Save(); }
     }
 
+    private void TryLoadDeathLoot(SaveData saveData)
+    {
+        if(saveData._deathLootData == null) { return; }
+
+        GameObject deathLootInstance = Instantiate(GameAssetsManager.Instance.DeathLootPickup);
+        DeathLoot deathLoot = deathLootInstance.GetComponent<DeathLoot>();
+        deathLoot.LoadSavedItems(saveData._deathLootData.Items);
+        Vector3 savedPos = new Vector3(saveData._deathLootData.Position[0], saveData._deathLootData.Position[1], saveData._deathLootData.Position[2]);
+        deathLoot.transform.position = savedPos;
+    }
+
     private void LoadInventories(SaveData saveData)
     {
         if(saveData._mainInventory != null && saveData._mainInventory.Count > 0)
         {
             MainInventory.Instance.LoadSavedItems(saveData._mainInventory);
+        }
+        if (saveData._shipInventory != null && saveData._shipInventory.Count > 0)
+        {
+            ShipInventory.Instance.LoadSavedItems(saveData._shipInventory);
         }
     }
 
@@ -121,5 +138,10 @@ public class ShipData : MonoBehaviour
     public Minable[] GetCurrentMinableData()
     {
         return FindObjectsOfType<Minable>(true);
+    }
+
+    public DeathLoot GetCurrentDeathLoot()
+    {
+        return FindObjectOfType<DeathLoot>();
     }
 }

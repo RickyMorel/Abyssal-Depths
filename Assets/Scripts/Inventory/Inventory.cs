@@ -31,6 +31,7 @@ public abstract class Inventory : MonoBehaviour
 
     public Dictionary<Item, ItemQuantity> InventoryDictionary => _inventory;
     public event Action OnUpdatedInventory;
+    public Dictionary<string, Item> ItemDatabase => _itemDatabase;
 
     #endregion
 
@@ -88,14 +89,21 @@ public abstract class Inventory : MonoBehaviour
         OnUpdatedInventory -= HandleUpdateInventory;
     }
 
-    public void TransferAllItemsToNewInventory(Inventory newInventory)
+    public List<ItemQuantity> ItemDictionaryToList()
     {
-        List<ItemQuantity> transferedItems = new List<ItemQuantity>();
+        List<ItemQuantity> listItems = new List<ItemQuantity>();
 
         foreach (KeyValuePair<Item, ItemQuantity> item in _inventory)
         {
-            transferedItems.Add(item.Value);
+            listItems.Add(item.Value);
         }
+
+        return listItems;
+    }
+
+    public void TransferAllItemsToNewInventory(Inventory newInventory)
+    {
+        List<ItemQuantity> transferedItems = ItemDictionaryToList();
 
         newInventory.AddItems(transferedItems);
         _inventory.Clear();

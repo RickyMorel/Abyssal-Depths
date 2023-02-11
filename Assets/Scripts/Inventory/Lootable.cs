@@ -11,6 +11,12 @@ public class Lootable : MonoBehaviourID
 
     #endregion
 
+    #region Public Properties
+
+    public List<ItemQuantity> LootList => _loot;
+
+    #endregion
+
     #region Unity Loops
 
     public virtual void OnTriggerEnter(Collider other)
@@ -25,6 +31,33 @@ public class Lootable : MonoBehaviourID
     }
 
     #endregion
+
+    public void LoadSavedItems(List<SaveData.ItemData> loadedItems)
+    {
+        _loot.Clear();
+
+        Dictionary<string, Item> itemDatabase = MainInventory.Instance.ItemDatabase;
+        List<ItemQuantity> loadedItemsList = new List<ItemQuantity>();
+
+        foreach (SaveData.ItemData item in loadedItems)
+        {
+            if (!itemDatabase.TryGetValue(item.Id, out Item wantedItem)) { continue; }
+
+            ItemQuantity itemQuantity = new ItemQuantity(wantedItem, item.Amount);
+
+            loadedItemsList.Add(itemQuantity);
+        }
+
+        AddLoot(loadedItemsList);
+    }
+
+    public void AddLoot(List<ItemQuantity> items)
+    {
+        foreach (ItemQuantity item in items)
+        {
+            _loot.Add(item);
+        }
+    }
 
     public void Loot(ShipInventory shipInventory)
     {

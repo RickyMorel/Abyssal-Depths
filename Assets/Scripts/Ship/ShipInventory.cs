@@ -55,6 +55,10 @@ public class ShipInventory : Inventory
 
     private void DropAllItems()
     {
+        GameObject deathLootInstance = Instantiate(GameAssetsManager.Instance.DeathLootPickup, transform.position, Quaternion.identity);
+        Lootable lootable = deathLootInstance.GetComponent<Lootable>();
+        lootable.AddLoot(ItemDictionaryToList());
+
         InventoryDictionary.Clear();
     }
 }

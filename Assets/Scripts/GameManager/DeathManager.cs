@@ -56,7 +56,7 @@ public class DeathManager : MonoBehaviour
 
         yield return new WaitForSeconds((float)DeathPanelUI.Instance.DeathPanelTimeLine.duration);
 
-        ReloadScene();
+        //ReloadScene();
     }
 
     private void ShowDeathScreen()

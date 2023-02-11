@@ -83,7 +83,7 @@ public class ShipFastTravel : MonoBehaviour
         _playersInShipList.Add(player);
         _playersInShip++;
 
-        StopCoroutine(_lastRoutine);
+        if (_lastRoutine != null) { StopCoroutine(_lastRoutine); }
         AttachToShip();
         CheckPlayersInShip();
     }

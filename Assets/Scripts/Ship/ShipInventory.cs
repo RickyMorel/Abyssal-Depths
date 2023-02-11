@@ -43,7 +43,7 @@ public class ShipInventory : Inventory
 
     private void OnDestroy()
     {
-        _shipHealth.OnDie -= DropAllItems;
+        if(_shipHealth != null) { _shipHealth.OnDie -= DropAllItems; }
     }
 
     public override void AddItems(List<ItemQuantity> addedItems)

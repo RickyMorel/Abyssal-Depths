@@ -21,6 +21,11 @@ public class ShipData : MonoBehaviour
 
     #endregion
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     private void Start()
     {
         StartCoroutine(LateStart());
@@ -37,6 +42,22 @@ public class ShipData : MonoBehaviour
         LoadInventories(saveData);
         LoadChips(saveData);
         TryLoadDeathLoot(saveData);
+    }
+
+    public void ReloadLevel()
+    {
+        SaveData saveData = SaveSystem.Load();
+
+        LoadInventories(saveData);
+        LoadChips(saveData);
+        TryLoadDeathLoot(saveData);
+
+        Booster.TrySetHealth(int.MaxValue, this, true);
+
+        for (int i = 0; i < Weapons.Length; i++)
+        {
+            Weapons[i].TrySetHealth(int.MaxValue, this, false);
+        }
     }
 
     private void Update()
@@ -70,8 +91,6 @@ public class ShipData : MonoBehaviour
     private void LoadChips(SaveData saveData)
     {
         UpgradeChip[] allChips = Resources.LoadAll<UpgradeChip>("ScriptableObjs/Chips");
-
-        //SceneManager.LoadScene(saveData.CurrentSceneIndex);
 
         Booster.LoadChips(allChips, saveData.BoosterData, this, true);
 

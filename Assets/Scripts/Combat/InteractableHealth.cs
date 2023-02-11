@@ -114,6 +114,8 @@ public class InteractableHealth : Damageable
 
     public void FixInteractable()
     {
+        if(_prevInteractableState == null) { return; }
+
         AddHealth((int)MaxHealth);
 
         _interactable.CanUse = true;

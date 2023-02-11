@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class DeathManager : MonoBehaviour
     private ShipHealth _shipHealth;
     private float _timeSinceDeath;
     private bool _isInSafeZone = false;
+    private bool _isLoadingScene = false;
 
     #endregion
 
@@ -22,6 +24,16 @@ public class DeathManager : MonoBehaviour
 
     #region Unity Loops
 
+    private void Awake()
+    {
+        SceneManager.activeSceneChanged += OnSceneLoaded;
+    }
+
+    private void OnDestroy()
+    {
+        SceneManager.activeSceneChanged -= OnSceneLoaded;
+    }
+
     private void Start()
     {
         _shipHealth = Ship.Instance.GetComponent<ShipHealth>();
@@ -29,20 +41,32 @@ public class DeathManager : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log($"_shipHealth.IsDead(): {_shipHealth.IsDead()} || IsInSafeZone: {IsInSafeZone}");
         if (!_shipHealth.IsDead() || IsInSafeZone) { UpdateDeathTime(-1f); return; }
 
         UpdateDeathTime(1f);
 
         if (_timeSinceDeath < Ship.Instance.TimeTillDeath) { return; }
 
+        if (_isLoadingScene) { return; }
+
+        _isLoadingScene = true;
+
         StartCoroutine(DeathCoroutine());
     }
 
     #endregion
 
+    private void OnSceneLoaded(Scene arg0, Scene arg1)
+    {
+        _isInSafeZone = false;
+        _isLoadingScene = false;
+    }
+
     private void UpdateDeathTime(float multiplier)
     {
         _timeSinceDeath = Mathf.Clamp(_timeSinceDeath + (Time.deltaTime * multiplier), 0f, Ship.Instance.TimeTillDeath);
+        Debug.Log("_timeSinceDeath: " + _timeSinceDeath + $" multiplier: {multiplier}");
         AddEyeClosingFX();
     }
 
@@ -56,7 +80,7 @@ public class DeathManager : MonoBehaviour
 
         yield return new WaitForSeconds((float)DeathPanelUI.Instance.DeathPanelTimeLine.duration);
 
-        //ReloadScene();
+        ReloadScene();
     }
 
     private void ShowDeathScreen()
@@ -66,7 +90,11 @@ public class DeathManager : MonoBehaviour
 
     private void ReloadScene()
     {
-        SceneManager.LoadScene(2);
+        Debug.Log("ReloadScene");
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Ship.Instance.GetComponent<ShipData>().ReloadLevel();
+        _timeSinceDeath = 0f;
     }
 
     private void KillAllPlayers()

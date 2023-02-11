@@ -26,7 +26,7 @@ public class Damageable : MonoBehaviour
 
     #region Private Variables
 
-    private float _currentHealth;
+    [SerializeField] private float _currentHealth;
 
     [ColorUsageAttribute(false, true)] private Color _originalColor;
 
@@ -150,7 +150,7 @@ public class Damageable : MonoBehaviour
 
     public void SetHealth(int newHealth)
     {
-        _currentHealth = newHealth;
+        _currentHealth = Mathf.Clamp(newHealth, 0f, MaxHealth);
 
         OnUpdateHealth?.Invoke(newHealth);
 

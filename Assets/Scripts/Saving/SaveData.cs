@@ -31,7 +31,9 @@ public class SaveData
     {
         DeathLoot deathLoot = shipData.GetCurrentDeathLoot();
 
-        if(deathLoot == null) { return; }
+        if(deathLoot == null) { Debug.Log("deathLoot = null"); return; }
+
+        Debug.Log($"Saved {deathLoot.LootList.Count}");
 
         DeathLootData deathLootData = new DeathLootData(deathLoot);
 
@@ -156,7 +158,7 @@ public class SaveData
     public class DeathLootData
     {
         public string Id;
-        public List<ItemData> Items;
+        public List<ItemData> Items = new List<ItemData>();
         public float[] Position = { 0f, 0f, 0f };
 
         public DeathLootData(Lootable lootable)

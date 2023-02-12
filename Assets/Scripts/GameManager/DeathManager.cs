@@ -41,7 +41,6 @@ public class DeathManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log($"_shipHealth.IsDead(): {_shipHealth.IsDead()} || IsInSafeZone: {IsInSafeZone}");
         if (!_shipHealth.IsDead() || IsInSafeZone) { UpdateDeathTime(-1f); return; }
 
         UpdateDeathTime(1f);
@@ -66,15 +65,17 @@ public class DeathManager : MonoBehaviour
     private void UpdateDeathTime(float multiplier)
     {
         _timeSinceDeath = Mathf.Clamp(_timeSinceDeath + (Time.deltaTime * multiplier), 0f, Ship.Instance.TimeTillDeath);
-        Debug.Log("_timeSinceDeath: " + _timeSinceDeath + $" multiplier: {multiplier}");
         AddEyeClosingFX();
     }
 
     private IEnumerator DeathCoroutine()
     {
         KillAllPlayers();
+        ShipInventory.Instance.DropAllItems();
 
         yield return new WaitForSeconds(2f);
+
+        SaveSystem.Save();
 
         ShowDeathScreen();
 
@@ -90,8 +91,6 @@ public class DeathManager : MonoBehaviour
 
     private void ReloadScene()
     {
-        Debug.Log("ReloadScene");
-
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Ship.Instance.GetComponent<ShipData>().ReloadLevel();
         _timeSinceDeath = 0f;

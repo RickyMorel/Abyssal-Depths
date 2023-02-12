@@ -6,7 +6,13 @@ public class DeathLoot : Lootable
 {
     private void Start()
     {
-        //DestroyPrevLoot();
+        DestroyPrevLoot();
+        Debug.Log("Spawned Death Loot");
+    }
+
+    private void OnDestroy()
+    {
+        Debug.Log("Destroyed Death Loot");
     }
 
     private void DestroyPrevLoot()

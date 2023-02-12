@@ -120,6 +120,8 @@ public class ShipFastTravel : MonoBehaviour
 
     private void AttachToShip()
     {
+        if(_isPlayerActive == null) { return; }
+
         for (int i = 0; i < _isPlayerActive.Length; i++)
         {
             if (_isPlayerActive[i].IsPlayerActive == true)

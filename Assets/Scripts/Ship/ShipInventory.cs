@@ -8,7 +8,6 @@ public class ShipInventory : Inventory
     #region Private Variables
 
     private static ShipInventory _instance;
-    private ShipHealth _shipHealth;
 
     #endregion
 
@@ -32,20 +31,6 @@ public class ShipInventory : Inventory
         base.Awake();
     }
 
-    public override void Start()
-    {
-        base.Start();
-
-        _shipHealth = GetComponent<ShipHealth>();
-
-        _shipHealth.OnDie += DropAllItems;
-    }
-
-    private void OnDestroy()
-    {
-        if(_shipHealth != null) { _shipHealth.OnDie -= DropAllItems; }
-    }
-
     public override void AddItems(List<ItemQuantity> addedItems)
     {
         base.AddItems(addedItems);
@@ -53,11 +38,14 @@ public class ShipInventory : Inventory
         LootUI.Instance.DisplayLootedItems(addedItems);
     }
 
-    private void DropAllItems()
+    public void DropAllItems()
     {
+        Debug.Log("DropAllItems");
         GameObject deathLootInstance = Instantiate(GameAssetsManager.Instance.DeathLootPickup, transform.position, Quaternion.identity);
         Lootable lootable = deathLootInstance.GetComponent<Lootable>();
         lootable.AddLoot(ItemDictionaryToList());
+
+        Debug.Log($"deathLootInstance: {deathLootInstance.name}//pos: {deathLootInstance.transform.position}");
 
         InventoryDictionary.Clear();
     }

@@ -5,6 +5,7 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static SaveData;
 
 public class ShipData : MonoBehaviour
 {
@@ -42,11 +43,15 @@ public class ShipData : MonoBehaviour
         LoadInventories(saveData);
         LoadChips(saveData);
         TryLoadDeathLoot(saveData);
+
+        Debug.Log("LateStart");
     }
 
     public void ReloadLevel()
     {
         SaveData saveData = SaveSystem.Load();
+
+        Debug.Log("ReloadLevel");
 
         LoadInventories(saveData);
         LoadChips(saveData);
@@ -67,7 +72,9 @@ public class ShipData : MonoBehaviour
 
     private void TryLoadDeathLoot(SaveData saveData)
     {
-        if(saveData._deathLootData == null) { return; }
+        if(saveData._deathLootData == null) { Debug.Log("Loading DeathLoot Null"); return; }
+
+        Debug.Log("TryLoadDeathLoot: " + saveData._deathLootData.Items.Count);
 
         GameObject deathLootInstance = Instantiate(GameAssetsManager.Instance.DeathLootPickup);
         DeathLoot deathLoot = deathLootInstance.GetComponent<DeathLoot>();

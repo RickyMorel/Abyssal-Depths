@@ -22,6 +22,13 @@ public class Mace : WeaponShoot
 
     #endregion
 
+    #region Public Properties
+
+    public float MaxMovementSpeed => _maxMovementSpeed;
+    public Rigidbody rb => _rb;
+
+    #endregion
+
     private void Awake()
     {
         _rb = _maceHead.GetComponent<Rigidbody>();

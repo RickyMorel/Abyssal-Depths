@@ -13,38 +13,34 @@ MonoBehaviour:
   m_Name: ChipDataSO
   m_EditorClassIdentifier: 
   BaseData:
-    ShootAfterSeconds: 0
-    MinimumDamage: 0
-    MaximumDamage: 0
-    MinimumDamageMK2: 0
-    MaximumDamageMK2: 0
-    MinimumDamageMK3: 0
-    MaximumDamageMK3: 0
-    DamageMultiplierWeakness: 0
-    DamageMultiplierResistance: 0
+    ShootAfterSeconds: 0.9
+    DamageMultiplierWeakness: 2
+    DamageMultiplierResistance: 3
+    MK1Damages: {x: 25, y: 75}
+    MK2Damages: {x: 75, y: 160}
+    MK3Damages: {x: 175, y: 290}
   FireData:
     ShootAfterSeconds: 0.8
-    HitDamage: 40
-    AfterburnDamage: 0
-    AfterburnDamageMK2: 0
-    AfterburnDamageMK3: 0
-    BurnAfterSeconds: 0
-    BurnDuration: 0
-    DamageMultiplierWeakness: 0
-    DamageMultiplierResistance: 0
+    DamageMultiplierWeakness: 3
+    DamageMultiplierResistance: 3
+    ImpactDamage: 40
+    MK1Damages: {x: 10, y: 2}
+    MK2Damages: {x: 25, y: 3}
+    MK3Damages: {x: 60, y: 4}
+    TimeBetweenBurns: 0.5
   ElectricData:
-    ShootAfterSeconds: 0
-    HitDamage: 0
-    AfterburnDamage: 0
-    AfterburnDamageMK2: 0
-    AfterburnDamageMK3: 0
-    DamageMultiplierWeakness: 0
+    ShootAfterSeconds: 1.2
+    DamageMultiplierWeakness: 2.5
     DamageMultiplierResistance: 0
+    ImpactDamage: 30
+    MK1Damages: {x: 20, y: 0.6}
+    MK2Damages: {x: 70, y: 0.7}
+    MK3Damages: {x: 160, y: 0.8}
   LaserData:
-    ShootAfterSeconds: 0
-    HitDamage: 0
-    AfterburnDamage: 0
-    AfterburnDamageMK2: 0
-    AfterburnDamageMK3: 0
-    DamageMultiplierWeakness: 0
+    ShootAfterSeconds: 1.5
+    DamageMultiplierWeakness: 2
     DamageMultiplierResistance: 0
+    TimeBetweenHits: 0.25
+    MK1Damages: {x: 30, y: 2.5}
+    MK2Damages: {x: 50, y: 2}
+    MK3Damages: {x: 115, y: 1.5}

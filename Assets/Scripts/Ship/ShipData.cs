@@ -22,20 +22,20 @@ public class ShipData : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(LateStart());
+        //StartCoroutine(LateStart());
     }
 
-    private IEnumerator LateStart()
-    {
-        yield return new WaitForEndOfFrame();
+    //private IEnumerator LateStart()
+    //{
+    //    yield return new WaitForEndOfFrame();
 
-        SaveData saveData = SaveSystem.Load();
+    //    SaveData saveData = SaveSystem.Load();
 
-        LoadMinables(saveData);
-        LoadEnemies(saveData);
-        LoadInventories(saveData);
-        LoadChips(saveData);
-    }
+    //    LoadMinables(saveData);
+    //    LoadEnemies(saveData);
+    //    LoadInventories(saveData);
+    //    LoadChips(saveData);
+    //}
 
     private void Update()
     {

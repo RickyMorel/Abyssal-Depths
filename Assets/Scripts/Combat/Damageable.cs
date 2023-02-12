@@ -43,6 +43,8 @@ public class Damageable : MonoBehaviour
     private ParticleSystem _electricParticles;
     private Renderer[] _renderers;
 
+    private ChipDataSO _chipData;
+
     #endregion
 
     #region Getters & Setters

@@ -10,7 +10,17 @@ public class AttackHitBox : MonoBehaviour
     #region Public Properties
 
     public event Action<GameObject> OnHit;
+
+    #endregion
+
+    #region Private Variable
+
     private Collider _hitBox;
+    private Mace _mace;
+    private ChipDataSO.BasicChip _chipClass;
+    private ChipDataSO _chipDataSO;
+    private DamageType _damageType = DamageType.Base;
+    private int _damage;
 
     #endregion
 
@@ -21,16 +31,27 @@ public class AttackHitBox : MonoBehaviour
 
     #endregion
 
+    #region Unity Loops
+
+    private void Awake()
+    {
+        _chipDataSO = GameAssetsManager.Instance.ChipDataSO;
+    }
+
     private void Start()
     {
         _hitBox = GetComponent<Collider>();
+        _mace = GetComponentInParent<Mace>();
+        _chipClass = _chipDataSO.GetChipType(_chipClass, _damageType);
     }
+
+    #endregion
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.layer == 6) { OnHit?.Invoke(other.gameObject); }
 
-        if (!other.gameObject.TryGetComponent<Damageable>(out Damageable enemyHealth)) { return; }
+        if (!other.gameObject.TryGetComponent(out Damageable enemyHealth)) { return; }
 
         if (_ownHealth != null && enemyHealth == _ownHealth) { return; }
 
@@ -39,7 +60,10 @@ public class AttackHitBox : MonoBehaviour
         if (enemyHealth is AIHealth)
         {
             AIHealth aiHealth = (AIHealth)enemyHealth;
-            if (aiHealth.CanKill) { enemyHealth.Damage(20, DamageType.Base); }
+            if (aiHealth.CanKill) 
+            {
+                CalculateDamage(enemyHealth);
+            }
             else { aiHealth.Hurt(DamageType.Base); }
 
             _ownHealth.GetComponent<PlayerComponents>()?.PlayerCamera.ShakeCamera(2f, 50f, 0.2f);
@@ -56,7 +80,13 @@ public class AttackHitBox : MonoBehaviour
 
         if (enemyHealth is ShipHealth)
         {
-            enemyHealth.Damage(20, DamageType.Base, false, _hitBox);
+            CalculateDamage(enemyHealth);
         }
+    }
+
+    private void CalculateDamage(Damageable health)
+    {
+        if (_mace.rb.velocity.x <= _mace.MaxMovementSpeed / 2 && _mace.rb.velocity.y < _mace.MaxMovementSpeed / 2) { _damage = _chipDataSO.GetDamageFromChip(_chipClass); health.Damage(_damage, _damageType); }
+        else { _damage = (int)_chipDataSO.GetSecondaryValueFromChip(_chipClass); health.Damage(_damage, _damageType); }
     }
 }

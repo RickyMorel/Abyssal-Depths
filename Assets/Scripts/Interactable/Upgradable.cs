@@ -21,6 +21,7 @@ public class Upgradable : Interactable
     private List<GameObject> _chipInstances = new List<GameObject>();
     private InteractableHealth _health;
     protected Upgrade _selectedUpgrade;
+    protected int _chipLevel;
 
     #endregion
 
@@ -29,6 +30,7 @@ public class Upgradable : Interactable
     public event Action<Upgrade> OnUpgradeMesh;
     public UpgradeChip[] UpgradeSockets => _upgradeSockets;
     public float? CurrentHealth => _health?.CurrentHealth;
+    public int ChipLevel => _chipLevel;
 
     #endregion
 
@@ -93,6 +95,8 @@ public class Upgradable : Interactable
 
     public bool TryUpgrade(UpgradeChip upgradeChip)
     {
+        _chipLevel = upgradeChip.Level;
+
         //If the interactable is broken, return false
         if(TryGetComponent<InteractableHealth>(out InteractableHealth interactableHealth)) { if (interactableHealth.IsDead()) return false; }
 

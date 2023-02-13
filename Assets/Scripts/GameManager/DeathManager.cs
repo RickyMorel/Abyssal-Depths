@@ -13,6 +13,7 @@ public class DeathManager : MonoBehaviour
     private float _timeSinceDeath;
     private bool _isInSafeZone = false;
     private bool _isLoadingScene = false;
+    private bool _isReloadingScene = false;
 
     #endregion
 
@@ -58,8 +59,14 @@ public class DeathManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene arg0, Scene arg1)
     {
+        if (!_isReloadingScene) { return; }
+
         _isInSafeZone = false;
         _isLoadingScene = false;
+        _timeSinceDeath = 0f;
+        Ship.Instance.GetComponent<ShipData>().ReloadLevel();
+        _isReloadingScene = false;
+        Ship.Instance.FireRespawnEvent();
     }
 
     private void UpdateDeathTime(float multiplier)
@@ -91,9 +98,8 @@ public class DeathManager : MonoBehaviour
 
     private void ReloadScene()
     {
+        _isReloadingScene = true;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        Ship.Instance.GetComponent<ShipData>().ReloadLevel();
-        _timeSinceDeath = 0f;
     }
 
     private void KillAllPlayers()

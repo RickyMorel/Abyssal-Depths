@@ -40,12 +40,11 @@ public class ShipInventory : Inventory
 
     public void DropAllItems()
     {
-        Debug.Log("DropAllItems");
-        GameObject deathLootInstance = Instantiate(GameAssetsManager.Instance.DeathLootPickup, transform.position, Quaternion.identity);
+        //Spawn in front of ship
+        Vector3 spawnPos = transform.position + Vector3.back * 1.5f;
+        GameObject deathLootInstance = Instantiate(GameAssetsManager.Instance.DeathLootPickup, spawnPos, Quaternion.identity);
         Lootable lootable = deathLootInstance.GetComponent<Lootable>();
         lootable.AddLoot(ItemDictionaryToList());
-
-        Debug.Log($"deathLootInstance: {deathLootInstance.name}//pos: {deathLootInstance.transform.position}");
 
         InventoryDictionary.Clear();
     }

@@ -66,9 +66,6 @@ public class Upgradable : Interactable
         if (!isBooster) { _health.SetHealth(wantedHealth); }
         else { shipData.GetComponent<ShipHealth>().SetHealth(wantedHealth); }
 
-        if (isBooster) { Debug.Log("TrySetHealth: " + _health.CurrentHealth); }
-
-
         StartCoroutine(WaitForLoadFix(wantedHealth));
     }
 

@@ -43,18 +43,14 @@ public class ShipData : MonoBehaviour
         LoadInventories(saveData);
         LoadChips(saveData);
         TryLoadDeathLoot(saveData);
-
-        Debug.Log("LateStart");
     }
 
     public void ReloadLevel()
     {
         SaveData saveData = SaveSystem.Load();
 
-        Debug.Log("ReloadLevel");
-
         LoadInventories(saveData);
-        LoadChips(saveData);
+        LoadChips(saveData, new Vector3(270f, -320f, 0f));
         TryLoadDeathLoot(saveData);
 
         Booster.TrySetHealth(int.MaxValue, this, true);
@@ -72,7 +68,9 @@ public class ShipData : MonoBehaviour
 
     private void TryLoadDeathLoot(SaveData saveData)
     {
-        if(saveData._deathLootData == null) { return; }
+        if(saveData._deathLootData == null) { Debug.Log("Death Loot Null"); return; }
+
+        Debug.Log("Loaded Death Loot");
 
         GameObject deathLootInstance = Instantiate(GameAssetsManager.Instance.DeathLootPickup);
         DeathLoot deathLoot = deathLootInstance.GetComponent<DeathLoot>();
@@ -93,7 +91,7 @@ public class ShipData : MonoBehaviour
         }
     }
 
-    private void LoadChips(SaveData saveData)
+    private void LoadChips(SaveData saveData, Vector3 wantedSpawnPosition = default(Vector3))
     {
         UpgradeChip[] allChips = Resources.LoadAll<UpgradeChip>("ScriptableObjs/Chips");
 
@@ -105,7 +103,7 @@ public class ShipData : MonoBehaviour
         }
 
         Vector3 spawnPos = new Vector3(saveData.ShipPos[0], saveData.ShipPos[1], saveData.ShipPos[2]);
-        transform.position = spawnPos;
+        transform.position = wantedSpawnPosition == default(Vector3) ? spawnPos : wantedSpawnPosition;
 
         SpawnPlayers();
     }

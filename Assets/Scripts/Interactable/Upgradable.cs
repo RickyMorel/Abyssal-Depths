@@ -73,7 +73,7 @@ public class Upgradable : Interactable
     {
         yield return new WaitForEndOfFrame();
 
-        if (wantedHealth > 0) { _health.FixInteractable(); }
+        if (wantedHealth > 0) { _health.FixInteractable(false); }
     }
 
     public void RemoveUpgrades()

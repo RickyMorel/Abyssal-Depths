@@ -31,9 +31,7 @@ public class SaveData
     {
         DeathLoot deathLoot = shipData.GetCurrentDeathLoot();
 
-        if(deathLoot == null) { Debug.Log("deathLoot = null"); return; }
-
-        Debug.Log($"Saved {deathLoot.LootList.Count}");
+        if(deathLoot == null) { return; }
 
         DeathLootData deathLootData = new DeathLootData(deathLoot);
 

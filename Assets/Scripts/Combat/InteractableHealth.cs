@@ -121,7 +121,7 @@ public class InteractableHealth : Damageable
         if (_canUseWhenBroken) { _interactable.CanUse = true; }
     }
 
-    public void FixInteractable()
+    public void FixInteractable(bool usedItems = true)
     {
         if(_prevInteractableState == null) { return; }
 
@@ -133,7 +133,7 @@ public class InteractableHealth : Damageable
         _interactable.Outline.OutlineColor = _originalOutlineColor;
         _timeSpentFixing = 0f;
         _interactable.RemoveCurrentPlayer();
-        MainInventory.Instance.RemoveItems(_fixCost.CraftingIngredients);
+        if (usedItems) { MainInventory.Instance.RemoveItems(_fixCost.CraftingIngredients); }
         OnFix?.Invoke();
 
         DestroyAllParticles();

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Lootable : MonoBehaviourID
 {
@@ -14,23 +15,16 @@ public class Lootable : MonoBehaviourID
     #region Public Properties
 
     public List<ItemQuantity> LootList => _loot;
+    public bool CanLoot { get { return _canLoot; } set { _canLoot = value; } }
 
     #endregion
 
-    #region Unity Loops
-
-    public virtual void OnTriggerEnter(Collider other)
+    public void TryLoot()
     {
-        if(_canLoot == false) { return; }
+        if (_canLoot == false) { return; }
 
-        if(_loot.Count < 1) { return; }
-
-        if(!other.gameObject.TryGetComponent<ShipInventory>(out ShipInventory shipInventory)) { return; }
-
-        Loot(shipInventory);
+        Loot(ShipInventory.Instance);
     }
-
-    #endregion
 
     public void LoadSavedItems(List<SaveData.ItemData> loadedItems)
     {
@@ -49,6 +43,7 @@ public class Lootable : MonoBehaviourID
         }
 
         AddLoot(loadedItemsList);
+        _canLoot = true;
     }
 
     public void AddLoot(List<ItemQuantity> items)

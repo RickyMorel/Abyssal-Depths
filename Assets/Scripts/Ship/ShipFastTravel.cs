@@ -54,14 +54,12 @@ public class ShipFastTravel : MonoBehaviour
 
     private void HandleRespawn()
     {
-        Debug.Log("HandleRespawn");
         _playersInShipList.Clear();
         _playersInShip = 0;
     }
 
     private void CheckPlayersInShip()
     {
-        Debug.Log("CheckPlayersInShip");
         _playersActive = 0;
         for (int i = 0; i < _isPlayerActive.Length; i++)
         {
@@ -71,11 +69,7 @@ public class ShipFastTravel : MonoBehaviour
             }
         }
 
-        Debug.Log($"_playersActive:{_playersActive} != _playersInShip:{_playersInShip}");
-
         if (_playersActive != _playersInShip) { return; }
-
-        Debug.Log("_playersActive != _playersInShip");
 
         _cameraManager.ToggleCamera(true);
 
@@ -93,14 +87,10 @@ public class ShipFastTravel : MonoBehaviour
     {
         if (!other.gameObject.TryGetComponent<PlayerInputHandler>(out PlayerInputHandler player)) { return; }
 
-        Debug.Log("OnPlayerTriggerEnter");
-
         if (_playersInShipList.Contains(player)) { return; }
 
-        Debug.Log("Tried To Change Perspective");
-
         _playersInShipList.Add(player);
-        Debug.Log("_playersActive: " + _playersActive);
+
         _playersInShip = Mathf.Clamp(_playersInShip+1, 0, _playersActive);
 
         if (_lastRoutine != null) { StopCoroutine(_lastRoutine); }

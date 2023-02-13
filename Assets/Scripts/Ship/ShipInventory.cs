@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class ShipInventory : Inventory
 {
@@ -17,6 +18,8 @@ public class ShipInventory : Inventory
 
     #endregion
 
+    #region Unity Loops
+
     public override void Awake()
     {
         if (_instance != null && _instance != this)
@@ -31,6 +34,8 @@ public class ShipInventory : Inventory
         base.Awake();
     }
 
+    #endregion
+
     public override void AddItems(List<ItemQuantity> addedItems)
     {
         base.AddItems(addedItems);
@@ -41,11 +46,18 @@ public class ShipInventory : Inventory
     public void DropAllItems()
     {
         //Spawn in front of ship
-        Vector3 spawnPos = transform.position + Vector3.back * 1.5f;
+        Vector3 spawnPos = transform.position + Vector3.back * 2.5f;
         GameObject deathLootInstance = Instantiate(GameAssetsManager.Instance.DeathLootPickup, spawnPos, Quaternion.identity);
         Lootable lootable = deathLootInstance.GetComponent<Lootable>();
         lootable.AddLoot(ItemDictionaryToList());
 
         InventoryDictionary.Clear();
+    }
+
+    public void ShipTryLoot(Collider other)
+    {
+        if (!other.gameObject.TryGetComponent<Lootable>(out Lootable loot)) { return; }
+
+        loot.TryLoot();
     }
 }

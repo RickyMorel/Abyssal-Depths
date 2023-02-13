@@ -7,6 +7,8 @@ public class FireShotgun : WeaponShoot
     #region Private Variable
 
     private bool _hasAlreadyShot = false;
+    private ChipDataSO _chipDataSO;
+    private ChipDataSO.BasicChip _chipClass;
 
     #endregion
 
@@ -17,10 +19,21 @@ public class FireShotgun : WeaponShoot
 
     #endregion
 
+    #region Unity Loops
+
+    private void Awake()
+    {
+        _chipDataSO = GameAssetsManager.Instance.ChipDataSO;
+    }
+
     public override void Start()
     {
         _weapon = GetComponentInParent<Weapon>();
+        _chipClass = _chipDataSO.GetChipType(DamageType.Fire);
+        _timeBetweenShots = _chipClass.ShootAfterSeconds;
     }
+
+    #endregion
 
     public override void CheckShootInput()
     {

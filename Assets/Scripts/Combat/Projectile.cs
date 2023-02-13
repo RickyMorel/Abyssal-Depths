@@ -23,6 +23,10 @@ public class Projectile : MonoBehaviour
     private int _damage;
     private ChipDataSO.BasicChip _chipClass;
     private ChipDataSO _chipDataSO;
+    private float _weakness;
+    private float _resistance;
+    private float _secondaryValue;
+    private float _impactDamage;
 
     #endregion
 
@@ -36,6 +40,10 @@ public class Projectile : MonoBehaviour
 
     public float DealDamageAfterSeconds => _dealDamageAfterSeconds;
 
+    public float Weakness => _weakness;
+    public float Resistance => _resistance;
+    public float SecondaryValue => _secondaryValue;
+    public float ImpactDamage => _impactDamage;
 
     #endregion
 
@@ -64,12 +72,14 @@ public class Projectile : MonoBehaviour
         _particles = GetComponentInChildren<ParticleSystem>();
         Invoke(nameof(DestroySelf), 4f);
 
-        _chipClass = _chipDataSO.GetChipType(_chipClass, _damageType);
-
+        _chipClass = _chipDataSO.GetChipType(_damageType);
+        _chipDataSO.GetWeaknessAndResistance(_chipClass, out _weakness, out _resistance);
         _damage = _chipDataSO.GetDamageFromChip(_chipClass);
-    }
+        _secondaryValue = _chipDataSO.GetSecondaryValueFromChip(_chipClass);
 
-    
+        if (_damageType == DamageType.Electric || _damageType == DamageType.Fire) { _impactDamage = _chipDataSO.GetImpactDamageFromChip(_chipClass); }
+        else { _impactDamage = 0; }
+    }
 
     public void Initialize(string ownerTag)
     {

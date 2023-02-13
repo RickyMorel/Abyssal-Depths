@@ -61,13 +61,63 @@ public class ChipDataSO : ScriptableObject
         return -1;
     }
 
-    public BasicChip GetChipType(BasicChip chipClass, DamageType damageType)
+    public BasicChip GetChipType(DamageType damageType)
     {
         if (damageType == DamageType.Base) { return BaseData; }
         else if (damageType == DamageType.Fire) { return FireData; }
         else if (damageType == DamageType.Electric) { return ElectricData; }
         else if (damageType == DamageType.Laser) { return LaserData; }
         return null;
+    }
+
+    public void GetWeaknessAndResistance(BasicChip chipClass, out float weakness, out float resistance)
+    {
+        if (chipClass is BaseChip)
+        {
+            BaseChip baseChip = chipClass as BaseChip;
+            weakness = baseChip.DamageMultiplierWeakness;
+            resistance = baseChip.DamageMultiplierResistance;
+            return;
+        }
+        if (chipClass is FireChip)
+        {
+            FireChip fireChip = chipClass as FireChip;
+            weakness = fireChip.DamageMultiplierWeakness;
+            resistance = fireChip.DamageMultiplierResistance;
+            return;
+        }
+        if (chipClass is ElectricChip)
+        {
+            ElectricChip electricChip = chipClass as ElectricChip;
+            weakness = electricChip.DamageMultiplierWeakness;
+            resistance = electricChip.DamageMultiplierResistance;
+            return;
+        }
+        if (chipClass is LaserChip)
+        {
+            LaserChip laserChip = chipClass as LaserChip;
+            weakness = laserChip.DamageMultiplierWeakness;
+            resistance = laserChip.DamageMultiplierResistance;
+            return;
+        }
+        weakness = 0;
+        resistance = 0;
+        return;
+    }
+
+    public float GetImpactDamageFromChip(BasicChip chipClass)
+    {
+        if (chipClass is FireChip)
+        {
+            FireChip fireChip = chipClass as FireChip;
+            return fireChip.ImpactDamage;
+        }
+        if (chipClass is ElectricChip)
+        {
+            ElectricChip electricChip = chipClass as ElectricChip;
+            return electricChip.ImpactDamage;
+        }
+        return -1;
     }
 
     #region Helper Classes

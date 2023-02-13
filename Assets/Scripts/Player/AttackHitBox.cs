@@ -40,7 +40,7 @@ public class AttackHitBox : MonoBehaviour
     private void Start()
     {
         _mace = GetComponentInParent<Mace>();
-        _chipClass = _chipDataSO.GetChipType(_chipClass, _damageType);
+        _chipClass = _chipDataSO.GetChipType(_damageType);
     }
 
     #endregion

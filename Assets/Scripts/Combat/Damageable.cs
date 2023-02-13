@@ -45,6 +45,8 @@ public class Damageable : MonoBehaviour
 
     private ChipDataSO _chipData;
 
+    private Projectile _projectile;
+
     #endregion
 
     #region Getters & Setters
@@ -93,7 +95,10 @@ public class Damageable : MonoBehaviour
 
         if (projectile.DestroyOnHit)
         {
-            Damage(projectile.Damage, projectile.DamageType, false);
+            _projectile = projectile;
+
+            if (projectile.DamageType == DamageType.Base || projectile.DamageType == DamageType.Laser) { Damage(projectile.Damage, projectile.DamageType, false); }
+            else { Damage((int)projectile.ImpactDamage, projectile.DamageType, false); }
 
             if (projectile.ProjectileParticles != null) { projectile.ProjectileParticles.transform.SetParent(null); }
 
@@ -101,6 +106,8 @@ public class Damageable : MonoBehaviour
         }
         else
         {
+            _projectile = projectile;
+
             _damageTimer += Time.deltaTime;
             if (_damageTimer >= projectile.DealDamageAfterSeconds)
             {
@@ -166,24 +173,24 @@ public class Damageable : MonoBehaviour
     {
         if (IsDead()) { return; }
 
-        int finalDamage = damage;
+        float finalDamage = damage;
 
         bool isWeak = false;
         bool isResistant = false;
 
         if (_resistanceType.Contains(damageType)) 
         { 
-            finalDamage = finalDamage / 2;
+            finalDamage = finalDamage / _projectile.Resistance;
             isResistant = true;
         }
 
         if (_weaknessType.Contains(damageType)) 
         { 
-            finalDamage = finalDamage * 2;
+            finalDamage = finalDamage * _projectile.Weakness;
             isWeak = true;
         }
 
-        finalDamage = DamageTypesSelector(damageType, isResistant, isWeak, finalDamage, isDamageChain);
+        finalDamage = DamageTypesSelector(damageType, isResistant, isWeak, (int)finalDamage, isDamageChain);
 
         _currentHealth = Mathf.Clamp(_currentHealth - finalDamage, 0, _maxHealth);
 
@@ -306,9 +313,9 @@ public class Damageable : MonoBehaviour
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, 10f);
         foreach (var hitCollider in hitColliders)
         {
-            if (!hitCollider.TryGetComponent<Damageable>(out Damageable damageable)) { continue; }
+            if (!hitCollider.TryGetComponent(out Damageable damageable)) { continue; }
 
-            damageable.Damage(2, DamageType.Electric, true);
+            damageable.Damage(_projectile.Damage, DamageType.Electric, true);
         }
 
         if (_electricRoutine != null) { StopCoroutine(_electricRoutine); }
@@ -334,7 +341,7 @@ public class Damageable : MonoBehaviour
     private IEnumerator ElectricParalysis(BaseStateMachine baseStateMachine)
     {
         if (DoesShowDamageParticles()) { _electricParticles.Play(); }
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(_projectile.SecondaryValue);
         if (!IsDead() && baseStateMachine != null) { baseStateMachine.CanMove = true; }
         _isBeingElectrocuted = false;
         _electricParticles.Stop();

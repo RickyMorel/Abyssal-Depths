@@ -7,13 +7,19 @@ public class SemiautoElectricRifle : WeaponShoot
     #region Private Variable
 
     private bool _hasAlreadyShot = false;
+    private ChipDataSO.ElectricChip _chipClass;
 
     #endregion
+
+    #region Unity Loops
 
     public override void Start()
     {
         _weapon = GetComponentInParent<Weapon>();
+        _timeBetweenShots = _chipClass.ShootAfterSeconds;
     }
+
+    #endregion
 
     public override void CheckShootInput()
     {

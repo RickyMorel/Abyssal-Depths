@@ -87,7 +87,7 @@ public class Damageable : MonoBehaviour
 
     public virtual void OnTriggerStay(Collider other)
     {
-        if (!other.gameObject.TryGetComponent<Projectile>(out Projectile projectile)) { return; }
+        if (!other.gameObject.TryGetComponent(out Projectile projectile)) { return; }
 
         if (IsOwnDamage(other)) { return; }
 

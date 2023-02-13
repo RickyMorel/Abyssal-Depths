@@ -15,7 +15,6 @@ public class AttackHitBox : MonoBehaviour
 
     #region Private Variable
 
-    private Collider _hitBox;
     private Mace _mace;
     private ChipDataSO.BasicChip _chipClass;
     private ChipDataSO _chipDataSO;
@@ -40,7 +39,6 @@ public class AttackHitBox : MonoBehaviour
 
     private void Start()
     {
-        _hitBox = GetComponent<Collider>();
         _mace = GetComponentInParent<Mace>();
         _chipClass = _chipDataSO.GetChipType(_chipClass, _damageType);
     }

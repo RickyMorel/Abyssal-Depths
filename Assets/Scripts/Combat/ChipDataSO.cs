@@ -75,7 +75,7 @@ public class ChipDataSO : ScriptableObject
     [System.Serializable]
     public class BasicChip
     {
-        public float ShootAfterSeconds;
+        public float ShootAfterSeconds = 0.2f;
         public float DamageMultiplierWeakness;
         public float DamageMultiplierResistance;
     }

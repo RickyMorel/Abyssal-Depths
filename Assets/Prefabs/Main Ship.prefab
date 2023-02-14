@@ -978,8 +978,9 @@ MonoBehaviour:
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
-  m_Cameras: []
-  m_RendererIndex: -1
+  m_Cameras:
+  - {fileID: 508254513682835084}
+  m_RendererIndex: 1
   m_VolumeLayerMask:
     serializedVersion: 2
     m_Bits: 1
@@ -1683,7 +1684,7 @@ Transform:
   - {fileID: 687801800}
   - {fileID: 4811621950326407202}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!208 &7022336706505972824
 NavMeshObstacle:
@@ -1780,11 +1781,10 @@ MonoBehaviour:
   _maxHealth: 1000
   _healthBarImage: {fileID: 0}
   _damageParticles: {fileID: 0}
-  _currentHealth: 0
   _boosterHealth: {fileID: 3161358064882640088}
   _crashLayers:
     serializedVersion: 2
-    m_Bits: 65
+    m_Bits: 65601
   _redLights: {fileID: 687801799}
 --- !u!114 &5877842457033602641
 MonoBehaviour:
@@ -1831,7 +1831,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 630c2e0d578a7204ab7373b37620a954, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cameraManager: {fileID: 0}
 --- !u!114 &9184728779062188578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1957,7 +1956,7 @@ MonoBehaviour:
   m_RenderShadows: 1
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
-  m_CameraType: 0
+  m_CameraType: 1
   m_Cameras: []
   m_RendererIndex: -1
   m_VolumeLayerMask:
@@ -8367,7 +8366,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.8307694, y: 1}
+    m_SensorSize: {x: 2.257436, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -12088,6 +12087,10 @@ PrefabInstance:
       propertyPath: RotatorTransform
       value: 
       objectReference: {fileID: 5808410598810673282}
+    - target: {fileID: 4237167444813469774, guid: 0268da4a0a01eb24fb94608c81bd4599, type: 3}
+      propertyPath: _damageMultiplier
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 4237167444813469774, guid: 0268da4a0a01eb24fb94608c81bd4599, type: 3}
       propertyPath: _pickaxeBoostParticles
       value: 

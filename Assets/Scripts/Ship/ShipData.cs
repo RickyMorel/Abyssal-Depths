@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static SaveData;
 
 public class ShipData : MonoBehaviour
 {
@@ -20,6 +22,11 @@ public class ShipData : MonoBehaviour
 
     #endregion
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     private void Start()
     {
         StartCoroutine(LateStart());
@@ -35,11 +42,39 @@ public class ShipData : MonoBehaviour
         LoadEnemies(saveData);
         LoadInventories(saveData);
         LoadChips(saveData);
+        TryLoadDeathLoot(saveData);
+    }
+
+    public void ReloadLevel()
+    {
+        SaveData saveData = SaveSystem.Load();
+
+        LoadInventories(saveData);
+        LoadChips(saveData, new Vector3(270f, -320f, 0f));
+        TryLoadDeathLoot(saveData);
+
+        Booster.TrySetHealth(int.MaxValue, this, true);
+
+        for (int i = 0; i < Weapons.Length; i++)
+        {
+            Weapons[i].TrySetHealth(int.MaxValue, this, false);
+        }
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.K)) { SaveSystem.Save(); }
+    }
+
+    private void TryLoadDeathLoot(SaveData saveData)
+    {
+        if(saveData._deathLootData == null) { return; }
+
+        GameObject deathLootInstance = Instantiate(GameAssetsManager.Instance.DeathLootPickup);
+        DeathLoot deathLoot = deathLootInstance.GetComponent<DeathLoot>();
+        deathLoot.LoadSavedItems(saveData._deathLootData.Items);
+        Vector3 savedPos = new Vector3(saveData._deathLootData.Position[0], saveData._deathLootData.Position[1], saveData._deathLootData.Position[2]);
+        deathLoot.transform.position = savedPos;
     }
 
     private void LoadInventories(SaveData saveData)
@@ -48,13 +83,15 @@ public class ShipData : MonoBehaviour
         {
             MainInventory.Instance.LoadSavedItems(saveData._mainInventory);
         }
+        if (saveData._shipInventory != null && saveData._shipInventory.Count > 0)
+        {
+            ShipInventory.Instance.LoadSavedItems(saveData._shipInventory);
+        }
     }
 
-    private void LoadChips(SaveData saveData)
+    private void LoadChips(SaveData saveData, Vector3 wantedSpawnPosition = default(Vector3))
     {
         UpgradeChip[] allChips = Resources.LoadAll<UpgradeChip>("ScriptableObjs/Chips");
-
-        //SceneManager.LoadScene(saveData.CurrentSceneIndex);
 
         Booster.LoadChips(allChips, saveData.BoosterData, this, true);
 
@@ -64,7 +101,7 @@ public class ShipData : MonoBehaviour
         }
 
         Vector3 spawnPos = new Vector3(saveData.ShipPos[0], saveData.ShipPos[1], saveData.ShipPos[2]);
-        transform.position = spawnPos;
+        transform.position = wantedSpawnPosition == default(Vector3) ? spawnPos : wantedSpawnPosition;
 
         SpawnPlayers();
     }
@@ -121,5 +158,10 @@ public class ShipData : MonoBehaviour
     public Minable[] GetCurrentMinableData()
     {
         return FindObjectsOfType<Minable>(true);
+    }
+
+    public DeathLoot GetCurrentDeathLoot()
+    {
+        return FindObjectOfType<DeathLoot>();
     }
 }

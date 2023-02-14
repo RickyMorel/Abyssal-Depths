@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Analytics;
+using static SaveData;
 
 public class Upgradable : Interactable
 {
@@ -57,8 +58,22 @@ public class Upgradable : Interactable
             LoadUpgrade(chip, 1);
         }
 
-        if (!isBooster) { _health.SetHealth((int)upgradableData.CurrentHealth); }
-        else { shipData.GetComponent<ShipHealth>().SetHealth((int)upgradableData.CurrentHealth); }
+        TrySetHealth((int)upgradableData.CurrentHealth, shipData, isBooster);
+    }
+
+    public void TrySetHealth(int wantedHealth, ShipData shipData, bool isBooster)
+    {
+        if (!isBooster) { _health.SetHealth(wantedHealth); }
+        else { shipData.GetComponent<ShipHealth>().SetHealth(wantedHealth); }
+
+        StartCoroutine(WaitForLoadFix(wantedHealth));
+    }
+
+    private IEnumerator WaitForLoadFix(int wantedHealth)
+    {
+        yield return new WaitForEndOfFrame();
+
+        if (wantedHealth > 0) { _health.FixInteractable(false); }
     }
 
     public void RemoveUpgrades()

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -45,9 +46,17 @@ public class ShipFastTravel : MonoBehaviour
         _cameraManager = FindObjectOfType<CameraManager>();
         TimelinesManager.Instance.BlackHoleParticle.gameObject.transform.SetParent(_mainShip.transform);
         TimelinesManager.Instance.BlackHoleParticle.gameObject.transform.localPosition =new Vector3(2.5f,0,0);
+
+        _mainShip.OnRespawn += HandleRespawn;
     }
 
     #endregion
+
+    private void HandleRespawn()
+    {
+        _playersInShipList.Clear();
+        _playersInShip = 0;
+    }
 
     private void CheckPlayersInShip()
     {
@@ -81,9 +90,10 @@ public class ShipFastTravel : MonoBehaviour
         if (_playersInShipList.Contains(player)) { return; }
 
         _playersInShipList.Add(player);
-        _playersInShip++;
 
-        StopCoroutine(_lastRoutine);
+        _playersInShip = Mathf.Clamp(_playersInShip+1, 0, _playersActive);
+
+        if (_lastRoutine != null) { StopCoroutine(_lastRoutine); }
         AttachToShip();
         CheckPlayersInShip();
     }
@@ -96,7 +106,7 @@ public class ShipFastTravel : MonoBehaviour
 
         _cameraManager.ToggleCamera(false);
         _lastRoutine = StartCoroutine(DetachFromShip());
-        _playersInShip--;
+        _playersInShip = Mathf.Clamp(_playersInShip-1, 0, _playersActive);
         _playersInShipList.Remove(player);
     }
 
@@ -120,6 +130,8 @@ public class ShipFastTravel : MonoBehaviour
 
     private void AttachToShip()
     {
+        if(_isPlayerActive == null) { return; }
+
         for (int i = 0; i < _isPlayerActive.Length; i++)
         {
             if (_isPlayerActive[i].IsPlayerActive == true)

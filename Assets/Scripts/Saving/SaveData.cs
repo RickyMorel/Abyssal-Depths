@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,8 @@ public class SaveData
     public List<EnemyData> enemiesInScene = new List<EnemyData>();
     public List<MinableData> _minablesInScene = new List<MinableData>();
     public List<ItemData> _mainInventory = new List<ItemData>();
+    public List<ItemData> _shipInventory = new List<ItemData>();
+    public DeathLootData _deathLootData;
 
     public SaveData(ShipData shipData)
     {
@@ -21,6 +24,18 @@ public class SaveData
         SaveEnemyData(shipData);
         SaveInventoryData(shipData);
         SaveMinablesData(shipData);
+        TrySaveDeathLootData(shipData);
+    }
+
+    private void TrySaveDeathLootData(ShipData shipData)
+    {
+        DeathLoot deathLoot = shipData.GetCurrentDeathLoot();
+
+        if(deathLoot == null) { return; }
+
+        DeathLootData deathLootData = new DeathLootData(deathLoot);
+
+        _deathLootData = deathLootData;
     }
 
     private void SaveMinablesData(ShipData shipData)
@@ -54,6 +69,15 @@ public class SaveData
             ItemData itemData = new ItemData(item.Value);
 
             _mainInventory.Add(itemData);
+        }
+
+        Dictionary<Item, ItemQuantity> shipItems = ShipInventory.Instance.InventoryDictionary;
+
+        foreach (KeyValuePair<Item, ItemQuantity> item in shipItems)
+        {
+            ItemData itemData = new ItemData(item.Value);
+
+            _shipInventory.Add(itemData);
         }
     }
 
@@ -125,6 +149,28 @@ public class SaveData
             Position[0] = aIStateMachine.transform.position.x;
             Position[1] = aIStateMachine.transform.position.y;
             Position[2] = aIStateMachine.transform.position.z;
+        }
+    }
+
+    [System.Serializable]
+    public class DeathLootData
+    {
+        public string Id;
+        public List<ItemData> Items = new List<ItemData>();
+        public float[] Position = { 0f, 0f, 0f };
+
+        public DeathLootData(Lootable lootable)
+        {
+            Id = lootable.Id;
+            Position[0] = lootable.transform.position.x;
+            Position[1] = lootable.transform.position.y;
+            Position[2] = lootable.transform.position.z;
+
+            foreach (ItemQuantity item in lootable.LootList)
+            {
+                ItemData itemData = new ItemData(item);
+                Items.Add(itemData);
+            }
         }
     }
 

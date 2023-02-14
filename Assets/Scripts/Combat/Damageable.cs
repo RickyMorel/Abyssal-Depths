@@ -150,7 +150,7 @@ public class Damageable : MonoBehaviour
 
     public void SetHealth(int newHealth)
     {
-        _currentHealth = newHealth;
+        _currentHealth = Mathf.Clamp(newHealth, 0f, MaxHealth);
 
         OnUpdateHealth?.Invoke(newHealth);
 

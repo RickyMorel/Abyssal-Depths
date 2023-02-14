@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 public class InteractableHealth : Damageable
 {
@@ -26,6 +27,7 @@ public class InteractableHealth : Damageable
     private GameObject _currentParticles;
     private float _timeSpentFixing = 0f;
     private PrevInteractableState _prevInteractableState;
+    private Color _originalOutlineColor;
     private GameObject _currentRepairPopup;
     private GameObject _currentRepairCanvas;
 
@@ -41,6 +43,13 @@ public class InteractableHealth : Damageable
 
         _interactable.OnInteract += TryStartFix;
         _interactable.OnUninteract += TryStopFix;
+    }
+
+    public override void Start()
+    {
+        base.Start();
+
+        _originalOutlineColor = _interactable.Outline.OutlineColor;
     }
 
     private void OnDestroy()
@@ -112,21 +121,34 @@ public class InteractableHealth : Damageable
         if (_canUseWhenBroken) { _interactable.CanUse = true; }
     }
 
-    public void FixInteractable()
+    public void FixInteractable(bool usedItems = true)
     {
+        if(_prevInteractableState == null) { return; }
+
         AddHealth((int)MaxHealth);
 
         _interactable.CanUse = true;
         _interactable.InteractionType = _prevInteractableState.InteractionType;
         _interactable.IsSingleUse = _prevInteractableState.IsSingleUse;
-        _interactable.Outline.OutlineColor = _prevInteractableState.OutlineColor;
+        _interactable.Outline.OutlineColor = _originalOutlineColor;
         _timeSpentFixing = 0f;
         _interactable.RemoveCurrentPlayer();
-        MainInventory.Instance.RemoveItems(_fixCost.CraftingIngredients);
+        if (usedItems) { MainInventory.Instance.RemoveItems(_fixCost.CraftingIngredients); }
         OnFix?.Invoke();
 
+        DestroyAllParticles();
+
         if (_currentRepairCanvas != null) { Destroy(_currentRepairCanvas); }
-        if (_currentParticles != null) { Destroy(_currentParticles); }
+    }
+
+    public void DestroyAllParticles()
+    {
+        foreach (Transform child in _particleSpawnTransform)
+        {
+            if(child == _particleSpawnTransform) { continue; }
+
+            Destroy(child.gameObject);
+        }
     }
 
     public override void Die()
@@ -138,6 +160,8 @@ public class InteractableHealth : Damageable
             _particleSpawnTransform.localPosition.x,
             _particleSpawnTransform.localPosition.y,
             _particleSpawnTransform.localPosition.z);
+
+        _currentParticles.transform.parent = _particleSpawnTransform;
 
         if (_canUseWhenBroken == false) 
         {

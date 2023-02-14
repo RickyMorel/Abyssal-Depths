@@ -2568,7 +2568,7 @@ Transform:
   - {fileID: 2389941571288428507}
   - {fileID: 6567959656405035337}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!54 &7627081817445622294
 Rigidbody:
@@ -2706,6 +2706,7 @@ MonoBehaviour:
   _maxHealth: 100
   _healthBarImage: {fileID: 0}
   _damageParticles: {fileID: 0}
+  _currentHealth: 0
   _fixCost: {fileID: 11400000, guid: 56de9e867278d034698076c776c8d4da, type: 2}
   _timeToFix: 8
   _canUseWhenBroken: 0

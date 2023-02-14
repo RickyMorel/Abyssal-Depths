@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 using Rewired;
+using System.Linq;
+using System.Collections;
 
 public class PlayerInputHandler : MonoBehaviour
 {
@@ -51,6 +53,18 @@ public class PlayerInputHandler : MonoBehaviour
     private void Start()
     {
         _player = ReInput.players.GetPlayer(_playerId);
+
+        StartCoroutine(LateStart());
+    }
+
+    private IEnumerator LateStart()
+    {
+        yield return new WaitForEndOfFrame();
+
+        //if finds a duplicate player, destroy self
+        PlayerInputHandler[] playerInputs = FindObjectsOfType<PlayerInputHandler>();
+
+        if (playerInputs.ToList().Find(x => (x.PlayerId == PlayerId) && (x.gameObject != gameObject))) { Destroy(transform.root.gameObject); }
     }
 
     private void Update()

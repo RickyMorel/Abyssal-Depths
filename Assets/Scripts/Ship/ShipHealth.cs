@@ -66,6 +66,7 @@ public class ShipHealth : Damageable
 
         if((1<<other.gameObject.layer & _crashLayers) == 0) { return; }
         if(other.gameObject.GetComponent<Projectile>() != null) { return; }
+        if(_rb == null) { return; }
         if(_rb.velocity.magnitude < _minCrashSpeed) { return; }
 
         _currentDamage = (int)CalculateCrashDamage();

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,8 @@ public class DeathManager : MonoBehaviour
     private ShipHealth _shipHealth;
     private float _timeSinceDeath;
     private bool _isInSafeZone = false;
+    private bool _isLoadingScene = false;
+    private bool _isReloadingScene = false;
 
     #endregion
 
@@ -21,6 +24,16 @@ public class DeathManager : MonoBehaviour
     #endregion
 
     #region Unity Loops
+
+    private void Awake()
+    {
+        SceneManager.activeSceneChanged += OnSceneLoaded;
+    }
+
+    private void OnDestroy()
+    {
+        SceneManager.activeSceneChanged -= OnSceneLoaded;
+    }
 
     private void Start()
     {
@@ -35,10 +48,26 @@ public class DeathManager : MonoBehaviour
 
         if (_timeSinceDeath < Ship.Instance.TimeTillDeath) { return; }
 
+        if (_isLoadingScene) { return; }
+
+        _isLoadingScene = true;
+
         StartCoroutine(DeathCoroutine());
     }
 
     #endregion
+
+    private void OnSceneLoaded(Scene arg0, Scene arg1)
+    {
+        if (!_isReloadingScene) { return; }
+
+        _isInSafeZone = false;
+        _isLoadingScene = false;
+        _timeSinceDeath = 0f;
+        Ship.Instance.GetComponent<ShipData>().ReloadLevel();
+        _isReloadingScene = false;
+        Ship.Instance.FireRespawnEvent();
+    }
 
     private void UpdateDeathTime(float multiplier)
     {
@@ -49,8 +78,11 @@ public class DeathManager : MonoBehaviour
     private IEnumerator DeathCoroutine()
     {
         KillAllPlayers();
+        ShipInventory.Instance.DropAllItems();
 
         yield return new WaitForSeconds(2f);
+
+        SaveSystem.Save();
 
         ShowDeathScreen();
 
@@ -66,7 +98,8 @@ public class DeathManager : MonoBehaviour
 
     private void ReloadScene()
     {
-        SceneManager.LoadScene(2);
+        _isReloadingScene = true;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void KillAllPlayers()

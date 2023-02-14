@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class LootUI : MonoBehaviour
 {
     #region Editor Fields
 
+    [SerializeField] private PlayableDirector _itemsRetrievedPanelTimeline;
     [SerializeField] private GameObject _lootItemUIPrefab;
     [SerializeField] private Transform _contentTransform;
     [SerializeField] private GameObject _lootPanel;
@@ -44,6 +46,8 @@ public class LootUI : MonoBehaviour
     public void DisplayLootedItems(List<ItemQuantity> lootedItems)
     {
         DestroyPrevListedItems();
+
+        _itemsRetrievedPanelTimeline.Play();
 
         StartCoroutine(DisplayLootedItemsSlowly(lootedItems));
 

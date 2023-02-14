@@ -120,6 +120,21 @@ public class ChipDataSO : ScriptableObject
         return -1;
     }
 
+    public float GetAdditionalValueFromChip(BasicChip chipClass)
+    {
+        if (chipClass is FireChip)
+        {
+            FireChip fireChip = chipClass as FireChip;
+            return fireChip.TimeBetweenBurns;
+        }
+        if (chipClass is LaserChip)
+        {
+            LaserChip laserChip = chipClass as LaserChip;
+            return laserChip.TimeBetweenHits;
+        }
+        return -1;
+    }
+
     #region Helper Classes
 
     [System.Serializable]

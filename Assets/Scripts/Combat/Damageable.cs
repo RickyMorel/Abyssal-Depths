@@ -37,13 +37,12 @@ public class Damageable : MonoBehaviour
     private float _timeToResetLaserLevel = 2;
     private float _laserLevel;
     private float _damageTimer = 0;
+    private float _timer = 0;
     private bool _isBeingElectrocuted = false;
 
     private ParticleSystem _fireParticles;
     private ParticleSystem _electricParticles;
     private Renderer[] _renderers;
-
-    private ChipDataSO _chipData;
 
     private Projectile _projectile;
 
@@ -83,6 +82,7 @@ public class Damageable : MonoBehaviour
     private void Update()
     {
         _timeSinceLastLaserShot += Time.deltaTime;
+        _timer += Time.deltaTime;
 
         ColorChangeForLaser();
     }
@@ -286,19 +286,19 @@ public class Damageable : MonoBehaviour
     {
         if (DoesShowDamageParticles()) { _fireParticles.Play(); }
 
-        int fireDamage = 0;
+        float fireDamage = _projectile.Damage;
 
-        if ((!isResistant && !isWeak) || (isResistant && isWeak)) { fireDamage = 8; }
+        if ((!isResistant && !isWeak) || (isResistant && isWeak)) { fireDamage = _projectile.Damage; }
 
-        if (isResistant && !isWeak) { fireDamage = 4; }
+        if (isResistant && !isWeak) { fireDamage = fireDamage / _projectile.Resistance; }
 
-        if (isWeak && !isResistant) { fireDamage = 12; }
+        if (isWeak && !isResistant) { fireDamage = fireDamage * _projectile.Weakness; }
 
         if (fireDamage == 0) { return; }
 
         if (_fireRoutine != null) { StopCoroutine(_fireRoutine); }
 
-        _fireRoutine = StartCoroutine(Afterburn(fireDamage));
+        _fireRoutine = StartCoroutine(Afterburn((int)fireDamage));
     }
 
     private void ElectricDamage(bool isDamageChain)
@@ -325,16 +325,12 @@ public class Damageable : MonoBehaviour
 
     private IEnumerator Afterburn(int damage)
     {
-        yield return new WaitForSeconds(1);
-        Damage(damage, DamageType.None);
-        yield return new WaitForSeconds(1);
-        Damage(damage, DamageType.None);
-        yield return new WaitForSeconds(1);
-        Damage(damage, DamageType.None);
-        yield return new WaitForSeconds(1);
-        Damage(damage, DamageType.None);
-        yield return new WaitForSeconds(1);
-        Damage(damage, DamageType.None);
+        _timer = 0;
+        while (_timer < _projectile.SecondaryValue)
+        {
+            yield return new WaitForSeconds(_projectile.AdditionalValue);
+            Damage(damage);
+        }
         _fireParticles.Stop();
     }
 

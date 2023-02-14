@@ -10,7 +10,7 @@ public class Projectile : MonoBehaviour
 
     [SerializeField] private float _speed;
     [SerializeField] protected float _dealDamageAfterSeconds = 0;
-    [SerializeField] private DamageType _damageType;
+    [SerializeField] protected DamageType _damageType;
 
     #endregion
 
@@ -20,13 +20,14 @@ public class Projectile : MonoBehaviour
     protected ParticleSystem _particles;
     protected bool _destroyOnHit = true;
     protected Weapon _weapon;
-    private int _damage;
-    private ChipDataSO.BasicChip _chipClass;
-    private ChipDataSO _chipDataSO;
-    private float _weakness;
-    private float _resistance;
-    private float _secondaryValue;
-    private float _impactDamage;
+    protected int _damage;
+    protected ChipDataSO.BasicChip _chipClass;
+    protected ChipDataSO _chipDataSO;
+    protected float _weakness;
+    protected float _resistance;
+    protected float _secondaryValue;
+    protected float _impactDamage;
+    protected float _additionalValue;
 
     #endregion
 
@@ -44,6 +45,7 @@ public class Projectile : MonoBehaviour
     public float Resistance => _resistance;
     public float SecondaryValue => _secondaryValue;
     public float ImpactDamage => _impactDamage;
+    public float AdditionalValue => _additionalValue;
 
     #endregion
 
@@ -78,7 +80,7 @@ public class Projectile : MonoBehaviour
         _secondaryValue = _chipDataSO.GetSecondaryValueFromChip(_chipClass);
 
         if (_damageType == DamageType.Electric || _damageType == DamageType.Fire) { _impactDamage = _chipDataSO.GetImpactDamageFromChip(_chipClass); }
-        else { _impactDamage = 0; }
+        else if(_damageType == DamageType.Fire || _damageType == DamageType.Laser) { _additionalValue = _chipDataSO.GetAdditionalValueFromChip(_chipClass); }
     }
 
     public void Initialize(string ownerTag)

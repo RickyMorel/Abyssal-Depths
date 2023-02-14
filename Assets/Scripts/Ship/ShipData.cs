@@ -29,14 +29,14 @@ public class ShipData : MonoBehaviour
 
     private void Start()
     {
-        //StartCoroutine(LateStart());
+        StartCoroutine(LateStart());
     }
 
-    //private IEnumerator LateStart()
-    //{
-    //    yield return new WaitForEndOfFrame();
+    private IEnumerator LateStart()
+    {
+        yield return new WaitForEndOfFrame();
 
-    //    SaveData saveData = SaveSystem.Load();
+        SaveData saveData = SaveSystem.Load();
 
         LoadMinables(saveData);
         LoadEnemies(saveData);
@@ -68,7 +68,7 @@ public class ShipData : MonoBehaviour
 
     private void TryLoadDeathLoot(SaveData saveData)
     {
-        if(saveData._deathLootData == null) { return; }
+        if (saveData._deathLootData == null) { return; }
 
         GameObject deathLootInstance = Instantiate(GameAssetsManager.Instance.DeathLootPickup);
         DeathLoot deathLoot = deathLootInstance.GetComponent<DeathLoot>();
@@ -79,7 +79,7 @@ public class ShipData : MonoBehaviour
 
     private void LoadInventories(SaveData saveData)
     {
-        if(saveData._mainInventory != null && saveData._mainInventory.Count > 0)
+        if (saveData._mainInventory != null && saveData._mainInventory.Count > 0)
         {
             MainInventory.Instance.LoadSavedItems(saveData._mainInventory);
         }
@@ -114,7 +114,7 @@ public class ShipData : MonoBehaviour
         {
             SaveData.MinableData wantedMinable = saveData._minablesInScene.Find(x => x.Id == minable.Id);
 
-            if(wantedMinable == null) { return; }
+            if (wantedMinable == null) { return; }
 
             minable.gameObject.SetActive(wantedMinable.IsActive);
         }
@@ -122,7 +122,7 @@ public class ShipData : MonoBehaviour
 
     private void LoadEnemies(SaveData saveData)
     {
-        if(saveData.enemiesInScene == null || saveData.enemiesInScene.Count < 1) { return; }
+        if (saveData.enemiesInScene == null || saveData.enemiesInScene.Count < 1) { return; }
 
         AIStateMachine[] currentEnemies = FindObjectsOfType<AIStateMachine>();
 
@@ -130,7 +130,7 @@ public class ShipData : MonoBehaviour
         {
             SaveData.EnemyData wantedEnemyData = saveData.enemiesInScene.Find(x => x.EnemyId == currentEnemy.Id);
 
-            if(wantedEnemyData == null) { continue; }
+            if (wantedEnemyData == null) { continue; }
 
             currentEnemy.GetComponent<AIHealth>().SetHealth((int)wantedEnemyData.Health);
             Vector3 savedPos = new Vector3(wantedEnemyData.Position[0], wantedEnemyData.Position[1], wantedEnemyData.Position[2]);

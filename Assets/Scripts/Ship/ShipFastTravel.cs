@@ -29,7 +29,7 @@ public class ShipFastTravel : MonoBehaviour
 
     private Ship _mainShip;
 
-    [SerializeField] private CameraManager _cameraManager;
+    private CameraManager _cameraManager;
 
     private Coroutine _lastRoutine = null;
 

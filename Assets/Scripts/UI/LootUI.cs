@@ -47,13 +47,16 @@ public class LootUI : MonoBehaviour
     {
         DestroyPrevListedItems();
 
-        _itemsRetrievedPanelTimeline.Play();
-
         StartCoroutine(DisplayLootedItemsSlowly(lootedItems));
 
         _lootPanel.SetActive(true);
 
         StartCoroutine(DisableLootPanel());
+    }
+
+    public void PlayRetrievedItems()
+    {
+        _itemsRetrievedPanelTimeline.Play();
     }
 
     private IEnumerator DisplayLootedItemsSlowly(List<ItemQuantity> lootedItems)

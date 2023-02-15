@@ -298,6 +298,7 @@ public class Damageable : MonoBehaviour
 
         if (_fireRoutine != null) { StopCoroutine(_fireRoutine); }
 
+        _timer = 0;
         _fireRoutine = StartCoroutine(Afterburn((int)fireDamage));
     }
 
@@ -325,13 +326,11 @@ public class Damageable : MonoBehaviour
 
     private IEnumerator Afterburn(int damage)
     {
-        _timer = 0;
         while (_timer < _projectile.SecondaryValue)
         {
             yield return new WaitForSeconds(_projectile.AdditionalValue);
             Damage(damage);
         }
-        _fireParticles.Stop();
     }
 
     private IEnumerator ElectricParalysis(BaseStateMachine baseStateMachine)

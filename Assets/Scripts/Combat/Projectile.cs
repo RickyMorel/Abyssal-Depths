@@ -80,7 +80,7 @@ public class Projectile : MonoBehaviour
         _secondaryValue = _chipDataSO.GetSecondaryValueFromChip(_chipClass);
 
         if (_damageType == DamageType.Electric || _damageType == DamageType.Fire) { _impactDamage = _chipDataSO.GetImpactDamageFromChip(_chipClass); }
-        else if(_damageType == DamageType.Fire || _damageType == DamageType.Laser) { _additionalValue = _chipDataSO.GetAdditionalValueFromChip(_chipClass); }
+        if(_damageType == DamageType.Fire || _damageType == DamageType.Laser) { _additionalValue = _chipDataSO.GetAdditionalValueFromChip(_chipClass); }
     }
 
     public void Initialize(string ownerTag)

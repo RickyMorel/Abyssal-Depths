@@ -1412,8 +1412,8 @@ GameObject:
   - component: {fileID: 3068541795191308857}
   - component: {fileID: 3068541795191308856}
   - component: {fileID: 3068541795191308855}
+  - component: {fileID: 4383039314619256584}
   - component: {fileID: 8650965756590058639}
-  - component: {fileID: 7343536267454773038}
   m_Layer: 25
   m_Name: Cube
   m_TagString: Untagged
@@ -1499,6 +1499,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!135 &4383039314619256584
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3068541795191308853}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.50000006
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8650965756590058639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1529,19 +1542,6 @@ MonoBehaviour:
   OnTriggerExitEvent:
     m_PersistentCalls:
       m_Calls: []
---- !u!65 &7343536267454773038
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3068541795191308853}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.0000006, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3920976112609291787
 GameObject:
   m_ObjectHideFlags: 0
@@ -7196,7 +7196,7 @@ GameObject:
   - component: {fileID: 5877842456878155297}
   - component: {fileID: 5877842456878155296}
   - component: {fileID: 5877842456878155303}
-  - component: {fileID: 4710712283358780915}
+  - component: {fileID: 1725745290470580367}
   - component: {fileID: 577259445533045808}
   m_Layer: 25
   m_Name: Cube
@@ -7283,8 +7283,8 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &4710712283358780915
-BoxCollider:
+--- !u!135 &1725745290470580367
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -7294,7 +7294,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0000006, y: 1, z: 1}
+  m_Radius: 0.5000003
   m_Center: {x: 0, y: 0.0000076293945, z: 0}
 --- !u!114 &577259445533045808
 MonoBehaviour:
@@ -8456,7 +8456,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.257436, y: 1}
+    m_SensorSize: {x: 2.2594874, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

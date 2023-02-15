@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Analytics;
+using UnityEngine.Playables;
 using static SaveData;
 
 public class Upgradable : Interactable
@@ -156,6 +157,8 @@ public class Upgradable : Interactable
 
     private IEnumerator PlayNotSameLevelAnim(UpgradeChip newChip, PlayerCarryController player)
     {
+        if (TryGetComponent(out PlayableDirector playableDirector)) { playableDirector.Play(); }
+
         PlaceChip(newChip, 1);
         //Disable and enable chip to give illusion that the player placed it in the upgradable
         player.CurrentSingleObjInstance.SetActive(false);

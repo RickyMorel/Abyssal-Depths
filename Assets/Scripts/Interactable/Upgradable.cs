@@ -127,11 +127,29 @@ public class Upgradable : Interactable
 
         if (!foundEmptySocket) { return false; }
 
+        if (!IsSameMkLevel(upgradeChip)) { return false; }
+
         _upgradeSockets[socketIndex] = upgradeChip;
 
         Upgrade(upgradeChip, socketIndex);
 
         return true;
+    }
+
+    private bool IsSameMkLevel(UpgradeChip newChip)
+    {
+        UpgradeChip firstChip = null;
+
+        foreach (UpgradeChip socket in _upgradeSockets)
+        {
+            if (socket != null) { firstChip = socket; break; }
+        }
+
+        if(firstChip == null) { return true; }
+
+        if(firstChip.Level == newChip.Level) { return true; }
+
+        return false;
     }
 
     public void LoadUpgrade(UpgradeChip upgradeChip, int socketIndex)

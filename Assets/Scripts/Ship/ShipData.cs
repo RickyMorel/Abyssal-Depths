@@ -68,7 +68,7 @@ public class ShipData : MonoBehaviour
 
     private void TryLoadDeathLoot(SaveData saveData)
     {
-        if (saveData._deathLootData == null) { return; }
+        if(saveData._deathLootData == null) { return; }
 
         GameObject deathLootInstance = Instantiate(GameAssetsManager.Instance.DeathLootPickup);
         DeathLoot deathLoot = deathLootInstance.GetComponent<DeathLoot>();

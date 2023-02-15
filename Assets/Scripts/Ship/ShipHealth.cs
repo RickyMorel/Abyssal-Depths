@@ -63,11 +63,21 @@ public class ShipHealth : Damageable
     public override void OnTriggerStay(Collider other)
     {
         base.OnTriggerStay(other);
+    }
 
-        if((1<<other.gameObject.layer & _crashLayers) == 0) { return; }
-        if(other.gameObject.GetComponent<Projectile>() != null) { return; }
-        if(_rb == null) { return; }
-        if(_rb.velocity.magnitude < _minCrashSpeed) { return; }
+    private void OnTriggerEnter(Collider other)
+    {
+        TryInflictCrashDamage(other);
+    }
+
+    #endregion
+
+    public void TryInflictCrashDamage(Collider other)
+    {
+        if ((1 << other.gameObject.layer & _crashLayers) == 0) { return; }
+        if (other.gameObject.GetComponent<Projectile>() != null) { return; }
+        if (_rb == null) { return; }
+        if (_rb.velocity.magnitude < _minCrashSpeed) { return; }
 
         _currentDamage = (int)CalculateCrashDamage();
         Damage((int)_currentDamage, DamageType.Base);
@@ -82,8 +92,6 @@ public class ShipHealth : Damageable
         Vector3 hitPos = other.ClosestPointOnBounds(transform.position);
         GameObject shipCrashParticles = Instantiate(Ship.Instance.ShipStatsSO.ShipCrashParticles.gameObject, hitPos, Quaternion.identity);
     }
-
-    #endregion
 
     public override void Damage(int damage, DamageType damageType = DamageType.None, bool isDamageChain = false, Collider instigatorCollider = null)
     {

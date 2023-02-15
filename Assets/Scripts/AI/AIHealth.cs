@@ -50,6 +50,7 @@ public class AIHealth : PlayerHealth
 
     private void HandleDead()
     {
+        StopPreviousAction();
         _gAgent.enabled = false;
         _rb.isKinematic = false;
         _rb.useGravity = true;

@@ -75,7 +75,7 @@ public class PlayerUpgradesController : MonoBehaviour
         Upgradable upgradable = _interactionController.CurrentInteractable as Upgradable;
         UpgradeChip upgradeItem = _playerCarryController.CurrentSingleItem as UpgradeChip;
 
-        bool didUpgrade = _playerCarryController.CurrentSingleItem is UpgradeChip ? upgradable.TryUpgrade(upgradeItem) : false;
+        bool didUpgrade = _playerCarryController.CurrentSingleItem is UpgradeChip ? upgradable.TryUpgrade(upgradeItem, _playerCarryController) : false;
 
         if (didUpgrade)
         {

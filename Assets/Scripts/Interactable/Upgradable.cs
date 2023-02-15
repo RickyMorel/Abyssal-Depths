@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Analytics;
+using UnityEngine.Playables;
 using static SaveData;
 
 public class Upgradable : Interactable
@@ -106,7 +107,7 @@ public class Upgradable : Interactable
         }
     }
 
-    public bool TryUpgrade(UpgradeChip upgradeChip)
+    public bool TryUpgrade(UpgradeChip upgradeChip, PlayerCarryController player)
     {
         //If the interactable is broken, return false
         if(TryGetComponent<InteractableHealth>(out InteractableHealth interactableHealth)) { if (interactableHealth.IsDead()) return false; }
@@ -127,11 +128,47 @@ public class Upgradable : Interactable
 
         if (!foundEmptySocket) { return false; }
 
+        if (!IsSameMkLevel(upgradeChip, player)) { return false; }
+
         _upgradeSockets[socketIndex] = upgradeChip;
 
         Upgrade(upgradeChip, socketIndex);
 
         return true;
+    }
+
+    private bool IsSameMkLevel(UpgradeChip newChip, PlayerCarryController player)
+    {
+        UpgradeChip firstChip = null;
+
+        foreach (UpgradeChip socket in _upgradeSockets)
+        {
+            if (socket != null) { firstChip = socket; break; }
+        }
+
+        if(firstChip == null) { return true; }
+
+        if(firstChip.Level == newChip.Level) { return true; }
+
+        StartCoroutine(PlayNotSameLevelAnim(newChip, player));
+
+        return false;
+    }
+
+    private IEnumerator PlayNotSameLevelAnim(UpgradeChip newChip, PlayerCarryController player)
+    {
+        if (TryGetComponent(out PlayableDirector playableDirector)) { playableDirector.Play(); }
+
+        PlaceChip(newChip, 1);
+        //Disable and enable chip to give illusion that the player placed it in the upgradable
+        player.CurrentSingleObjInstance.SetActive(false);
+
+        yield return new WaitForSeconds(1f);
+
+        GameObject tempChip = _chipInstances[1];
+        _chipInstances.Remove(tempChip);
+        Destroy(tempChip);
+        player.CurrentSingleObjInstance.SetActive(true);
     }
 
     public void LoadUpgrade(UpgradeChip upgradeChip, int socketIndex)

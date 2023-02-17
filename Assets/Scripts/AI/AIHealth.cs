@@ -55,7 +55,15 @@ public class AIHealth : PlayerHealth
         _rb.isKinematic = false;
         _rb.useGravity = true;
 
+        SpawnAmmoPickup();
+
         Invoke(nameof(DisableSelf), 10f);
+    }
+
+    private void SpawnAmmoPickup()
+    {
+        GameObject ammoPickupInstance = Instantiate(GameAssetsManager.Instance.AmmoPickup, transform.position, Quaternion.identity);
+        ammoPickupInstance.GetComponent<AmmoPickup>().AssignAmmoType(ChipType.Laser);
     }
 
     public override void Hurt(DamageType damageType)

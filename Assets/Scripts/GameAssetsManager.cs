@@ -11,6 +11,7 @@ public class GameAssetsManager : MonoBehaviour
     [SerializeField] private GameObject _repairCostsCanvas;
     [SerializeField] private GameObject _chipPickup;
     [SerializeField] private GameObject _deathLootPickup;
+    [SerializeField] private GameObject _ammoPickup;
     [SerializeField] private GameObject _upgradeParticles;
     [SerializeField] private GameObject _electricParticles;
     [SerializeField] private GameObject _fireParticles;
@@ -33,6 +34,7 @@ public class GameAssetsManager : MonoBehaviour
     public GameObject RepairCostsCanvas => _repairCostsCanvas;
     public GameObject ChipPickup => _chipPickup;
     public GameObject DeathLootPickup => _deathLootPickup;
+    public GameObject AmmoPickup => _ammoPickup;
     public GameObject UpgradeParticles => _upgradeParticles;
     public GameObject ElectricParticles => _electricParticles;
     public GameObject FireParticles => _fireParticles;

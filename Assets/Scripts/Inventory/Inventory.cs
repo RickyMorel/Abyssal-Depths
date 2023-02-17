@@ -60,6 +60,8 @@ public abstract class Inventory : MonoBehaviour
 
     private void DestroyItemsUI()
     {
+        if(_contentTransform == null) { return; }
+
         foreach (Transform child in _contentTransform)
         {
             if(child == _contentTransform) { continue; }

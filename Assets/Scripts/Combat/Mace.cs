@@ -33,7 +33,7 @@ public class Mace : WeaponShoot
     {
         _rb = _maceHead.GetComponent<Rigidbody>();
         _attackHitBox = _maceHead.GetComponent<AttackHitBox>();
-
+        
         _attackHitBox.OnHit += HandleHitParticles;
     }
 

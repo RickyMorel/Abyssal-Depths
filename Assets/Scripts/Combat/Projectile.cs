@@ -76,8 +76,8 @@ public class Projectile : MonoBehaviour
 
         _chipClass = _chipDataSO.GetChipType(_damageType);
         _chipDataSO.GetWeaknessAndResistance(_chipClass, out _weakness, out _resistance);
-        _damage = _chipDataSO.GetDamageFromChip(_chipClass);
-        _secondaryValue = _chipDataSO.GetSecondaryValueFromChip(_chipClass);
+        _damage = _chipDataSO.GetDamageFromChip(_chipClass, _weapon.ChipLevel);
+        _secondaryValue = _chipDataSO.GetSecondaryValueFromChip(_chipClass, _weapon.ChipLevel);
 
         if (_damageType == DamageType.Electric || _damageType == DamageType.Fire) { _impactDamage = _chipDataSO.GetImpactDamageFromChip(_chipClass); }
         if(_damageType == DamageType.Fire || _damageType == DamageType.Laser) { _additionalValue = _chipDataSO.GetAdditionalValueFromChip(_chipClass); }

@@ -20,6 +20,7 @@ public class AttackHitBox : MonoBehaviour
     private ChipDataSO _chipDataSO;
     private DamageType _damageType = DamageType.Base;
     private int _damage;
+    private Weapon _weapon;
 
     #endregion
 
@@ -84,7 +85,7 @@ public class AttackHitBox : MonoBehaviour
 
     private void CalculateDamage(Damageable health)
     {
-        if (_mace.rb.velocity.x <= _mace.MaxMovementSpeed / 2 && _mace.rb.velocity.y < _mace.MaxMovementSpeed / 2) { _damage = _chipDataSO.GetDamageFromChip(_chipClass); health.Damage(_damage, _damageType); }
-        else { _damage = (int)_chipDataSO.GetSecondaryValueFromChip(_chipClass); health.Damage(_damage, _damageType); }
+        if (_mace.rb.velocity.x <= _mace.MaxMovementSpeed / 2 && _mace.rb.velocity.y < _mace.MaxMovementSpeed / 2) { _damage = _chipDataSO.GetDamageFromChip(_chipClass, _weapon.ChipLevel); health.Damage(_damage, _damageType); }
+        else { _damage = (int)_chipDataSO.GetSecondaryValueFromChip(_chipClass, _weapon.ChipLevel); health.Damage(_damage, _damageType); }
     }
 }

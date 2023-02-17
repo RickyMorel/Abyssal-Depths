@@ -80,7 +80,7 @@ public class ShipHealth : Damageable
         if (_rb.velocity.magnitude < _minCrashSpeed) { return; }
 
         _currentDamage = (int)CalculateCrashDamage();
-        Damage((int)_currentDamage, DamageType.Base);
+        Damage((int)_currentDamage, (Collider)null, DamageType.Base, false);
         if (other.TryGetComponent<AIHealth>(out AIHealth enemyHealth)) { enemyHealth.Damage((int)_currentDamage); }
 
         float currentSpeedPercentage = _rb.velocity.magnitude / Ship.Instance.TopSpeed;
@@ -93,7 +93,7 @@ public class ShipHealth : Damageable
         GameObject shipCrashParticles = Instantiate(Ship.Instance.ShipStatsSO.ShipCrashParticles.gameObject, hitPos, Quaternion.identity);
     }
 
-    public override void Damage(int damage, DamageType damageType = DamageType.None, bool isDamageChain = false, Collider instigatorCollider = null)
+    public override void Damage(int damage, Collider instigatorCollider, DamageType damageType = DamageType.None,  bool isDamageChain = false)
     {
         base.Damage(damage, damageType, isDamageChain);
 

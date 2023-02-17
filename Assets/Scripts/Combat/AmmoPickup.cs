@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.iOS;
 
 public class AmmoPickup : MonoBehaviour
 {
@@ -27,24 +28,35 @@ public class AmmoPickup : MonoBehaviour
         Pickup();
     }
 
-    public void AssignAmmoType(ChipType chipType)
+    public void AssignAmmoType(DamageType damageType, Weapon weapon)
     {
-        Debug.Log("AssignAmmoType: " + chipType);
+        ChipType wantedChipType = weapon.UpgradeSockets[0] != null ? weapon.UpgradeSockets[0].ChipType : ChipType.None;
         Color wantedColor = _baseAmmoColor;
 
-        switch (chipType)
+        //if weapon has both chips, pick an ammo type
+        if (weapon.UpgradeSockets[1] != null)
         {
-            case ChipType.Base:
+            int randomAmmo = Random.Range(0, 2);
+            wantedChipType = weapon.UpgradeSockets[randomAmmo].ChipType;
+        }
+
+        switch (damageType)
+        {
+            case DamageType.Base:
                 wantedColor = _baseAmmoColor;
                 break;
-            case ChipType.Fire:
+            case DamageType.Fire:
                 wantedColor = _fireAmmoColor;
                 break;
-            case ChipType.Electric:
+            case DamageType.Electric:
                 wantedColor = _electricAmmoColor;
                 break;
-            case ChipType.Laser:
+            case DamageType.Laser:
                 wantedColor = _laserAmmoColor;
+                break;
+            default:
+                //if has no chips, then don't spawn ammo pickup
+                Destroy(gameObject);
                 break;
         }
 

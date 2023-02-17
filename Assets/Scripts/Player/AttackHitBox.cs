@@ -56,7 +56,7 @@ public class AttackHitBox : MonoBehaviour
 
         if (enemyHealth is ShipHealth)
         {
-            enemyHealth.Damage(20, DamageType.Base, false, _hitBox);
+            enemyHealth.Damage(20, _hitBox, DamageType.Base, false);
         }
     }
 }

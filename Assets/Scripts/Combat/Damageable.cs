@@ -56,6 +56,7 @@ public class Damageable : MonoBehaviour
 
     public event Action<int> OnUpdateHealth;
     public event Action<DamageType> OnDamaged;
+    public event Action<DamageType, Weapon> OnDamagedWithWeapon;
     public event Action OnDie;
 
     #endregion
@@ -91,7 +92,7 @@ public class Damageable : MonoBehaviour
 
         if (projectile.DestroyOnHit)
         {
-            Damage(projectile.Damage, projectile.DamageType, false);
+            Damage(projectile.Damage, projectile.WeaponReference, projectile.DamageType, false);
 
             if (projectile.ProjectileParticles != null) { projectile.ProjectileParticles.transform.SetParent(null); }
 
@@ -102,7 +103,7 @@ public class Damageable : MonoBehaviour
             _damageTimer += Time.deltaTime;
             if (_damageTimer >= projectile.DealDamageAfterSeconds)
             {
-                Damage(projectile.Damage, projectile.DamageType, false);
+                Damage(projectile.Damage, projectile.WeaponReference, projectile.DamageType, false);
                 _damageTimer = 0;
             }
         }
@@ -160,7 +161,18 @@ public class Damageable : MonoBehaviour
             Die();
     }
 
-    public virtual void Damage(int damage, DamageType damageType = DamageType.None, bool isDamageChain = false, Collider instigatorCollider = null)
+    public virtual void Damage(int damage, Weapon weapon, DamageType damageType = DamageType.None, bool isDamageChain = false)
+    {
+        Damage(damage, damageType, isDamageChain);
+        OnDamagedWithWeapon?.Invoke(damageType, weapon);
+    }
+
+    public virtual void Damage(int damage, Collider instigatorCollider, DamageType damageType = DamageType.None, bool isDamageChain = false)
+    {
+        Damage(damage, damageType, isDamageChain);
+    }
+
+    public virtual void Damage(int damage, DamageType damageType = DamageType.None, bool isDamageChain = false)
     {
         if (IsDead()) { return; }
 

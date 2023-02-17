@@ -17,6 +17,8 @@ public class AIHealth : PlayerHealth
     private GAgent _gAgent;
     private AIInteractionController _interactionController;
     private Rigidbody _rb;
+    private Weapon _currentInstigatorsWeapon;
+    private DamageType _lastDamageType;
 
     #endregion
 
@@ -37,16 +39,24 @@ public class AIHealth : PlayerHealth
         _rb = GetComponent<Rigidbody>();
 
         OnDamaged += Hurt;
+        OnDamagedWithWeapon += StoreInstigatorsWeapon;
         OnDie += HandleDead;
     }
 
     private void OnDestroy()
     {
         OnDamaged -= Hurt;
+        OnDamagedWithWeapon -= StoreInstigatorsWeapon;
         OnDie -= HandleDead;
     }
 
     #endregion
+
+    private void StoreInstigatorsWeapon(DamageType damageType, Weapon weapon)
+    {
+        _lastDamageType = damageType;
+        _currentInstigatorsWeapon = weapon;
+    }
 
     private void HandleDead()
     {
@@ -63,7 +73,7 @@ public class AIHealth : PlayerHealth
     private void SpawnAmmoPickup()
     {
         GameObject ammoPickupInstance = Instantiate(GameAssetsManager.Instance.AmmoPickup, transform.position, Quaternion.identity);
-        ammoPickupInstance.GetComponent<AmmoPickup>().AssignAmmoType(ChipType.Laser);
+        ammoPickupInstance.GetComponent<AmmoPickup>().AssignAmmoType(_lastDamageType, _currentInstigatorsWeapon);
     }
 
     public override void Hurt(DamageType damageType)

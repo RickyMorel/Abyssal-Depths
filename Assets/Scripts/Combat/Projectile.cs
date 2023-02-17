@@ -11,6 +11,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] protected float _dealDamageAfterSeconds = 0;
     [SerializeField] protected DamageType _damageType;
+    [ColorUsageAttribute(false, true), SerializeField] private Color _laserHeatColor;
 
     #endregion
 
@@ -28,6 +29,7 @@ public class Projectile : MonoBehaviour
     protected float _secondaryValue;
     protected float _impactDamage;
     protected float _additionalValue;
+    private Renderer[] _renderers;
 
     #endregion
 

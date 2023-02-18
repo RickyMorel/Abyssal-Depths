@@ -17,6 +17,7 @@ public class WeaponShoot : MonoBehaviour
     public virtual void Start()
     {
         _weapon = GetComponentInParent<Weapon>();
+        //Hacer funcion, usar de Weapon el upgrade socket
     }
 
     public virtual void Update()

@@ -96,8 +96,9 @@ public class Damageable : MonoBehaviour
         if (projectile.DestroyOnHit)
         {
             _projectile = projectile;
-
+            //
             if (projectile.DamageType == DamageType.Base || projectile.DamageType == DamageType.Laser) { Damage(projectile.Damage, projectile.DamageType, false); }
+            //
             else { Damage((int)projectile.ImpactDamage, projectile.DamageType, false); }
 
             if (projectile.ProjectileParticles != null) { projectile.ProjectileParticles.transform.SetParent(null); }

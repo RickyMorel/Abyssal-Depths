@@ -10,6 +10,7 @@ public class ChipDataSO : ScriptableObject
     public FireChip FireData;
     public ElectricChip ElectricData;
     public LaserChip LaserData;
+
     public int GetDamageFromChip(BasicChip chipClass, int chipLevel)
     {
         if (chipClass is BaseChip)
@@ -66,7 +67,7 @@ public class ChipDataSO : ScriptableObject
         }
         return -1;
     }
-
+    //cringe
     public float GetSecondaryValueFromChip(BasicChip chipClass, int chipLevel)
     {
         if (chipClass is BaseChip)

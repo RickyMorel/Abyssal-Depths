@@ -11,7 +11,7 @@ public class ChipDataSO : ScriptableObject
     public ElectricChip ElectricData;
     public LaserChip LaserData;
 
-    public int GetDamageFromChip(BasicChip chipClass, int chipLevel)
+    public int GetDamageFromChip(BasicChip chipClass, int chipLevel, int selectedDamage)
     {
         if (chipClass is BaseChip)
         {
@@ -19,11 +19,11 @@ public class ChipDataSO : ScriptableObject
             switch (chipLevel)
             {
                 case 1:
-                    return (int)baseChip.MK1Damages[0];
+                    return (int)baseChip.MK1Damages[selectedDamage];
                 case 2:
-                    return (int)baseChip.MK2Damages[0];
+                    return (int)baseChip.MK2Damages[selectedDamage];
                 case 3:
-                    return (int)baseChip.MK3Damages[0];
+                    return (int)baseChip.MK3Damages[selectedDamage];
             }
         }
         if (chipClass is FireChip)
@@ -32,11 +32,11 @@ public class ChipDataSO : ScriptableObject
             switch (chipLevel)
             {
                 case 1:
-                    return (int)fireChip.MK1Damages[0];
+                    return (int)fireChip.MK1Damages[selectedDamage];
                 case 2:
-                    return (int)fireChip.MK2Damages[0];
+                    return (int)fireChip.MK2Damages[selectedDamage];
                 case 3:
-                    return (int)fireChip.MK3Damages[0];
+                    return (int)fireChip.MK3Damages[selectedDamage];
             }
         }
         if (chipClass is ElectricChip)
@@ -45,11 +45,11 @@ public class ChipDataSO : ScriptableObject
             switch (chipLevel)
             {
                 case 1:
-                    return (int)electricChip.MK1Damages[0];
+                    return (int)electricChip.MK1Damages[selectedDamage];
                 case 2:
-                    return (int)electricChip.MK2Damages[0];
+                    return (int)electricChip.MK2Damages[selectedDamage];
                 case 3:
-                    return (int)electricChip.MK3Damages[0];
+                    return (int)electricChip.MK3Damages[selectedDamage];
             }
         }
         if (chipClass is LaserChip)
@@ -58,68 +58,11 @@ public class ChipDataSO : ScriptableObject
             switch (chipLevel)
             {
                 case 1:
-                    return (int)laserChip.MK1Damages[0];
+                    return (int)laserChip.MK1Damages[selectedDamage];
                 case 2:
-                    return (int)laserChip.MK2Damages[0];
+                    return (int)laserChip.MK2Damages[selectedDamage];
                 case 3:
-                    return (int)laserChip.MK3Damages[0];
-            }
-        }
-        return -1;
-    }
-    //cringe
-    public float GetSecondaryValueFromChip(BasicChip chipClass, int chipLevel)
-    {
-        if (chipClass is BaseChip)
-        {
-            BaseChip baseChip = chipClass as BaseChip;
-            switch (chipLevel)
-            {
-                case 1:
-                    return (int)baseChip.MK1Damages[1];
-                case 2:
-                    return (int)baseChip.MK2Damages[1];
-                case 3:
-                    return (int)baseChip.MK3Damages[1];
-            }
-        }
-        if (chipClass is FireChip)
-        {
-            FireChip fireChip = chipClass as FireChip;
-            switch (chipLevel)
-            {
-                case 1:
-                    return (int)fireChip.MK1Damages[1];
-                case 2:
-                    return (int)fireChip.MK2Damages[1];
-                case 3:
-                    return (int)fireChip.MK3Damages[1];
-            }
-        }
-        if (chipClass is ElectricChip)
-        {
-            ElectricChip electricChip = chipClass as ElectricChip;
-            switch (chipLevel)
-            {
-                case 1:
-                    return (int)electricChip.MK1Damages[1];
-                case 2:
-                    return (int)electricChip.MK2Damages[1];
-                case 3:
-                    return (int)electricChip.MK3Damages[1];
-            }
-        }
-        if (chipClass is LaserChip)
-        {
-            LaserChip laserChip = chipClass as LaserChip;
-            switch (chipLevel)
-            {
-                case 1:
-                    return (int)laserChip.MK1Damages[1];
-                case 2:
-                    return (int)laserChip.MK2Damages[1];
-                case 3:
-                    return (int)laserChip.MK3Damages[1];
+                    return (int)laserChip.MK3Damages[selectedDamage];
             }
         }
         return -1;

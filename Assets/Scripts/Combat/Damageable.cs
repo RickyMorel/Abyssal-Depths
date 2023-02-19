@@ -168,13 +168,13 @@ public class Damageable : MonoBehaviour
             Die();
     }
 
-    public virtual void Damage(int damage, DamageType damageType = DamageType.None, bool damageOnHit = false, bool isDamageChain = false, Collider instigatorCollider = null)
+    public virtual void Damage(int damage, DamageType damageType = DamageType.None, bool isDamageChain = false, Collider instigatorCollider = null)
     {
         if (IsDead()) { return; }
 
         float finalDamage = 0;
 
-        if (damageType == DamageType.None || damageOnHit)
+        if (damageType == DamageType.None)
         {
             finalDamage = damage;
         }
@@ -238,7 +238,7 @@ public class Damageable : MonoBehaviour
 
     private int DamageTypesSelector(DamageType damageType, bool isResistant, bool isWeak, int finalDamage, bool isDamageChain)
     {
-        if (DamageType.Electric == damageType) { ElectricDamage(isDamageChain, isResistant, isWeak); }
+        if (DamageType.Electric == damageType) { finalDamage = ElectricDamage(isDamageChain, isResistant, isWeak); }
 
         if (DamageType.Fire == damageType){ FireDamage(isResistant, isWeak); }
 
@@ -296,13 +296,11 @@ public class Damageable : MonoBehaviour
         _fireRoutine = StartCoroutine(Afterburn(fireDamage));
     }
 
-    private void ElectricDamage(bool isDamageChain, bool isResistant, bool isWeak)
+    private int ElectricDamage(bool isDamageChain, bool isResistant, bool isWeak)
     {
         int electricDamage = CalculateDamageForTypes(isResistant, isWeak);
 
-        if (electricDamage == 0) { return; }
-
-        if (_isBeingElectrocuted && isDamageChain) { return; }
+        if (_isBeingElectrocuted && isDamageChain) { return 0; }
 
         _isBeingElectrocuted = true;
 
@@ -314,12 +312,14 @@ public class Damageable : MonoBehaviour
         {
             if (!hitCollider.TryGetComponent(out Damageable damageable)) { continue; }
 
-            damageable.Damage(electricDamage, DamageType.Electric, true, true);
+            damageable.Damage(electricDamage, DamageType.Electric, true);
         }
 
         if (_electricRoutine != null) { StopCoroutine(_electricRoutine); }
 
         _electricRoutine = StartCoroutine(ElectricParalysis(baseStateMachine));
+
+        return electricDamage;
     }
 
     private int BaseDamage(bool isResistant, bool isWeak)

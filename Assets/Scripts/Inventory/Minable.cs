@@ -35,7 +35,7 @@ public class Minable : Lootable
 
         _currentHealth -= damage;
 
-        DamagePopup.Create(transform.position, (int)damage, true);
+        DamagePopup.Create(transform.position, (int)damage, DamageType.None, true);
 
         CheckIfBreak();
     }

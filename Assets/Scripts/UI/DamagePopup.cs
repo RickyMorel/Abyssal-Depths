@@ -13,6 +13,7 @@ public class DamagePopup : MonoBehaviour
     [SerializeField] private Color _electricColor;
     [SerializeField] private Color _laserColor;
     [SerializeField] private Color _normalTextColor;
+    [SerializeField] private Color _criticalTextColor;
 
     #endregion
 
@@ -85,22 +86,17 @@ public class DamagePopup : MonoBehaviour
 
     public void Setup(int damageAmount, DamageType damageType, bool isCriticalHit, bool isSmall)
     {
-        isCriticalHit = true;
+        isCriticalHit = UnityEngine.Random.Range(0, 4) == 1 ? true : false;
         _damageText.text = damageAmount.ToString();
         float fontDivider = isSmall ? 3.5f : 1f;
-        _damageText.fontSize = isCriticalHit ? 45 / fontDivider : 36 / fontDivider;
+        _damageText.fontSize = isCriticalHit ? 80 / fontDivider : 40 / fontDivider;
         _disappearTimer = DISSAPEAR_TIMER_MAX;
         _moveVector = new Vector3(1, 1) * 30f;
         _sortingOrder++;
         _damageText.sortingOrder = _sortingOrder;
 
-        if (isCriticalHit)
-        {
-            _damageText.fontStyle = FontStyles.Bold;
-            _damageText.fontStyle = FontStyles.Italic;
-        }
+        if (isCriticalHit) { _damageText.fontStyle = FontStyles.Bold | FontStyles.Italic; }
         _textColor = _normalTextColor;
-        float critialColorMultiplier = isCriticalHit ? 1f : 1f;
 
         switch (damageType)
         {
@@ -118,7 +114,7 @@ public class DamagePopup : MonoBehaviour
                 break;
         }
 
-        Color finalColor = _textColor * critialColorMultiplier;
+        Color finalColor = isCriticalHit ? _criticalTextColor : _textColor;
         finalColor.a = 1f;
         _damageText.color = finalColor;
     }

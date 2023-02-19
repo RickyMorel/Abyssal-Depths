@@ -168,11 +168,16 @@ public class Damageable : MonoBehaviour
             Die();
     }
 
-    public virtual void Damage(int damage, DamageType damageType = DamageType.None, bool isDamageChain = false, Collider instigatorCollider = null)
+    public virtual void Damage(int damage, DamageType damageType = DamageType.None, bool damageOnHit = false, bool isDamageChain = false, Collider instigatorCollider = null)
     {
         if (IsDead()) { return; }
 
-        float finalDamage = damage;
+        float finalDamage = 0;
+
+        if (damageType == DamageType.None || damageOnHit)
+        {
+            finalDamage = damage;
+        }
 
         bool isWeak = false;
         bool isResistant = false;
@@ -195,7 +200,7 @@ public class Damageable : MonoBehaviour
 
         OnDamaged?.Invoke(damageType);
 
-        DamagePopup.Create(transform.position, (int)finalDamage, isWeak);
+        if(finalDamage != 0) { DamagePopup.Create(transform.position, (int)finalDamage, isWeak); }
 
         if (_damageParticles != null && damageType != DamageType.None) { _damageParticles.Play(); }
 
@@ -233,30 +238,28 @@ public class Damageable : MonoBehaviour
 
     private int DamageTypesSelector(DamageType damageType, bool isResistant, bool isWeak, int finalDamage, bool isDamageChain)
     {
-        if (DamageType.Electric == damageType) { ElectricDamage(isDamageChain); }
+        if (DamageType.Electric == damageType) { ElectricDamage(isDamageChain, isResistant, isWeak); }
 
         if (DamageType.Fire == damageType){ FireDamage(isResistant, isWeak); }
 
         if (DamageType.Laser == damageType) { finalDamage = LaserDamage(isResistant, isWeak, finalDamage); }
+
+        if (DamageType.Base == damageType) { finalDamage = BaseDamage(isResistant, isWeak); }
 
         return finalDamage;
     }
 
     private int LaserDamage(bool isResistant, bool isWeak, int finalDamage)
     {
-        int laserDamage = 0;
+        int laserDamage = CalculateDamageForTypes(isResistant, isWeak);
+
+        if (laserDamage == 0) { return finalDamage; }
+
+        laserDamage = laserDamage * (int)_laserLevel;
 
         _laserLevel = Mathf.Clamp(_laserLevel + 0.3f, 0f, 5f);
 
         _timeSinceLastLaserShot = 0;
-
-        if ((!isResistant && !isWeak) || (isResistant && isWeak)) { laserDamage = 8 * (int)_laserLevel; }
-
-        if (isResistant && !isWeak) { laserDamage = 4 * (int)_laserLevel; }
-
-        if (isWeak && !isResistant) { laserDamage = 12 * (int)_laserLevel; }
-
-        if (laserDamage == 0) { return finalDamage; }
 
         finalDamage = finalDamage + laserDamage;
 
@@ -281,31 +284,29 @@ public class Damageable : MonoBehaviour
 
     private void FireDamage(bool isResistant, bool isWeak)
     {
-        if (DoesShowDamageParticles()) { _fireParticles.Play(); }
-
-        float fireDamage = _projectile.Damage;
-
-        if ((!isResistant && !isWeak) || (isResistant && isWeak)) { fireDamage = _projectile.Damage; }
-
-        if (isResistant && !isWeak) { fireDamage = fireDamage / _projectile.Resistance; }
-
-        if (isWeak && !isResistant) { fireDamage = fireDamage * _projectile.Weakness; }
+        int fireDamage = CalculateDamageForTypes(isResistant, isWeak);
 
         if (fireDamage == 0) { return; }
+
+        if (DoesShowDamageParticles()) { _fireParticles.Play(); }
 
         if (_fireRoutine != null) { StopCoroutine(_fireRoutine); }
 
         _timer = 0;
-        _fireRoutine = StartCoroutine(Afterburn((int)fireDamage));
+        _fireRoutine = StartCoroutine(Afterburn(fireDamage));
     }
 
-    private void ElectricDamage(bool isDamageChain)
+    private void ElectricDamage(bool isDamageChain, bool isResistant, bool isWeak)
     {
+        int electricDamage = CalculateDamageForTypes(isResistant, isWeak);
+
+        if (electricDamage == 0) { return; }
+
         if (_isBeingElectrocuted && isDamageChain) { return; }
 
         _isBeingElectrocuted = true;
 
-        if (TryGetComponent<BaseStateMachine>(out BaseStateMachine baseStateMachine)) { baseStateMachine.CanMove = false; }
+        if (TryGetComponent(out BaseStateMachine baseStateMachine)) { baseStateMachine.CanMove = false; }
 
         //Electrocute all nearby enemies
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, 10f);
@@ -313,12 +314,18 @@ public class Damageable : MonoBehaviour
         {
             if (!hitCollider.TryGetComponent(out Damageable damageable)) { continue; }
 
-            damageable.Damage(_projectile.Damage, DamageType.Electric, true);
+            damageable.Damage(electricDamage, DamageType.Electric, true, true);
         }
 
         if (_electricRoutine != null) { StopCoroutine(_electricRoutine); }
 
         _electricRoutine = StartCoroutine(ElectricParalysis(baseStateMachine));
+    }
+
+    private int BaseDamage(bool isResistant, bool isWeak)
+    {
+        int baseDamage = CalculateDamageForTypes(isResistant, isWeak);
+        return baseDamage;
     }
 
     private IEnumerator Afterburn(int damage)
@@ -337,6 +344,17 @@ public class Damageable : MonoBehaviour
         if (!IsDead() && baseStateMachine != null) { baseStateMachine.CanMove = true; }
         _isBeingElectrocuted = false;
         _electricParticles.Stop();
+    }
+
+    private int CalculateDamageForTypes(bool isResistant, bool isWeak)
+    {
+        float damage = _projectile.Damage;
+
+        if (isResistant && !isWeak) { damage = damage / _projectile.Resistance; }
+
+        if (isWeak && !isResistant) { damage = damage * _projectile.Weakness; }
+
+        return (int)damage;
     }
 
     #endregion

@@ -93,7 +93,7 @@ public class ShipHealth : Damageable
         GameObject shipCrashParticles = Instantiate(Ship.Instance.ShipStatsSO.ShipCrashParticles.gameObject, hitPos, Quaternion.identity);
     }
 
-    public override void Damage(int damage, DamageType damageType = DamageType.None, bool isDamageChain = false, Collider instigatorCollider = null)
+    public override void Damage(int damage, DamageType damageType = DamageType.None, bool damageOnHit = false, bool isDamageChain = false, Collider instigatorCollider = null)
     {
         base.Damage(damage, damageType, isDamageChain);
 

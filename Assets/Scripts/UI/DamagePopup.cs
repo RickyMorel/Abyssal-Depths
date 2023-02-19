@@ -8,8 +8,11 @@ public class DamagePopup : MonoBehaviour
 {
     #region Editor Fields
 
+    [SerializeField] private Color _baseColor;
+    [SerializeField] private Color _fireColor;
+    [SerializeField] private Color _electricColor;
+    [SerializeField] private Color _laserColor;
     [SerializeField] private Color _normalTextColor;
-    [SerializeField] private Color _criticalTextColor;
 
     #endregion
 
@@ -28,11 +31,11 @@ public class DamagePopup : MonoBehaviour
 
     #region Public Properties
 
-    public static DamagePopup Create(Vector3 position, int damage, bool isCriticalHit, bool isSmall = true)
+    public static DamagePopup Create(Vector3 position, int damage, DamageType damageType, bool isCriticalHit, bool isSmall = true)
     {
         GameObject damagePopupObj = Instantiate(GameAssetsManager.Instance.DamagePopup, position, Quaternion.identity);
         DamagePopup damagePopup = damagePopupObj.GetComponent<DamagePopup>();
-        damagePopup.Setup((int)damage, isCriticalHit, isSmall);
+        damagePopup.Setup((int)damage, damageType, isCriticalHit, isSmall);
 
         return damagePopup;
     }
@@ -80,16 +83,43 @@ public class DamagePopup : MonoBehaviour
         if(_textColor.a < 0) { Destroy(gameObject); }
     }
 
-    public void Setup(int damageAmount, bool isCriticalHit, bool isSmall)
+    public void Setup(int damageAmount, DamageType damageType, bool isCriticalHit, bool isSmall)
     {
+        isCriticalHit = true;
         _damageText.text = damageAmount.ToString();
         float fontDivider = isSmall ? 3.5f : 1f;
         _damageText.fontSize = isCriticalHit ? 45 / fontDivider : 36 / fontDivider;
-        _textColor = isCriticalHit ? _criticalTextColor : _normalTextColor;
-        _damageText.color = _textColor;
         _disappearTimer = DISSAPEAR_TIMER_MAX;
         _moveVector = new Vector3(1, 1) * 30f;
         _sortingOrder++;
         _damageText.sortingOrder = _sortingOrder;
+
+        if (isCriticalHit)
+        {
+            _damageText.fontStyle = FontStyles.Bold;
+            _damageText.fontStyle = FontStyles.Italic;
+        }
+        _textColor = _normalTextColor;
+        float critialColorMultiplier = isCriticalHit ? 1f : 1f;
+
+        switch (damageType)
+        {
+            case DamageType.Base:
+                _textColor = _baseColor;
+                break;
+            case DamageType.Fire:
+                _textColor = _fireColor;
+                break;
+            case DamageType.Electric:
+                _textColor = _electricColor ;
+                break;
+            case DamageType.Laser:
+                _textColor = _laserColor;
+                break;
+        }
+
+        Color finalColor = _textColor * critialColorMultiplier;
+        finalColor.a = 1f;
+        _damageText.color = finalColor;
     }
 }

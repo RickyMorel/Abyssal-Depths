@@ -96,10 +96,8 @@ public class Damageable : MonoBehaviour
         if (projectile.DestroyOnHit)
         {
             _projectile = projectile;
-            //
-            if (projectile.DamageType == DamageType.Base || projectile.DamageType == DamageType.Laser) { Damage(projectile.Damage, projectile.DamageType, false); }
-            //
-            else { Damage((int)projectile.ImpactDamage, projectile.DamageType, false); }
+            //LLamar 2 veces damage, a no ser que sean iguales
+            Damage(projectile.Damage, projectile.DamageType, false);
 
             if (projectile.ProjectileParticles != null) { projectile.ProjectileParticles.transform.SetParent(null); }
 
@@ -179,15 +177,13 @@ public class Damageable : MonoBehaviour
         bool isWeak = false;
         bool isResistant = false;
 
-        if (_resistanceType.Contains(damageType) && (damageType != DamageType.Fire || damageType != DamageType.Electric))
+        if (_resistanceType.Contains(damageType))
         { 
-            finalDamage = finalDamage / _projectile.Resistance;
             isResistant = true;
         }
 
-        if (_weaknessType.Contains(damageType) && (damageType != DamageType.Fire || damageType != DamageType.Electric))
+        if (_weaknessType.Contains(damageType))
         { 
-            finalDamage = finalDamage * _projectile.Weakness;
             isWeak = true;
         }
 

@@ -30,7 +30,8 @@ public class DamagePopup : MonoBehaviour
 
     public static DamagePopup Create(Vector3 position, int damage, bool isCriticalHit, bool isSmall = true)
     {
-        GameObject damagePopupObj = Instantiate(GameAssetsManager.Instance.DamagePopup, position, Quaternion.identity);
+        Vector3 offset = new Vector3(UnityEngine.Random.Range(-5f, 5f), UnityEngine.Random.Range(-5f, 5f), 0);
+        GameObject damagePopupObj = Instantiate(GameAssetsManager.Instance.DamagePopup, position + offset, Quaternion.identity);
         DamagePopup damagePopup = damagePopupObj.GetComponent<DamagePopup>();
         damagePopup.Setup((int)damage, isCriticalHit, isSmall);
 

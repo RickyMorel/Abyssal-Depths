@@ -199,11 +199,17 @@ public class ChipDataSO : ScriptableObject
         return -1;
     }
 
+    public float GetBonusFromChip(DamageType damageType)
+    {
+        return 0;
+    }
+
     #region Helper Classes
 
     [System.Serializable]
     public class BasicChip
     {
+        public float ImpactDamage;
         public float ShootAfterSeconds = 0.2f;
         public float DamageMultiplierWeakness;
         public float DamageMultiplierResistance;
@@ -218,14 +224,11 @@ public class ChipDataSO : ScriptableObject
         public Vector2 MK2Damages;
         [Tooltip("X is minimum damage, Y is maximum damage")]
         public Vector2 MK3Damages;
-
-
     }
 
     [System.Serializable]
     public class FireChip : BasicChip
     {
-        public float ImpactDamage;
         [Tooltip("X is for fire damage, Y is for burn time")]
         public Vector2 MK1Damages;
         [Tooltip("X is for fire damage, Y is for burn time")]
@@ -238,7 +241,6 @@ public class ChipDataSO : ScriptableObject
     [System.Serializable]
     public class ElectricChip : BasicChip
     {
-        public float ImpactDamage;
         [Tooltip("X is for electric damage, Y is for paralysis time")]
         public Vector2 MK1Damages;
         [Tooltip("X is for electric damage, Y is for paralysis time")]
@@ -257,6 +259,19 @@ public class ChipDataSO : ScriptableObject
         public Vector2 MK2Damages;
         [Tooltip("X is for max damage, Y is for time to reach that max damage")]
         public Vector2 MK3Damages;
+    }
+
+    [System.Serializable]
+    public class BonusDamages
+    {
+        [Tooltip("X is for max damage, Y is for time to reach that max damage")]
+        public int BaseBonus;
+        [Tooltip("X is for max damage, Y is for time to reach that max damage")]
+        public int FireBonus;
+        [Tooltip("X is for max damage, Y is for time to reach that max damage")]
+        public int ElectricBonus;
+        [Tooltip("X is for max damage, Y is for time to reach that max damage")]
+        public int LaserBonus;
     }
 
     #endregion

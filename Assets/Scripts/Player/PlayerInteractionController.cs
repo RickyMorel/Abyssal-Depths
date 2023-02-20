@@ -34,6 +34,7 @@ public class PlayerInteractionController : BaseInteractionController
 
         MoveDirection = _playerInput.MoveDirection;
         IsUsing = _playerInput.IsShooting;
+        IsUsing_2 = _playerInput.IsShooting_2;
     }
 
     private void OnDestroy()

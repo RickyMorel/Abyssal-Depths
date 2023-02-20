@@ -18,6 +18,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     private Vector2 _moveDirection;
     private bool _isShooting;
+    private bool _isShooting_2;
     private bool _canPlayerSpawn = false;
 
     #endregion
@@ -39,6 +40,7 @@ public class PlayerInputHandler : MonoBehaviour
     public Vector2 MoveDirection => _moveDirection;
    
     public bool IsShooting => _isShooting;
+    public bool IsShooting_2 => _isShooting_2;
 
     #endregion
 
@@ -77,6 +79,7 @@ public class PlayerInputHandler : MonoBehaviour
         Interact();
         Upgrade();
         Shoot();
+        Shoot2();
     }
 
     public void Move()
@@ -156,5 +159,12 @@ public class PlayerInputHandler : MonoBehaviour
         if (!IsPlayerActive) { return; }
 
         _isShooting = _player.GetButton("Shoot");
+    }
+
+    public void Shoot2()
+    {
+        if (!IsPlayerActive) { return; }
+
+        _isShooting_2 = _player.GetButton("Shoot2");
     }
 }

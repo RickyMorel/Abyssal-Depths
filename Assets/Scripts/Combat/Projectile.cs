@@ -10,7 +10,7 @@ public class Projectile : MonoBehaviour
 
     [SerializeField] private float _speed;
     [SerializeField] protected float _dealDamageAfterSeconds = 0;
-    [SerializeField] protected DamageType _damageType;
+    [SerializeField] protected DamageType[] _damageTypes;
     [ColorUsageAttribute(false, true), SerializeField] private Color _laserHeatColor;
 
     #endregion
@@ -22,13 +22,12 @@ public class Projectile : MonoBehaviour
     protected bool _destroyOnHit = true;
     protected Weapon _weapon;
     protected int _damage;
-    protected ChipDataSO.BasicChip _chipClass;
+    protected ChipDataSO.BasicChip[] _chipClass;
     protected ChipDataSO _chipDataSO;
-    protected float _weakness;
-    protected float _resistance;
-    protected float _secondaryValue;
-    protected float _impactDamage;
-    protected float _additionalValue;
+    protected float[] _weakness;
+    protected float[] _resistance;
+    protected float[] _secondaryValue;
+    protected float[] _additionalValue;
     private Renderer[] _renderers;
 
     #endregion
@@ -37,17 +36,16 @@ public class Projectile : MonoBehaviour
 
     public int Damage => _damage;
 
-    public DamageType DamageType => _damageType;
+    public DamageType[] DamageTypes => _damageTypes;
 
     public bool DestroyOnHit => _destroyOnHit;
 
     public float DealDamageAfterSeconds => _dealDamageAfterSeconds;
 
-    public float Weakness => _weakness;
-    public float Resistance => _resistance;
-    public float SecondaryValue => _secondaryValue;
-    public float ImpactDamage => _impactDamage;
-    public float AdditionalValue => _additionalValue;
+    public float[] Weakness => _weakness;
+    public float[] Resistance => _resistance;
+    public float[] SecondaryValue => _secondaryValue;
+    public float[] AdditionalValue => _additionalValue;
 
     #endregion
 
@@ -75,14 +73,17 @@ public class Projectile : MonoBehaviour
 
         _particles = GetComponentInChildren<ParticleSystem>();
         Invoke(nameof(DestroySelf), 4f);
-        //Si los dos tipos de daños son iguales o none, aplicar buffs
-        _chipClass = _chipDataSO.GetChipType(_damageType);
-        _chipDataSO.GetWeaknessAndResistance(_chipClass, out _weakness, out _resistance);
-        _damage = _chipDataSO.GetDamageFromChip(_chipClass, _weapon.ChipLevel, 0);
-        _secondaryValue = _chipDataSO.GetDamageFromChip(_chipClass, _weapon.ChipLevel, 1);
-        _impactDamage = _chipDataSO.GetImpactDamageFromChip(_chipClass);
+        for (int i = 0; i < 2; i++)
+        {
+            _chipClass[i] = _chipDataSO.GetChipType(_damageTypes[i]);
+            _chipDataSO.GetWeaknessAndResistance(_chipClass[i], out _weakness[i], out _resistance[i]);
+            _damage = _chipDataSO.GetDamageFromChip(_chipClass[i], _weapon.ChipLevel, 0);
+            _secondaryValue[i] = _chipDataSO.GetDamageFromChip(_chipClass[i], _weapon.ChipLevel, 1);
 
-        if(_damageType == DamageType.Fire || _damageType == DamageType.Laser) { _additionalValue = _chipDataSO.GetAdditionalValueFromChip(_chipClass); }
+            if (_damageTypes[i] == DamageType.Fire || _damageTypes[i] == DamageType.Laser) { _additionalValue[i] = _chipDataSO.GetAdditionalValueFromChip(_chipClass[i]); }
+        }
+
+        if (_damageTypes[0] == _damageTypes[1]) { _chipDataSO.GetBonusFromChip(_damageTypes[0]); }
     }
 
     public void Initialize(string ownerTag)

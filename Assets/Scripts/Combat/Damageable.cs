@@ -97,7 +97,7 @@ public class Damageable : MonoBehaviour
         {
             _projectile = projectile;
             //LLamar 2 veces damage, a no ser que sean iguales
-            Damage(projectile.Damage, projectile.DamageType, false);
+            Damage(projectile.Damage, projectile.DamageTypes[0], false);
 
             if (projectile.ProjectileParticles != null) { projectile.ProjectileParticles.transform.SetParent(null); }
 
@@ -110,7 +110,7 @@ public class Damageable : MonoBehaviour
             _damageTimer += Time.deltaTime;
             if (_damageTimer >= projectile.DealDamageAfterSeconds)
             {
-                Damage(projectile.Damage, projectile.DamageType, false);
+                Damage(projectile.Damage, projectile.DamageTypes[0], false);
                 _damageTimer = 0;
             }
         }
@@ -330,9 +330,9 @@ public class Damageable : MonoBehaviour
 
     private IEnumerator Afterburn(int damage)
     {
-        while (_timer < _projectile.SecondaryValue)
+        while (_timer < _projectile.SecondaryValue[0])
         {
-            yield return new WaitForSeconds(_projectile.AdditionalValue);
+            yield return new WaitForSeconds(_projectile.AdditionalValue[0]);
             Damage(damage);
         }
     }
@@ -340,7 +340,7 @@ public class Damageable : MonoBehaviour
     private IEnumerator ElectricParalysis(BaseStateMachine baseStateMachine)
     {
         if (DoesShowDamageParticles()) { _electricParticles.Play(); }
-        yield return new WaitForSeconds(_projectile.SecondaryValue);
+        yield return new WaitForSeconds(_projectile.SecondaryValue[0]);
         if (!IsDead() && baseStateMachine != null) { baseStateMachine.CanMove = true; }
         _isBeingElectrocuted = false;
         _electricParticles.Stop();
@@ -350,9 +350,9 @@ public class Damageable : MonoBehaviour
     {
         float damage = _projectile.Damage;
 
-        if (isResistant && !isWeak) { damage = damage / _projectile.Resistance; }
+        if (isResistant && !isWeak) { damage = damage / _projectile.Resistance[0]; }
 
-        if (isWeak && !isResistant) { damage = damage * _projectile.Weakness; }
+        if (isWeak && !isResistant) { damage = damage * _projectile.Weakness[0]; }
 
         return (int)damage;
     }

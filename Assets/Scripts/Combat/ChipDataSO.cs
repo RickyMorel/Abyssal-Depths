@@ -112,21 +112,6 @@ public class ChipDataSO : ScriptableObject
         return;
     }
 
-    public float GetImpactDamageFromChip(BasicChip chipClass)
-    {
-        if (chipClass is FireChip)
-        {
-            FireChip fireChip = chipClass as FireChip;
-            return fireChip.ImpactDamage;
-        }
-        if (chipClass is ElectricChip)
-        {
-            ElectricChip electricChip = chipClass as ElectricChip;
-            return electricChip.ImpactDamage;
-        }
-        return -1;
-    }
-
     public float GetAdditionalValueFromChip(BasicChip chipClass)
     {
         if (chipClass is FireChip)
@@ -142,9 +127,61 @@ public class ChipDataSO : ScriptableObject
         return -1;
     }
 
-    public float GetBonusFromChip(DamageType damageType)
+    public float GetBonusFromChip(BasicChip chipClass, int chipLevel)
     {
-        return 0;
+        if (chipClass is BaseChip)
+        {
+            BaseChip baseChip = chipClass as BaseChip;
+            switch (chipLevel)
+            {
+                case 1:
+                    return (int)baseChip.MK1Damages[selectedDamage];
+                case 2:
+                    return (int)baseChip.MK2Damages[selectedDamage];
+                case 3:
+                    return (int)baseChip.MK3Damages[selectedDamage];
+            }
+        }
+        if (chipClass is FireChip)
+        {
+            FireChip fireChip = chipClass as FireChip;
+            switch (chipLevel)
+            {
+                case 1:
+                    return (int)fireChip.MK1Damages[selectedDamage];
+                case 2:
+                    return (int)fireChip.MK2Damages[selectedDamage];
+                case 3:
+                    return (int)fireChip.MK3Damages[selectedDamage];
+            }
+        }
+        if (chipClass is ElectricChip)
+        {
+            ElectricChip electricChip = chipClass as ElectricChip;
+            switch (chipLevel)
+            {
+                case 1:
+                    return (int)electricChip.MK1Damages[selectedDamage];
+                case 2:
+                    return (int)electricChip.MK2Damages[selectedDamage];
+                case 3:
+                    return (int)electricChip.MK3Damages[selectedDamage];
+            }
+        }
+        if (chipClass is LaserChip)
+        {
+            LaserChip laserChip = chipClass as LaserChip;
+            switch (chipLevel)
+            {
+                case 1:
+                    return (int)laserChip.MK1Damages[selectedDamage];
+                case 2:
+                    return (int)laserChip.MK2Damages[selectedDamage];
+                case 3:
+                    return (int)laserChip.MK3Damages[selectedDamage];
+            }
+        }
+        return -1;
     }
 
     #region Helper Classes

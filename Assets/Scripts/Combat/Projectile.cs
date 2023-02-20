@@ -83,7 +83,7 @@ public class Projectile : MonoBehaviour
             if (_damageTypes[i] == DamageType.Fire || _damageTypes[i] == DamageType.Laser) { _additionalValue[i] = _chipDataSO.GetAdditionalValueFromChip(_chipClass[i]); }
         }
 
-        if (_damageTypes[0] == _damageTypes[1]) { _chipDataSO.GetBonusFromChip(_chipClass[0], _weapon.ChipLevel, _damage[0], _secondaryValue[0], _additionalValue); }
+        if (_damageTypes[0] == _damageTypes[1]) { _chipDataSO.GetBonusFromChip(_chipClass[0], ref _damage[0], ref _secondaryValue[0], ref _additionalValue[0]); }
     }
 
     public void Initialize(string ownerTag)

@@ -96,8 +96,11 @@ public class Damageable : MonoBehaviour
         if (projectile.DestroyOnHit)
         {
             _projectile = projectile;
-            //LLamar 2 veces damage, a no ser que sean iguales
-            Damage(projectile.Damage, projectile.DamageTypes[0], false);
+
+            if (projectile.DamageTypes[0] == projectile.DamageTypes[1])
+            {
+                Damage(projectile.Damage[0], projectile.DamageTypes[0], false);
+            }
 
             if (projectile.ProjectileParticles != null) { projectile.ProjectileParticles.transform.SetParent(null); }
 
@@ -110,7 +113,7 @@ public class Damageable : MonoBehaviour
             _damageTimer += Time.deltaTime;
             if (_damageTimer >= projectile.DealDamageAfterSeconds)
             {
-                Damage(projectile.Damage, projectile.DamageTypes[0], false);
+                Damage(projectile.Damage[0], projectile.DamageTypes[0], false);
                 _damageTimer = 0;
             }
         }
@@ -168,7 +171,7 @@ public class Damageable : MonoBehaviour
             Die();
     }
 
-    public virtual void Damage(int damage, DamageType damageType = DamageType.None, bool isDamageChain = false, Collider instigatorCollider = null)
+    public virtual void Damage(int damage, DamageType damageType = DamageType.None, bool isDamageChain = false, Collider instigatorCollider = null, int index = 0)
     {
         if (IsDead()) { return; }
 
@@ -192,7 +195,7 @@ public class Damageable : MonoBehaviour
             isWeak = true;
         }
 
-        finalDamage = DamageTypesSelector(damageType, isResistant, isWeak, (int)finalDamage, isDamageChain);
+        finalDamage = DamageTypesSelector(damageType, isResistant, isWeak, (int)finalDamage, isDamageChain, index);
 
         _currentHealth = Mathf.Clamp(_currentHealth - finalDamage, 0, _maxHealth);
 
@@ -236,22 +239,22 @@ public class Damageable : MonoBehaviour
         _electricParticles.Stop();
     }
 
-    private int DamageTypesSelector(DamageType damageType, bool isResistant, bool isWeak, int finalDamage, bool isDamageChain)
+    private int DamageTypesSelector(DamageType damageType, bool isResistant, bool isWeak, int finalDamage, bool isDamageChain, int index)
     {
-        if (DamageType.Electric == damageType) { finalDamage = ElectricDamage(isDamageChain, isResistant, isWeak); }
+        if (DamageType.Electric == damageType) { finalDamage = ElectricDamage(isDamageChain, isResistant, isWeak, index); }
 
-        if (DamageType.Fire == damageType){ FireDamage(isResistant, isWeak); }
+        if (DamageType.Fire == damageType){ FireDamage(isResistant, isWeak, index); }
 
-        if (DamageType.Laser == damageType) { finalDamage = LaserDamage(isResistant, isWeak, finalDamage); }
+        if (DamageType.Laser == damageType) { finalDamage = LaserDamage(isResistant, isWeak, finalDamage, index); }
 
-        if (DamageType.Base == damageType) { finalDamage = BaseDamage(isResistant, isWeak); }
+        if (DamageType.Base == damageType) { finalDamage = BaseDamage(isResistant, isWeak, index); }
 
         return finalDamage;
     }
 
-    private int LaserDamage(bool isResistant, bool isWeak, int finalDamage)
+    private int LaserDamage(bool isResistant, bool isWeak, int finalDamage, int index)
     {
-        int laserDamage = CalculateDamageForTypes(isResistant, isWeak);
+        int laserDamage = CalculateDamageForTypes(isResistant, isWeak, index);
 
         if (laserDamage == 0) { return finalDamage; }
 
@@ -282,9 +285,9 @@ public class Damageable : MonoBehaviour
         }
     }
 
-    private void FireDamage(bool isResistant, bool isWeak)
+    private void FireDamage(bool isResistant, bool isWeak, int index)
     {
-        int fireDamage = CalculateDamageForTypes(isResistant, isWeak);
+        int fireDamage = CalculateDamageForTypes(isResistant, isWeak, index);
 
         if (fireDamage == 0) { return; }
 
@@ -293,12 +296,12 @@ public class Damageable : MonoBehaviour
         if (_fireRoutine != null) { StopCoroutine(_fireRoutine); }
 
         _timer = 0;
-        _fireRoutine = StartCoroutine(Afterburn(fireDamage));
+        _fireRoutine = StartCoroutine(Afterburn(fireDamage, index));
     }
 
-    private int ElectricDamage(bool isDamageChain, bool isResistant, bool isWeak)
+    private int ElectricDamage(bool isDamageChain, bool isResistant, bool isWeak, int index)
     {
-        int electricDamage = CalculateDamageForTypes(isResistant, isWeak);
+        int electricDamage = CalculateDamageForTypes(isResistant, isWeak, index);
 
         if (_isBeingElectrocuted && isDamageChain) { return 0; }
 
@@ -317,42 +320,42 @@ public class Damageable : MonoBehaviour
 
         if (_electricRoutine != null) { StopCoroutine(_electricRoutine); }
 
-        _electricRoutine = StartCoroutine(ElectricParalysis(baseStateMachine));
+        _electricRoutine = StartCoroutine(ElectricParalysis(baseStateMachine, index));
 
         return electricDamage;
     }
 
-    private int BaseDamage(bool isResistant, bool isWeak)
+    private int BaseDamage(bool isResistant, bool isWeak, int index)
     {
-        int baseDamage = CalculateDamageForTypes(isResistant, isWeak);
+        int baseDamage = CalculateDamageForTypes(isResistant, isWeak, index);
         return baseDamage;
     }
 
-    private IEnumerator Afterburn(int damage)
+    private IEnumerator Afterburn(int damage, int index)
     {
-        while (_timer < _projectile.SecondaryValue[0])
+        while (_timer < _projectile.SecondaryValue[index])
         {
-            yield return new WaitForSeconds(_projectile.AdditionalValue[0]);
+            yield return new WaitForSeconds(_projectile.AdditionalValue[index]);
             Damage(damage);
         }
     }
 
-    private IEnumerator ElectricParalysis(BaseStateMachine baseStateMachine)
+    private IEnumerator ElectricParalysis(BaseStateMachine baseStateMachine, int index)
     {
         if (DoesShowDamageParticles()) { _electricParticles.Play(); }
-        yield return new WaitForSeconds(_projectile.SecondaryValue[0]);
+        yield return new WaitForSeconds(_projectile.SecondaryValue[index]);
         if (!IsDead() && baseStateMachine != null) { baseStateMachine.CanMove = true; }
         _isBeingElectrocuted = false;
         _electricParticles.Stop();
     }
 
-    private int CalculateDamageForTypes(bool isResistant, bool isWeak)
+    private int CalculateDamageForTypes(bool isResistant, bool isWeak, int index)
     {
-        float damage = _projectile.Damage;
+        float damage = _projectile.Damage[index];
 
-        if (isResistant && !isWeak) { damage = damage / _projectile.Resistance[0]; }
+        if (isResistant && !isWeak) { damage = damage / _projectile.Resistance[index]; }
 
-        if (isWeak && !isResistant) { damage = damage * _projectile.Weakness[0]; }
+        if (isWeak && !isResistant) { damage = damage * _projectile.Weakness[index]; }
 
         return (int)damage;
     }

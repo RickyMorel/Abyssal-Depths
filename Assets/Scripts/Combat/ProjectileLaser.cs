@@ -12,12 +12,12 @@ public class ProjectileLaser : Projectile
         {
             _chipClass[i] = _chipDataSO.GetChipType(_damageTypes[i]);
             _chipDataSO.GetWeaknessAndResistance(_chipClass[i], out _weakness[i], out _resistance[i]);
-            _damage = _chipDataSO.GetDamageFromChip(_chipClass[i], _weapon.ChipLevel, 0);
+            _damage[0] = _chipDataSO.GetDamageFromChip(_chipClass[i], _weapon.ChipLevel, 0);
             _secondaryValue[i] = _chipDataSO.GetDamageFromChip(_chipClass[i], _weapon.ChipLevel, 1);
 
             if (_damageTypes[i] == DamageType.Fire || _damageTypes[i] == DamageType.Laser) { _additionalValue[i] = _chipDataSO.GetAdditionalValueFromChip(_chipClass[i]); }
         }
-        if (_damageTypes[0] == _damageTypes[1]) { _chipDataSO.GetBonusFromChip(_damageTypes[0]); }
+        if (_damageTypes[0] == _damageTypes[1]) { _chipDataSO.GetBonusFromChip(_chipClass[0], ref _damage[0], ref _secondaryValue[0], ref _additionalValue[0]); }
 
         _particles = GetComponentInChildren<ParticleSystem>();
         _destroyOnHit = false;

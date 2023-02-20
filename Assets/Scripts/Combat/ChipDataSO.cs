@@ -124,64 +124,38 @@ public class ChipDataSO : ScriptableObject
             LaserChip laserChip = chipClass as LaserChip;
             return laserChip.TimeBetweenHits;
         }
-        return -1;
-    }
-
-    public float GetBonusFromChip(BasicChip chipClass, int chipLevel)
-    {
-        if (chipClass is BaseChip)
-        {
-            BaseChip baseChip = chipClass as BaseChip;
-            switch (chipLevel)
-            {
-                case 1:
-                    return (int)baseChip.MK1Damages[selectedDamage];
-                case 2:
-                    return (int)baseChip.MK2Damages[selectedDamage];
-                case 3:
-                    return (int)baseChip.MK3Damages[selectedDamage];
-            }
-        }
-        if (chipClass is FireChip)
-        {
-            FireChip fireChip = chipClass as FireChip;
-            switch (chipLevel)
-            {
-                case 1:
-                    return (int)fireChip.MK1Damages[selectedDamage];
-                case 2:
-                    return (int)fireChip.MK2Damages[selectedDamage];
-                case 3:
-                    return (int)fireChip.MK3Damages[selectedDamage];
-            }
-        }
         if (chipClass is ElectricChip)
         {
             ElectricChip electricChip = chipClass as ElectricChip;
-            switch (chipLevel)
-            {
-                case 1:
-                    return (int)electricChip.MK1Damages[selectedDamage];
-                case 2:
-                    return (int)electricChip.MK2Damages[selectedDamage];
-                case 3:
-                    return (int)electricChip.MK3Damages[selectedDamage];
-            }
+            return electricChip.StunRadius;
+        }
+        return -1;
+    }
+
+    public void GetBonusFromChip(BasicChip chipClass, ref int damage, ref float secondaryValue, ref float additionalValue)
+    {
+        if (chipClass is BaseChip)
+        {
+            damage = (int)(damage * 1.5f);
+            return;
+        }
+        if (chipClass is FireChip)
+        {
+            damage = damage * 2;
+            additionalValue = additionalValue / 2;
+            return;
+        }
+        if (chipClass is ElectricChip)
+        {
+            additionalValue = additionalValue * 1.1f;
+            return;
         }
         if (chipClass is LaserChip)
         {
-            LaserChip laserChip = chipClass as LaserChip;
-            switch (chipLevel)
-            {
-                case 1:
-                    return (int)laserChip.MK1Damages[selectedDamage];
-                case 2:
-                    return (int)laserChip.MK2Damages[selectedDamage];
-                case 3:
-                    return (int)laserChip.MK3Damages[selectedDamage];
-            }
+            secondaryValue = secondaryValue * 0.5f;
+            return;
         }
-        return -1;
+        return;
     }
 
     #region Helper Classes
@@ -227,6 +201,7 @@ public class ChipDataSO : ScriptableObject
         public Vector2 MK2Damages;
         [Tooltip("X is for electric damage, Y is for paralysis time")]
         public Vector2 MK3Damages;
+        public float StunRadius;
     }
 
     [System.Serializable]

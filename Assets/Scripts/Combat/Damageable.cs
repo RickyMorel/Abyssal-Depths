@@ -93,14 +93,14 @@ public class Damageable : MonoBehaviour
 
         if (IsOwnDamage(other)) { return; }
 
+        _projectile = projectile;
+
         if (projectile.DestroyOnHit)
         {
-            _projectile = projectile;
-
             Damage(projectile.Damage[0], projectile.DamageTypes[0]);
 
-            if (projectile.DamageTypes[0] != projectile.DamageTypes[1] && projectile.DamageTypes[1] != DamageType.None) { Damage(projectile.Damage[1], projectile.DamageTypes[1]); }
-            else if (projectile.DamageTypes[0] != projectile.DamageTypes[1] && projectile.DamageTypes[1] == DamageType.None) { Damage(projectile.Damage[1], projectile.DamageTypes[1]); }
+            if (projectile.DamageTypes[0] != projectile.DamageTypes[1] && projectile.DamageTypes[1] != DamageType.None) { Damage(projectile.Damage[1], projectile.DamageTypes[1], false, null, 1); }
+            else if (projectile.DamageTypes[0] != projectile.DamageTypes[1] && projectile.DamageTypes[1] == DamageType.None) { Damage(projectile.ImpactDamage, DamageType.None); }
 
             if (projectile.ProjectileParticles != null) { projectile.ProjectileParticles.transform.SetParent(null); }
 
@@ -108,12 +108,10 @@ public class Damageable : MonoBehaviour
         }
         else
         {
-            _projectile = projectile;
-
             _damageTimer += Time.deltaTime;
             if (_damageTimer >= projectile.DealDamageAfterSeconds)
             {
-                Damage(projectile.Damage[0], projectile.DamageTypes[0], false);
+                Damage(projectile.Damage[0], projectile.DamageTypes[0]);
                 _damageTimer = 0;
             }
         }

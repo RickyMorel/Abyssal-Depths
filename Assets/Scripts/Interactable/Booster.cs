@@ -27,14 +27,11 @@ public class Booster : RotationalInteractable
 
     private bool _isBoosting = false;
     private bool _isHovering = false;
-    [SerializeField] private bool _lockHovering = false;
-    [SerializeField] private bool _lockHoveringPressedOnce = false;
+    private bool _lockHovering = false;
     private int _currentGear = 0;
     private bool _recentlyChangedGear = false;
     private bool _isStuttering = false;
     private bool _canStutter = true;
-
-    [SerializeField] private float _timeSinceLastHoverPress;
 
     #endregion
 
@@ -71,8 +68,6 @@ public class Booster : RotationalInteractable
     public override void Update()
     {
         base.Update();
-
-        _timeSinceLastHoverPress += Time.deltaTime;
 
         if(CanUse == false) { return; }
        

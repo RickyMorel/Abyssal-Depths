@@ -97,10 +97,10 @@ public class Damageable : MonoBehaviour
         {
             _projectile = projectile;
 
-            if (projectile.DamageTypes[0] == projectile.DamageTypes[1])
-            {
-                Damage(projectile.Damage[0], projectile.DamageTypes[0], false);
-            }
+            Damage(projectile.Damage[0], projectile.DamageTypes[0]);
+
+            if (projectile.DamageTypes[0] != projectile.DamageTypes[1] && projectile.DamageTypes[1] != DamageType.None) { Damage(projectile.Damage[1], projectile.DamageTypes[1]); }
+            else if (projectile.DamageTypes[0] != projectile.DamageTypes[1] && projectile.DamageTypes[1] == DamageType.None) { Damage(projectile.Damage[1], projectile.DamageTypes[1]); }
 
             if (projectile.ProjectileParticles != null) { projectile.ProjectileParticles.transform.SetParent(null); }
 

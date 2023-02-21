@@ -77,6 +77,36 @@ public class ChipDataSO : ScriptableObject
         return null;
     }
 
+    public int GetImpactDamageFromChip(BasicChip chipClass)
+    {
+        int impactDamage;
+        if (chipClass is BaseChip)
+        {
+            BaseChip baseChip = chipClass as BaseChip;
+            impactDamage = baseChip.ImpactDamage;
+            return impactDamage;
+        }
+        if (chipClass is FireChip)
+        {
+            FireChip fireChip = chipClass as FireChip;
+            impactDamage = fireChip.ImpactDamage;
+            return impactDamage;
+        }
+        if (chipClass is ElectricChip)
+        {
+            ElectricChip electricChip = chipClass as ElectricChip;
+            impactDamage = electricChip.ImpactDamage;
+            return impactDamage;
+        }
+        if (chipClass is LaserChip)
+        {
+            LaserChip laserChip = chipClass as LaserChip;
+            impactDamage = laserChip.ImpactDamage;
+            return impactDamage;
+        }
+        return -1;
+    }
+
     public void GetWeaknessAndResistance(BasicChip chipClass, out float weakness, out float resistance)
     {
         if (chipClass is BaseChip)
@@ -163,7 +193,7 @@ public class ChipDataSO : ScriptableObject
     [System.Serializable]
     public class BasicChip
     {
-        public float ImpactDamage;
+        public int ImpactDamage;
         public float ShootAfterSeconds = 0.2f;
         public float DamageMultiplierWeakness;
         public float DamageMultiplierResistance;

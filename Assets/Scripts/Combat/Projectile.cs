@@ -22,6 +22,7 @@ public class Projectile : MonoBehaviour
     protected bool _destroyOnHit = true;
     protected Weapon _weapon;
     protected int[] _damage;
+    protected int _impactDamage;
     protected ChipDataSO.BasicChip[] _chipClass;
     protected ChipDataSO _chipDataSO;
     protected float[] _weakness;
@@ -35,6 +36,7 @@ public class Projectile : MonoBehaviour
     #region Public Properties
 
     public int[] Damage => _damage;
+    public int ImpactDamage => _impactDamage;
 
     public DamageType[] DamageTypes => _damageTypes;
 

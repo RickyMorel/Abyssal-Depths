@@ -152,45 +152,6 @@ public class Booster : RotationalInteractable
         }
     }
 
-    private void SetIsLockHovering(bool isHoveringPressed)
-    {
-        float doubleTapWindow = 0.25f;
-
-        // Check if the button is pressed
-        if (isHoveringPressed)
-        {
-            // If it was pressed again within the time window, invert the bool
-            if (_lockHoveringPressedOnce && _timeSinceLastHoverPress <= doubleTapWindow)
-            {
-                _lockHovering = !_lockHovering;
-                Debug.Log("Double tap!");
-            }
-            // Otherwise, set the flag and reset the timer
-            else
-            {
-                _lockHoveringPressedOnce = true;
-                _timeSinceLastHoverPress = 0f;
-            }
-        }
-        // If the button is not pressed, reset the flag and the timer
-        else
-        {
-            _lockHoveringPressedOnce = false;
-            _timeSinceLastHoverPress = 0f;
-        }
-
-        // Increment the timer
-        if (_lockHoveringPressedOnce)
-        {
-            _timeSinceLastHoverPress += Time.deltaTime;
-            if (_timeSinceLastHoverPress > doubleTapWindow)
-            {
-                _lockHoveringPressedOnce = false;
-            }
-        }
-
-    }
-
     private void StabilizeShip()
     {
         if (!_isHovering) { return; }

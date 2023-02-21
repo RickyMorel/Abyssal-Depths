@@ -27,10 +27,14 @@ public class Booster : RotationalInteractable
 
     private bool _isBoosting = false;
     private bool _isHovering = false;
+    [SerializeField] private bool _lockHovering = false;
+    [SerializeField] private bool _lockHoveringPressedOnce = false;
     private int _currentGear = 0;
     private bool _recentlyChangedGear = false;
     private bool _isStuttering = false;
     private bool _canStutter = true;
+
+    [SerializeField] private float _timeSinceLastHoverPress;
 
     #endregion
 
@@ -68,12 +72,20 @@ public class Booster : RotationalInteractable
     {
         base.Update();
 
+        _timeSinceLastHoverPress += Time.deltaTime;
+
         if(CanUse == false) { return; }
        
-        if (_currentPlayer == null) { SetIsBoosting(false); SetIsHovering(false); return; }
+        if (_currentPlayer == null) 
+        {
+            SetIsBoosting(false);
+            if (!_lockHovering) { SetIsHovering(false); }
+            return;
+        }
 
         SetIsBoosting(_currentPlayer.IsUsing);
-        SetIsHovering(_currentPlayer.IsUsing_2);
+        SetIsHovering(_currentPlayer.IsUsing_2 || _lockHovering);
+        if (_currentPlayer.PlayerInput.DetectDoubleTap()) { _lockHovering = !_lockHovering; }
     }
 
     private void FixedUpdate()
@@ -143,6 +155,45 @@ public class Booster : RotationalInteractable
         {
             if (_isHovering) particle.Play(); else particle.Stop();
         }
+    }
+
+    private void SetIsLockHovering(bool isHoveringPressed)
+    {
+        float doubleTapWindow = 0.25f;
+
+        // Check if the button is pressed
+        if (isHoveringPressed)
+        {
+            // If it was pressed again within the time window, invert the bool
+            if (_lockHoveringPressedOnce && _timeSinceLastHoverPress <= doubleTapWindow)
+            {
+                _lockHovering = !_lockHovering;
+                Debug.Log("Double tap!");
+            }
+            // Otherwise, set the flag and reset the timer
+            else
+            {
+                _lockHoveringPressedOnce = true;
+                _timeSinceLastHoverPress = 0f;
+            }
+        }
+        // If the button is not pressed, reset the flag and the timer
+        else
+        {
+            _lockHoveringPressedOnce = false;
+            _timeSinceLastHoverPress = 0f;
+        }
+
+        // Increment the timer
+        if (_lockHoveringPressedOnce)
+        {
+            _timeSinceLastHoverPress += Time.deltaTime;
+            if (_timeSinceLastHoverPress > doubleTapWindow)
+            {
+                _lockHoveringPressedOnce = false;
+            }
+        }
+
     }
 
     private void StabilizeShip()

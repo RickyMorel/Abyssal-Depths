@@ -12,6 +12,7 @@ public class BaseInteractionController : MonoBehaviour
     #region Private Variables
 
     protected PlayerHealth _playerHealth;
+    protected PlayerInputHandler _playerInput;
     protected PlayerCarryController _playerCarryController;
     protected Animator _anim;
     protected Rigidbody _rb;
@@ -28,6 +29,7 @@ public class BaseInteractionController : MonoBehaviour
 
     #region Public Properties
 
+    public PlayerInputHandler PlayerInput => _playerInput;
     public Interactable CurrentInteractable => _currentInteractable;
 
     #endregion

@@ -3,18 +3,6 @@ using UnityEngine;
 
 public class PlayerInteractionController : BaseInteractionController
 {
-    #region Private Variables
-
-    private PlayerInputHandler _playerInput;
-
-    #endregion
-
-    #region Public Properties
-
-    public PlayerInputHandler PlayerInput => _playerInput;
-
-    #endregion
-
     #region Unity Loops
 
     public override void Start()

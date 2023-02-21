@@ -21,6 +21,10 @@ public class PlayerInputHandler : MonoBehaviour
     private bool _isShooting_2;
     private bool _canPlayerSpawn = false;
 
+    private bool _doubleTapButtonWasPressed = false; // Flag to keep track of whether the button was pressed once or twice
+    private float _timeSinceLastPress = 0f; // Keep track of the time since the last button press
+    private float _doubleTapWindow = 0.25f; // The time window in which the button needs to be pressed twice
+
     #endregion
 
     #region Public Properties
@@ -80,6 +84,39 @@ public class PlayerInputHandler : MonoBehaviour
         Upgrade();
         Shoot();
         Shoot2();
+    }
+
+    public bool DetectDoubleTap()
+    {
+        bool doubleTapDetected = false;
+
+        // Check if the button is pressed
+        if (_player.GetButtonDown("Shoot2"))
+        {
+            // If it was pressed again within the time window, set the flag and return true
+            if (_doubleTapButtonWasPressed && _timeSinceLastPress <= _doubleTapWindow)
+            {
+                doubleTapDetected = true;
+            }
+            // Otherwise, set the flag and reset the timer
+            else
+            {
+                _doubleTapButtonWasPressed = true;
+                _timeSinceLastPress = 0f;
+            }
+        }
+
+        // Increment the timer
+        if (_doubleTapButtonWasPressed)
+        {
+            _timeSinceLastPress += Time.deltaTime;
+            if (_timeSinceLastPress > _doubleTapWindow)
+            {
+                _doubleTapButtonWasPressed = false;
+            }
+        }
+
+        return doubleTapDetected;
     }
 
     public void Move()

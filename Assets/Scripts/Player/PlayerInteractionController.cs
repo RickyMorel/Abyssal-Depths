@@ -3,18 +3,6 @@ using UnityEngine;
 
 public class PlayerInteractionController : BaseInteractionController
 {
-    #region Private Variables
-
-    private PlayerInputHandler _playerInput;
-
-    #endregion
-
-    #region Public Properties
-
-    public PlayerInputHandler PlayerInput => _playerInput;
-
-    #endregion
-
     #region Unity Loops
 
     public override void Start()
@@ -34,6 +22,7 @@ public class PlayerInteractionController : BaseInteractionController
 
         MoveDirection = _playerInput.MoveDirection;
         IsUsing = _playerInput.IsShooting;
+        IsUsing_2 = _playerInput.IsShooting_2;
     }
 
     private void OnDestroy()

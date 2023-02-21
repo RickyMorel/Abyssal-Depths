@@ -18,7 +18,12 @@ public class PlayerInputHandler : MonoBehaviour
 
     private Vector2 _moveDirection;
     private bool _isShooting;
+    private bool _isShooting_2;
     private bool _canPlayerSpawn = false;
+
+    private bool _doubleTapButtonWasPressed = false; // Flag to keep track of whether the button was pressed once or twice
+    private float _timeSinceLastPress = 0f; // Keep track of the time since the last button press
+    private float _doubleTapWindow = 0.25f; // The time window in which the button needs to be pressed twice
 
     #endregion
 
@@ -39,6 +44,7 @@ public class PlayerInputHandler : MonoBehaviour
     public Vector2 MoveDirection => _moveDirection;
    
     public bool IsShooting => _isShooting;
+    public bool IsShooting_2 => _isShooting_2;
 
     #endregion
 
@@ -77,6 +83,40 @@ public class PlayerInputHandler : MonoBehaviour
         Interact();
         Upgrade();
         Shoot();
+        Shoot2();
+    }
+
+    public bool DetectDoubleTap()
+    {
+        bool doubleTapDetected = false;
+
+        // Check if the button is pressed
+        if (_player.GetButtonDown("Shoot2"))
+        {
+            // If it was pressed again within the time window, set the flag and return true
+            if (_doubleTapButtonWasPressed && _timeSinceLastPress <= _doubleTapWindow)
+            {
+                doubleTapDetected = true;
+            }
+            // Otherwise, set the flag and reset the timer
+            else
+            {
+                _doubleTapButtonWasPressed = true;
+                _timeSinceLastPress = 0f;
+            }
+        }
+
+        // Increment the timer
+        if (_doubleTapButtonWasPressed)
+        {
+            _timeSinceLastPress += Time.deltaTime;
+            if (_timeSinceLastPress > _doubleTapWindow)
+            {
+                _doubleTapButtonWasPressed = false;
+            }
+        }
+
+        return doubleTapDetected;
     }
 
     public void Move()
@@ -156,5 +196,12 @@ public class PlayerInputHandler : MonoBehaviour
         if (!IsPlayerActive) { return; }
 
         _isShooting = _player.GetButton("Shoot");
+    }
+
+    public void Shoot2()
+    {
+        if (!IsPlayerActive) { return; }
+
+        _isShooting_2 = _player.GetButton("Shoot2");
     }
 }

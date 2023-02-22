@@ -65,7 +65,7 @@ public class ChipDataSO : ScriptableObject
                     return (int)laserChip.MK3Damages[selectedDamage];
             }
         }
-        return -1;
+        return 20;
     }
 
     public BasicChip GetChipType(DamageType damageType)

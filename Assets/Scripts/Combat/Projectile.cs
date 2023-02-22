@@ -21,14 +21,14 @@ public class Projectile : MonoBehaviour
     protected ParticleSystem _particles;
     protected bool _destroyOnHit = true;
     protected Weapon _weapon;
-    protected int[] _damage;
+    protected int[] _damage = { 0, 0 };
     protected int _impactDamage;
-    protected ChipDataSO.BasicChip[] _chipClass;
+    protected ChipDataSO.BasicChip[] _chipClass = {null, null};
     protected ChipDataSO _chipDataSO;
-    protected float[] _weakness;
-    protected float[] _resistance;
-    protected float[] _secondaryValue;
-    protected float[] _additionalValue;
+    protected float[] _weakness = {0, 0};
+    protected float[] _resistance = { 0, 0 };
+    protected float[] _secondaryValue = { 0, 0 };
+    protected float[] _additionalValue = { 0, 0 };
     private Renderer[] _renderers;
 
     #endregion

@@ -349,6 +349,7 @@ public class Damageable : MonoBehaviour
 
     private int CalculateDamageForTypes(bool isResistant, bool isWeak, int index)
     {
+        Debug.Log(index);
         float damage = _projectile.Damage[index];
 
         if (isResistant && !isWeak) { damage = damage / _projectile.Resistance[index]; }

@@ -12,6 +12,7 @@ public class ShipData : MonoBehaviour
     #region Editor Fields
 
     [SerializeField] private Transform[] _playerSpawnPositions;
+    [SerializeField] private bool _loadData = false;
 
     #endregion
 
@@ -29,6 +30,8 @@ public class ShipData : MonoBehaviour
 
     private void Start()
     {
+        if (!_loadData) { return; }
+
         StartCoroutine(LateStart());
     }
 

@@ -163,7 +163,7 @@ public class Booster : RotationalInteractable
 
     private void BoostImpulse()
     {
-        _rb.AddForce(-(RotatorTransform.transform.up * _boostImpulseForce * _rb.mass), ForceMode.Impulse);
+        _rb.AddForce((RotatorTransform.transform.up * _boostImpulseForce * _rb.mass), ForceMode.Impulse);
     }
 
     private void BoostShip()
@@ -177,7 +177,7 @@ public class Booster : RotationalInteractable
 
         if (_isStuttering) { return; }
 
-        _rb.AddForce(-(RotatorTransform.transform.up * _acceleration * _rb.mass));
+        _rb.AddForce((RotatorTransform.transform.up * _acceleration * _rb.mass));
 
         _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, Ship.Instance.TopSpeed);
     }

@@ -831,8 +831,9 @@ GameObject:
   - component: {fileID: 4216913838182659089}
   - component: {fileID: 4861685669163106959}
   - component: {fileID: 3926611867066130000}
-  - component: {fileID: 5877842458206897380}
-  m_Layer: 25
+  - component: {fileID: 7238815909928439104}
+  - component: {fileID: 3006501415176180845}
+  m_Layer: 17
   m_Name: DefaultShield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -848,7 +849,7 @@ Transform:
   m_GameObject: {fileID: 212232855496702715}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 269.72452, y: 19.659733, z: 129.31653}
+  m_LocalScale: {x: 809.1735, y: 19.659733, z: 129.31653}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2779971361569505423}
@@ -904,7 +905,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &5877842458206897380
+--- !u!114 &7238815909928439104
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -913,9 +914,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 212232855496702715}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26c23ea41acf6c446a50ea25d18580fc, type: 3}
+  m_Script: {fileID: 11500000, guid: 0d93080e69f09754b9c2ffc91dbddeff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _pushForce: 2000
+--- !u!65 &3006501415176180845
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 212232855496702715}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.020047769, y: 0.045829788, z: 0.5}
+  m_Center: {x: 0.00000011920928, y: 0.012918902, z: -2.3283028e-10}
 --- !u!1 &865493894868582840
 GameObject:
   m_ObjectHideFlags: 0
@@ -1058,10 +1073,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5107104897272096298}
   - {fileID: 1202903695679858970}
-  - {fileID: 7222955984455954706}
   - {fileID: 2992342501792126743}
+  - {fileID: 5107104897272096298}
+  - {fileID: 7222955984455954706}
   m_Father: {fileID: 319713644502076378}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1505,9 +1520,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8358298928486277400}
   - {fileID: 8791963942421099269}
   - {fileID: 4056226016182675615}
+  - {fileID: 8358298928486277400}
   - {fileID: 5916802313259482199}
   - {fileID: 4056226016973576050}
   - {fileID: 4886668954849437493}
@@ -1883,7 +1898,7 @@ GameObject:
   - component: {fileID: 2118481411321703527}
   - component: {fileID: 3870878673296504444}
   - component: {fileID: 3309062734910213320}
-  - component: {fileID: 35519599847881798}
+  - component: {fileID: 6096146645842684641}
   m_Layer: 25
   m_Name: ElectricShield
   m_TagString: Untagged
@@ -1959,7 +1974,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &35519599847881798
+--- !u!114 &6096146645842684641
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1968,9 +1983,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4351335709194019255}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26c23ea41acf6c446a50ea25d18580fc, type: 3}
+  m_Script: {fileID: 11500000, guid: 0d93080e69f09754b9c2ffc91dbddeff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _pushForce: 20
 --- !u!1 &4423279608118713247
 GameObject:
   m_ObjectHideFlags: 0
@@ -2070,13 +2086,13 @@ Transform:
   - {fileID: 1682401164}
   - {fileID: 9089860946685071163}
   - {fileID: 288223202040407313}
-  - {fileID: 3690532010340257002}
   - {fileID: 5420827500758795476}
   - {fileID: 687801800}
+  - {fileID: 3690532010340257002}
   - {fileID: 4811621950326407202}
   - {fileID: 7364360263897305908}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!208 &7022336706505972824
 NavMeshObstacle:

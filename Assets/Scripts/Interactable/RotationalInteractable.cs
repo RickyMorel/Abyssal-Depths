@@ -48,7 +48,7 @@ public class RotationalInteractable : Upgradable
 
         if (CanUse == false) { return; }
 
-        if (this is Shield) { RotateWASD(); }
+        if (this is ShieldWheel) { RotateWASD(); }
         else { Rotate(); }
     }
 

@@ -30,6 +30,7 @@ public class Projectile : MonoBehaviour
     protected float[] _secondaryValue = { 0, 0 };
     protected float[] _additionalValue = { 0, 0 };
     private Renderer[] _renderers;
+    private DamageData _damageData;
 
     #endregion
 
@@ -48,6 +49,7 @@ public class Projectile : MonoBehaviour
     public float[] Resistance => _resistance;
     public float[] SecondaryValue => _secondaryValue;
     public float[] AdditionalValue => _additionalValue;
+    public DamageData DamageData => _damageData;
 
     #endregion
 
@@ -63,12 +65,11 @@ public class Projectile : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
-
-        _chipDataSO = GameAssetsManager.Instance.ChipDataSO;
     }
 
     public virtual void Start()
     {
+        _chipDataSO = GameAssetsManager.Instance.ChipDataSO;
         _rb.AddForce(transform.forward * _speed, ForceMode.Impulse);
 
         if (GetComponentInChildren<ParticleSystem>() == null) { return; }
@@ -87,6 +88,8 @@ public class Projectile : MonoBehaviour
         _impactDamage = _chipDataSO.GetImpactDamageFromChip(_chipClass[0]);
 
         if (_damageTypes[0] == _damageTypes[1]) { _chipDataSO.GetBonusFromChip(_chipClass[0], ref _damage[0], ref _secondaryValue[0], ref _additionalValue[0]); }
+        Debug.Log("Llamo damageData");
+        _damageData = new DamageData(_damageTypes, _damage, _impactDamage, _resistance, _weakness, _secondaryValue, _additionalValue);
     }
 
     public void Initialize(string ownerTag)

@@ -60,10 +60,10 @@ public class ShipHealth : Damageable
         _boosterHealth.OnFix -= HandleFix;
     }
 
-    public override void OnTriggerStay(Collider other)
-    {
-        base.OnTriggerStay(other);
-    }
+    //public override void OnTriggerStay(Collider other)
+    //{
+    //    base.OnTriggerStay(other);
+    //}
 
     private void OnTriggerEnter(Collider other)
     {
@@ -80,7 +80,7 @@ public class ShipHealth : Damageable
         if (_rb.velocity.magnitude < _minCrashSpeed) { return; }
 
         _currentDamage = (int)CalculateCrashDamage();
-        Damage((int)_currentDamage, DamageType.Base);
+        DamageWithoutDamageData((int)_currentDamage, other);
         if (other.TryGetComponent<AIHealth>(out AIHealth enemyHealth)) { enemyHealth.Damage((int)_currentDamage); }
 
         float currentSpeedPercentage = _rb.velocity.magnitude / Ship.Instance.TopSpeed;
@@ -93,9 +93,9 @@ public class ShipHealth : Damageable
         GameObject shipCrashParticles = Instantiate(Ship.Instance.ShipStatsSO.ShipCrashParticles.gameObject, hitPos, Quaternion.identity);
     }
 
-    public override void Damage(int damage, DamageType damageType = DamageType.None, bool isDamageChain = false, Collider instigatorCollider = null, int index = 0)
+    public override void DamageWithoutDamageData(int damage, Collider instigatorCollider = null)
     {
-        base.Damage(damage, damageType, isDamageChain);
+        base.DamageWithoutDamageData(damage, instigatorCollider);
 
         ShipCamera.Instance.ShakeCamera(2f, 50f, 0.2f);
 

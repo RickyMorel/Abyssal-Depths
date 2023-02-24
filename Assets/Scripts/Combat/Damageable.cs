@@ -39,6 +39,7 @@ public class Damageable : MonoBehaviour
     private float _damageTimer = 0;
     private float _timer = 0;
     private bool _isBeingElectrocuted = false;
+    private DamageData _damageData;
 
     private ParticleSystem _fireParticles;
     private ParticleSystem _electricParticles;
@@ -90,13 +91,14 @@ public class Damageable : MonoBehaviour
         if (!other.gameObject.TryGetComponent(out Projectile projectile)) { return; }
 
         if (IsOwnDamage(other)) { return; }
-
+        Debug.Log(projectile + " " + gameObject.name);
+        _damageData = new DamageData(projectile.DamageData);
         if (projectile.DestroyOnHit)
         {
-            Damage(projectile);
+            Damage(_damageData.Damage[0]);
 
-            if (projectile.DamageTypes[0] != projectile.DamageTypes[1] && projectile.DamageTypes[1] != DamageType.None) { Damage(projectile, true, false, null, 1); }
-            else if (projectile.DamageTypes[0] != projectile.DamageTypes[1] && projectile.DamageTypes[1] == DamageType.None) { Damage(projectile, true); }
+            if (projectile.DamageTypes[0] != projectile.DamageTypes[1] && projectile.DamageTypes[1] != DamageType.None) { Damage(_damageData.Damage[1], true, false, null, 1); }
+            else if (projectile.DamageTypes[0] != projectile.DamageTypes[1] && projectile.DamageTypes[1] == DamageType.None) { Damage(_damageData.Damage[0], true); }
 
             if (projectile.ProjectileParticles != null) { projectile.ProjectileParticles.transform.SetParent(null); }
 
@@ -107,7 +109,7 @@ public class Damageable : MonoBehaviour
             _damageTimer += Time.deltaTime;
             if (_damageTimer >= projectile.DealDamageAfterSeconds)
             {
-                Damage(projectile);
+                Damage(_damageData.Damage[0]);
                 _damageTimer = 0;
             }
         }
@@ -165,45 +167,61 @@ public class Damageable : MonoBehaviour
             Die();
     }
 
-    public virtual void Damage(Projectile projectile, bool isImpactDamage = false, bool isDamageChain = false, Collider instigatorCollider = null, int index = 0)
+    public virtual void Damage(int damage, bool isImpactDamage = false, bool isDamageChain = false, Collider instigatorCollider = null, int index = 0)
     {
         if (IsDead()) { return; }
 
         float finalDamage = 0;
-
-        if (projectile.DamageTypes[0] == DamageType.None)
+        if (_damageData.DamageTypes[0] == DamageType.None)
         {
-            finalDamage = projectile.Damage[index];
+            finalDamage = damage;
         }
         else if(isImpactDamage)
         {
-            finalDamage = projectile.ImpactDamage;
+            finalDamage = damage;
         }
 
         bool isWeak = false;
         bool isResistant = false;
 
-        if (_resistanceType.Contains(projectile.DamageTypes[index]))
+        if (_resistanceType.Contains(_damageData.DamageTypes[index]))
         { 
             isResistant = true;
         }
 
-        if (_weaknessType.Contains(projectile.DamageTypes[index]))
+        if (_weaknessType.Contains(_damageData.DamageTypes[index]))
         { 
             isWeak = true;
         }
 
-        finalDamage = DamageTypesSelector(projectile.DamageTypes[index], isResistant, isWeak, (int)finalDamage, isDamageChain, index);
+        finalDamage = DamageTypesSelector(_damageData.DamageTypes[index], isResistant, isWeak, (int)finalDamage, isDamageChain, index);
 
         _currentHealth = Mathf.Clamp(_currentHealth - finalDamage, 0, _maxHealth);
 
         UpdateHealthUI();
 
-        OnDamaged?.Invoke(projectile.DamageTypes[index]);
+        OnDamaged?.Invoke(_damageData.DamageTypes[index]);
 
-        if(finalDamage != 0) { DamagePopup.Create(transform.position, (int)finalDamage, projectile.DamageTypes[index], isWeak); }
+        if(finalDamage != 0) { DamagePopup.Create(transform.position, (int)finalDamage, _damageData.DamageTypes[index], isWeak); }
 
-        if (_damageParticles != null && projectile.DamageTypes[index] != DamageType.None) { _damageParticles.Play(); }
+        if (_damageParticles != null && _damageData.DamageTypes[index] != DamageType.None) { _damageParticles.Play(); }
+
+        if (_currentHealth == 0) { Die(); }
+    }
+
+    public virtual void DamageWithoutDamageData(int damage, Collider instigatorCollider = null)
+    {
+        if (IsDead()) { return; }
+
+        _currentHealth = Mathf.Clamp(_currentHealth - damage, 0, _maxHealth);
+
+        UpdateHealthUI();
+
+        OnDamaged?.Invoke(DamageType.None);
+
+        if (damage != 0) { DamagePopup.Create(transform.position, damage, DamageType.None, false); }
+
+        if (_damageParticles != null) { _damageParticles.Play(); }
 
         if (_currentHealth == 0) { Die(); }
     }
@@ -331,9 +349,9 @@ public class Damageable : MonoBehaviour
 
     private IEnumerator Afterburn(int damage, int index)
     {
-        while (_timer < projectile.SecondaryValue[index])
+        while (_timer < _damageData.SecondaryValue[index])
         {
-            yield return new WaitForSeconds(projectile.AdditionalValue[index]);
+            yield return new WaitForSeconds(_damageData.AdditionalValue[index]);
             Damage(damage);
         }
     }
@@ -341,7 +359,7 @@ public class Damageable : MonoBehaviour
     private IEnumerator ElectricParalysis(BaseStateMachine baseStateMachine, int index)
     {
         if (DoesShowDamageParticles()) { _electricParticles.Play(); }
-        yield return new WaitForSeconds(projectile.SecondaryValue[index]);
+        yield return new WaitForSeconds(_damageData.SecondaryValue[index]);
         if (!IsDead() && baseStateMachine != null) { baseStateMachine.CanMove = true; }
         _isBeingElectrocuted = false;
         _electricParticles.Stop();
@@ -351,9 +369,9 @@ public class Damageable : MonoBehaviour
     {
         float damageAux = damage;
 
-        if (isResistant && !isWeak) { damageAux = damage / projectile.Resistance[index]; }
+        if (isResistant && !isWeak) { damageAux = damage / _damageData.Resistance[index]; }
 
-        if (isWeak && !isResistant) { damageAux = damage * projectile.Weakness[index]; }
+        if (isWeak && !isResistant) { damageAux = damage * _damageData.Weakness[index]; }
 
         return (int)damageAux;
     }

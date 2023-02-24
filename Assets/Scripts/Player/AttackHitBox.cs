@@ -33,13 +33,9 @@ public class AttackHitBox : MonoBehaviour
 
     #region Unity Loops
 
-    private void Awake()
-    {
-        _chipDataSO = GameAssetsManager.Instance.ChipDataSO;
-    }
-
     private void Start()
     {
+        _chipDataSO = GameAssetsManager.Instance.ChipDataSO;
         _mace = GetComponentInParent<Mace>();
         _chipClass = _chipDataSO.GetChipType(_damageType);
     }
@@ -85,7 +81,7 @@ public class AttackHitBox : MonoBehaviour
 
     private void CalculateDamage(Damageable health)
     {
-        if (_mace.rb.velocity.x <= _mace.MaxMovementSpeed / 2 && _mace.rb.velocity.y < _mace.MaxMovementSpeed / 2) { _damage = _chipDataSO.GetDamageFromChip(_chipClass, _weapon.ChipLevel, 0); health.Damage(_damage, _damageType); }
-        else { _damage = (int)_chipDataSO.GetDamageFromChip(_chipClass, _weapon.ChipLevel, 1); health.Damage(_damage, _damageType); }
+        if (_mace.rb.velocity.x <= _mace.MaxMovementSpeed / 2 && _mace.rb.velocity.y < _mace.MaxMovementSpeed / 2) { _damage = _chipDataSO.GetDamageFromChip(_chipClass, _weapon.ChipLevel, 0); health.Damage(_damage); }
+        else { _damage = _chipDataSO.GetDamageFromChip(_chipClass, _weapon.ChipLevel, 1); health.Damage(_damage); }
     }
 }

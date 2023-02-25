@@ -69,23 +69,9 @@ public class Projectile : MonoBehaviour
 
     public virtual void Start()
     {
-        _chipDataSO = GameAssetsManager.Instance.ChipDataSO;
         _rb.AddForce(transform.forward * _speed, ForceMode.Impulse);
         Invoke(nameof(DestroySelf), 4f);
-        for (int i = 0; i < 2; i++)
-        {
-            _chipClass[i] = _chipDataSO.GetChipType(_damageTypes[i]);
-            _chipDataSO.GetWeaknessAndResistance(_chipClass[i], out _weakness[i], out _resistance[i]);
-            _damage[i] = _chipDataSO.GetDamageFromChip(_chipClass[i], _weapon.ChipLevel, 0);
-            _secondaryValue[i] = _chipDataSO.GetDamageFromChip(_chipClass[i], _weapon.ChipLevel, 1);
-
-            if (_damageTypes[i] == DamageType.Fire || _damageTypes[i] == DamageType.Laser) { _additionalValue[i] = _chipDataSO.GetAdditionalValueFromChip(_chipClass[i]); }
-        }
-        _impactDamage = _chipDataSO.GetImpactDamageFromChip(_chipClass[0]);
-
-        if (_damageTypes[0] == _damageTypes[1]) { _chipDataSO.GetBonusFromChip(_chipClass[0], ref _damage[0], ref _secondaryValue[0], ref _additionalValue[0]); }
-        Debug.Log("Llamo damageData");
-        _damageData = new DamageData(_damageTypes, _damage, _impactDamage, _resistance, _weakness, _secondaryValue, _additionalValue);
+        CreateDamageDataFromChip();
 
         if (GetComponentInChildren<ParticleSystem>() == null) { return; }
 
@@ -103,4 +89,23 @@ public class Projectile : MonoBehaviour
     }
 
     #endregion
+
+    private void CreateDamageDataFromChip()
+    {
+        _chipDataSO = GameAssetsManager.Instance.ChipDataSO;
+        for (int i = 0; i < 2; i++)
+        {
+            _chipClass[i] = _chipDataSO.GetChipType(_damageTypes[i]);
+            _chipDataSO.GetWeaknessAndResistance(_chipClass[i], out _weakness[i], out _resistance[i]);
+            _damage[i] = _chipDataSO.GetDamageFromChip(_chipClass[i], _weapon.ChipLevel, 0);
+            _secondaryValue[i] = _chipDataSO.GetDamageFromChip(_chipClass[i], _weapon.ChipLevel, 1);
+
+            if (_damageTypes[i] == DamageType.Fire || _damageTypes[i] == DamageType.Laser) { _additionalValue[i] = _chipDataSO.GetAdditionalValueFromChip(_chipClass[i]); }
+        }
+        _impactDamage = _chipDataSO.GetImpactDamageFromChip(_chipClass[0]);
+
+        if (_damageTypes[0] == _damageTypes[1]) { _chipDataSO.GetBonusFromChip(_chipClass[0], ref _damage[0], ref _secondaryValue[0], ref _additionalValue[0]); }
+
+        _damageData = new DamageData(_damageTypes, _damage, _impactDamage, _resistance, _weakness, _secondaryValue, _additionalValue);
+    }
 }

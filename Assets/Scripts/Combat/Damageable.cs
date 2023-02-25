@@ -14,6 +14,7 @@ public class Damageable : MonoBehaviour
     [SerializeField] private List<DamageType> _weaknessType = new List<DamageType>();
 
     [Header("Stats")]
+    [SerializeField] private float _currentHealth;
     [SerializeField] private int _maxHealth;
 
     [Header("UI")]
@@ -25,8 +26,6 @@ public class Damageable : MonoBehaviour
     #endregion
 
     #region Private Variables
-
-    private float _currentHealth;
 
     [ColorUsageAttribute(false, true)] private Color _originalColor;
 
@@ -91,7 +90,7 @@ public class Damageable : MonoBehaviour
         if (!other.gameObject.TryGetComponent(out Projectile projectile)) { return; }
 
         if (IsOwnDamage(other)) { return; }
-        Debug.Log(projectile + " " + gameObject.name);
+        Debug.Log($"{gameObject.name} {projectile.DamageData}");
         _damageData = new DamageData(projectile.DamageData);
         if (projectile.DestroyOnHit)
         {
@@ -171,7 +170,11 @@ public class Damageable : MonoBehaviour
     {
         if (IsDead()) { return; }
 
+        if (_damageData == null) { return; }
+
         float finalDamage = 0;
+        Debug.Log(gameObject.name + " " + _damageData);
+        Debug.Log(gameObject.name + " " + _damageData.DamageTypes[0]);
         if (_damageData.DamageTypes[0] == DamageType.None)
         {
             finalDamage = damage;
@@ -330,6 +333,8 @@ public class Damageable : MonoBehaviour
         foreach (var hitCollider in hitColliders)
         {
             if (!hitCollider.TryGetComponent(out Damageable damageable)) { continue; }
+
+            if (damageable is PlayerHealth) { continue; }
 
             damageable.Damage(electricDamage, false, true, null, index);
         }

@@ -36,6 +36,8 @@ public class AICombat : PlayerCombat
 
     public void Aggro()
     {
+        if (_gAgent == null) { return; }
+
         if (_gAgent.Beliefs.HasState("aggro")) { return; }
 
         _gAgent.Beliefs.AddState("aggro", 1);

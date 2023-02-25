@@ -6,6 +6,7 @@ public class AICombat : PlayerCombat
 {
     #region Editor Fields
 
+    [SerializeField] private int _enemyDamageDataID;
     [Range(2f, 100f)]
     [SerializeField] private float _attackRange = 10f;
 

@@ -107,40 +107,39 @@ public class ChipDataSO : ScriptableObject
         return -1;
     }
 
-    public void GetWeaknessAndResistance(BasicChip chipClass, out float weakness, out float resistance)
-    {
-        if (chipClass is BaseChip)
-        {
-            BaseChip baseChip = chipClass as BaseChip;
-            weakness = baseChip.DamageMultiplierWeakness;
-            resistance = baseChip.DamageMultiplierResistance;
-            return;
-        }
-        if (chipClass is FireChip)
-        {
-            FireChip fireChip = chipClass as FireChip;
-            weakness = fireChip.DamageMultiplierWeakness;
-            resistance = fireChip.DamageMultiplierResistance;
-            return;
-        }
-        if (chipClass is ElectricChip)
-        {
-            ElectricChip electricChip = chipClass as ElectricChip;
-            weakness = electricChip.DamageMultiplierWeakness;
-            resistance = electricChip.DamageMultiplierResistance;
-            return;
-        }
-        if (chipClass is LaserChip)
-        {
-            LaserChip laserChip = chipClass as LaserChip;
-            weakness = laserChip.DamageMultiplierWeakness;
-            resistance = laserChip.DamageMultiplierResistance;
-            return;
-        }
-        weakness = 0;
-        resistance = 0;
-        return;
-    }
+    //public void GetWeaknessAndResistance(BasicChip chipClass, out float weakness, out float resistance)
+    //{
+    //    if (chipClass is BaseChip)
+    //    {
+    //        BaseChip baseChip = chipClass as BaseChip;
+    //        baseChip.DamageMultipliers = _damageMultipliersValues.
+    //        return;
+    //    }
+    //    if (chipClass is FireChip)
+    //    {
+    //        FireChip fireChip = chipClass as FireChip;
+    //        weakness = fireChip.DamageMultiplierWeakness;
+    //        resistance = fireChip.DamageMultiplierResistance;
+    //        return;
+    //    }
+    //    if (chipClass is ElectricChip)
+    //    {
+    //        ElectricChip electricChip = chipClass as ElectricChip;
+    //        weakness = electricChip.DamageMultiplierWeakness;
+    //        resistance = electricChip.DamageMultiplierResistance;
+    //        return;
+    //    }
+    //    if (chipClass is LaserChip)
+    //    {
+    //        LaserChip laserChip = chipClass as LaserChip;
+    //        weakness = laserChip.DamageMultiplierWeakness;
+    //        resistance = laserChip.DamageMultiplierResistance;
+    //        return;
+    //    }
+    //    weakness = 0;
+    //    resistance = 0;
+    //    return;
+    //}
 
     public float GetAdditionalValueFromChip(BasicChip chipClass)
     {
@@ -195,8 +194,8 @@ public class ChipDataSO : ScriptableObject
     {
         public int ImpactDamage;
         public float ShootAfterSeconds = 0.2f;
-        public float DamageMultiplierWeakness;
-        public float DamageMultiplierResistance;
+        private Vector2 _damageMultipliers;
+        public Vector2 DamageMultipliers { get { return _damageMultipliers; } set { _damageMultipliers = value; } }
     }
 
     [System.Serializable]

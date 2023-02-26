@@ -33,6 +33,7 @@ public class AICombat : PlayerCombat
         GameObject newProjectile = Instantiate(_projectilePrefab, _shootTransform.position, _shootTransform.rotation);
         newProjectile.transform.LookAt(enemyTransform);
         newProjectile.GetComponent<Projectile>().Initialize(tag);
+        newProjectile.GetComponent<Projectile>().AICombatID = _enemyDamageDataID;
     }
 
     public void Aggro()

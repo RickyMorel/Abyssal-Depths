@@ -18,6 +18,7 @@ public class GameAssetsManager : MonoBehaviour
     [SerializeField] private GameObject[] _stunnedParticles;
     [ColorUsageAttribute(false, true), SerializeField] private Color _laserHeatColor;
     [SerializeField] private ChipDataSO _chipDataSO;
+    [SerializeField] private EnemyDamageDataSO _enemyDamageDataSO;
 
     #endregion
 
@@ -41,6 +42,7 @@ public class GameAssetsManager : MonoBehaviour
     public GameObject[] StunnedParticles => _stunnedParticles;
     public Color LaserHeatColor => _laserHeatColor;
     public ChipDataSO ChipDataSO => _chipDataSO;
+    public EnemyDamageDataSO EnemyDamageDataSO => _enemyDamageDataSO;
 
     public static GameAssetsManager Instance { get { return _instance; } }
 

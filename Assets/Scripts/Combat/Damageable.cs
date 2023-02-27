@@ -10,8 +10,8 @@ public class Damageable : MonoBehaviour
     #region Editor Fields
 
     [Header("Type Resistances")]
-    [SerializeField] private List<DamageType> _resistanceType = new List<DamageType>();
-    [SerializeField] private List<DamageType> _weaknessType = new List<DamageType>();
+    [SerializeField] private List<DamageTypes> _resistanceType = new List<DamageTypes>();
+    [SerializeField] private List<DamageTypes> _weaknessType = new List<DamageTypes>();
 
     [Header("Stats")]
     [SerializeField] private float _currentHealth;
@@ -56,7 +56,7 @@ public class Damageable : MonoBehaviour
     public float MaxHealth => _maxHealth;
 
     public event Action<int> OnUpdateHealth;
-    public event Action<DamageType> OnDamaged;
+    public event Action<DamageTypes> OnDamaged;
     public event Action OnDie;
 
     #endregion
@@ -90,14 +90,13 @@ public class Damageable : MonoBehaviour
         if (!other.gameObject.TryGetComponent(out Projectile projectile)) { return; }
 
         if (IsOwnDamage(other)) { return; }
-        Debug.Log($"{gameObject.name} {projectile.DamageData}");
         _damageData = new DamageData(projectile.DamageData);
         if (projectile.DestroyOnHit)
         {
             Damage(_damageData.Damage[0]);
 
-            if (projectile.DamageTypes[0] != projectile.DamageTypes[1] && projectile.DamageTypes[1] != DamageType.None) { Damage(_damageData.Damage[1], true, false, null, 1); }
-            else if (projectile.DamageTypes[0] != projectile.DamageTypes[1] && projectile.DamageTypes[1] == DamageType.None) { Damage(_damageData.Damage[0], true); }
+            if (projectile.DamageTypes[0] != projectile.DamageTypes[1] && projectile.DamageTypes[1] != DamageTypes.None) { Damage(_damageData.Damage[1], true, false, null, 1); }
+            else if (projectile.DamageTypes[0] != projectile.DamageTypes[1] && projectile.DamageTypes[1] == DamageTypes.None) { Damage(_damageData.Damage[0], true); }
 
             if (projectile.ProjectileParticles != null) { projectile.ProjectileParticles.transform.SetParent(null); }
 
@@ -173,9 +172,8 @@ public class Damageable : MonoBehaviour
         if (_damageData == null) { return; }
 
         float finalDamage = 0;
-        Debug.Log(gameObject.name + " " + _damageData);
-        Debug.Log(gameObject.name + " " + _damageData.DamageTypes[0]);
-        if (_damageData.DamageTypes[0] == DamageType.None)
+
+        if (_damageData.DamageTypes[0] == DamageTypes.None)
         {
             finalDamage = damage;
         }
@@ -207,7 +205,7 @@ public class Damageable : MonoBehaviour
 
         if(finalDamage != 0) { DamagePopup.Create(transform.position, (int)finalDamage, _damageData.DamageTypes[index], isWeak); }
 
-        if (_damageParticles != null && _damageData.DamageTypes[index] != DamageType.None) { _damageParticles.Play(); }
+        if (_damageParticles != null && _damageData.DamageTypes[index] != DamageTypes.None) { _damageParticles.Play(); }
 
         if (_currentHealth == 0) { Die(); }
     }
@@ -220,9 +218,9 @@ public class Damageable : MonoBehaviour
 
         UpdateHealthUI();
 
-        OnDamaged?.Invoke(DamageType.None);
+        OnDamaged?.Invoke(DamageTypes.None);
 
-        if (damage != 0) { DamagePopup.Create(transform.position, damage, DamageType.None, false); }
+        if (damage != 0) { DamagePopup.Create(transform.position, damage, DamageTypes.None, false); }
 
         if (_damageParticles != null) { _damageParticles.Play(); }
 
@@ -258,15 +256,15 @@ public class Damageable : MonoBehaviour
         _electricParticles.Stop();
     }
 
-    private int DamageTypesSelector(DamageType damageType, bool isResistant, bool isWeak, int finalDamage, bool isDamageChain, int index)
+    private int DamageTypesSelector(DamageTypes damageType, bool isResistant, bool isWeak, int finalDamage, bool isDamageChain, int index)
     {
-        if (DamageType.Electric == damageType) { finalDamage = ElectricDamage(isDamageChain, isResistant, isWeak, index, finalDamage); }
+        if (DamageTypes.Electric == damageType) { finalDamage = ElectricDamage(isDamageChain, isResistant, isWeak, index, finalDamage); }
 
-        if (DamageType.Fire == damageType){ FireDamage(isResistant, isWeak, index, finalDamage); }
+        if (DamageTypes.Fire == damageType){ FireDamage(isResistant, isWeak, index, finalDamage); }
 
-        if (DamageType.Laser == damageType) { finalDamage = LaserDamage(isResistant, isWeak, finalDamage, index); }
+        if (DamageTypes.Laser == damageType) { finalDamage = LaserDamage(isResistant, isWeak, finalDamage, index); }
 
-        if (DamageType.Base == damageType) { finalDamage = BaseDamage(isResistant, isWeak, index, finalDamage); }
+        if (DamageTypes.Base == damageType) { finalDamage = BaseDamage(isResistant, isWeak, index, finalDamage); }
 
         return finalDamage;
     }

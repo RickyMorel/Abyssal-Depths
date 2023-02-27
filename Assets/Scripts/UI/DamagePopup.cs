@@ -32,7 +32,7 @@ public class DamagePopup : MonoBehaviour
 
     #region Public Properties
 
-    public static DamagePopup Create(Vector3 position, int damage, DamageType damageType, bool isCriticalHit, bool isSmall = true)
+    public static DamagePopup Create(Vector3 position, int damage, DamageTypes damageType, bool isCriticalHit, bool isSmall = true)
     {
         Vector3 offset = new Vector3(UnityEngine.Random.Range(-5f, 5f), UnityEngine.Random.Range(-5f, 5f), 0);
         GameObject damagePopupObj = Instantiate(GameAssetsManager.Instance.DamagePopup, position + offset, Quaternion.identity);
@@ -85,7 +85,7 @@ public class DamagePopup : MonoBehaviour
         if(_textColor.a < 0) { Destroy(gameObject); }
     }
 
-    public void Setup(int damageAmount, DamageType damageType, bool isCriticalHit, bool isSmall)
+    public void Setup(int damageAmount, DamageTypes damageType, bool isCriticalHit, bool isSmall)
     {
         isCriticalHit = UnityEngine.Random.Range(0, 4) == 1 ? true : false;
         _damageText.text = damageAmount.ToString();
@@ -101,16 +101,16 @@ public class DamagePopup : MonoBehaviour
 
         switch (damageType)
         {
-            case DamageType.Base:
+            case DamageTypes.Base:
                 _textColor = _baseColor;
                 break;
-            case DamageType.Fire:
+            case DamageTypes.Fire:
                 _textColor = _fireColor;
                 break;
-            case DamageType.Electric:
+            case DamageTypes.Electric:
                 _textColor = _electricColor ;
                 break;
-            case DamageType.Laser:
+            case DamageTypes.Laser:
                 _textColor = _laserColor;
                 break;
         }

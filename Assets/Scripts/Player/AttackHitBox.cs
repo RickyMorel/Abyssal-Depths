@@ -18,7 +18,7 @@ public class AttackHitBox : MonoBehaviour
     private Mace _mace;
     private ChipDataSO.BasicChip _chipClass;
     private ChipDataSO _chipDataSO;
-    private DamageType _damageType = DamageType.Base;
+    private DamageTypes _damageType = DamageTypes.Base;
     private int _damage;
     private Weapon _weapon;
 
@@ -59,7 +59,7 @@ public class AttackHitBox : MonoBehaviour
             {
                 CalculateDamage(enemyHealth);
             }
-            else { aiHealth.Hurt(DamageType.Base); }
+            else { aiHealth.Hurt(DamageTypes.Base); }
 
             _ownHealth.GetComponent<PlayerComponents>()?.PlayerCamera.ShakeCamera(2f, 50f, 0.2f);
         }
@@ -69,7 +69,7 @@ public class AttackHitBox : MonoBehaviour
         if (enemyHealth is PlayerHealth) 
         { 
             PlayerHealth playerHealth = enemyHealth as PlayerHealth;
-            playerHealth.Hurt(DamageType.Base);
+            playerHealth.Hurt(DamageTypes.Base);
             _ownHealth.GetComponent<PlayerComponents>()?.PlayerCamera.ShakeCamera(2f, 50f, 0.2f);
         }
 

@@ -18,13 +18,15 @@ public class GameAssetsManager : MonoBehaviour
     [SerializeField] private GameObject[] _stunnedParticles;
     [ColorUsageAttribute(false, true), SerializeField] private Color _laserHeatColor;
     [SerializeField] private ChipDataSO _chipDataSO;
-    [SerializeField] private EnemyDamageDataSO _enemyDamageDataSO;
+    [SerializeField] private EnemyDamageDataSO _enemyDamageDataSOPrefab;
+    [SerializeField] private DamageType _damageType;
 
     #endregion
 
     #region Private Variables
 
     private static GameAssetsManager _instance;
+    private EnemyDamageDataSO _enemyDamageDataSOInstance;
 
     #endregion
 
@@ -42,7 +44,8 @@ public class GameAssetsManager : MonoBehaviour
     public GameObject[] StunnedParticles => _stunnedParticles;
     public Color LaserHeatColor => _laserHeatColor;
     public ChipDataSO ChipDataSO => _chipDataSO;
-    public EnemyDamageDataSO EnemyDamageDataSO => _enemyDamageDataSO;
+    public EnemyDamageDataSO EnemyDamageDataSO => _enemyDamageDataSOInstance;
+    public DamageType DamageType => _damageType;
 
     public static GameAssetsManager Instance { get { return _instance; } }
 
@@ -58,5 +61,7 @@ public class GameAssetsManager : MonoBehaviour
         {
             _instance = this;
         }
+
+        _enemyDamageDataSOInstance = new EnemyDamageDataSO(_enemyDamageDataSOPrefab);
     }
 }

@@ -1,12 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class DamageData
 {
     #region Private Variables
 
-    protected DamageType[] _damageTypes;
+    protected DamageTypes[] _damageTypes;
     protected int[] _damage = { 0, 0 };
     protected int _impactDamage;
     protected float[] _weakness = { 0, 0 };
@@ -20,7 +16,7 @@ public class DamageData
 
     public int[] Damage => _damage;
     public int ImpactDamage => _impactDamage;
-    public DamageType[] DamageTypes => _damageTypes;
+    public DamageTypes[] DamageTypes => _damageTypes;
     public float[] Weakness => _weakness;
     public float[] Resistance => _resistance;
     public float[] SecondaryValue => _secondaryValue;
@@ -28,7 +24,7 @@ public class DamageData
 
     #endregion
 
-    public DamageData(DamageType[] damageTypes, int[] damage, int impactDamage, float[] resistance, float[] weakness, float[] secondaryValue, float[] additionalValue)
+    public DamageData(DamageTypes[] damageTypes, int[] damage, int impactDamage, float[] resistance, float[] weakness, float[] secondaryValue, float[] additionalValue)
     {
         _damageTypes = damageTypes;
         _damage = damage;

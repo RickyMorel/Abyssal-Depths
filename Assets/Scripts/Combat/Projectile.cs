@@ -10,7 +10,7 @@ public class Projectile : MonoBehaviour
 
     [SerializeField] private float _speed;
     [SerializeField] protected float _dealDamageAfterSeconds = 0;
-    [SerializeField] protected DamageType[] _damageTypes;
+    [SerializeField] protected DamageTypes[] _damageTypes;
     [ColorUsageAttribute(false, true), SerializeField] private Color _laserHeatColor;
 
     #endregion
@@ -41,7 +41,7 @@ public class Projectile : MonoBehaviour
     public int[] Damage => _damage;
     public int ImpactDamage => _impactDamage;
 
-    public DamageType[] DamageTypes => _damageTypes;
+    public DamageTypes[] DamageTypes => _damageTypes;
 
     public bool DestroyOnHit => _destroyOnHit;
 
@@ -74,7 +74,9 @@ public class Projectile : MonoBehaviour
     {
         _rb.AddForce(transform.forward * _speed, ForceMode.Impulse);
         Invoke(nameof(DestroySelf), 4f);
-        CreateDamageDataFromChip();
+
+        if (_weapon == null) { CreateDamageForEnemies(); }
+        else { CreateDamageDataFromChip(); }
 
         if (GetComponentInChildren<ParticleSystem>() == null) { return; }
 
@@ -99,11 +101,11 @@ public class Projectile : MonoBehaviour
         for (int i = 0; i < 2; i++)
         {
             _chipClass[i] = _chipDataSO.GetChipType(_damageTypes[i]);
-            //_chipDataSO.GetWeaknessAndResistance(_chipClass[i], out _weakness[i], out _resistance[i]);
+            _chipDataSO.GetWeaknessAndResistance(_damageTypes[i], out _weakness[i], out _resistance[i]);
             _damage[i] = _chipDataSO.GetDamageFromChip(_chipClass[i], _weapon.ChipLevel, 0);
             _secondaryValue[i] = _chipDataSO.GetDamageFromChip(_chipClass[i], _weapon.ChipLevel, 1);
             
-            if (_damageTypes[i] == DamageType.Fire || _damageTypes[i] == DamageType.Laser) { _additionalValue[i] = _chipDataSO.GetAdditionalValueFromChip(_chipClass[i]); }
+            if (_damageTypes[i] == global::DamageTypes.Fire || _damageTypes[i] == global::DamageTypes.Laser) { _additionalValue[i] = _chipDataSO.GetAdditionalValueFromChip(_chipClass[i]); }
         }
         _impactDamage = _chipDataSO.GetImpactDamageFromChip(_chipClass[0]);
 
@@ -115,13 +117,16 @@ public class Projectile : MonoBehaviour
     private void CreateDamageForEnemies()
     {
         _enemyDamageDataSO = GameAssetsManager.Instance.EnemyDamageDataSO;
-        EnemyDamageValues enemyDamageValues = _enemyDamageDataSO.EnemyDataDictionary[_aiCombatID];
+        _enemyDamageDataSO.EnemyDataDictionary.TryGetValue(_aiCombatID, out EnemyDamageValues enemyDamageValues);
         for (int i = 0; i < 2; i++)
         {
             _damage[i] = enemyDamageValues.Damage[i];
             _impactDamage = enemyDamageValues.ImpactDamage;
             _secondaryValue[i] = enemyDamageValues.SecondaryValue[i];
             _additionalValue[i] = enemyDamageValues.AdditionalValue[i];
+            _damageTypes[i] = enemyDamageValues.DamageType[i];
+            _enemyDamageDataSO.GetWeaknessAndResistance(_damageTypes[i], out _weakness[i], out _resistance[i]);
         }
+        _damageData = new DamageData(_damageTypes, _damage, _impactDamage, _resistance, _weakness, _secondaryValue, _additionalValue);
     }
 }

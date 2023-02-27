@@ -9,11 +9,11 @@ public class ProjectileLaser : Projectile
         for (int i = 0; i < 2; i++)
         {
             _chipClass[i] = _chipDataSO.GetChipType(_damageTypes[i]);
-            //_chipDataSO.GetWeaknessAndResistance(_chipClass[i], out _weakness[i], out _resistance[i]);
+            _chipDataSO.GetWeaknessAndResistance(_damageTypes[i], out _weakness[i], out _resistance[i]);
             _damage[i] = _chipDataSO.GetDamageFromChip(_chipClass[i], _weapon.ChipLevel, 0);
             _secondaryValue[i] = _chipDataSO.GetDamageFromChip(_chipClass[i], _weapon.ChipLevel, 1);
 
-            if (_damageTypes[i] == DamageType.Fire || _damageTypes[i] == DamageType.Laser) { _additionalValue[i] = _chipDataSO.GetAdditionalValueFromChip(_chipClass[i]); }
+            if (_damageTypes[i] == global::DamageTypes.Fire || _damageTypes[i] == global::DamageTypes.Laser) { _additionalValue[i] = _chipDataSO.GetAdditionalValueFromChip(_chipClass[i]); }
         }
 
         _impactDamage = _chipDataSO.GetImpactDamageFromChip(_chipClass[0]);

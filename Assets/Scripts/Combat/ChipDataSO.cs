@@ -6,10 +6,20 @@ using UnityEngine;
 
 public class ChipDataSO : ScriptableObject
 {
+    #region Private Variables
+
+    private DamageType _damageMultipliers;
+
+    #endregion
+
+    #region Public Properties
+
     public BaseChip BaseData;
     public FireChip FireData;
     public ElectricChip ElectricData;
     public LaserChip LaserData;
+
+    #endregion
 
     public int GetDamageFromChip(BasicChip chipClass, int chipLevel, int selectedDamage)
     {
@@ -68,12 +78,12 @@ public class ChipDataSO : ScriptableObject
         return 20;
     }
 
-    public BasicChip GetChipType(DamageType damageType)
+    public BasicChip GetChipType(DamageTypes damageType)
     {
-        if (damageType == DamageType.Base) { return BaseData; }
-        else if (damageType == DamageType.Fire) { return FireData; }
-        else if (damageType == DamageType.Electric) { return ElectricData; }
-        else if (damageType == DamageType.Laser) { return LaserData; }
+        if (damageType == DamageTypes.Base) { return BaseData; }
+        else if (damageType == DamageTypes.Fire) { return FireData; }
+        else if (damageType == DamageTypes.Electric) { return ElectricData; }
+        else if (damageType == DamageTypes.Laser) { return LaserData; }
         return null;
     }
 
@@ -107,39 +117,37 @@ public class ChipDataSO : ScriptableObject
         return -1;
     }
 
-    //public void GetWeaknessAndResistance(BasicChip chipClass, out float weakness, out float resistance)
-    //{
-    //    if (chipClass is BaseChip)
-    //    {
-    //        BaseChip baseChip = chipClass as BaseChip;
-    //        baseChip.DamageMultipliers = _damageMultipliersValues.
-    //        return;
-    //    }
-    //    if (chipClass is FireChip)
-    //    {
-    //        FireChip fireChip = chipClass as FireChip;
-    //        weakness = fireChip.DamageMultiplierWeakness;
-    //        resistance = fireChip.DamageMultiplierResistance;
-    //        return;
-    //    }
-    //    if (chipClass is ElectricChip)
-    //    {
-    //        ElectricChip electricChip = chipClass as ElectricChip;
-    //        weakness = electricChip.DamageMultiplierWeakness;
-    //        resistance = electricChip.DamageMultiplierResistance;
-    //        return;
-    //    }
-    //    if (chipClass is LaserChip)
-    //    {
-    //        LaserChip laserChip = chipClass as LaserChip;
-    //        weakness = laserChip.DamageMultiplierWeakness;
-    //        resistance = laserChip.DamageMultiplierResistance;
-    //        return;
-    //    }
-    //    weakness = 0;
-    //    resistance = 0;
-    //    return;
-    //}
+    public void GetWeaknessAndResistance(DamageTypes damageType, out float weakness, out float resistance)
+    {
+        _damageMultipliers = GameAssetsManager.Instance.DamageType;
+        if (damageType is DamageTypes.Base)
+        {
+            weakness = _damageMultipliers.Base[0];
+            resistance = _damageMultipliers.Base[1];
+            return;
+        }
+        if (damageType is DamageTypes.Fire)
+        {
+            weakness = _damageMultipliers.Fire[0];
+            resistance = _damageMultipliers.Fire[1];
+            return;
+        }
+        if (damageType is DamageTypes.Electric)
+        {
+            weakness = _damageMultipliers.Electric[0];
+            resistance = _damageMultipliers.Electric[1];
+            return;
+        }
+        if (damageType is DamageTypes.Laser)
+        {
+            weakness = _damageMultipliers.Laser[0];
+            resistance = _damageMultipliers.Laser[1];
+            return;
+        }
+        weakness = 0;
+        resistance = 0;
+        return;
+    }
 
     public float GetAdditionalValueFromChip(BasicChip chipClass)
     {
@@ -194,8 +202,6 @@ public class ChipDataSO : ScriptableObject
     {
         public int ImpactDamage;
         public float ShootAfterSeconds = 0.2f;
-        private Vector2 _damageMultipliers;
-        public Vector2 DamageMultipliers { get { return _damageMultipliers; } set { _damageMultipliers = value; } }
     }
 
     [System.Serializable]

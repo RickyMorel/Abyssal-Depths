@@ -22,7 +22,7 @@ public class SemiautoElectricRifle : WeaponShoot
     public override void Start()
     {
         _weapon = GetComponentInParent<Weapon>();
-        _chipClass = _chipDataSO.GetChipType(DamageType.Electric);
+        _chipClass = _chipDataSO.GetChipType(DamageTypes.Electric);
         _timeBetweenShots = _chipClass.ShootAfterSeconds;
     }
 

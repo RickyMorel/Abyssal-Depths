@@ -124,7 +124,7 @@ public class ShipHealth : Damageable
         CheckFlickerRedLights();
     }
 
-    private void HandleDamaged(DamageType damageType)
+    private void HandleDamaged(DamageTypes damageType)
     {
         _boosterHealth.SetHealth((int)CurrentHealth);
 

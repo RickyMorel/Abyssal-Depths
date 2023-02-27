@@ -30,7 +30,7 @@ public class FireShotgun : WeaponShoot
     public override void Start()
     {
         _weapon = GetComponentInParent<Weapon>();
-        _chipClass = _chipDataSO.GetChipType(DamageType.Fire);
+        _chipClass = _chipDataSO.GetChipType(DamageTypes.Fire);
         _timeBetweenShots = _chipClass.ShootAfterSeconds;
     }
 

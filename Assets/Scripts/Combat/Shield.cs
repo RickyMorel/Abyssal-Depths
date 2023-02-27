@@ -8,27 +8,48 @@ public class Shield : MonoBehaviour
     #region Editor Fields
 
     [SerializeField] private float _pushForce = 20f;
+    [SerializeField] private GameObject _ball;
 
     #endregion
 
-    public void OnTriggerEnter(Collider other)
+    private void Update()
     {
-       // if (other.GetComponent<Projectile>() != null) { Destroy(other.gameObject); }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            GameObject ball = Instantiate(_ball, transform.position + Vector3.left * 10f , Quaternion.identity);
+            ball.GetComponent<AIStateMachine>().BounceOffShield();
+            ball.GetComponent<Rigidbody>().AddForce(Vector3.right * 20f, ForceMode.Impulse);
+        }
 
-        if (other.TryGetComponent(out AIHealth aIHealth)) { PushEnemy(aIHealth); }
+        Debug.DrawRay(transform.position, -transform.up * 50f, Color.red);
     }
 
-    private void PushEnemy(AIHealth aIHealth)
+    private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("PUSH: " + aIHealth.gameObject.name);
-        Rigidbody rb = aIHealth.GetComponent<Rigidbody>();
-        NavMeshAgent agent = aIHealth.GetComponent<NavMeshAgent>();
+        if (collision.transform.parent.TryGetComponent(out AIStateMachine aIStateMachine)) { PushEnemy(aIStateMachine, collision); }
+    }
 
-        rb.isKinematic = false;
-        rb.useGravity = true;
-        agent.enabled = false;
+    private void PushEnemy(AIStateMachine aIStateMachine, Collision collision)
+    {
+        Debug.Log("PUSH: " + aIStateMachine.gameObject.name);
 
-        Vector3 pushDir = aIHealth.transform.position - transform.position;
+        aIStateMachine.BounceOffShield();
+
+        StartCoroutine(PushEnemyDelay(aIStateMachine, collision.contacts[0].point));
+    }
+
+    private IEnumerator PushEnemyDelay(AIStateMachine aIStateMachine, Vector3 contanctPoint)
+    {
+        yield return new WaitForEndOfFrame();
+
+        Rigidbody rb = aIStateMachine.GetComponent<Rigidbody>();
+
+        Vector3 pushDir = Vector3.Reflect(aIStateMachine.transform.position - transform.position, -transform.up);
+
+        //Debug.DrawRay(contanctPoint, contanctPoint - aIStateMachine.transform.position, Color.magenta, 5f);
+        //Debug.DrawRay(aIStateMachine.transform.position, pushDir, Color.green, 5f);
+
+        //Vector3 pushDir = contanctPoint;
 
         rb.AddForce(pushDir.normalized * rb.mass * _pushForce, ForceMode.Impulse);
     }

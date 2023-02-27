@@ -9,12 +9,14 @@ public class AIStateMachine : BaseStateMachine
 
     private GAgent _gAgent;
     private NavMeshAgent _agent;
+    private bool _isBouncingOffShield = false;
 
     #endregion
 
     #region Public Properties
 
     public NavMeshAgent Agent => _agent;
+    public bool IsBouncingOffShield => _isBouncingOffShield;
 
     #endregion
 
@@ -38,6 +40,15 @@ public class AIStateMachine : BaseStateMachine
         StartCoroutine(SetIsShootingCoroutine());
     }
 
+    public void BounceOffShield()
+    {
+        if (_isBouncingOffShield) { return; }
+
+        _isBouncingOffShield = true;
+
+        StartCoroutine(SetBouncingOffShieldCoroutine());
+    }
+
     public IEnumerator SetIsShootingCoroutine()
     {
         _isShooting = true;
@@ -45,5 +56,14 @@ public class AIStateMachine : BaseStateMachine
         yield return new WaitForSeconds(0.5f);
 
         _isShooting = false;
+    }
+
+    public IEnumerator SetBouncingOffShieldCoroutine()
+    {
+        _isBouncingOffShield = true;
+
+        yield return new WaitForSeconds(3f);
+
+        _isBouncingOffShield = false;
     }
 }

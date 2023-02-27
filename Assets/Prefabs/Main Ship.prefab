@@ -833,6 +833,7 @@ GameObject:
   - component: {fileID: 3926611867066130000}
   - component: {fileID: 7238815909928439104}
   - component: {fileID: 3006501415176180845}
+  - component: {fileID: 1132603600175419452}
   m_Layer: 17
   m_Name: DefaultShield
   m_TagString: Untagged
@@ -917,7 +918,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d93080e69f09754b9c2ffc91dbddeff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pushForce: 2000
+  _pushForce: 30
+  _ball: {fileID: 0}
 --- !u!65 &3006501415176180845
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -931,6 +933,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.020047769, y: 0.045829788, z: 0.5}
   m_Center: {x: 0.00000011920928, y: 0.012918902, z: -2.3283028e-10}
+--- !u!54 &1132603600175419452
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 212232855496702715}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &865493894868582840
 GameObject:
   m_ObjectHideFlags: 0
@@ -1987,6 +2005,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pushForce: 20
+  _ball: {fileID: 0}
 --- !u!1 &4423279608118713247
 GameObject:
   m_ObjectHideFlags: 0
@@ -8769,7 +8788,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.257436, y: 1}
+    m_SensorSize: {x: 1.7887579, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

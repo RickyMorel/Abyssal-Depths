@@ -98,7 +98,11 @@ public class Damageable : MonoBehaviour
             if (projectile.DamageTypes[0] != projectile.DamageTypes[1] && projectile.DamageTypes[1] != DamageTypes.None) { Damage(_damageData.Damage[1], true, false, null, 1); }
             else if (projectile.DamageTypes[0] != projectile.DamageTypes[1] && projectile.DamageTypes[1] == DamageTypes.None) { Damage(_damageData.Damage[0], true); }
 
-            if (projectile.ProjectileParticles != null) { projectile.ProjectileParticles.transform.SetParent(null); }
+            if (projectile.ProjectileParticles != null) 
+            { 
+                foreach(ParticleSystem particle in projectile.ProjectileParticles)
+                particle.transform.SetParent(null); 
+            }
 
             Destroy(projectile.gameObject);
         }

@@ -11,14 +11,15 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] protected float _dealDamageAfterSeconds = 0;
     [SerializeField] protected DamageTypes[] _damageTypes;
-    [ColorUsageAttribute(false, true), SerializeField] private Color _laserHeatColor;
+    [Tooltip("The colors used for each level")]
+    [SerializeField] private Color[] _projectileColors = new Color[3];
+    [SerializeField] protected ParticleSystem[] _particles;
 
     #endregion
 
     #region Private Varaibles
 
     private Rigidbody _rb;
-    protected ParticleSystem _particles;
     protected bool _destroyOnHit = true;
     protected Weapon _weapon;
     protected int _aiCombatID;
@@ -31,7 +32,6 @@ public class Projectile : MonoBehaviour
     protected float[] _resistance = { 0, 0 };
     protected float[] _secondaryValue = { 0, 0 };
     protected float[] _additionalValue = { 0, 0 };
-    private Renderer[] _renderers;
     private DamageData _damageData;
 
     #endregion
@@ -57,7 +57,7 @@ public class Projectile : MonoBehaviour
 
     #region Getters and Setters
 
-    public ParticleSystem ProjectileParticles { get { return _particles; } set { _particles = value; } }
+    public ParticleSystem[] ProjectileParticles { get { return _particles; } set { _particles = value; } }
     public Weapon WeaponReference { get { return _weapon; } set { _weapon = value; } }
     public int AICombatID { get { return _aiCombatID; } set { _aiCombatID = value; } }
 
@@ -76,11 +76,7 @@ public class Projectile : MonoBehaviour
         Invoke(nameof(DestroySelf), 4f);
 
         if (_weapon == null) { CreateDamageForEnemies(); }
-        else { CreateDamageDataFromChip(); }
-
-        if (GetComponentInChildren<ParticleSystem>() == null) { return; }
-
-        _particles = GetComponentInChildren<ParticleSystem>();
+        else { CreateDamageDataFromChip(); ChangeParticleColor(_weapon.ChipLevel); }
     }
 
     public void Initialize(string ownerTag)
@@ -95,7 +91,7 @@ public class Projectile : MonoBehaviour
 
     #endregion
 
-    private void CreateDamageDataFromChip()
+    public void CreateDamageDataFromChip()
     {
         _chipDataSO = GameAssetsManager.Instance.ChipDataSO;
         for (int i = 0; i < 2; i++)
@@ -114,7 +110,7 @@ public class Projectile : MonoBehaviour
         _damageData = new DamageData(_damageTypes, _damage, _impactDamage, _resistance, _weakness, _secondaryValue, _additionalValue);
     }
 
-    private void CreateDamageForEnemies()
+    public void CreateDamageForEnemies()
     {
         _enemyDamageDataSO = GameAssetsManager.Instance.EnemyDamageDataSO;
         _enemyDamageDataSO.EnemyDataDictionary.TryGetValue(_aiCombatID, out EnemyDamageValues enemyDamageValues);
@@ -128,5 +124,44 @@ public class Projectile : MonoBehaviour
             GameAssetsManager.Instance.DamageType.GetWeaknessAndResistance(_damageTypes[i], out _weakness[i], out _resistance[i]);
         }
         _damageData = new DamageData(_damageTypes, _damage, _impactDamage, _resistance, _weakness, _secondaryValue, _additionalValue);
+    }
+
+    public void ChangeParticleColor(int chipLevel = 1)
+    {
+        for (int i = 0; i < _projectileColors.Length; i++)
+        {
+            if (_particles[i].trails.enabled)
+            {
+                var trails = _particles[i].trails;
+                switch (chipLevel)
+                {
+                    case 1:
+                        trails.colorOverLifetime = _projectileColors[0];
+                        return;
+                    case 2:
+                        trails.colorOverLifetime = _projectileColors[1];
+                        return;
+                    case 3:
+                        trails.colorOverLifetime = _projectileColors[2];
+                        return;
+                }
+            }
+            else
+            {
+                var startColor = _particles[i].main.startColor;
+                switch (chipLevel)
+                {
+                    case 1:
+                        startColor = _projectileColors[0];
+                        return;
+                    case 2:
+                        startColor = _projectileColors[1];
+                        return;
+                    case 3:
+                        startColor = _projectileColors[2];
+                        return;
+                }
+            }
+        }
     }
 }

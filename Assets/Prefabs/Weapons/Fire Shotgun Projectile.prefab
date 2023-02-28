@@ -163,7 +163,13 @@ MonoBehaviour:
   _speed: 50
   _dealDamageAfterSeconds: 0
   _damageTypes: 0200000000000000
-  _laserHeatColor: {r: 0, g: 0, b: 0, a: 0}
+  _projectileColors:
+  - {r: 1, g: 0.433569, b: 0, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 1, g: 0, b: 0.6106472, a: 1}
+  _particles:
+  - {fileID: 2842498285542718101}
+  - {fileID: 2842148815812621381}
 --- !u!1 &2717069140676046993
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,7 +358,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      maxColor: {r: 1, g: 0.32126835, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -1265,9 +1271,9 @@ ParticleSystem:
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 0}
-        key1: {r: 1, g: 0.8509096, b: 0.3087625, a: 1}
-        key2: {r: 1, g: 0.33629513, b: 0, a: 0.6853976}
-        key3: {r: 0.49264705, g: 0, b: 0, a: 0}
+        key1: {r: 1, g: 1, b: 1, a: 1}
+        key2: {r: 0.5471698, g: 0.5471698, b: 0.5471698, a: 0.6853976}
+        key3: {r: 0.084905684, g: 0.084905684, b: 0.084905684, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
         key6: {r: 0, g: 0, b: 0, a: 0}
@@ -4917,7 +4923,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      maxColor: {r: 1, g: 0.32156864, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -5829,8 +5835,8 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 0.6827587, b: 0, a: 0}
-        key1: {r: 1, g: 0.6827587, b: 0, a: 1}
+        key0: {r: 1, g: 1, b: 1, a: 0}
+        key1: {r: 1, g: 1, b: 1, a: 1}
         key2: {r: 1, g: 0, b: 0, a: 0.97759134}
         key3: {r: 1, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -5849,8 +5855,8 @@ ParticleSystem:
         atime1: 10134
         atime2: 56682
         atime3: 65535
-        atime4: 0
-        atime5: 0
+        atime4: 65535
+        atime5: 65535
         atime6: 0
         atime7: 0
         m_Mode: 0

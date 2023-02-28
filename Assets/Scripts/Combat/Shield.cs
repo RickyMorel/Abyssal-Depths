@@ -22,10 +22,12 @@ public class Shield : MonoBehaviour
         }
 
         Debug.DrawRay(transform.position, -transform.up * 50f, Color.red);
+        Debug.DrawRay(transform.position, -transform.right * 50f, Color.red);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("OnCollisionEnter: " + collision.gameObject.name);
         if (collision.transform.parent.TryGetComponent(out AIStateMachine aIStateMachine)) { PushEnemy(aIStateMachine, collision); }
     }
 
@@ -44,9 +46,9 @@ public class Shield : MonoBehaviour
 
         Rigidbody rb = aIStateMachine.GetComponent<Rigidbody>();
 
-        Vector3 pushDir = Vector3.Reflect(aIStateMachine.transform.position - transform.position, -transform.up);
+        Vector3 pushDir = Vector3.Reflect(aIStateMachine.transform.position - transform.position, -transform.right);
 
-        //Debug.DrawRay(contanctPoint, contanctPoint - aIStateMachine.transform.position, Color.magenta, 5f);
+        Debug.DrawRay(aIStateMachine.transform.position, pushDir * 50f, Color.magenta, 5f);
         //Debug.DrawRay(aIStateMachine.transform.position, pushDir, Color.green, 5f);
 
         //Vector3 pushDir = contanctPoint;

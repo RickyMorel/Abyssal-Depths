@@ -101,7 +101,7 @@ public class Projectile : MonoBehaviour
         for (int i = 0; i < 2; i++)
         {
             _chipClass[i] = _chipDataSO.GetChipType(_damageTypes[i]);
-            _chipDataSO.GetWeaknessAndResistance(_damageTypes[i], out _weakness[i], out _resistance[i]);
+            GameAssetsManager.Instance.DamageType.GetWeaknessAndResistance(_damageTypes[i], out _weakness[i], out _resistance[i]);
             _damage[i] = _chipDataSO.GetDamageFromChip(_chipClass[i], _weapon.ChipLevel, 0);
             _secondaryValue[i] = _chipDataSO.GetDamageFromChip(_chipClass[i], _weapon.ChipLevel, 1);
             
@@ -125,7 +125,7 @@ public class Projectile : MonoBehaviour
             _secondaryValue[i] = enemyDamageValues.SecondaryValue[i];
             _additionalValue[i] = enemyDamageValues.AdditionalValue[i];
             _damageTypes[i] = enemyDamageValues.DamageType[i];
-            _enemyDamageDataSO.GetWeaknessAndResistance(_damageTypes[i], out _weakness[i], out _resistance[i]);
+            GameAssetsManager.Instance.DamageType.GetWeaknessAndResistance(_damageTypes[i], out _weakness[i], out _resistance[i]);
         }
         _damageData = new DamageData(_damageTypes, _damage, _impactDamage, _resistance, _weakness, _secondaryValue, _additionalValue);
     }

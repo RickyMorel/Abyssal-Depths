@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class EnemyDamageDataSO : ScriptableObject
 {
-    private DamageType _damageMultipliers;
     public List<EnemyDamageValues> EnemyDataList = new List<EnemyDamageValues>();
     public Dictionary<int, EnemyDamageValues> EnemyDataDictionary = new Dictionary<int, EnemyDamageValues>();
 
@@ -18,8 +17,6 @@ public class EnemyDamageDataSO : ScriptableObject
             EnemyDataDictionary.Add(enemyDamageData.EnemyID, enemyDamageData);
         }
     }
-
-    
 }
 
 [System.Serializable]

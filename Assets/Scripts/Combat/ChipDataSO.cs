@@ -117,38 +117,6 @@ public class ChipDataSO : ScriptableObject
         return -1;
     }
 
-    public void GetWeaknessAndResistance(DamageTypes damageType, out float weakness, out float resistance)
-    {
-        _damageMultipliers = GameAssetsManager.Instance.DamageType;
-        if (damageType is DamageTypes.Base)
-        {
-            weakness = _damageMultipliers.Base[0];
-            resistance = _damageMultipliers.Base[1];
-            return;
-        }
-        if (damageType is DamageTypes.Fire)
-        {
-            weakness = _damageMultipliers.Fire[0];
-            resistance = _damageMultipliers.Fire[1];
-            return;
-        }
-        if (damageType is DamageTypes.Electric)
-        {
-            weakness = _damageMultipliers.Electric[0];
-            resistance = _damageMultipliers.Electric[1];
-            return;
-        }
-        if (damageType is DamageTypes.Laser)
-        {
-            weakness = _damageMultipliers.Laser[0];
-            resistance = _damageMultipliers.Laser[1];
-            return;
-        }
-        weakness = 0;
-        resistance = 0;
-        return;
-    }
-
     public float GetAdditionalValueFromChip(BasicChip chipClass)
     {
         if (chipClass is FireChip)

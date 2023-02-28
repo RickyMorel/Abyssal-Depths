@@ -9,7 +9,7 @@ public class ProjectileLaser : Projectile
         for (int i = 0; i < 2; i++)
         {
             _chipClass[i] = _chipDataSO.GetChipType(_damageTypes[i]);
-            _chipDataSO.GetWeaknessAndResistance(_damageTypes[i], out _weakness[i], out _resistance[i]);
+            GameAssetsManager.Instance.DamageType.GetWeaknessAndResistance(_damageTypes[i], out _weakness[i], out _resistance[i]); 
             _damage[i] = _chipDataSO.GetDamageFromChip(_chipClass[i], _weapon.ChipLevel, 0);
             _secondaryValue[i] = _chipDataSO.GetDamageFromChip(_chipClass[i], _weapon.ChipLevel, 1);
 

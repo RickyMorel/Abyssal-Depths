@@ -852,7 +852,7 @@ MonoBehaviour:
   _playerPositionTransform: {fileID: 812851628}
   _isAIOnlyInteractable: 1
   _isSingleUse: 1
-  _singleUseTime: 1.8
+  _singleUseTime: 19
 --- !u!114 &8910096689639035120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -913,8 +913,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4216913838182659089}
   - component: {fileID: 7238815909928439104}
-  - component: {fileID: 3006501415176180845}
   - component: {fileID: 1132603600175419452}
+  - component: {fileID: 6813348888639309268}
   m_Layer: 18
   m_Name: DefaultShield
   m_TagString: Untagged
@@ -931,7 +931,7 @@ Transform:
   m_GameObject: {fileID: 212232855496702715}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 809.1735, y: 19.659733, z: 129.31653}
+  m_LocalScale: {x: 539.449, y: 78.63892, z: 86.211}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1402829759}
@@ -950,21 +950,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d93080e69f09754b9c2ffc91dbddeff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pushForce: 30
+  _pushForce: 60
   _ball: {fileID: 0}
---- !u!65 &3006501415176180845
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 212232855496702715}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.020047769, y: 0.03597861, z: 0.5}
-  m_Center: {x: 0.00000011903114, y: 0.017844468, z: 2.3489558e-16}
 --- !u!54 &1132603600175419452
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -981,6 +968,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!64 &6813348888639309268
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 212232855496702715}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5495902117074765545, guid: 14903736148a94148ba46f30c6a5d466, type: 3}
 --- !u!1 &865493894868582840
 GameObject:
   m_ObjectHideFlags: 0
@@ -1408,7 +1409,7 @@ MonoBehaviour:
   _playerPositionTransform: {fileID: 5285812325594334998}
   _isAIOnlyInteractable: 1
   _isSingleUse: 1
-  _singleUseTime: 10
+  _singleUseTime: 19
 --- !u!114 &3637270902505392618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8820,7 +8821,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.257436, y: 1}
+    m_SensorSize: {x: 2.2594874, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

@@ -18,6 +18,7 @@ public class BaseInteractionController : MonoBehaviour
     protected Rigidbody _rb;
     private NavMeshAgent _agent;
     protected Interactable _currentInteractable;
+    [SerializeField] protected bool _canInteractInCurrentState = true;
 
     protected bool _isUsing = false;
     protected bool _isUsing_2 = false;
@@ -71,10 +72,17 @@ public class BaseInteractionController : MonoBehaviour
         CheckExitInteraction();
     }
 
+    public virtual void HandleChangeState(PlayerBaseState newState, bool isRootState)
+    {
+
+    }
+
     public virtual void CheckExitInteraction()
     {
         //if is not doing interaction, return
         if (!IsInteracting()) { return; }
+
+        Debug.Log("CheckExitInteraction: " + gameObject.name);
 
         SetInteraction(0, transform);
 
@@ -90,6 +98,8 @@ public class BaseInteractionController : MonoBehaviour
 
         //if you can't use the interactable while it's broken, return
         if(!_currentInteractable.CanUse && !IsFixing) { return; }
+
+        Debug.Log("HandleInteraction: " + gameObject.name);
 
         float singleUseDuration = customDuration == -1 ? _currentInteractable.SingleUseTime : customDuration;
 

@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 164210208374471132}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.67120165, y: 0.22245985, z: 0.67120165, w: 0.22245973}
+  m_LocalPosition: {x: 0.49980274, y: 0.59004146, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7157232019716196987}
-  m_RootOrder: 4
+  m_Father: {fileID: 5048578928290474677}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1372173607004248497
 BoxCollider:
@@ -19416,6 +19416,7 @@ Transform:
   - {fileID: 5047995247665320657}
   - {fileID: 5048311611116401455}
   - {fileID: 5048573449903982845}
+  - {fileID: 6124724130838882893}
   m_Father: {fileID: 5048369196815601783}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -21765,7 +21766,6 @@ Transform:
   - {fileID: 3455716032564154233}
   - {fileID: 3455716032967025346}
   - {fileID: 4731726961228027436}
-  - {fileID: 6124724130838882893}
   m_Father: {fileID: 0}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -21907,6 +21907,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentInteraction: 0
+  _canInteractInCurrentState: 1
 --- !u!114 &7153336119383687657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21962,7 +21963,7 @@ MonoBehaviour:
   Cost: 1
   Target: {fileID: 0}
   TargetTag: 
-  Duration: 2
+  Duration: 20
   IsRunning: 0
   _attackItemTag: 1
   _attackFreeItemName: 1

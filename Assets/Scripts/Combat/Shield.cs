@@ -12,6 +12,12 @@ public class Shield : MonoBehaviour
 
     #endregion
 
+    #region Private Variables
+
+    private int _getComponentTries = 4;
+
+    #endregion
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))
@@ -27,8 +33,15 @@ public class Shield : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("OnCollisionEnter: " + collision.gameObject.name);
-        if (collision.transform.parent.TryGetComponent(out AIStateMachine aIStateMachine)) { PushEnemy(aIStateMachine, collision); }
+        //Recursively tries to fetch the root gameobject of the collision
+        Transform parentTransform = collision.transform.parent;
+
+        for (int i = 0; i < _getComponentTries; i++)
+        {
+            if(parentTransform.TryGetComponent(out AIStateMachine aIStateMachine)){ PushEnemy(aIStateMachine, collision); break; }
+
+            parentTransform = parentTransform.parent;
+        }
     }
 
     private void PushEnemy(AIStateMachine aIStateMachine, Collision collision)
@@ -46,7 +59,8 @@ public class Shield : MonoBehaviour
 
         Rigidbody rb = aIStateMachine.GetComponent<Rigidbody>();
 
-        Vector3 pushDir = Vector3.Reflect(aIStateMachine.transform.position - transform.position, -transform.right);
+        // Vector3 pushDir = Vector3.Reflect(aIStateMachine.transform.position - transform.position, -transform.right);
+        Vector3 pushDir = aIStateMachine.transform.position - contanctPoint;
 
         Debug.DrawRay(aIStateMachine.transform.position, pushDir * 50f, Color.magenta, 5f);
         //Debug.DrawRay(aIStateMachine.transform.position, pushDir, Color.green, 5f);

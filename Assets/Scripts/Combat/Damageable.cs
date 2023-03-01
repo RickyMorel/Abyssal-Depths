@@ -95,6 +95,12 @@ public class Damageable : MonoBehaviour
         {
             Damage(_damageData.Damage[0]);
 
+            if (_fireParticles != null &&_electricParticles != null && projectile.Weapon != null)
+            {
+                ParticleSystem[] particles = { _fireParticles, _electricParticles };
+                projectile.ChangeParticleColor(particles, projectile.Weapon.ChipLevel);
+            }
+
             if (projectile.DamageTypes[0] != projectile.DamageTypes[1] && projectile.DamageTypes[1] != DamageTypes.None) { Damage(_damageData.Damage[1], true, false, null, 1); }
             else if (projectile.DamageTypes[0] != projectile.DamageTypes[1] && projectile.DamageTypes[1] == DamageTypes.None) { Damage(_damageData.Damage[0], true); }
 

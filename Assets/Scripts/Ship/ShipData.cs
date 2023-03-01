@@ -112,7 +112,7 @@ public class ShipData : MonoBehaviour
 
         foreach (Minable minable in currentMinables)
         {
-            SaveData.MinableData wantedMinable = saveData._minablesInScene.Find(x => x.Id == minable.Id);
+            MinableData wantedMinable = saveData._minablesInScene.Find(x => x.Id == minable.Id);
 
             if (wantedMinable == null) { return; }
 

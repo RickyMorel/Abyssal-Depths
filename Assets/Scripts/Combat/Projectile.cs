@@ -52,6 +52,7 @@ public class Projectile : MonoBehaviour
     public float[] SecondaryValue => _secondaryValue;
     public float[] AdditionalValue => _additionalValue;
     public DamageData DamageData => _damageData;
+    public Weapon Weapon => _weapon;
 
     #endregion
 
@@ -76,7 +77,14 @@ public class Projectile : MonoBehaviour
         Invoke(nameof(DestroySelf), 4f);
 
         if (_weapon == null) { CreateDamageForEnemies(); }
-        else { CreateDamageDataFromChip(); ChangeParticleColor(_weapon.ChipLevel); }
+        else 
+        { 
+            CreateDamageDataFromChip();
+
+            if (_particles.Length < 1) { return; }
+
+            ChangeParticleColor(_particles, _weapon.ChipLevel); 
+        }
     }
 
     public void Initialize(string ownerTag)
@@ -126,13 +134,13 @@ public class Projectile : MonoBehaviour
         _damageData = new DamageData(_damageTypes, _damage, _impactDamage, _resistance, _weakness, _secondaryValue, _additionalValue);
     }
 
-    public void ChangeParticleColor(int chipLevel = 1)
+    public void ChangeParticleColor(ParticleSystem[] particles, int chipLevel = 1)
     {
-        for (int i = 0; i < _projectileColors.Length; i++)
+        for (int i = 0; i < particles.Length; i++)
         {
-            if (_particles[i].trails.enabled)
+            if (particles[i].trails.enabled)
             {
-                var trails = _particles[i].trails;
+                var trails = particles[i].trails;
                 switch (chipLevel)
                 {
                     case 1:
@@ -148,17 +156,18 @@ public class Projectile : MonoBehaviour
             }
             else
             {
-                var startColor = _particles[i].main.startColor;
+                ParticleSystem.MainModule particleColor;
+                particleColor = particles[i].main;
                 switch (chipLevel)
                 {
                     case 1:
-                        startColor = _projectileColors[0];
+                        particleColor.startColor = _projectileColors[0];
                         return;
                     case 2:
-                        startColor = _projectileColors[1];
+                        particleColor.startColor = _projectileColors[1];
                         return;
                     case 3:
-                        startColor = _projectileColors[2];
+                        particleColor.startColor = _projectileColors[2];
                         return;
                 }
             }

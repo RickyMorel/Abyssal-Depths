@@ -67,8 +67,6 @@ public class Shield : MonoBehaviour
 
     private void PushShip(Collision collision)
     {
-        Debug.Log("PUSH SHIP");
-
         Vector3 pushDir = _shipHealth.transform.position - collision.contacts[0].point;
 
         _shipHealth.Rb.AddForce(pushDir.normalized * _shipHealth.Rb.mass * _shipPushForce, ForceMode.Impulse);
@@ -76,8 +74,6 @@ public class Shield : MonoBehaviour
 
     private void PushEnemy(AIStateMachine aIStateMachine, Collision collision)
     {
-        Debug.Log("PUSH: " + aIStateMachine.gameObject.name);
-
         aIStateMachine.BounceOffShield();
 
         StartCoroutine(PushEnemyDelay(aIStateMachine, collision.contacts[0].point));

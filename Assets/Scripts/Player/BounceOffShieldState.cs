@@ -24,8 +24,6 @@ public class BounceOffShieldState : PlayerBaseState
         _useGravityInitialState = _context.Rb.useGravity;
         _agentEnabledInitialState = _aiContext.Agent.enabled;
 
-        Debug.Log($"Enter Bounce State; {_aiContext.gameObject.name} {_aiContext.IsBouncingOffShield}");
-
         _context.Rb.isKinematic = false;
         _context.Rb.useGravity = true;
         _aiContext.Agent.enabled = false;
@@ -39,7 +37,6 @@ public class BounceOffShieldState : PlayerBaseState
 
     public override void ExitState() 
     {
-        Debug.Log($"Exit Bounce State; {_aiContext.gameObject.name} {_aiContext.IsBouncingOffShield}");
         _context.Rb.isKinematic = _isKinematicInitialState;
         _context.Rb.useGravity = _useGravityInitialState;
         _aiContext.Agent.enabled = _agentEnabledInitialState;

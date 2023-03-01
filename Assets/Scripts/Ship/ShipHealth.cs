@@ -26,6 +26,13 @@ public class ShipHealth : Damageable
 
     #endregion
 
+    #region Public Properties
+
+    public LayerMask CrashLayers => _crashLayers;
+    public Rigidbody Rb => _rb;
+
+    #endregion
+
     #region Getters & Setters
 
     public float MinCrashSpeed { get { return _minCrashSpeed; } set { _minCrashSpeed = value; } }

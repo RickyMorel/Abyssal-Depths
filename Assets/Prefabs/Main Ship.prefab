@@ -915,7 +915,7 @@ GameObject:
   - component: {fileID: 7238815909928439104}
   - component: {fileID: 1132603600175419452}
   - component: {fileID: 6813348888639309268}
-  m_Layer: 18
+  m_Layer: 25
   m_Name: DefaultShield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -950,7 +950,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d93080e69f09754b9c2ffc91dbddeff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pushForce: 60
+  _enemyPushForce: 20
+  _shipPushForce: 15
   _ball: {fileID: 0}
 --- !u!54 &1132603600175419452
 Rigidbody:
@@ -2037,7 +2038,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d93080e69f09754b9c2ffc91dbddeff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pushForce: 20
+  _enemyPushForce: 20
+  _shipPushForce: 10
   _ball: {fileID: 0}
 --- !u!1 &4423279608118713247
 GameObject:
@@ -2144,7 +2146,7 @@ Transform:
   - {fileID: 4811621950326407202}
   - {fileID: 7364360263897305908}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!208 &7022336706505972824
 NavMeshObstacle:
@@ -2189,8 +2191,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 8
-  m_Center: {x: 0, y: 0, z: 1.1235485}
+  m_Radius: 7.8
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &5877842457033602664
 Animator:
   serializedVersion: 4

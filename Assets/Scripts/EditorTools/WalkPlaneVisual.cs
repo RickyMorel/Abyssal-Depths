@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.Analytics;
 
 //This is just a class find the walk plane instance
 [ExecuteInEditMode]
@@ -42,25 +44,33 @@ public class WalkPlaneVisual : MonoBehaviour
     private void CreateNavMeshBlockerGOs()
     {
         Transform blockingPlane_1 = transform.Find("BlockingPlane_1");
+        Transform blockingPlane_2 = transform.Find("BlockingPlane_2");
 
-        if (blockingPlane_1 != null)
+        for (int i = 0; i < 2; i++)
         {
-            //blockingPlane_1 = blockingPlane_1.gameObject;
-            //blockingPlane_1.transform.position = _enemyBot.Path[0].Position;
-            return;
+            if (i == 0 && blockingPlane_1 != null) { continue; }
+            if (i == 1 && blockingPlane_2 != null) { continue; }
+
+            bool isFirstPlane = i == 0;
+
+            //Spawn and Scale Object
+            GameObject newBlockingPlane = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            newBlockingPlane.name = isFirstPlane ? "BlockingPlane_1" : "BlockingPlane_2";
+            newBlockingPlane.transform.parent = transform;
+            newBlockingPlane.transform.localScale = new Vector3(1f, 500f, 100f);
+            newBlockingPlane.isStatic = true;
+
+            //Add Components
+            newBlockingPlane.GetComponent<Renderer>().enabled = false;
+            DestroyImmediate(newBlockingPlane.GetComponent<Collider>());
+            NavMeshObstacle navMeshObstacle = newBlockingPlane.AddComponent<NavMeshObstacle>();
+            navMeshObstacle.carving = true;
+
+            //Position Object
+            int positionMultiplier = isFirstPlane ? 1 : -1;
+            Vector3 spawnPos = new Vector3(0f, 0f, (newBlockingPlane.transform.localScale.z / 2f + 0.5f) * positionMultiplier);
+            newBlockingPlane.transform.localPosition = spawnPos;
         }
-
-        GameObject newBlockingPlane_1 = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        newBlockingPlane_1.name = "BlockingPlane_1";
-        newBlockingPlane_1.transform.parent = transform;
-        newBlockingPlane_1.transform.localScale = new Vector3(1f, 500f, 100f);
-        newBlockingPlane_1.isStatic = true;
-        newBlockingPlane_1.GetComponent<Renderer>().enabled = false;
-        DestroyImmediate(newBlockingPlane_1.GetComponent<Collider>());
-
-        Vector3 spawnPos = new Vector3(0f, 0f, newBlockingPlane_1.transform.localScale.z / 2f + 0.5f);
-
-        newBlockingPlane_1.transform.localPosition = spawnPos;
     }
 
     public bool IsWithinBounds(Vector3 pos)

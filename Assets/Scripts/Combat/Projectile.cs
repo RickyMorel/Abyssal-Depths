@@ -51,13 +51,19 @@ public class Projectile : MonoBehaviour
 
     public virtual void Start()
     {
-        _rb.AddForce(transform.forward * _speed, ForceMode.Impulse);
+        Launch(transform.forward);
 
         if (GetComponentInChildren<ParticleSystem>() == null) { return; }
 
         _particles = GetComponentInChildren<ParticleSystem>();
 
         Invoke(nameof(DestroySelf), 4f);
+    }
+
+    public void Launch(Vector3 direction)
+    {
+        _rb.velocity = Vector3.zero;
+        _rb.AddForce(direction.normalized * _speed, ForceMode.Impulse);
     }
 
     public void Initialize(string ownerTag)

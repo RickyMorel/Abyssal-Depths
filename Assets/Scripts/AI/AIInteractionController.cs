@@ -60,8 +60,6 @@ public class AIInteractionController : BaseInteractionController
 
         _canInteractInCurrentState = false;
 
-        Debug.Log("Exit Interaction because of changed state: " + gameObject.name);
-
         CheckExitInteraction();
     }
 

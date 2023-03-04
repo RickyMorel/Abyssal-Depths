@@ -164,6 +164,8 @@ public class Damageable : MonoBehaviour
     {
         if (IsDead()) { return; }
 
+        Debug.Log($"victim: {gameObject.name}");
+
         int finalDamage = damage;
 
         bool isWeak = false;

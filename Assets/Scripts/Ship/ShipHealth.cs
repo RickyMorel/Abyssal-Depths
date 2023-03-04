@@ -69,12 +69,12 @@ public class ShipHealth : Damageable
 
     public override void OnTriggerStay(Collider other)
     {
-        base.OnTriggerStay(other);
+      //  base.OnTriggerStay(other);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        TryInflictCrashDamage(other);
+      //  TryInflictCrashDamage(other);
     }
 
     #endregion

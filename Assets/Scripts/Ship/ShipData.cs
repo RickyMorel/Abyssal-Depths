@@ -11,13 +11,14 @@ public class ShipData : MonoBehaviour
 {
     #region Editor Fields
 
-    [SerializeField] private Transform[] _playerSpawnPositions;
     [SerializeField] private bool _loadData = false;
+    [SerializeField] private Transform[] _playerSpawnPositions;
 
     #endregion
 
     #region Public Properties
 
+    [Header("Upgradables")]
     public Upgradable Booster;
     public Upgradable[] Weapons;
 

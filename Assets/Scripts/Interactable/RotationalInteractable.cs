@@ -14,7 +14,7 @@ public class RotationalInteractable : Upgradable
 
     #region Private Variables
 
-    private float _currentAngle = 0;
+    private float _currentAngle;
     private float _radius;
 
     #endregion
@@ -40,6 +40,8 @@ public class RotationalInteractable : Upgradable
         base.Start();
 
         _radius = Vector3.Distance(_pivotTransform.position, RotatorTransform.position);
+
+        if (UsesWASDRotation()) { SetRotationWASD(); }
     }
 
     public virtual void Update()
@@ -48,11 +50,16 @@ public class RotationalInteractable : Upgradable
 
         if (CanUse == false) { return; }
 
-        if (this is ShieldWheel) { RotateWASD(); }
+        if (UsesWASDRotation()) { RotateWASD(); }
         else { Rotate(); }
     }
 
     #endregion
+
+    private bool UsesWASDRotation()
+    {
+        return this is ShieldWheel;
+    }
 
     public virtual void RotateWASD()
     {
@@ -67,6 +74,11 @@ public class RotationalInteractable : Upgradable
             _currentAngle = Mathf.MoveTowardsAngle(_currentAngle, targetAngle, _rotationSpeed * Time.deltaTime);
         }
 
+        SetRotationWASD();
+    }
+
+    private void SetRotationWASD()
+    {
         float x = _pivotTransform.position.x + _radius * Mathf.Cos(_currentAngle * Mathf.Deg2Rad);
         float y = _pivotTransform.position.y + _radius * Mathf.Sin(_currentAngle * Mathf.Deg2Rad);
         float z = RotatorTransform.position.z;

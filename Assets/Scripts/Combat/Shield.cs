@@ -41,10 +41,21 @@ public class Shield : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("OnCollisionEnter: " + collision.gameObject.name);
+        if (collision.gameObject.TryGetComponent(out Projectile projectile)) { ReflectProjectile(projectile); }
+
         if(LayerMask.LayerToName(collision.gameObject.layer) == "NPC") { CheckForEnemyCollision(collision); return; }
 
         //If object layer is one of the crash layers, except for NPC
         if (_shipHealth.CrashLayers == (_shipHealth.CrashLayers | (1 << collision.gameObject.layer))) { CheckForSceneCollision(collision); return; }  
+    }
+
+    private void ReflectProjectile(Projectile projectile)
+    {
+        Debug.Log("ReflectProjectile");
+        Vector3 newDir = Vector3.Reflect(projectile.transform.forward, transform.up);
+
+        projectile.Launch(newDir);
     }
 
     private void CheckForSceneCollision(Collision collision)

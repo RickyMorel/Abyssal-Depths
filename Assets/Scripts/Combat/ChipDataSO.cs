@@ -8,7 +8,7 @@ public class ChipDataSO : ScriptableObject
 {
     #region Private Variables
 
-    private DamageType _damageMultipliers;
+    private Color[] _projectileColors;
 
     #endregion
 
@@ -161,6 +161,54 @@ public class ChipDataSO : ScriptableObject
             return;
         }
         return;
+    }
+
+    public void ChangeParticleColor(ParticleSystem particle, DamageTypes damageType, int chipLevel = 1)
+    {
+        SelectCorrectProjectileParticleColors(damageType);
+
+        if (particle.trails.enabled)
+        {
+            var trails = particle.trails;
+            switch (chipLevel)
+            {
+                case 1:
+                    trails.colorOverLifetime = _projectileColors[0];
+                    return;
+                case 2:
+                    trails.colorOverLifetime = _projectileColors[1];
+                    return;
+                case 3:
+                    trails.colorOverLifetime = _projectileColors[2];
+                    return;
+            }
+        }
+        else
+        {
+            ParticleSystem.MainModule particleColor;
+            particleColor = particle.main;
+            switch (chipLevel)
+            {
+                case 1:
+                    particleColor.startColor = _projectileColors[0];
+                    return;
+                case 2:
+                    particleColor.startColor = _projectileColors[1];
+                    return;
+                case 3:
+                    particleColor.startColor = _projectileColors[2];
+                    return;
+            }
+        }
+    }
+
+    private Color[] SelectCorrectProjectileParticleColors(DamageTypes damageType)
+    {
+        if (damageType == DamageTypes.Base) { return GameAssetsManager.Instance.BaseColors; }
+        else if (damageType == DamageTypes.Fire) { return GameAssetsManager.Instance.FireColors; }
+        else if (damageType == DamageTypes.Electric) { return GameAssetsManager.Instance.ElectricColors; }
+        else if (damageType == DamageTypes.Laser) { return GameAssetsManager.Instance.LaserColors; }
+        return null;
     }
 
     #region Helper Classes

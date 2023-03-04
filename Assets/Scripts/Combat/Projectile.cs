@@ -82,7 +82,7 @@ public class Projectile : MonoBehaviour
 
             if (_particles.Length < 1) { return; }
 
-            ChangeParticleColor(_particles, _weapon.ChipLevel); 
+            _chipDataSO.ChangeParticleColor(_particles[0], _damageTypes[0], _weapon.ChipLevel); 
         }
     }
 
@@ -131,45 +131,5 @@ public class Projectile : MonoBehaviour
             GameAssetsManager.Instance.DamageType.GetWeaknessAndResistance(_damageTypes[i], out _weakness[i], out _resistance[i]);
         }
         _damageData = new DamageData(_damageTypes, _damage, _impactDamage, _resistance, _weakness, _secondaryValue, _additionalValue);
-    }
-
-    public void ChangeParticleColor(ParticleSystem[] particles, int chipLevel = 1)
-    {
-        for (int i = 0; i < particles.Length; i++)
-        {
-            if (particles[i].trails.enabled)
-            {
-                var trails = particles[i].trails;
-                switch (chipLevel)
-                {
-                    case 1:
-                        trails.colorOverLifetime = _projectileColors[0];
-                        return;
-                    case 2:
-                        trails.colorOverLifetime = _projectileColors[1];
-                        return;
-                    case 3:
-                        trails.colorOverLifetime = _projectileColors[2];
-                        return;
-                }
-            }
-            else
-            {
-                ParticleSystem.MainModule particleColor;
-                particleColor = particles[i].main;
-                switch (chipLevel)
-                {
-                    case 1:
-                        particleColor.startColor = _projectileColors[0];
-                        return;
-                    case 2:
-                        particleColor.startColor = _projectileColors[1];
-                        return;
-                    case 3:
-                        particleColor.startColor = _projectileColors[2];
-                        return;
-                }
-            }
-        }
     }
 }

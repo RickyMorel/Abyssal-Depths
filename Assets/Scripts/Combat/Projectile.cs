@@ -12,7 +12,6 @@ public class Projectile : MonoBehaviour
     [SerializeField] protected float _dealDamageAfterSeconds = 0;
     [SerializeField] protected DamageTypes[] _damageTypes;
     [Tooltip("The colors used for each level")]
-    [SerializeField] private Color[] _projectileColors = new Color[3];
     [SerializeField] protected ParticleSystem[] _particles;
 
     #endregion

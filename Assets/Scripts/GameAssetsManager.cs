@@ -16,6 +16,10 @@ public class GameAssetsManager : MonoBehaviour
     [SerializeField] private GameObject _fireParticles;
     [SerializeField] private GameObject _meleeFloorHitParticles;
     [SerializeField] private GameObject[] _stunnedParticles;
+    [SerializeField] private Color[] _fireColors = new Color[3];
+    [SerializeField] private Color[] _electricColors = new Color[3];
+    [SerializeField] private Color[] _laserColors = new Color[3];
+    [SerializeField] private Color[] _baseColors = new Color[3];
     [ColorUsageAttribute(false, true), SerializeField] private Color _laserHeatColor;
     [SerializeField] private ChipDataSO _chipDataSO;
     [SerializeField] private EnemyDamageDataSO _enemyDamageDataSOPrefab;
@@ -42,6 +46,10 @@ public class GameAssetsManager : MonoBehaviour
     public GameObject FireParticles => _fireParticles;
     public GameObject MeleeFloorHitParticles => _meleeFloorHitParticles;
     public GameObject[] StunnedParticles => _stunnedParticles;
+    public Color[] FireColors => _fireColors;
+    public Color[] ElectricColors => _electricColors;
+    public Color[] LaserColors => _laserColors;
+    public Color[] BaseColors => _baseColors;
     public Color LaserHeatColor => _laserHeatColor;
     public ChipDataSO ChipDataSO => _chipDataSO;
     public EnemyDamageDataSO EnemyDamageDataSO => _enemyDamageDataSOInstance;

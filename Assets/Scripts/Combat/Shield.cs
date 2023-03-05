@@ -10,7 +10,6 @@ public class Shield : MonoBehaviour
 
     [SerializeField] private float _enemyPushForce = 20f;
     [SerializeField] private float _shipPushForce = 10f;
-    [SerializeField] private GameObject _ball;
 
     #endregion
 
@@ -26,22 +25,8 @@ public class Shield : MonoBehaviour
         _shipHealth = transform.root.GetComponent<ShipHealth>();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            GameObject ball = Instantiate(_ball, transform.position + Vector3.left * 10f , Quaternion.identity);
-            ball.GetComponent<AIStateMachine>().BounceOffShield();
-            ball.GetComponent<Rigidbody>().AddForce(Vector3.right * 20f, ForceMode.Impulse);
-        }
-
-        Debug.DrawRay(transform.position, -transform.up * 50f, Color.red);
-        Debug.DrawRay(transform.position, -transform.right * 50f, Color.red);
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("OnCollisionEnter: " + collision.gameObject.name);
         if (collision.gameObject.TryGetComponent(out Projectile projectile)) { ReflectProjectile(projectile); }
 
         if(LayerMask.LayerToName(collision.gameObject.layer) == "NPC") { CheckForEnemyCollision(collision); return; }
@@ -52,10 +37,7 @@ public class Shield : MonoBehaviour
 
     private void ReflectProjectile(Projectile projectile)
     {
-        Debug.Log("ReflectProjectile");
-        Vector3 newDir = Vector3.Reflect(projectile.transform.forward, transform.up);
-
-        projectile.Launch(newDir);
+        projectile.RefelctFromShield(_shipHealth.tag);
     }
 
     private void CheckForSceneCollision(Collision collision)

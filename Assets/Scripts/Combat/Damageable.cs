@@ -39,6 +39,7 @@ public class Damageable : MonoBehaviour
     private float _timer = 0;
     private bool _isBeingElectrocuted = false;
     private DamageData _damageData;
+    private ChipDataSO _chipDataSO;
 
     private ParticleSystem _fireParticles;
     private ParticleSystem _electricParticles;
@@ -95,16 +96,20 @@ public class Damageable : MonoBehaviour
         {
             Damage(_damageData.Damage[0]);
 
-            if (_fireParticles != null &&_electricParticles != null && projectile.Weapon != null)
+            _chipDataSO = GameAssetsManager.Instance.ChipDataSO;
+            if (_fireParticles != null && projectile.Weapon != null)
             {
-                ParticleSystem[] particles = { _fireParticles, _electricParticles };
-                projectile.ChangeParticleColor(particles, projectile.Weapon.ChipLevel);
+                _chipDataSO.ChangeParticleColor(_fireParticles, DamageTypes.Fire, projectile.Weapon.ChipLevel);
+            }
+            else if (_electricParticles != null && projectile.Weapon != null)
+            {
+                _chipDataSO.ChangeParticleColor(_fireParticles, DamageTypes.Electric, projectile.Weapon.ChipLevel);
             }
 
             if (projectile.DamageTypes[0] != projectile.DamageTypes[1] && projectile.DamageTypes[1] != DamageTypes.None) { Damage(_damageData.Damage[1], true, false, null, 1); }
             else if (projectile.DamageTypes[0] != projectile.DamageTypes[1] && projectile.DamageTypes[1] == DamageTypes.None) { Damage(_damageData.Damage[0], true); }
 
-            if (projectile.ProjectileParticles != null) 
+            if (projectile.ProjectileParticles != null && projectile.ShouldUnparent) 
             { 
                 foreach(ParticleSystem particle in projectile.ProjectileParticles)
                 particle.transform.SetParent(null); 

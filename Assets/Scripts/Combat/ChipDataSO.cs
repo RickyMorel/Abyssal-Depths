@@ -165,7 +165,7 @@ public class ChipDataSO : ScriptableObject
 
     public void ChangeParticleColor(ParticleSystem particle, DamageTypes damageType, int chipLevel = 1)
     {
-        SelectCorrectProjectileParticleColors(damageType);
+        _projectileColors = SelectCorrectProjectileParticleColors(damageType);
 
         if (particle.trails.enabled)
         {

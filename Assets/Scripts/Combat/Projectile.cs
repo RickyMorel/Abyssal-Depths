@@ -13,6 +13,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] protected DamageTypes[] _damageTypes;
     [Tooltip("The colors used for each level")]
     [SerializeField] protected ParticleSystem[] _particles;
+    [SerializeField] protected bool _shouldUnparent;
 
     #endregion
 
@@ -52,6 +53,7 @@ public class Projectile : MonoBehaviour
     public float[] AdditionalValue => _additionalValue;
     public DamageData DamageData => _damageData;
     public Weapon Weapon => _weapon;
+    public bool ShouldUnparent => _shouldUnparent;
 
     #endregion
 

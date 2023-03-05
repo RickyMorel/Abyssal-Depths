@@ -167,6 +167,8 @@ public class ChipDataSO : ScriptableObject
     {
         _projectileColors = SelectCorrectProjectileParticleColors(damageType);
 
+        Debug.Log(particle.name + " " + particle.trails.enabled);
+
         if (particle.trails.enabled)
         {
             var trails = particle.trails;

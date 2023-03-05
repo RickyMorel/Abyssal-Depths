@@ -80,12 +80,9 @@ MonoBehaviour:
   _speed: 45
   _dealDamageAfterSeconds: 0
   _damageTypes: 0400000000000000
-  _projectileColors:
-  - {r: 0, g: 0, b: 0, a: 1}
-  - {r: 0, g: 1, b: 0.9641752, a: 1}
-  - {r: 1, g: 0, b: 0, a: 1}
   _particles:
   - {fileID: 3817925586644902740}
+  _shouldUnparentParticle: 0
 --- !u!1 &3908453874856664360
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,7 +131,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 0
+  looping: 1
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -291,7 +288,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.78431374, b: 0, a: 1}
+      maxColor: {r: 1, g: 0.7843138, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}

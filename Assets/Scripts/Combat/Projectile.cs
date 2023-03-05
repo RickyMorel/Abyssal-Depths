@@ -11,9 +11,8 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] protected float _dealDamageAfterSeconds = 0;
     [SerializeField] protected DamageTypes[] _damageTypes;
-    [Tooltip("The colors used for each level")]
     [SerializeField] protected ParticleSystem[] _particles;
-    [SerializeField] protected bool _shouldUnparent;
+    [SerializeField] protected bool _shouldUnparentParticle = false;
 
     #endregion
 
@@ -53,7 +52,6 @@ public class Projectile : MonoBehaviour
     public float[] AdditionalValue => _additionalValue;
     public DamageData DamageData => _damageData;
     public Weapon Weapon => _weapon;
-    public bool ShouldUnparent => _shouldUnparent;
 
     #endregion
 
@@ -93,8 +91,13 @@ public class Projectile : MonoBehaviour
         gameObject.tag = ownerTag;
     }
 
-    private void DestroySelf()
+    public void DestroySelf()
     {
+        if (_shouldUnparentParticle) 
+        {
+            foreach (ParticleSystem particle in _particles)
+                particle.transform.SetParent(null);
+        }
         Destroy(gameObject);
     }
 

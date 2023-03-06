@@ -25,6 +25,7 @@ public class Ship : MonoBehaviour
 
     public static Ship Instance { get { return _instance; } }
     public ShipStatsSO ShipStatsSO => _shipStatsSO;
+    public ShipHealth ShipHealth => _health;
     public float TopSpeed => _topSpeed;
     public float BoostTimeAfterGearChange => _boostTimeAfterGearChange;
     public float TimeTillDeath => _timeTillDeath;

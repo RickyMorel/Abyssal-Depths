@@ -23,6 +23,7 @@ public class ShipHealth : Damageable
     private float _currentDamage;
     private float _minCrashSpeed;
     private float _crashDamageMultiplier;
+    private bool _invunerableToCrash = false;
 
     #endregion
 
@@ -37,6 +38,7 @@ public class ShipHealth : Damageable
 
     public float MinCrashSpeed { get { return _minCrashSpeed; } set { _minCrashSpeed = value; } }
     public float CrashDamageMultiplier { get { return _crashDamageMultiplier; } set { _crashDamageMultiplier = value; } }
+    public bool InvunerableToCrash { get { return _invunerableToCrash; } set { _invunerableToCrash = value; } }
 
     #endregion
 
@@ -79,8 +81,27 @@ public class ShipHealth : Damageable
 
     #endregion
 
+    /// <summary>
+    /// Waits 1 second when shield is colliding so ship doesn't take damage when using shield
+    /// </summary>
+    public void SetInvunerableToCrash()
+    {
+        StartCoroutine(InvunerableToCrashCoroutine());
+    }
+
+    private IEnumerator InvunerableToCrashCoroutine()
+    {
+        _invunerableToCrash = true;
+
+        yield return new WaitForSeconds(1f);
+
+        _invunerableToCrash = false;
+    }
+
     public void TryInflictCrashDamage(Collider other)
     {
+        if (_invunerableToCrash) { return; }
+
         if ((1 << other.gameObject.layer & _crashLayers) == 0) { return; }
         if (other.gameObject.GetComponent<Projectile>() != null) { return; }
         if (_rb == null) { return; }

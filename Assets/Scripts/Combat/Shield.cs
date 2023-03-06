@@ -47,6 +47,8 @@ public class Shield : MonoBehaviour
 
     private void CheckForEnemyCollision(Collider other)
     {
+        Ship.Instance.ShipHealth.SetInvunerableToCrash();
+
         //Recursively tries to fetch the root gameobject of the collision
         Transform parentTransform = other.transform.parent;
 

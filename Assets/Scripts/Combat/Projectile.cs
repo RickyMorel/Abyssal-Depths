@@ -9,7 +9,6 @@ public class Projectile : MonoBehaviour
     #region Editor Fields
 
     [SerializeField] private float _speed;
-    [SerializeField] protected float _dealDamageAfterSeconds = 0;
     [SerializeField] protected DamageTypes[] _damageTypes;
     [SerializeField] protected ParticleSystem[] _particles;
     [SerializeField] protected bool _shouldUnparentParticle = false;
@@ -22,36 +21,21 @@ public class Projectile : MonoBehaviour
     protected bool _destroyOnHit = true;
     protected Weapon _weapon;
     protected int _aiCombatID;
-    protected int[] _damage = { 0, 0 };
-    protected int _impactDamage;
-    protected ChipDataSO.BasicChip[] _chipClass = {null, null};
     protected ChipDataSO _chipDataSO;
     protected EnemyDamageDataSO _enemyDamageDataSO;
-    protected float[] _weakness = {0, 0};
-    protected float[] _resistance = { 0, 0 };
-    protected float[] _secondaryValue = { 0, 0 };
-    protected float[] _additionalValue = { 0, 0 };
-    private DamageData _damageData;
+    protected DamageData _damageData;
+    protected float _dealDamageAfterSeconds;
 
     #endregion
 
     #region Public Properties
 
-    public int[] Damage => _damage;
-    public int ImpactDamage => _impactDamage;
-
     public DamageTypes[] DamageTypes => _damageTypes;
 
     public bool DestroyOnHit => _destroyOnHit;
-
-    public float DealDamageAfterSeconds => _dealDamageAfterSeconds;
-
-    public float[] Weakness => _weakness;
-    public float[] Resistance => _resistance;
-    public float[] SecondaryValue => _secondaryValue;
-    public float[] AdditionalValue => _additionalValue;
     public DamageData DamageData => _damageData;
     public Weapon Weapon => _weapon;
+    public float DealDamageAfterSeconds => _dealDamageAfterSeconds;
 
     #endregion
 
@@ -75,14 +59,14 @@ public class Projectile : MonoBehaviour
         _rb.AddForce(transform.forward * _speed, ForceMode.Impulse);
         Invoke(nameof(DestroySelf), 4f);
 
-        if (_weapon == null) { CreateDamageForEnemies(); }
+        if (_weapon == null) { GameAssetsManager.Instance.EnemyDamageDataSO.CreateDamageForEnemies(_damageTypes, _aiCombatID, ref _damageData); }
         else 
         { 
-            CreateDamageDataFromChip();
+            GameAssetsManager.Instance.ChipDataSO.CreateDamageDataFromChip(_damageTypes, _weapon, ref _damageData);
 
             if (_particles.Length < 1) { return; }
 
-            _chipDataSO.ChangeParticleColor(_particles[0], _damageTypes[0], _weapon.ChipLevel); 
+            GameAssetsManager.Instance.ChipDataSO.ChangeParticleColor(_particles[0], _damageTypes[0], _weapon.ChipLevel); 
         }
     }
 
@@ -102,39 +86,4 @@ public class Projectile : MonoBehaviour
     }
 
     #endregion
-
-    public void CreateDamageDataFromChip()
-    {
-        _chipDataSO = GameAssetsManager.Instance.ChipDataSO;
-        for (int i = 0; i < 2; i++)
-        {
-            _chipClass[i] = _chipDataSO.GetChipType(_damageTypes[i]);
-            GameAssetsManager.Instance.DamageType.GetWeaknessAndResistance(_damageTypes[i], out _weakness[i], out _resistance[i]);
-            _damage[i] = _chipDataSO.GetDamageFromChip(_chipClass[i], _weapon.ChipLevel, 0);
-            _secondaryValue[i] = _chipDataSO.GetDamageFromChip(_chipClass[i], _weapon.ChipLevel, 1);
-            
-            if (_damageTypes[i] == global::DamageTypes.Fire || _damageTypes[i] == global::DamageTypes.Laser) { _additionalValue[i] = _chipDataSO.GetAdditionalValueFromChip(_chipClass[i]); }
-        }
-        _impactDamage = _chipDataSO.GetImpactDamageFromChip(_chipClass[0]);
-
-        if (_damageTypes[0] == _damageTypes[1]) { _chipDataSO.GetBonusFromChip(_chipClass[0], ref _damage[0], ref _secondaryValue[0], ref _additionalValue[0]); }
-
-        _damageData = new DamageData(_damageTypes, _damage, _impactDamage, _resistance, _weakness, _secondaryValue, _additionalValue);
-    }
-
-    public void CreateDamageForEnemies()
-    {
-        _enemyDamageDataSO = GameAssetsManager.Instance.EnemyDamageDataSO;
-        _enemyDamageDataSO.EnemyDataDictionary.TryGetValue(_aiCombatID, out EnemyDamageValues enemyDamageValues);
-        for (int i = 0; i < 2; i++)
-        {
-            _damage[i] = enemyDamageValues.Damage[i];
-            _impactDamage = enemyDamageValues.ImpactDamage;
-            _secondaryValue[i] = enemyDamageValues.SecondaryValue[i];
-            _additionalValue[i] = enemyDamageValues.AdditionalValue[i];
-            _damageTypes[i] = enemyDamageValues.DamageType[i];
-            GameAssetsManager.Instance.DamageType.GetWeaknessAndResistance(_damageTypes[i], out _weakness[i], out _resistance[i]);
-        }
-        _damageData = new DamageData(_damageTypes, _damage, _impactDamage, _resistance, _weakness, _secondaryValue, _additionalValue);
-    }
 }

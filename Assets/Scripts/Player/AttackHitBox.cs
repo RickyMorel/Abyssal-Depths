@@ -18,9 +18,11 @@ public class AttackHitBox : MonoBehaviour
     private Mace _mace;
     private ChipDataSO.BasicChip _chipClass;
     private ChipDataSO _chipDataSO;
-    private DamageTypes _damageType = DamageTypes.Base;
     private int _damage;
     private Weapon _weapon;
+    private DamageData _damageData;
+    private int _aiCombatID;
+    public int AICombatID { get { return _aiCombatID; } set { _aiCombatID = value; } }
 
     #endregion
 
@@ -28,6 +30,7 @@ public class AttackHitBox : MonoBehaviour
 
     [SerializeField] private Damageable _ownHealth;
     [SerializeField] private bool _isFriendlyToPlayers = true;
+    [SerializeField] private DamageTypes[] _damageTypes;
 
     #endregion
 
@@ -37,10 +40,15 @@ public class AttackHitBox : MonoBehaviour
     {
         _chipDataSO = GameAssetsManager.Instance.ChipDataSO;
         _mace = GetComponentInParent<Mace>();
-        _chipClass = _chipDataSO.GetChipType(_damageType);
+
+        if (_weapon == null) { GameAssetsManager.Instance.EnemyDamageDataSO.CreateDamageForEnemies(_damageTypes, _aiCombatID, ref _damageData); }
+        else
+        {
+            GameAssetsManager.Instance.ChipDataSO.CreateDamageDataFromChip(_damageTypes, _weapon, ref _damageData);
+        }
     }
 
-    #endregion
+        #endregion
 
     private void OnTriggerEnter(Collider other)
     {

@@ -34,6 +34,8 @@ public class ConstantLaser : WeaponShoot
 
         _laserBeam.SetActive(false);
         _laserBall.transform.localScale = new Vector3(0, 0, 0);
+
+        _laserBeam.GetComponent<ProjectileLaser>().WeaponReference = _weapon;
     }
 
     public override void Update()

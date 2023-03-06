@@ -17,6 +17,27 @@ public class EnemyDamageDataSO : ScriptableObject
             EnemyDataDictionary.Add(enemyDamageData.EnemyID, enemyDamageData);
         }
     }
+
+    public void CreateDamageForEnemies(DamageTypes[] damageTypes, int aiCombatID, ref DamageData damageData)
+    {
+        int impactDamage;
+        float[] weakness = { 0, 0 };
+        float[] resistance = { 0, 0 };
+        float[] secondaryValue = { 0, 0 };
+        float[] additionalValue = { 0, 0 };
+        int[] damage = { 0, 0 };
+        EnemyDataDictionary.TryGetValue(aiCombatID, out EnemyDamageValues enemyDamageValues);
+        for (int i = 0; i < 2; i++)
+        {
+            damage[i] = enemyDamageValues.Damage[i];
+            secondaryValue[i] = enemyDamageValues.SecondaryValue[i];
+            additionalValue[i] = enemyDamageValues.AdditionalValue[i];
+            damageTypes[i] = enemyDamageValues.DamageType[i];
+            GameAssetsManager.Instance.DamageType.GetWeaknessAndResistance(damageTypes[i], out weakness[i], out resistance[i]);
+        }
+        impactDamage = enemyDamageValues.ImpactDamage;
+        damageData = new DamageData(damageTypes, damage, impactDamage, resistance, weakness, secondaryValue, additionalValue);
+    }
 }
 
 [System.Serializable]

@@ -167,8 +167,6 @@ public class ChipDataSO : ScriptableObject
     {
         _projectileColors = SelectCorrectProjectileParticleColors(damageType);
 
-        Debug.Log(particle.name + " " + particle.trails.enabled);
-
         if (particle.trails.enabled)
         {
             var trails = particle.trails;
@@ -202,6 +200,32 @@ public class ChipDataSO : ScriptableObject
                     return;
             }
         }
+    }
+
+    public void CreateDamageDataFromChip(DamageTypes[] damageTypes, Weapon weapon, ref DamageData damageData)
+    {
+        BasicChip[] chipClass = { null, null };
+        float[] weakness = { 0, 0 };
+        float[] resistance = { 0, 0 };
+        float[] secondaryValue = { 0, 0 };
+        float[] additionalValue = { 0, 0 };
+        int[] damage = { 0, 0 };
+        int impactDamage;
+
+        for (int i = 0; i < 2; i++)
+        {
+            chipClass[i] = GetChipType(damageTypes[i]);
+            GameAssetsManager.Instance.DamageType.GetWeaknessAndResistance(damageTypes[i], out weakness[i], out resistance[i]);
+            damage[i] = GetDamageFromChip(chipClass[i], weapon.ChipLevel, 0);
+            secondaryValue[i] = GetDamageFromChip(chipClass[i], weapon.ChipLevel, 1);
+
+            if (damageTypes[i] == DamageTypes.Fire || damageTypes[i] == DamageTypes.Laser) { additionalValue[i] = GetAdditionalValueFromChip(chipClass[i]); }
+        }
+        impactDamage = GetImpactDamageFromChip(chipClass[0]);
+
+        if (damageTypes[0] == damageTypes[1]) { GetBonusFromChip(chipClass[0], ref damage[0], ref secondaryValue[0], ref additionalValue[0]); }
+
+        damageData = new DamageData(damageTypes, damage, impactDamage, resistance, weakness, secondaryValue, additionalValue);
     }
 
     private Color[] SelectCorrectProjectileParticleColors(DamageTypes damageType)

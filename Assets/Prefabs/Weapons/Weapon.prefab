@@ -2137,6 +2137,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ownHealth: {fileID: 2835829445178600864}
   _isFriendlyToPlayers: 1
+  _damageTypes: 0100000000000000
 --- !u!138 &9098718564592703483
 FixedJoint:
   m_ObjectHideFlags: 0
@@ -2562,7 +2563,7 @@ Transform:
   - {fileID: 2389941571288428507}
   - {fileID: 6567959656405035337}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!54 &7627081817445622294
 Rigidbody:
@@ -2697,6 +2698,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _resistanceType: 
   _weaknessType: 
+  _currentHealth: 0
   _maxHealth: 100
   _healthBarImage: {fileID: 0}
   _damageParticles: {fileID: 0}

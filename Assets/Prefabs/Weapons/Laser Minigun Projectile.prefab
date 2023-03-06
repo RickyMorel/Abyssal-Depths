@@ -28,6 +28,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.0043, y: 0, z: 0}
   m_LocalScale: {x: 0.06, y: 0.06, z: 0.3}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7837682231542152147}
   m_RootOrder: 0
@@ -111,6 +112,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.38, y: 1.082, z: 0}
   m_LocalScale: {x: 3.8635998, y: 3.8635998, z: 3.8635998}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6762442594866772561}
   m_Father: {fileID: 0}
@@ -143,7 +145,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 40
   m_CollisionDetection: 0
 --- !u!114 &6421736673352849636
 MonoBehaviour:
@@ -158,5 +160,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 50
+  _dealDamageAfterSeconds: 0
   _damage: 12
   _damageType: 3

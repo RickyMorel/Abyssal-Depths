@@ -64,6 +64,16 @@ public class AIStateMachine : BaseStateMachine
 
         yield return new WaitForSeconds(3f);
 
-        _isBouncingOffShield = false;
+        if (!IsOnGround()) { StartCoroutine(SetBouncingOffShieldCoroutine()); }
+        else { _isBouncingOffShield = false; }
+    }
+
+    private bool IsOnGround()
+    {
+        NavMeshHit hit;
+
+        bool isOnNavMesh = NavMesh.SamplePosition(transform.position, out hit, 5f, _agent.areaMask);
+
+        return isOnNavMesh;
     }
 }

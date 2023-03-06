@@ -14,7 +14,6 @@ public class TriggerEvents : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("TriggerEvents: " + gameObject.name);
         OnTriggerEnterEvent?.Invoke(other);
     }
 

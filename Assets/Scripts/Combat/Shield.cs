@@ -10,6 +10,7 @@ public class Shield : MonoBehaviour
 
     [SerializeField] private float _enemyPushForce = 20f;
     [SerializeField] private float _shipPushForce = 10f;
+    [SerializeField] private ParticleSystem _pushParticles;
 
     #endregion
 
@@ -42,7 +43,7 @@ public class Shield : MonoBehaviour
 
     private void CheckForSceneCollision(Collider other)
     {
-        PushShip(other);
+        //PushShip(other);
     }
 
     private void CheckForEnemyCollision(Collider other)
@@ -65,6 +66,8 @@ public class Shield : MonoBehaviour
         Vector3 pushDir = _shipHealth.transform.position - other.ClosestPointOnBounds(transform.position); ;
 
         _shipHealth.Rb.AddForce(pushDir.normalized * _shipHealth.Rb.mass * _shipPushForce, ForceMode.Impulse);
+
+        _pushParticles.Play();
     }
 
     private void PushEnemy(AIStateMachine aIStateMachine, Collider other)
@@ -83,5 +86,9 @@ public class Shield : MonoBehaviour
         Vector3 pushDir = aIStateMachine.transform.position - contanctPoint;
 
         rb.AddForce(pushDir.normalized * rb.mass * _enemyPushForce, ForceMode.Impulse);
+
+        _pushParticles.Play();
+
+        Ship.Instance.Rb.AddForce(-pushDir.normalized * rb.mass, ForceMode.Impulse);
     }
 }

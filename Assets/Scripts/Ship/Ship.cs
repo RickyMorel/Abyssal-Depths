@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(ShipHealth))]
+[RequireComponent(typeof(Rigidbody))]
 public class Ship : MonoBehaviour
 {
     #region Editor Fields
@@ -14,6 +15,7 @@ public class Ship : MonoBehaviour
 
     private static Ship _instance;
     private ShipHealth _health;
+    private Rigidbody _rb;
 
     private float _topSpeed;
     private float _boostTimeAfterGearChange;
@@ -26,6 +28,7 @@ public class Ship : MonoBehaviour
     public static Ship Instance { get { return _instance; } }
     public ShipStatsSO ShipStatsSO => _shipStatsSO;
     public ShipHealth ShipHealth => _health;
+    public Rigidbody Rb => _rb;
     public float TopSpeed => _topSpeed;
     public float BoostTimeAfterGearChange => _boostTimeAfterGearChange;
     public float TimeTillDeath => _timeTillDeath;
@@ -49,6 +52,7 @@ public class Ship : MonoBehaviour
     private void Start()
     {
         _health = GetComponent<ShipHealth>();
+        _rb = GetComponent<Rigidbody>();    
 
         SetShipStats();
     }

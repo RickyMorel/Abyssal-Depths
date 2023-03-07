@@ -38,7 +38,6 @@ public class AttackHitBox : MonoBehaviour
 
     private void Start()
     {
-        _chipDataSO = GameAssetsManager.Instance.ChipDataSO;
         _mace = GetComponentInParent<Mace>();
 
         if (_weapon == null) { GameAssetsManager.Instance.EnemyDamageDataSO.CreateDamageForEnemies(_damageTypes, _aiCombatID, ref _damageData); }
@@ -48,7 +47,7 @@ public class AttackHitBox : MonoBehaviour
         }
     }
 
-        #endregion
+    #endregion
 
     private void OnTriggerEnter(Collider other)
     {

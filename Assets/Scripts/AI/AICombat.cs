@@ -20,6 +20,14 @@ public class AICombat : PlayerCombat
 
     private GAgent _gAgent;
 
+    private void Awake()
+    {
+        if (_attackHitbox.GetComponents<AttackHitBox>() != null)
+        {
+            _attackHitbox.GetComponent<AttackHitBox>().AICombatID = _enemyDamageDataID;
+        }
+    }
+
     private void Start()
     {
         _gAgent = GetComponent<GAgent>();

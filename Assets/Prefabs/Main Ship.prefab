@@ -954,7 +954,6 @@ MonoBehaviour:
   _enemyPushForce: 40
   _shipPushForce: 15
   _pushParticles: {fileID: 4416300729368506779}
-  _timeSincePushEnemy: 0
 --- !u!54 &1132603600175419452
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2046,7 +2045,6 @@ MonoBehaviour:
   _enemyPushForce: 20
   _shipPushForce: 10
   _pushParticles: {fileID: 0}
-  _timeSincePushEnemy: 0
 --- !u!1 &4423279608118713247
 GameObject:
   m_ObjectHideFlags: 0
@@ -2153,7 +2151,7 @@ Transform:
   - {fileID: 4811621950326407202}
   - {fileID: 7364360263897305908}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!208 &7022336706505972824
 NavMeshObstacle:
@@ -2255,7 +2253,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 65601
   _redLights: {fileID: 687801799}
-  _invunerableToCrash: 0
 --- !u!114 &5877842457033602641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18683,7 +18680,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.257436, y: 1}
+    m_SensorSize: {x: 1.9717948, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

@@ -107,15 +107,10 @@ public class ShipHealth : Damageable
     public void TryInflictCrashDamage(Collision collision)
     {
         if (_invunerableToCrash) { return; }
-        Debug.Log("TryInflictCrashDamage: " + collision.gameObject.layer);
         if ((1 << collision.gameObject.layer & _crashLayers) == 0) { return; }
-        Debug.Log("Test 1");
         if (collision.gameObject.GetComponent<Projectile>() != null) { return; }
-        Debug.Log("Test 2");
         if (_rb == null) { return; }
-        Debug.Log($"{_prevVelocity} < {_minCrashSpeed}");
         if (_prevVelocity < _minCrashSpeed) { return; }
-        Debug.Log("Passed");
 
         _currentDamage = (int)CalculateCrashDamage();
         Damage((int)_currentDamage, DamageType.Base);

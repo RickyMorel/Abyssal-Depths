@@ -37,9 +37,12 @@ public class Shield : MonoBehaviour
         if (collision.gameObject.TryGetComponent(out Projectile projectile)) { ReflectProjectile(projectile); }
 
         if(LayerMask.LayerToName(collision.gameObject.layer) == "NPC") { CheckForEnemyCollision(collision); return; }
+    }
 
+    private void OnCollisionEnter(Collision collision)
+    {
         //If object layer is one of the crash layers, except for NPC
-        //if (_shipHealth.CrashLayers == (_shipHealth.CrashLayers | (1 << other.gameObject.layer))) { CheckForSceneCollision(other); return; }  
+        if (_shipHealth.CrashLayers == (_shipHealth.CrashLayers | (1 << collision.gameObject.layer))) { CheckForSceneCollision(collision); return; }
     }
 
     private void ReflectProjectile(Projectile projectile)
@@ -49,11 +52,11 @@ public class Shield : MonoBehaviour
         _pushParticles.Play();
     }
 
-    private void CheckForSceneCollision(Collider other)
+    private void CheckForSceneCollision(Collision collision)
     {
         if(_timeSincePushEnemy < 1f) { return; }
 
-        PushShip(other);
+        PushShip(collision);
     }
 
     private void CheckForEnemyCollision(Collision collision)
@@ -71,9 +74,9 @@ public class Shield : MonoBehaviour
         }
     }
 
-    private void PushShip(Collider other)
+    private void PushShip(Collision collision)
     {
-        Vector3 pushDir = _shipHealth.transform.position - other.ClosestPointOnBounds(transform.position); ;
+        Vector3 pushDir = _shipHealth.transform.position - collision.contacts[0].point;
 
         _shipHealth.Rb.AddForce(pushDir.normalized * _shipHealth.Rb.mass * _shipPushForce, ForceMode.Impulse);
 

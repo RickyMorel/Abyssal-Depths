@@ -954,6 +954,7 @@ MonoBehaviour:
   _enemyPushForce: 40
   _shipPushForce: 15
   _pushParticles: {fileID: 4416300729368506779}
+  _timeSincePushEnemy: 0
 --- !u!54 &1132603600175419452
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -978,7 +979,7 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 212232855496702715}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
   m_Convex: 1
@@ -1693,16 +1694,16 @@ GameObject:
   - component: {fileID: 3068541795191308854}
   - component: {fileID: 3068541795191308857}
   - component: {fileID: 3068541795191308856}
+  - component: {fileID: 9148316172646813634}
   - component: {fileID: 3068541795191308855}
-  - component: {fileID: 4383039314619256584}
-  - component: {fileID: 8650965756590058639}
+  - component: {fileID: 757372097597622611}
   m_Layer: 25
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3068541795191308854
 Transform:
   m_ObjectHideFlags: 0
@@ -1768,6 +1769,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!54 &9148316172646813634
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3068541795191308853}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!65 &3068541795191308855
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1781,20 +1798,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.8, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &4383039314619256584
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3068541795191308853}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.50000006
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8650965756590058639
+--- !u!114 &757372097597622611
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1803,10 +1807,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3068541795191308853}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a33649ff35b97ba4c88c156f863fbd67, type: 3}
+  m_Script: {fileID: 11500000, guid: 58f0cc586e466a94cbcd431b963973f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnTriggerEnterEvent:
+  OnCollisionEnterEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5877842457033602642}
@@ -1821,7 +1825,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  OnTriggerExitEvent:
+  OnCollisionExitEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &3330598072607107729
@@ -2042,6 +2046,7 @@ MonoBehaviour:
   _enemyPushForce: 20
   _shipPushForce: 10
   _pushParticles: {fileID: 0}
+  _timeSincePushEnemy: 0
 --- !u!1 &4423279608118713247
 GameObject:
   m_ObjectHideFlags: 0
@@ -2190,10 +2195,10 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4471484184268937319}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 7.8
+  m_Radius: 7.55
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &5877842457033602664
 Animator:
@@ -2250,6 +2255,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 65601
   _redLights: {fileID: 687801799}
+  _invunerableToCrash: 0
 --- !u!114 &5877842457033602641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17464,16 +17470,16 @@ GameObject:
   - component: {fileID: 5877842456878155302}
   - component: {fileID: 5877842456878155297}
   - component: {fileID: 5877842456878155296}
+  - component: {fileID: 1396329726127685362}
   - component: {fileID: 5877842456878155303}
-  - component: {fileID: 1725745290470580367}
-  - component: {fileID: 577259445533045808}
+  - component: {fileID: 3040170895642223872}
   m_Layer: 25
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5877842456878155302
 Transform:
   m_ObjectHideFlags: 0
@@ -17539,6 +17545,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!54 &1396329726127685362
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5877842456878155301}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!65 &5877842456878155303
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17552,20 +17574,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.8, z: 1}
   m_Center: {x: 0, y: 0, z: -0.025442898}
---- !u!135 &1725745290470580367
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5877842456878155301}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000003
-  m_Center: {x: 0, y: 0.0000076293945, z: 0}
---- !u!114 &577259445533045808
+--- !u!114 &3040170895642223872
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -17574,10 +17583,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5877842456878155301}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a33649ff35b97ba4c88c156f863fbd67, type: 3}
+  m_Script: {fileID: 11500000, guid: 58f0cc586e466a94cbcd431b963973f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnTriggerEnterEvent:
+  OnCollisionEnterEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5877842457033602642}
@@ -17592,7 +17601,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  OnTriggerExitEvent:
+  OnCollisionExitEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &5877842457065167456
@@ -18674,7 +18683,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 2.257436, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

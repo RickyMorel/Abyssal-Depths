@@ -58,6 +58,21 @@ public class Booster : RotationalInteractable
         base.Start();
 
         _rb.drag = _shipDrag;
+
+        StartCoroutine(LateStart());
+    }
+
+    private IEnumerator LateStart()
+    {
+        yield return new WaitForEndOfFrame();
+
+        //Stops ship from randomly moving due to physics collisions
+        SetIsBoosting(true);
+
+        yield return new WaitForEndOfFrame();
+
+        SetIsBoosting(false);
+        StabilizeShip();
     }
 
     private void OnDestroy()

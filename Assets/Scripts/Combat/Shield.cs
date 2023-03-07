@@ -32,11 +32,11 @@ public class Shield : MonoBehaviour
         _timeSincePushEnemy += Time.deltaTime;
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnCollisionStay(Collision collision)
     {
-        if (other.gameObject.TryGetComponent(out Projectile projectile)) { ReflectProjectile(projectile); }
+        if (collision.gameObject.TryGetComponent(out Projectile projectile)) { ReflectProjectile(projectile); }
 
-        if(LayerMask.LayerToName(other.gameObject.layer) == "NPC") { CheckForEnemyCollision(other); return; }
+        if(LayerMask.LayerToName(collision.gameObject.layer) == "NPC") { CheckForEnemyCollision(collision); return; }
 
         //If object layer is one of the crash layers, except for NPC
         //if (_shipHealth.CrashLayers == (_shipHealth.CrashLayers | (1 << other.gameObject.layer))) { CheckForSceneCollision(other); return; }  
@@ -45,6 +45,8 @@ public class Shield : MonoBehaviour
     private void ReflectProjectile(Projectile projectile)
     {
         projectile.RefelctFromShield(_shipHealth.tag);
+
+        _pushParticles.Play();
     }
 
     private void CheckForSceneCollision(Collider other)
@@ -54,16 +56,16 @@ public class Shield : MonoBehaviour
         PushShip(other);
     }
 
-    private void CheckForEnemyCollision(Collider other)
+    private void CheckForEnemyCollision(Collision collision)
     {
         Ship.Instance.ShipHealth.SetInvunerableToCrash();
 
         //Recursively tries to fetch the root gameobject of the collision
-        Transform parentTransform = other.transform.parent;
+        Transform parentTransform = collision.transform.parent;
 
         for (int i = 0; i < _getComponentTries; i++)
         {
-            if (parentTransform.TryGetComponent(out AIStateMachine aIStateMachine)) { PushEnemy(aIStateMachine, other); break; }
+            if (parentTransform.TryGetComponent(out AIStateMachine aIStateMachine)) { PushEnemy(aIStateMachine, collision); break; }
 
             parentTransform = parentTransform.parent;
         }
@@ -78,11 +80,11 @@ public class Shield : MonoBehaviour
         _pushParticles.Play();
     }
 
-    private void PushEnemy(AIStateMachine aIStateMachine, Collider other)
+    private void PushEnemy(AIStateMachine aIStateMachine, Collision collision)
     {
         aIStateMachine.BounceOffShield();
 
-        StartCoroutine(PushEnemyDelay(aIStateMachine, other.ClosestPointOnBounds(aIStateMachine.transform.position)));
+        StartCoroutine(PushEnemyDelay(aIStateMachine, collision.contacts[0].point));
     }
 
     private IEnumerator PushEnemyDelay(AIStateMachine aIStateMachine, Vector3 contanctPoint)
@@ -100,5 +102,8 @@ public class Shield : MonoBehaviour
         _pushParticles.Play();
 
         Ship.Instance.Rb.AddForce(-pushDir.normalized * rb.mass, ForceMode.Impulse);
+
+        //Makes ship invunerable so ship doesn't recive damage when hitting enemies with the shield
+        Ship.Instance.ShipHealth.SetInvunerableToCrash(1f);
     }
 }

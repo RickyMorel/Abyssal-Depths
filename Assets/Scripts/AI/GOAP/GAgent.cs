@@ -89,6 +89,8 @@ public class GAgent : MonoBehaviour
     {
         if (_aiStateMachine.IsBouncingOffShield) { return; }
 
+        if (_rb.isKinematic) { return; }
+
         _rb.velocity = Vector3.zero;
     }
 

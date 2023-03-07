@@ -83,7 +83,17 @@ public class Damageable : MonoBehaviour
         ColorChangeForLaser();
     }
 
-    public virtual void OnTriggerStay(Collider other)
+    public virtual void OnCollisionStay(Collision collision)
+    {
+        TryDamageWithProjectile(collision.collider);
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        TryDamageWithProjectile(other);
+    }
+
+    private void TryDamageWithProjectile(Collider other)
     {
         if (!other.gameObject.TryGetComponent<Projectile>(out Projectile projectile)) { return; }
 

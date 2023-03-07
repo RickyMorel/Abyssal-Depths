@@ -20,6 +20,7 @@ public class Projectile : MonoBehaviour
     private Rigidbody _rb;
     protected ParticleSystem _particles;
     protected bool _destroyOnHit = true;
+    private Transform _ownersTransform;
 
     #endregion
 
@@ -39,6 +40,7 @@ public class Projectile : MonoBehaviour
     #region Getters and Setters
 
     public ParticleSystem ProjectileParticles { get { return _particles; } set { _particles = value; } }
+    public Transform OwnersTransform { get { return _ownersTransform; } set { _ownersTransform = value; } }
 
     #endregion
 
@@ -51,7 +53,7 @@ public class Projectile : MonoBehaviour
 
     public virtual void Start()
     {
-        _rb.AddForce(transform.forward * _speed, ForceMode.Impulse);
+        Launch(transform.forward);
 
         if (GetComponentInChildren<ParticleSystem>() == null) { return; }
 
@@ -60,9 +62,35 @@ public class Projectile : MonoBehaviour
         Invoke(nameof(DestroySelf), 4f);
     }
 
-    public void Initialize(string ownerTag)
+    public void Launch(Vector3 direction, Vector3 lookDir = default(Vector3))
+    {
+        //Forces projectile to always be in Z = 0f
+        direction.z = 0f;
+        lookDir.z = 0f;
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
+
+        _rb.velocity = Vector3.zero;
+        _rb.AddForce(direction.normalized * _speed, ForceMode.Impulse);
+
+        if (lookDir == default(Vector3)) { return; }
+
+        transform.LookAt(lookDir.normalized * _speed);
+    }
+
+    public void Initialize(string ownerTag, Transform ownerTransform = null)
     {
         gameObject.tag = ownerTag;
+
+        if(ownerTransform == null) { return; }
+
+        _ownersTransform = ownerTransform;
+    }
+
+    public void RefelctFromShield(string newOwnerTag)
+    {
+        Vector3 newDir = _ownersTransform.position - transform.position;
+        Launch(newDir, newDir);
+        Initialize(newOwnerTag);
     }
 
     private void DestroySelf()

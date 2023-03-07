@@ -22,6 +22,8 @@ public class RagdollLimb : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (_rb.isKinematic) { return; }
+
         _rb.velocity = new Vector3(
             Mathf.Clamp(_rb.velocity.x, -_maxLimbVelocity, _maxLimbVelocity),
             Mathf.Clamp(_rb.velocity.y, -_maxLimbVelocity, _maxLimbVelocity),

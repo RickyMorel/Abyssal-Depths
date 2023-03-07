@@ -74,7 +74,6 @@ public class Projectile : MonoBehaviour
 
         if (lookDir == default(Vector3)) { return; }
 
-        Debug.DrawRay(transform.position, lookDir.normalized * _speed, Color.red, 4);
         transform.LookAt(lookDir.normalized * _speed);
     }
 

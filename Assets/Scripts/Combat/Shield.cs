@@ -18,7 +18,7 @@ public class Shield : MonoBehaviour
 
     private int _getComponentTries = 4;
     private ShipHealth _shipHealth;
-    [SerializeField] private float _timeSincePushEnemy;
+    private float _timeSincePushEnemy;
 
     #endregion
 
@@ -71,6 +71,8 @@ public class Shield : MonoBehaviour
             if (parentTransform.TryGetComponent(out AIStateMachine aIStateMachine)) { PushEnemy(aIStateMachine, collision); break; }
 
             parentTransform = parentTransform.parent;
+
+            if (parentTransform == null) { break; }
         }
     }
 
@@ -96,17 +98,20 @@ public class Shield : MonoBehaviour
 
         _timeSincePushEnemy = 0f;
 
+        _pushParticles.Play();
+
+        //Makes ship invunerable so ship doesn't recive damage when hitting enemies with the shield
+        Ship.Instance.ShipHealth.SetInvunerableToCrash(1f);
+
         Rigidbody rb = aIStateMachine.GetComponent<Rigidbody>();
 
         Vector3 pushDir = aIStateMachine.transform.position - contanctPoint;
 
-        rb.AddForce(pushDir.normalized * rb.mass * _enemyPushForce, ForceMode.Impulse);
-
-        _pushParticles.Play();
-
         Ship.Instance.Rb.AddForce(-pushDir.normalized * rb.mass, ForceMode.Impulse);
 
-        //Makes ship invunerable so ship doesn't recive damage when hitting enemies with the shield
-        Ship.Instance.ShipHealth.SetInvunerableToCrash(1f);
+        if(rb.velocity.magnitude < _enemyPushForce * 0.8f)
+        {
+            rb.AddForce(pushDir.normalized * rb.mass * _enemyPushForce, ForceMode.Impulse);
+        }
     }
 }

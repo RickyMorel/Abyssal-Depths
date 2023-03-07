@@ -18,6 +18,7 @@ public class Shield : MonoBehaviour
 
     private int _getComponentTries = 4;
     private ShipHealth _shipHealth;
+    [SerializeField] private float _timeSincePushEnemy;
 
     #endregion
 
@@ -26,14 +27,19 @@ public class Shield : MonoBehaviour
         _shipHealth = transform.root.GetComponent<ShipHealth>();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void Update()
+    {
+        _timeSincePushEnemy += Time.deltaTime;
+    }
+
+    private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.TryGetComponent(out Projectile projectile)) { ReflectProjectile(projectile); }
 
         if(LayerMask.LayerToName(other.gameObject.layer) == "NPC") { CheckForEnemyCollision(other); return; }
 
         //If object layer is one of the crash layers, except for NPC
-        if (_shipHealth.CrashLayers == (_shipHealth.CrashLayers | (1 << other.gameObject.layer))) { CheckForSceneCollision(other); return; }  
+        //if (_shipHealth.CrashLayers == (_shipHealth.CrashLayers | (1 << other.gameObject.layer))) { CheckForSceneCollision(other); return; }  
     }
 
     private void ReflectProjectile(Projectile projectile)
@@ -43,7 +49,9 @@ public class Shield : MonoBehaviour
 
     private void CheckForSceneCollision(Collider other)
     {
-        //PushShip(other);
+        if(_timeSincePushEnemy < 1f) { return; }
+
+        PushShip(other);
     }
 
     private void CheckForEnemyCollision(Collider other)
@@ -80,6 +88,8 @@ public class Shield : MonoBehaviour
     private IEnumerator PushEnemyDelay(AIStateMachine aIStateMachine, Vector3 contanctPoint)
     {
         yield return new WaitForEndOfFrame();
+
+        _timeSincePushEnemy = 0f;
 
         Rigidbody rb = aIStateMachine.GetComponent<Rigidbody>();
 

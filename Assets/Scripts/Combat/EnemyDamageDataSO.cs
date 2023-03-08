@@ -29,6 +29,8 @@ public class EnemyDamageDataSO : ScriptableObject
         EnemyDataDictionary.TryGetValue(aiCombatID, out EnemyDamageValues enemyDamageValues);
         for (int i = 0; i < 2; i++)
         {
+            if (enemyDamageValues == null) { Debug.LogError("Check the enemy ID"); }
+            
             damage[i] = enemyDamageValues.Damage[i];
             secondaryValue[i] = enemyDamageValues.SecondaryValue[i];
             additionalValue[i] = enemyDamageValues.AdditionalValue[i];

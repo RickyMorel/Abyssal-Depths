@@ -60,10 +60,6 @@ public class Projectile : MonoBehaviour
     {
         Launch(transform.forward);
 
-        if (GetComponentInChildren<ParticleSystem>() == null) { return; }
-
-        _particles = GetComponentInChildren<ParticleSystem>();
-
         Invoke(nameof(DestroySelf), 4f);
 
         if (_weapon == null) { GameAssetsManager.Instance.EnemyDamageDataSO.CreateDamageForEnemies(_damageTypes, _aiCombatID, ref _damageData); }

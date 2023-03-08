@@ -18,6 +18,7 @@ public class BaseInteractionController : MonoBehaviour
     protected Rigidbody _rb;
     private NavMeshAgent _agent;
     protected Interactable _currentInteractable;
+    protected bool _canInteractInCurrentState = true;
 
     protected bool _isUsing = false;
     protected bool _isUsing_2 = false;
@@ -69,6 +70,11 @@ public class BaseInteractionController : MonoBehaviour
     public void HandleHurt()
     {
         CheckExitInteraction();
+    }
+
+    public virtual void HandleChangeState(PlayerBaseState newState, bool isRootState)
+    {
+
     }
 
     public virtual void CheckExitInteraction()

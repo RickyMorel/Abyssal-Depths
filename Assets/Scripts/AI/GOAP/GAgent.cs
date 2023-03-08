@@ -87,17 +87,15 @@ public class GAgent : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_aiStateMachine.IsBouncingOffShield) { return; }
-
-        if (_rb.isKinematic) { return; }
-
         _rb.velocity = Vector3.zero;
     }
 
 
     private void LateUpdate()
     {
-        EnableMovement();
+        if (!_aiStateMachine.CanMove) { _isMoving = false; _aiStateMachine.Agent.enabled = false; }
+
+        else if(!_interactionController.IsInteracting()) { _aiStateMachine.Agent.enabled = true; }
 
         if (CurrentAction != null && CurrentAction.IsRunning)
         {
@@ -105,7 +103,7 @@ public class GAgent : MonoBehaviour
             Debug.Log(CurrentAction.ActionName + " is Running");
 #endif
             //if target moved, update desitination
-            if (CurrentAction.Target != null && CurrentAction.Target.transform.position != _destination)
+            if (CurrentAction.Target != null && CurrentAction.Target.transform.position != _destination) 
             { _destination = CurrentAction.Target.transform.position; }
 
             if (CurrentAction.Agent.isOnNavMesh) { CurrentAction.Agent.SetDestination(_destination); }
@@ -135,20 +133,6 @@ public class GAgent : MonoBehaviour
         CheckIfRemoveGoal();
 
         TryPerformGoal();
-    }
-
-    private void EnableMovement()
-    {
-        if (!_aiStateMachine.CanMove) 
-        {
-            _isMoving = false;
-           // _aiStateMachine.Agent.enabled = false;
-        }
-
-        else if (!_interactionController.IsInteracting()) 
-        {
-           // if (!_aiStateMachine.IsBouncingOffShield) { _aiStateMachine.Agent.enabled = true; }
-        }
     }
 
     public void SetGoalDistance(float newGoalDistance)

@@ -1660,7 +1660,7 @@ Transform:
   - {fileID: 4524114987256736729}
   - {fileID: 3827943407836743354}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!54 &2028690528299777053
 Rigidbody:
@@ -1670,13 +1670,13 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2028690528299777028}
   serializedVersion: 2
-  m_Mass: 100
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 8
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!135 &2028690528299777050
 SphereCollider:
@@ -1685,7 +1685,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2028690528299777028}
-  m_Material: {fileID: 13400000, guid: 5fbe5c85895b9144480b4a2437598ca4, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
@@ -1700,7 +1700,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 2028690528299777028}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.6
+  m_Radius: 1
   m_Speed: 3.5
   m_Acceleration: 80
   avoidancePriority: 50
@@ -1712,7 +1712,7 @@ NavMeshAgent:
   m_Height: 1.43
   m_BaseOffset: 0
   m_WalkableMask: 7
-  m_ObstacleAvoidanceType: 3
+  m_ObstacleAvoidanceType: 0
 --- !u!95 &2122743646632203522
 Animator:
   serializedVersion: 4
@@ -1768,6 +1768,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _resistanceType: 
   _weaknessType: 02000000
+  _currentHealth: 0
   _maxHealth: 100
   _healthBarImage: {fileID: 5807305312909571157}
   _damageParticles: {fileID: 4330216161463991999}
@@ -1815,7 +1816,8 @@ MonoBehaviour:
   _attackHitbox: {fileID: 5807305312097066761}
   _projectilePrefab: {fileID: 6835169869500657298, guid: ae5425c51ae307f4bb82602a757b6b25, type: 3}
   _shootTransform: {fileID: 5807305311339477148}
-  _attackRange: 50
+  _enemyDamageDataID: 1
+  _attackRange: 25
 --- !u!114 &2028690528299777055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20846,8 +20848,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3827943407836743354}
   - component: {fileID: 414467667733973011}
-  - component: {fileID: 4461428279080584993}
-  m_Layer: 16
+  m_Layer: 0
   m_Name: BodyCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20876,28 +20877,12 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4555432071736959449}
-  m_Material: {fileID: 13400000, guid: 5fbe5c85895b9144480b4a2437598ca4, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.85, y: 1.155856, z: 0.7850152}
   m_Center: {x: 0, y: 0.717928, z: 0.10749239}
---- !u!54 &4461428279080584993
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4555432071736959449}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
 --- !u!1 &5807305311230990541
 GameObject:
   m_ObjectHideFlags: 0
@@ -21323,6 +21308,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ownHealth: {fileID: 2028690528299777049}
   _isFriendlyToPlayers: 1
+  _damageTypes: 0100000000000000
 --- !u!1 &5807305312909571154
 GameObject:
   m_ObjectHideFlags: 0

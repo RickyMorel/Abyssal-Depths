@@ -11,11 +11,9 @@ public class PlayerGroundedState : PlayerBaseState
         InitializeSubStates();
     }
 
-    private AIStateMachine _aiContext;
-
     public override void EnterState()
     {
-        _aiContext = _context as AIStateMachine;
+
     }
 
     public override void UpdateState()
@@ -42,10 +40,6 @@ public class PlayerGroundedState : PlayerBaseState
         if (_context.PlayerHealth.IsHurt || _context.PlayerHealth.IsDead())
         {
             SwitchState(_factory.Ragdoll());
-        }
-        if(_aiContext != null && _aiContext.IsBouncingOffShield)
-        {
-            SwitchState(_factory.BounceOff());
         }
         else if (_context.IsJumpPressed)
         {

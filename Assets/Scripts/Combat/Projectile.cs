@@ -25,7 +25,6 @@ public class Projectile : MonoBehaviour
     protected EnemyDamageDataSO _enemyDamageDataSO;
     protected DamageData _damageData;
     protected float _dealDamageAfterSeconds;
-    private Transform _ownersTransform;
 
     #endregion
 
@@ -45,7 +44,6 @@ public class Projectile : MonoBehaviour
     public ParticleSystem[] ProjectileParticles { get { return _particles; } set { _particles = value; } }
     public Weapon WeaponReference { get { return _weapon; } set { _weapon = value; } }
     public int AICombatID { get { return _aiCombatID; } set { _aiCombatID = value; } }
-    public Transform OwnersTransform { get { return _ownersTransform; } set { _ownersTransform = value; } }
 
     #endregion
 
@@ -58,12 +56,7 @@ public class Projectile : MonoBehaviour
 
     public virtual void Start()
     {
-        Launch(transform.forward);
-
-        if (GetComponentInChildren<ParticleSystem>() == null) { return; }
-
-        _particles = GetComponentInChildren<ParticleSystem>();
-
+        _rb.AddForce(transform.forward * _speed, ForceMode.Impulse);
         Invoke(nameof(DestroySelf), 4f);
 
         if (_weapon == null) { GameAssetsManager.Instance.EnemyDamageDataSO.CreateDamageForEnemies(_damageTypes, _aiCombatID, ref _damageData); }
@@ -77,35 +70,9 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    public void Launch(Vector3 direction, Vector3 lookDir = default(Vector3))
-    {
-        //Forces projectile to always be in Z = 0f
-        direction.z = 0f;
-        lookDir.z = 0f;
-        transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
-
-        _rb.velocity = Vector3.zero;
-        _rb.AddForce(direction.normalized * _speed, ForceMode.Impulse);
-
-        if (lookDir == default(Vector3)) { return; }
-
-        transform.LookAt(lookDir.normalized * _speed);
-    }
-
-    public void Initialize(string ownerTag, Transform ownerTransform = null)
+    public void Initialize(string ownerTag)
     {
         gameObject.tag = ownerTag;
-
-        if(ownerTransform == null) { return; }
-
-        _ownersTransform = ownerTransform;
-    }
-
-    public void RefelctFromShield(string newOwnerTag)
-    {
-        Vector3 newDir = _ownersTransform.position - transform.position;
-        Launch(newDir, newDir);
-        Initialize(newOwnerTag);
     }
 
     public void DestroySelf()

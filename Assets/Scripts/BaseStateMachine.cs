@@ -82,7 +82,6 @@ public class BaseStateMachine : MonoBehaviourID
         _playerRagdoll = GetComponent<PlayerRagdoll>();
         _playerHealth = GetComponent<PlayerHealth>();
         _anim = GetComponent<Animator>();
-        _rb = GetComponent<Rigidbody>();
     }
 
     public virtual void Update()

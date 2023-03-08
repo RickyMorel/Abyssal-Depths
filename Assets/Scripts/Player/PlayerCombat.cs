@@ -20,7 +20,7 @@ public class PlayerCombat : MonoBehaviour
     public virtual void Shoot()
     {
         GameObject newProjectile = Instantiate(_projectilePrefab, _shootTransform.position, _shootTransform.rotation);
-        newProjectile.GetComponent<Projectile>().Initialize(tag, transform);
+        newProjectile.GetComponent<Projectile>().Initialize(tag);
     }
 
     private IEnumerator EnableHitboxRoutine()

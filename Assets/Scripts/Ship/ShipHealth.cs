@@ -23,15 +23,6 @@ public class ShipHealth : Damageable
     private float _currentDamage;
     private float _minCrashSpeed;
     private float _crashDamageMultiplier;
-    private bool _invunerableToCrash = false;
-    private float _prevVelocity;
-
-    #endregion
-
-    #region Public Properties
-
-    public LayerMask CrashLayers => _crashLayers;
-    public Rigidbody Rb => _rb;
 
     #endregion
 
@@ -39,7 +30,6 @@ public class ShipHealth : Damageable
 
     public float MinCrashSpeed { get { return _minCrashSpeed; } set { _minCrashSpeed = value; } }
     public float CrashDamageMultiplier { get { return _crashDamageMultiplier; } set { _crashDamageMultiplier = value; } }
-    public bool InvunerableToCrash { get { return _invunerableToCrash; } set { _invunerableToCrash = value; } }
 
     #endregion
 
@@ -63,11 +53,6 @@ public class ShipHealth : Damageable
         _rb = GetComponent<Rigidbody>();
     }
 
-    private void FixedUpdate()
-    {
-        _prevVelocity = _rb.velocity.magnitude;
-    }
-
     private void OnDestroy()
     {
         OnUpdateHealth -= HandleUpdateHealth;
@@ -75,54 +60,36 @@ public class ShipHealth : Damageable
         _boosterHealth.OnFix -= HandleFix;
     }
 
-    public override void OnCollisionStay(Collision collision)
-    {
-        base.OnCollisionStay(collision);
-    }
+    //public override void OnTriggerStay(Collider other)
+    //{
+    //    base.OnTriggerStay(other);
+    //}
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        TryInflictCrashDamage(collision);
+        TryInflictCrashDamage(other);
     }
 
     #endregion
 
-    /// <summary>
-    /// Waits 1 second when shield is colliding so ship doesn't take damage when using shield
-    /// </summary>
-    public void SetInvunerableToCrash(float invunerableTime = 1f)
+    public void TryInflictCrashDamage(Collider other)
     {
-        StartCoroutine(InvunerableToCrashCoroutine(invunerableTime));
-    }
-
-    private IEnumerator InvunerableToCrashCoroutine(float invunerableTime)
-    {
-        _invunerableToCrash = true;
-
-        yield return new WaitForSeconds(invunerableTime);
-
-        _invunerableToCrash = false;
-    }
-
-    public void TryInflictCrashDamage(Collision collision)
-    {
-        if (_invunerableToCrash) { return; }
-        if ((1 << collision.gameObject.layer & _crashLayers) == 0) { return; }
-        if (collision.gameObject.GetComponent<Projectile>() != null) { return; }
+        if ((1 << other.gameObject.layer & _crashLayers) == 0) { return; }
+        if (other.gameObject.GetComponent<Projectile>() != null) { return; }
         if (_rb == null) { return; }
-        if (_prevVelocity < _minCrashSpeed) { return; }
+        if (_rb.velocity.magnitude < _minCrashSpeed) { return; }
 
         _currentDamage = (int)CalculateCrashDamage();
-        Damage((int)_currentDamage, DamageType.Base);
-        if (collision.gameObject.TryGetComponent<AIHealth>(out AIHealth enemyHealth)) { enemyHealth.Damage((int)_currentDamage); }
+        DamageWithoutDamageData((int)_currentDamage, other);
+        if (other.TryGetComponent<AIHealth>(out AIHealth enemyHealth)) { enemyHealth.Damage((int)_currentDamage); }
 
-        float currentSpeedPercentage = _prevVelocity / Ship.Instance.TopSpeed;
+        float currentSpeedPercentage = _rb.velocity.magnitude / Ship.Instance.TopSpeed;
         float crashImpactPercentageRatio = 4 * currentSpeedPercentage;
         float impactAmplitude = 5f * crashImpactPercentageRatio;
         ShipCamera.Instance.ShakeCamera(impactAmplitude, 50f, 0.2f);
 
 
-        Vector3 hitPos = collision.contacts[0].point;
+        Vector3 hitPos = other.ClosestPointOnBounds(transform.position);
         GameObject shipCrashParticles = Instantiate(Ship.Instance.ShipStatsSO.ShipCrashParticles.gameObject, hitPos, Quaternion.identity);
     }
 

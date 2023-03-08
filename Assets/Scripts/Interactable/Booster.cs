@@ -58,21 +58,6 @@ public class Booster : RotationalInteractable
         base.Start();
 
         _rb.drag = _shipDrag;
-
-        StartCoroutine(LateStart());
-    }
-
-    private IEnumerator LateStart()
-    {
-        yield return new WaitForEndOfFrame();
-
-        //Stops ship from randomly moving due to physics collisions
-        SetIsBoosting(true);
-
-        yield return new WaitForEndOfFrame();
-
-        SetIsBoosting(false);
-        StabilizeShip();
     }
 
     private void OnDestroy()
@@ -178,7 +163,7 @@ public class Booster : RotationalInteractable
 
     private void BoostImpulse()
     {
-        _rb.AddForce((RotatorTransform.transform.up * _boostImpulseForce * _rb.mass), ForceMode.Impulse);
+        _rb.AddForce(-(RotatorTransform.transform.up * _boostImpulseForce * _rb.mass), ForceMode.Impulse);
     }
 
     private void BoostShip()
@@ -192,7 +177,7 @@ public class Booster : RotationalInteractable
 
         if (_isStuttering) { return; }
 
-        _rb.AddForce((RotatorTransform.transform.up * _acceleration * _rb.mass));
+        _rb.AddForce(-(RotatorTransform.transform.up * _acceleration * _rb.mass));
 
         _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, Ship.Instance.TopSpeed);
     }

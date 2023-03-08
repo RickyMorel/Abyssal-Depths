@@ -44,11 +44,13 @@ public class PlayerStateMachine : BaseStateMachine
 
     public override void Start()
     {
-        base.Start();
-
         _playerInput = GetComponent<PlayerInputHandler>();
         _playerInteraction = GetComponent<PlayerInteractionController>();
+        _playerRagdoll = GetComponent<PlayerRagdoll>();
+        _playerHealth = GetComponent<PlayerHealth>();
         _playerCarryController = GetComponent<PlayerCarryController>();
+        _anim = GetComponent<Animator>();
+        _rb = GetComponent<Rigidbody>();
         _capsuleCollider = GetComponent<CapsuleCollider>();
 
         _playerInput.OnJump += HandleJump;

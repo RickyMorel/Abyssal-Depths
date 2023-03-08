@@ -36,8 +36,6 @@ public class AIInteractionController : BaseInteractionController
 
     public override void SetCurrentInteractable(Interactable interactable)
     {
-        if (!_canInteractInCurrentState) { return; }
-
         base.SetCurrentInteractable(interactable);
 
         if(interactable == null) { return; }
@@ -50,17 +48,6 @@ public class AIInteractionController : BaseInteractionController
         {
             HandleInteraction(_gAgent.CurrentAction.Duration);
         }
-    }
-
-    public override void HandleChangeState(PlayerBaseState newState, bool isRootState)
-    {
-        if (!isRootState) { return; }
-
-        if (newState is PlayerGroundedState) { _canInteractInCurrentState = true; return; }
-
-        _canInteractInCurrentState = false;
-
-        CheckExitInteraction();
     }
 
     public override void CheckExitInteraction()

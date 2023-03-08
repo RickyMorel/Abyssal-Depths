@@ -17,4 +17,5 @@ public class PlayerStateFactory
     public PlayerBaseState Ragdoll() { return new PlayerRagdollState(_context, this); }
     public PlayerBaseState Attack() { return new PlayerAttackState(_context, this); }
     public PlayerBaseState Carry() { return new PlayerCarryState(_context, this); }
+    public PlayerBaseState BounceOff() { return new BounceOffShieldState(_context, this); }
 }

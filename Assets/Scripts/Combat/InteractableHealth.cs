@@ -73,9 +73,9 @@ public class InteractableHealth : Damageable
         if(_timeSpentFixing > _timeToFix) { FixInteractable(); }
     }
 
-    public override void OnTriggerStay(Collider other)
+    public override void OnCollisionStay(Collision collision)
     {
-        base.OnTriggerStay(other);
+        base.OnCollisionStay(collision);
 
         if(_interactable.Outline.enabled == false) { return; }
 

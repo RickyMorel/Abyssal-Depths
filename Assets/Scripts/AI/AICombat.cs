@@ -39,8 +39,8 @@ public class AICombat : PlayerCombat
 
         Transform enemyTransform = _gAgent.CurrentAction.Target.transform;
         GameObject newProjectile = Instantiate(_projectilePrefab, _shootTransform.position, _shootTransform.rotation);
-        newProjectile.transform.LookAt(enemyTransform);
-        newProjectile.GetComponent<Projectile>().Initialize(tag);
+        newProjectile.transform.LookAt(enemyTransform);        
+        newProjectile.GetComponent<Projectile>().Initialize(tag, transform);
         newProjectile.GetComponent<Projectile>().AICombatID = _enemyDamageDataID;
     }
 

@@ -16,6 +16,8 @@ public class AIFieldOfView : MonoBehaviour
 
         foreach (AICombat ai in _enemyAiList)
         {
+            if(ai.gameObject.activeInHierarchy == false) { continue; }
+
             ai.Aggro();
         }
     }

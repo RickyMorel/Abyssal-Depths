@@ -15,14 +15,9 @@ public class AttackHitBox : MonoBehaviour
 
     #region Private Variable
 
-    private Mace _mace;
-    private ChipDataSO.BasicChip _chipClass;
-    private ChipDataSO _chipDataSO;
     private int _damage;
-    private Weapon _weapon;
     private DamageData _damageData;
     private int _aiCombatID;
-    public int AICombatID { get { return _aiCombatID; } set { _aiCombatID = value; } }
 
     #endregion
 
@@ -31,6 +26,14 @@ public class AttackHitBox : MonoBehaviour
     [SerializeField] private Damageable _ownHealth;
     [SerializeField] private bool _isFriendlyToPlayers = true;
     [SerializeField] private DamageTypes[] _damageTypes;
+    [SerializeField] private Weapon _weapon;
+    [SerializeField] private Mace _mace;
+
+    #endregion
+
+    #region Getters And Setters
+
+    public int AICombatID { get { return _aiCombatID; } set { _aiCombatID = value; } }
 
     #endregion
 
@@ -38,9 +41,7 @@ public class AttackHitBox : MonoBehaviour
 
     private void Start()
     {
-        _mace = GetComponentInParent<Mace>();
-
-        if (_weapon == null) { GameAssetsManager.Instance.EnemyDamageDataSO.CreateDamageForEnemies(_damageTypes, _aiCombatID, ref _damageData); }
+        if (_weapon == null && _aiCombatID != 0) { GameAssetsManager.Instance.EnemyDamageDataSO.CreateDamageForEnemies(_damageTypes, _aiCombatID, ref _damageData); }
         else
         {
             GameAssetsManager.Instance.ChipDataSO.CreateDamageDataFromChip(_damageTypes, _weapon, ref _damageData);
@@ -88,7 +89,10 @@ public class AttackHitBox : MonoBehaviour
 
     private void CalculateDamage(Damageable health)
     {
-        if (_mace.rb.velocity.x <= _mace.MaxMovementSpeed / 2 && _mace.rb.velocity.y < _mace.MaxMovementSpeed / 2) { _damage = _chipDataSO.GetDamageFromChip(_chipClass, _weapon.ChipLevel, 0); health.Damage(_damage); }
-        else { _damage = _chipDataSO.GetDamageFromChip(_chipClass, _weapon.ChipLevel, 1); health.Damage(_damage); }
+        _damage = _damageData.Damage[0];
+        health.DamageData = _damageData;
+
+        if (_mace.rb.velocity.x <= _mace.MaxMovementSpeed / 2 && _mace.rb.velocity.y < _mace.MaxMovementSpeed / 2) { _damage = _damage / 2; health.Damage(_damage); }
+        else { health.Damage(_damage); }
     }
 }

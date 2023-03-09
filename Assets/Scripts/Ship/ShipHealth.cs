@@ -114,7 +114,7 @@ public class ShipHealth : Damageable
 
         _currentDamage = (int)CalculateCrashDamage();
         DamageWithoutDamageData((int)_currentDamage, collision.collider);
-        if (collision.gameObject.TryGetComponent<AIHealth>(out AIHealth enemyHealth)) { enemyHealth.Damage((int)_currentDamage); }
+        if (collision.gameObject.TryGetComponent(out AIHealth enemyHealth)) { enemyHealth.Damage((int)_currentDamage); }
 
         float currentSpeedPercentage = _prevVelocity / Ship.Instance.TopSpeed;
         float crashImpactPercentageRatio = 4 * currentSpeedPercentage;

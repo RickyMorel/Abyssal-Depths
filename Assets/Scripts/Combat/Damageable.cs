@@ -50,6 +50,7 @@ public class Damageable : MonoBehaviour
     #region Getters & Setters
 
     public float CurrentHealth { get { return _currentHealth; } set { _currentHealth = value; } }
+    public DamageData DamageData { get { return _damageData; } set { _damageData = value; } }
 
     #endregion
 
@@ -214,7 +215,7 @@ public class Damageable : MonoBehaviour
             isWeak = true;
         }
 
-        finalDamage = DamageTypesSelector(_damageData.DamageTypes[index], isResistant, isWeak, (int)finalDamage, isDamageChain, index);
+        finalDamage = DamageTypesSelector(_damageData.DamageTypes[index], isResistant, isWeak, (int)finalDamage, isDamageChain, index, damage);
 
         _currentHealth = Mathf.Clamp(_currentHealth - finalDamage, 0, _maxHealth);
 
@@ -275,7 +276,7 @@ public class Damageable : MonoBehaviour
         _electricParticles.Stop();
     }
 
-    private int DamageTypesSelector(DamageTypes damageType, bool isResistant, bool isWeak, int finalDamage, bool isDamageChain, int index)
+    private int DamageTypesSelector(DamageTypes damageType, bool isResistant, bool isWeak, int finalDamage, bool isDamageChain, int index, int damage)
     {
         if (DamageTypes.Electric == damageType) { finalDamage = ElectricDamage(isDamageChain, isResistant, isWeak, index, finalDamage); }
 
@@ -283,7 +284,7 @@ public class Damageable : MonoBehaviour
 
         if (DamageTypes.Laser == damageType) { finalDamage = LaserDamage(isResistant, isWeak, finalDamage, index); }
 
-        if (DamageTypes.Base == damageType) { finalDamage = BaseDamage(isResistant, isWeak, index, finalDamage); }
+        if (DamageTypes.Base == damageType) { finalDamage = BaseDamage(isResistant, isWeak, index, finalDamage, damage); }
 
         return finalDamage;
     }
@@ -363,9 +364,9 @@ public class Damageable : MonoBehaviour
         return electricDamage;
     }
 
-    private int BaseDamage(bool isResistant, bool isWeak, int index, int finalDamage)
+    private int BaseDamage(bool isResistant, bool isWeak, int index, int finalDamage, int damage)
     {
-        int baseDamage = CalculateDamageForTypes(isResistant, isWeak, index, finalDamage);
+        int baseDamage = CalculateDamageForTypes(isResistant, isWeak, index, finalDamage, damage);
         return baseDamage;
     }
 
@@ -388,13 +389,13 @@ public class Damageable : MonoBehaviour
         _electricParticles.Stop();
     }
 
-    private int CalculateDamageForTypes(bool isResistant, bool isWeak, int index, int damage)
+    private int CalculateDamageForTypes(bool isResistant, bool isWeak, int index, int finalDamage, int damage = 0)
     {
-        float damageAux = damage;
+        float damageAux = finalDamage + damage;
 
-        if (isResistant && !isWeak) { damageAux = damage / _damageData.Resistance[index]; }
+        if (isResistant && !isWeak) { damageAux = damageAux / _damageData.Resistance[index]; }
 
-        if (isWeak && !isResistant) { damageAux = damage * _damageData.Weakness[index]; }
+        if (isWeak && !isResistant) { damageAux = damageAux * _damageData.Weakness[index]; }
 
         return (int)damageAux;
     }

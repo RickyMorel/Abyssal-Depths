@@ -1227,9 +1227,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7237233875537454944, guid: 64ee8d372665a8f4aac4a102a749da20, type: 3}
+      propertyPath: m_text
+      value: "\tResolution"
+      objectReference: {fileID: 0}
     - target: {fileID: 7359668026711462767, guid: 64ee8d372665a8f4aac4a102a749da20, type: 3}
       propertyPath: m_Name
-      value: GameplayOptionButton
+      value: Resolutions
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -2167,9 +2171,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7237233875537454944, guid: 64ee8d372665a8f4aac4a102a749da20, type: 3}
+      propertyPath: m_text
+      value: "\tFrame Rate Limitation"
+      objectReference: {fileID: 0}
     - target: {fileID: 7359668026711462767, guid: 64ee8d372665a8f4aac4a102a749da20, type: 3}
       propertyPath: m_Name
-      value: GameplayOptionButton (2)
+      value: FrameRateLimitation
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -2187,6 +2195,26 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 2087607127139725590}
     m_Modifications:
+    - target: {fileID: 154624844043793231, guid: 64ee8d372665a8f4aac4a102a749da20, type: 3}
+      propertyPath: _options.Array.data[0]
+      value: True
+      objectReference: {fileID: 0}
+    - target: {fileID: 154624844043793231, guid: 64ee8d372665a8f4aac4a102a749da20, type: 3}
+      propertyPath: _options.Array.data[1]
+      value: False
+      objectReference: {fileID: 0}
+    - target: {fileID: 154624844043793231, guid: 64ee8d372665a8f4aac4a102a749da20, type: 3}
+      propertyPath: OnSelected.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 154624844043793231, guid: 64ee8d372665a8f4aac4a102a749da20, type: 3}
+      propertyPath: OnSelected.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 154624844043793231, guid: 64ee8d372665a8f4aac4a102a749da20, type: 3}
+      propertyPath: OnSelected.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6605344388638210856, guid: 64ee8d372665a8f4aac4a102a749da20, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2271,9 +2299,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7237233875537454944, guid: 64ee8d372665a8f4aac4a102a749da20, type: 3}
+      propertyPath: m_text
+      value: "\tFull Screen\n"
+      objectReference: {fileID: 0}
     - target: {fileID: 7359668026711462767, guid: 64ee8d372665a8f4aac4a102a749da20, type: 3}
       propertyPath: m_Name
-      value: GameplayOptionButton (1)
+      value: FullScreen
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -2291,6 +2323,14 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 2087607127139725590}
     m_Modifications:
+    - target: {fileID: 154624844043793231, guid: 64ee8d372665a8f4aac4a102a749da20, type: 3}
+      propertyPath: _options.Array.data[0]
+      value: On
+      objectReference: {fileID: 0}
+    - target: {fileID: 154624844043793231, guid: 64ee8d372665a8f4aac4a102a749da20, type: 3}
+      propertyPath: _options.Array.data[1]
+      value: Off
+      objectReference: {fileID: 0}
     - target: {fileID: 6605344388638210856, guid: 64ee8d372665a8f4aac4a102a749da20, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2375,9 +2415,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7237233875537454944, guid: 64ee8d372665a8f4aac4a102a749da20, type: 3}
+      propertyPath: m_text
+      value: "\tVsync"
+      objectReference: {fileID: 0}
     - target: {fileID: 7359668026711462767, guid: 64ee8d372665a8f4aac4a102a749da20, type: 3}
       propertyPath: m_Name
-      value: GameplayOptionButton (3)
+      value: Vsync
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

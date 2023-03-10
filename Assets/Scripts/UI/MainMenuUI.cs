@@ -3,75 +3,78 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenuUI : MonoBehaviour
+namespace AbyssalDepths.UI
 {
-    #region Editor Fields
-
-    [SerializeField] private GameObject _headerPanel;
-    [SerializeField] private GameObject _playPanel;
-    [SerializeField] private GameObject _settingsPanel;
-    [SerializeField] private GameObject _loadPanel;
-    [SerializeField] private GameObject _gameplaySettingsPanel;
-    [SerializeField] private GameObject _videoSettingsPanel;
-    [SerializeField] private GameObject _audioSettingsPanel;
-
-    #endregion
-
-    public void NewGame()
+    public class MainMenuUI : MonoBehaviour
     {
-        SceneManager.LoadScene("MainScene");
-    }
+        #region Editor Fields
 
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
+        [SerializeField] private GameObject _headerPanel;
+        [SerializeField] private GameObject _playPanel;
+        [SerializeField] private GameObject _settingsPanel;
+        [SerializeField] private GameObject _loadPanel;
+        [SerializeField] private GameObject _gameplaySettingsPanel;
+        [SerializeField] private GameObject _videoSettingsPanel;
+        [SerializeField] private GameObject _audioSettingsPanel;
 
-    public void DisableAllPanels()
-    {
-        _headerPanel.SetActive(false);
-        _playPanel.SetActive(false);
-        _settingsPanel.SetActive(false);
-        _loadPanel.SetActive(false);
-        _gameplaySettingsPanel.SetActive(false);
-        _videoSettingsPanel.SetActive(false);
-        _audioSettingsPanel.SetActive(false);
-    }
+        #endregion
 
-    public void SelectPlayPanel()
-    {
-        DisableAllPanels();
+        public void NewGame()
+        {
+            SceneManager.LoadScene(1);
+        }
 
-        _playPanel.SetActive(true);
-        _headerPanel.SetActive(true);
-    }
+        public void QuitGame()
+        {
+            Application.Quit();
+        }
 
-    public void SelectSettingsPanel()
-    {
-        DisableAllPanels();
+        public void DisableAllPanels()
+        {
+            _headerPanel.SetActive(false);
+            _playPanel.SetActive(false);
+            _settingsPanel.SetActive(false);
+            _loadPanel.SetActive(false);
+            _gameplaySettingsPanel.SetActive(false);
+            _videoSettingsPanel.SetActive(false);
+            _audioSettingsPanel.SetActive(false);
+        }
 
-        _settingsPanel.SetActive(true);
-        _headerPanel.SetActive(true);
-    }
+        public void SelectPlayPanel()
+        {
+            DisableAllPanels();
 
-    public void SelectGameplayPanel()
-    {
-        DisableAllPanels();
+            _playPanel.SetActive(true);
+            _headerPanel.SetActive(true);
+        }
 
-        _gameplaySettingsPanel.SetActive(true);
-    }
+        public void SelectSettingsPanel()
+        {
+            DisableAllPanels();
 
-    public void SelectVideoPanel()
-    {
-        DisableAllPanels();
+            _settingsPanel.SetActive(true);
+            _headerPanel.SetActive(true);
+        }
 
-        _videoSettingsPanel.SetActive(true);
-    }
+        public void SelectGameplayPanel()
+        {
+            DisableAllPanels();
 
-    public void SelectAudioPanel()
-    {
-        DisableAllPanels();
+            _gameplaySettingsPanel.SetActive(true);
+        }
 
-        _audioSettingsPanel.SetActive(true);
+        public void SelectVideoPanel()
+        {
+            DisableAllPanels();
+
+            _videoSettingsPanel.SetActive(true);
+        }
+
+        public void SelectAudioPanel()
+        {
+            DisableAllPanels();
+
+            _audioSettingsPanel.SetActive(true);
+        }
     }
 }

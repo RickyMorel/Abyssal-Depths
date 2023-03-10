@@ -103,7 +103,6 @@ public class AttackHitBox : MonoBehaviour
                 damagePercentage = (Mathf.Abs(_mace.rb.velocity.y) * 100) / _mace.MaxMovementSpeed;
             }
             _damage = (int)((_damage * damagePercentage) / 100);
-            Debug.Log(_damage);
             health.Damage(_damage); 
         }
         else { health.Damage(_damageData.Damage[0]); }

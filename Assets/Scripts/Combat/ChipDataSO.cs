@@ -230,10 +230,10 @@ public class ChipDataSO : ScriptableObject
 
     private Color[] SelectCorrectProjectileParticleColors(DamageTypes damageType)
     {
-        if (damageType == DamageTypes.Base) { return GameAssetsManager.Instance.BaseColors; }
-        else if (damageType == DamageTypes.Fire) { return GameAssetsManager.Instance.FireColors; }
-        else if (damageType == DamageTypes.Electric) { return GameAssetsManager.Instance.ElectricColors; }
-        else if (damageType == DamageTypes.Laser) { return GameAssetsManager.Instance.LaserColors; }
+        if (damageType == DamageTypes.Base) { return BaseData.BaseColors; }
+        else if (damageType == DamageTypes.Fire) { return FireData.FireColors; }
+        else if (damageType == DamageTypes.Electric) { return ElectricData.ElectricColors; }
+        else if (damageType == DamageTypes.Laser) { return LaserData.LaserColors; }
         return null;
     }
 
@@ -255,6 +255,7 @@ public class ChipDataSO : ScriptableObject
         public Vector2 MK2Damages;
         [Tooltip("X is minimum damage, Y is maximum damage")]
         public Vector2 MK3Damages;
+        public Color[] BaseColors = new Color[3];
     }
 
     [System.Serializable]
@@ -267,6 +268,7 @@ public class ChipDataSO : ScriptableObject
         [Tooltip("X is for fire damage, Y is for burn time")]
         public Vector2 MK3Damages;
         public float TimeBetweenBurns;
+        public Color[] FireColors = new Color[3];
     }
 
     [System.Serializable]
@@ -279,6 +281,7 @@ public class ChipDataSO : ScriptableObject
         [Tooltip("X is for electric damage, Y is for paralysis time")]
         public Vector2 MK3Damages;
         public float StunRadius;
+        public Color[] ElectricColors = new Color[3];
     }
 
     [System.Serializable]
@@ -291,6 +294,7 @@ public class ChipDataSO : ScriptableObject
         public Vector2 MK2Damages;
         [Tooltip("X is for max damage, Y is for time to reach that max damage")]
         public Vector2 MK3Damages;
+        public Color[] LaserColors = new Color[3];
     }
 
     [System.Serializable]

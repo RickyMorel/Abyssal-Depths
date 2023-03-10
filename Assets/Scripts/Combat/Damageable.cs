@@ -105,8 +105,6 @@ public class Damageable : MonoBehaviour
         _damageData = new DamageData(projectile.DamageData);
         if (projectile.DestroyOnHit)
         {
-            Damage(_damageData.Damage[0]);
-
             _chipDataSO = GameAssetsManager.Instance.ChipDataSO;
             if (_fireParticles != null && projectile.Weapon != null)
             {
@@ -116,9 +114,11 @@ public class Damageable : MonoBehaviour
             {
                 _chipDataSO.ChangeParticleColor(_electricParticles, DamageTypes.Electric, projectile.Weapon.ChipLevel);
             }
+            
+            Damage(_damageData.Damage[0]);
 
-            if (projectile.DamageTypes[0] != projectile.DamageTypes[1] && projectile.DamageTypes[1] != DamageTypes.None) { Damage(_damageData.Damage[1], true, false, null, 1); }
-            else if (projectile.DamageTypes[0] != projectile.DamageTypes[1] && projectile.DamageTypes[1] == DamageTypes.None) { Damage(_damageData.Damage[0], true); }
+            if (projectile.DamageTypes[0] != projectile.DamageTypes[1] && projectile.DamageTypes[1] != DamageTypes.None) { Damage(_damageData.Damage[1], false, false, null, 1); }
+            else if (projectile.DamageTypes[0] != projectile.DamageTypes[1] && projectile.DamageTypes[1] == DamageTypes.None) { Damage(_damageData.ImpactDamage, true); }
 
             projectile.DestroySelf();
         }
@@ -205,17 +205,20 @@ public class Damageable : MonoBehaviour
         bool isWeak = false;
         bool isResistant = false;
 
-        if (_resistanceType.Contains(_damageData.DamageTypes[index]))
-        { 
-            isResistant = true;
-        }
+        if (!isImpactDamage || _damageData.DamageTypes[index] != DamageTypes.None)
+        {
+            if (_resistanceType.Contains(_damageData.DamageTypes[index]))
+            {
+                isResistant = true;
+            }
 
-        if (_weaknessType.Contains(_damageData.DamageTypes[index]))
-        { 
-            isWeak = true;
-        }
+            if (_weaknessType.Contains(_damageData.DamageTypes[index]))
+            {
+                isWeak = true;
+            }
 
-        finalDamage = DamageTypesSelector(_damageData.DamageTypes[index], isResistant, isWeak, (int)finalDamage, isDamageChain, index, damage);
+            finalDamage = DamageTypesSelector(_damageData.DamageTypes[index], isResistant, isWeak, (int)finalDamage, isDamageChain, index, damage);
+        }
 
         _currentHealth = Mathf.Clamp(_currentHealth - finalDamage, 0, _maxHealth);
 
@@ -280,7 +283,7 @@ public class Damageable : MonoBehaviour
     {
         if (DamageTypes.Electric == damageType) { finalDamage = ElectricDamage(isDamageChain, isResistant, isWeak, index, finalDamage); }
 
-        if (DamageTypes.Fire == damageType){ FireDamage(isResistant, isWeak, index, finalDamage); }
+        if (DamageTypes.Fire == damageType){ FireDamage(isResistant, isWeak, index, damage); }
 
         if (DamageTypes.Laser == damageType) { finalDamage = LaserDamage(isResistant, isWeak, finalDamage, index); }
 
@@ -322,10 +325,10 @@ public class Damageable : MonoBehaviour
         }
     }
 
-    private void FireDamage(bool isResistant, bool isWeak, int index, int finalDamage)
+    private void FireDamage(bool isResistant, bool isWeak, int index, int damage)
     {
-        int fireDamage = CalculateDamageForTypes(isResistant, isWeak, index, finalDamage);
-
+        int fireDamage = CalculateDamageForTypes(isResistant, isWeak, index, 0, damage);
+        
         if (fireDamage == 0) { return; }
 
         if (DoesShowDamageParticles()) { _fireParticles.Play(); }
@@ -375,7 +378,7 @@ public class Damageable : MonoBehaviour
         while (_timer < _damageData.SecondaryValue[index] && !IsDead())
         {
             yield return new WaitForSeconds(_damageData.AdditionalValue[index]);
-            Damage(damage);
+            Damage(damage, true);
         }
         _fireParticles.Stop();
     }
@@ -389,7 +392,7 @@ public class Damageable : MonoBehaviour
         _electricParticles.Stop();
     }
 
-    private int CalculateDamageForTypes(bool isResistant, bool isWeak, int index, int finalDamage, int damage = 0)
+    private int CalculateDamageForTypes(bool isResistant, bool isWeak, int index, int finalDamage = 0, int damage = 0)
     {
         float damageAux = finalDamage + damage;
 

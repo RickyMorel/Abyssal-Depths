@@ -13,34 +13,45 @@ MonoBehaviour:
   m_Name: ChipDataSO
   m_EditorClassIdentifier: 
   BaseData:
+    ImpactDamage: 0
     ShootAfterSeconds: 0.9
-    DamageMultiplierWeakness: 2
-    DamageMultiplierResistance: 3
     MK1Damages: {x: 25, y: 75}
     MK2Damages: {x: 75, y: 160}
     MK3Damages: {x: 175, y: 290}
+    BaseColors:
+    - {r: 0, g: 0, b: 0, a: 0}
+    - {r: 0, g: 0, b: 0, a: 0}
+    - {r: 0, g: 0, b: 0, a: 0}
   FireData:
-    ShootAfterSeconds: 0.8
-    DamageMultiplierWeakness: 3
-    DamageMultiplierResistance: 3
     ImpactDamage: 40
+    ShootAfterSeconds: 0.8
     MK1Damages: {x: 10, y: 2}
     MK2Damages: {x: 25, y: 3}
     MK3Damages: {x: 60, y: 4}
     TimeBetweenBurns: 0.5
+    FireColors:
+    - {r: 1, g: 0.5414939, b: 0, a: 1}
+    - {r: 1, g: 0, b: 0, a: 1}
+    - {r: 0.08167672, g: 1, b: 0, a: 1}
   ElectricData:
-    ShootAfterSeconds: 1.2
-    DamageMultiplierWeakness: 2.5
-    DamageMultiplierResistance: 0
     ImpactDamage: 30
+    ShootAfterSeconds: 1.2
     MK1Damages: {x: 20, y: 0.6}
     MK2Damages: {x: 70, y: 0.7}
     MK3Damages: {x: 160, y: 0.8}
+    StunRadius: 0
+    ElectricColors:
+    - {r: 1, g: 0.8573201, b: 0, a: 1}
+    - {r: 1, g: 0, b: 0.90898514, a: 1}
+    - {r: 0, g: 0.3022356, b: 1, a: 1}
   LaserData:
+    ImpactDamage: 0
     ShootAfterSeconds: 1.5
-    DamageMultiplierWeakness: 2
-    DamageMultiplierResistance: 0
     TimeBetweenHits: 0.25
     MK1Damages: {x: 30, y: 2.5}
     MK2Damages: {x: 50, y: 2}
     MK3Damages: {x: 115, y: 1.5}
+    LaserColors:
+    - {r: 0, g: 0, b: 0, a: 0}
+    - {r: 0, g: 0, b: 0, a: 0}
+    - {r: 0, g: 0, b: 0, a: 0}

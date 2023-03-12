@@ -34,6 +34,7 @@ RectTransform:
   - {fileID: 5139256054125464469}
   - {fileID: 5139256053661302213}
   - {fileID: 5139256054105770149}
+  - {fileID: 5139256053943304505}
   - {fileID: 5139256053711918675}
   - {fileID: 5139256053574714962}
   - {fileID: 5139256053188985759}
@@ -41,7 +42,6 @@ RectTransform:
   - {fileID: 5139256053103345481}
   - {fileID: 5139256053272810313}
   - {fileID: 5139256053974565571}
-  - {fileID: 5139256053943304505}
   - {fileID: 5139256053076697916}
   - {fileID: 5139256052378096337}
   - {fileID: 5139256054084764671}
@@ -1251,6 +1251,30 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 2087607127139725590}
     m_Modifications:
+    - target: {fileID: 154624844043793231, guid: 64ee8d372665a8f4aac4a102a749da20, type: 3}
+      propertyPath: _options.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 154624844043793231, guid: 64ee8d372665a8f4aac4a102a749da20, type: 3}
+      propertyPath: _options.Array.data[0]
+      value: Disabled
+      objectReference: {fileID: 0}
+    - target: {fileID: 154624844043793231, guid: 64ee8d372665a8f4aac4a102a749da20, type: 3}
+      propertyPath: _options.Array.data[1]
+      value: Fast
+      objectReference: {fileID: 0}
+    - target: {fileID: 154624844043793231, guid: 64ee8d372665a8f4aac4a102a749da20, type: 3}
+      propertyPath: _options.Array.data[2]
+      value: Quality 2X
+      objectReference: {fileID: 0}
+    - target: {fileID: 154624844043793231, guid: 64ee8d372665a8f4aac4a102a749da20, type: 3}
+      propertyPath: _options.Array.data[3]
+      value: Quality 4X
+      objectReference: {fileID: 0}
+    - target: {fileID: 154624844043793231, guid: 64ee8d372665a8f4aac4a102a749da20, type: 3}
+      propertyPath: _options.Array.data[4]
+      value: Quality 8X
+      objectReference: {fileID: 0}
     - target: {fileID: 6605344388638210856, guid: 64ee8d372665a8f4aac4a102a749da20, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1335,9 +1359,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7237233875537454944, guid: 64ee8d372665a8f4aac4a102a749da20, type: 3}
+      propertyPath: m_text
+      value: "\tAnti-Aliasing Quality"
+      objectReference: {fileID: 0}
     - target: {fileID: 7359668026711462767, guid: 64ee8d372665a8f4aac4a102a749da20, type: 3}
       propertyPath: m_Name
-      value: GameplayOptionButton (8)
+      value: Anti-Aliasing Quality
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -1543,9 +1571,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7237233875537454944, guid: 64ee8d372665a8f4aac4a102a749da20, type: 3}
+      propertyPath: m_text
+      value: "\tView Distance Quality"
+      objectReference: {fileID: 0}
     - target: {fileID: 7359668026711462767, guid: 64ee8d372665a8f4aac4a102a749da20, type: 3}
       propertyPath: m_Name
-      value: GameplayOptionButton (9)
+      value: View Distance Quality
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -1647,9 +1679,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7237233875537454944, guid: 64ee8d372665a8f4aac4a102a749da20, type: 3}
+      propertyPath: m_text
+      value: "\tShadow Quality"
+      objectReference: {fileID: 0}
     - target: {fileID: 7359668026711462767, guid: 64ee8d372665a8f4aac4a102a749da20, type: 3}
       propertyPath: m_Name
-      value: GameplayOptionButton (6)
+      value: Shadow Quality
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -1751,9 +1787,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7237233875537454944, guid: 64ee8d372665a8f4aac4a102a749da20, type: 3}
+      propertyPath: m_text
+      value: "\tVisual Effects Quality"
+      objectReference: {fileID: 0}
     - target: {fileID: 7359668026711462767, guid: 64ee8d372665a8f4aac4a102a749da20, type: 3}
       propertyPath: m_Name
-      value: GameplayOptionButton (7)
+      value: Visual Effects Quality
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -1855,9 +1895,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7237233875537454944, guid: 64ee8d372665a8f4aac4a102a749da20, type: 3}
+      propertyPath: m_text
+      value: "\tTexture Quality"
+      objectReference: {fileID: 0}
     - target: {fileID: 7359668026711462767, guid: 64ee8d372665a8f4aac4a102a749da20, type: 3}
       propertyPath: m_Name
-      value: GameplayOptionButton (5)
+      value: Texture Quality
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -2067,9 +2111,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7237233875537454944, guid: 64ee8d372665a8f4aac4a102a749da20, type: 3}
+      propertyPath: m_text
+      value: "\tOverall Quality"
+      objectReference: {fileID: 0}
     - target: {fileID: 7359668026711462767, guid: 64ee8d372665a8f4aac4a102a749da20, type: 3}
       propertyPath: m_Name
-      value: GameplayOptionButton (4)
+      value: Overall Quality
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -2627,9 +2675,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7237233875537454944, guid: 64ee8d372665a8f4aac4a102a749da20, type: 3}
+      propertyPath: m_text
+      value: "\tPost Process Quality"
+      objectReference: {fileID: 0}
     - target: {fileID: 7359668026711462767, guid: 64ee8d372665a8f4aac4a102a749da20, type: 3}
       propertyPath: m_Name
-      value: GameplayOptionButton (10)
+      value: Post Process Quality
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -2835,9 +2887,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7237233875537454944, guid: 64ee8d372665a8f4aac4a102a749da20, type: 3}
+      propertyPath: m_text
+      value: "\tBrightness"
+      objectReference: {fileID: 0}
     - target: {fileID: 7359668026711462767, guid: 64ee8d372665a8f4aac4a102a749da20, type: 3}
       propertyPath: m_Name
-      value: GameplayOptionButton (11)
+      value: Brightness
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

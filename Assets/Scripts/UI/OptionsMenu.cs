@@ -20,7 +20,7 @@ namespace AbyssalDepths.UI
 
         #endregion
 
-        private void Start()
+        private void Awake()
         {
             PopulateResolutionsSelector();
             PopulateFrameRateRestrictionSelector();
@@ -112,6 +112,26 @@ namespace AbyssalDepths.UI
             bool isFullScreenBool = isFullScreen == 0 ? true : false;
 
             Screen.fullScreen = isFullScreenBool;
+        }
+
+        public void SetVsync(int isEnabled)
+        {
+            int vSyncCount = isEnabled == 0 ? 1 : 0;
+            QualitySettings.vSyncCount = vSyncCount;
+        }
+
+        public void SetAntiAliasing(int index)
+        {
+            if (index == 2)
+                QualitySettings.antiAliasing = 2;
+            else if (index == 3)
+                QualitySettings.antiAliasing = 4;
+            else if (index == 4)
+                QualitySettings.antiAliasing = 8;
+            else
+                QualitySettings.antiAliasing = 0; // If none of FXAA turn off MSAA
+
+            //Post Process Layer Control
         }
 
         public void SetVolume(float volume)

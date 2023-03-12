@@ -1660,7 +1660,7 @@ Transform:
   - {fileID: 4524114987256736729}
   - {fileID: 3827943407836743354}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!54 &2028690528299777053
 Rigidbody:
@@ -1767,7 +1767,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _resistanceType: 
-  _weaknessType: 02000000
+  _weaknessType: 
   _currentHealth: 0
   _maxHealth: 100
   _healthBarImage: {fileID: 5807305312909571157}
@@ -21326,6 +21326,8 @@ MonoBehaviour:
   _ownHealth: {fileID: 2028690528299777049}
   _isFriendlyToPlayers: 1
   _damageTypes: 0000000000000000
+  _weapon: {fileID: 0}
+  _mace: {fileID: 0}
 --- !u!1 &5807305312909571154
 GameObject:
   m_ObjectHideFlags: 0

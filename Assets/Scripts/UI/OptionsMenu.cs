@@ -8,6 +8,7 @@ namespace AbyssalDepths.UI
     {
         #region Editor Fields
 
+        [SerializeField] private SettingsSO _defaultSettingsSO;
         [SerializeField] private OptionSelectorButton _resolutionSelector;
         [SerializeField] private OptionSelectorButton _frameRateLimitSelector;
 
@@ -24,6 +25,19 @@ namespace AbyssalDepths.UI
         {
             PopulateResolutionsSelector();
             PopulateFrameRateRestrictionSelector();
+        }
+
+        private void Start()
+        {
+            SetResolution(_defaultSettingsSO.ResolutionIndex);
+            SetFrameRate(_defaultSettingsSO.FrameRateIndex);
+            SetQuality(_defaultSettingsSO.QualityIndex);
+            SetFullScreen(_defaultSettingsSO.FullScreenIndex);
+            SetVsync(_defaultSettingsSO.VsyncIndex);
+            SetAntiAliasing(_defaultSettingsSO.AntiAliasIndex);
+            SetTextureQuality(_defaultSettingsSO.TextureQualityIndex);
+            SetShadowsQuality(_defaultSettingsSO.ShadowQualityIndex);
+            SetVolume(_defaultSettingsSO.VolumePercentage);
         }
 
         private void PopulateResolutionsSelector()
@@ -130,8 +144,50 @@ namespace AbyssalDepths.UI
                 QualitySettings.antiAliasing = 8;
             else
                 QualitySettings.antiAliasing = 0; // If none of FXAA turn off MSAA
+        }
 
-            //Post Process Layer Control
+        public void SetTextureQuality(int index)
+        {
+            if (index == 0)         //Full res
+                QualitySettings.masterTextureLimit = 0;
+            else if (index == 1)    //1/2 res    
+                QualitySettings.masterTextureLimit = 1;
+            else                    //1/4 res
+                QualitySettings.masterTextureLimit = 2;
+        }
+
+        public void SetShadowsQuality(int index)
+        {
+            switch (index)
+            {
+                case 0://Very Low
+                    ChangeShadows(ShadowmaskMode.Shadowmask, ShadowQuality.Disable, ShadowResolution.Low, ShadowProjection.StableFit, 15, 3, 0);
+                    break;
+                case 1://Low
+                    ChangeShadows(ShadowmaskMode.Shadowmask, ShadowQuality.HardOnly, ShadowResolution.Low, ShadowProjection.StableFit, 20, 3, 0);
+                    break;
+                case 2://Medium
+                    ChangeShadows(ShadowmaskMode.DistanceShadowmask, ShadowQuality.All, ShadowResolution.Medium, ShadowProjection.StableFit, 40, 3, 2);
+                    break;
+                case 3://High
+                    ChangeShadows(ShadowmaskMode.DistanceShadowmask, ShadowQuality.All, ShadowResolution.High, ShadowProjection.StableFit, 70, 3, 4);
+                    break;
+                case 4://Very High
+                    ChangeShadows(ShadowmaskMode.DistanceShadowmask, ShadowQuality.All, ShadowResolution.VeryHigh, ShadowProjection.StableFit, 150, 3, 4);
+                    break;
+            }
+        }
+
+        private void ChangeShadows(ShadowmaskMode mask, ShadowQuality quality, ShadowResolution res,
+            ShadowProjection projection, float shadowDistance, float shadowNearPlaneOffset, int shadowCascades)
+        {
+            QualitySettings.shadowmaskMode = mask;
+            QualitySettings.shadows = quality;
+            QualitySettings.shadowResolution = res;
+            QualitySettings.shadowProjection = projection;
+            QualitySettings.shadowDistance = shadowDistance;
+            QualitySettings.shadowNearPlaneOffset = shadowNearPlaneOffset;
+            QualitySettings.shadowCascades = shadowCascades;
         }
 
         public void SetVolume(float volume)

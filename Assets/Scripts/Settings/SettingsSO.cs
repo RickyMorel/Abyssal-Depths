@@ -5,15 +5,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/SettingsSO", order = 5)]
 public class SettingsSO : ScriptableObject
 {
+    public int ResolutionIndex;
+    public int FrameRateIndex;
+    public int QualityIndex;
+    public int FullScreenIndex;
+    public int VsyncIndex;
     public int AntiAliasIndex;
-
-    public void SetAntiAliasing()
-    {
-        Camera[] cameras = FindObjectsOfType<Camera>();
-
-        foreach (Camera cam in cameras)
-        {
-            //cam.GetComponent<PostProcessLayer>();
-        }
-    }
+    public int TextureQualityIndex;
+    public int ShadowQualityIndex;
+    public float VolumePercentage;
 }

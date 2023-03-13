@@ -22,6 +22,7 @@ public class BaseStateMachine : MonoBehaviourID
     [Header("State Variables")]
     [SerializeField] protected PlayerBaseState _currentState;
     [SerializeField] protected PlayerStateFactory _states;
+    [SerializeField] protected bool _canMove = true;
 
     #endregion
 
@@ -48,7 +49,6 @@ public class BaseStateMachine : MonoBehaviourID
 
     protected bool _isJumpPressed;
     protected Vector3 _moveDirection;
-    [SerializeField] protected bool _canMove = true;
     protected bool _isShooting;
 
     #endregion

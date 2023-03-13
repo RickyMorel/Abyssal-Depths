@@ -56,6 +56,7 @@ public class Damageable : MonoBehaviour
 
     #region Public Properties
     public float MaxHealth => _maxHealth;
+    public bool IsBeingElectrocuted => _isBeingElectrocuted;
 
     public event Action<int> OnUpdateHealth;
     public event Action<DamageTypes> OnDamaged;
@@ -345,7 +346,7 @@ public class Damageable : MonoBehaviour
         if (TryGetComponent(out BaseStateMachine baseStateMachine)) { baseStateMachine.CanMove = false; }
 
         //Electrocute all nearby enemies
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 100f, LayerMask.GetMask("NPC"));
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, _damageData.AdditionalValue[index], LayerMask.GetMask("NPC"));
         foreach (var hitCollider in hitColliders)
         {
             if (!hitCollider.TryGetComponent(out Damageable damageable)) { continue; }

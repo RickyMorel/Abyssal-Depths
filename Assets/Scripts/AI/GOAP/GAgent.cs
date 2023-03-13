@@ -61,6 +61,7 @@ public class GAgent : MonoBehaviour
     private AIStateMachine _aiStateMachine;
     private AIInteractionController _interactionController;
     private float _initialGoalDistance;
+    private Damageable _damageable;
 
     #endregion
 
@@ -71,6 +72,7 @@ public class GAgent : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _aiStateMachine = GetComponent<AIStateMachine>();
         _interactionController = GetComponent<AIInteractionController>();
+        _damageable = GetComponent<Damageable>();
 
         _initialGoalDistance = _goalDistance;
     }
@@ -142,12 +144,12 @@ public class GAgent : MonoBehaviour
         if (!_aiStateMachine.CanMove) 
         {
             _isMoving = false;
-           // _aiStateMachine.Agent.enabled = false;
+            _aiStateMachine.Agent.enabled = false;
         }
 
         else if (!_interactionController.IsInteracting()) 
         {
-           // if (!_aiStateMachine.IsBouncingOffShield) { _aiStateMachine.Agent.enabled = true; }
+            if (!_aiStateMachine.IsBouncingOffShield) { _aiStateMachine.Agent.enabled = true; }
         }
     }
 

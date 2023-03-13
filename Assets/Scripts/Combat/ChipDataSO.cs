@@ -21,7 +21,7 @@ public class ChipDataSO : ScriptableObject
 
     #endregion
 
-    public int GetDamageFromChip(BasicChip chipClass, int chipLevel, int selectedDamage)
+    public float GetDamageFromChip(BasicChip chipClass, int chipLevel, int selectedDamage)
     {
         if (chipClass is BaseChip)
         {
@@ -29,11 +29,11 @@ public class ChipDataSO : ScriptableObject
             switch (chipLevel)
             {
                 case 1:
-                    return (int)baseChip.MK1Damages[selectedDamage];
+                    return baseChip.MK1Damages[selectedDamage];
                 case 2:
-                    return (int)baseChip.MK2Damages[selectedDamage];
+                    return baseChip.MK2Damages[selectedDamage];
                 case 3:
-                    return (int)baseChip.MK3Damages[selectedDamage];
+                    return baseChip.MK3Damages[selectedDamage];
             }
         }
         if (chipClass is FireChip)
@@ -42,11 +42,11 @@ public class ChipDataSO : ScriptableObject
             switch (chipLevel)
             {
                 case 1:
-                    return (int)fireChip.MK1Damages[selectedDamage];
+                    return fireChip.MK1Damages[selectedDamage];
                 case 2:
-                    return (int)fireChip.MK2Damages[selectedDamage];
+                    return fireChip.MK2Damages[selectedDamage];
                 case 3:
-                    return (int)fireChip.MK3Damages[selectedDamage];
+                    return fireChip.MK3Damages[selectedDamage];
             }
         }
         if (chipClass is ElectricChip)
@@ -55,11 +55,11 @@ public class ChipDataSO : ScriptableObject
             switch (chipLevel)
             {
                 case 1:
-                    return (int)electricChip.MK1Damages[selectedDamage];
+                    return electricChip.MK1Damages[selectedDamage];
                 case 2:
-                    return (int)electricChip.MK2Damages[selectedDamage];
+                    return electricChip.MK2Damages[selectedDamage];
                 case 3:
-                    return (int)electricChip.MK3Damages[selectedDamage];
+                    return electricChip.MK3Damages[selectedDamage];
             }
         }
         if (chipClass is LaserChip)
@@ -68,11 +68,11 @@ public class ChipDataSO : ScriptableObject
             switch (chipLevel)
             {
                 case 1:
-                    return (int)laserChip.MK1Damages[selectedDamage];
+                    return laserChip.MK1Damages[selectedDamage];
                 case 2:
-                    return (int)laserChip.MK2Damages[selectedDamage];
+                    return laserChip.MK2Damages[selectedDamage];
                 case 3:
-                    return (int)laserChip.MK3Damages[selectedDamage];
+                    return laserChip.MK3Damages[selectedDamage];
             }
         }
         return 20;
@@ -216,7 +216,7 @@ public class ChipDataSO : ScriptableObject
         {
             chipClass[i] = GetChipType(damageTypes[i]);
             GameAssetsManager.Instance.DamageType.GetWeaknessAndResistance(damageTypes[i], out weakness[i], out resistance[i]);
-            damage[i] = GetDamageFromChip(chipClass[i], weapon.ChipLevel, 0);
+            damage[i] = (int)GetDamageFromChip(chipClass[i], weapon.ChipLevel, 0);
             secondaryValue[i] = GetDamageFromChip(chipClass[i], weapon.ChipLevel, 1);
 
             if (damageTypes[i] == DamageTypes.Fire || damageTypes[i] == DamageTypes.Laser) { additionalValue[i] = GetAdditionalValueFromChip(chipClass[i]); }

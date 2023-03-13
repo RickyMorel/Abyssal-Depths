@@ -16,6 +16,38 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 250975965772246816, guid: 40872eaff03bac7499163d1752562732, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 250975965772246816, guid: 40872eaff03bac7499163d1752562732, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 250975965772246816, guid: 40872eaff03bac7499163d1752562732, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2900136392217131423}
+    - target: {fileID: 250975965772246816, guid: 40872eaff03bac7499163d1752562732, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 250975965772246816, guid: 40872eaff03bac7499163d1752562732, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetVolume
+      objectReference: {fileID: 0}
+    - target: {fileID: 250975965772246816, guid: 40872eaff03bac7499163d1752562732, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: AudioOptionButton, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 250975965772246816, guid: 40872eaff03bac7499163d1752562732, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 250975965772246818, guid: 40872eaff03bac7499163d1752562732, type: 3}
+      propertyPath: m_Name
+      value: MasterVolumeSlider
+      objectReference: {fileID: 0}
     - target: {fileID: 250975966516381133, guid: 40872eaff03bac7499163d1752562732, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -30,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5195582740423839081, guid: 40872eaff03bac7499163d1752562732, type: 3}
       propertyPath: m_Name
-      value: AudioOptionButton
+      value: MasterVolumeButton
       objectReference: {fileID: 0}
     - target: {fileID: 8471908975247664430, guid: 40872eaff03bac7499163d1752562732, type: 3}
       propertyPath: m_Pivot.x
@@ -119,6 +151,17 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 40872eaff03bac7499163d1752562732, type: 3}
+--- !u!114 &2900136392217131423 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3117898184808882277, guid: 40872eaff03bac7499163d1752562732, type: 3}
+  m_PrefabInstance: {fileID: 250975966545222138}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01b99a0d30ea7894c95a2194f06acabb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &8568627278471380180 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8471908975247664430, guid: 40872eaff03bac7499163d1752562732, type: 3}
@@ -831,6 +874,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 250975965772246818, guid: 40872eaff03bac7499163d1752562732, type: 3}
+      propertyPath: m_Name
+      value: AmbientVolumeSlider
+      objectReference: {fileID: 0}
     - target: {fileID: 250975966516381133, guid: 40872eaff03bac7499163d1752562732, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -845,7 +892,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5195582740423839081, guid: 40872eaff03bac7499163d1752562732, type: 3}
       propertyPath: m_Name
-      value: AudioOptionButton (4)
+      value: AmbientVolumeButton
       objectReference: {fileID: 0}
     - target: {fileID: 5356873666043296102, guid: 40872eaff03bac7499163d1752562732, type: 3}
       propertyPath: m_text
@@ -959,6 +1006,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 250975965772246818, guid: 40872eaff03bac7499163d1752562732, type: 3}
+      propertyPath: m_Name
+      value: SfxVolumeSlider
+      objectReference: {fileID: 0}
     - target: {fileID: 250975966516381133, guid: 40872eaff03bac7499163d1752562732, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -973,7 +1024,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5195582740423839081, guid: 40872eaff03bac7499163d1752562732, type: 3}
       propertyPath: m_Name
-      value: AudioOptionButton (3)
+      value: SfxVolumeButton
       objectReference: {fileID: 0}
     - target: {fileID: 5356873666043296102, guid: 40872eaff03bac7499163d1752562732, type: 3}
       propertyPath: m_text
@@ -1087,6 +1138,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 250975965772246818, guid: 40872eaff03bac7499163d1752562732, type: 3}
+      propertyPath: m_Name
+      value: MusicVolumeSlider
+      objectReference: {fileID: 0}
     - target: {fileID: 250975966516381133, guid: 40872eaff03bac7499163d1752562732, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1101,7 +1156,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5195582740423839081, guid: 40872eaff03bac7499163d1752562732, type: 3}
       propertyPath: m_Name
-      value: AudioOptionButton (1)
+      value: MusicVolumeButton
       objectReference: {fileID: 0}
     - target: {fileID: 5356873666043296102, guid: 40872eaff03bac7499163d1752562732, type: 3}
       propertyPath: m_text
@@ -1215,6 +1270,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 250975965772246818, guid: 40872eaff03bac7499163d1752562732, type: 3}
+      propertyPath: m_Name
+      value: DialogueVolumeSlider
+      objectReference: {fileID: 0}
     - target: {fileID: 250975966516381133, guid: 40872eaff03bac7499163d1752562732, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1229,7 +1288,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5195582740423839081, guid: 40872eaff03bac7499163d1752562732, type: 3}
       propertyPath: m_Name
-      value: AudioOptionButton (2)
+      value: DialogueVolumeButton
       objectReference: {fileID: 0}
     - target: {fileID: 5356873666043296102, guid: 40872eaff03bac7499163d1752562732, type: 3}
       propertyPath: m_text

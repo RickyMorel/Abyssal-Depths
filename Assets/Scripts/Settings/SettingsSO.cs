@@ -13,7 +13,11 @@ public class SettingsSO : ScriptableObject
     public int AntiAliasIndex;
     public int TextureQualityIndex;
     public int ShadowQualityIndex;
-    public float VolumePercentage;
+    public float MasterVolumePercentage;
+    public float MusicVolumePercentage;
+    public float DialogueVolumePercentage;
+    public float SfxVolumePercentage;
+    public float AmbientVolumePercentage;
 
     public SettingsSO(SettingsSO settingsSO)
     {
@@ -25,7 +29,11 @@ public class SettingsSO : ScriptableObject
         AntiAliasIndex = settingsSO.AntiAliasIndex;
         TextureQualityIndex = settingsSO.TextureQualityIndex;
         ShadowQualityIndex = settingsSO.ShadowQualityIndex;
-        VolumePercentage = settingsSO.VolumePercentage;
+        MasterVolumePercentage = settingsSO.MasterVolumePercentage;
+        MusicVolumePercentage = settingsSO.MusicVolumePercentage;
+        DialogueVolumePercentage = settingsSO.DialogueVolumePercentage;
+        SfxVolumePercentage = settingsSO.SfxVolumePercentage;
+        AmbientVolumePercentage = settingsSO.AmbientVolumePercentage;
     }
 }
 
@@ -40,7 +48,11 @@ public class SettingsData
     public int AntiAliasIndex;
     public int TextureQualityIndex;
     public int ShadowQualityIndex;
-    public float VolumePercentage;
+    public float MasterVolumePercentage;
+    public float MusicVolumePercentage;
+    public float DialogueVolumePercentage;
+    public float SfxVolumePercentage;
+    public float AmbientVolumePercentage;
 
     public SettingsData(SettingsSO settingsSO)
     {
@@ -52,6 +64,10 @@ public class SettingsData
         AntiAliasIndex = settingsSO.AntiAliasIndex;
         TextureQualityIndex = settingsSO.TextureQualityIndex;
         ShadowQualityIndex = settingsSO.ShadowQualityIndex;
-        VolumePercentage = settingsSO.VolumePercentage;
+        MasterVolumePercentage = settingsSO.MasterVolumePercentage;
+        MusicVolumePercentage = settingsSO.MusicVolumePercentage;
+        DialogueVolumePercentage = settingsSO.DialogueVolumePercentage;
+        SfxVolumePercentage = settingsSO.SfxVolumePercentage;
+        AmbientVolumePercentage = settingsSO.AmbientVolumePercentage;
     }
 }

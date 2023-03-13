@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace AbyssalDepths.UI
 {
@@ -21,6 +22,13 @@ namespace AbyssalDepths.UI
         [SerializeField] private OptionSelectorButton _textureQualitySelector;
         [SerializeField] private OptionSelectorButton _shadowQualitySelector;
         [SerializeField] private OptionSelectorButton _antiAliasingSelector;
+
+        [Header("Audio Buttons")]
+        [SerializeField] private Slider _masterVolumeSlider;
+        [SerializeField] private Slider _musicVolumeSlider;
+        [SerializeField] private Slider _dialogueVolumeSlider;
+        [SerializeField] private Slider _sfxVolumeSlider;
+        [SerializeField] private Slider _ambientVolumeSlider;
 
         #endregion
 
@@ -56,7 +64,11 @@ namespace AbyssalDepths.UI
             SetAntiAliasing(settingsData.AntiAliasIndex);
             SetTextureQuality(settingsData.TextureQualityIndex);
             SetShadowsQuality(settingsData.ShadowQualityIndex);
-            SetVolume(settingsData.VolumePercentage);
+            SetVolume(settingsData.MasterVolumePercentage, 0);
+            SetVolume(settingsData.MusicVolumePercentage, 1);
+            SetVolume(settingsData.DialogueVolumePercentage, 2);
+            SetVolume(settingsData.SfxVolumePercentage, 3);
+            SetVolume(settingsData.AmbientVolumePercentage, 4);
         }
 
         public void Apply()
@@ -239,9 +251,31 @@ namespace AbyssalDepths.UI
             QualitySettings.shadowCascades = shadowCascades;
         }
 
-        public void SetVolume(float volume)
+        public void SetVolume(float volume, int mixerIndex)
         {
-            _finalSettings.VolumePercentage = volume;
+            switch (mixerIndex)
+            {
+                case 0:
+                    _finalSettings.MasterVolumePercentage = volume;
+                    _masterVolumeSlider.value = volume;
+                    break;
+                case 1:
+                    _finalSettings.MusicVolumePercentage = volume;
+                    _musicVolumeSlider.value = volume;
+                    break;
+                case 2:
+                    _finalSettings.DialogueVolumePercentage = volume;
+                    _dialogueVolumeSlider.value = volume;
+                    break;
+                case 3:
+                    _finalSettings.SfxVolumePercentage = volume;
+                    _sfxVolumeSlider.value = volume;
+                    break;
+                case 4:
+                    _finalSettings.AmbientVolumePercentage = volume;
+                    _ambientVolumeSlider.value = volume;
+                    break;
+            }
         }
     }
 

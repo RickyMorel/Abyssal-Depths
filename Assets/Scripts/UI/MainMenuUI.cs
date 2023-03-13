@@ -24,6 +24,11 @@ namespace AbyssalDepths.UI
             SceneManager.LoadScene(1);
         }
 
+        public void LoadGame()
+        {
+
+        }
+
         public void QuitGame()
         {
             Application.Quit();
@@ -75,6 +80,13 @@ namespace AbyssalDepths.UI
             DisableAllPanels();
 
             _audioSettingsPanel.SetActive(true);
+        }
+
+        public void SelectLoadPanel()
+        {
+            DisableAllPanels();
+
+            _loadPanel.SetActive(true);
         }
     }
 }

@@ -8,9 +8,19 @@ namespace AbyssalDepths.UI
     {
         #region Editor Fields
 
+        [Header("SO's")]
         [SerializeField] private SettingsSO _defaultSettingsSO;
+
+        [Header("Video Buttons")]
         [SerializeField] private OptionSelectorButton _resolutionSelector;
+        [SerializeField] private OptionSelectorButton _fullscreenSelector;
         [SerializeField] private OptionSelectorButton _frameRateLimitSelector;
+        [SerializeField] private OptionSelectorButton _vsyncSelector;
+        [SerializeField] private OptionSelectorButton _brightnessSelector;
+        [SerializeField] private OptionSelectorButton _qualitySelector;
+        [SerializeField] private OptionSelectorButton _textureQualitySelector;
+        [SerializeField] private OptionSelectorButton _shadowQualitySelector;
+        [SerializeField] private OptionSelectorButton _antiAliasingSelector;
 
         #endregion
 
@@ -18,26 +28,41 @@ namespace AbyssalDepths.UI
 
         private Resolution[] _resolutions;
         private FrameRateLimits _frameRateLimit;
+        private SettingsData _finalSettings;
 
         #endregion
 
         private void Awake()
         {
+            SettingsData savedSettings = SaveSystem.LoadSettings();
+            _finalSettings = savedSettings != null ? savedSettings: new SettingsData(_defaultSettingsSO);
+
             PopulateResolutionsSelector();
             PopulateFrameRateRestrictionSelector();
         }
 
         private void Start()
         {
-            SetResolution(_defaultSettingsSO.ResolutionIndex);
-            SetFrameRate(_defaultSettingsSO.FrameRateIndex);
-            SetQuality(_defaultSettingsSO.QualityIndex);
-            SetFullScreen(_defaultSettingsSO.FullScreenIndex);
-            SetVsync(_defaultSettingsSO.VsyncIndex);
-            SetAntiAliasing(_defaultSettingsSO.AntiAliasIndex);
-            SetTextureQuality(_defaultSettingsSO.TextureQualityIndex);
-            SetShadowsQuality(_defaultSettingsSO.ShadowQualityIndex);
-            SetVolume(_defaultSettingsSO.VolumePercentage);
+            LoadSettings(_finalSettings);
+        }
+
+        public void LoadSettings(SettingsData settingsData)
+        {
+            SetResolution(settingsData.ResolutionIndex);
+            SetFrameRate(settingsData.FrameRateIndex);
+            SetQuality(settingsData.QualityIndex);
+            SetFullScreen(settingsData.FullScreenIndex);
+            SetVsync(settingsData.VsyncIndex);
+            SetAntiAliasing(settingsData.AntiAliasIndex);
+            SetTextureQuality(settingsData.TextureQualityIndex);
+            SetShadowsQuality(settingsData.ShadowQualityIndex);
+            SetVolume(settingsData.VolumePercentage);
+        }
+
+        public void Apply()
+        {
+
+            SaveSystem.SaveSettings(_finalSettings);
         }
 
         private void PopulateResolutionsSelector()
@@ -56,7 +81,6 @@ namespace AbyssalDepths.UI
             }
 
             _resolutionSelector.InitializeOptions(options.ToArray());
-            _resolutionSelector.SetIndex(currentResolutionIndex);
         }
 
         private void PopulateFrameRateRestrictionSelector()
@@ -76,12 +100,16 @@ namespace AbyssalDepths.UI
             }
 
             _frameRateLimitSelector.InitializeOptions(limitsList.ToArray());
-            _frameRateLimitSelector.SetIndex(0);
         }
 
         public void SetResolution(int resolutionIndex)
         {
-            Resolution resolution = _resolutions[resolutionIndex];
+            int wantedIndex = resolutionIndex == -1 ? _resolutions.Length - 1 : resolutionIndex;
+
+            _finalSettings.ResolutionIndex = wantedIndex;
+            _resolutionSelector.SetIndex(wantedIndex, false);
+
+            Resolution resolution = _resolutions[wantedIndex];
 
             Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
         }
@@ -113,16 +141,25 @@ namespace AbyssalDepths.UI
                     break;
             }
 
+            _finalSettings.FrameRateIndex = index;
+            _frameRateLimitSelector.SetIndex(index, false);
+
             Application.targetFrameRate = (int)_frameRateLimit;
         }
 
         public void SetQuality(int qualityIndex)
         {
+            _finalSettings.QualityIndex = qualityIndex;
+            _qualitySelector.SetIndex(qualityIndex, false);
+
             QualitySettings.SetQualityLevel(qualityIndex);
         }
 
         public void SetFullScreen(int isFullScreen)
         {
+            _finalSettings.FullScreenIndex = isFullScreen;
+            _fullscreenSelector.SetIndex(isFullScreen, false);
+
             bool isFullScreenBool = isFullScreen == 0 ? true : false;
 
             Screen.fullScreen = isFullScreenBool;
@@ -130,12 +167,18 @@ namespace AbyssalDepths.UI
 
         public void SetVsync(int isEnabled)
         {
+            _finalSettings.VsyncIndex = isEnabled;
+            _vsyncSelector.SetIndex(isEnabled, false);
+
             int vSyncCount = isEnabled == 0 ? 1 : 0;
             QualitySettings.vSyncCount = vSyncCount;
         }
 
         public void SetAntiAliasing(int index)
         {
+            _finalSettings.AntiAliasIndex = index;
+            _antiAliasingSelector.SetIndex(index, false);
+
             if (index == 2)
                 QualitySettings.antiAliasing = 2;
             else if (index == 3)
@@ -148,6 +191,9 @@ namespace AbyssalDepths.UI
 
         public void SetTextureQuality(int index)
         {
+            _finalSettings.TextureQualityIndex = index;
+            _textureQualitySelector.SetIndex(index, false);
+
             if (index == 0)         //Full res
                 QualitySettings.masterTextureLimit = 0;
             else if (index == 1)    //1/2 res    
@@ -158,6 +204,9 @@ namespace AbyssalDepths.UI
 
         public void SetShadowsQuality(int index)
         {
+            _finalSettings.ShadowQualityIndex = index;
+            _shadowQualitySelector.SetIndex(index, false);
+
             switch (index)
             {
                 case 0://Very Low
@@ -192,7 +241,7 @@ namespace AbyssalDepths.UI
 
         public void SetVolume(float volume)
         {
-
+            _finalSettings.VolumePercentage = volume;
         }
     }
 

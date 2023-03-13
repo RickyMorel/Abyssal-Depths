@@ -27,11 +27,6 @@ namespace AbyssalDepths.UI
 
         #endregion
 
-        private void Start()
-        {
-            SetIndex(Index);
-        }
-
         public void Left()
         {
             SetIndex(Index-1);
@@ -52,13 +47,14 @@ namespace AbyssalDepths.UI
             }
         }
 
-        public void SetIndex(int wantedIndex)
+        public void SetIndex(int wantedIndex, bool invokes = true)
         {
             Index = Mathf.Clamp(wantedIndex, 0, _options.Count - 1);
 
             _optionText.text = _options[Index];
 
-            OnSelected?.Invoke(Index);
+            if(invokes)
+                OnSelected?.Invoke(Index);
         }
     }
 }

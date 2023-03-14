@@ -44,6 +44,7 @@ public class Damageable : MonoBehaviour
     private ParticleSystem _fireParticles;
     private ParticleSystem _electricParticles;
     private Renderer[] _renderers;
+    private GAgent _gAgent;
 
     #endregion
 
@@ -73,6 +74,8 @@ public class Damageable : MonoBehaviour
 
     public virtual void Start()
     {
+        _gAgent = GetComponent<GAgent>();
+
         FindMeshes();
 
         UpdateHealthUI();
@@ -381,9 +384,10 @@ public class Damageable : MonoBehaviour
 
     private IEnumerator ElectricParalysis(BaseStateMachine baseStateMachine, int index)
     {
+        GAgent gAgent = GetComponent<GAgent>();
         if (DoesShowDamageParticles()) { _electricParticles.Play(); }
         yield return new WaitForSeconds(_damageData.SecondaryValue[index]);
-        if (!IsDead() && baseStateMachine != null) { baseStateMachine.CanMove = true; }
+        if (!IsDead() && baseStateMachine != null) { baseStateMachine.CanMove = true; gAgent.IsMoving = true; }
         _isBeingElectrocuted = false;
         _electricParticles.Stop();
     }

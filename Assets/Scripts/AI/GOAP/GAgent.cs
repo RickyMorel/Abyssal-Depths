@@ -26,6 +26,12 @@ public class SubGoal
 [RequireComponent(typeof(AIStateMachine))]
 public class GAgent : MonoBehaviour
 {
+    #region Getters and Setters
+
+    public bool IsMoving { get { return _isMoving; } set { _isMoving = value; } }
+
+    #endregion
+
     #region Public Properties
 
     public List<GAction> Actions = new List<GAction>();
@@ -33,8 +39,6 @@ public class GAgent : MonoBehaviour
     public GInventory Inventory = new GInventory();
     public WorldStates Beliefs = new WorldStates();
     public GAction CurrentAction;
-
-    public bool IsMoving => _isMoving;
 
     public event Action OnDoAction;
     public event Action OnExitAction;

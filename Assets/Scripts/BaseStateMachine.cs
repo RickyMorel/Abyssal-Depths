@@ -35,6 +35,7 @@ public class BaseStateMachine : MonoBehaviourID
     public bool IsGrounded { get { return _isGrounded; } set { _isGrounded = value; } }
     public bool CanMove { get { return _canMove; } set { _canMove = value; } }
     public virtual bool IsShooting { get { return _isShooting; } set { _isShooting = value; } }
+    public Vector3 MoveDirection { get { return _moveDirection; } set { _moveDirection = value; } }
 
     #endregion
 
@@ -59,7 +60,6 @@ public class BaseStateMachine : MonoBehaviourID
     public PlayerRagdoll PlayerRagdoll => _playerRagdoll;
     public PlayerHealth PlayerHealth => _playerHealth;
     public PlayerCarryController PlayerCarryController => _playerCarryController;
-    public Vector3 MoveDirection => _moveDirection;
     public Rigidbody Rb => _rb;
     public Animator Anim => _anim;
     public bool IsJumpPressed => _isJumpPressed;

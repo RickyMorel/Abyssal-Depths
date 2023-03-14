@@ -44,7 +44,6 @@ public class Damageable : MonoBehaviour
     private ParticleSystem _fireParticles;
     private ParticleSystem _electricParticles;
     private Renderer[] _renderers;
-    private GAgent _gAgent;
 
     #endregion
 
@@ -52,12 +51,12 @@ public class Damageable : MonoBehaviour
 
     public float CurrentHealth { get { return _currentHealth; } set { _currentHealth = value; } }
     public DamageData DamageData { get { return _damageData; } set { _damageData = value; } }
+    public bool IsBeingElectrocuted { get { return _isBeingElectrocuted; } set { _isBeingElectrocuted = value; } }
 
     #endregion
 
     #region Public Properties
     public float MaxHealth => _maxHealth;
-    public bool IsBeingElectrocuted => _isBeingElectrocuted;
 
     public event Action<int> OnUpdateHealth;
     public event Action<DamageTypes> OnDamaged;
@@ -74,8 +73,6 @@ public class Damageable : MonoBehaviour
 
     public virtual void Start()
     {
-        _gAgent = GetComponent<GAgent>();
-
         FindMeshes();
 
         UpdateHealthUI();
@@ -106,7 +103,9 @@ public class Damageable : MonoBehaviour
         if (!other.gameObject.TryGetComponent(out Projectile projectile)) { return; }
 
         if (IsOwnDamage(other)) { return; }
+
         _damageData = new DamageData(projectile.DamageData);
+
         if (projectile.DestroyOnHit)
         {
             _chipDataSO = GameAssetsManager.Instance.ChipDataSO;
@@ -356,6 +355,10 @@ public class Damageable : MonoBehaviour
 
             if (damageable is not AIHealth) { continue; }
 
+            //Resets IsBeingElectrocuted to apply electric damage even though the monster is still being electrocuted
+            if (_isBeingElectrocuted && !isDamageChain) { damageable.IsBeingElectrocuted = false; }
+
+            damageable.DamageData = _damageData;
             damageable.Damage(electricDamage, false, true, null, index);
         }
 

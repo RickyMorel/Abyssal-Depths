@@ -219,7 +219,7 @@ public class ChipDataSO : ScriptableObject
             damage[i] = (int)GetDamageFromChip(chipClass[i], weapon.ChipLevel, 0);
             secondaryValue[i] = GetDamageFromChip(chipClass[i], weapon.ChipLevel, 1);
 
-            if (damageTypes[i] == DamageTypes.Fire || damageTypes[i] == DamageTypes.Laser) { additionalValue[i] = GetAdditionalValueFromChip(chipClass[i]); }
+            if (damageTypes[i] != DamageTypes.Base) { additionalValue[i] = GetAdditionalValueFromChip(chipClass[i]); }
         }
         impactDamage = GetImpactDamageFromChip(chipClass[0]);
 

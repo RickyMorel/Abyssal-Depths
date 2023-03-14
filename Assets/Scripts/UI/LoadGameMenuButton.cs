@@ -14,6 +14,9 @@ public class LoadGameMenuButton : MonoBehaviour
 
     public void DisplayData(SaveData saveData)
     {
-
+        foreach (var upgradeData in saveData.WeaponDatas)
+        {
+            _upgradesText.text += $"{ upgradeData.Socket1ChipId}, ";
+        }
     }
 }

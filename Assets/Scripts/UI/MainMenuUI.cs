@@ -9,6 +9,7 @@ namespace AbyssalDepths.UI
     {
         #region Editor Fields
 
+        [Header("Panels")]
         [SerializeField] private GameObject _headerPanel;
         [SerializeField] private GameObject _playPanel;
         [SerializeField] private GameObject _settingsPanel;
@@ -17,7 +18,18 @@ namespace AbyssalDepths.UI
         [SerializeField] private GameObject _videoSettingsPanel;
         [SerializeField] private GameObject _audioSettingsPanel;
 
+        [Header("Buttons")]
+        [SerializeField] private GameObject _loadGameMenuButtonPrefab;
+
+        [Header("Transforms")]
+        [SerializeField] private Transform _loadMenuContentTransform;
+
         #endregion
+
+        private void Start()
+        {
+            LoadGame();
+        }
 
         public void NewGame()
         {
@@ -26,7 +38,26 @@ namespace AbyssalDepths.UI
 
         public void LoadGame()
         {
+            DestroyPrevLoadGameButtons();
 
+            SaveData saveData = SaveSystem.Load();
+
+            if(saveData == null) { return; }
+
+            GameObject loadButtonInstance = Instantiate(_loadGameMenuButtonPrefab, _loadMenuContentTransform);
+            LoadGameMenuButton loadButtonInstanceScript = loadButtonInstance.GetComponent<LoadGameMenuButton>();
+
+            loadButtonInstanceScript.DisplayData(saveData);
+        }
+
+        private void DestroyPrevLoadGameButtons()
+        {
+            foreach (Transform child in _loadMenuContentTransform)
+            {
+                if(child == _loadMenuContentTransform) { continue; }
+
+                Destroy(child.gameObject);
+            }
         }
 
         public void QuitGame()

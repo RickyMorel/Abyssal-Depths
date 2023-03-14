@@ -95,13 +95,11 @@ public class ShipData : MonoBehaviour
 
     private void LoadChips(SaveData saveData, Vector3 wantedSpawnPosition = default(Vector3))
     {
-        UpgradeChip[] allChips = Resources.LoadAll<UpgradeChip>("ScriptableObjs/Chips");
-
-        Booster.LoadChips(allChips, saveData.BoosterData, this, true);
+        Booster.LoadChips(saveData.BoosterData, this, true);
 
         for (int i = 0; i < Weapons.Length; i++)
         {
-            Weapons[i].LoadChips(allChips, saveData.WeaponDatas[i], this, false);
+            Weapons[i].LoadChips(saveData.WeaponDatas[i], this, false);
         }
 
         Vector3 spawnPos = new Vector3(saveData.ShipPos[0], saveData.ShipPos[1], saveData.ShipPos[2]);

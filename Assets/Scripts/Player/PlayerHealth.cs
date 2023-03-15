@@ -9,6 +9,7 @@ public class PlayerHealth : Damageable
 
     [SerializeField] private float _hurtTime = 5f;
     [SerializeField] private Renderer _mesh;
+    [SerializeField] protected Transform _particleParentTransform;
 
     #endregion
 

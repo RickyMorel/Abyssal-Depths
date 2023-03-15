@@ -52,6 +52,7 @@ public class Damageable : MonoBehaviour
     public float CurrentHealth { get { return _currentHealth; } set { _currentHealth = value; } }
     public DamageData DamageData { get { return _damageData; } set { _damageData = value; } }
     public bool IsBeingElectrocuted { get { return _isBeingElectrocuted; } set { _isBeingElectrocuted = value; } }
+    public ParticleSystem ElectricParticles { get { return _electricParticles; } set { _electricParticles = value; } }
 
     #endregion
 
@@ -105,14 +106,10 @@ public class Damageable : MonoBehaviour
         if (IsOwnDamage(other)) { return; }
 
         _damageData = new DamageData(projectile.DamageData);
+        ChangeColorForDamageTypeParticles(DamageData.ChipLevel);
 
         if (projectile.DestroyOnHit)
         {
-            _chipDataSO = GameAssetsManager.Instance.ChipDataSO;
-
-            if (_fireParticles != null && projectile.Weapon != null) { _chipDataSO.ChangeParticleColor(_fireParticles, DamageTypes.Fire, projectile.Weapon.ChipLevel); }
-            if (_electricParticles != null && projectile.Weapon != null) { _chipDataSO.ChangeParticleColor(_electricParticles, DamageTypes.Electric, projectile.Weapon.ChipLevel); }
-            
             Damage(_damageData.Damage[0]);
 
             if (projectile.DamageTypes[0] != projectile.DamageTypes[1] && projectile.DamageTypes[1] != DamageTypes.None) { Damage(_damageData.Damage[1], false, false, null, 1); }
@@ -129,6 +126,12 @@ public class Damageable : MonoBehaviour
                 _damageTimer = 0;
             }
         }
+    }
+
+    public void ChangeColorForDamageTypeParticles(int chipLevel)
+    {
+        if (_fireParticles != null) { GameAssetsManager.Instance.ChipDataSO.ChangeParticleColor(_fireParticles, DamageTypes.Fire, chipLevel); }
+        if (_electricParticles != null) { GameAssetsManager.Instance.ChipDataSO.ChangeParticleColor(_electricParticles, DamageTypes.Electric, chipLevel); }
     }
 
     #endregion
@@ -357,8 +360,8 @@ public class Damageable : MonoBehaviour
 
             //Resets IsBeingElectrocuted to apply electric damage even though the monster is still being electrocuted
             if (_isBeingElectrocuted && !isDamageChain) { damageable.IsBeingElectrocuted = false; }
-
             damageable.DamageData = _damageData;
+            damageable.ChangeColorForDamageTypeParticles(damageable.DamageData.ChipLevel);
             damageable.Damage(electricDamage, false, true, null, index);
         }
 

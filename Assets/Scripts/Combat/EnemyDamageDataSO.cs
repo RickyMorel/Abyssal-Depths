@@ -26,6 +26,7 @@ public class EnemyDamageDataSO : ScriptableObject
         float[] secondaryValue = { 0, 0 };
         float[] additionalValue = { 0, 0 };
         int[] damage = { 0, 0 };
+        int chipLevel = 1;
         EnemyDataDictionary.TryGetValue(aiCombatID, out EnemyDamageValues enemyDamageValues);
         for (int i = 0; i < 2; i++)
         {
@@ -38,7 +39,7 @@ public class EnemyDamageDataSO : ScriptableObject
             GameAssetsManager.Instance.DamageType.GetWeaknessAndResistance(damageTypes[i], out weakness[i], out resistance[i]);
         }
         impactDamage = enemyDamageValues.ImpactDamage;
-        damageData = new DamageData(damageTypes, damage, impactDamage, resistance, weakness, secondaryValue, additionalValue);
+        damageData = new DamageData(damageTypes, damage, impactDamage, resistance, weakness, secondaryValue, additionalValue, chipLevel);
     }
 }
 

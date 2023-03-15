@@ -211,6 +211,7 @@ public class ChipDataSO : ScriptableObject
         float[] additionalValue = { 0, 0 };
         int[] damage = { 0, 0 };
         int impactDamage;
+        int chipLevel;
 
         for (int i = 0; i < 2; i++)
         {
@@ -222,10 +223,11 @@ public class ChipDataSO : ScriptableObject
             if (damageTypes[i] != DamageTypes.Base) { additionalValue[i] = GetAdditionalValueFromChip(chipClass[i]); }
         }
         impactDamage = GetImpactDamageFromChip(chipClass[0]);
+        chipLevel = weapon.ChipLevel;
 
         if (damageTypes[0] == damageTypes[1]) { GetBonusFromChip(chipClass[0], ref damage[0], ref secondaryValue[0], ref additionalValue[0]); }
 
-        damageData = new DamageData(damageTypes, damage, impactDamage, resistance, weakness, secondaryValue, additionalValue);
+        damageData = new DamageData(damageTypes, damage, impactDamage, resistance, weakness, secondaryValue, additionalValue, chipLevel);
     }
 
     private Color[] SelectCorrectProjectileParticleColors(DamageTypes damageType)

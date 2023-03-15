@@ -9,6 +9,7 @@ public class DamageData
     protected float[] _resistance = { 0, 0 };
     protected float[] _secondaryValue = { 0, 0 };
     protected float[] _additionalValue = { 0, 0 };
+    protected int _chipLevel;
 
     #endregion
 
@@ -21,10 +22,11 @@ public class DamageData
     public float[] Resistance => _resistance;
     public float[] SecondaryValue => _secondaryValue;
     public float[] AdditionalValue => _additionalValue;
+    public int ChipLevel => _chipLevel;
 
     #endregion
 
-    public DamageData(DamageTypes[] damageTypes, int[] damage, int impactDamage, float[] resistance, float[] weakness, float[] secondaryValue, float[] additionalValue)
+    public DamageData(DamageTypes[] damageTypes, int[] damage, int impactDamage, float[] resistance, float[] weakness, float[] secondaryValue, float[] additionalValue, int chipLevel)
     {
         _damageTypes = damageTypes;
         _damage = damage;
@@ -33,6 +35,7 @@ public class DamageData
         _resistance = resistance;
         _secondaryValue = secondaryValue;
         _additionalValue = additionalValue;
+        _chipLevel = chipLevel;
     }
 
     public DamageData(DamageData damageData)
@@ -44,5 +47,6 @@ public class DamageData
         _resistance = damageData.Resistance;
         _secondaryValue = damageData.SecondaryValue;
         _additionalValue = damageData.AdditionalValue;
+        _chipLevel = damageData.ChipLevel;
     }
 }

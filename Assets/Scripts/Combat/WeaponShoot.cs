@@ -8,7 +8,12 @@ public class WeaponShoot : MonoBehaviour
 
     protected Weapon _weapon;
     protected float _timeSinceLastShot;
-    protected float _timeBetweenShots = 0.2f;
+
+    #endregion
+
+    #region
+
+    [SerializeField] protected float _timeBetweenShots = 0.2f;
 
     #endregion
 

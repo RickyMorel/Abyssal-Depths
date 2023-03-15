@@ -19,7 +19,7 @@ public class GameAssetsManager : MonoBehaviour
     [ColorUsageAttribute(false, true), SerializeField] private Color _laserHeatColor;
     [SerializeField] private ChipDataSO _chipDataSO;
     [SerializeField] private EnemyDamageDataSO _enemyDamageDataSOPrefab;
-    [SerializeField] private DamageType _damageType;
+    [SerializeField] private DamageTypeSO _damageType;
 
     #endregion
 
@@ -45,7 +45,7 @@ public class GameAssetsManager : MonoBehaviour
     public Color LaserHeatColor => _laserHeatColor;
     public ChipDataSO ChipDataSO => _chipDataSO;
     public EnemyDamageDataSO EnemyDamageDataSO => _enemyDamageDataSOInstance;
-    public DamageType DamageType => _damageType;
+    public DamageTypeSO DamageType => _damageType;
 
     public static GameAssetsManager Instance { get { return _instance; } }
 

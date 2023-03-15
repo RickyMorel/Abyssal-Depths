@@ -7,24 +7,6 @@ public class SemiautoElectricRifle : WeaponShoot
     #region Private Variable
 
     private bool _hasAlreadyShot = false;
-    private ChipDataSO _chipDataSO;
-    private ChipDataSO.BasicChip _chipClass;
-
-    #endregion
-
-    #region Unity Loops
-
-    private void Awake()
-    {
-        _chipDataSO = GameAssetsManager.Instance.ChipDataSO;
-    }
-
-    public override void Start()
-    {
-        _weapon = GetComponentInParent<Weapon>();
-        _chipClass = _chipDataSO.GetChipType(DamageTypes.Electric);
-        _timeBetweenShots = _chipClass.ShootAfterSeconds;
-    }
 
     #endregion
 

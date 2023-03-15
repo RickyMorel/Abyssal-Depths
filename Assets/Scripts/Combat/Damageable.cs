@@ -190,6 +190,7 @@ public class Damageable : MonoBehaviour
             Die();
     }
 
+    //The index determines which damagetype it's suppose to use from the damageData, alongside all of its related information such as the damage or damagemultipliers
     public virtual void Damage(int damage, bool isImpactDamage = false, bool isDamageChain = false, Collider instigatorCollider = null, int index = 0)
     {
         if (IsDead()) { return; }

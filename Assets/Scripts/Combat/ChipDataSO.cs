@@ -245,7 +245,6 @@ public class ChipDataSO : ScriptableObject
     public class BasicChip
     {
         public int ImpactDamage;
-        public float ShootAfterSeconds = 0.2f;
     }
 
     [System.Serializable]

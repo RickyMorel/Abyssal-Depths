@@ -7,8 +7,6 @@ public class FireShotgun : WeaponShoot
     #region Private Variable
 
     private bool _hasAlreadyShot = false;
-    private ChipDataSO _chipDataSO;
-    private ChipDataSO.BasicChip _chipClass;
     GameObject _projectileInstance;
 
     #endregion
@@ -17,22 +15,6 @@ public class FireShotgun : WeaponShoot
 
     [SerializeField] private float _shootSpreadSeparationAngle = 5;
     [SerializeField] private int _amountOfProjectiles = 1;
-
-    #endregion
-
-    #region Unity Loops
-
-    private void Awake()
-    {
-        _chipDataSO = GameAssetsManager.Instance.ChipDataSO;
-    }
-
-    public override void Start()
-    {
-        _weapon = GetComponentInParent<Weapon>();
-        _chipClass = _chipDataSO.GetChipType(DamageTypes.Fire);
-        _timeBetweenShots = _chipClass.ShootAfterSeconds;
-    }
 
     #endregion
 

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Data", menuName = "Combat/DamageType")]
-public class DamageType : ScriptableObject
+public class DamageTypeSO : ScriptableObject
 {
     [Tooltip("X is weakness, Y resistance")]
     public Vector2 Base = new Vector2(2, 3);

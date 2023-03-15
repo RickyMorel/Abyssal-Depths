@@ -26,12 +26,6 @@ public class SubGoal
 [RequireComponent(typeof(AIStateMachine))]
 public class GAgent : MonoBehaviour
 {
-    #region Getters and Setters
-
-    public bool IsMoving { get { return _isMoving; } set { _isMoving = value; } }
-
-    #endregion
-
     #region Public Properties
 
     public List<GAction> Actions = new List<GAction>();
@@ -39,6 +33,7 @@ public class GAgent : MonoBehaviour
     public GInventory Inventory = new GInventory();
     public WorldStates Beliefs = new WorldStates();
     public GAction CurrentAction;
+    public bool IsMoving => _isMoving;
 
     public event Action OnDoAction;
     public event Action OnExitAction;
@@ -169,6 +164,8 @@ public class GAgent : MonoBehaviour
 
     private void TryPerformGoal()
     {
+        if (_aiStateMachine.CanMove && !_isMoving) { _isMoving = true; }
+
         if (_actionQueue == null || _actionQueue.Count < 1) { return; }
 
         CurrentAction = _actionQueue.Dequeue();
@@ -187,7 +184,7 @@ public class GAgent : MonoBehaviour
 
                 CurrentAction.Agent.SetDestination(_destination);
 
-                if (_aiStateMachine.CanMove) { _isMoving = true; }
+                
             }
         }
         else

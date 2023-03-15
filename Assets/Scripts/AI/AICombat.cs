@@ -22,10 +22,8 @@ public class AICombat : PlayerCombat
 
     private void Awake()
     {
-        if (_attackHitbox.GetComponents<AttackHitBox>() != null)
-        {
-            _attackHitbox.GetComponent<AttackHitBox>().AICombatID = _enemyDamageDataID;
-        }
+        if (_attackHitbox == null) { return; }
+        _attackHitbox.GetComponent<AttackHitBox>().AICombatID = _enemyDamageDataID;
     }
 
     private void Start()

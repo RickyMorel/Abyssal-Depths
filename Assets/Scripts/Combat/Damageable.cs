@@ -39,7 +39,6 @@ public class Damageable : MonoBehaviour
     private float _timer = 0;
     private bool _isBeingElectrocuted = false;
     private DamageData _damageData;
-    private ChipDataSO _chipDataSO;
 
     private ParticleSystem _fireParticles;
     private ParticleSystem _electricParticles;
@@ -393,7 +392,7 @@ public class Damageable : MonoBehaviour
         GAgent gAgent = GetComponent<GAgent>();
         if (DoesShowDamageParticles()) { _electricParticles.Play(); }
         yield return new WaitForSeconds(_damageData.SecondaryValue[index]);
-        if (!IsDead() && baseStateMachine != null) { baseStateMachine.CanMove = true; gAgent.IsMoving = true; }
+        if (!IsDead() && baseStateMachine != null) { baseStateMachine.CanMove = true; }
         _isBeingElectrocuted = false;
         _electricParticles.Stop();
     }

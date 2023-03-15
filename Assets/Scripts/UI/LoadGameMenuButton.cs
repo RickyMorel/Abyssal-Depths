@@ -12,11 +12,22 @@ public class LoadGameMenuButton : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _timePlayedText;
     [SerializeField] private TextMeshProUGUI _upgradesText;
 
+    public LoadGameMenuButton()
+    {
+        _upgradesText.text = "";
+    }
+
     public void DisplayData(SaveData saveData)
     {
+        _upgradesText.text += "Wpns(";
         foreach (var upgradeData in saveData.WeaponDatas)
         {
-            _upgradesText.text += $"{ upgradeData.Socket1ChipId}, ";
+            UpgradeChip chip_1 = SaveUtils.GetChipById(upgradeData.Socket1ChipId);
+            UpgradeChip chip_2 = SaveUtils.GetChipById(upgradeData.Socket2ChipId);
+
+            if(chip_1 != null) { _upgradesText.text += $"{chip_1.GetChipName()}, "; }
+            if(chip_2 != null) { _upgradesText.text += $"{chip_2.GetChipName()}"; }
         }
+        _upgradesText.text += "), ";
     }
 }

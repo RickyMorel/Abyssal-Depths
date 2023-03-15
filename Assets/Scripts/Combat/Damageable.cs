@@ -102,15 +102,19 @@ public class Damageable : MonoBehaviour
     {
         if (!other.gameObject.TryGetComponent(out Projectile projectile)) { return; }
 
+        //We don't want the projectile to damage its user
         if (IsOwnDamage(other)) { return; }
 
         _damageData = new DamageData(projectile.DamageData);
         ChangeColorForDamageTypeParticles(DamageData.ChipLevel);
 
+        //In some cases, we don't want the projectile to be destroyed on impact, like the constant laser for example
         if (projectile.DestroyOnHit)
         {
             Damage(_damageData.Damage[0]);
 
+            //If the projectile has 2 different damagetypes it will also do the damage for the second damagetype, if the second is none though, it will do its impact damage
+            //or if both damagetypes are same, we don't want to do anything else
             if (projectile.DamageTypes[0] != projectile.DamageTypes[1] && projectile.DamageTypes[1] != DamageTypes.None) { Damage(_damageData.Damage[1], false, false, null, 1); }
             else if (projectile.DamageTypes[0] != projectile.DamageTypes[1] && projectile.DamageTypes[1] == DamageTypes.None) { Damage(_damageData.ImpactDamage, true); }
 
@@ -118,6 +122,7 @@ public class Damageable : MonoBehaviour
         }
         else
         {
+            //Since the projectile won't get destroyed on hit, we want it to do damage after a certain amount of seconds passes, or else it will just the damage everyframe
             _damageTimer += Time.deltaTime;
             if (_damageTimer >= projectile.DealDamageAfterSeconds)
             {

@@ -49,4 +49,12 @@ public class DamageData
         _additionalValue = damageData.AdditionalValue;
         _chipLevel = damageData.ChipLevel;
     }
+
+    public static DamageData GetDamageData(DamageTypes[] damageTypes, Weapon weapon, int aiCombatID = 0)
+    {
+        DamageData damageData = null;
+        if (weapon == null) { GameAssetsManager.Instance.EnemyDamageDataSO.CreateDamageForEnemies(damageTypes, aiCombatID, ref damageData); }
+        else { GameAssetsManager.Instance.ChipDataSO.CreateDamageDataFromChip(damageTypes, weapon, ref damageData); }
+        return damageData;
+    }
 }

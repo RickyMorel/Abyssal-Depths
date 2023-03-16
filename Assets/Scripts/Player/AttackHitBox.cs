@@ -41,11 +41,7 @@ public class AttackHitBox : MonoBehaviour
 
     private void Start()
     {
-        if (_weapon == null && _aiCombatID != 0) { GameAssetsManager.Instance.EnemyDamageDataSO.CreateDamageForEnemies(_damageTypes, _aiCombatID, ref _damageData); }
-        else
-        {
-            GameAssetsManager.Instance.ChipDataSO.CreateDamageDataFromChip(_damageTypes, _weapon, ref _damageData);
-        }
+        _damageData = DamageData.GetDamageData(_damageTypes, _weapon, _aiCombatID);
     }
 
     #endregion

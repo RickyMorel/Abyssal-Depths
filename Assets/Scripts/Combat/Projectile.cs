@@ -21,8 +21,6 @@ public class Projectile : MonoBehaviour
     protected bool _destroyOnHit = true;
     protected Weapon _weapon;
     protected int _aiCombatID;
-    protected ChipDataSO _chipDataSO;
-    protected EnemyDamageDataSO _enemyDamageDataSO;
     protected DamageData _damageData;
     protected float _dealDamageAfterSeconds;
     private Transform _ownersTransform;
@@ -61,15 +59,13 @@ public class Projectile : MonoBehaviour
         Launch(transform.forward);
 
         Invoke(nameof(DestroySelf), 4f);
+        _damageData = DamageData.GetDamageData(_damageTypes, _weapon, _aiCombatID);
 
-        if (_weapon == null) { GameAssetsManager.Instance.EnemyDamageDataSO.CreateDamageForEnemies(_damageTypes, _aiCombatID, ref _damageData); }
-        else 
-        { 
-            GameAssetsManager.Instance.ChipDataSO.CreateDamageDataFromChip(_damageTypes, _weapon, ref _damageData);
-
+        if (_weapon != null) 
+        {
             if (_particles.Length < 1) { return; }
 
-            GameAssetsManager.Instance.ChipDataSO.ChangeParticleColor(_particles[0], _damageTypes[0], _weapon.ChipLevel); 
+            GameAssetsManager.Instance.ChipDataSO.ChangeParticleColor(_particles[0], _damageTypes[0], _weapon.ChipLevel);
         }
     }
 

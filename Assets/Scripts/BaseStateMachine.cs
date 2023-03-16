@@ -51,6 +51,7 @@ public class BaseStateMachine : MonoBehaviourID
     protected bool _isJumpPressed;
     protected Vector3 _moveDirection;
     protected bool _isShooting;
+    protected Damageable _damageable;
 
     #endregion
 
@@ -74,6 +75,7 @@ public class BaseStateMachine : MonoBehaviourID
         _states = new PlayerStateFactory(this);
         _currentState = _states.Grounded();
         _currentState.EnterState();
+        _damageable = GetComponent<Damageable>();
     }
 
     public virtual void Start()
@@ -102,7 +104,22 @@ public class BaseStateMachine : MonoBehaviourID
         AnimateMove();
     }
 
+    public virtual void OnEnable()
+    {
+        _damageable.OnElectrocution += ToggleCanMove;
+    }
+
+    public virtual void OnDisable()
+    {
+        _damageable.OnElectrocution -= ToggleCanMove;
+    }
+
     #endregion
+
+    public virtual void ToggleCanMove(bool canMove)
+    {
+        _canMove = canMove;
+    }
 
     public virtual void Move()
     {

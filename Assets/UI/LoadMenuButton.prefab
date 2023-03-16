@@ -765,7 +765,7 @@ GameObject:
   - component: {fileID: 7788369050967492586}
   - component: {fileID: 3780796715222180550}
   m_Layer: 5
-  m_Name: SaveMenuButton
+  m_Name: LoadMenuButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -878,7 +878,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 333905161174909954}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3780796715222180550}
+        m_TargetAssemblyTypeName: LoadGameMenuButton, Assembly-CSharp
+        m_MethodName: LoadGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3780796715222180550
 MonoBehaviour:
   m_ObjectHideFlags: 0

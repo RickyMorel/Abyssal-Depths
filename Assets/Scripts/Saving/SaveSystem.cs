@@ -22,14 +22,11 @@ public static class SaveSystem
 
     public static void Save()
     {
-        SaveData prevData = Load();
-
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/abyssalDepths.sav";
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        ShipData shipData = Ship.Instance.GetComponent<ShipData>();
-        shipData.SetFileData(prevData);
+        ShipData shipData = Ship.Instance.GetComponent<ShipData>();;
 
         SaveData saveData = new SaveData(shipData);
 

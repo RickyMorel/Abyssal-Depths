@@ -62,7 +62,7 @@ namespace AbyssalDepths.UI
             GameObject loadButtonInstance = Instantiate(_loadGameMenuButtonPrefab, _loadMenuContentTransform);
             LoadGameMenuButton loadButtonInstanceScript = loadButtonInstance.GetComponent<LoadGameMenuButton>();
 
-            loadButtonInstanceScript.DisplayData(saveData);
+            loadButtonInstanceScript.DisplayData(saveData, 0);
         }
 
         private void DestroyPrevLoadGameButtons()

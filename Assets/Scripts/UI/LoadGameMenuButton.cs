@@ -2,26 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LoadGameMenuButton : MonoBehaviour
 {
+    #region Editor Fields
+
     [SerializeField] private Image _icon;
     [SerializeField] private TextMeshProUGUI _playerNameText;
     [SerializeField] private TextMeshProUGUI _locationNameText;
     [SerializeField] private TextMeshProUGUI _timePlayedText;
     [SerializeField] private TextMeshProUGUI _upgradesText;
 
-    public LoadGameMenuButton()
-    {
-        _upgradesText.text = "";
-    }
+    #endregion
 
-    public void DisplayData(SaveData saveData)
+    #region Private Variables
+
+    private int _saveIndex;
+
+    #endregion
+
+    public void DisplayData(SaveData saveData, int saveIndex)
     {
+        _saveIndex = saveIndex;
+
         _playerNameText.text = saveData.ShipName;
         _locationNameText.text = saveData.LocationName;
         _timePlayedText.text = CalculateTimePlayed(saveData.PlayedTime);
+        _upgradesText.text = "";
 
         _upgradesText.text += "Wpns(";
         foreach (var upgradeData in saveData.WeaponDatas)
@@ -43,6 +52,14 @@ public class LoadGameMenuButton : MonoBehaviour
         int seconds = Mathf.FloorToInt(totalSecondsPlayed - (totalMinutes * 60));
 
         return $"{PadNumber(hours)}:{PadNumber(minutes)}:{PadNumber(seconds)}";
+    }
+
+    public void LoadGame()
+    {
+        GameObject saveDataObj = new GameObject($"Loaded Data:{_saveIndex}");
+        DontDestroyOnLoad(saveDataObj);
+
+        SceneManager.LoadScene(1);
     }
 
     private string PadNumber(float number)

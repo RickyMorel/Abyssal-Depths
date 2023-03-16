@@ -50,6 +50,7 @@ public class ShipData : MonoBehaviour
 
         SaveData saveData = SaveSystem.Load();
 
+        SetFileData(saveData);
         LoadMinables(saveData);
         LoadEnemies(saveData);
         LoadInventories(saveData);

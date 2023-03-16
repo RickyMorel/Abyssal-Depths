@@ -19,6 +19,10 @@ public class LoadGameMenuButton : MonoBehaviour
 
     public void DisplayData(SaveData saveData)
     {
+        _playerNameText.text = saveData.ShipName;
+        _locationNameText.text = saveData.LocationName;
+        _timePlayedText.text = CalculateTimePlayed(saveData.PlayedTime);
+
         _upgradesText.text += "Wpns(";
         foreach (var upgradeData in saveData.WeaponDatas)
         {
@@ -29,5 +33,21 @@ public class LoadGameMenuButton : MonoBehaviour
             if(chip_2 != null) { _upgradesText.text += $"{chip_2.GetChipName()}"; }
         }
         _upgradesText.text += "), ";
+    }
+
+    private string CalculateTimePlayed(float totalSecondsPlayed)
+    {
+        int totalMinutes = Mathf.FloorToInt(totalSecondsPlayed / 60);
+        int hours = Mathf.FloorToInt(totalSecondsPlayed / 3600);
+        int minutes = totalMinutes - (hours * 60);
+        int seconds = Mathf.FloorToInt(totalSecondsPlayed - (totalMinutes * 60));
+
+        return $"{PadNumber(hours)}:{PadNumber(minutes)}:{PadNumber(seconds)}";
+    }
+
+    private string PadNumber(float number)
+    {
+        string numberString = number.ToString();
+        return numberString.PadLeft(2, '0');
     }
 }

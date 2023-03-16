@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 namespace AbyssalDepths.UI
 {
@@ -13,6 +14,7 @@ namespace AbyssalDepths.UI
         [SerializeField] private GameObject _headerPanel;
         [SerializeField] private GameObject _playPanel;
         [SerializeField] private GameObject _settingsPanel;
+        [SerializeField] private GameObject _newGamePanel;
         [SerializeField] private GameObject _loadPanel;
         [SerializeField] private GameObject _gameplaySettingsPanel;
         [SerializeField] private GameObject _videoSettingsPanel;
@@ -24,6 +26,9 @@ namespace AbyssalDepths.UI
         [Header("Transforms")]
         [SerializeField] private Transform _loadMenuContentTransform;
 
+        [Header("Misc")]
+        [SerializeField] private TMP_InputField _newGameNameText;
+
         #endregion
 
         private void Start()
@@ -33,7 +38,17 @@ namespace AbyssalDepths.UI
 
         public void NewGame()
         {
+            if(_newGameNameText.text == string.Empty) { return; }
+
+            SaveSystem.CreateNewSave(_newGameNameText.text);
+
+            EnableNewGamePanel(false);
             SceneManager.LoadScene(1);
+        }
+
+        public void EnableNewGamePanel(bool isEnabled)
+        {
+            _newGamePanel.SetActive(isEnabled);
         }
 
         public void LoadGame()

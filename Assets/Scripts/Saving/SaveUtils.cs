@@ -14,7 +14,6 @@ public class SaveUtils
 
     public static UpgradeChip GetChipById(string chipId)
     {
-        Debug.Log("_allChips: " + _allChips.Length);
         foreach (UpgradeChip chip in _allChips)
         {
             if (chipId != chip.Id) { continue; }

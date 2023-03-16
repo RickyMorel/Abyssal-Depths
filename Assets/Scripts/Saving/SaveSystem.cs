@@ -5,13 +5,33 @@ using static SaveData;
 
 public static class SaveSystem
 {
-    public static void Save()
+    public static void CreateNewSave(string shipName)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/abyssalDepths.sav";
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        SaveData saveData = new SaveData(Ship.Instance.GetComponent<ShipData>());
+        SaveData saveData = new SaveData(shipName);
+
+        formatter.Serialize(stream, saveData);
+        stream.Close();
+
+        //Left here on purpose
+        Debug.Log("Saved! " + path);
+    }
+
+    public static void Save()
+    {
+        SaveData prevData = Load();
+
+        BinaryFormatter formatter = new BinaryFormatter();
+        string path = Application.persistentDataPath + "/abyssalDepths.sav";
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+        ShipData shipData = Ship.Instance.GetComponent<ShipData>();
+        shipData.SetFileData(prevData);
+
+        SaveData saveData = new SaveData(shipData);
 
         formatter.Serialize(stream, saveData);
         stream.Close();

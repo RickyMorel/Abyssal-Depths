@@ -16,6 +16,14 @@ public class ShipData : MonoBehaviour
 
     #endregion
 
+    #region Getters & Setters
+
+    public string ShipName { get; private set; }
+    public string Location { get; private set; }
+    public float PlayTime { get; private set; }
+
+    #endregion
+
     #region Public Properties
 
     [Header("Upgradables")]
@@ -67,7 +75,21 @@ public class ShipData : MonoBehaviour
 
     private void Update()
     {
+        PlayTime += Time.deltaTime;
+
         if (Input.GetKeyDown(KeyCode.K)) { SaveSystem.Save(); }
+    }
+
+    public void SetFileData(SaveData saveData)
+    {
+        ShipName = saveData.ShipName;
+        if (Location == string.Empty) { Location = saveData.LocationName; }
+        if (PlayTime < 1) { PlayTime = saveData.PlayedTime; }
+    }
+
+    public void SetLocation(string newLocation)
+    {
+        Location = newLocation;
     }
 
     private void TryLoadDeathLoot(SaveData saveData)

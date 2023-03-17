@@ -21,7 +21,7 @@ public class ScreenshotHandler : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.T))
         {
             Debug.Log("Take Screenshot");
-            TakeScreenshot(600, 600);
+            TakeScreenshot(1080, 1080);
         }
     }
 

@@ -2,6 +2,8 @@ using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using static SaveData;
+using System.Collections.Generic;
+using System.Text;
 
 public static class SaveSystem
 {
@@ -27,14 +29,19 @@ public static class SaveSystem
         FileStream stream = new FileStream(path, FileMode.Create);
 
         ShipData shipData = Ship.Instance.GetComponent<ShipData>();;
-
         SaveData saveData = new SaveData(shipData);
 
-        formatter.Serialize(stream, saveData);
-        stream.Close();
+        ScreenshotHandler.TakeScreenshotStatic(1080, 1080, (Texture2D screenshotTexture) =>
+        {
+            byte[] screenshotByteArray = screenshotTexture.EncodeToPNG();
 
-        //Left here on purpose
-        Debug.Log("Saved! " + path);
+            saveData.ScreenShotBytes = screenshotByteArray;
+
+            formatter.Serialize(stream, saveData);
+            stream.Close();
+            //Left here on purpose
+            Debug.Log("Saved! " + path);
+        });
     }
 
     public static SaveData Load()

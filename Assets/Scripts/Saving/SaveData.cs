@@ -20,6 +20,7 @@ public class SaveData
     public List<ItemData> _mainInventory = new List<ItemData>();
     public List<ItemData> _shipInventory = new List<ItemData>();
     public DeathLootData _deathLootData;
+    public byte[] ScreenShotBytes;
 
     public SaveData(string shipName)
     {

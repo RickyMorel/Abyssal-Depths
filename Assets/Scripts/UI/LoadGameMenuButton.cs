@@ -27,6 +27,7 @@ public class LoadGameMenuButton : MonoBehaviour
     {
         _saveIndex = saveIndex;
 
+        _icon.sprite = SaveUtils.ConvertBytesToTexture2D(saveData.ScreenShotBytes);
         _playerNameText.text = saveData.ShipName;
         _locationNameText.text = saveData.LocationName;
         _timePlayedText.text = CalculateTimePlayed(saveData.PlayedTime);

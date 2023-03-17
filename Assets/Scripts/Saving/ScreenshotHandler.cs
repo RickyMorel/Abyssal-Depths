@@ -1,19 +1,24 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization;
 using UnityEngine;
 using UnityEngine.Rendering;
+using static SaveFileScreenshotDemo;
 
 public class ScreenshotHandler : MonoBehaviour
 {
     private static ScreenshotHandler _instance;
     private Camera _camera;
     private bool _takeScreenshotOnNextFrame;
+    private Action<Texture2D> onScreenshotTaken;
 
     private void Awake()
     {
         _instance = this;
         _camera = gameObject.GetComponent<Camera>();
+        _camera.enabled = false;
     }
 
     private void Update()
@@ -21,7 +26,10 @@ public class ScreenshotHandler : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.T))
         {
             Debug.Log("Take Screenshot");
-            TakeScreenshot(1080, 1080);
+            TakeScreenshotStatic(1080, 1080, (Texture2D screenshotTexture) =>
+            {
+
+            });
         }
     }
 
@@ -39,6 +47,8 @@ public class ScreenshotHandler : MonoBehaviour
     {
         if (!_takeScreenshotOnNextFrame) { return; }
 
+        _camera.enabled = true;
+
         _takeScreenshotOnNextFrame = false;
 
         RenderTexture renderTexture = _camera.targetTexture;
@@ -53,16 +63,22 @@ public class ScreenshotHandler : MonoBehaviour
 
         RenderTexture.ReleaseTemporary(renderTexture);
         _camera.targetTexture = null;
+
+        onScreenshotTaken(renderResult);
+        onScreenshotTaken = null;
+
+        _camera.enabled = false;
     }
 
-    private void TakeScreenshot(int width, int height)
+    private void TakeScreenshot(int width, int height, Action<Texture2D> onScreenShotTaken)
     {
         _camera.targetTexture = RenderTexture.GetTemporary(width, height);
         _takeScreenshotOnNextFrame = true;
+        this.onScreenshotTaken = onScreenShotTaken;
     }
 
-    public static void TakeScreenshotStatic(int width, int height)
+    public static void TakeScreenshotStatic(int width, int height, Action<Texture2D> onScreenShotTaken)
     {
-        _instance.TakeScreenshot(width, height);
+        _instance.TakeScreenshot(width, height, onScreenShotTaken);
     }
 }

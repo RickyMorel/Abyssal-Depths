@@ -56,17 +56,17 @@ public class Projectile : MonoBehaviour
 
     public virtual void Start()
     {
+        _damageData = DamageData.GetDamageData(_damageTypes, _weapon, _aiCombatID);
+
+        if (_weapon == null) { return; }
+
+        if (_particles.Length < 1) { return; }
+
+        GameAssetsManager.Instance.ChipDataSO.ChangeParticleColor(_particles[0], _damageTypes[0], _weapon.ChipLevel);
+
         Launch(transform.forward);
 
         Invoke(nameof(DestroySelf), 4f);
-        _damageData = DamageData.GetDamageData(_damageTypes, _weapon, _aiCombatID);
-
-        if (_weapon != null) 
-        {
-            if (_particles.Length < 1) { return; }
-
-            GameAssetsManager.Instance.ChipDataSO.ChangeParticleColor(_particles[0], _damageTypes[0], _weapon.ChipLevel);
-        }
     }
 
     public void Launch(Vector3 direction, Vector3 lookDir = default(Vector3))

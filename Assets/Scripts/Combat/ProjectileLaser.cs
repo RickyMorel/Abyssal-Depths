@@ -12,16 +12,8 @@ public class ProjectileLaser : Projectile
 
     public override void Start()
     {
+        base.Start();
         _destroyOnHit = false;
         _dealDamageAfterSeconds = 0.5f;
-
-        _damageData = DamageData.GetDamageData(_damageTypes, _weapon, _aiCombatID);
-
-        if (_weapon != null)
-        {
-            if (_particles.Length < 1) { return; }
-
-            GameAssetsManager.Instance.ChipDataSO.ChangeParticleColor(_particles[0], _damageTypes[0], _weapon.ChipLevel);
-        }
     }
 }

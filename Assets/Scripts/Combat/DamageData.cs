@@ -52,9 +52,18 @@ public class DamageData
 
     public static DamageData GetDamageData(DamageTypes[] damageTypes, Weapon weapon, int aiCombatID = 0)
     {
+        if (aiCombatID < 0 && weapon == null) 
+        {
+            int[] damage = { 20, 0 };
+            float[] nullFloatArray = { 0, 0 };
+            return new DamageData(damageTypes, damage, 0, nullFloatArray, nullFloatArray, nullFloatArray, nullFloatArray, 1); 
+        }
+
         DamageData damageData = null;
+
         if (weapon == null) { GameAssetsManager.Instance.EnemyDamageDataSO.CreateDamageForEnemies(damageTypes, aiCombatID, ref damageData); }
         else { GameAssetsManager.Instance.ChipDataSO.CreateDamageDataFromChip(damageTypes, weapon, ref damageData); }
+
         return damageData;
     }
 }

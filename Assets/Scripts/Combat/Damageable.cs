@@ -61,9 +61,7 @@ public class Damageable : MonoBehaviour
     public event Action<int> OnUpdateHealth;
     public event Action<DamageTypes> OnDamaged;
     public event Action OnDie;
-
-    public delegate void Electrocution(bool canMove);
-    public event Electrocution OnElectrocution;
+    public event Action<bool> OnElectrocution;
 
     #endregion
 
@@ -356,7 +354,7 @@ public class Damageable : MonoBehaviour
 
         _isBeingElectrocuted = true;
 
-        if (TryGetComponent(out BaseStateMachine baseStateMachine)) { OnElectrocution(false); }
+        if (TryGetComponent(out BaseStateMachine baseStateMachine)) { OnElectrocution?.Invoke(true); }
 
         //Electrocute all nearby enemies
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, _damageData.AdditionalValue[index], LayerMask.GetMask("NPC"));
@@ -398,10 +396,9 @@ public class Damageable : MonoBehaviour
 
     private IEnumerator ElectricParalysis(BaseStateMachine baseStateMachine, int index)
     {
-        GAgent gAgent = GetComponent<GAgent>();
         if (DoesShowDamageParticles()) { _electricParticles.Play(); }
         yield return new WaitForSeconds(_damageData.SecondaryValue[index]);
-        if (!IsDead() && baseStateMachine != null) { OnElectrocution(true); }
+        if (!IsDead() && baseStateMachine != null) { OnElectrocution?.Invoke(false); }
         _isBeingElectrocuted = false;
         _electricParticles.Stop();
     }

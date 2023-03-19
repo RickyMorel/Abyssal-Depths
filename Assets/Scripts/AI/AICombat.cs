@@ -23,6 +23,7 @@ public class AICombat : PlayerCombat
     private void Awake()
     {
         if (_attackHitbox == null) { return; }
+
         _attackHitbox.GetComponent<AttackHitBox>().AICombatID = _enemyDamageDataID;
     }
 

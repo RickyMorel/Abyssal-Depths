@@ -17,7 +17,7 @@ public class AttackHitBox : MonoBehaviour
 
     private int _damage;
     private DamageData _damageData;
-    private int _aiCombatID;
+    private int _aiCombatID = -1;
 
     #endregion
 
@@ -41,6 +41,11 @@ public class AttackHitBox : MonoBehaviour
 
     private void Start()
     {
+        if (_weapon == null && _aiCombatID < 0) 
+        {
+            DamageTypes[] damageTypes = { DamageTypes.None, DamageTypes.None };
+            _damageData = DamageData.GetDamageData(damageTypes, null, -1);
+        }
         _damageData = DamageData.GetDamageData(_damageTypes, _weapon, _aiCombatID);
     }
 

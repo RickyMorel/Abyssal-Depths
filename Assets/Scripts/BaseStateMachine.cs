@@ -85,6 +85,7 @@ public class BaseStateMachine : MonoBehaviourID
         _playerHealth = GetComponent<PlayerHealth>();
         _anim = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody>();
+        _damageable.OnElectrocution += SetCanMove;
     }
 
     public virtual void Update()
@@ -104,21 +105,16 @@ public class BaseStateMachine : MonoBehaviourID
         AnimateMove();
     }
 
-    public virtual void OnEnable()
+    public virtual void OnDestroy()
     {
-        _damageable.OnElectrocution += ToggleCanMove;
-    }
-
-    public virtual void OnDisable()
-    {
-        _damageable.OnElectrocution -= ToggleCanMove;
+        _damageable.OnElectrocution -= SetCanMove;
     }
 
     #endregion
-
-    public virtual void ToggleCanMove(bool canMove)
+    //We want canMove be the opposite of OnElectrocution, so if it it is electrocuted, it can't move
+    public virtual void SetCanMove(bool canMove)
     {
-        _canMove = canMove;
+        _canMove = !canMove;
     }
 
     public virtual void Move()

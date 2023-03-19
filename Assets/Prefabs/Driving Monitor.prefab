@@ -67,7 +67,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1688170152322542363}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: PlayerPosition
   m_TagString: Untagged
   m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 8939861088303502654}
   - component: {fileID: 3031896794887204772}
   - component: {fileID: 7509570099185175406}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: Driving Monitor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,15 +201,14 @@ MonoBehaviour:
   - {fileID: 3062101694037517811}
   _upgrades:
   - UpgradeMesh: {fileID: 7473328548439351794}
-    Projectile: {fileID: 0}
     ShootTransform: []
-    _socket_1_ChipType: 0
-    _socket_2_ChipType: 0
+    UpgradeSO: {fileID: 11400000, guid: 83e644d978439cb44bc0fc3737705725, type: 2}
   _chipDropTransform: {fileID: 5430291205112534148}
   _rotationSpeed: 120
   _pivotTransform: {fileID: 0}
   RotatorTransform: {fileID: 0}
   _acceleration: 20
+  _hoverAcceleration: 13
   _boostImpulseForce: 5
   _shipDrag: 0.25
   _gears:
@@ -220,6 +219,11 @@ MonoBehaviour:
   _speedReductionTolerance: 8
   _rb: {fileID: 0}
   _boosterParticle: {fileID: 0}
+  _stabilizerBoosterParticles:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &3031896794887204772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,7 +242,7 @@ MonoBehaviour:
   _healthBarImage: {fileID: 0}
   _damageParticles: {fileID: 0}
   _fixCost: {fileID: 11400000, guid: 5980c9c518217fe498cc9b85953ea003, type: 2}
-  _timeToFix: 10
+  _timeToFix: 2
   _canUseWhenBroken: 1
   _particleSpawnTransform: {fileID: 3238404405033975116}
 --- !u!320 &7509570099185175406
@@ -312,7 +316,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5430291205112534148}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: ChipDropTransform
   m_TagString: Untagged
   m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}

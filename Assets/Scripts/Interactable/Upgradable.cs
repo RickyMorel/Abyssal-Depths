@@ -211,7 +211,7 @@ public class Upgradable : Interactable
         foreach (Upgrade upgrade in _upgrades)
         {
             upgradeMeshIndex++;
-            if(upgrade._socket_1_ChipType == socket_1_chip_type && upgrade._socket_2_ChipType == socket_2_chip_type)
+            if(upgrade.UpgradeSO.Socket_1 == socket_1_chip_type && upgrade.UpgradeSO.Socket_2 == socket_2_chip_type)
             {
                 break;
             }
@@ -219,7 +219,7 @@ public class Upgradable : Interactable
 
         _selectedUpgrade = _upgrades[upgradeMeshIndex];
         GameObject newMesh = _upgrades[upgradeMeshIndex].UpgradeMesh;
-        GameObject newProjectile = _upgrades[upgradeMeshIndex].Projectile;
+        GameObject newProjectile = _upgrades[upgradeMeshIndex].UpgradeSO.ProjectilePrefab;
         GameObject[] newShootTransform = _upgrades[upgradeMeshIndex].ShootTransform;
 
         newMesh.SetActive(true);
@@ -234,10 +234,8 @@ public class Upgradable : Interactable
 public class Upgrade
 {
     public GameObject UpgradeMesh;
-    public GameObject Projectile;
     public GameObject[] ShootTransform;
-    public ChipType _socket_1_ChipType;
-    public ChipType _socket_2_ChipType;
+    public WeaponSO UpgradeSO;
 }
 
 #endregion

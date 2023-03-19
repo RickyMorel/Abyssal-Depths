@@ -10,11 +10,6 @@ public class SemiautoElectricRifle : WeaponShoot
 
     #endregion
 
-    public override void Start()
-    {
-        _weapon = GetComponentInParent<Weapon>();
-    }
-
     public override void CheckShootInput()
     {
         if (_weapon.CurrentPlayer.IsUsing && !_hasAlreadyShot)

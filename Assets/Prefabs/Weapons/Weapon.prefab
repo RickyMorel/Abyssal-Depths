@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 095073ca705494647888fd3a4b729b8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timeBetweenShots: 0.2
+  _timeBetweenShots: 0
   _laserBallSize: 2
   _scaleDuration: 1
 --- !u!1 &457473744826260656
@@ -290,7 +290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7b4a1ca6217b23418b624c856a3ceb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timeBetweenShots: 0.1
+  _timeBetweenShots: 0.2
   _maxRotationSpeed: 500
 --- !u!1 &458250032658626900
 GameObject:
@@ -1473,7 +1473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce79472da175b8d4fbb53c560911e0b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timeBetweenShots: 0.35
+  _timeBetweenShots: 0.2
 --- !u!1 &5196958495453686589
 GameObject:
   m_ObjectHideFlags: 0
@@ -2125,7 +2125,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.6, y: 1.6218746, z: 0.6}
+  m_Size: {x: 1.69, y: 1.6218746, z: 0.6}
   m_Center: {x: -0.000000025696108, y: 0.04906252, z: -0.00000013438986}
 --- !u!114 &4018232727435811441
 MonoBehaviour:
@@ -2141,6 +2141,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ownHealth: {fileID: 2835829445178600864}
   _isFriendlyToPlayers: 1
+  _damageTypes: 0100000000000000
+  _weapon: {fileID: 7627081817445622300}
+  _mace: {fileID: 1154468729331244522}
 --- !u!138 &9098718564592703483
 FixedJoint:
   m_ObjectHideFlags: 0
@@ -2567,7 +2570,7 @@ Transform:
   - {fileID: 2389941571288428507}
   - {fileID: 6567959656405035337}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!54 &7627081817445622294
 Rigidbody:
@@ -2702,6 +2705,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _resistanceType: 
   _weaknessType: 
+  _currentHealth: 0
   _maxHealth: 100
   _healthBarImage: {fileID: 0}
   _damageParticles: {fileID: 0}

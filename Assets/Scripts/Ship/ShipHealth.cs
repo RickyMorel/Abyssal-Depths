@@ -113,8 +113,8 @@ public class ShipHealth : Damageable
         if (_prevVelocity < _minCrashSpeed) { return; }
 
         _currentDamage = (int)CalculateCrashDamage();
-        Damage((int)_currentDamage, DamageType.Base);
-        if (collision.gameObject.TryGetComponent<AIHealth>(out AIHealth enemyHealth)) { enemyHealth.Damage((int)_currentDamage); }
+        DamageWithoutDamageData((int)_currentDamage, collision.collider);
+        if (collision.gameObject.TryGetComponent(out AIHealth enemyHealth)) { enemyHealth.Damage((int)_currentDamage); }
 
         float currentSpeedPercentage = _prevVelocity / Ship.Instance.TopSpeed;
         float crashImpactPercentageRatio = 4 * currentSpeedPercentage;
@@ -126,9 +126,9 @@ public class ShipHealth : Damageable
         GameObject shipCrashParticles = Instantiate(Ship.Instance.ShipStatsSO.ShipCrashParticles.gameObject, hitPos, Quaternion.identity);
     }
 
-    public override void Damage(int damage, DamageType damageType = DamageType.None, bool isDamageChain = false, Collider instigatorCollider = null)
+    public override void DamageWithoutDamageData(int damage, Collider instigatorCollider = null)
     {
-        base.Damage(damage, damageType, isDamageChain);
+        base.DamageWithoutDamageData(damage, instigatorCollider);
 
         ShipCamera.Instance.ShakeCamera(2f, 50f, 0.2f);
 
@@ -157,7 +157,7 @@ public class ShipHealth : Damageable
         CheckFlickerRedLights();
     }
 
-    private void HandleDamaged(DamageType damageType)
+    private void HandleDamaged(DamageTypes damageType)
     {
         _boosterHealth.SetHealth((int)CurrentHealth);
 

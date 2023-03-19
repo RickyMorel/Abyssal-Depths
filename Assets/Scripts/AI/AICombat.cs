@@ -6,6 +6,7 @@ public class AICombat : PlayerCombat
 {
     #region Editor Fields
 
+    [SerializeField] private int _enemyDamageDataID;
     [Range(2f, 100f)]
     [SerializeField] private float _attackRange = 10f;
 
@@ -18,6 +19,13 @@ public class AICombat : PlayerCombat
     #endregion
 
     private GAgent _gAgent;
+
+    private void Awake()
+    {
+        if (_attackHitbox == null) { return; }
+
+        _attackHitbox.GetComponent<AttackHitBox>().AICombatID = _enemyDamageDataID;
+    }
 
     private void Start()
     {
@@ -32,10 +40,13 @@ public class AICombat : PlayerCombat
         GameObject newProjectile = Instantiate(_projectilePrefab, _shootTransform.position, _shootTransform.rotation);
         newProjectile.transform.LookAt(enemyTransform);
         newProjectile.GetComponent<Projectile>().Initialize(tag, transform);
+        newProjectile.GetComponent<Projectile>().AICombatID = _enemyDamageDataID;
     }
 
     public void Aggro()
     {
+        if (_gAgent == null) { return; }
+
         if (_gAgent.Beliefs.HasState("aggro")) { return; }
 
         _gAgent.Beliefs.AddState("aggro", 1);

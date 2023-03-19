@@ -30,7 +30,7 @@ public class AIStateMachine : BaseStateMachine
 
     public override void Move()
     {
-        _moveDirection.x = _gAgent.IsMoving ? 1f : 0f;
+        _moveDirection.x = _canMove ? 1f : 0f;
     }
 
     public void BasicAttack()

@@ -7,11 +7,7 @@ using UnityEngine.Rendering;
 public static class SaveUtils
 {
     private static UpgradeChip[] _allChips = Resources.LoadAll<UpgradeChip>("ScriptableObjs/Chips");
-
-    //public SaveUtils()
-    //{
-    //    _allChips = Resources.LoadAll<UpgradeChip>("ScriptableObjs/Chips");
-    //}
+    private static WeaponSO[] _allWeapons = Resources.LoadAll<WeaponSO>("ScriptableObjs/Weapons");
 
     public static UpgradeChip GetChipById(string chipId)
     {
@@ -20,6 +16,20 @@ public static class SaveUtils
             if (chipId != chip.Id) { continue; }
 
             return chip;
+        }
+
+        return null;
+    }
+
+    public static WeaponSO GetUpgradableByChips(ChipType socket_1, ChipType socket_2, UpgradableType upgradableType)
+    {
+        foreach (WeaponSO weapon in _allWeapons)
+        {
+            if(weapon.Socket_1 != socket_1) { continue; }
+            if(weapon.Socket_2 != socket_2) { continue; }
+            if(weapon.UpgradableType != upgradableType) { continue; }
+
+            return weapon;
         }
 
         return null;

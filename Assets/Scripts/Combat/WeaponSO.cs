@@ -9,4 +9,12 @@ public class WeaponSO : ScriptableObject
     public GameObject ProjectilePrefab;
     public ChipType Socket_1;
     public ChipType Socket_2;
+    public UpgradableType UpgradableType;
+}
+
+public enum UpgradableType
+{
+    Weapon,
+    Shield,
+    Booster
 }

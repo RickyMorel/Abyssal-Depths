@@ -31,18 +31,57 @@ public class LoadGameMenuButton : MonoBehaviour
         _playerNameText.text = saveData.ShipName;
         _locationNameText.text = saveData.LocationName;
         _timePlayedText.text = CalculateTimePlayed(saveData.PlayedTime);
-        _upgradesText.text = "";
+        _upgradesText.text = "Upgrades: ";
 
+        DisplayBoosterData(saveData);
+        DisplayShieldData(saveData);
+        DisplayWeaponData(saveData);
+    }
+
+    private void DisplayBoosterData(SaveData saveData)
+    {
+        _upgradesText.text += "Bstr(";
+
+        WeaponSO booster = GetUpgradableSO(saveData.BoosterData, UpgradableType.Booster);
+
+        if (booster != null) { _upgradesText.text += $"{booster.WeaponName}"; }
+
+        _upgradesText.text += "), ";
+    }
+
+    private void DisplayShieldData(SaveData saveData)
+    {
+        _upgradesText.text += "Shld(";
+
+        WeaponSO shield = null;
+
+        if (shield != null) { _upgradesText.text += $"{shield.WeaponName}"; }
+        else { _upgradesText.text += $"?"; }
+
+        _upgradesText.text += ")";
+    }
+
+    private void DisplayWeaponData(SaveData saveData)
+    {
         _upgradesText.text += "Wpns(";
         foreach (var upgradeData in saveData.WeaponDatas)
         {
-            UpgradeChip chip_1 = SaveUtils.GetChipById(upgradeData.Socket1ChipId);
-            UpgradeChip chip_2 = SaveUtils.GetChipById(upgradeData.Socket2ChipId);
+            WeaponSO weapon = GetUpgradableSO(upgradeData, UpgradableType.Weapon);
 
-            if(chip_1 != null) { _upgradesText.text += $"{chip_1.GetChipName()}, "; }
-            if(chip_2 != null) { _upgradesText.text += $"{chip_2.GetChipName()}"; }
+            if (weapon != null) { _upgradesText.text += $"{weapon.WeaponName}, "; }
         }
-        _upgradesText.text += "), ";
+        _upgradesText.text += ")";
+    }
+
+    private static WeaponSO GetUpgradableSO(SaveData.UpgradableData upgradeData, UpgradableType upgradableType)
+    {
+        UpgradeChip chip_1 = SaveUtils.GetChipById(upgradeData.Socket1ChipId);
+        UpgradeChip chip_2 = SaveUtils.GetChipById(upgradeData.Socket2ChipId);
+        ChipType chip_1_type = chip_1 != null ? chip_1.ChipType : ChipType.None;
+        ChipType chip_2_type = chip_2 != null ? chip_2.ChipType : ChipType.None;
+
+        WeaponSO weapon = SaveUtils.GetUpgradableByChips(chip_1_type, chip_2_type, upgradableType);
+        return weapon;
     }
 
     private string CalculateTimePlayed(float totalSecondsPlayed)

@@ -43,7 +43,6 @@ public class Projectile : MonoBehaviour
     public ParticleSystem[] ProjectileParticles { get { return _particles; } set { _particles = value; } }
     public Weapon WeaponReference { get { return _weapon; } set { _weapon = value; } }
     public int AICombatID { get { return _aiCombatID; } set { _aiCombatID = value; } }
-    public Transform OwnersTransform { get { return _ownersTransform; } set { _ownersTransform = value; } }
 
     #endregion
 
@@ -57,16 +56,17 @@ public class Projectile : MonoBehaviour
     public virtual void Start()
     {
         _damageData = DamageData.GetDamageData(_damageTypes, _weapon, _aiCombatID);
+        if (_destroyOnHit == true) 
+        {
+            Launch(transform.forward);
+            Invoke(nameof(DestroySelf), 4f); 
+        }
 
         if (_weapon == null) { return; }
 
         if (_particles.Length < 1) { return; }
 
-        GameAssetsManager.Instance.ChipDataSO.ChangeParticleColor(_particles[0], _damageTypes[0], _weapon.ChipLevel);
-
-        Launch(transform.forward);
-
-        Invoke(nameof(DestroySelf), 4f);
+        GameAssetsManager.Instance.ChipDataSO.ChangeParticleColor(_particles[0], _damageTypes[0], _weapon.ChipLevel); 
     }
 
     public void Launch(Vector3 direction, Vector3 lookDir = default(Vector3))
@@ -93,7 +93,7 @@ public class Projectile : MonoBehaviour
         _ownersTransform = ownerTransform;
     }
 
-    public void RefelctFromShield(string newOwnerTag)
+    public void ReflectFromShield(string newOwnerTag)
     {
         Vector3 newDir = _ownersTransform.position - transform.position;
         Launch(newDir, newDir);

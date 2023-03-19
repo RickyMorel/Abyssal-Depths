@@ -12,8 +12,9 @@ public class ProjectileLaser : Projectile
 
     public override void Start()
     {
-        base.Start();
         _destroyOnHit = false;
         _dealDamageAfterSeconds = 0.5f;
+
+        base.Start();
     }
 }

@@ -47,7 +47,7 @@ public class Shield : MonoBehaviour
 
     private void ReflectProjectile(Projectile projectile)
     {
-        projectile.RefelctFromShield(_shipHealth.tag);
+        projectile.ReflectFromShield(_shipHealth.tag);
 
         _pushParticles.Play();
     }

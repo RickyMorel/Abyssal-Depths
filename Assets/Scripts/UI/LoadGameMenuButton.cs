@@ -34,8 +34,8 @@ public class LoadGameMenuButton : MonoBehaviour
         _upgradesText.text = "Upgrades: ";
 
         DisplayBoosterData(saveData);
-        DisplayShieldData(saveData);
         DisplayWeaponData(saveData);
+        DisplayShieldData(saveData);
     }
 
     private void DisplayBoosterData(SaveData saveData)
@@ -70,7 +70,7 @@ public class LoadGameMenuButton : MonoBehaviour
 
             if (weapon != null) { _upgradesText.text += $"{weapon.WeaponName}, "; }
         }
-        _upgradesText.text += ")";
+        _upgradesText.text += "), ";
     }
 
     private static WeaponSO GetUpgradableSO(SaveData.UpgradableData upgradeData, UpgradableType upgradableType)

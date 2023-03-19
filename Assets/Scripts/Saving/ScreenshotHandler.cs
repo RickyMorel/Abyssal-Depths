@@ -47,8 +47,6 @@ public class ScreenshotHandler : MonoBehaviour
     {
         if (!_takeScreenshotOnNextFrame) { return; }
 
-        _camera.enabled = true;
-
         _takeScreenshotOnNextFrame = false;
 
         RenderTexture renderTexture = _camera.targetTexture;
@@ -75,6 +73,7 @@ public class ScreenshotHandler : MonoBehaviour
         _camera.targetTexture = RenderTexture.GetTemporary(width, height);
         _takeScreenshotOnNextFrame = true;
         this.onScreenshotTaken = onScreenShotTaken;
+        _camera.enabled = true;
     }
 
     public static void TakeScreenshotStatic(int width, int height, Action<Texture2D> onScreenShotTaken)

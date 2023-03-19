@@ -22,6 +22,7 @@ public class BaseStateMachine : MonoBehaviourID
     [Header("State Variables")]
     [SerializeField] protected PlayerBaseState _currentState;
     [SerializeField] protected PlayerStateFactory _states;
+    [SerializeField] protected bool _canMove = true;
 
     #endregion
 
@@ -34,6 +35,7 @@ public class BaseStateMachine : MonoBehaviourID
     public bool IsGrounded { get { return _isGrounded; } set { _isGrounded = value; } }
     public bool CanMove { get { return _canMove; } set { _canMove = value; } }
     public virtual bool IsShooting { get { return _isShooting; } set { _isShooting = value; } }
+    public Vector3 MoveDirection { get { return _moveDirection; } set { _moveDirection = value; } }
 
     #endregion
 
@@ -48,8 +50,8 @@ public class BaseStateMachine : MonoBehaviourID
 
     protected bool _isJumpPressed;
     protected Vector3 _moveDirection;
-    [SerializeField] protected bool _canMove = true;
     protected bool _isShooting;
+    protected Damageable _damageable;
 
     #endregion
 
@@ -59,7 +61,6 @@ public class BaseStateMachine : MonoBehaviourID
     public PlayerRagdoll PlayerRagdoll => _playerRagdoll;
     public PlayerHealth PlayerHealth => _playerHealth;
     public PlayerCarryController PlayerCarryController => _playerCarryController;
-    public Vector3 MoveDirection => _moveDirection;
     public Rigidbody Rb => _rb;
     public Animator Anim => _anim;
     public bool IsJumpPressed => _isJumpPressed;
@@ -74,6 +75,7 @@ public class BaseStateMachine : MonoBehaviourID
         _states = new PlayerStateFactory(this);
         _currentState = _states.Grounded();
         _currentState.EnterState();
+        _damageable = GetComponent<Damageable>();
     }
 
     public virtual void Start()
@@ -83,6 +85,7 @@ public class BaseStateMachine : MonoBehaviourID
         _playerHealth = GetComponent<PlayerHealth>();
         _anim = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody>();
+        _damageable.OnElectrocution += SetCanMove;
     }
 
     public virtual void Update()
@@ -102,7 +105,17 @@ public class BaseStateMachine : MonoBehaviourID
         AnimateMove();
     }
 
+    public virtual void OnDestroy()
+    {
+        _damageable.OnElectrocution -= SetCanMove;
+    }
+
     #endregion
+    //We want canMove be the opposite of OnElectrocution, so if it it is electrocuted, it can't move
+    public virtual void SetCanMove(bool canMove)
+    {
+        _canMove = !canMove;
+    }
 
     public virtual void Move()
     {

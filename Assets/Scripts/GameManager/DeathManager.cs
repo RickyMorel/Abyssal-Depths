@@ -108,7 +108,7 @@ public class DeathManager : MonoBehaviour
 
         foreach(PlayerHealth player in allPlayers)
         {
-            player.Hurt(DamageType.Base);
+            player.Hurt(DamageTypes.Base);
         }
     }
 

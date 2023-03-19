@@ -20,7 +20,7 @@ public class PickaxeTrigger : MonoBehaviour
 
     private void CheckForMinable(Collider other)
     {
-        if (!other.TryGetComponent<Minable>(out Minable minable)) { return; }
+        if (!other.TryGetComponent(out Minable minable)) { return; }
 
         GameObject impactParticles = Instantiate(_impactParticlesPrefab, _pickaxeTipTransform.position, Quaternion.identity);
 
@@ -37,7 +37,7 @@ public class PickaxeTrigger : MonoBehaviour
 
         float damage = _pickaxeInteractable.GetHitSpeed();
 
-        damageable.Damage((int)damage);
+        damageable.DamageWithoutDamageData((int)damage);
 
         _pickaxeInteractable.ApplyImpactForce();
     }

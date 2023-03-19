@@ -40,6 +40,7 @@ public class PlayerStateMachine : BaseStateMachine
         _states = new PlayerStateFactory(this);
         _currentState = _states.Grounded();
         _currentState.EnterState();
+        _damageable = GetComponent<Damageable>();
     }
 
     public override void Start()

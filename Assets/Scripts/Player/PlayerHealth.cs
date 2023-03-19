@@ -9,6 +9,7 @@ public class PlayerHealth : Damageable
 
     [SerializeField] private float _hurtTime = 5f;
     [SerializeField] private Renderer _mesh;
+    [SerializeField] protected Transform _particleParentTransform;
 
     #endregion
 
@@ -41,7 +42,7 @@ public class PlayerHealth : Damageable
         base.Start();
     }
 
-    public virtual void Hurt(DamageType damageType)
+    public virtual void Hurt(DamageTypes damageType)
     {
         OnHurt?.Invoke();
 

@@ -58,7 +58,7 @@ public class AIHealth : PlayerHealth
         Invoke(nameof(DisableSelf), 10f);
     }
 
-    public override void Hurt(DamageType damageType)
+    public override void Hurt(DamageTypes damageType)
     {
         if (CanKill == false) { base.Hurt(damageType); }
 

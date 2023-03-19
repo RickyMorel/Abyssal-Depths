@@ -5,7 +5,6 @@ using System.IO;
 using System.Runtime.Serialization;
 using UnityEngine;
 using UnityEngine.Rendering;
-using static SaveFileScreenshotDemo;
 
 public class ScreenshotHandler : MonoBehaviour
 {

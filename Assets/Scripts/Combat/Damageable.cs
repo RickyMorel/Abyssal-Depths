@@ -306,6 +306,8 @@ public class Damageable : MonoBehaviour
         _laserLevel = Mathf.Clamp(_laserLevel + 0.1f, 0f, 1f);
         _timeSinceLastLaserShot = 0;
 
+        if (_laserLevel == 0) { laserDamage = 1; }
+
         if (_laserLevel == 1 && laserDamage != _damageData.Damage[index]) { laserDamage = _damageData.Damage[index]; }
 
         return laserDamage;

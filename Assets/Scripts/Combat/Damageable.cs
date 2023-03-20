@@ -302,13 +302,14 @@ public class Damageable : MonoBehaviour
     private int LaserDamage(bool isResistant, bool isWeak, int damage, int index)
     {
         int laserDamage = CalculateDamageForTypes(isResistant, isWeak, index, damage);
-        //To calculate the laserDamage, we'll be using a logarithmic function, in this case it'll be log to the base n^(1/n) of the current value of the interpolation of the laserDamage by the current laserLevel amount
+        //To calculate the laserDamage, we'll be using a logarithmic function, in this case it'll be log to the base n^(1/n), n being max damage
+        //We use interpolation to recieve a value for the laserDamage that is between the range of 1 and n, we then give this value to the aforementioned log
         laserDamage = (int)Mathf.Log(Mathf.Lerp(1, laserDamage, _laserLevel), Mathf.Pow((float)_damageData.Damage[index], 1f / (float)_damageData.Damage[index]));
-        //laserLevel is used to determine a laserDamage value, the lowest level gives 1, while  the max level gives the laser max damage, while the numbers in between gives numbers that increase in  value logarithmically
+        //laserLevel is used to determine a laserDamage value, the lowest level gives 1, while  the max level gives the laser max damage
         _laserLevel = Mathf.Clamp(_laserLevel + 0.1f, 0f, 1f);
         _timeSinceLastLaserShot = 0;
 
-        //If laser level is 0, then the value given is 1, every log of 1, no matter the base, will give you 0, but we want to atleast do 1 damage to the enemy
+        //We want to atleast do 1 damage to the enemy
         if (_laserLevel == 0) { laserDamage = 1; }
 
         //There are some cases where laserLevel is maximum, but the damage is a little off due to the way unity works, so we just make it max manually for good measure

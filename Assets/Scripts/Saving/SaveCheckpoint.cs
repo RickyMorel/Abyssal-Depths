@@ -8,6 +8,6 @@ public class SaveCheckpoint : MonoBehaviour
     {
         if (!other.gameObject.GetComponent<Ship>()) { return; }
 
-        SaveSystem.Save();
+        SaveSystem.Save(Ship.Instance.ShipData.CurrentSaveIndex);
     }
 }

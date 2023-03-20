@@ -7,10 +7,13 @@ using System.Text;
 
 public static class SaveSystem
 {
-    public static void CreateNewSave(string shipName)
+    public static int CreateNewSave(string shipName)
     {
+        List<SaveData> allSaves = LoadAllSaves();
+        int saveIndex = allSaves.Count;
+
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/abyssalDepths.sav";
+        string path = Application.persistentDataPath + $"/abyssalDepths{saveIndex}.sav";
         FileStream stream = new FileStream(path, FileMode.Create);
 
         SaveData saveData = new SaveData(shipName);
@@ -20,15 +23,17 @@ public static class SaveSystem
 
         //Left here on purpose
         Debug.Log("Saved! " + path);
+
+        return saveIndex;
     }
 
-    public static void Save()
+    public static void Save(int saveIndex)
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/abyssalDepths.sav";
+        string path = Application.persistentDataPath + $"/abyssalDepths{saveIndex}.sav";
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        ShipData shipData = Ship.Instance.GetComponent<ShipData>();;
+        ShipData shipData = Ship.Instance.ShipData;
         SaveData saveData = new SaveData(shipData);
 
         ScreenshotHandler.Instance.TakeScreenshot(1080, 1080, (Texture2D screenshotTexture) =>
@@ -44,9 +49,9 @@ public static class SaveSystem
         });
     }
 
-    public static SaveData Load()
+    public static SaveData Load(int saveIndex)
     {
-        string path = Application.persistentDataPath + "/abyssalDepths.sav";
+        string path = Application.persistentDataPath + $"/abyssalDepths{saveIndex}.sav";
 
         if (File.Exists(path))
         {
@@ -60,9 +65,25 @@ public static class SaveSystem
         }
         else
         {
-            Debug.LogError("Save file not found in " + path);
+            //Debug.LogError("Save file not found in " + path);
             return null;
         }
+    }
+
+    public static List<SaveData> LoadAllSaves()
+    {
+        List<SaveData> allSaves = new List<SaveData>();
+
+        for (int i = 0; i < 20; i++)
+        {
+            SaveData loadedData = Load(i);
+
+            if(loadedData == null) { break; }
+
+            allSaves.Add(loadedData);
+        }
+
+        return allSaves;
     }
 
     public static void SaveSettings(SettingsData settingsData)

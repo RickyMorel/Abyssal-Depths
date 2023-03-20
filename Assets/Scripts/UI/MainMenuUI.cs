@@ -40,10 +40,18 @@ namespace AbyssalDepths.UI
         {
             if(_newGameNameText.text == string.Empty) { return; }
 
-            SaveSystem.CreateNewSave(_newGameNameText.text);
+            int saveIndex = SaveSystem.CreateNewSave(_newGameNameText.text);
+            CreateLoadObj(saveIndex);
 
             EnableNewGamePanel(false);
             SceneManager.LoadScene(1);
+        }
+
+        public static void CreateLoadObj(int saveIndex)
+        {
+            GameObject saveDataObj = new GameObject($"Loaded Data:{saveIndex}");
+            saveDataObj.tag = "LoadIndex";
+            DontDestroyOnLoad(saveDataObj);
         }
 
         public void EnableNewGamePanel(bool isEnabled)
@@ -55,14 +63,18 @@ namespace AbyssalDepths.UI
         {
             DestroyPrevLoadGameButtons();
 
-            SaveData saveData = SaveSystem.Load();
+            List<SaveData> allSaves = SaveSystem.LoadAllSaves();
 
-            if(saveData == null) { return; }
+            if(allSaves.Count < 1) { return; }
 
-            GameObject loadButtonInstance = Instantiate(_loadGameMenuButtonPrefab, _loadMenuContentTransform);
-            LoadGameMenuButton loadButtonInstanceScript = loadButtonInstance.GetComponent<LoadGameMenuButton>();
-
-            loadButtonInstanceScript.DisplayData(saveData, 0);
+            int i = 0;
+            foreach (SaveData save in allSaves)
+            {
+                GameObject loadButtonInstance = Instantiate(_loadGameMenuButtonPrefab, _loadMenuContentTransform);
+                LoadGameMenuButton loadButtonInstanceScript = loadButtonInstance.GetComponent<LoadGameMenuButton>();
+                loadButtonInstanceScript.DisplayData(save, i);
+                i++;
+            }
         }
 
         private void DestroyPrevLoadGameButtons()

@@ -13,6 +13,7 @@ public class ShipData : MonoBehaviour
 
     [SerializeField] private bool _loadData = false;
     [SerializeField] private Transform[] _playerSpawnPositions;
+    [SerializeField] private int _currentSaveIndex = 0;
 
     #endregion
 
@@ -21,6 +22,7 @@ public class ShipData : MonoBehaviour
     public string ShipName { get; private set; }
     public string Location { get; private set; }
     public float PlayTime { get; private set; }
+    public int CurrentSaveIndex => _currentSaveIndex;
 
     #endregion
 
@@ -43,6 +45,16 @@ public class ShipData : MonoBehaviour
         if (!_loadData) { return; }
 #endif
 
+        string loadIndexObjName = GameObject.FindGameObjectWithTag("LoadIndex").name;
+
+        if(loadIndexObjName == null) { return; }
+
+        string[] splitString = loadIndexObjName.Split(":");
+
+        Debug.Log("splitString: " + splitString[1]);
+
+        _currentSaveIndex = int.Parse(splitString[1]);
+
         StartCoroutine(LateStart());
     }
 
@@ -50,9 +62,7 @@ public class ShipData : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
 
-        SaveData saveData = SaveSystem.Load();
-
-        Debug.Log("Set Ship Data: " + saveData.ShipName);
+        SaveData saveData = SaveSystem.Load(_currentSaveIndex);
 
         SetFileData(saveData);
         LoadMinables(saveData);
@@ -64,7 +74,7 @@ public class ShipData : MonoBehaviour
 
     public void ReloadLevel()
     {
-        SaveData saveData = SaveSystem.Load();
+        SaveData saveData = SaveSystem.Load(_currentSaveIndex);
 
         LoadInventories(saveData);
         LoadChips(saveData, new Vector3(270f, -320f, 0f));
@@ -82,7 +92,7 @@ public class ShipData : MonoBehaviour
     {
         PlayTime += Time.deltaTime;
 
-        if (Input.GetKeyDown(KeyCode.K)) { SaveSystem.Save(); }
+        if (Input.GetKeyDown(KeyCode.K)) { SaveSystem.Save(_currentSaveIndex); }
     }
 
     public void SetFileData(SaveData saveData)

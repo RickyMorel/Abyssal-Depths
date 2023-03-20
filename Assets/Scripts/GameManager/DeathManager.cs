@@ -10,7 +10,7 @@ public class DeathManager : MonoBehaviour
     #region Private Variables
 
     private ShipHealth _shipHealth;
-    [SerializeField] private float _timeSinceDeath;
+    private float _timeSinceDeath;
     private bool _isInSafeZone = false;
     private bool _isLoadingScene = false;
     private bool _isReloadingScene = false;
@@ -77,23 +77,17 @@ public class DeathManager : MonoBehaviour
 
     private IEnumerator DeathCoroutine()
     {
-        Debug.Log("DeathCoroutine");
         KillAllPlayers();
-        Debug.Log("KillAllPlayers");
         ShipInventory.Instance.DropAllItems();
-        Debug.Log("DropAllItems");
 
         yield return new WaitForSeconds(2f);
 
-        SaveSystem.Save();
-        Debug.Log("Save");
+        SaveSystem.Save(Ship.Instance.ShipData.CurrentSaveIndex);
 
         ShowDeathScreen();
-        Debug.Log("ShowDeathScreen");
 
         yield return new WaitForSeconds((float)DeathPanelUI.Instance.DeathPanelTimeLine.duration);
 
-        Debug.Log("TryReloadScene");
         ReloadScene();
     }
 

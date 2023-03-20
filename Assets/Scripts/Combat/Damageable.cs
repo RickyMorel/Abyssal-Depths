@@ -302,18 +302,13 @@ public class Damageable : MonoBehaviour
     private int LaserDamage(bool isResistant, bool isWeak, int damage, int index)
     {
         int laserDamage = CalculateDamageForTypes(isResistant, isWeak, index, damage);
-
-        if (laserDamage == 0) { return damage; }
-
-        laserDamage = laserDamage * (int)_laserLevel;
-
-        _laserLevel = Mathf.Clamp(_laserLevel + 0.3f, 0f, 5f);
-
+        laserDamage = (int)Mathf.Log(Mathf.Lerp(1, laserDamage, _laserLevel), Mathf.Pow((float)_damageData.Damage[index], 1f / (float)_damageData.Damage[index]));
+        _laserLevel = Mathf.Clamp(_laserLevel + 0.1f, 0f, 1f);
         _timeSinceLastLaserShot = 0;
 
-        damage = damage + laserDamage;
+        if (_laserLevel == 1 && laserDamage != _damageData.Damage[index]) { laserDamage = _damageData.Damage[index]; }
 
-        return damage;
+        return laserDamage;
     }
 
     private void ColorChangeForLaser()
@@ -323,12 +318,12 @@ public class Damageable : MonoBehaviour
         if (_timeSinceLastLaserShot > _timeToResetLaserLevel)
         {
             float laserReductionAmount = 2.5f * Time.deltaTime;
-            _laserLevel = Mathf.Clamp(_laserLevel - laserReductionAmount, 0, 5);
+            _laserLevel = Mathf.Clamp(_laserLevel - laserReductionAmount, 0, 1);
         }
 
         foreach (Renderer renderer in _renderers)
         {
-            renderer.material.SetColor("_EmissionColor", Color.Lerp(_originalColor, GameAssetsManager.Instance.LaserHeatColor, _laserLevel / 5f));
+            renderer.material.SetColor("_EmissionColor", Color.Lerp(_originalColor, GameAssetsManager.Instance.LaserHeatColor, _laserLevel));
         }
     }
 

@@ -302,18 +302,20 @@ public class Damageable : MonoBehaviour
     private int LaserDamage(bool isResistant, bool isWeak, int damage, int index)
     {
         int laserDamage = CalculateDamageForTypes(isResistant, isWeak, index, damage);
-
-        if (laserDamage == 0) { return damage; }
-
-        laserDamage = laserDamage * (int)_laserLevel;
-
-        _laserLevel = Mathf.Clamp(_laserLevel + 0.3f, 0f, 5f);
-
+        //To calculate the laserDamage, we'll be using a logarithmic function, in this case it'll be log to the base n^(1/n), n being max damage
+        //We use interpolation to recieve a value for the laserDamage that is between the range of 1 and n, we then give this value to the aforementioned log
+        laserDamage = (int)Mathf.Log(Mathf.Lerp(1, laserDamage, _laserLevel), Mathf.Pow((float)_damageData.Damage[index], 1f / (float)_damageData.Damage[index]));
+        //laserLevel is used to determine a laserDamage value, the lowest level gives 1, while  the max level gives the laser max damage
+        _laserLevel = Mathf.Clamp(_laserLevel + 0.1f, 0f, 1f);
         _timeSinceLastLaserShot = 0;
 
-        damage = damage + laserDamage;
+        //We want to atleast do 1 damage to the enemy
+        if (_laserLevel == 0) { laserDamage = 1; }
 
-        return damage;
+        //There are some cases where laserLevel is maximum, but the damage is a little off due to the way unity works, so we just make it max manually for good measure
+        if (_laserLevel == 1 && laserDamage != _damageData.Damage[index]) { laserDamage = CalculateDamageForTypes(isResistant, isWeak, index, _damageData.Damage[index]); }
+
+        return laserDamage;
     }
 
     private void ColorChangeForLaser()
@@ -323,12 +325,12 @@ public class Damageable : MonoBehaviour
         if (_timeSinceLastLaserShot > _timeToResetLaserLevel)
         {
             float laserReductionAmount = 2.5f * Time.deltaTime;
-            _laserLevel = Mathf.Clamp(_laserLevel - laserReductionAmount, 0, 5);
+            _laserLevel = Mathf.Clamp(_laserLevel - laserReductionAmount, 0, 1);
         }
 
         foreach (Renderer renderer in _renderers)
         {
-            renderer.material.SetColor("_EmissionColor", Color.Lerp(_originalColor, GameAssetsManager.Instance.LaserHeatColor, _laserLevel / 5f));
+            renderer.material.SetColor("_EmissionColor", Color.Lerp(_originalColor, GameAssetsManager.Instance.LaserHeatColor, _laserLevel));
         }
     }
 

@@ -26,6 +26,7 @@ Transform:
   m_LocalRotation: {x: 0.49999967, y: -0.49999973, z: -0.5000004, w: 0.50000024}
   m_LocalPosition: {x: 0.7329998, y: 0.233, z: -0.441}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4241111588482480209}
   m_RootOrder: 0
@@ -56,6 +57,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4236485090595187586}
   m_Father: {fileID: 4241111588482480209}
@@ -89,6 +91,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4236485090102483188}
   m_RootOrder: 0
@@ -173,11 +176,12 @@ Transform:
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -2.75, y: 2.45, z: 0.47}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4236485088593298216}
   - {fileID: 4236485090102483188}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!54 &4236485088725815918
 Rigidbody:
@@ -248,10 +252,8 @@ MonoBehaviour:
   _upgradeSocketObjs: []
   _upgrades:
   - UpgradeMesh: {fileID: 4236485090595187587}
-    Projectile: {fileID: 0}
     ShootTransform: []
-    _socket_1_ChipType: 0
-    _socket_2_ChipType: 0
+    UpgradeSO: {fileID: 11400000, guid: 83e644d978439cb44bc0fc3737705725, type: 2}
   _chipDropTransform: {fileID: 0}
   _rotationSpeed: 1
   _pivotTransform: {fileID: 0}

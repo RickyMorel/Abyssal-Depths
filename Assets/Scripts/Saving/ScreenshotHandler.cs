@@ -8,14 +8,35 @@ using UnityEngine.Rendering;
 
 public class ScreenshotHandler : MonoBehaviour
 {
+    #region Private Variables
+
     private static ScreenshotHandler _instance;
     private Camera _camera;
     private bool _takeScreenshotOnNextFrame;
     private Action<Texture2D> onScreenshotTaken;
 
+    #endregion
+
+    #region Public Properties
+
+    public static ScreenshotHandler Instance { get { return _instance; } }
+
+    #endregion
+
     private void Awake()
     {
-        _instance = this;
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
+
+    private void Start()
+    {
         _camera = gameObject.GetComponent<Camera>();
         _camera.enabled = false;
     }
@@ -25,7 +46,7 @@ public class ScreenshotHandler : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.T))
         {
             Debug.Log("Take Screenshot");
-            TakeScreenshotStatic(1080, 1080, (Texture2D screenshotTexture) =>
+            TakeScreenshot(1080, 1080, (Texture2D screenshotTexture) =>
             {
 
             });
@@ -67,16 +88,11 @@ public class ScreenshotHandler : MonoBehaviour
         _camera.enabled = false;
     }
 
-    private void TakeScreenshot(int width, int height, Action<Texture2D> onScreenShotTaken)
+    public void TakeScreenshot(int width, int height, Action<Texture2D> onScreenShotTaken)
     {
         _camera.targetTexture = RenderTexture.GetTemporary(width, height);
         _takeScreenshotOnNextFrame = true;
         this.onScreenshotTaken = onScreenShotTaken;
         _camera.enabled = true;
-    }
-
-    public static void TakeScreenshotStatic(int width, int height, Action<Texture2D> onScreenShotTaken)
-    {
-        _instance.TakeScreenshot(width, height, onScreenShotTaken);
     }
 }

@@ -39,7 +39,9 @@ public class ShipData : MonoBehaviour
 
     private void Start()
     {
+#if UNITY_EDITOR
         if (!_loadData) { return; }
+#endif
 
         StartCoroutine(LateStart());
     }
@@ -49,6 +51,8 @@ public class ShipData : MonoBehaviour
         yield return new WaitForEndOfFrame();
 
         SaveData saveData = SaveSystem.Load();
+
+        Debug.Log("Set Ship Data: " + saveData.ShipName);
 
         SetFileData(saveData);
         LoadMinables(saveData);

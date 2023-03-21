@@ -51,8 +51,6 @@ public class ShipData : MonoBehaviour
 
         string[] splitString = loadIndexObjName.Split(":");
 
-        Debug.Log("splitString: " + splitString[1]);
-
         _currentSaveIndex = int.Parse(splitString[1]);
 
         StartCoroutine(LateStart());

@@ -41,18 +41,6 @@ public class ScreenshotHandler : MonoBehaviour
         _camera.enabled = false;
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            Debug.Log("Take Screenshot");
-            TakeScreenshot(1080, 1080, (Texture2D screenshotTexture) =>
-            {
-
-            });
-        }
-    }
-
     private void OnEnable()
     {
         RenderPipelineManager.endCameraRendering += RenderPipelineManager_endCameraRendering;

@@ -82,7 +82,7 @@ public class DeathManager : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
 
-        SaveSystem.Save();
+        SaveSystem.Save(Ship.Instance.ShipData.CurrentSaveIndex);
 
         ShowDeathScreen();
 

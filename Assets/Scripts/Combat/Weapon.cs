@@ -75,7 +75,7 @@ public class Weapon : Upgradable
 
         _turretHead = rotationChild;
 
-        _projectilePrefab = upgrade.Projectile;
+        _projectilePrefab = upgrade.UpgradeSO.ProjectilePrefab;
 
         _shootTransforms.Clear();
 
@@ -103,11 +103,11 @@ public class Weapon : Upgradable
         if(_selectedUpgrade == null) { return true; }
 
         //if is harpoon gun
-        if (_selectedUpgrade._socket_1_ChipType == ChipType.Base && _selectedUpgrade._socket_1_ChipType == ChipType.Electric) { return true; }
-        if (_selectedUpgrade._socket_1_ChipType == ChipType.Electric && _selectedUpgrade._socket_1_ChipType == ChipType.Base) { return true; }
+        if (_selectedUpgrade.UpgradeSO.Socket_1 == ChipType.Base && _selectedUpgrade.UpgradeSO.Socket_1 == ChipType.Electric) { return true; }
+        if (_selectedUpgrade.UpgradeSO.Socket_1 == ChipType.Electric && _selectedUpgrade.UpgradeSO.Socket_1 == ChipType.Base) { return true; }
 
         //if is any other base weapon
-        if (_selectedUpgrade._socket_1_ChipType == ChipType.Base || _selectedUpgrade._socket_2_ChipType == ChipType.Base) { return false; }
+        if (_selectedUpgrade.UpgradeSO.Socket_1 == ChipType.Base || _selectedUpgrade.UpgradeSO.Socket_2 == ChipType.Base) { return false; }
 
         return true;
     }

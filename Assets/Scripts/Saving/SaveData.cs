@@ -7,6 +7,10 @@ using UnityEngine.SceneManagement;
 [System.Serializable]
 public class SaveData
 {
+    public readonly string ShipName;
+    public readonly string LocationName;
+    public readonly float PlayedTime;
+
     public UpgradableData BoosterData;
     public UpgradableData[] WeaponDatas = { null, null, null, null };
     public float[] ShipPos = { 0f, 0f, 0f};
@@ -16,9 +20,21 @@ public class SaveData
     public List<ItemData> _mainInventory = new List<ItemData>();
     public List<ItemData> _shipInventory = new List<ItemData>();
     public DeathLootData _deathLootData;
+    public byte[] ScreenShotBytes;
+
+    public SaveData(string shipName)
+    {
+        ShipName = shipName;
+        LocationName = "Game Start";
+        PlayedTime = 0;
+    }
 
     public SaveData(ShipData shipData)
     {
+        ShipName = shipData.ShipName;
+        LocationName = shipData.Location;
+        PlayedTime = shipData.PlayTime;
+
         SaveChipData(shipData);
         SaveShipPosition(shipData);
         SaveEnemyData(shipData);

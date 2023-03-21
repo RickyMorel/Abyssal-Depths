@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1052606829203341393}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: PlayerPosition
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1052606830377376653}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: Meshes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 1052606830937450747}
   - component: {fileID: 1052606830937450725}
   - component: {fileID: 1052606830937450724}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: Mesh 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,7 +160,7 @@ GameObject:
   - component: {fileID: 1052606829067686161}
   - component: {fileID: 7558584333572636754}
   - component: {fileID: 7522110788010740015}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: Shield Wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -174,7 +174,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1053254885815081780}
-  m_LocalRotation: {x: -0.70710576, y: -0, z: -0, w: 0.7071079}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -8.3, y: -6.046, z: 0.4658963}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -243,13 +243,14 @@ MonoBehaviour:
   - {fileID: 3418516141112142185}
   - {fileID: 3154696156972176293}
   _upgrades:
-  - UpgradeMesh: {fileID: 7236884786893169634}
-    Projectile: {fileID: 0}
+  - UpgradeMesh: {fileID: 0}
     ShootTransform: []
-    _socket_1_ChipType: 0
-    _socket_2_ChipType: 0
+    UpgradeSO: {fileID: 11400000, guid: ffcd87bb81a6a284c88682043ce1dadc, type: 2}
+  - UpgradeMesh: {fileID: 0}
+    ShootTransform: []
+    UpgradeSO: {fileID: 11400000, guid: ba2d65225dde7784a999084611867e6a, type: 2}
   _chipDropTransform: {fileID: 9046642067894341401}
-  _rotationSpeed: 20
+  _rotationSpeed: 150
   _pivotTransform: {fileID: 0}
   RotatorTransform: {fileID: 0}
 --- !u!65 &7558584333572636754
@@ -306,7 +307,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9046642067894341401}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: ChipDropPosition
   m_TagString: Untagged
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}

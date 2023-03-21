@@ -13,6 +13,16 @@ public class ShipData : MonoBehaviour
 
     [SerializeField] private bool _loadData = false;
     [SerializeField] private Transform[] _playerSpawnPositions;
+    [SerializeField] private int _currentSaveIndex = 0;
+
+    #endregion
+
+    #region Getters & Setters
+
+    public string ShipName { get; private set; }
+    public string Location { get; private set; }
+    public float PlayTime { get; private set; }
+    public int CurrentSaveIndex => _currentSaveIndex;
 
     #endregion
 
@@ -31,7 +41,17 @@ public class ShipData : MonoBehaviour
 
     private void Start()
     {
+#if UNITY_EDITOR
         if (!_loadData) { return; }
+#endif
+
+        string loadIndexObjName = GameObject.FindGameObjectWithTag("LoadIndex").name;
+
+        if(loadIndexObjName == null) { return; }
+
+        string[] splitString = loadIndexObjName.Split(":");
+
+        _currentSaveIndex = int.Parse(splitString[1]);
 
         StartCoroutine(LateStart());
     }
@@ -40,8 +60,9 @@ public class ShipData : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
 
-        SaveData saveData = SaveSystem.Load();
+        SaveData saveData = SaveSystem.Load(_currentSaveIndex);
 
+        SetFileData(saveData);
         LoadMinables(saveData);
         LoadEnemies(saveData);
         LoadInventories(saveData);
@@ -51,7 +72,7 @@ public class ShipData : MonoBehaviour
 
     public void ReloadLevel()
     {
-        SaveData saveData = SaveSystem.Load();
+        SaveData saveData = SaveSystem.Load(_currentSaveIndex);
 
         LoadInventories(saveData);
         LoadChips(saveData, new Vector3(270f, -320f, 0f));
@@ -67,7 +88,21 @@ public class ShipData : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K)) { SaveSystem.Save(); }
+        PlayTime += Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.K)) { SaveSystem.Save(_currentSaveIndex); }
+    }
+
+    public void SetFileData(SaveData saveData)
+    {
+        ShipName = saveData.ShipName;
+        if (Location == string.Empty) { Location = saveData.LocationName; }
+        if (PlayTime < 1) { PlayTime = saveData.PlayedTime; }
+    }
+
+    public void SetLocation(string newLocation)
+    {
+        Location = newLocation;
     }
 
     private void TryLoadDeathLoot(SaveData saveData)
@@ -95,13 +130,11 @@ public class ShipData : MonoBehaviour
 
     private void LoadChips(SaveData saveData, Vector3 wantedSpawnPosition = default(Vector3))
     {
-        UpgradeChip[] allChips = Resources.LoadAll<UpgradeChip>("ScriptableObjs/Chips");
-
-        Booster.LoadChips(allChips, saveData.BoosterData, this, true);
+        Booster.LoadChips(saveData.BoosterData, this, true);
 
         for (int i = 0; i < Weapons.Length; i++)
         {
-            Weapons[i].LoadChips(allChips, saveData.WeaponDatas[i], this, false);
+            Weapons[i].LoadChips(saveData.WeaponDatas[i], this, false);
         }
 
         Vector3 spawnPos = new Vector3(saveData.ShipPos[0], saveData.ShipPos[1], saveData.ShipPos[2]);

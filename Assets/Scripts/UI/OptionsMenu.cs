@@ -106,6 +106,7 @@ namespace AbyssalDepths.UI
                 string wantedString = " ";
 
                 if (limitValue == 0) { wantedString = "Unlimited"; }
+                else if (limitValue == 1) { wantedString = $"Monitor Rate({Screen.currentResolution.refreshRate})"; }
                 else { wantedString = limitValue.ToString(); }
 
                 limitsList.Add(wantedString);
@@ -121,6 +122,8 @@ namespace AbyssalDepths.UI
             _finalSettings.ResolutionIndex = wantedIndex;
             _resolutionSelector.SetIndex(wantedIndex, false);
 
+            if (_resolutions.Length - 1 < wantedIndex) { return; }
+
             Resolution resolution = _resolutions[wantedIndex];
 
             Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
@@ -134,21 +137,24 @@ namespace AbyssalDepths.UI
                     _frameRateLimit = FrameRateLimits.Unlimited;
                     break;
                 case 1:
-                    _frameRateLimit = FrameRateLimits.limit30;
+                    _frameRateLimit = FrameRateLimits.Monitor;
                     break;
                 case 2:
-                    _frameRateLimit = FrameRateLimits.limit60;
+                    _frameRateLimit = FrameRateLimits.limit30;
                     break;
                 case 3:
-                    _frameRateLimit = FrameRateLimits.limit90;
+                    _frameRateLimit = FrameRateLimits.limit60;
                     break;
                 case 4:
-                    _frameRateLimit = FrameRateLimits.limit120;
+                    _frameRateLimit = FrameRateLimits.limit90;
                     break;
                 case 5:
-                    _frameRateLimit = FrameRateLimits.limit144;
+                    _frameRateLimit = FrameRateLimits.limit120;
                     break;
                 case 6:
+                    _frameRateLimit = FrameRateLimits.limit144;
+                    break;
+                case 7:
                     _frameRateLimit = FrameRateLimits.limit240;
                     break;
             }
@@ -156,7 +162,9 @@ namespace AbyssalDepths.UI
             _finalSettings.FrameRateIndex = index;
             _frameRateLimitSelector.SetIndex(index, false);
 
-            Application.targetFrameRate = (int)_frameRateLimit;
+            int wantedFrameRate = _frameRateLimit == FrameRateLimits.Monitor ? Screen.currentResolution.refreshRate : (int)_frameRateLimit;
+
+            Application.targetFrameRate = wantedFrameRate;
         }
 
         public void SetQuality(int qualityIndex)
@@ -282,6 +290,7 @@ namespace AbyssalDepths.UI
     public enum FrameRateLimits
     {
         Unlimited = 0,
+        Monitor = 1,
         limit30 = 30,
         limit60 = 60,
         limit90 = 90,

@@ -38,8 +38,6 @@ public class VolumeInterface : MonoBehaviour
     private void Start()
     {
         _volume = GetComponent<Volume>();
-
-        Debug.Log(gameObject.name);
         
         if(_volume.profile.TryGet<Vignette>(out Vignette vignette)) { _vignette = vignette; }
 

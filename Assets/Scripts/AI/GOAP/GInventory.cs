@@ -31,7 +31,8 @@ public class GInventory
             if (item == itemToRemove)
                 break;
         }
-        if (indexToRemove >= -1)
+
+        if (indexToRemove > -1)
             Items.RemoveAt(indexToRemove);
     }
 }

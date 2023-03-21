@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 954992133}
   - component: {fileID: 954992132}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: SFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,6 +27,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5750933852758521267}
   m_RootOrder: 1
@@ -139,7 +140,7 @@ GameObject:
   - component: {fileID: 5750933852592569926}
   - component: {fileID: 5750933852592569927}
   - component: {fileID: 8117610698256018725}
-  m_Layer: 5
+  m_Layer: 25
   m_Name: LocationDiscoveredText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,6 +157,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5750933853752326107}
   m_RootOrder: 0
@@ -195,8 +197,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Ariel Landia
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 781b0934cf84e4648957a414ba6a55de, type: 2}
+  m_sharedMaterial: {fileID: 6367916701860075375, guid: 781b0934cf84e4648957a414ba6a55de, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -264,7 +266,7 @@ MonoBehaviour:
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!95 &8117610698256018725
 Animator:
-  serializedVersion: 3
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -277,6 +279,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -292,9 +295,9 @@ GameObject:
   - component: {fileID: 5750933852758521267}
   - component: {fileID: 5750933852758521276}
   - component: {fileID: 5750933852758521277}
-  - component: {fileID: 5750933852758521278}
   - component: {fileID: 5750933852758521279}
-  m_Layer: 0
+  - component: {fileID: 5138971045029013958}
+  m_Layer: 25
   m_Name: Location Discovered Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
@@ -311,6 +314,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -35.4, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5750933854556275472}
   - {fileID: 954992133}
@@ -344,20 +348,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 50, y: 50, z: 5}
+  m_Size: {x: 1000, y: 500, z: 50}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5750933852758521278
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5750933852758521272}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b20ced3699808e74d8a2ab6b54aff832, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!320 &5750933852758521279
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -381,6 +373,20 @@ PlayableDirector:
     value: {fileID: 954992131}
   m_ExposedReferences:
     m_References: []
+--- !u!114 &5138971045029013958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5750933852758521272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f22b24d3f3f85d418299b99ce79ea8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _locationName: Ariel Landia
+  _locationText: {fileID: 5750933852592569927}
 --- !u!1 &5750933853752326084
 GameObject:
   m_ObjectHideFlags: 0
@@ -392,7 +398,7 @@ GameObject:
   - component: {fileID: 5750933853752326107}
   - component: {fileID: 5750933853752326105}
   - component: {fileID: 5750933853752326106}
-  m_Layer: 5
+  m_Layer: 25
   m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -409,6 +415,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5750933852592569920}
   - {fileID: 8117610698901634388}
@@ -470,7 +477,7 @@ GameObject:
   - component: {fileID: 5750933854556275477}
   - component: {fileID: 5750933854556275478}
   - component: {fileID: 5750933854556275479}
-  m_Layer: 5
+  m_Layer: 25
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -487,6 +494,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5750933853752326107}
   m_Father: {fileID: 5750933852758521267}
@@ -515,6 +523,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -570,7 +579,7 @@ GameObject:
   - component: {fileID: 8117610698901634390}
   - component: {fileID: 8117610698901634391}
   - component: {fileID: 8117610698901634387}
-  m_Layer: 5
+  m_Layer: 25
   m_Name: Underline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -587,6 +596,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5750933853752326107}
   m_RootOrder: 1
@@ -636,7 +646,7 @@ MonoBehaviour:
   m_PixelsPerUnitMultiplier: 1
 --- !u!95 &8117610698901634387
 Animator:
-  serializedVersion: 3
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -649,6 +659,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1

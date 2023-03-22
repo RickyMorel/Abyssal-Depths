@@ -29,8 +29,11 @@ namespace Tests
     {
         private readonly GameObject _playerRootPrefab;
         private readonly GameObject _playerPrefab;
+
         private readonly string PlayerLayer = "Player";
         private readonly string EnemyHitBoxLayer = "EnemyHitBox";
+        private readonly string ItemLayer = "ItemLayer";
+        private readonly string RagdollLayer = "Ragdoll";
 
         public player_prefab_tests(GameObject playerRootPrefab)
         {
@@ -96,6 +99,29 @@ namespace Tests
         public void check_if_player_has_player_tag()
         {
             Assert.IsTrue(_playerPrefab.tag == "Player", "Player object doesn't have correct tag");
+        }
+
+        [Test]
+        public void check_if_player_cpllider_is_trigger()
+        {
+            CapsuleCollider collider = _playerPrefab.GetComponent<CapsuleCollider>();
+
+            Assert.IsTrue(collider.isTrigger == true, "Player root collider isn't trigger");
+        }
+
+        [Test]
+        public void check_if_player_mesh_has_correct_layer()
+        {
+            Transform meshTransform = _playerPrefab.transform.Find("Mesh");
+
+            bool allChildrenHaveCorrectLayer = true;
+
+            foreach (Transform child in meshTransform)
+            {
+                if(child.gameObject.layer != LayerMask.NameToLayer(RagdollLayer)) { allChildrenHaveCorrectLayer = false; break; }
+            }
+
+            Assert.IsTrue(allChildrenHaveCorrectLayer, "A child of Mesh doesn't have the correct layer");
         }
 
         #region AttackHitBox Tests
@@ -179,6 +205,44 @@ namespace Tests
 
             Assert.IsTrue(groundCheck.FloorLayers == (groundCheck.FloorLayers | (1 << LayerMask.NameToLayer("Floor"))), "GroundCheck doesn't contain Floor layer");
             Assert.IsTrue(groundCheck.FloorLayers == (groundCheck.FloorLayers | (1 << LayerMask.NameToLayer("ShipFloor"))), "GroundCheck doesn't contain ShipFloor layer");
+        }
+
+        #endregion
+
+        #region CarryTriggerArea Tests
+
+        [Test]
+        public void check_if_player_carryTriggerArea_is_on_correct_layer()
+        {
+            GameObject carryTriggerAreaObj = _playerPrefab.GetComponentInChildren<PickupTrigger>().gameObject;
+            bool isCorrectLayer = carryTriggerAreaObj.layer == LayerMask.NameToLayer(ItemLayer);
+
+            Assert.IsTrue(isCorrectLayer, "CarryTriggerArea is on incorrect layer");
+        }
+
+        [Test]
+        public void check_if_player_carryTriggerArea_has_collider_enabled()
+        {
+            GameObject carryTriggerAreaObj = _playerPrefab.GetComponentInChildren<PickupTrigger>().gameObject;
+
+            Assert.IsTrue(carryTriggerAreaObj.GetComponent<Collider>().enabled == true, "CarryTriggerArea collider is disabled on start");
+        }
+
+        [Test]
+        public void check_if_player_carryTriggerArea_collider_is_trigger()
+        {
+            GameObject carryTriggerAreaObj = _playerPrefab.GetComponentInChildren<PickupTrigger>().gameObject;
+
+            Assert.IsTrue(carryTriggerAreaObj.GetComponent<Collider>().isTrigger == true, "CarryTriggerArea collider is not trigger");
+        }
+
+        [Test]
+        public void check_if_player_carryTriggerArea_rigidbody_is_kinematic()
+        {
+            GameObject carryTriggerAreaObj = _playerPrefab.GetComponentInChildren<PickupTrigger>().gameObject;
+            bool isKinematic = carryTriggerAreaObj.GetComponent<Rigidbody>().isKinematic == true;
+
+            Assert.IsTrue(isKinematic, "CarryTriggerArea is not kinematic");
         }
 
         #endregion

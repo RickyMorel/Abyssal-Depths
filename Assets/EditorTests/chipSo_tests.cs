@@ -49,8 +49,6 @@ namespace Tests
         {
             string chipName = _chipSo.name.ToLower();
             string chipTypeString = _chipSo.ChipType.ToString().ToLower();
-            Debug.Log(chipName);
-            Debug.Log(_chipSo.ChipType.ToString());
 
             Assert.IsTrue(chipName.Contains(chipTypeString), "Chip name and chip type don't match, or there is a spelling error");
         }
@@ -59,11 +57,15 @@ namespace Tests
         public void check_if_chipMkName_matches_level()
         {
             string chipName = _chipSo.name.ToLower();
-            string chiplevelString = "MK" + _chipSo.Level.ToString();
-            Debug.Log(chipName);
-            Debug.Log(_chipSo.ChipType.ToString());
+            string chiplevelString = "mk" + _chipSo.Level.ToString();
 
             Assert.IsTrue(chipName.Contains(chiplevelString), "Chip name and chip level don't match, or there is a spelling error");
+        }
+
+        [Test]
+        public void check_if_isSingleHold_equals_true()
+        {
+            Assert.IsTrue(_chipSo.IsSingleHold == true, "IsSingleHold was false");
         }
     }
 }

@@ -41,8 +41,8 @@ public class InteractableHealth : Damageable
 
         _interactable = GetComponent<Interactable>();
 
-        _interactable.OnInteract += TryStartFix;
-        _interactable.OnUninteract += TryStopFix;
+        _interactable.Humble.OnInteract += TryStartFix;
+        _interactable.Humble.OnUninteract += TryStopFix;
     }
 
     public override void Start()
@@ -54,8 +54,8 @@ public class InteractableHealth : Damageable
 
     private void OnDestroy()
     {
-        _interactable.OnInteract -= TryStartFix;
-        _interactable.OnUninteract -= TryStopFix;
+        _interactable.Humble.OnInteract -= TryStartFix;
+        _interactable.Humble.OnUninteract -= TryStopFix;
     }
 
     private void Update()

@@ -86,16 +86,16 @@ public class Booster : RotationalInteractable
 
         if(CanUse == false) { return; }
        
-        if (_currentPlayer == null) 
+        if (CurrentPlayer == null) 
         {
             SetIsBoosting(false);
             if (!_lockHovering) { SetIsHovering(false); }
             return;
         }
 
-        SetIsBoosting(_currentPlayer.IsUsing);
-        SetIsHovering(_currentPlayer.IsUsing_2 || _lockHovering);
-        if (_currentPlayer.PlayerInput.DetectDoubleTap()) { _lockHovering = !_lockHovering; }
+        SetIsBoosting(CurrentPlayer.IsUsing);
+        SetIsHovering(CurrentPlayer.IsUsing_2 || _lockHovering);
+        if (CurrentPlayer.PlayerInput.DetectDoubleTap()) { _lockHovering = !_lockHovering; }
     }
 
     private void FixedUpdate()

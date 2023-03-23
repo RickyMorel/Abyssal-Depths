@@ -46,7 +46,7 @@ public class RotationalInteractable : Upgradable
 
     public virtual void Update()
     {
-        if (_currentPlayer == null) { return; }
+        if (CurrentPlayer == null) { return; }
 
         if (CanUse == false) { return; }
 
@@ -63,10 +63,10 @@ public class RotationalInteractable : Upgradable
 
     public virtual void RotateWASD()
     {
-        if (_currentPlayer.MoveDirection.magnitude == 0) { return; }
+        if (CurrentPlayer.MoveDirection.magnitude == 0) { return; }
 
-        float horizontal = _currentPlayer.MoveDirection.x;
-        float vertical = _currentPlayer.MoveDirection.y;
+        float horizontal = CurrentPlayer.MoveDirection.x;
+        float vertical = CurrentPlayer.MoveDirection.y;
 
         if (Mathf.Abs(horizontal) > 0f || Mathf.Abs(vertical) > 0f)
         {
@@ -89,9 +89,9 @@ public class RotationalInteractable : Upgradable
 
     public virtual void Rotate()
     {
-        if (_currentPlayer.MoveDirection.magnitude == 0) { return; }
+        if (CurrentPlayer.MoveDirection.magnitude == 0) { return; }
 
-        _currentAngle = _rotationSpeed * _currentPlayer.MoveDirection.x * Time.deltaTime;
+        _currentAngle = _rotationSpeed * CurrentPlayer.MoveDirection.x * Time.deltaTime;
         RotatorTransform.RotateAround(_pivotTransform.position, Vector3.forward, -_currentAngle);
     }
 }

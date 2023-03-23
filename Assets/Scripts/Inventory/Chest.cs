@@ -15,21 +15,21 @@ public class Chest : Interactable
 
     private void Start()
     {
-        OnInteract += HandleInteract;
-        OnUninteract += HandleUninteract;
+        Humble.OnInteract += HandleInteract;
+        Humble.OnUninteract += HandleUninteract;
     }
 
     private void OnDestroy()
     {
-        OnInteract -= HandleInteract;
-        OnUninteract -= HandleUninteract;
+        Humble.OnInteract -= HandleInteract;
+        Humble.OnUninteract -= HandleUninteract;
     }
 
     #endregion
 
     private void HandleInteract()
     {
-        PlayerInteractionController playerInteractionController = _currentPlayer as PlayerInteractionController;
+        PlayerInteractionController playerInteractionController = CurrentPlayer as PlayerInteractionController;
 
         if(playerInteractionController == null) { return; }
 

@@ -35,7 +35,7 @@ public class FastTravelNPC : NPC
 
     private void DisplayUI()
     {
-        if (_currentPlayer == null)
+        if (CurrentPlayer == null)
         {
             _fastTravelOptions.SetActive(false);
         }
@@ -51,6 +51,6 @@ public class FastTravelNPC : NPC
         shipFastTravel.FastTravelNPC = this;
         _travelToPosition = _travelPos[posIndex];
         shipFastTravel.WantToTravel = true;
-        _currentPlayer.GetComponent<PlayerInteractionController>().CheckExitInteraction();
+        CurrentPlayer.GetComponent<PlayerInteractionController>().CheckExitInteraction();
     }
 }

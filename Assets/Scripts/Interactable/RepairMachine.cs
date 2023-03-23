@@ -43,7 +43,7 @@ public class RepairMachine : Upgradable
     {
         UpdateTime();
 
-        if (_currentPlayer == null) { return; }
+        if (CurrentPlayer == null) { return; }
 
         CheckShootInput();
     }
@@ -59,7 +59,7 @@ public class RepairMachine : Upgradable
     {
         if(_timeSinceLastUsed < _timeBetweenUses) { return; }
 
-        if (_currentPlayer.IsUsing)
+        if (CurrentPlayer.IsUsing)
         {
             UseHealer();
         }

@@ -22,15 +22,10 @@ public class Interactable : MonoBehaviour
 
     #region Private Variables
 
+    private InteractableHumble _interactableHumble;
     private InteractableHealth _interactableHealth;
     private Outline _outline;
     private bool _canUse = true;
-
-    #endregion
-
-    #region Protected Variables
-
-    protected BaseInteractionController _currentPlayer;
 
     #endregion
 
@@ -44,14 +39,12 @@ public class Interactable : MonoBehaviour
 
     #region Public Properties
 
+    public InteractableHumble Humble => _interactableHumble;
     public Transform PlayerPositionTransform => _playerPositionTransform;
-    public BaseInteractionController CurrentPlayer => _currentPlayer;
+    public BaseInteractionController CurrentPlayer => _interactableHumble.CurrentPlayer;
     public float SingleUseTime => _singleUseTime;
     public InteractableHealth InteractableHealth => _interactableHealth;
     public Outline Outline => _outline;
-
-    public event Action OnInteract;
-    public event Action OnUninteract;
 
     #endregion
 
@@ -61,64 +54,47 @@ public class Interactable : MonoBehaviour
     {
         _interactableHealth = GetComponent<InteractableHealth>();
         _outline = GetComponent<Outline>();
-
         _outline.enabled = false;
+
+        _interactableHumble = new InteractableHumble(this, _interactableHealth, _isAIOnlyInteractable);
     }
 
     public virtual void OnTriggerEnter(Collider other)
     {
-        if (!other.gameObject.TryGetComponent<BaseInteractionController>(out BaseInteractionController interactionController)) { return; }
-
-        if (interactionController is PlayerInteractionController) 
-        {
-            if (_isAIOnlyInteractable) { return; }
-
-            _outline.enabled = true; 
-        }
-
-        interactionController.SetCurrentInteractable(this);
+        SetCurrentInteractable(other, true);
     }
 
     public virtual void OnTriggerExit(Collider other)
     {
-        if (!other.gameObject.TryGetComponent<BaseInteractionController>(out BaseInteractionController interactionController)) { return; }
+        SetCurrentInteractable(other, false);
+    }
 
-        if (interactionController is PlayerInteractionController) 
-        {
-            if (_isAIOnlyInteractable) { return; }
+    private void SetCurrentInteractable(Collider other, bool isSetting)
+    {
+        _interactableHumble.SetCurrentInteractable(other, isSetting, out bool setOutline);
 
-            _outline.enabled = false;
-
-            //Only sets current interactable null for players so they don't teleport to it when pressing the interact button
-            interactionController.SetCurrentInteractable(null);
-        }
+        _outline.enabled = setOutline;
     }
 
     public void SetCurrentPlayer(BaseInteractionController interactionController)
     {
-        _currentPlayer = interactionController;
-
-        OnInteract?.Invoke();
+        _interactableHumble.SetCurrentPlayer(interactionController);
     }
 
     public void Uninteract()
     {
-        OnUninteract?.Invoke();
+        _interactableHumble.Uninteract();
     }
 
     public void RemoveCurrentPlayer()
     {
-        if(_currentPlayer == null) { return; }
-
-        _currentPlayer.CheckExitInteraction();
+        _interactableHumble.RemoveCurrentPlayer();
     }
 
     #endregion
 
     public bool IsBroken()
     {
-        if(_interactableHealth == null) { return false; }
-
-        return _interactableHealth.IsDead();
+        return _interactableHumble.IsBroken();
     }
 }

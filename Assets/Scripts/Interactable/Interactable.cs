@@ -22,7 +22,7 @@ public class Interactable : MonoBehaviour
 
     #region Private Variables
 
-    private InteractableHumble _interactableHumble;
+    protected InteractableHumble _humble;
     private InteractableHealth _interactableHealth;
     private Outline _outline;
     private bool _canUse = true;
@@ -39,12 +39,13 @@ public class Interactable : MonoBehaviour
 
     #region Public Properties
 
-    public InteractableHumble Humble => _interactableHumble;
+    public InteractableHumble Humble => _humble;
     public Transform PlayerPositionTransform => _playerPositionTransform;
-    public BaseInteractionController CurrentPlayer => _interactableHumble.CurrentPlayer;
+    public BaseInteractionController CurrentPlayer => _humble.CurrentPlayer;
     public float SingleUseTime => _singleUseTime;
     public InteractableHealth InteractableHealth => _interactableHealth;
     public Outline Outline => _outline;
+    public bool IsAIOnlyInteractable => _isAIOnlyInteractable;
 
     #endregion
 
@@ -56,7 +57,7 @@ public class Interactable : MonoBehaviour
         _outline = GetComponent<Outline>();
         _outline.enabled = false;
 
-        _interactableHumble = new InteractableHumble(this, _interactableHealth, _isAIOnlyInteractable);
+        _humble = new InteractableHumble(this, _interactableHealth, _isAIOnlyInteractable);
     }
 
     public virtual void OnTriggerEnter(Collider other)
@@ -71,30 +72,30 @@ public class Interactable : MonoBehaviour
 
     private void SetCurrentInteractable(Collider other, bool isSetting)
     {
-        _interactableHumble.SetCurrentInteractable(other, isSetting, out bool setOutline);
+        _humble.SetCurrentInteractable(other, isSetting, out bool setOutline);
 
         _outline.enabled = setOutline;
     }
 
     public void SetCurrentPlayer(BaseInteractionController interactionController)
     {
-        _interactableHumble.SetCurrentPlayer(interactionController);
+        _humble.SetCurrentPlayer(interactionController);
     }
 
     public void Uninteract()
     {
-        _interactableHumble.Uninteract();
+        _humble.Uninteract();
     }
 
     public void RemoveCurrentPlayer()
     {
-        _interactableHumble.RemoveCurrentPlayer();
+        _humble.RemoveCurrentPlayer();
     }
 
     #endregion
 
     public bool IsBroken()
     {
-        return _interactableHumble.IsBroken();
+        return _humble.IsBroken();
     }
 }

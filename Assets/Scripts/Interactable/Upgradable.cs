@@ -19,8 +19,8 @@ public class Upgradable : Interactable
 
     #region Private Variables
 
-    private UpgradeChip[] _upgradeSockets = { null, null };
-    private List<GameObject> _chipInstances = new List<GameObject>();
+    private UpgradableHumble _humbleUpgradable;
+
     private InteractableHealth _health;
     protected Upgrade _selectedUpgrade;
     protected int _chipLevel;
@@ -30,7 +30,7 @@ public class Upgradable : Interactable
     #region Public Properties
 
     public event Action<Upgrade> OnUpgradeMesh;
-    public UpgradeChip[] UpgradeSockets => _upgradeSockets;
+    public UpgradeChip[] UpgradeSockets => _humbleUpgradable.UpgradeSockets;
     public float? CurrentHealth => _health?.CurrentHealth;
     public int ChipLevel => _chipLevel;
 
@@ -41,6 +41,9 @@ public class Upgradable : Interactable
         base.Awake();
 
         _health = GetComponent<InteractableHealth>();
+
+        _humble = new UpgradableHumble(this, InteractableHealth, IsAIOnlyInteractable);
+        _humbleUpgradable = _humble as UpgradableHumble;
     }
 
     public virtual void Start() { EnableUpgradeMesh(); }
@@ -75,18 +78,9 @@ public class Upgradable : Interactable
 
     public void RemoveUpgrades()
     {
-        if(_upgradeSockets[0] == null && _upgradeSockets[1] == null) { return; }
-
         InstantiateChipPickups();
 
-        _upgradeSockets[0] = null;
-        _upgradeSockets[1] = null;
-
-        foreach (GameObject chip in _chipInstances)
-        {
-            Destroy(chip.gameObject);
-        }
-        _chipInstances.Clear();
+        if (_humbleUpgradable.RemoveUpgrades() == false) { return; }
 
         EnableUpgradeMesh();
         PlayUpgradeFX();
@@ -94,11 +88,11 @@ public class Upgradable : Interactable
 
     public void InstantiateChipPickups()
     {
-        foreach (UpgradeChip chip in _upgradeSockets)
+        foreach (UpgradeChip chip in _humbleUpgradable.UpgradeSockets)
         {
-            if(chip == null) { continue; }
+            if (chip == null) { continue; }
 
-            GameObject chipPickupInstance = Instantiate(GameAssetsManager.Instance.ChipPickup, _chipDropTransform.position, Quaternion.identity);
+            GameObject chipPickupInstance = GameObject.Instantiate(GameAssetsManager.Instance.ChipPickup, _chipDropTransform.position, Quaternion.identity);
             chipPickupInstance.GetComponent<ChipPickup>().Initialize(chip);
         }
     }
@@ -108,12 +102,12 @@ public class Upgradable : Interactable
         _chipLevel = upgradeChip.Level;
 
         //If the interactable is broken, return false
-        if(TryGetComponent<InteractableHealth>(out InteractableHealth interactableHealth)) { if (interactableHealth.IsDead()) return false; }
+        if(TryGetComponent(out InteractableHealth interactableHealth)) { if (interactableHealth.IsDead()) return false; }
 
         int socketIndex = -1;
         bool foundEmptySocket = false;
 
-        foreach (UpgradeChip socket in _upgradeSockets)
+        foreach (UpgradeChip socket in _humbleUpgradable.UpgradeSockets)
         {
             socketIndex++;
 
@@ -126,52 +120,32 @@ public class Upgradable : Interactable
 
         if (!foundEmptySocket) { return false; }
 
-        if (!IsSameMkLevel(upgradeChip, player)) { return false; }
+        if (!_humbleUpgradable.IsSameMkLevel(upgradeChip)) { StartCoroutine(PlayNotSameLevelAnim(upgradeChip, player)); return false; }
 
-        _upgradeSockets[socketIndex] = upgradeChip;
-
-        Upgrade(upgradeChip, socketIndex);
+        LoadUpgrade(upgradeChip, socketIndex);
 
         return true;
-    }
-
-    private bool IsSameMkLevel(UpgradeChip newChip, PlayerCarryController player)
-    {
-        UpgradeChip firstChip = null;
-
-        foreach (UpgradeChip socket in _upgradeSockets)
-        {
-            if (socket != null) { firstChip = socket; break; }
-        }
-
-        if(firstChip == null) { return true; }
-
-        if(firstChip.Level == newChip.Level) { return true; }
-
-        StartCoroutine(PlayNotSameLevelAnim(newChip, player));
-
-        return false;
     }
 
     private IEnumerator PlayNotSameLevelAnim(UpgradeChip newChip, PlayerCarryController player)
     {
         if (TryGetComponent(out PlayableDirector playableDirector)) { playableDirector.Play(); }
 
-        PlaceChip(newChip, 1);
+        _humbleUpgradable.PlaceChip(newChip, _upgradeSocketObjs, 1);
         //Disable and enable chip to give illusion that the player placed it in the upgradable
         player.CurrentSingleObjInstance.SetActive(false);
 
         yield return new WaitForSeconds(1f);
 
-        GameObject tempChip = _chipInstances[1];
-        _chipInstances.Remove(tempChip);
+        GameObject tempChip = _humbleUpgradable.ChipInstances[1];
+        _humbleUpgradable.ChipInstances.Remove(tempChip);
         Destroy(tempChip);
         player.CurrentSingleObjInstance.SetActive(true);
     }
 
     public void LoadUpgrade(UpgradeChip upgradeChip, int socketIndex)
     {
-        _upgradeSockets[socketIndex] = upgradeChip;
+        if(!_humbleUpgradable.LoadUpgrade(upgradeChip, socketIndex)) { return; }
 
         Upgrade(upgradeChip, socketIndex);
     }
@@ -180,7 +154,7 @@ public class Upgradable : Interactable
     {
         if(upgradeChip == null) { return; }
 
-        PlaceChip(upgradeChip, socketIndex);
+        _humbleUpgradable.PlaceChip(upgradeChip, _upgradeSocketObjs, socketIndex);
         EnableUpgradeMesh();
         PlayUpgradeFX();
     }
@@ -191,16 +165,6 @@ public class Upgradable : Interactable
         Instantiate(particlesPrefab, transform.position, particlesPrefab.transform.rotation);
     }
 
-    private void PlaceChip(UpgradeChip upgradeChip, int socketIndex)
-    {
-        if(upgradeChip == null) { return; }
-
-        GameObject newChip = Instantiate(upgradeChip.ItemPrefab, _upgradeSocketObjs[socketIndex].transform);
-        newChip.transform.localPosition = new Vector3(-0.025f, 0.15f, 0f);
-        newChip.transform.localEulerAngles = new Vector3(90f, 0f,-90f);
-        _chipInstances.Add(newChip);
-    }
-
     public void EnableUpgradeMesh()
     {
         foreach (Upgrade upgrade in _upgrades)
@@ -208,8 +172,8 @@ public class Upgradable : Interactable
             upgrade.UpgradeMesh.SetActive(false);
         }
 
-        ChipType socket_1_chip_type = _upgradeSockets[0] ? _upgradeSockets[0].ChipType : ChipType.None;
-        ChipType socket_2_chip_type = _upgradeSockets[1] ? _upgradeSockets[1].ChipType : ChipType.None;
+        ChipType socket_1_chip_type = _humbleUpgradable.UpgradeSockets[0] ? _humbleUpgradable.UpgradeSockets[0].ChipType : ChipType.None;
+        ChipType socket_2_chip_type = _humbleUpgradable.UpgradeSockets[1] ? _humbleUpgradable.UpgradeSockets[1].ChipType : ChipType.None;
 
         int upgradeMeshIndex = -1;
         foreach (Upgrade upgrade in _upgrades)

@@ -13,6 +13,11 @@ public class UpgradableHumble : InteractableHumble
 
     }
 
+    public UpgradableHumble(UpgradeChip[] upgradeSockets, bool isAIOnlyInteractable) : base(isAIOnlyInteractable)
+    {
+        UpgradeSockets = upgradeSockets;
+    }
+
     public bool IsSameMkLevel(UpgradeChip newChip)
     {
         UpgradeChip firstChip = null;

@@ -6,8 +6,9 @@ public class UpgradableHumble : InteractableHumble
 {
     public UpgradeChip[] UpgradeSockets { get; private set; } = { null, null };
     public List<GameObject> ChipInstances { get; private set; } = new List<GameObject>();
+    public int ChipLevel { get; private set; }
 
-    public UpgradableHumble(Interactable interactable, InteractableHealth interactableHealth, bool isAIOnlyInteractable) : base(interactable, interactableHealth, isAIOnlyInteractable)
+    public UpgradableHumble(bool isAIOnlyInteractable) : base(isAIOnlyInteractable)
     {
 
     }
@@ -45,11 +46,63 @@ public class UpgradableHumble : InteractableHumble
         return true;
     }
 
+    public bool TryUpgrade(UpgradeChip upgradeChip, GameObject interactableObj, out int socketIndex, out bool isSameMKLevel)
+    {
+        ChipLevel = upgradeChip.Level;
+        isSameMKLevel = true;
+        socketIndex = -1;
+
+        //If the interactable is broken, return false
+        if (interactableObj.TryGetComponent(out InteractableHealth interactableHealth)) { if (interactableHealth.IsDead()) return false; }
+
+        bool foundEmptySocket = false;
+
+        foreach (UpgradeChip socket in UpgradeSockets)
+        {
+            socketIndex++;
+
+            if (socket != null) { continue; }
+
+            foundEmptySocket = true;
+
+            break;
+        }
+
+        if (!foundEmptySocket) { return false; }
+
+        if (!IsSameMkLevel(upgradeChip)) { isSameMKLevel = false; return false; }
+
+        return true;
+    }
+
     public bool LoadUpgrade(UpgradeChip upgradeChip, int socketIndex)
     {
         UpgradeSockets[socketIndex] = upgradeChip;
 
         return true;
+    }
+
+    public int EnableCorrectUpgradeMesh(Upgrade[] upgrades)
+    {
+        foreach (Upgrade upgrade in upgrades)
+        {
+            upgrade.UpgradeMesh.SetActive(false);
+        }
+
+        ChipType socket_1_chip_type = UpgradeSockets[0] ? UpgradeSockets[0].ChipType : ChipType.None;
+        ChipType socket_2_chip_type = UpgradeSockets[1] ? UpgradeSockets[1].ChipType : ChipType.None;
+
+        int upgradeMeshIndex = -1;
+        foreach (Upgrade upgrade in upgrades)
+        {
+            upgradeMeshIndex++;
+            if (upgrade.UpgradeSO.Socket_1 == socket_1_chip_type && upgrade.UpgradeSO.Socket_2 == socket_2_chip_type)
+            {
+                break;
+            }
+        }
+
+        return upgradeMeshIndex;
     }
 
     public void PlaceChip(UpgradeChip upgradeChip, GameObject[] upgradeSocketObjs, int socketIndex)

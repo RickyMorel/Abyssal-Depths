@@ -15,8 +15,6 @@ public class InteractableHumble
 
     #region Private Variables
 
-    private Interactable _interactableMono;
-    private InteractableHealth _interactableHealth;
     private bool _isAIOnlyInteractable;
 
     #endregion
@@ -31,34 +29,40 @@ public class InteractableHumble
 
     #endregion
 
-    public InteractableHumble(Interactable interactable, InteractableHealth interactableHealth, bool isAIOnlyInteractable)
+    public InteractableHumble(bool isAIOnlyInteractable)
     {
-        _interactableMono = interactable;
-        _interactableHealth = interactableHealth;
         _isAIOnlyInteractable = isAIOnlyInteractable;
     }
 
-    public void SetCurrentInteractable(Collider other, bool isSetting, out bool setOutline)
+    public bool SetCurrentInteractable(Collider other, bool isSetting, out BaseInteractionController interactionController, out bool setInteractable, out bool setOutline)
     {
         setOutline = false;
+        setInteractable = false;
+        interactionController = null;
 
-        if (!other.gameObject.TryGetComponent(out BaseInteractionController interactionController)) { return; }
+        if (!other.gameObject.TryGetComponent(out BaseInteractionController InteractionController)) { return false; }
+
+        interactionController = InteractionController;
 
         if (interactionController is PlayerInteractionController)
         {
-            if (_isAIOnlyInteractable) { return; }
+            if (_isAIOnlyInteractable) { return false; }
 
             setOutline = isSetting;
 
             if (!isSetting)
             {
                 //Only sets current interactable null for players so they don't teleport to it when pressing the interact button
-                interactionController.SetCurrentInteractable(isSetting ? _interactableMono : null);
+                setInteractable = false;
                 OnSetInteractable?.Invoke();
             }
         }
 
-        if (isSetting) { interactionController.SetCurrentInteractable(isSetting ? _interactableMono : null); OnSetInteractable?.Invoke(); }
+        if (isSetting) { setInteractable = true; OnSetInteractable?.Invoke(); }
+
+        setInteractable = true;
+
+        return true;
     }
 
     public void SetCurrentPlayer(BaseInteractionController interactionController)
@@ -80,12 +84,5 @@ public class InteractableHumble
         _currentPlayer.CheckExitInteraction();
 
         return true;
-    }
-
-    public bool IsBroken()
-    {
-        if (_interactableHealth == null) { return false; }
-
-        return _interactableHealth.IsDead();
     }
 }

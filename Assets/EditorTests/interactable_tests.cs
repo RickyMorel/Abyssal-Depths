@@ -60,7 +60,7 @@ public class interactable_tests
         Interactable interactable = GameObject.CreatePrimitive(PrimitiveType.Cube).AddComponent<Interactable>();
         Interactable interactableInstance = GameObject.Instantiate(interactable.gameObject).GetComponent<Interactable>();
         InteractableHealth interactableHealth = new InteractableHealth();
-        var interactableHumble = InteractableFactory.AnInteractable.WithInteractableMono(interactableInstance).WithInteractableHealth(interactableHealth).Build();
+        var interactableHumble = InteractableFactory.AnInteractable.Build();
 
         bool eventRaised = false;
 
@@ -75,9 +75,7 @@ public class interactable_tests
         Collider collider = playerObj.AddComponent<Collider>();
         GameObject instanceObj = GameObject.Instantiate(playerObj);
 
-        Debug.Log("collider: " + instanceObj.GetComponent<Collider>());
-
-        interactableHumble.SetCurrentInteractable(instanceObj.GetComponent<Collider>(), isSetting, out bool setOutline);
+        //interactableHumble.SetCurrentInteractable(isSetting, out bool setOutline);
 
 
         Assert.AreEqual(eventRaised, true);

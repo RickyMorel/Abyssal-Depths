@@ -57,7 +57,7 @@ public class Interactable : MonoBehaviour
         _outline = GetComponent<Outline>();
         _outline.enabled = false;
 
-        _humble = new InteractableHumble(this, _interactableHealth, _isAIOnlyInteractable);
+        _humble = new InteractableHumble(_isAIOnlyInteractable);
     }
 
     public virtual void OnTriggerEnter(Collider other)
@@ -72,7 +72,12 @@ public class Interactable : MonoBehaviour
 
     private void SetCurrentInteractable(Collider other, bool isSetting)
     {
-        _humble.SetCurrentInteractable(other, isSetting, out bool setOutline);
+        _humble.SetCurrentInteractable(other, isSetting, out BaseInteractionController interactionController, out bool setInteractable, out bool setOutline);
+
+        Debug.Log("interactionController: " + interactionController);
+        Debug.Log("setInteractable: " + setInteractable);
+
+        interactionController?.SetCurrentInteractable(setInteractable ? this : null);
 
         _outline.enabled = setOutline;
     }
@@ -96,6 +101,8 @@ public class Interactable : MonoBehaviour
 
     public bool IsBroken()
     {
-        return _humble.IsBroken();
+        if (_interactableHealth == null) { return false; }
+
+        return _interactableHealth.IsDead();
     }
 }

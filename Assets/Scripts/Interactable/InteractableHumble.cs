@@ -60,8 +60,6 @@ public class InteractableHumble
 
         if (isSetting) { setInteractable = true; OnSetInteractable?.Invoke(); }
 
-        setInteractable = true;
-
         return true;
     }
 

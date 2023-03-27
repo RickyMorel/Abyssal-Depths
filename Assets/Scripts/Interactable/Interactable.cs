@@ -74,9 +74,6 @@ public class Interactable : MonoBehaviour
     {
         _humble.SetCurrentInteractable(other, isSetting, out BaseInteractionController interactionController, out bool setInteractable, out bool setOutline);
 
-        Debug.Log("interactionController: " + interactionController);
-        Debug.Log("setInteractable: " + setInteractable);
-
         interactionController?.SetCurrentInteractable(setInteractable ? this : null);
 
         _outline.enabled = setOutline;

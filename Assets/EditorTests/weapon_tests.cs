@@ -35,17 +35,19 @@ namespace InteractableTests
         [Test]
         public void check_if_HandleUpgrade_updates_weaponShoot()
         {
+            //Arrange
             WeaponHumble weaponHumble = WeaponFactory.AWeapon.Build();
-            GameObject meshObj = new GameObject();
+            GameObject meshObj = GameObject.Instantiate(new GameObject());
             GameObject rotationObj = new GameObject();
+            meshObj.AddComponent<WeaponShoot>();
             rotationObj.transform.SetParent(meshObj.transform);
             GameObject[] shootTransforms = { new GameObject() };
             Upgrade upgrade = new Upgrade(meshObj, shootTransforms, _weaponSO);
 
+            //Act
             weaponHumble.HandleUpgrade(upgrade);
 
-            Debug.Log("weaponHumble: " + weaponHumble);
-
+            //Assert
             Assert.That(weaponHumble.WeaponShoot, Is.Not.Null);
         }
     }

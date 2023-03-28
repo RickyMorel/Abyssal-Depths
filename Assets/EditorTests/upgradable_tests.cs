@@ -20,23 +20,96 @@ public class upgradable_tests
     }
 
     [Test]
+    [TestCase(0, 100, true)]
+    [TestCase(1, 100, true)]
+    [TestCase(2, 100, false)]
+    [TestCase(0, 0, false)]
+    [TestCase(1, 0, false)]
+    [TestCase(2, 0, false)]
+    public void check_if_TryUpgrade_returns_correct_bool(int chipsInSockets, int interactableHealth, bool expectedResult)
+    {
+        //Arrange
+        UpgradeChip[] upgradeSockets = { null, null };
+        UpgradeChip chip = new UpgradeChip();
+
+        for (int i = 0; i < chipsInSockets; i++)
+        {
+            upgradeSockets[i] = chip;
+        }
+
+        UpgradableHumble upgradableHumble = UpgradableFactory.AnUpgradable.WithUpgradeSockets(upgradeSockets).Build();
+        GameObject interactableObj = GameObject.Instantiate(new GameObject());
+        interactableObj.AddComponent<BoxCollider>();
+        InteractableHealth health = interactableObj.AddComponent<InteractableHealth>();
+        health.CurrentHealth = interactableHealth;
+
+        //Act
+        bool canUpgrade = upgradableHumble.TryUpgrade(chip, interactableObj, out int socketIndex, out bool isSameMKLevel);
+
+        //Assert
+        Assert.AreEqual(expectedResult, canUpgrade);
+    }
+
+    [Test]
     [TestCase(0)]
     [TestCase(1)]
-    public void check_if_RemovedUpgrades_correctly(int socketIndex)
+    [TestCase(2)]
+    public void check_if_RemovedUpgrades_correctly(int chipAmount)
     {
-        UpgradableHumble upgradableHumble = UpgradableFactory.AnUpgradable.Build();
-        GameObject[] upgradeSocketObjs = { new GameObject(), new GameObject() };
-        //UpgradeChip chip = new UpgradeChip();
-        //upgradableHumble.LoadUpgrade(chip, 0);
-        //upgradableHumble.LoadUpgrade(chip, 1);
-        //upgradableHumble.PlaceChip()
+        //Arrange
+        UpgradeChip chip = new UpgradeChip();
+        UpgradeChip[] upgradeSockets = { null, null };
+        List<GameObject> chipInstances = new List<GameObject>();
 
-        Assert.That(upgradableHumble.UpgradeSockets[0], Is.Not.Null, "Did not correctly load chip 0");
-        Assert.That(upgradableHumble.UpgradeSockets[1], Is.Not.Null, "Did not correctly load chip 1");
+        for (int i = 0; i < chipAmount; i++)
+        {
+            upgradeSockets[i] = chip;
+            chipInstances.Add(new GameObject());
+        }
 
+        UpgradableHumble upgradableHumble = UpgradableFactory.AnUpgradable.WithUpgradeSockets(upgradeSockets).WithChipInstances(chipInstances).Build();
 
+        for (int i = 0; i < chipAmount; i++)
+        {
+            Assert.That(upgradableHumble.UpgradeSockets[i], Is.Not.Null, $"Did not correctly load chip {i}");
+            Assert.That(upgradableHumble.ChipInstances[i], Is.Not.Null, "Did not correctly load chip instance");
+        }
 
-        Assert.That(upgradableHumble.UpgradeSockets[socketIndex], Is.Not.Null);
+        //Act
+        upgradableHumble.RemoveUpgrades();
+
+        //Assert
+        Assert.That(upgradableHumble.ChipInstances.Count == 0);
+    }
+
+    [Test]
+    [TestCase(0)]
+    [TestCase(1)]
+    [TestCase(2)]
+    public void check_if_RemovedUpgrades_set_upgradeSockets_to_null(int chipAmount)
+    {
+        //Arrange
+        UpgradeChip chip = new UpgradeChip();
+        UpgradeChip[] upgradeSockets = { null, null };
+
+        for (int i = 0; i < chipAmount; i++)
+        {
+            upgradeSockets[i] = chip;
+        }
+
+        UpgradableHumble upgradableHumble = UpgradableFactory.AnUpgradable.WithUpgradeSockets(upgradeSockets).Build();
+
+        for (int i = 0; i < chipAmount; i++)
+        {
+            Assert.That(upgradableHumble.UpgradeSockets[i], Is.Not.Null, $"Did not correctly load chip {i}");
+        }
+
+        //Act
+        upgradableHumble.RemoveUpgrades();
+
+        //Assert
+        Assert.That(upgradableHumble.UpgradeSockets[0] == null, "UpgradeSockets[0] did not get set to null");
+        Assert.That(upgradableHumble.UpgradeSockets[1] == null, "UpgradeSockets[1] did not get set to null");
     }
 
     [Test]

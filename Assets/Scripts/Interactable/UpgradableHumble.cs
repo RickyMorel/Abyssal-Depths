@@ -13,9 +13,10 @@ public class UpgradableHumble : InteractableHumble
 
     }
 
-    public UpgradableHumble(UpgradeChip[] upgradeSockets, bool isAIOnlyInteractable) : base(isAIOnlyInteractable)
+    public UpgradableHumble(UpgradeChip[] upgradeSockets, List<GameObject> chipInstances, bool isAIOnlyInteractable) : base(isAIOnlyInteractable)
     {
         UpgradeSockets = upgradeSockets;
+        ChipInstances = chipInstances;
     }
 
     public bool IsSameMkLevel(UpgradeChip newChip)
@@ -43,7 +44,7 @@ public class UpgradableHumble : InteractableHumble
 
         foreach (GameObject chip in ChipInstances)
         {
-            GameObject.Destroy(chip.gameObject);
+            GameObject.DestroyImmediate(chip.gameObject);
         }
 
         ChipInstances.Clear();

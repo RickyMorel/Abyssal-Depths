@@ -168,6 +168,18 @@ public class Upgrade
     public GameObject UpgradeMesh;
     public GameObject[] ShootTransform;
     public WeaponSO UpgradeSO;
+
+    public Upgrade()
+    {
+
+    }
+
+    public Upgrade(GameObject newUpgradeMesh, GameObject[] newShootTransforms, WeaponSO newUpgradeSO)
+    {
+        UpgradeMesh = newUpgradeMesh;
+        ShootTransform = newShootTransforms;
+        UpgradeSO = newUpgradeSO;
+    }
 }
 
 #endregion

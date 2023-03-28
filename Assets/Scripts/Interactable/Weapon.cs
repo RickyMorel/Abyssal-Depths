@@ -7,30 +7,24 @@ public class Weapon : Upgradable
 {
     #region Editor Fields
 
-    [Header("Shooting Variables")]
-    [SerializeField] private GameObject _projectilePrefab;
-    [SerializeField] private List<Transform> _shootTransforms = new List<Transform>();
-
     [Header("Rotation Variables")]
-    [SerializeField] private Transform _turretHead;
     [SerializeField] private float _rotationSpeed = 10f;
-    [SerializeField] private Vector2 _rotationLimits; 
+    [SerializeField] private Vector2 _rotationLimits;
 
     #endregion
 
     #region Private Variables
 
+    private WeaponHumble _weaponHumble;
     private float _rotationX;
-
-    private WeaponShoot _weaponShoot;
 
     #endregion
 
     #region Public Properties
 
-    public GameObject ProjectilePrefab => _projectilePrefab;
-    public List<Transform> ShootTransforms => _shootTransforms;
-    public Transform TurretHead => _turretHead;
+    public GameObject ProjectilePrefab => _weaponHumble.ProjectilePrefab;
+    public List<Transform> ShootTransforms => _weaponHumble.ShootTransforms;
+    public Transform TurretHead => _weaponHumble.TurretHead;
 
     #endregion
 
@@ -40,7 +34,10 @@ public class Weapon : Upgradable
     {
         base.Awake();
 
-        OnUpgradeMesh += HandleUpgrade;
+        _humble = new WeaponHumble(IsAIOnlyInteractable);
+        _weaponHumble = _humble as WeaponHumble;
+
+        OnUpgradeMesh += _weaponHumble.HandleUpgrade;
     }
 
     public override void Start()
@@ -48,8 +45,6 @@ public class Weapon : Upgradable
         base.Start();
 
         _rotationX = (_rotationLimits.x + _rotationLimits.y)/2;
-
-        _weaponShoot = GetComponentInChildren<WeaponShoot>();
     }
 
     private void Update()
@@ -58,34 +53,16 @@ public class Weapon : Upgradable
 
         if (CanUse == false) { return; }
 
-        _weaponShoot.CheckShootInput();
+        _weaponHumble.WeaponShoot.CheckShootInput();
         CheckRotationInput();
     }
 
     private void OnDestroy()
     {
-        OnUpgradeMesh -= HandleUpgrade;
+        OnUpgradeMesh -= _weaponHumble.HandleUpgrade;
     }
 
     #endregion
-
-    private void HandleUpgrade(Upgrade upgrade)
-    {
-        Transform rotationChild = upgrade.UpgradeMesh.transform.GetChild(0);
-
-        _turretHead = rotationChild;
-
-        _projectilePrefab = upgrade.UpgradeSO.ProjectilePrefab;
-
-        _shootTransforms.Clear();
-
-        for (int i = 0; i < upgrade.ShootTransform.Length; i++)
-        {
-            _shootTransforms.Add(upgrade.ShootTransform[i].transform);
-        }
-
-        _weaponShoot = upgrade.UpgradeMesh.GetComponent<WeaponShoot>();
-    }
 
     private void CheckRotationInput()
     {
@@ -95,7 +72,7 @@ public class Weapon : Upgradable
 
         _rotationX += _rotationSpeed * CurrentPlayer.MoveDirection.x * Time.deltaTime;
         _rotationX = Mathf.Clamp(_rotationX, _rotationLimits.x, _rotationLimits.y);
-        _turretHead.localEulerAngles = new Vector3(_rotationX, 0f, 0f);
+        _weaponHumble.TurretHead.localEulerAngles = new Vector3(_rotationX, 0f, 0f);
     }
 
     private bool DoesRotate()

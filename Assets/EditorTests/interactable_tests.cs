@@ -4,71 +4,74 @@ using System.Collections.Generic;
 using Tests.Factories;
 using UnityEngine;
 
-public class interactable_tests
+namespace InteractableTests
 {
-    [Test]
-    public void check_if_onInteract_is_raised_when_calling_SetCurrentPlayer()
+    public class interactable_tests
     {
-        var interactableHumble = InteractableFactory.AnInteractable.Build();
-
-        bool eventRaised = false;
-
-        interactableHumble.OnInteract += delegate ()
+        [Test]
+        public void check_if_onInteract_is_raised_when_calling_SetCurrentPlayer()
         {
-            eventRaised = true;
-        };
+            var interactableHumble = InteractableFactory.AnInteractable.Build();
 
-        interactableHumble.SetCurrentPlayer(null);
+            bool eventRaised = false;
 
-        Assert.AreEqual(true, eventRaised);
-    }
+            interactableHumble.OnInteract += delegate ()
+            {
+                eventRaised = true;
+            };
 
-    [Test]
-    public void check_if_onUnInteract_is_raised_when_calling_Uninteract()
-    {
-        var interactableHumble = InteractableFactory.AnInteractable.Build();
+            interactableHumble.SetCurrentPlayer(null);
 
-        bool eventRaised = false;
+            Assert.AreEqual(true, eventRaised);
+        }
 
-        interactableHumble.OnUninteract += delegate ()
+        [Test]
+        public void check_if_onUnInteract_is_raised_when_calling_Uninteract()
         {
-            eventRaised = true;
-        };
+            var interactableHumble = InteractableFactory.AnInteractable.Build();
 
-        interactableHumble.Uninteract();
+            bool eventRaised = false;
 
-        Assert.AreEqual(true, eventRaised);
-    }
+            interactableHumble.OnUninteract += delegate ()
+            {
+                eventRaised = true;
+            };
 
-    [Test]
-    public void check_if_sets_player_when_calling_SetCurrentPlayer()
-    {
-        var interactableHumble = InteractableFactory.AnInteractable.Build();
+            interactableHumble.Uninteract();
 
-        BaseInteractionController controller = new BaseInteractionController();
-        interactableHumble.SetCurrentPlayer(controller);
+            Assert.AreEqual(true, eventRaised);
+        }
 
-        Assert.AreEqual(controller, interactableHumble.CurrentPlayer);
-    }
+        [Test]
+        public void check_if_sets_player_when_calling_SetCurrentPlayer()
+        {
+            var interactableHumble = InteractableFactory.AnInteractable.Build();
 
-    [Test]
-    [TestCase(false, 0, false)]
-    [TestCase(true, 0, true)]
-    [TestCase(false, 1, false)]
-    [TestCase(true, 1, true)]
-    public void check_if_sets_playerInteractable_when_calling_SetCurrentInteractable(bool isSetting, int controllerType, bool expectedOutput)
-    {
-        InteractableHumble interactableHumble = InteractableFactory.AnInteractable.Build();
+            BaseInteractionController controller = new BaseInteractionController();
+            interactableHumble.SetCurrentPlayer(controller);
 
-        GameObject playerObj = new GameObject();
-        GameObject playerInstance = GameObject.Instantiate(playerObj);
-        playerInstance.AddComponent<BoxCollider>();
+            Assert.AreEqual(controller, interactableHumble.CurrentPlayer);
+        }
 
-        if (controllerType == 0) { playerInstance.AddComponent<BaseInteractionController>(); }
-        else if (controllerType == 1) { playerInstance.AddComponent<PlayerInteractionController>(); }
+        [Test]
+        [TestCase(false, 0, false)]
+        [TestCase(true, 0, true)]
+        [TestCase(false, 1, false)]
+        [TestCase(true, 1, true)]
+        public void check_if_sets_playerInteractable_when_calling_SetCurrentInteractable(bool isSetting, int controllerType, bool expectedOutput)
+        {
+            InteractableHumble interactableHumble = InteractableFactory.AnInteractable.Build();
 
-        interactableHumble.SetCurrentInteractable(playerInstance.GetComponent<Collider>(), isSetting, out BaseInteractionController interactionController, out bool setInteractable, out bool setOutline); ;
+            GameObject playerObj = new GameObject();
+            GameObject playerInstance = GameObject.Instantiate(playerObj);
+            playerInstance.AddComponent<BoxCollider>();
 
-        Assert.AreEqual(setInteractable, expectedOutput);
+            if (controllerType == 0) { playerInstance.AddComponent<BaseInteractionController>(); }
+            else if (controllerType == 1) { playerInstance.AddComponent<PlayerInteractionController>(); }
+
+            interactableHumble.SetCurrentInteractable(playerInstance.GetComponent<Collider>(), isSetting, out BaseInteractionController interactionController, out bool setInteractable, out bool setOutline); ;
+
+            Assert.AreEqual(setInteractable, expectedOutput);
+        }
     }
 }

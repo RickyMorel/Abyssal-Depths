@@ -70,9 +70,7 @@ public class Weapon : Upgradable
 
         if (CurrentPlayer.MoveDirection.x == 0) { return; }
 
-        _rotationX += _rotationSpeed * CurrentPlayer.MoveDirection.x * Time.deltaTime;
-        _rotationX = Mathf.Clamp(_rotationX, _rotationLimits.x, _rotationLimits.y);
-        _weaponHumble.TurretHead.localEulerAngles = new Vector3(_rotationX, 0f, 0f);
+        _weaponHumble.TurretHead.localEulerAngles = _weaponHumble.CalculateWeaponLocalRotation(ref _rotationX, CurrentPlayer.MoveDirection.x, _rotationSpeed, _rotationLimits);
     }
 
     private bool DoesRotate()

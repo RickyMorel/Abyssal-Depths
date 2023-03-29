@@ -50,5 +50,24 @@ namespace InteractableTests
             //Assert
             Assert.That(weaponHumble.WeaponShoot, Is.Not.Null);
         }
+
+        [Test]
+        [TestCase(0f, 0f, 0f, 0f, 0f, 0f)]
+        [TestCase(10f, 1f, 300f, -190f, 10f, 10f)]
+        [TestCase(-90.34481f, -1f, 300f, -190f, 10f, -92.7848f)]
+        public void check_if_HandleUpgrade_updates_weaponShoot(float rotationX, float movDirX, float rotationSpeed, float limitX, float limitY, float expectedRotX)
+        {
+            //Arrange
+            WeaponHumble weaponHumble = WeaponFactory.AWeapon.Build();
+            Vector2 limits = new Vector2(limitX, limitY);
+            float maxDelta = 5;
+
+            //Act
+            Vector3 finalRotation = weaponHumble.CalculateWeaponLocalRotation(ref rotationX, movDirX, rotationSpeed, limits);
+            Vector3 expectedRotation = new Vector3(expectedRotX, 0f, 0f);
+
+            //Assert
+            Assert.IsTrue(Mathf.Abs(finalRotation.x - expectedRotX) < maxDelta, "Calculated rotation and expected rotation are not the same");
+        }
     }
 }

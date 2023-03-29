@@ -14,6 +14,7 @@ public class RotationalInteractable : Upgradable
 
     #region Private Variables
 
+    private RotationalInteractableHumble _rotationalHumble;
     private float _currentAngle;
     private float _radius;
 
@@ -35,13 +36,19 @@ public class RotationalInteractable : Upgradable
 
     #region Unity Loops
 
+    public override void Awake()
+    {
+        base.Awake();
+
+        _humble = new RotationalInteractableHumble(IsAIOnlyInteractable);
+        _rotationalHumble = _humble as RotationalInteractableHumble;
+    }
+
     public override void Start()
     {
         base.Start();
 
-        _radius = Vector3.Distance(_pivotTransform.position, RotatorTransform.position);
-
-        if (UsesWASDRotation()) { SetRotationWASD(); }
+        _radius = _rotationalHumble.CalculateRadius(_pivotTransform.position, RotatorTransform.position);
     }
 
     public virtual void Update()
@@ -63,28 +70,20 @@ public class RotationalInteractable : Upgradable
 
     public virtual void RotateWASD()
     {
-        if (CurrentPlayer.MoveDirection.magnitude == 0) { return; }
-
         float horizontal = CurrentPlayer.MoveDirection.x;
         float vertical = CurrentPlayer.MoveDirection.y;
 
-        if (Mathf.Abs(horizontal) > 0f || Mathf.Abs(vertical) > 0f)
-        {
-            float targetAngle = Mathf.Atan2(vertical, horizontal) * Mathf.Rad2Deg;
-            _currentAngle = Mathf.MoveTowardsAngle(_currentAngle, targetAngle, _rotationSpeed * Time.deltaTime);
-        }
+        _currentAngle = _rotationalHumble.CalculateCurrentAngle(horizontal, vertical, _currentAngle, _rotationSpeed);
 
         SetRotationWASD();
     }
 
     private void SetRotationWASD()
     {
-        float x = _pivotTransform.position.x + _radius * Mathf.Cos(_currentAngle * Mathf.Deg2Rad);
-        float y = _pivotTransform.position.y + _radius * Mathf.Sin(_currentAngle * Mathf.Deg2Rad);
-        float z = RotatorTransform.position.z;
+        _rotationalHumble.CalculateRotationWASD(_pivotTransform.position, RotatorTransform.position, _radius, _currentAngle, out Vector3 finalPos, out Quaternion finalRotation);
 
-        RotatorTransform.position = new Vector3(x, y, z);
-        RotatorTransform.rotation = Quaternion.LookRotation(Vector3.forward, _pivotTransform.position - RotatorTransform.position);
+        RotatorTransform.position = finalPos;
+        RotatorTransform.rotation = finalRotation;
     }
 
     public virtual void Rotate()

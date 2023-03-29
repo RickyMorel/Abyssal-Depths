@@ -15,6 +15,13 @@ public class WeaponHumble : UpgradableHumble
 
     }
 
+    public Vector3 CalculateWeaponLocalRotation(ref float rotationX, float movDirX, float rotationSpeed, Vector2 rotationLimits)
+    {
+        rotationX += rotationSpeed * movDirX * Time.deltaTime;
+        rotationX = Mathf.Clamp(rotationX, rotationLimits.x, rotationLimits.y);
+        return new Vector3(rotationX, 0f, 0f);
+    }
+
     public void HandleUpgrade(Upgrade upgrade)
     {
         Transform rotationChild = upgrade.UpgradeMesh.transform.GetChild(0);

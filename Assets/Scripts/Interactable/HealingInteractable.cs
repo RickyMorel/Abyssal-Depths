@@ -15,12 +15,12 @@ public class HealingInteractable : Interactable
 
     private void Start()
     {
-        OnInteract += HandleInteract;
+        Humble.OnInteract += HandleInteract;
     }
 
     private void OnDestroy()
     {
-        OnInteract -= HandleInteract;
+        Humble.OnInteract -= HandleInteract;
     }
 
     private void HandleInteract()

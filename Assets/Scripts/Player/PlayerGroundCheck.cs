@@ -1,27 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PlayerGroundCheck : MonoBehaviour
 {
     #region Editor Fields
 
-    [SerializeField] private int _floorMask = 6;
-    [SerializeField] private int _shipFloorMask = 24;
+    [SerializeField] private LayerMask _floorLayers;
     [SerializeField] private PlayerStateMachine _playerStateMachine;
+
+    #endregion
+
+    #region Public Properties
+
+    public LayerMask FloorLayers => _floorLayers;
 
     #endregion
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.gameObject.layer != _floorMask && other.gameObject.layer != _shipFloorMask) { return; }
+        if (_floorLayers != (_floorLayers | (1 << other.gameObject.layer))) { return; }
 
         _playerStateMachine.IsGrounded = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.layer != _floorMask && other.gameObject.layer != _shipFloorMask) { return; }
+        if (_floorLayers != (_floorLayers | (1 << other.gameObject.layer))) { return; }
 
         _playerStateMachine.IsGrounded = false;
     }

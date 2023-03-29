@@ -28,11 +28,11 @@ public class Pickaxe : RotationalInteractable
         base.Update();
 
         //Finish moving even when player gets off
-        if (_currentPlayer == null && CurrentAngle != 0) { FinishRotateWhenPlayerIsNull(); }
+        if (CurrentPlayer == null && CurrentAngle != 0) { FinishRotateWhenPlayerIsNull(); }
 
-        if (_currentPlayer == null) { SetIsBoosting(false); return; }
+        if (CurrentPlayer == null) { SetIsBoosting(false); return; }
 
-        if (!_currentPlayer.IsUsing) { SetIsBoosting(false); return; }
+        if (!CurrentPlayer.IsUsing) { SetIsBoosting(false); return; }
 
         SetIsBoosting(true);
     }
@@ -64,7 +64,7 @@ public class Pickaxe : RotationalInteractable
     {
         if(CurrentAngle == 0) { return; }
 
-        if(_currentPlayer != null && (_isBoosting || _currentPlayer.MoveDirection.magnitude > 0) && CurrentAngle < _topSpeed) { return; }
+        if(CurrentPlayer != null && (_isBoosting || CurrentPlayer.MoveDirection.magnitude > 0) && CurrentAngle < _topSpeed) { return; }
 
         CurrentAngle -= CurrentAngle * _pickaxeDrag * Time.deltaTime;
     }
@@ -91,7 +91,7 @@ public class Pickaxe : RotationalInteractable
 
     public override void Rotate()
     {
-        float acceleration = RotationSpeed * _currentPlayer.MoveDirection.x * Time.deltaTime;
+        float acceleration = RotationSpeed * CurrentPlayer.MoveDirection.x * Time.deltaTime;
 
         //Start slowing down if surpassed top speed
         if (Mathf.Abs(CurrentAngle) > _topSpeed) { acceleration = 0; }

@@ -9,6 +9,7 @@ public static class SaveSystem
 {
     public static int CreateNewSave(string shipName)
     {
+        Debug.Log(Application.persistentDataPath);
         List<SaveData> allSaves = LoadAllSaves();
         int saveIndex = allSaves.Count;
 

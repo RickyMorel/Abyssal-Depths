@@ -29,12 +29,12 @@ public class ShipDoor : Interactable
 
     private void Start()
     {
-        OnInteract += HandleButtonPress;
+        Humble.OnInteract += HandleButtonPress;
     }
 
     private void OnDestroy()
     {
-        OnInteract -= HandleButtonPress;
+        Humble.OnInteract -= HandleButtonPress;
     }
 
     private void FixedUpdate()

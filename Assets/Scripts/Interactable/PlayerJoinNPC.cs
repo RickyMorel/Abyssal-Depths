@@ -46,7 +46,7 @@ public class PlayerJoinNPC : NPC
 
     private void DisplayUI()
     {
-        if (_currentPlayer == null)
+        if (CurrentPlayer == null)
         {
             _playersToJoinText.SetActive(false);
             _canPlayersJoin = false;

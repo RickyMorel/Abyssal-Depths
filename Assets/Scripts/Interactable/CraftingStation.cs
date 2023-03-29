@@ -21,14 +21,14 @@ public class CraftingStation : Interactable
     {
         base.Awake();
 
-        OnInteract += HandleInteract;
-        OnUninteract += HandleUnInteract;
+        Humble.OnInteract += HandleInteract;
+        Humble.OnUninteract += HandleUnInteract;
     }
 
     private void OnDestroy()
     {
-        OnInteract -= HandleInteract;
-        OnUninteract -= HandleUnInteract;
+        Humble.OnInteract -= HandleInteract;
+        Humble.OnUninteract -= HandleUnInteract;
     }
 
     public void TryCraft(CraftingRecipy craftingRecipy)
@@ -50,9 +50,9 @@ public class CraftingStation : Interactable
 
     private void HandleInteract()
     {
-        if(_currentPlayer == null) { HandleUnInteract(); return; }
+        if(CurrentPlayer == null) { HandleUnInteract(); return; }
 
-        CraftingManager.Instance.EnableCanvas(true, _currentPlayer.GetComponent<PlayerInputHandler>(), this);
+        CraftingManager.Instance.EnableCanvas(true, CurrentPlayer.GetComponent<PlayerInputHandler>(), this);
     }
 
     private void HandleUnInteract()

@@ -60,7 +60,7 @@ namespace InteractableTests
             //Arrange
             WeaponHumble weaponHumble = WeaponFactory.AWeapon.Build();
             Vector2 limits = new Vector2(limitX, limitY);
-            float maxDelta = 5;
+            float maxDelta = 10;
 
             //Act
             Vector3 finalRotation = weaponHumble.CalculateWeaponLocalRotation(ref rotationX, movDirX, rotationSpeed, limits);

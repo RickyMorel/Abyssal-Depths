@@ -15,19 +15,16 @@ public class AttackHitBox : MonoBehaviour
 
     #region Private Variable
 
-    private int _damage;
-    private DamageData _damageData;
+    protected int _damage;
+    protected DamageData _damageData;
     private int _aiCombatID = -1;
 
     #endregion
 
     #region Editor Fields
 
-    [SerializeField] private Damageable _ownHealth;
-    [SerializeField] private bool _isFriendlyToPlayers = true;
-    [SerializeField] private DamageTypes[] _damageTypes;
-    [SerializeField] private Weapon _weapon;
-    [SerializeField] private Mace _mace;
+    [SerializeField] protected Damageable _ownHealth;
+    [SerializeField] protected DamageTypes[] _damageTypes;
 
     #endregion
 
@@ -39,44 +36,55 @@ public class AttackHitBox : MonoBehaviour
 
     #region Unity Loops
 
-    private void Start()
+    public virtual void Start()
     {
-        if (_weapon == null && _aiCombatID < 0) 
+        if (_aiCombatID < 0)
         {
             DamageTypes[] damageTypes = { DamageTypes.None, DamageTypes.None };
             _damageData = DamageData.GetDamageData(damageTypes, null, -1);
         }
-        _damageData = DamageData.GetDamageData(_damageTypes, _weapon, _aiCombatID);
+        else
+        {
+            _damageData = DamageData.GetDamageData(_damageTypes, null, _aiCombatID);
+
+        }
     }
 
     #endregion
 
-    private void OnTriggerEnter(Collider other)
+    public virtual void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.layer == 6) { OnHit?.Invoke(other.gameObject); }
-
         if (!other.gameObject.TryGetComponent(out Damageable enemyHealth)) { return; }
 
         if (_ownHealth != null && enemyHealth == _ownHealth) { return; }
 
+        DealDamageToPlayerOrShip(enemyHealth);
+    }
+
+    protected void CheckForParticles(Collider other)
+    {
+        if (other.gameObject.layer == 6) { OnHit?.Invoke(other.gameObject); }
+
         OnHit?.Invoke(other.gameObject);
+    }
 
-        if (enemyHealth is AIHealth)
+    protected void DealDamageToEnemies(AIHealth enemyHealth)
+    {
+        AIHealth aiHealth = enemyHealth;
+        if (aiHealth.CanKill)
         {
-            AIHealth aiHealth = (AIHealth)enemyHealth;
-            if (aiHealth.CanKill) 
-            {
-                CalculateDamage(enemyHealth);
-            }
-            else { aiHealth.Hurt(DamageTypes.Base); }
-
-            _ownHealth.GetComponent<PlayerComponents>()?.PlayerCamera.ShakeCamera(2f, 50f, 0.2f);
+            enemyHealth.DamageData = _damageData;
+            enemyHealth.Damage(_damage);
         }
+        else { aiHealth.Hurt(DamageTypes.Base); }
 
-        if (_isFriendlyToPlayers) { return; }
+        _ownHealth.GetComponent<PlayerComponents>()?.PlayerCamera.ShakeCamera(2f, 50f, 0.2f);
+    }
 
-        if (enemyHealth is PlayerHealth) 
-        { 
+    protected void DealDamageToPlayerOrShip(Damageable enemyHealth)
+    {
+        if (enemyHealth is PlayerHealth)
+        {
             PlayerHealth playerHealth = enemyHealth as PlayerHealth;
             playerHealth.Hurt(DamageTypes.Base);
             _ownHealth.GetComponent<PlayerComponents>()?.PlayerCamera.ShakeCamera(2f, 50f, 0.2f);
@@ -84,28 +92,8 @@ public class AttackHitBox : MonoBehaviour
 
         if (enemyHealth is ShipHealth)
         {
-            CalculateDamage(enemyHealth);
+            enemyHealth.DamageData = _damageData;
+            enemyHealth.Damage(_damageData.Damage[0]);
         }
-    }
-
-    private void CalculateDamage(Damageable health)
-    {
-        _damage = (int)_damageData.SecondaryValue[0];
-        health.DamageData = _damageData;
-        if (Mathf.Abs(_mace.rb.velocity.x) >= (_mace.MaxMovementSpeed / 2) || Mathf.Abs(_mace.rb.velocity.y) >= (_mace.MaxMovementSpeed / 2)) 
-        {
-            float damagePercentage;
-            if (Mathf.Abs(_mace.rb.velocity.x) >= Mathf.Abs(_mace.rb.velocity.y))
-            {
-                damagePercentage = (Mathf.Abs(_mace.rb.velocity.x) * 100) / _mace.MaxMovementSpeed;
-            }
-            else
-            {
-                damagePercentage = (Mathf.Abs(_mace.rb.velocity.y) * 100) / _mace.MaxMovementSpeed;
-            }
-            _damage = (int)((_damage * damagePercentage) / 100);
-            health.Damage(_damage); 
-        }
-        else { health.Damage(_damageData.Damage[0]); }
     }
 }

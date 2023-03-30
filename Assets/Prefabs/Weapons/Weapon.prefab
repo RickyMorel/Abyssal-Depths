@@ -2059,8 +2059,8 @@ GameObject:
   - component: {fileID: 6339893265388052966}
   - component: {fileID: 4880904848387659598}
   - component: {fileID: 9171795821542709802}
-  - component: {fileID: 4018232727435811441}
   - component: {fileID: 9098718564592703483}
+  - component: {fileID: 2668363459235702877}
   m_Layer: 25
   m_Name: MaceHead
   m_TagString: MainShip
@@ -2127,23 +2127,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.69, y: 1.6218746, z: 0.6}
   m_Center: {x: -0.000000025696108, y: 0.04906252, z: -0.00000013438986}
---- !u!114 &4018232727435811441
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6670758329025972589}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ddf72292aedb3149a43356854e9d5eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _ownHealth: {fileID: 2835829445178600864}
-  _isFriendlyToPlayers: 1
-  _damageTypes: 0100000000000000
-  _weapon: {fileID: 7627081817445622300}
-  _mace: {fileID: 1154468729331244522}
 --- !u!138 &9098718564592703483
 FixedJoint:
   m_ObjectHideFlags: 0
@@ -2159,6 +2142,20 @@ FixedJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &2668363459235702877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6670758329025972589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a384c1e917a6d4f42afc3ab7aac31575, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ownHealth: {fileID: 2835829445178600864}
+  _damageTypes: 0100000000000000
 --- !u!1 &7429366894016704111
 GameObject:
   m_ObjectHideFlags: 0
@@ -2674,9 +2671,6 @@ MonoBehaviour:
     - {fileID: 19551064917177264}
     UpgradeSO: {fileID: 11400000, guid: 6452576b3217a0841b56c053e8c6001a, type: 2}
   _chipDropTransform: {fileID: 2389941571288428507}
-  _projectilePrefab: {fileID: 6835169869500657298, guid: ae5425c51ae307f4bb82602a757b6b25, type: 3}
-  _shootTransforms: []
-  _turretHead: {fileID: 5191781562417900849}
   _rotationSpeed: 300
   _rotationLimits: {x: -190, y: 10}
 --- !u!114 &2835829445178600864

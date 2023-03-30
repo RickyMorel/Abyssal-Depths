@@ -409,6 +409,8 @@ MonoBehaviour:
   _ownHealth: {fileID: 7153336119383687660}
   _isFriendlyToPlayers: 0
   _damageTypes: 0100000000000000
+  _weapon: {fileID: 0}
+  _mace: {fileID: 0}
 --- !u!1 &3455716033785055655
 GameObject:
   m_ObjectHideFlags: 0
@@ -21768,7 +21770,7 @@ Transform:
   - {fileID: 3455716032967025346}
   - {fileID: 4731726961228027436}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!54 &7153336119383687656
 Rigidbody:
@@ -21882,6 +21884,7 @@ MonoBehaviour:
   _damageParticles: {fileID: 4862373215728599882}
   _hurtTime: 5
   _mesh: {fileID: 0}
+  _particleParentTransform: {fileID: 0}
   _canKill: 1
 --- !u!114 &7153336119383687667
 MonoBehaviour:
@@ -21924,7 +21927,7 @@ MonoBehaviour:
   _attackHitbox: {fileID: 3455716032967025404}
   _projectilePrefab: {fileID: 6835169869500657298, guid: ae5425c51ae307f4bb82602a757b6b25, type: 3}
   _shootTransform: {fileID: 0}
-  _enemyDamageDataID: 0
+  _enemyDamageDataID: 2
   _attackRange: 2
 --- !u!114 &7153336119383687664
 MonoBehaviour:

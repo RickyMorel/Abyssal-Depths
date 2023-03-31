@@ -37,6 +37,7 @@ public class AICombat : PlayerCombat
     {
         if(_gAgent.CurrentAction == null) { return; }
 
+        DestroyPrevHeldProjectile();
         Transform enemyTransform = _gAgent.CurrentAction.Target.transform;
         GameObject newProjectile = Instantiate(_projectilePrefab, _shootTransform.position, _shootTransform.rotation);
         newProjectile.transform.LookAt(enemyTransform);

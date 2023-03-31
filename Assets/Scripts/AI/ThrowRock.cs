@@ -41,6 +41,15 @@ public class ThrowRock : GAction
         return true;
     }
 
+    public override bool Perform()
+    {
+        Debug.Log("Perform: " + gameObject.name);
+
+        _stateMachine.Attack(3);
+
+        return true;
+    }
+
     public override bool PostPeform()
     {
         GWorld.Instance.GetQueue(_attackItemTag.ToString()).AddResource(Target);
@@ -48,8 +57,6 @@ public class ThrowRock : GAction
         Inventory.RemoveItem(Target);
 
         GWorld.Instance.GetWorld().ModifyState(_attackFreeItemName.ToString(), 1);
-
-        _stateMachine.Attack(3);
 
         Beliefs.RemoveState("hasRock");
 

@@ -104,5 +104,6 @@ public abstract class GAction : MonoBehaviour
     }
 
     public abstract bool PrePerform();
+    public abstract bool Perform();
     public abstract bool PostPeform();
 }

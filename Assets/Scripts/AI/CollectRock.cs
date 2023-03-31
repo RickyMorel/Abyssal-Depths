@@ -17,6 +17,11 @@ public class CollectRock : GAction
         return true;
     }
 
+    public override bool Perform()
+    {
+        return true;
+    }
+
     public override bool PostPeform()
     {
         GWorld.Instance.GetQueue(GWorld.ROCK_PICKUP_POINTS).AddResource(Target);

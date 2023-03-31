@@ -36,6 +36,11 @@ public class RunAway : GAction
         return true;
     }
 
+    public override bool Perform()
+    {
+        return true;
+    }
+
     public override bool PostPeform()
     {
         if(_currentRunAwayObj != null) { Destroy(_currentRunAwayObj); }

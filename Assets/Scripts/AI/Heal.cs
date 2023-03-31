@@ -17,6 +17,11 @@ public class Heal : GAction
         return true;
     }
 
+    public override bool Perform()
+    {
+        return true;
+    }
+
     public override bool PostPeform()
     {
         GWorld.Instance.GetQueue(GWorld.HEAL_POINTS).AddResource(Target);

@@ -1,4 +1,4 @@
-#define DISTANCE_DEBUGS
+//#define DISTANCE_DEBUGS
 
 using System.Collections.Generic;
 using UnityEngine;
@@ -125,6 +125,7 @@ public class GAgent : MonoBehaviour
 
                 if (!_invoked)
                 {
+                    DoActionBeforeComplete();
                     Invoke(nameof(CompleteAction), CurrentAction.Duration);
                     _invoked = true;
                     OnDoAction?.Invoke();
@@ -234,6 +235,11 @@ public class GAgent : MonoBehaviour
         CurrentAction = null;
         CancelInvoke(nameof(CompleteAction));
         _invoked = false;
+    }
+
+    private void DoActionBeforeComplete()
+    {
+        CurrentAction.Perform();
     }
 
     private void CompleteAction()

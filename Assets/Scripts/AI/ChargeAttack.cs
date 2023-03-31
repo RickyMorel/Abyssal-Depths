@@ -48,6 +48,11 @@ public class ChargeAttack : GAction
         return true;
     }
 
+    public override bool Perform()
+    {
+        return true;
+    }
+
     public override bool PostPeform()
     {
         GAgent.StateMachine.SetMovementSpeed(1f);

@@ -38,9 +38,9 @@ public class AIInteractionController : BaseInteractionController
     {
         if (!_canInteractInCurrentState) { return; }
 
-        base.SetCurrentInteractable(interactable);
+        if (interactable == null) { return; }
 
-        if(interactable == null) { return; }
+        base.SetCurrentInteractable(interactable);
 
         if(_gAgent.CurrentAction == null || _gAgent.CurrentAction.Target == null || _gAgent.CurrentAction.IsRunning == false) { return; }
 

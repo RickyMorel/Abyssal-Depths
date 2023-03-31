@@ -6,8 +6,8 @@ public class MaceAttackHitBox : AttackHitBox
 {
     #region Editors Field
 
-    private Weapon _weapon;
-    private Mace _mace;
+    [SerializeField] private Weapon _weapon;
+    [SerializeField] private Mace _mace;
 
     #endregion
 
@@ -15,10 +15,6 @@ public class MaceAttackHitBox : AttackHitBox
 
     public override void Start()
     {
-        _mace = GetComponentInParent<Mace>();
-        _weapon = GetComponentInParent<Weapon>();
-        _ownHealth = GetComponentInParent<InteractableHealth>();
-
         _damageData = DamageData.GetDamageData(_damageTypes, _weapon, -1);
     }
 
@@ -30,11 +26,14 @@ public class MaceAttackHitBox : AttackHitBox
 
         if (_ownHealth != null && enemyHealth == _ownHealth) { return; }
 
-        CheckForParticles(other);
+        if(enemyHealth is AIHealth) 
+        {
+            CheckForParticles(other);
 
-        CalculateDamage();
+            CalculateDamage();
 
-        DealDamageToEnemies((AIHealth)enemyHealth);
+            DealDamageToEnemies((AIHealth)enemyHealth);
+        }
     }
 
     private void CalculateDamage()

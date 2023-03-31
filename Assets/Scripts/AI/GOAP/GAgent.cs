@@ -1,4 +1,4 @@
-//#define DISTANCE_DEBUGS
+#define DISTANCE_DEBUGS
 
 using System.Collections.Generic;
 using UnityEngine;
@@ -33,10 +33,12 @@ public class GAgent : MonoBehaviour
     public GInventory Inventory = new GInventory();
     public WorldStates Beliefs = new WorldStates();
     public GAction CurrentAction;
-    public bool IsMoving => _isMoving;
 
     public event Action OnDoAction;
     public event Action OnExitAction;
+
+    public AIStateMachine StateMachine => _aiStateMachine;
+    public bool IsMoving => _isMoving;
 
     #endregion
 
@@ -56,11 +58,11 @@ public class GAgent : MonoBehaviour
     private bool _invoked = false;
     private bool _isMoving = false;
 
-    private Rigidbody _rb;
-    private AIStateMachine _aiStateMachine;
-    private AIInteractionController _interactionController;
+    protected Rigidbody _rb;
+    protected AIStateMachine _aiStateMachine;
+    protected AIInteractionController _interactionController;
     private float _initialGoalDistance;
-    private Damageable _damageable;
+    protected Damageable _damageable;
 
     #endregion
 

@@ -10,6 +10,7 @@ public class AIStateMachine : BaseStateMachine
     private GAgent _gAgent;
     private NavMeshAgent _agent;
     private bool _isBouncingOffShield = false;
+    private float _movementSpeed = 1f;
 
     #endregion
 
@@ -30,7 +31,7 @@ public class AIStateMachine : BaseStateMachine
 
     public override void Move()
     {
-        _moveDirection.x = _canMove ? 1f : 0f;
+        _moveDirection.x = _canMove ? _movementSpeed : 0f;
     }
 
     public void BasicAttack()
@@ -38,6 +39,14 @@ public class AIStateMachine : BaseStateMachine
         if (!CanMove) { return; }
 
         StartCoroutine(SetIsShootingCoroutine());
+    }
+
+    public void Attack(int attackNumber)
+    {
+        if (!CanMove) { return; }
+
+        Anim.SetInteger("AttackType", attackNumber);
+        Anim.SetTrigger("Attack");
     }
 
     public void BounceOffShield()
@@ -66,6 +75,11 @@ public class AIStateMachine : BaseStateMachine
 
         if (!IsOnGround()) { StartCoroutine(SetBouncingOffShieldCoroutine()); }
         else { _isBouncingOffShield = false; }
+    }
+
+    public void SetMovementSpeed(float newSpeed)
+    {
+        _movementSpeed = newSpeed;
     }
 
     private bool IsOnGround()

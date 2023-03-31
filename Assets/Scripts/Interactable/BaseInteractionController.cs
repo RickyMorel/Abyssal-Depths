@@ -124,14 +124,18 @@ public class BaseInteractionController : MonoBehaviour
     public void SetInteraction(int interactionType, Transform playerPositionTransform)
     {
         BaseInteractionController interactionController = interactionType == 0 ? null : this;
-        if(_agent != null) { _agent.enabled = interactionType == 0; }
 
         _currentInteractable.SetCurrentPlayer(interactionController);
         _currentInteraction = interactionType;
 
         _anim.SetInteger("Interaction", interactionType);
-        transform.position = playerPositionTransform.position;
-        transform.rotation = playerPositionTransform.rotation;
+
+        if (CurrentInteractable.AttachOnInteract)
+        {
+            if (_agent != null) { _agent.enabled = interactionType == 0; }
+            transform.position = playerPositionTransform.position;
+            transform.rotation = playerPositionTransform.rotation;
+        }
 
         _timeSinceLastInteraction = 0f;
 

@@ -1,4 +1,5 @@
 
+//DO NOT ENUM CHANGE VALUES
 public enum InteractionType
 {
     Sitting = 1,
@@ -12,4 +13,5 @@ public enum InteractionType
     Healing = 9,
     Fixing = 10,
     AttachedAttacking = 11,
+    GrabRock = 12,
 }

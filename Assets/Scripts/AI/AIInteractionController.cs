@@ -25,6 +25,8 @@ public class AIInteractionController : BaseInteractionController
 
         if(_currentInteraction == 0) { return; }
 
+        if(CurrentInteractable.AttachOnInteract == false) { return; }
+
         transform.position = CurrentInteractable.PlayerPositionTransform.position;
         transform.rotation = CurrentInteractable.PlayerPositionTransform.rotation;
     }

@@ -47,6 +47,8 @@ public class ThrowRock : GAction
 
         _stateMachine.Attack(3);
 
+        GAgent.StateMachine.SetIsCarryingItem(false);
+
         return true;
     }
 

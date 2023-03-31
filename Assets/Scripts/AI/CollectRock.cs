@@ -30,6 +30,8 @@ public class CollectRock : GAction
 
         GWorld.Instance.GetWorld().ModifyState(GWorld.FREE_ROCK_PICKUP_POINTS, 1);
 
+        GAgent.StateMachine.SetIsCarryingItem(true);
+
         Beliefs.RemoveState("getRock");
 
         return true;

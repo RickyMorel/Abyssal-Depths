@@ -6,6 +6,7 @@ public class AICombat : PlayerCombat
 {
     #region Editor Fields
 
+    [SerializeField] private Transform _projectileHolsterTransform;
     [SerializeField] private int _enemyDamageDataID;
     [Range(2f, 100f)]
     [SerializeField] private float _attackRange = 10f;
@@ -41,6 +42,27 @@ public class AICombat : PlayerCombat
         newProjectile.transform.LookAt(enemyTransform);
         newProjectile.GetComponent<Projectile>().Initialize(tag, transform);
         newProjectile.GetComponent<Projectile>().AICombatID = _enemyDamageDataID;
+    }
+
+    public void HoldProjectileInHolster()
+    {
+        DestroyPrevHeldProjectile();
+
+        GameObject projectileMesh = _projectilePrefab.transform.Find("Mesh").gameObject;
+
+        GameObject projectileMeshInstance = Instantiate(projectileMesh, _projectileHolsterTransform);
+        projectileMeshInstance.transform.localPosition = Vector3.zero;
+        projectileMeshInstance.transform.localRotation = Quaternion.identity;
+    }
+
+    public void DestroyPrevHeldProjectile()
+    {
+        foreach (Transform child in _projectileHolsterTransform)
+        {
+            if(child == _projectileHolsterTransform) { continue; }
+
+            Destroy(child.gameObject);
+        }
     }
 
     public void Aggro()

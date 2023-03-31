@@ -1170,6 +1170,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1761628038, guid: 7c2f4a2fd99211d439267619217db38a, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 319713644502076378, guid: 7c2f4a2fd99211d439267619217db38a, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -7719,11 +7723,11 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1034862789}
-  - {fileID: 1448023563}
   - {fileID: 6676553}
   - {fileID: 1146848256}
   - {fileID: 2135365790}
   - {fileID: 2118182920}
+  - {fileID: 1448023563}
   - {fileID: 1893688659}
   - {fileID: 526136367}
   - {fileID: 1787136155}
@@ -8825,14 +8829,6 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7157232019728915862, guid: f01dc6d958cfc3f47b5729003ec2b841, type: 3}
-      propertyPath: _preConditionsInspector.Array.data[2].key
-      value: hasRock
-      objectReference: {fileID: 0}
-    - target: {fileID: 7157232019728915863, guid: f01dc6d958cfc3f47b5729003ec2b841, type: 3}
-      propertyPath: _effectsInspector.Array.data[0].key
-      value: hasRock
-      objectReference: {fileID: 0}
     - target: {fileID: 8172708540713768750, guid: f01dc6d958cfc3f47b5729003ec2b841, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -8884,10 +8880,6 @@ PrefabInstance:
     - target: {fileID: 8177713152652336312, guid: f01dc6d958cfc3f47b5729003ec2b841, type: 3}
       propertyPath: _id.Value
       value: -12244
-      objectReference: {fileID: 0}
-    - target: {fileID: 8177713152652336316, guid: f01dc6d958cfc3f47b5729003ec2b841, type: 3}
-      propertyPath: _attackRange
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

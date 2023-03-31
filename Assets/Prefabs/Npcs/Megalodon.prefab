@@ -2282,6 +2282,37 @@ Transform:
   m_Father: {fileID: 5061525941459399165}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1844410292135738130
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4115589652576855531}
+  m_Layer: 13
+  m_Name: ProjectileHolsterTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4115589652576855531
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844410292135738130}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.00207, z: 0.00533}
+  m_LocalScale: {x: 0.02, y: 0.02, z: 0.02}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4719300499963438575}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1865530240035490161
 GameObject:
   m_ObjectHideFlags: 0
@@ -5794,7 +5825,8 @@ Transform:
   m_LocalPosition: {x: -0, y: 0.00725315, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4115589652576855531}
   m_Father: {fileID: 8168112604344358550}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -27105,6 +27137,37 @@ Transform:
   m_Father: {fileID: 4346204484168526677}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7846650294937992350
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8223282100829996152}
+  m_Layer: 16
+  m_Name: ShootTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8223282100829996152
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7846650294937992350}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.25, y: 0, z: 1.753}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8172708540713768750}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7898025807921318515
 GameObject:
   m_ObjectHideFlags: 0
@@ -27548,6 +27611,7 @@ Transform:
   - {fileID: 4453489282487423532}
   - {fileID: 4453489282889875351}
   - {fileID: 6022063796985875321}
+  - {fileID: 8223282100829996152}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 90, y: 180, z: 0}
@@ -27704,8 +27768,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackHitbox: {fileID: 4453489282889875369}
-  _projectilePrefab: {fileID: 6835169869500657298, guid: ae5425c51ae307f4bb82602a757b6b25, type: 3}
-  _shootTransform: {fileID: 0}
+  _projectilePrefab: {fileID: 6835169869500657298, guid: eba6b2479c1482c4fae3032ca08f82b8, type: 3}
+  _shootTransform: {fileID: 8223282100829996152}
+  _projectileHolsterTransform: {fileID: 4115589652576855531}
   _enemyDamageDataID: 2
   _attackRange: 20
 --- !u!114 &398723808698627166

@@ -49,6 +49,11 @@ public class AIStateMachine : BaseStateMachine
         Anim.SetTrigger("Attack");
     }
 
+    public void SetIsCarryingItem(bool isCarrying)
+    {
+        Anim.SetBool("IsCarryingItem", isCarrying);
+    }
+
     public void BounceOffShield()
     {
         if (_isBouncingOffShield) { return; }

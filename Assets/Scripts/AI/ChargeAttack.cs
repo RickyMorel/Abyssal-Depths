@@ -35,6 +35,11 @@ public class ChargeAttack : GAction
 
         Vector3 destination = Ship.Instance.transform.position + (Ship.Instance.transform.position - transform.position).normalized * 20;
 
+        if (Physics.Raycast(destination, transform.TransformDirection(Vector3.forward), out RaycastHit hit, Mathf.Infinity))
+        {
+            destination = hit.point;
+        }
+
         GameObject newTargetObj = new GameObject();
         newTargetObj.transform.position = destination;
         newTargetObj.name = "ChargeTargetPositionObj";

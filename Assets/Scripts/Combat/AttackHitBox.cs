@@ -27,7 +27,7 @@ public class AttackHitBox : MonoBehaviour
     [SerializeField] private bool _isFriendlyToPlayers = true;
     [SerializeField] private DamageTypes[] _damageTypes;
     [SerializeField] private Weapon _weapon;
-    [SerializeField] private Mace _mace;
+    [SerializeField] private MeleeWeapon _meleeWeapon;
 
     #endregion
 
@@ -92,16 +92,16 @@ public class AttackHitBox : MonoBehaviour
     {
         _damage = (int)_damageData.SecondaryValue[0];
         health.DamageData = _damageData;
-        if (Mathf.Abs(_mace.rb.velocity.x) >= (_mace.MaxMovementSpeed / 2) || Mathf.Abs(_mace.rb.velocity.y) >= (_mace.MaxMovementSpeed / 2)) 
+        if (Mathf.Abs(_meleeWeapon.rb.velocity.x) >= (_meleeWeapon.MaxMovementSpeed / 2) || Mathf.Abs(_meleeWeapon.rb.velocity.y) >= (_meleeWeapon.MaxMovementSpeed / 2)) 
         {
             float damagePercentage;
-            if (Mathf.Abs(_mace.rb.velocity.x) >= Mathf.Abs(_mace.rb.velocity.y))
+            if (Mathf.Abs(_meleeWeapon.rb.velocity.x) >= Mathf.Abs(_meleeWeapon.rb.velocity.y))
             {
-                damagePercentage = (Mathf.Abs(_mace.rb.velocity.x) * 100) / _mace.MaxMovementSpeed;
+                damagePercentage = (Mathf.Abs(_meleeWeapon.rb.velocity.x) * 100) / _meleeWeapon.MaxMovementSpeed;
             }
             else
             {
-                damagePercentage = (Mathf.Abs(_mace.rb.velocity.y) * 100) / _mace.MaxMovementSpeed;
+                damagePercentage = (Mathf.Abs(_meleeWeapon.rb.velocity.y) * 100) / _meleeWeapon.MaxMovementSpeed;
             }
             _damage = (int)((_damage * damagePercentage) / 100);
             health.Damage(_damage); 

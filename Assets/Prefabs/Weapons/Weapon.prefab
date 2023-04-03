@@ -233,7 +233,7 @@ MonoBehaviour:
   _isFriendlyToPlayers: 1
   _damageTypes: 0200000001000000
   _weapon: {fileID: 7627081817445622300}
-  _mace: {fileID: 5287989740016555058}
+  _meleeWeapon: {fileID: 8711923388874455362}
 --- !u!1 &211072648925897656
 GameObject:
   m_ObjectHideFlags: 0
@@ -378,7 +378,7 @@ GameObject:
   - component: {fileID: 7028550834310858804}
   - component: {fileID: 6257601178187439102}
   m_Layer: 25
-  m_Name: Mace Rotator Mesh
+  m_Name: Whip Rotator Mesh
   m_TagString: MainShip
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -905,7 +905,7 @@ MonoBehaviour:
   _isFriendlyToPlayers: 1
   _damageTypes: 0200000001000000
   _weapon: {fileID: 7627081817445622300}
-  _mace: {fileID: 5287989740016555058}
+  _meleeWeapon: {fileID: 8711923388874455362}
 --- !u!1 &574489328291009645
 GameObject:
   m_ObjectHideFlags: 0
@@ -1077,7 +1077,7 @@ MonoBehaviour:
   _isFriendlyToPlayers: 1
   _damageTypes: 0200000001000000
   _weapon: {fileID: 7627081817445622300}
-  _mace: {fileID: 5287989740016555058}
+  _meleeWeapon: {fileID: 8711923388874455362}
 --- !u!1 &1791258052167691310
 GameObject:
   m_ObjectHideFlags: 0
@@ -1432,7 +1432,7 @@ MonoBehaviour:
   _isFriendlyToPlayers: 1
   _damageTypes: 0200000001000000
   _weapon: {fileID: 7627081817445622300}
-  _mace: {fileID: 5287989740016555058}
+  _meleeWeapon: {fileID: 8711923388874455362}
 --- !u!1 &2483814846787299703
 GameObject:
   m_ObjectHideFlags: 0
@@ -1774,7 +1774,7 @@ MonoBehaviour:
   _isFriendlyToPlayers: 1
   _damageTypes: 0200000001000000
   _weapon: {fileID: 7627081817445622300}
-  _mace: {fileID: 5287989740016555058}
+  _meleeWeapon: {fileID: 8711923388874455362}
 --- !u!1 &3176484016150529723
 GameObject:
   m_ObjectHideFlags: 0
@@ -1924,7 +1924,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4758724998128473627}
   m_Layer: 25
-  m_Name: MaceRotator
+  m_Name: WhipRotator
   m_TagString: MainShip
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2117,7 +2117,7 @@ MonoBehaviour:
   _isFriendlyToPlayers: 1
   _damageTypes: 0200000001000000
   _weapon: {fileID: 7627081817445622300}
-  _mace: {fileID: 5287989740016555058}
+  _meleeWeapon: {fileID: 8711923388874455362}
 --- !u!1 &3843574088574756828
 GameObject:
   m_ObjectHideFlags: 0
@@ -2582,7 +2582,7 @@ MonoBehaviour:
   _isFriendlyToPlayers: 1
   _damageTypes: 0200000001000000
   _weapon: {fileID: 7627081817445622300}
-  _mace: {fileID: 5287989740016555058}
+  _meleeWeapon: {fileID: 8711923388874455362}
 --- !u!1 &5195123832446667425
 GameObject:
   m_ObjectHideFlags: 0
@@ -3044,7 +3044,7 @@ GameObject:
   - component: {fileID: 7604218662156677272}
   - component: {fileID: 1463465559240965549}
   - component: {fileID: 5378751501524200002}
-  - component: {fileID: 5287989740016555058}
+  - component: {fileID: 8711923388874455362}
   m_Layer: 25
   m_Name: Fire Whip
   m_TagString: MainShip
@@ -3119,7 +3119,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &5287989740016555058
+--- !u!114 &8711923388874455362
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3128,15 +3128,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 5690369232586464998}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fc93c931ab17af4cb70d416172c41b3, type: 3}
+  m_Script: {fileID: 11500000, guid: 500f131c8b153a74095c2061c5ddea9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _timeBetweenShots: 0.2
-  _maceHead: {fileID: 531503494910745630}
+  _attackHitBox: {fileID: 83939654093029116}
   _parentTransform: {fileID: 5941236623131322626}
   maxDistance: 10
-  _moveForce: 110
-  _maxMovementSpeed: 60
+  _moveForce: 160
+  _maxMovementSpeed: 20
 --- !u!1 &5849193822041755191
 GameObject:
   m_ObjectHideFlags: 0
@@ -3401,7 +3401,7 @@ MonoBehaviour:
   _isFriendlyToPlayers: 1
   _damageTypes: 0200000001000000
   _weapon: {fileID: 7627081817445622300}
-  _mace: {fileID: 5287989740016555058}
+  _meleeWeapon: {fileID: 8711923388874455362}
 --- !u!1 &6253536961031130645
 GameObject:
   m_ObjectHideFlags: 0
@@ -3795,7 +3795,7 @@ MonoBehaviour:
   _isFriendlyToPlayers: 1
   _damageTypes: 0100000000000000
   _weapon: {fileID: 7627081817445622300}
-  _mace: {fileID: 1154468729331244522}
+  _meleeWeapon: {fileID: 0}
 --- !u!138 &9098718564592703483
 FixedJoint:
   m_ObjectHideFlags: 0
@@ -4703,7 +4703,7 @@ MonoBehaviour:
   _isFriendlyToPlayers: 1
   _damageTypes: 0200000001000000
   _weapon: {fileID: 7627081817445622300}
-  _mace: {fileID: 5287989740016555058}
+  _meleeWeapon: {fileID: 8711923388874455362}
 --- !u!1 &8278165535455272840
 GameObject:
   m_ObjectHideFlags: 0
@@ -5056,11 +5056,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeBetweenShots: 0.2
-  _maceHead: {fileID: 6670758329025972589}
+  _attackHitBox: {fileID: 4018232727435811441}
   _parentTransform: {fileID: 4564376745032513126}
   maxDistance: 10
   _moveForce: 110
   _maxMovementSpeed: 30
+  _maceHead: {fileID: 6670758329025972589}
 --- !u!1 &9020570903267728230
 GameObject:
   m_ObjectHideFlags: 0

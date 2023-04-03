@@ -209,12 +209,12 @@ SpringJoint:
   m_Spring: 1000
   m_Damper: 0.2
   m_MinDistance: 0
-  m_MaxDistance: 0
-  m_Tolerance: 0.025
+  m_MaxDistance: 0.1
+  m_Tolerance: 0.01
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 0
-  m_EnablePreprocessing: 1
+  m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
 --- !u!114 &1856104736055209140
@@ -881,12 +881,12 @@ SpringJoint:
   m_Spring: 1000
   m_Damper: 0.2
   m_MinDistance: 0
-  m_MaxDistance: 0
-  m_Tolerance: 0.025
+  m_MaxDistance: 0.1
+  m_Tolerance: 0.01
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 0
-  m_EnablePreprocessing: 1
+  m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
 --- !u!114 &2486765252256444304
@@ -1054,11 +1054,11 @@ SpringJoint:
   m_Damper: 0.2
   m_MinDistance: 0
   m_MaxDistance: 0.1
-  m_Tolerance: 0.025
+  m_Tolerance: 0.01
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 0
-  m_EnablePreprocessing: 1
+  m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
 --- !u!114 &343325775697919534
@@ -1408,12 +1408,12 @@ SpringJoint:
   m_Spring: 1000
   m_Damper: 0.2
   m_MinDistance: 0
-  m_MaxDistance: 0
-  m_Tolerance: 0.025
+  m_MaxDistance: 0.1
+  m_Tolerance: 0.01
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 0
-  m_EnablePreprocessing: 1
+  m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
 --- !u!114 &8651083649717491975
@@ -1750,12 +1750,12 @@ SpringJoint:
   m_Spring: 1000
   m_Damper: 0.2
   m_MinDistance: 0
-  m_MaxDistance: 0
-  m_Tolerance: 0.025
+  m_MaxDistance: 0.1
+  m_Tolerance: 0.01
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 0
-  m_EnablePreprocessing: 1
+  m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
 --- !u!114 &6638913173712438073
@@ -2093,12 +2093,12 @@ SpringJoint:
   m_Spring: 1000
   m_Damper: 0.2
   m_MinDistance: 0
-  m_MaxDistance: 0
-  m_Tolerance: 0.025
+  m_MaxDistance: 0.1
+  m_Tolerance: 0.01
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 0
-  m_EnablePreprocessing: 1
+  m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
 --- !u!114 &6760830553134963585
@@ -2559,11 +2559,11 @@ SpringJoint:
   m_Damper: 0.2
   m_MinDistance: 0
   m_MaxDistance: 0.1
-  m_Tolerance: 0.025
+  m_Tolerance: 0.01
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 0
-  m_EnablePreprocessing: 1
+  m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
 --- !u!114 &7093578596807046654
@@ -3135,8 +3135,18 @@ MonoBehaviour:
   _attackHitBox: {fileID: 83939654093029116}
   _parentTransform: {fileID: 5941236623131322626}
   maxDistance: 10
-  _moveForce: 160
+  _moveForce: 300
   _maxMovementSpeed: 20
+  _attackHitBoxes:
+  - {fileID: 343325775697919534}
+  - {fileID: 7093578596807046654}
+  - {fileID: 1856104736055209140}
+  - {fileID: 847860463481905306}
+  - {fileID: 8651083649717491975}
+  - {fileID: 6760830553134963585}
+  - {fileID: 6638913173712438073}
+  - {fileID: 2486765252256444304}
+  - {fileID: 83939654093029116}
 --- !u!1 &5849193822041755191
 GameObject:
   m_ObjectHideFlags: 0
@@ -3377,12 +3387,12 @@ SpringJoint:
   m_Spring: 1000
   m_Damper: 0.2
   m_MinDistance: 0
-  m_MaxDistance: 0
-  m_Tolerance: 0.025
+  m_MaxDistance: 0.1
+  m_Tolerance: 0.01
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 0
-  m_EnablePreprocessing: 1
+  m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
 --- !u!114 &83939654093029116
@@ -4679,12 +4689,12 @@ SpringJoint:
   m_Spring: 1000
   m_Damper: 0.2
   m_MinDistance: 0
-  m_MaxDistance: 0
-  m_Tolerance: 0.025
+  m_MaxDistance: 0.1
+  m_Tolerance: 0.01
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 0
-  m_EnablePreprocessing: 1
+  m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
 --- !u!114 &847860463481905306

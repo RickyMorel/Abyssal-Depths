@@ -5,6 +5,32 @@ using UnityEngine;
 
 public class FireWhip : MeleeWeapon
 {
+    #region Editor Fields
+
+    [SerializeField] private AttackHitBox[] _attackHitBoxes;
+
+    #endregion
+
+    public override void Awake()
+    {
+        base.Awake();
+
+        foreach (AttackHitBox hitBox in _attackHitBoxes)
+        {
+            hitBox.OnHit += HandleHitParticles;
+        }
+    }
+
+    public override void OnDestroy()
+    {
+        base.OnDestroy();
+
+        foreach (AttackHitBox hitBox in _attackHitBoxes)
+        {
+            hitBox.OnHit -= HandleHitParticles;
+        }
+    }
+
     public override void HandleHitParticles(GameObject obj)
     {
         if(obj.tag == "MainShip") { return; }

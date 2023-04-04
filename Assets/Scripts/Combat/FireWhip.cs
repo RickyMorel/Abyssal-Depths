@@ -7,6 +7,7 @@ public class FireWhip : MeleeWeapon
 {
     #region Editor Fields
 
+    [SerializeField] private float _pushForce = 20f;
     [SerializeField] private AttackHitBox[] _attackHitBoxes;
 
     #endregion
@@ -38,7 +39,7 @@ public class FireWhip : MeleeWeapon
         if(obj.TryGetComponent(out AIStateMachine aIState)) 
         {
             Vector3 pushDir = _rb.velocity;
-            aIState.BounceOffShield(pushDir, 20f);
+            aIState.BounceOffShield(pushDir, _pushForce);
         }
         Instantiate(GameAssetsManager.Instance.FireWhipCollisionParticles, _attackHitBox.transform.position, Quaternion.identity);
         ShipCamera.Instance.ShakeCamera(2f, 50f, 0.2f);

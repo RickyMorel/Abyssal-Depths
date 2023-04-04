@@ -84,8 +84,6 @@ public class Shield : MonoBehaviour
 
     private void PushEnemy(AIStateMachine aIStateMachine, Collision collision)
     {
-        aIStateMachine.BounceOffShield();
-
         StartCoroutine(PushEnemyDelay(aIStateMachine, collision.contacts[0].point));
     }
 
@@ -106,9 +104,6 @@ public class Shield : MonoBehaviour
 
         Ship.Instance.Rb.AddForce(-pushDir.normalized * rb.mass, ForceMode.Impulse);
 
-        if(rb.velocity.magnitude < _enemyPushForce * 0.8f)
-        {
-            rb.AddForce(pushDir.normalized * rb.mass * _enemyPushForce, ForceMode.Impulse);
-        }
+        aIStateMachine.BounceOffShield(pushDir, _shipPushForce);
     }
 }

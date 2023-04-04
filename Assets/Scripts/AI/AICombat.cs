@@ -20,6 +20,7 @@ public class AICombat : PlayerCombat
     #endregion
 
     private GAgent _gAgent;
+    private EnemyPushAttackCollider _enemyPushAttackCollider;
 
     private void Awake()
     {
@@ -31,6 +32,7 @@ public class AICombat : PlayerCombat
     private void Start()
     {
         _gAgent = GetComponent<GAgent>();
+        _enemyPushAttackCollider = GetComponentInChildren<EnemyPushAttackCollider>();  
     }
 
     public override void Shoot()
@@ -43,6 +45,13 @@ public class AICombat : PlayerCombat
         newProjectile.transform.LookAt(enemyTransform);
         newProjectile.GetComponent<Projectile>().Initialize(tag, transform);
         newProjectile.GetComponent<Projectile>().AICombatID = _enemyDamageDataID;
+    }
+
+    public void EnablePushAttack()
+    {
+        if(_enemyPushAttackCollider == null) { return; }
+
+        _enemyPushAttackCollider.PushAttack();
     }
 
     public void HoldProjectileInHolster()

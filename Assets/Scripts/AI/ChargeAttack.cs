@@ -8,6 +8,7 @@ public class ChargeAttack : GAction
     #region Editor Fields
 
     [SerializeField] private float _chargeSpeed;
+    [SerializeField] private LayerMask _chargeStopMask;
 
     #endregion
 
@@ -16,6 +17,7 @@ public class ChargeAttack : GAction
     private GameObject _currentChargeObj;
     private float _defaultSpeed;
     private ObstacleAvoidanceType _defaultObstacleAvoidance;
+    private Vector3 _destination;
 
     #endregion
 
@@ -27,21 +29,26 @@ public class ChargeAttack : GAction
         _defaultObstacleAvoidance = Agent.obstacleAvoidanceType;
     }
 
+    //Start playing headbutt animation before you reach the target
+    private void FixedUpdate()
+    {
+        if(_destination == Vector3.zero) { return; }
+
+        if(Vector3.Distance(_destination, transform.position) > 20f) { return; }
+
+        DoHeadButtAnimation();
+    }
+
     public override bool PrePerform()
     {
         GAgent.StateMachine.SetMovementSpeed(2f);
         Agent.speed = _chargeSpeed;
         Agent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
 
-        Vector3 destination = Ship.Instance.transform.position + (Ship.Instance.transform.position - transform.position).normalized * 20;
-
-        if (Physics.Raycast(destination, transform.TransformDirection(Vector3.forward), out RaycastHit hit, Mathf.Infinity))
-        {
-            destination = hit.point;
-        }
+        _destination = Ship.Instance.transform.position - (Ship.Instance.transform.position - transform.position).normalized * 5;
 
         GameObject newTargetObj = new GameObject();
-        newTargetObj.transform.position = destination;
+        newTargetObj.transform.position = _destination;
         newTargetObj.name = "ChargeTargetPositionObj";
 
         _currentChargeObj = newTargetObj;
@@ -58,6 +65,12 @@ public class ChargeAttack : GAction
         return true;
     }
 
+    private void DoHeadButtAnimation()
+    {
+        GAgent.StateMachine.Anim.SetInteger("AttackType", 2);
+        GAgent.StateMachine.Anim.SetTrigger("Attack");
+    }
+
     public override bool PostPeform()
     {
         GAgent.StateMachine.SetMovementSpeed(1f);
@@ -67,6 +80,8 @@ public class ChargeAttack : GAction
         if (_currentChargeObj != null) { Destroy(_currentChargeObj); }
 
         Beliefs.RemoveState("charge");
+
+        _destination = Vector3.zero;
 
         return true;
     }

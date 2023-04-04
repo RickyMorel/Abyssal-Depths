@@ -54,15 +54,6 @@ public class AIStateMachine : BaseStateMachine
         Anim.SetBool("IsCarryingItem", isCarrying);
     }
 
-    public void BounceOffShield()
-    {
-        if (_isBouncingOffShield) { return; }
-
-        _isBouncingOffShield = true;
-
-        StartCoroutine(SetBouncingOffShieldCoroutine());
-    }
-
     public IEnumerator SetIsShootingCoroutine()
     {
         _isShooting = true;

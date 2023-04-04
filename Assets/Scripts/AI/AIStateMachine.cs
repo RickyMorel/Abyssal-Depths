@@ -7,7 +7,6 @@ public class AIStateMachine : BaseStateMachine
 {
     #region Private Variables
 
-    private GAgent _gAgent;
     private NavMeshAgent _agent;
     private bool _isBouncingOffShield = false;
 
@@ -24,7 +23,6 @@ public class AIStateMachine : BaseStateMachine
     {
         base.Start();
 
-        _gAgent = GetComponent<GAgent>();
         _agent = GetComponent<NavMeshAgent>();
     }
 

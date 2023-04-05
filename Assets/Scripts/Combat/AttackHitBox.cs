@@ -64,6 +64,7 @@ public class AttackHitBox : MonoBehaviour
     public void InvokeHitParticles(Collider other)
     {
         if (other.gameObject.layer == 6) { OnHit?.Invoke(other.gameObject); }
+        else if (other.gameObject.TryGetComponent(out Damageable enemyHealth)) { OnHit?.Invoke(other.gameObject); }
     }
 
     public void DealDamageToEnemies(AIHealth enemyHealth)

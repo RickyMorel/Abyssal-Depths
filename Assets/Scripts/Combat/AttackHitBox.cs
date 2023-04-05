@@ -25,9 +25,6 @@ public class AttackHitBox : MonoBehaviour
 
     [SerializeField] protected Damageable _ownHealth;
     [SerializeField] protected DamageTypes[] _damageTypes;
-    [SerializeField] private bool _isFriendlyToPlayers = true;
-    [SerializeField] private Weapon _weapon;
-    [SerializeField] private MeleeWeapon _meleeWeapon;
 
     #endregion
 
@@ -96,26 +93,5 @@ public class AttackHitBox : MonoBehaviour
             enemyHealth.DamageData = _damageData;
             enemyHealth.Damage(_damageData.Damage[0]);
         }
-    }
-
-    private void CalculateDamage(Damageable health)
-    {
-        _damage = (int)_damageData.SecondaryValue[0];
-        health.DamageData = _damageData;
-        if (Mathf.Abs(_meleeWeapon.rb.velocity.x) >= (_meleeWeapon.MaxMovementSpeed / 2) || Mathf.Abs(_meleeWeapon.rb.velocity.y) >= (_meleeWeapon.MaxMovementSpeed / 2)) 
-        {
-            float damagePercentage;
-            if (Mathf.Abs(_meleeWeapon.rb.velocity.x) >= Mathf.Abs(_meleeWeapon.rb.velocity.y))
-            {
-                damagePercentage = (Mathf.Abs(_meleeWeapon.rb.velocity.x) * 100) / _meleeWeapon.MaxMovementSpeed;
-            }
-            else
-            {
-                damagePercentage = (Mathf.Abs(_meleeWeapon.rb.velocity.y) * 100) / _meleeWeapon.MaxMovementSpeed;
-            }
-            _damage = (int)((_damage * damagePercentage) / 100);
-            health.Damage(_damage); 
-        }
-        else { health.Damage(_damageData.Damage[0]); }
     }
 }

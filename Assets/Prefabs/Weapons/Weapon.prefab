@@ -230,10 +230,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ownHealth: {fileID: 2835829445178600864}
-  _isFriendlyToPlayers: 1
   _damageTypes: 0200000001000000
-  _weapon: {fileID: 7627081817445622300}
-  _meleeWeapon: {fileID: 8711923388874455362}
+  _isFriendlyToPlayers: 1
 --- !u!1 &211072648925897656
 GameObject:
   m_ObjectHideFlags: 0
@@ -876,7 +874,7 @@ SpringJoint:
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: -0.5, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.61300373, y: 0, z: 0}
+  m_ConnectedAnchor: {x: 0.551002, y: 0.0000023841858, z: 0.71499825}
   serializedVersion: 2
   m_Spring: 1000
   m_Damper: 0.2
@@ -902,10 +900,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ownHealth: {fileID: 2835829445178600864}
-  _isFriendlyToPlayers: 1
   _damageTypes: 0200000001000000
-  _weapon: {fileID: 7627081817445622300}
-  _meleeWeapon: {fileID: 8711923388874455362}
+  _isFriendlyToPlayers: 1
 --- !u!1 &574489328291009645
 GameObject:
   m_ObjectHideFlags: 0
@@ -1074,10 +1070,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ownHealth: {fileID: 2835829445178600864}
-  _isFriendlyToPlayers: 1
   _damageTypes: 0200000001000000
-  _weapon: {fileID: 7627081817445622300}
-  _meleeWeapon: {fileID: 8711923388874455362}
+  _isFriendlyToPlayers: 1
 --- !u!1 &1791258052167691310
 GameObject:
   m_ObjectHideFlags: 0
@@ -1429,10 +1423,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ownHealth: {fileID: 2835829445178600864}
-  _isFriendlyToPlayers: 1
   _damageTypes: 0200000001000000
-  _weapon: {fileID: 7627081817445622300}
-  _meleeWeapon: {fileID: 8711923388874455362}
+  _isFriendlyToPlayers: 1
 --- !u!1 &2483814846787299703
 GameObject:
   m_ObjectHideFlags: 0
@@ -1771,10 +1763,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ownHealth: {fileID: 2835829445178600864}
-  _isFriendlyToPlayers: 1
   _damageTypes: 0200000001000000
-  _weapon: {fileID: 7627081817445622300}
-  _meleeWeapon: {fileID: 8711923388874455362}
+  _isFriendlyToPlayers: 1
 --- !u!1 &3176484016150529723
 GameObject:
   m_ObjectHideFlags: 0
@@ -2114,10 +2104,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ownHealth: {fileID: 2835829445178600864}
-  _isFriendlyToPlayers: 1
   _damageTypes: 0200000001000000
-  _weapon: {fileID: 7627081817445622300}
-  _meleeWeapon: {fileID: 8711923388874455362}
+  _isFriendlyToPlayers: 1
 --- !u!1 &3843574088574756828
 GameObject:
   m_ObjectHideFlags: 0
@@ -2579,10 +2567,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ownHealth: {fileID: 2835829445178600864}
-  _isFriendlyToPlayers: 1
   _damageTypes: 0200000001000000
-  _weapon: {fileID: 7627081817445622300}
-  _meleeWeapon: {fileID: 8711923388874455362}
+  _isFriendlyToPlayers: 1
 --- !u!1 &5195123832446667425
 GameObject:
   m_ObjectHideFlags: 0
@@ -3051,7 +3037,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7604218662156677272
 Transform:
   m_ObjectHideFlags: 0
@@ -3137,6 +3123,7 @@ MonoBehaviour:
   maxDistance: 10
   _moveForce: 300
   _maxMovementSpeed: 20
+  _pushForce: 20
   _attackHitBoxes:
   - {fileID: 343325775697919534}
   - {fileID: 7093578596807046654}
@@ -3382,7 +3369,7 @@ SpringJoint:
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: -0.5, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.61300373, y: 0, z: 0}
+  m_ConnectedAnchor: {x: 0.551002, y: 0.0000023841858, z: -0.8249998}
   serializedVersion: 2
   m_Spring: 1000
   m_Damper: 0.2
@@ -3408,10 +3395,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ownHealth: {fileID: 2835829445178600864}
-  _isFriendlyToPlayers: 1
   _damageTypes: 0200000001000000
-  _weapon: {fileID: 7627081817445622300}
-  _meleeWeapon: {fileID: 8711923388874455362}
+  _isFriendlyToPlayers: 1
 --- !u!1 &6253536961031130645
 GameObject:
   m_ObjectHideFlags: 0
@@ -3721,7 +3706,7 @@ GameObject:
   - component: {fileID: 6339893265388052966}
   - component: {fileID: 4880904848387659598}
   - component: {fileID: 9171795821542709802}
-  - component: {fileID: 4018232727435811441}
+  - component: {fileID: 6166615154732534096}
   - component: {fileID: 9098718564592703483}
   m_Layer: 25
   m_Name: MaceHead
@@ -3789,7 +3774,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.69, y: 1.6218746, z: 0.6}
   m_Center: {x: -0.000000025696108, y: 0.04906252, z: -0.00000013438986}
---- !u!114 &4018232727435811441
+--- !u!114 &6166615154732534096
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3798,14 +3783,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 6670758329025972589}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ddf72292aedb3149a43356854e9d5eb, type: 3}
+  m_Script: {fileID: 11500000, guid: a384c1e917a6d4f42afc3ab7aac31575, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _ownHealth: {fileID: 2835829445178600864}
-  _isFriendlyToPlayers: 1
   _damageTypes: 0100000000000000
+  _isFriendlyToPlayers: 1
   _weapon: {fileID: 7627081817445622300}
-  _meleeWeapon: {fileID: 0}
+  _meleeWeapon: {fileID: 1154468729331244522}
 --- !u!138 &9098718564592703483
 FixedJoint:
   m_ObjectHideFlags: 0
@@ -4232,7 +4217,7 @@ Transform:
   - {fileID: 2389941571288428507}
   - {fileID: 6567959656405035337}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!54 &7627081817445622294
 Rigidbody:
@@ -4710,10 +4695,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ownHealth: {fileID: 2835829445178600864}
-  _isFriendlyToPlayers: 1
   _damageTypes: 0200000001000000
-  _weapon: {fileID: 7627081817445622300}
-  _meleeWeapon: {fileID: 8711923388874455362}
+  _isFriendlyToPlayers: 1
 --- !u!1 &8278165535455272840
 GameObject:
   m_ObjectHideFlags: 0
@@ -5066,7 +5049,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeBetweenShots: 0.2
-  _attackHitBox: {fileID: 4018232727435811441}
+  _attackHitBox: {fileID: 6166615154732534096}
   _parentTransform: {fileID: 4564376745032513126}
   maxDistance: 10
   _moveForce: 110

@@ -30,11 +30,9 @@ public class ChargeAttack : GAction
     }
 
     //Start playing headbutt animation before you reach the target
-    private void FixedUpdate()
+    public void OnChargeTrigger(Collider other)
     {
-        if(_destination == Vector3.zero) { return; }
-
-        if(Vector3.Distance(_destination, transform.position) > 20f) { return; }
+        if(other.gameObject.tag != "MainShip") { return; }
 
         DoHeadButtAnimation();
     }
@@ -67,6 +65,7 @@ public class ChargeAttack : GAction
 
     private void DoHeadButtAnimation()
     {
+        Debug.Log("DoHeadButtAnimation");
         GAgent.StateMachine.Anim.SetInteger("AttackType", 2);
         GAgent.StateMachine.Anim.SetTrigger("Attack");
     }

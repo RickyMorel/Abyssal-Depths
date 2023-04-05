@@ -38,15 +38,6 @@ public class AIStateMachine : BaseStateMachine
         StartCoroutine(SetIsShootingCoroutine());
     }
 
-    public void BounceOffShield()
-    {
-        if (_isBouncingOffShield) { return; }
-
-        _isBouncingOffShield = true;
-
-        StartCoroutine(SetBouncingOffShieldCoroutine());
-    }
-
     public IEnumerator SetIsShootingCoroutine()
     {
         _isShooting = true;
@@ -56,13 +47,27 @@ public class AIStateMachine : BaseStateMachine
         _isShooting = false;
     }
 
-    public IEnumerator SetBouncingOffShieldCoroutine()
+    public void BounceOffShield(Vector3 pushDir, float pushForce)
     {
+        if (_isBouncingOffShield) { return; }
+
         _isBouncingOffShield = true;
+
+        StartCoroutine(SetBouncingOffShieldCoroutine(pushDir, pushForce));
+    }
+
+    public IEnumerator SetBouncingOffShieldCoroutine(Vector3 pushDir, float pushForce)
+    {
+        yield return new WaitForEndOfFrame();
+
+        if (_rb.velocity.magnitude < pushForce * 0.8f)
+        {
+            _rb.AddForce(pushDir.normalized * _rb.mass * pushForce, ForceMode.Impulse);
+        }
 
         yield return new WaitForSeconds(3f);
 
-        if (!IsOnGround()) { StartCoroutine(SetBouncingOffShieldCoroutine()); }
+        if (!IsOnGround()) { StartCoroutine(SetBouncingOffShieldCoroutine(pushDir, pushForce)); }
         else { _isBouncingOffShield = false; }
     }
 

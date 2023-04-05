@@ -15,6 +15,7 @@ public class GameAssetsManager : MonoBehaviour
     [SerializeField] private GameObject _electricParticles;
     [SerializeField] private GameObject _fireParticles;
     [SerializeField] private GameObject _meleeFloorHitParticles;
+    [SerializeField] private GameObject _fireWhipCollisionParticles;
     [SerializeField] private GameObject[] _stunnedParticles;
     [ColorUsageAttribute(false, true), SerializeField] private Color _laserHeatColor;
     [SerializeField] private ChipDataSO _chipDataSO;
@@ -41,6 +42,7 @@ public class GameAssetsManager : MonoBehaviour
     public GameObject ElectricParticles => _electricParticles;
     public GameObject FireParticles => _fireParticles;
     public GameObject MeleeFloorHitParticles => _meleeFloorHitParticles;
+    public GameObject FireWhipCollisionParticles => _fireWhipCollisionParticles;
     public GameObject[] StunnedParticles => _stunnedParticles;
     public Color LaserHeatColor => _laserHeatColor;
     public ChipDataSO ChipDataSO => _chipDataSO;

@@ -77,9 +77,11 @@ public class Weapon : Upgradable
     {
         if(_selectedUpgrade == null) { return true; }
 
-        //if is harpoon gun
+        //if is harpoon gun or lightsaber
         if (_selectedUpgrade.UpgradeSO.Socket_1 == ChipType.Base && _selectedUpgrade.UpgradeSO.Socket_1 == ChipType.Electric) { return true; }
         if (_selectedUpgrade.UpgradeSO.Socket_1 == ChipType.Electric && _selectedUpgrade.UpgradeSO.Socket_1 == ChipType.Base) { return true; }
+        if (_selectedUpgrade.UpgradeSO.Socket_1 == ChipType.Base && _selectedUpgrade.UpgradeSO.Socket_1 == ChipType.Laser) { return true; }
+        if (_selectedUpgrade.UpgradeSO.Socket_1 == ChipType.Laser && _selectedUpgrade.UpgradeSO.Socket_1 == ChipType.Base) { return true; }
 
         //if is any other base weapon
         if (_selectedUpgrade.UpgradeSO.Socket_1 == ChipType.Base || _selectedUpgrade.UpgradeSO.Socket_2 == ChipType.Base) { return false; }

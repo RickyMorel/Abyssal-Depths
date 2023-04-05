@@ -79,6 +79,7 @@ public class ChargeAttack : GAction
         if (_currentChargeObj != null) { Destroy(_currentChargeObj); }
 
         Beliefs.RemoveState("charge");
+        Beliefs.RemoveState("hasDistance");
 
         _destination = Vector3.zero;
 

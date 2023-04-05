@@ -4099,10 +4099,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ownHealth: {fileID: 8177713152652336313}
-  _isFriendlyToPlayers: 0
   _damageTypes: 01000000
-  _weapon: {fileID: 0}
-  _meleeWeapon: {fileID: 0}
 --- !u!1 &3464060068106285631
 GameObject:
   m_ObjectHideFlags: 0
@@ -5116,10 +5113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ownHealth: {fileID: 8177713152652336313}
-  _isFriendlyToPlayers: 0
   _damageTypes: 0100000000000000
-  _weapon: {fileID: 0}
-  _meleeWeapon: {fileID: 0}
 --- !u!1 &4453489283706557682
 GameObject:
   m_ObjectHideFlags: 0
@@ -26412,6 +26406,68 @@ Transform:
   m_Father: {fileID: 8671470045243239568}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6849947069116835614
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8287263673618422385}
+  - component: {fileID: 7277117880575495956}
+  - component: {fileID: 7105844370639543188}
+  m_Layer: 16
+  m_Name: BodyCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &8287263673618422385
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6849947069116835614}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8172708540713768750}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &7277117880575495956
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6849947069116835614}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!65 &7105844370639543188
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6849947069116835614}
+  m_Material: {fileID: 13400000, guid: 5fbe5c85895b9144480b4a2437598ca4, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.85, y: 1.83, z: 3.5484269}
+  m_Center: {x: 0, y: 0, z: 0.2281868}
 --- !u!1 &6854463060335828199
 GameObject:
   m_ObjectHideFlags: 0
@@ -27789,6 +27845,7 @@ GameObject:
   - component: {fileID: 3184812802082676991}
   - component: {fileID: 7157232019728915863}
   - component: {fileID: 7157232019728915864}
+  - component: {fileID: 8990752274080902997}
   - component: {fileID: 8177713152652336318}
   m_Layer: 16
   m_Name: Megalodon
@@ -27816,6 +27873,7 @@ Transform:
   - {fileID: 8223282100829996152}
   - {fileID: 4887968488686566316}
   - {fileID: 5369204394955099230}
+  - {fileID: 8287263673618422385}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 180, z: 0}
@@ -27977,6 +28035,7 @@ MonoBehaviour:
   _projectileHolsterTransform: {fileID: 4115589652576855531}
   _enemyDamageDataID: 2
   _attackRange: 20
+  _hitParticle: {fileID: 0}
 --- !u!114 &398723808698627166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27992,6 +28051,7 @@ MonoBehaviour:
   Actions: []
   CurrentAction: {fileID: 0}
   _goalDistance: 2
+  _isMoving: 0
 --- !u!114 &4195348738880653127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28004,7 +28064,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bd08474ed1c6d546b4d2ca9907a6322, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _preConditionsInspector: []
+  _preConditionsInspector:
+  - key: hasDistance
+    value: 0
   _effectsInspector:
   - key: hasCharged
     value: 0
@@ -28096,6 +28158,30 @@ MonoBehaviour:
   TargetTag: 
   Duration: 1.5
   IsRunning: 0
+--- !u!114 &8990752274080902997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8177713152652336292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f129f883cb6d1c74f9a307cd07789176, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _preConditionsInspector: []
+  _effectsInspector:
+  - key: hasDistance
+    value: 0
+  ActionName: Get Distance
+  Cost: 1
+  Target: {fileID: 0}
+  TargetTag: 
+  Duration: 1
+  IsRunning: 0
+  _minDistance: 40
+  _maxDistance: 60
 --- !u!114 &8177713152652336318
 MonoBehaviour:
   m_ObjectHideFlags: 0

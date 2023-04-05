@@ -60,6 +60,9 @@ public class EnemyPushAttackCollider : MonoBehaviour
     {
         if (_timeSincePushEnemy < 1f) { return; }
 
+        //Don't push ship if hits shield
+        if(collision.gameObject.GetComponent<Shield>() != null) { Debug.Log("Hit Shield!"); return; }
+
         PushShip(collision);
     }
 
@@ -81,5 +84,7 @@ public class EnemyPushAttackCollider : MonoBehaviour
         Ship.Instance.Rb.AddForce(-pushDir.normalized * _pushVelocity, ForceMode.VelocityChange);
 
         ShipCamera.Instance.ShakeCamera(2f, 50f, 0.2f);
+
+        Debug.Log("PushShip!");
     }
 }

@@ -11,6 +11,8 @@ public class AICombat : PlayerCombat
     [Range(2f, 100f)]
     [SerializeField] private float _attackRange = 10f;
 
+    [SerializeField] private ParticleSystem _hitParticle;
+
     #endregion
 
     #region Public Properties
@@ -33,6 +35,13 @@ public class AICombat : PlayerCombat
     {
         _gAgent = GetComponent<GAgent>();
         _enemyPushAttackCollider = GetComponentInChildren<EnemyPushAttackCollider>();  
+    }
+
+    public override void Hit()
+    {
+        base.Hit();
+
+        _hitParticle.Play();
     }
 
     public override void Shoot()

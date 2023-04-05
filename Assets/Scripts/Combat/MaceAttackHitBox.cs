@@ -22,10 +22,7 @@ public class MaceAttackHitBox : AttackHitBox
 
     public override void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 6)
-        {
-            InvokeHitParticles(other);
-        }
+        if (other.gameObject.layer == 6) { InvokeHitParticles(other); }
 
         if (!other.gameObject.TryGetComponent(out Damageable enemyHealth)) { return; }
 

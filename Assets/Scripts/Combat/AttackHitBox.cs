@@ -65,7 +65,7 @@ public class AttackHitBox : MonoBehaviour
         DealDamageToPlayerOrShip(enemyHealth);
     }
 
-    protected void CheckForParticles(Collider other)
+    protected void CheckForHitParticles(Collider other)
     {
         if (other.gameObject.layer == 6) { OnHit?.Invoke(other.gameObject); }
 

@@ -22,13 +22,14 @@ public class MaceAttackHitBox : AttackHitBox
 
     public override void OnTriggerEnter(Collider other)
     {
+        InvokeHitParticles(other);
+
         if (!other.gameObject.TryGetComponent(out Damageable enemyHealth)) { return; }
 
         if (_ownHealth != null && enemyHealth == _ownHealth) { return; }
 
-        if(enemyHealth is AIHealth) 
+        if (enemyHealth is AIHealth) 
         {
-            InvokeHitParticles(other);
 
             CalculateDamage();
 

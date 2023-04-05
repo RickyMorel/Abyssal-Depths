@@ -61,12 +61,12 @@ public class AttackHitBox : MonoBehaviour
         DealDamageToPlayerOrShip(enemyHealth);
     }
 
-    protected void InvokeHitParticles(Collider other)
+    public void InvokeHitParticles(Collider other)
     {
         if (other.gameObject.layer == 6) { OnHit?.Invoke(other.gameObject); }
     }
 
-    protected void DealDamageToEnemies(AIHealth enemyHealth)
+    public void DealDamageToEnemies(AIHealth enemyHealth)
     {
         AIHealth aiHealth = enemyHealth;
         if (aiHealth.CanKill)
@@ -79,7 +79,7 @@ public class AttackHitBox : MonoBehaviour
         _ownHealth.GetComponent<PlayerComponents>()?.PlayerCamera.ShakeCamera(2f, 50f, 0.2f);
     }
 
-    protected void DealDamageToPlayerOrShip(Damageable enemyHealth)
+    public void DealDamageToPlayerOrShip(Damageable enemyHealth)
     {
         if (enemyHealth is PlayerHealth)
         {

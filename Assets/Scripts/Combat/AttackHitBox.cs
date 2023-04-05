@@ -26,7 +26,6 @@ public class AttackHitBox : MonoBehaviour
     [SerializeField] protected Damageable _ownHealth;
     [SerializeField] protected DamageTypes[] _damageTypes;
     [SerializeField] private bool _isFriendlyToPlayers = true;
-    [SerializeField] private DamageTypes[] _damageTypes;
     [SerializeField] private Weapon _weapon;
     [SerializeField] private MeleeWeapon _meleeWeapon;
 
@@ -65,11 +64,9 @@ public class AttackHitBox : MonoBehaviour
         DealDamageToPlayerOrShip(enemyHealth);
     }
 
-    protected void CheckForHitParticles(Collider other)
+    protected void InvokeHitParticles(Collider other)
     {
         if (other.gameObject.layer == 6) { OnHit?.Invoke(other.gameObject); }
-
-        OnHit?.Invoke(other.gameObject);
     }
 
     protected void DealDamageToEnemies(AIHealth enemyHealth)

@@ -28,7 +28,7 @@ public class MaceAttackHitBox : AttackHitBox
 
         if(enemyHealth is AIHealth) 
         {
-            CheckForParticles(other);
+            InvokeHitParticles(other);
 
             CalculateDamage();
 

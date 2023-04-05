@@ -12,7 +12,7 @@ public class PlayerCombat : MonoBehaviour
 
     #endregion
 
-    public void Hit()
+    public virtual void Hit()
     {
         StartCoroutine(EnableHitboxRoutine());
     }

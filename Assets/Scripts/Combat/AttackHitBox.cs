@@ -73,7 +73,7 @@ public class AttackHitBox : MonoBehaviour
         {
             enemyHealth.DamageData = _damageData;
             enemyHealth.Damage(damage);
-            if (secondaryDamage != 0) { enemyHealth.Damage(secondaryDamage); }
+            if (secondaryDamage != 0) { enemyHealth.Damage(secondaryDamage, false, false, null, 1); }
         }
         else { aiHealth.Hurt(DamageTypes.Base); }
 

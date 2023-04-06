@@ -25,6 +25,6 @@ public class SaberAttackHitBox : MaceAttackHitBox
     public override void CalculateDamage()
     {
         _damage = _damageData.Damage[0];
-        _secondaryDamage = _damageData.Damage[0];
+        _secondaryDamage = _damageData.Damage[1];
     }
 }

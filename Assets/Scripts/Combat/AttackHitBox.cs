@@ -66,13 +66,14 @@ public class AttackHitBox : MonoBehaviour
         OnHit?.Invoke(other.gameObject);
     }
 
-    public void DealDamageToEnemies(AIHealth enemyHealth)
+    public void DealDamageToEnemies(AIHealth enemyHealth, int damage, int secondaryDamage = 0)
     {
         AIHealth aiHealth = enemyHealth;
         if (aiHealth.CanKill)
         {
             enemyHealth.DamageData = _damageData;
-            enemyHealth.Damage(_damage);
+            enemyHealth.Damage(damage);
+            if (secondaryDamage != 0) { enemyHealth.Damage(secondaryDamage); }
         }
         else { aiHealth.Hurt(DamageTypes.Base); }
 

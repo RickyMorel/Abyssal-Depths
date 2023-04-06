@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class LightSaber : MeleeWeapon
 {
-
+    public override void FixedUpdate()
+    {
+        //do nothing
+    }
 }

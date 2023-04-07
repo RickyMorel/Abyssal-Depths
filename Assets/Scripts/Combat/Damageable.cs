@@ -38,7 +38,7 @@ public class Damageable : MonoBehaviour
     private float _damageTimer = 0;
     private float _timer = 0;
     private bool _isBeingElectrocuted = false;
-    private DamageData _damageData;
+    protected DamageData _damageData;
 
     private ParticleSystem _fireParticles;
     private ParticleSystem _electricParticles;

@@ -6,6 +6,7 @@ public class ThrowRock : GAction
 {
     #region Editor Fields
 
+    [SerializeField] private float _throwRange;
     [SerializeField] private GWorld.AttackTags _attackItemTag;
     [SerializeField] private GWorld.AttackFreeTags _attackFreeItemName;
 
@@ -36,7 +37,7 @@ public class ThrowRock : GAction
 
         GWorld.Instance.GetWorld().ModifyState(_attackFreeItemName.ToString(), -1);
 
-        _gAgent.SetGoalDistance(_aiCombat.AttackRange);
+        _gAgent.SetGoalDistance(_throwRange);
 
         return true;
     }

@@ -26423,7 +26423,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8287263673618422385
 Transform:
   m_ObjectHideFlags: 0
@@ -26451,9 +26451,9 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 126
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!65 &7105844370639543188
 BoxCollider:
@@ -27875,7 +27875,7 @@ Transform:
   - {fileID: 5369204394955099230}
   - {fileID: 8287263673618422385}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 90, y: 180, z: 0}
 --- !u!54 &8177713152652336317
 Rigidbody:
@@ -27926,8 +27926,8 @@ NavMeshAgent:
   m_AutoRepath: 1
   m_Height: 1.22
   m_BaseOffset: 0
-  m_WalkableMask: 8
-  m_ObstacleAvoidanceType: 4
+  m_WalkableMask: 16
+  m_ObstacleAvoidanceType: 0
 --- !u!95 &8083901510940554658
 Animator:
   serializedVersion: 4
@@ -28034,7 +28034,7 @@ MonoBehaviour:
   _shootTransform: {fileID: 8223282100829996152}
   _projectileHolsterTransform: {fileID: 4115589652576855531}
   _enemyDamageDataID: 2
-  _attackRange: 20
+  _attackRange: 10
   _hitParticle: {fileID: 0}
 --- !u!114 &398723808698627166
 MonoBehaviour:
@@ -28076,6 +28076,7 @@ MonoBehaviour:
   TargetTag: 
   Duration: 5
   IsRunning: 0
+  _chargeStopDistance: 1
   _chargeSpeed: 50
   _chargeStopMask:
     serializedVersion: 2
@@ -28095,8 +28096,6 @@ MonoBehaviour:
   _preConditionsInspector:
   - key: FreeShipTurretAttackPoint
     value: 0
-  - key: aggro
-    value: 0
   - key: hasRock
     value: 0
   _effectsInspector:
@@ -28108,6 +28107,7 @@ MonoBehaviour:
   TargetTag: MainShip
   Duration: 2
   IsRunning: 0
+  _throwRange: 50
   _attackItemTag: 2
   _attackFreeItemName: 2
 --- !u!114 &7157232019728915863
@@ -28180,8 +28180,9 @@ MonoBehaviour:
   TargetTag: 
   Duration: 1
   IsRunning: 0
-  _minDistance: 40
-  _maxDistance: 60
+  _navMeshmMaskName: Boss
+  _minDistance: 60
+  _maxDistance: 100
 --- !u!114 &8177713152652336318
 MonoBehaviour:
   m_ObjectHideFlags: 0

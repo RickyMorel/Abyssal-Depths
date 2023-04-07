@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing.Printing;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -7,6 +8,7 @@ public class ChargeAttack : GAction
 {
     #region Editor Fields
 
+    [SerializeField] private float _chargeStopDistance;
     [SerializeField] private float _chargeSpeed;
     [SerializeField] private LayerMask _chargeStopMask;
 
@@ -34,6 +36,8 @@ public class ChargeAttack : GAction
     {
         if(other.gameObject.tag != "MainShip") { return; }
 
+        if(GAgent.CurrentAction != this) { return; }
+
         DoHeadButtAnimation();
     }
 
@@ -41,7 +45,8 @@ public class ChargeAttack : GAction
     {
         GAgent.StateMachine.SetMovementSpeed(2f);
         Agent.speed = _chargeSpeed;
-        Agent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
+        GAgent.SetGoalDistance(_chargeStopDistance);
+        //Agent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
 
         _destination = Ship.Instance.transform.position - (Ship.Instance.transform.position - transform.position).normalized * 5;
 
@@ -68,13 +73,22 @@ public class ChargeAttack : GAction
         Debug.Log("DoHeadButtAnimation");
         GAgent.StateMachine.Anim.SetInteger("AttackType", 2);
         GAgent.StateMachine.Anim.SetTrigger("Attack");
+
+        Invoke(nameof(FinishCharge), 2f);
     }
+
+    private void FinishCharge()
+    {
+        GAgent.CancelPreviousActions();
+    } 
 
     public override bool PostPeform()
     {
+        Debug.Log("PostPerform: " + gameObject.name);
         GAgent.StateMachine.SetMovementSpeed(1f);
         Agent.speed = _defaultSpeed;
         Agent.obstacleAvoidanceType = _defaultObstacleAvoidance;
+        GAgent.ResetGoalDistance();
 
         if (_currentChargeObj != null) { Destroy(_currentChargeObj); }
 

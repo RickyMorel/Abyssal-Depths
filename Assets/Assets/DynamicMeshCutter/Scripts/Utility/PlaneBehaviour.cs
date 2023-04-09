@@ -3,6 +3,10 @@ namespace DynamicMeshCutter
 {
     public class PlaneBehaviour : CutterBehaviour
     {
+        private void Start()
+        {
+        }
+
         public float DebugPlaneLength = 2;
         public void Cut()
         {

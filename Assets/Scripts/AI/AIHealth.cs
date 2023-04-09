@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DynamicMeshCutter;
 
 [RequireComponent(typeof(Rigidbody))]
 public class AIHealth : PlayerHealth
@@ -17,14 +18,13 @@ public class AIHealth : PlayerHealth
     private GAgent _gAgent;
     private AIInteractionController _interactionController;
     private Rigidbody _rb;
+    private MeshTarget _meshTarget;
     
     #endregion
 
     #region Public Properties
 
     public bool CanKill => _canKill;
-
-    public event Action OnSplit;
 
     #endregion
 
@@ -37,6 +37,12 @@ public class AIHealth : PlayerHealth
         _gAgent = GetComponent<GAgent>();
         _interactionController = GetComponent<AIInteractionController>();
         _rb = GetComponent<Rigidbody>();
+
+        if (GetComponent<MeshTarget>() != null)
+        {
+            _meshTarget = GetComponentInChildren<MeshTarget>();
+            _meshTarget.enabled = false;
+        }
 
         OnDamaged += Hurt;
         OnDie += HandleDead;
@@ -52,10 +58,10 @@ public class AIHealth : PlayerHealth
 
     private void HandleDead()
     {
-        if ((_damageData.DamageTypes[0] == DamageTypes.Base && _damageData.DamageTypes[1] == DamageTypes.Laser) || (_damageData.DamageTypes[1] == DamageTypes.Base && _damageData.DamageTypes[0] == DamageTypes.Laser)) 
+        if (((_damageData.DamageTypes[0] == DamageTypes.Base && _damageData.DamageTypes[1] == DamageTypes.Laser) || (_damageData.DamageTypes[1] == DamageTypes.Base && _damageData.DamageTypes[0] == DamageTypes.Laser)) && GetComponent<MeshTarget>() != null) 
         {
-
-            OnSplit?.Invoke(); 
+            _meshTarget.enabled = true;
+            GetComponentInChildren<PlaneBehaviour>().Cut();
         }
 
         StopPreviousAction();

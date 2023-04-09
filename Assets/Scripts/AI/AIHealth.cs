@@ -17,13 +17,14 @@ public class AIHealth : PlayerHealth
     private GAgent _gAgent;
     private AIInteractionController _interactionController;
     private Rigidbody _rb;
-    private bool _shouldSplit = false;
-
+    
     #endregion
 
     #region Public Properties
 
     public bool CanKill => _canKill;
+
+    public event Action OnSplit;
 
     #endregion
 
@@ -49,14 +50,14 @@ public class AIHealth : PlayerHealth
 
     #endregion
 
-    public override void Die()
-    {
-        if ((_damageData.DamageTypes[0] == DamageTypes.Base && _damageData.DamageTypes[1] == DamageTypes.Laser) || (_damageData.DamageTypes[1] == DamageTypes.Base && _damageData.DamageTypes[0] == DamageTypes.Laser)) { _shouldSplit = true; }
-        base.Die();
-    }
-
     private void HandleDead()
     {
+        if ((_damageData.DamageTypes[0] == DamageTypes.Base && _damageData.DamageTypes[1] == DamageTypes.Laser) || (_damageData.DamageTypes[1] == DamageTypes.Base && _damageData.DamageTypes[0] == DamageTypes.Laser)) 
+        {
+
+            OnSplit?.Invoke(); 
+        }
+
         StopPreviousAction();
         _gAgent.enabled = false;
         _rb.isKinematic = false;

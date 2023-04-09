@@ -57,6 +57,7 @@ public class RunAway : GAction
         Vector3 randomDirection = Random.insideUnitSphere * radius;
         randomDirection += transform.position;
         NavMeshHit hit;
+        Vector3 center = Ship.Instance.transform.position;
         Vector3 finalPosition = Vector3.zero;
         int foundNavmeshMask = NavMesh.AllAreas;
         int crashPreventionCounter = 0;
@@ -73,7 +74,7 @@ public class RunAway : GAction
                 foundNavmeshMask = hit.mask;
 
                 //If random point is closer than min distance, project point further out
-                float remainingMinDistance = Vector3.Distance(transform.position, finalPosition);
+                float remainingMinDistance = Vector3.Distance(center, finalPosition);
                 if (remainingMinDistance < _minDistance)
                     if (NavMesh.SamplePosition(finalPosition + (randomDirection.normalized * remainingMinDistance), out hit, _maxDistance, _navMeshMask))
                     {

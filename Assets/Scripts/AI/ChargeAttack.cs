@@ -16,10 +16,8 @@ public class ChargeAttack : GAction
 
     #region Private Variables
 
-    private GameObject _currentChargeObj;
     private float _defaultSpeed;
     private ObstacleAvoidanceType _defaultObstacleAvoidance;
-    private Vector3 _destination;
 
     #endregion
 
@@ -48,15 +46,7 @@ public class ChargeAttack : GAction
         GAgent.SetGoalDistance(_chargeStopDistance);
         //Agent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
 
-        _destination = Ship.Instance.transform.position - (Ship.Instance.transform.position - transform.position).normalized * 5;
-
-        GameObject newTargetObj = new GameObject();
-        newTargetObj.transform.position = _destination;
-        newTargetObj.name = "ChargeTargetPositionObj";
-
-        _currentChargeObj = newTargetObj;
-
-        Target = newTargetObj;
+        Target = Ship.Instance.gameObject;
 
         if (Target == null) { return false; }
 
@@ -70,11 +60,16 @@ public class ChargeAttack : GAction
 
     private void DoHeadButtAnimation()
     {
-        Debug.Log("DoHeadButtAnimation");
         GAgent.StateMachine.Anim.SetInteger("AttackType", 2);
         GAgent.StateMachine.Anim.SetTrigger("Attack");
 
         Invoke(nameof(FinishCharge), 2f);
+    }
+
+    public void RotatedMessage()
+    {
+        Debug.Log("RotatedMessage");
+        FinishCharge();
     }
 
     private void FinishCharge()
@@ -84,18 +79,13 @@ public class ChargeAttack : GAction
 
     public override bool PostPeform()
     {
-        Debug.Log("PostPerform: " + gameObject.name);
         GAgent.StateMachine.SetMovementSpeed(1f);
         Agent.speed = _defaultSpeed;
         Agent.obstacleAvoidanceType = _defaultObstacleAvoidance;
         GAgent.ResetGoalDistance();
 
-        if (_currentChargeObj != null) { Destroy(_currentChargeObj); }
-
         Beliefs.RemoveState("charge");
         Beliefs.RemoveState("hasDistance");
-
-        _destination = Vector3.zero;
 
         return true;
     }

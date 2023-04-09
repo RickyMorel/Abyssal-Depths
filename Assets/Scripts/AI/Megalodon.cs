@@ -7,7 +7,7 @@ public class Megalodon : GAgent
 {
     private Vector3 _startingRotation;
 
-    private float _currentYRotation;
+    private float _currentYTarget;
     private float _yRotVel;
     private float _yRotSmoothTime = 0.3f;
 
@@ -39,11 +39,27 @@ public class Megalodon : GAgent
 
         float yRotationTarget = difVector.x > 0 ? 270f : 90f;
 
-        float yRotationValue = Mathf.SmoothDamp(transform.eulerAngles.y, yRotationTarget, ref _yRotVel, _yRotSmoothTime);
-
-        Quaternion targetRotation = Quaternion.Euler(0f, yRotationTarget, 90f);
+        Quaternion targetRotation = Quaternion.Euler(0f, _currentYTarget, 90f);
 
         transform.rotation = targetRotation;
+
+        if (_currentYTarget == yRotationTarget) { return; }
+
+        _currentYTarget = yRotationTarget;
+
+        SendMessage("RotatedMessage");
+
+        //StateMachine.Anim.Play("180Turn", 0);
+    }
+
+    public void Rotate180()
+    {
+        //Debug.Log("Rotate180");
+        ////float yRotationValue = Mathf.SmoothDamp(transform.eulerAngles.y, _currentYTarget, ref _yRotVel, _yRotSmoothTime);
+
+        //Quaternion targetRotation = Quaternion.Euler(0f, _currentYTarget, 90f);
+
+        //transform.rotation = targetRotation;
     }
 }
 

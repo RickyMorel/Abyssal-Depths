@@ -23,8 +23,11 @@ public class Megalodon : GAgent
         //SubGoal s1 = new SubGoal("destroyShip", 1, false);
         //Goals.Add(s1, 1);
 
-        SubGoal s2 = new SubGoal("hasCharged", 1, false);
-        Goals.Add(s2, 3);
+        //SubGoal s2 = new SubGoal("hasCharged", 1, false);
+        //Goals.Add(s2, 3);
+
+        SubGoal s6 = new SubGoal("ragdollShip", 1, false);
+        Goals.Add(s6, 3);
 
         //SubGoal s4 = new SubGoal("healthy", 1, false);
         //Goals.Add(s4, 10);

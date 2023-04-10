@@ -26,22 +26,6 @@ public class SubGoal
 [RequireComponent(typeof(AIStateMachine))]
 public class GAgent : MonoBehaviour
 {
-    #region Public Properties
-
-    public List<GAction> Actions = new List<GAction>();
-    public Dictionary<SubGoal, int> Goals = new Dictionary<SubGoal, int>();
-    public GInventory Inventory = new GInventory();
-    public WorldStates Beliefs = new WorldStates();
-    public GAction CurrentAction;
-
-    public event Action OnDoAction;
-    public event Action OnExitAction;
-
-    public AIStateMachine StateMachine => _aiStateMachine;
-    public bool IsMoving => _isMoving;
-
-    #endregion
-
     #region Editor Fields
 
     [SerializeField] private float _goalDistance = 2f;
@@ -63,6 +47,22 @@ public class GAgent : MonoBehaviour
     protected AIInteractionController _interactionController;
     private float _initialGoalDistance;
     protected Damageable _damageable;
+
+    #endregion
+
+    #region Public Properties
+
+    public List<GAction> Actions = new List<GAction>();
+    public Dictionary<SubGoal, int> Goals = new Dictionary<SubGoal, int>();
+    public GInventory Inventory = new GInventory();
+    public WorldStates Beliefs = new WorldStates();
+    public GAction CurrentAction;
+
+    public event Action OnDoAction;
+    public event Action OnExitAction;
+
+    public AIStateMachine StateMachine => _aiStateMachine;
+    public bool IsMoving => _isMoving;
 
     #endregion
 

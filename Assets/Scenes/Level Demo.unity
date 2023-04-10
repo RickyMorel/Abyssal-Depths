@@ -1353,6 +1353,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 508254513682835084, guid: 7c2f4a2fd99211d439267619217db38a, type: 3}
+      propertyPath: near clip plane
+      value: -8
+      objectReference: {fileID: 0}
     - target: {fileID: 4471484184268937319, guid: 7c2f4a2fd99211d439267619217db38a, type: 3}
       propertyPath: m_Name
       value: Main Ship
@@ -7370,6 +7374,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: b3991de570f6479418e4e1572b99969b, type: 3}
+--- !u!1 &1885241238 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8177713152652336292, guid: f01dc6d958cfc3f47b5729003ec2b841, type: 3}
+  m_PrefabInstance: {fileID: 1313031855283751613}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1885827215
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9007,12 +9016,59 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8177713152652336316, guid: f01dc6d958cfc3f47b5729003ec2b841, type: 3}
   m_PrefabInstance: {fileID: 1313031855283751613}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1885241238}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 999a34002b9685644a460948c1968fff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7153336119370978821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1885241238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 435745b4333df3345a57e71b057ee36c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _preConditionsInspector:
+  - key: hasZPos
+    value: 0
+  _effectsInspector:
+  - key: ragdollShip
+    value: 0
+  ActionName: Ragdoll Player Ship
+  Cost: 1
+  Target: {fileID: 0}
+  TargetTag: 
+  Duration: 5
+  IsRunning: 0
+--- !u!114 &7153336119370978835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1885241238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed665da0dfcbef64aa2645cc5306b4da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _preConditionsInspector: []
+  _effectsInspector:
+  - key: hasZPos
+    value: 0
+  ActionName: Go to Z position
+  Cost: 1
+  Target: {fileID: 0}
+  TargetTag: 
+  Duration: 2
+  IsRunning: 0
+  _zDistance: 300
 --- !u!1001 &9022035090312351527
 PrefabInstance:
   m_ObjectHideFlags: 0

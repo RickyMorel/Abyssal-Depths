@@ -68,7 +68,8 @@ public class ChargeAttack : GAction
 
     public void RotatedMessage()
     {
-        Debug.Log("RotatedMessage");
+        if(GAgent.CurrentAction is not ChargeAttack) { return; }
+
         FinishCharge();
     }
 

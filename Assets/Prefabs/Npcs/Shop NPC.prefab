@@ -5147,7 +5147,7 @@ Transform:
   m_Children:
   - {fileID: 5822881816085479891}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!54 &3968562041791390721
 Rigidbody:
@@ -5233,6 +5233,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 514135a66a5760447b1b21fd2a3341c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _id:
+    Value: 
   _currentSpeed: 2
   _runSpeed: 2
   _turnSmoothTime: 0
@@ -5254,12 +5256,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _resistanceType: 
   _weaknessType: 
+  _currentHealth: 0
   _maxHealth: 100
   _healthBarImage: {fileID: 0}
   _damageParticles: {fileID: 0}
   _hurtTime: 5
   _mesh: {fileID: 0}
-  _id: 
+  _particleParentTransform: {fileID: 0}
   _canKill: 0
 --- !u!114 &8760323682469693783
 MonoBehaviour:

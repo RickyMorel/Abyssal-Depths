@@ -11,6 +11,12 @@ public class MaceAttackHitBox : AttackHitBox
 
     #endregion
 
+    #region Private Variables
+
+    private int _damage;
+
+    #endregion
+
     #region Unity Loops
 
     public override void Start()

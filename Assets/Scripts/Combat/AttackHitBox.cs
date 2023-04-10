@@ -15,7 +15,6 @@ public class AttackHitBox : MonoBehaviour
 
     #region Private Variable
 
-    protected int _damage;
     protected DamageData _damageData;
     private int _aiCombatID = -1;
 

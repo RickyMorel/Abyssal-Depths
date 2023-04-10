@@ -38,11 +38,8 @@ public class AIHealth : PlayerHealth
         _interactionController = GetComponent<AIInteractionController>();
         _rb = GetComponent<Rigidbody>();
 
-        if (GetComponentInChildren<MeshTarget>() != null)
-        {
-            _meshTarget = GetComponentInChildren<MeshTarget>();
-            _meshTarget.enabled = false;
-        }
+        _meshTarget = GetComponentInChildren<MeshTarget>();
+        _meshTarget.enabled = false;
 
         OnDamaged += Hurt;
         OnDie += HandleDead;
@@ -58,13 +55,7 @@ public class AIHealth : PlayerHealth
 
     private void HandleDead()
     {
-        if (((_damageData.DamageTypes[0] == DamageTypes.Base && _damageData.DamageTypes[1] == DamageTypes.Laser) 
-            || (_damageData.DamageTypes[1] == DamageTypes.Base && _damageData.DamageTypes[0] == DamageTypes.Laser)) 
-            && GetComponentInChildren<MeshTarget>() != null) 
-        {
-            _meshTarget.enabled = true;
-            GetComponentInChildren<PlaneBehaviour>().Cut();
-        }
+        CutMeshIfLightSaber();
 
         StopPreviousAction();
         _gAgent.enabled = false;
@@ -72,6 +63,14 @@ public class AIHealth : PlayerHealth
         _rb.useGravity = true;
 
         Invoke(nameof(DisableSelf), 10f);
+    }
+
+    private void CutMeshIfLightSaber()
+    {
+        if (!(_damageData.DamageTypes[0] == DamageTypes.Base && _damageData.DamageTypes[1] == DamageTypes.Laser)) { return; }
+        if (!(_damageData.DamageTypes[1] == DamageTypes.Laser && _damageData.DamageTypes[0] == DamageTypes.Base)) { return; }
+        _meshTarget.enabled = true;
+        GetComponentInChildren<PlaneBehaviour>().Cut();
     }
 
     public override void Hurt(DamageTypes damageType)

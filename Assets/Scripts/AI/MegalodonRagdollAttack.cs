@@ -7,6 +7,7 @@ public class MegalodonRagdollAttack : GAction
 {
     #region Editor Fields
 
+    [SerializeField] private Collider _biteCollider;
     [SerializeField] private float _attackSpeed = 50f;
 
     #endregion
@@ -22,6 +23,7 @@ public class MegalodonRagdollAttack : GAction
     {
         Debug.Log("PrePerform MegalodonRagdollAttack");
 
+        _biteCollider.enabled = true;
         GAgent.StateMachine.CanMove = false;
 
         GameObject newTargetObj = new GameObject();
@@ -37,6 +39,21 @@ public class MegalodonRagdollAttack : GAction
         _goToZPos = true;
 
         return true;
+    }
+
+    public void BiteShip(Collider collider)
+    {
+        Debug.Log("BiteShip try");
+
+        if (GAgent.CurrentAction is not MegalodonRagdollAttack) { return; }
+
+        if(collider.gameObject.tag != "MainShip") { return; }
+
+        Debug.Log("BiteShip 2");
+
+        Ship.Instance.FreezeShip(true);
+
+        _biteCollider.enabled = false;
     }
 
     private void Update()
@@ -66,6 +83,8 @@ public class MegalodonRagdollAttack : GAction
         _goToZPos = false;
 
         Debug.Log("PostPerform MegalodonRagdollAttack");
+
+        Ship.Instance.FreezeShip(false);
 
         return true;
     }

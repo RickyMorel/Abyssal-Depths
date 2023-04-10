@@ -23,6 +23,7 @@ public class MoveInZPlane : GAction
     public override bool PrePerform()
     {
         GAgent.StateMachine.CanMove = false;
+        GAgent.StateMachine.Anim.Play("90Turn", 0);
 
         GameObject newTargetObj = new GameObject();
         newTargetObj.transform.position = transform.position + Vector3.forward * _zDistance;

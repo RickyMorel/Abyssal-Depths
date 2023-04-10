@@ -3,11 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 namespace DynamicMeshCutter
 {
     public class MeshTarget : MonoBehaviour
     {
+        #region Public Properties
+
         //basic both
         [Tooltip("This represents the root of the object and the gameobject that will be destroyed if \"DestroyTargets\" is enabled in the cutter. ")]
         public GameObject GameobjectRoot;
@@ -34,19 +35,36 @@ namespace DynamicMeshCutter
         //inheritance
         public bool[] Inherit = new bool[2] { false, false };
 
+        #endregion
+
+        #region PrivateVariables
+
         private MeshRenderer _meshRenderer;
         private SkinnedMeshRenderer _skinnedMeshRenderer;
+        private float _destroyAfterSeconds = 4;
 
+        #endregion
+
+        #region Unity Loops
+
+        protected virtual void Start()
+        {
+            if (DynamicRagdoll == null)
+                DynamicRagdoll = GetComponentInParent<DynamicRagdoll>();
+        }
 
         private void OnEnable()
         {
             MeshTargetShephard.RegisterMeshTarget(this);
+            StartCoroutine(DestroyAfterSplit());
         }
 
         private void OnDisable()
         {
             MeshTargetShephard.UnRegisterMeshTarget(this);
         }
+
+        #endregion
 
         public MeshRenderer MeshRenderer
         {
@@ -57,6 +75,7 @@ namespace DynamicMeshCutter
                 return _meshRenderer;
             }
         }
+
         public SkinnedMeshRenderer SkinnedMeshRenderer
         {
             get
@@ -66,8 +85,11 @@ namespace DynamicMeshCutter
                 return _skinnedMeshRenderer;
             }
         }
+
         public bool IsSkinned => SkinnedMeshRenderer != null ? true : false;
-        public Renderer Renderer => IsSkinned ? (Renderer) SkinnedMeshRenderer: (Renderer)MeshRenderer;
+
+        public Renderer Renderer => IsSkinned ? SkinnedMeshRenderer : MeshRenderer;
+
         public Material FaceMaterial
         {
             get
@@ -78,13 +100,9 @@ namespace DynamicMeshCutter
 
             }
         }
+
         public bool RequireLocal => GetComponent<SkinnedMeshRenderer>() != null;
 
-        protected virtual void Start()
-        {
-            if (DynamicRagdoll == null)
-                DynamicRagdoll = GetComponentInParent<DynamicRagdoll>();
-        }
         public Material TryGetMaterial()
         {
             var renderer = GetComponent<MeshRenderer>();
@@ -94,6 +112,12 @@ namespace DynamicMeshCutter
             if (sRenderer != null)
                 return sRenderer.material;
             return null;
+        }
+
+        private IEnumerator DestroyAfterSplit()
+        {
+            yield return new WaitForSeconds(_destroyAfterSeconds);
+            Destroy(gameObject);
         }
     }
 }

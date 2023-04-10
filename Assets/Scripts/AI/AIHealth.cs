@@ -38,7 +38,7 @@ public class AIHealth : PlayerHealth
         _interactionController = GetComponent<AIInteractionController>();
         _rb = GetComponent<Rigidbody>();
 
-        if (GetComponent<MeshTarget>() != null)
+        if (GetComponentInChildren<MeshTarget>() != null)
         {
             _meshTarget = GetComponentInChildren<MeshTarget>();
             _meshTarget.enabled = false;
@@ -58,7 +58,9 @@ public class AIHealth : PlayerHealth
 
     private void HandleDead()
     {
-        if (((_damageData.DamageTypes[0] == DamageTypes.Base && _damageData.DamageTypes[1] == DamageTypes.Laser) || (_damageData.DamageTypes[1] == DamageTypes.Base && _damageData.DamageTypes[0] == DamageTypes.Laser)) && GetComponent<MeshTarget>() != null) 
+        if (((_damageData.DamageTypes[0] == DamageTypes.Base && _damageData.DamageTypes[1] == DamageTypes.Laser) 
+            || (_damageData.DamageTypes[1] == DamageTypes.Base && _damageData.DamageTypes[0] == DamageTypes.Laser)) 
+            && GetComponentInChildren<MeshTarget>() != null) 
         {
             _meshTarget.enabled = true;
             GetComponentInChildren<PlaneBehaviour>().Cut();

@@ -116,6 +116,7 @@ namespace DynamicMeshCutter
 
         private IEnumerator DestroyAfterSplit()
         {
+            gameObject.layer = LayerMask.NameToLayer("NPC");
             yield return new WaitForSeconds(_destroyAfterSeconds);
             Destroy(gameObject);
         }

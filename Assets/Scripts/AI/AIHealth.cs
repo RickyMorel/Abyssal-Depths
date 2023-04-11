@@ -71,6 +71,8 @@ public class AIHealth : PlayerHealth
         if (!(_damageData.DamageTypes[1] == DamageTypes.Laser && _damageData.DamageTypes[0] == DamageTypes.Base)) { return; }
         _meshTarget.enabled = true;
         GetComponentInChildren<PlaneBehaviour>().Cut();
+
+        Invoke(nameof(DisableSelf), 0.1f);
     }
 
     public override void Hurt(DamageTypes damageType)

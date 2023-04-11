@@ -175,7 +175,7 @@ Transform:
   - {fileID: 347207617399624442}
   - {fileID: 8086166350305057248}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!54 &1401204668924913012
 Rigidbody:
@@ -21188,6 +21188,7 @@ GameObject:
   m_Component:
   - component: {fileID: 863816446258717414}
   - component: {fileID: 7546338134446013053}
+  - component: {fileID: 2669445669374755740}
   m_Layer: 13
   m_Name: Circle.001
   m_TagString: Untagged
@@ -21329,6 +21330,30 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.00033027772, y: -0.023446487, z: -0.00000023562461}
     m_Extent: {x: 0.01856412, y: 0.040293567, z: 0.01837252}
   m_DirtyAABB: 0
+--- !u!114 &2669445669374755740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7931836234184716370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74d075e443ddc624db302098f7826153, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameobjectRoot: {fileID: 2957934071046943742}
+  OverrideFaceMaterial: {fileID: 2100000, guid: 9efedd2a02a24ac479e285d244f6b34e, type: 2}
+  SeparateMeshes: 0
+  ApplyTranslation: 1
+  DefaultBehaviour: 0000000000000000
+  DynamicRagdoll: {fileID: 0}
+  Animator: {fileID: 1306271937535167595}
+  GroupBehaviours: []
+  CreateRigidbody: 0101
+  CreateMeshCollider: 0101
+  Physics: 0200000002000000
+  Inherit: 0000
 --- !u!1 &7992354081386471745
 GameObject:
   m_ObjectHideFlags: 0

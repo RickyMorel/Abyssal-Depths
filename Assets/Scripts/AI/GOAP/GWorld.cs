@@ -54,6 +54,7 @@ public sealed class GWorld
     private static ResourceQueue _shipTurretAttackPoints;
     private static ResourceQueue _healPoints;
     private static ResourceQueue _rockPickupPoints;
+    private static ResourceQueue _megalodonRagdollPoints;
     private static Dictionary<string, ResourceQueue> _resources = new Dictionary<string, ResourceQueue>();
 
     #endregion
@@ -80,12 +81,14 @@ public sealed class GWorld
     {
         shipAttackPoints = 1,
         shipTurretAttackPoints = 2,
+        megalodonRagdollPoints = 3,
     }
 
     public enum AttackFreeTags
     {
         FreeShipAttackPoint = 1,
         FreeShipTurretAttackPoint = 2,
+        FreeMegalodonRagdollPoint = 3,
     }
 
     #endregion
@@ -101,6 +104,7 @@ public sealed class GWorld
         _shipTurretAttackPoints = new ResourceQueue("ShipTurretAttackPoint", AttackFreeTags.FreeShipTurretAttackPoint.ToString(), _world);
         _healPoints = new ResourceQueue("HealPoint", FREE_HEAL_POINTS, _world);
         _rockPickupPoints = new ResourceQueue("RockPickupPoint", FREE_ROCK_PICKUP_POINTS, _world);
+        _megalodonRagdollPoints = new ResourceQueue("MegalodonRagdollPoint", AttackFreeTags.FreeMegalodonRagdollPoint.ToString(), _world);
 
         _resources.Add(EATINGCHAIRS, _eatingChairs);
         _resources.Add(SHOPS, _shops);
@@ -110,6 +114,7 @@ public sealed class GWorld
         _resources.Add(AttackTags.shipTurretAttackPoints.ToString(), _shipTurretAttackPoints);
         _resources.Add(HEAL_POINTS, _healPoints);
         _resources.Add(ROCK_PICKUP_POINTS, _rockPickupPoints);
+        _resources.Add(AttackTags.megalodonRagdollPoints.ToString(), _megalodonRagdollPoints);
 
         //Leave this here for future testing
         //Time.timeScale = 5;

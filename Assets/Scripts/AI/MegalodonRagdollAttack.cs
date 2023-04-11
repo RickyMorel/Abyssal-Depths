@@ -7,6 +7,9 @@ public class MegalodonRagdollAttack : GAction
 {
     #region Editor Fields
 
+    [SerializeField] private GWorld.AttackTags _attackItemTag;
+    [SerializeField] private GWorld.AttackFreeTags _attackFreeItemName;
+
     [SerializeField] private Transform _mouthTransform;
     [SerializeField] private Collider _biteCollider;
     [SerializeField] private Collider _bodyCollider;
@@ -16,17 +19,20 @@ public class MegalodonRagdollAttack : GAction
 
     #region Private Variables
 
-    private GameObject _currentRunAwayObj;
     private bool _goToZPos;
     private bool _prevIsKinematic;
     private bool _prevUseGravity;
     private bool _hitShip;
+    private Vector3 _prevSize;
 
     #endregion
 
     public override bool PrePerform()
     {
         _hitShip = false;
+        _prevSize = transform.localScale;
+
+        transform.localScale = new Vector3(12, 12, 12);
 
         _prevUseGravity = GAgent.StateMachine.Rb.useGravity;
         _prevIsKinematic = GAgent.StateMachine.Rb.isKinematic;
@@ -38,15 +44,13 @@ public class MegalodonRagdollAttack : GAction
         GAgent.StateMachine.Rb.useGravity = false;
         GAgent.StateMachine.CanMove = false;
 
-        GameObject newTargetObj = new GameObject();
-        newTargetObj.transform.position = Ship.Instance.transform.position;
-        newTargetObj.name = "MegalodonZPosTarget";
-
-        _currentRunAwayObj = newTargetObj;
-
-        Target = newTargetObj;
+        Target = GWorld.Instance.GetQueue(_attackItemTag.ToString()).RemoveResource();
 
         if (Target == null) { return false; }
+
+        Inventory.AddItem(Target);
+
+        GWorld.Instance.GetWorld().ModifyState(_attackFreeItemName.ToString(), -1);
 
         _goToZPos = true;
 
@@ -79,10 +83,10 @@ public class MegalodonRagdollAttack : GAction
 
     private void GetToZPos()
     {
-        if(_currentRunAwayObj == null) { return; }
+        //if(Target == null) { return; }
 
         var step = _attackSpeed * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(transform.position, _currentRunAwayObj.transform.position, step);
+        transform.position = Vector3.MoveTowards(transform.position, Target.transform.position, step);
     }
 
     public override bool Perform()
@@ -97,8 +101,6 @@ public class MegalodonRagdollAttack : GAction
 
     public override bool PostPeform()
     {
-        if(_currentRunAwayObj != null) { Destroy(_currentRunAwayObj); }
-
         GAgent.StateMachine.Rb.isKinematic = _prevIsKinematic;
         GAgent.StateMachine.Rb.useGravity = _prevUseGravity;
         _bodyCollider.enabled = true;
@@ -106,9 +108,19 @@ public class MegalodonRagdollAttack : GAction
 
         GAgent.StateMachine.ResetAttacking();
 
+        GWorld.Instance.GetQueue(_attackItemTag.ToString()).AddResource(Target);
+
+        Inventory.RemoveItem(Target);
+
+        GWorld.Instance.GetWorld().ModifyState(_attackFreeItemName.ToString(), 1);
+
         Debug.Log("PostPerform MegalodonRagdollAttack");
 
         Ship.Instance.FreezeShip(false);
+
+        _goToZPos = false;
+
+        transform.localScale = _prevSize;
 
         return true;
     }

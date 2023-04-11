@@ -79,8 +79,6 @@ public class Interactable : MonoBehaviour
         interactionController?.SetCurrentInteractable(setInteractable ? this : null);
 
         _outline.enabled = setOutline;
-
-        Debug.Log("SetCurrentInteractable: " + gameObject.name + ", " + other.gameObject.name + ", " + isSetting);
     }
 
     public void SetCurrentPlayer(BaseInteractionController interactionController)

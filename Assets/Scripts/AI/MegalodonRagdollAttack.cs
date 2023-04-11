@@ -59,13 +59,9 @@ public class MegalodonRagdollAttack : GAction
 
     public void BiteShip(Collider collider)
     {
-        Debug.Log("BiteShip try");
-
         if (GAgent.CurrentAction is not MegalodonRagdollAttack) { return; }
 
         if(collider.gameObject.tag != "MainShip") { return; }
-
-        Debug.Log("BiteShip 2");
 
         Ship.Instance.FreezeShip(true);
 

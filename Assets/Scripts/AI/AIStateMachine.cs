@@ -39,12 +39,18 @@ public class AIStateMachine : BaseStateMachine
         StartCoroutine(SetIsShootingCoroutine());
     }
 
-    public void Attack(int attackNumber)
+    public void Attack(int attackNumber, bool checkCanMove = true)
     {
-        if (!CanMove) { return; }
+        if (checkCanMove) { if (!CanMove) { return; } }
 
         Anim.SetInteger("AttackType", attackNumber);
         Anim.SetTrigger("Attack");
+    }
+
+    public void ResetAttacking()
+    {
+        Anim.SetInteger("AttackType", 0);
+        Anim.ResetTrigger("Attack");
     }
 
     public void SetIsCarryingItem(bool isCarrying)

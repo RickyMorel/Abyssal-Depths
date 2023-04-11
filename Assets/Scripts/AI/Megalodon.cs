@@ -41,6 +41,8 @@ public class Megalodon : GAgent
         Vector3 difVector = CurrentAction ? transform.position - CurrentAction.Target.transform.position : Vector3.zero;
 
         float yRotationTarget = difVector.x > 0 ? 270f : 90f;
+        if(CurrentAction is MoveInZPlane) { yRotationTarget = 0f; }
+        else if(CurrentAction is MegalodonRagdollAttack) { yRotationTarget = 180f; }
 
         Quaternion targetRotation = Quaternion.Euler(0f, _currentYTarget, 90f);
 

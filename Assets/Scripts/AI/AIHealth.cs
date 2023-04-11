@@ -50,6 +50,7 @@ public class AIHealth : PlayerHealth
 
     private void HandleDead()
     {
+        Debug.Log("HandleDead: " + gameObject.name);
         StopPreviousAction();
         _gAgent.enabled = false;
         _rb.isKinematic = false;

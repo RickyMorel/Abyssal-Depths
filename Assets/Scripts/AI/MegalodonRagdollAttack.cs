@@ -7,7 +7,9 @@ public class MegalodonRagdollAttack : GAction
 {
     #region Editor Fields
 
+    [SerializeField] private Transform _mouthTransform;
     [SerializeField] private Collider _biteCollider;
+    [SerializeField] private Collider _bodyCollider;
     [SerializeField] private float _attackSpeed = 50f;
 
     #endregion
@@ -16,14 +18,24 @@ public class MegalodonRagdollAttack : GAction
 
     private GameObject _currentRunAwayObj;
     private bool _goToZPos;
+    private bool _prevIsKinematic;
+    private bool _prevUseGravity;
+    private bool _hitShip;
 
     #endregion
 
     public override bool PrePerform()
     {
-        Debug.Log("PrePerform MegalodonRagdollAttack");
+        _hitShip = false;
+
+        _prevUseGravity = GAgent.StateMachine.Rb.useGravity;
+        _prevIsKinematic = GAgent.StateMachine.Rb.isKinematic;
 
         _biteCollider.enabled = true;
+        _bodyCollider.enabled = false;
+
+        GAgent.StateMachine.Rb.isKinematic = true;
+        GAgent.StateMachine.Rb.useGravity = false;
         GAgent.StateMachine.CanMove = false;
 
         GameObject newTargetObj = new GameObject();
@@ -53,6 +65,8 @@ public class MegalodonRagdollAttack : GAction
 
         Ship.Instance.FreezeShip(true);
 
+        _hitShip = true;
+
         _biteCollider.enabled = false;
     }
 
@@ -73,6 +87,11 @@ public class MegalodonRagdollAttack : GAction
 
     public override bool Perform()
     {
+        if (!_hitShip) { return true; }
+
+        GAgent.StateMachine.Attack(5, false);
+        Ship.Instance.transform.position = _mouthTransform.position;
+
         return true;
     }
 
@@ -80,7 +99,12 @@ public class MegalodonRagdollAttack : GAction
     {
         if(_currentRunAwayObj != null) { Destroy(_currentRunAwayObj); }
 
+        GAgent.StateMachine.Rb.isKinematic = _prevIsKinematic;
+        GAgent.StateMachine.Rb.useGravity = _prevUseGravity;
+        _bodyCollider.enabled = true;
         _goToZPos = false;
+
+        GAgent.StateMachine.ResetAttacking();
 
         Debug.Log("PostPerform MegalodonRagdollAttack");
 

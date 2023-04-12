@@ -44,17 +44,31 @@ public class Megalodon : GAgent
         if(CurrentAction is MoveInZPlane) { yRotationTarget = 0f; }
         else if(CurrentAction is MegalodonRagdollAttack) { yRotationTarget = 180f; }
 
+        _currentYTarget = Mathf.MoveTowards(_currentYTarget, yRotationTarget, 300f * Time.deltaTime);
+
         Quaternion targetRotation = Quaternion.Euler(0f, _currentYTarget, 90f);
 
         transform.rotation = targetRotation;
 
-        if (_currentYTarget == yRotationTarget) { return; }
-
-        _currentYTarget = yRotationTarget;
+        if (Mathf.Abs(_currentYTarget - yRotationTarget) < 5f) { return; }
 
         SendMessage("RotatedMessage");
 
-        //StateMachine.Anim.Play("180Turn", 0);
+        switch (yRotationTarget)
+        {
+            case 90f:
+                StateMachine.Anim.Play("180Turn", 0);
+                break;
+            case 270f:
+                StateMachine.Anim.Play("-180Turn", 0);
+                break;
+            case 0f:
+                StateMachine.Anim.Play("90Turn", 0);
+                break;
+            case 180f:
+                StateMachine.Anim.Play("-90Turn", 0);
+                break;
+        }
     }
 
     public void Rotate180()

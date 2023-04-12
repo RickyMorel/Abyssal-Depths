@@ -7,6 +7,7 @@ public class LightSaber : MeleeWeapon
     #region Editor Fields
 
     [SerializeField] private Transform _handleTransform;
+    [SerializeField] private BoxCollider _bladeBoxCollider;
 
     #endregion
 
@@ -14,7 +15,6 @@ public class LightSaber : MeleeWeapon
 
     private bool _isBladeOut = false;
 
-    private BoxCollider _bladeBoxCollider;
 
     #endregion
 
@@ -24,7 +24,6 @@ public class LightSaber : MeleeWeapon
     {
         base.Start();
 
-        _bladeBoxCollider = GetComponentInChildren<WeaponAttackHitBox>().gameObject.GetComponent<BoxCollider>();
         _bladeBoxCollider.enabled = false;
     }
 

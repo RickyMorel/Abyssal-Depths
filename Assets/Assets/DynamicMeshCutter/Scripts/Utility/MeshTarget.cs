@@ -15,7 +15,7 @@ namespace DynamicMeshCutter
         public Material OverrideFaceMaterial;
         public bool SeparateMeshes;
         public bool ApplyTranslation = true;
-        
+
         //basic single
         public Behaviour[] DefaultBehaviour = new Behaviour[2] { Behaviour.Stone, Behaviour.Stone };
 
@@ -29,8 +29,8 @@ namespace DynamicMeshCutter
         public bool[] CreateMeshCollider = new bool[2] { true, true };
 
         //ragdoll
-        public RagdollPhysics[] Physics = new RagdollPhysics[2] { RagdollPhysics.NonKinematic, RagdollPhysics.NonKinematic};
-        
+        public RagdollPhysics[] Physics = new RagdollPhysics[2] { RagdollPhysics.NonKinematic, RagdollPhysics.NonKinematic };
+
 
         //inheritance
         public bool[] Inherit = new bool[2] { false, false };
@@ -42,6 +42,7 @@ namespace DynamicMeshCutter
         private MeshRenderer _meshRenderer;
         private SkinnedMeshRenderer _skinnedMeshRenderer;
         private float _destroyAfterSeconds = 4;
+        private Rigidbody _rb;
 
         #endregion
 
@@ -49,6 +50,8 @@ namespace DynamicMeshCutter
 
         protected virtual void Start()
         {
+            _rb = GetComponentInParent<Rigidbody>();
+
             if (DynamicRagdoll == null)
                 DynamicRagdoll = GetComponentInParent<DynamicRagdoll>();
         }
@@ -56,6 +59,7 @@ namespace DynamicMeshCutter
         private void OnEnable()
         {
             MeshTargetShephard.RegisterMeshTarget(this);
+            _rb.constraints = RigidbodyConstraints.FreezePositionZ;
             StartCoroutine(DestroyAfterSplit());
         }
 
@@ -116,7 +120,7 @@ namespace DynamicMeshCutter
 
         private IEnumerator DestroyAfterSplit()
         {
-            gameObject.layer = LayerMask.NameToLayer("NPC");
+            gameObject.layer = LayerMask.NameToLayer("Orthographic");
             yield return new WaitForSeconds(_destroyAfterSeconds);
             Destroy(gameObject);
         }

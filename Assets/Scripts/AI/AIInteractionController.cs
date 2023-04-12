@@ -44,21 +44,31 @@ public class AIInteractionController : BaseInteractionController
         Debug.Log("1-SetCurrentInteractable: " + gameObject.name);
 #endif
         if (!_canInteractInCurrentState) { return; }
+
 #if INTERACTION_DEBUGS
         Debug.Log("2-_canInteractInCurrentState: " + gameObject.name);
 #endif
 
         if (interactable == null) { return; }
+
 #if INTERACTION_DEBUGS
         Debug.Log("3-interactable != null: " + gameObject.name);
 #endif
 
-        base.SetCurrentInteractable(interactable);
-
         if(_gAgent.CurrentAction == null || _gAgent.CurrentAction.Target == null || _gAgent.CurrentAction.IsRunning == false) { return; }
+
 #if INTERACTION_DEBUGS
         Debug.Log("4-has action!: " + gameObject.name);
 #endif
+        //Only interact with intended interactable
+        if(_gAgent.CurrentAction.Target.transform != interactable.transform) { return; }
+
+#if INTERACTION_DEBUGS
+        Debug.Log($"4.5-_gAgent.CurrentAction.Target.transform: {_gAgent.CurrentAction.Target.transform} !=  interactable.transform: {interactable.transform} " + gameObject.name);
+#endif
+
+        base.SetCurrentInteractable(interactable);
+
         Interactable wantedInteractable = _gAgent?.CurrentAction?.Target?.GetComponent<Interactable>();
 
         if(interactable == wantedInteractable)

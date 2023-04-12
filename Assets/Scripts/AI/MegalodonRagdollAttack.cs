@@ -29,8 +29,6 @@ public class MegalodonRagdollAttack : GAction
 
     public override bool PrePerform()
     {
-        Debug.Log("PrePerform");
-
         _hitShip = false;
         _prevSize = transform.localScale;
 
@@ -61,7 +59,6 @@ public class MegalodonRagdollAttack : GAction
 
     public void BiteShip()
     {
-        Debug.Log("BiteShip");
         if (GAgent.CurrentAction is not MegalodonRagdollAttack) { return; }
 
         Ship.Instance.FreezeShip(true);
@@ -75,14 +72,12 @@ public class MegalodonRagdollAttack : GAction
 
     private void Update()
     {
-        if(_goToZPos == false) { return; }
-
         GetToZPos();
     }
 
     private void GetToZPos()
     {
-        //if(Target == null) { return; }
+        if (_goToZPos == false) { return; }
 
         var step = _attackSpeed * Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position, Target.transform.position, step);
@@ -90,14 +85,9 @@ public class MegalodonRagdollAttack : GAction
 
     public override bool Perform()
     {
-        Debug.Log("Perform");
-
         if (!_hitShip) { return true; }
 
         GAgent.StateMachine.Attack(5, false);
-
-        //Vector3 finalShipPos = new Vector3(_mouthTransform.position.x, _mouthTransform.position.y, Ship.Instance.transform.position.z);
-        //Ship.Instance.transform.position = finalShipPos;
 
         return true;
     }
@@ -106,6 +96,7 @@ public class MegalodonRagdollAttack : GAction
     {
         GAgent.StateMachine.Rb.isKinematic = _prevIsKinematic;
         GAgent.StateMachine.Rb.useGravity = _prevUseGravity;
+
         //Enable hitBox after 4 seconds to prevent shield from hitting megalodon
         Invoke(nameof(EnableBodyCollider), 4f);
 
@@ -116,8 +107,6 @@ public class MegalodonRagdollAttack : GAction
         Inventory.RemoveItem(Target);
 
         GWorld.Instance.GetWorld().ModifyState(_attackFreeItemName.ToString(), 1);
-
-        Debug.Log("PostPerform MegalodonRagdollAttack");
 
         Ship.Instance.FreezeShip(false);
 

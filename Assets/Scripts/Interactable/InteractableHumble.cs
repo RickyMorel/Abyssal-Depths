@@ -65,7 +65,11 @@ public class InteractableHumble
 
     public void SetCurrentPlayer(BaseInteractionController interactionController)
     {
+        Debug.Log("SetCurrentPlayer: " + interactionController);
+
         _currentPlayer = interactionController;
+
+        Debug.Log("_currentPlayer: " + _currentPlayer);
 
         OnInteract?.Invoke();
     }

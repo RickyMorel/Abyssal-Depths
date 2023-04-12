@@ -61,6 +61,8 @@ public class AIHealth : PlayerHealth
 
     public override void Hurt(DamageTypes damageType)
     {
+        Debug.Log("Hurt: " + gameObject.name);
+
         if (CanKill == false) { base.Hurt(damageType); }
 
         CheckIfLowHealth();

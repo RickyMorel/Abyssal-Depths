@@ -92,10 +92,18 @@ public class BaseInteractionController : MonoBehaviour
     {
         if (_currentInteractable == null) { return; }
 
-        if (_currentInteractable.CurrentPlayer == this) { return; }
+        Debug.Log("6-_currentInteractable != null: " + gameObject.name);
+
+        Debug.Log($"6.5-{_currentInteractable.CurrentPlayer} == {this}: " + gameObject.name);
+
+        //if (_currentInteractable.CurrentPlayer == this) { return; }
+
+        Debug.Log($"7-{_currentInteractable.CurrentPlayer} == {this}: " + gameObject.name);
 
         //if you can't use the interactable while it's broken, return
-        if(!_currentInteractable.CanUse && !IsFixing) { return; }
+        if (!_currentInteractable.CanUse && !IsFixing) { return; }
+
+        Debug.Log("8-can use and is not fixing: " + gameObject.name);
 
         float singleUseDuration = customDuration == -1 ? _currentInteractable.SingleUseTime : customDuration;
 
@@ -123,6 +131,8 @@ public class BaseInteractionController : MonoBehaviour
 
     public void SetInteraction(int interactionType, Transform playerPositionTransform)
     {
+        Debug.Log($"SetInteraction: {gameObject.name}, " + interactionType);
+        Debug.Log($"playerPositionTransform: {gameObject.name}, " + playerPositionTransform.parent.gameObject.name);
         BaseInteractionController interactionController = interactionType == 0 ? null : this;
 
         _currentInteractable.SetCurrentPlayer(interactionController);

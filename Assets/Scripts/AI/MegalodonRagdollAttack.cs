@@ -90,7 +90,9 @@ public class MegalodonRagdollAttack : GAction
         if (!_hitShip) { return true; }
 
         GAgent.StateMachine.Attack(5, false);
-        Ship.Instance.transform.position = _mouthTransform.position;
+
+        Vector3 finalShipPos = new Vector3(_mouthTransform.position.x, _mouthTransform.position.y, Ship.Instance.transform.position.z);
+        Ship.Instance.transform.position = finalShipPos;
 
         return true;
     }
@@ -99,7 +101,8 @@ public class MegalodonRagdollAttack : GAction
     {
         GAgent.StateMachine.Rb.isKinematic = _prevIsKinematic;
         GAgent.StateMachine.Rb.useGravity = _prevUseGravity;
-        _bodyCollider.enabled = true;
+        //Enable hitBox after 4 seconds to prevent shield from hitting megalodon
+        Invoke(nameof(EnableBodyCollider), 4f);
         _goToZPos = false;
 
         GAgent.StateMachine.ResetAttacking();
@@ -119,5 +122,10 @@ public class MegalodonRagdollAttack : GAction
         transform.localScale = _prevSize;
 
         return true;
+    }
+
+    private void EnableBodyCollider()
+    {
+        _bodyCollider.enabled = true;
     }
 }

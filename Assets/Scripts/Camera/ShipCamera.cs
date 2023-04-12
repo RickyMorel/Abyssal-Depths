@@ -61,7 +61,7 @@ public class ShipCamera : BaseCamera
         _currentFOV = _orginalFOV;
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         UpdateBoostFOVEffect();
         UpdateCameraZoom();

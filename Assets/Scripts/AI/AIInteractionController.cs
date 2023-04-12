@@ -38,18 +38,26 @@ public class AIInteractionController : BaseInteractionController
 
     public override void SetCurrentInteractable(Interactable interactable)
     {
+        Debug.Log("1-SetCurrentInteractable: " + gameObject.name);
         if (!_canInteractInCurrentState) { return; }
 
+        Debug.Log("2-_canInteractInCurrentState: " + gameObject.name);
+
         if (interactable == null) { return; }
+
+        Debug.Log("3-interactable != null: " + gameObject.name);
 
         base.SetCurrentInteractable(interactable);
 
         if(_gAgent.CurrentAction == null || _gAgent.CurrentAction.Target == null || _gAgent.CurrentAction.IsRunning == false) { return; }
 
+        Debug.Log("4-has action!: " + gameObject.name);
+
         Interactable wantedInteractable = _gAgent?.CurrentAction?.Target?.GetComponent<Interactable>();
 
         if(interactable == wantedInteractable)
         {
+            Debug.Log("5-is wanted Interaction!: " + gameObject.name);
             HandleInteraction(_gAgent.CurrentAction.Duration);
         }
     }

@@ -24078,8 +24078,8 @@ GameObject:
   - component: {fileID: 1699108970611143923}
   - component: {fileID: 8802519255053198523}
   - component: {fileID: 6471623415172757395}
-  - component: {fileID: 128441165415461553}
   - component: {fileID: 1211777380288274685}
+  - component: {fileID: 7910252201965089964}
   m_Layer: 0
   m_Name: MegalodonRagdollPoint
   m_TagString: MegalodonRagdollPoint
@@ -24201,24 +24201,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 8.98, y: 10.1051855, z: 16.452644}
   m_Center: {x: 0, y: -3.7304578, z: -5.102621}
---- !u!114 &128441165415461553
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8441726633607191155}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8046843e808c296429d8184548559900, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _interactionType: 11
-  _playerPositionTransform: {fileID: 532014120310782047}
-  _isAIOnlyInteractable: 1
-  _attachOnInteract: 1
-  _isSingleUse: 1
-  _singleUseTime: 6
 --- !u!114 &1211777380288274685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24238,6 +24220,24 @@ MonoBehaviour:
   bakeKeys: []
   bakeValues: []
   _meshes: []
+--- !u!114 &7910252201965089964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8441726633607191155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22c5aec7e40000c4cbd20ca86088245c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactionType: 11
+  _playerPositionTransform: {fileID: 532014120310782047}
+  _isAIOnlyInteractable: 1
+  _attachOnInteract: 1
+  _isSingleUse: 1
+  _singleUseTime: 6
 --- !u!1 &8583784946353665753
 GameObject:
   m_ObjectHideFlags: 0

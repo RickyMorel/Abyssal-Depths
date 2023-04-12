@@ -9,8 +9,6 @@ public class BossZone : MonoBehaviour
         if (other.gameObject.GetComponent<Ship>() == null) { return; }
 
         ShipCamera.Instance.ChangeToBossZoom(true);
-
-        Debug.Log("Entered Boss Zone");
     }
 
     private void OnTriggerExit(Collider other)
@@ -18,7 +16,5 @@ public class BossZone : MonoBehaviour
         if (other.gameObject.GetComponent<Ship>() == null) { return; }
 
         ShipCamera.Instance.ChangeToBossZoom(false);
-
-        Debug.Log("Exited Boss Zone");
     }
 }

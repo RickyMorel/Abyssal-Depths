@@ -1,3 +1,5 @@
+//#define INTERACTION_DEBUGS
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -38,26 +40,32 @@ public class AIInteractionController : BaseInteractionController
 
     public override void SetCurrentInteractable(Interactable interactable)
     {
+#if INTERACTION_DEBUGS
         Debug.Log("1-SetCurrentInteractable: " + gameObject.name);
+#endif
         if (!_canInteractInCurrentState) { return; }
-
+#if INTERACTION_DEBUGS
         Debug.Log("2-_canInteractInCurrentState: " + gameObject.name);
+#endif
 
         if (interactable == null) { return; }
-
+#if INTERACTION_DEBUGS
         Debug.Log("3-interactable != null: " + gameObject.name);
+#endif
 
         base.SetCurrentInteractable(interactable);
 
         if(_gAgent.CurrentAction == null || _gAgent.CurrentAction.Target == null || _gAgent.CurrentAction.IsRunning == false) { return; }
-
+#if INTERACTION_DEBUGS
         Debug.Log("4-has action!: " + gameObject.name);
-
+#endif
         Interactable wantedInteractable = _gAgent?.CurrentAction?.Target?.GetComponent<Interactable>();
 
         if(interactable == wantedInteractable)
         {
+#if INTERACTION_DEBUGS
             Debug.Log("5-is wanted Interaction!: " + gameObject.name);
+#endif
             HandleInteraction(_gAgent.CurrentAction.Duration);
         }
     }

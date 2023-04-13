@@ -70,15 +70,5 @@ public class Megalodon : GAgent
                 break;
         }
     }
-
-    public void Rotate180()
-    {
-        //Debug.Log("Rotate180");
-        ////float yRotationValue = Mathf.SmoothDamp(transform.eulerAngles.y, _currentYTarget, ref _yRotVel, _yRotSmoothTime);
-
-        //Quaternion targetRotation = Quaternion.Euler(0f, _currentYTarget, 90f);
-
-        //transform.rotation = targetRotation;
-    }
 }
 

@@ -54,6 +54,8 @@ public class MegalodonRagdollAttack : GAction
 
         _goToZPos = true;
 
+        GAgent.StateMachine.Attack(5, false);
+
         return true;
     }
 
@@ -75,6 +77,13 @@ public class MegalodonRagdollAttack : GAction
         GetToZPos();
     }
 
+    private void LateUpdate()
+    {
+        if (!_hitShip) { return; }
+
+        Ship.Instance.transform.position = _mouthTransform.transform.position;
+    }
+
     private void GetToZPos()
     {
         if (_goToZPos == false) { return; }
@@ -85,15 +94,13 @@ public class MegalodonRagdollAttack : GAction
 
     public override bool Perform()
     {
-        if (!_hitShip) { return true; }
-
-        GAgent.StateMachine.Attack(5, false);
-
         return true;
     }
 
     public override bool PostPeform()
     {
+        _hitShip = false;
+
         GAgent.StateMachine.Rb.isKinematic = _prevIsKinematic;
         GAgent.StateMachine.Rb.useGravity = _prevUseGravity;
 
@@ -109,6 +116,7 @@ public class MegalodonRagdollAttack : GAction
         GWorld.Instance.GetWorld().ModifyState(_attackFreeItemName.ToString(), 1);
 
         Ship.Instance.FreezeShip(false);
+        Ship.Instance.Rb.AddForce(Vector3.right * 50f, ForceMode.VelocityChange);
 
         transform.localScale = _prevSize;
 

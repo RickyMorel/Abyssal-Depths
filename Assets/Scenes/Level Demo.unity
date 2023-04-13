@@ -1377,10 +1377,6 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 128441165415461553, guid: 7c2f4a2fd99211d439267619217db38a, type: 3}
-      propertyPath: _singleUseTime
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 319713644502076378, guid: 7c2f4a2fd99211d439267619217db38a, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -1428,22 +1424,6 @@ PrefabInstance:
     - target: {fileID: 4471484184268937319, guid: 7c2f4a2fd99211d439267619217db38a, type: 3}
       propertyPath: m_Name
       value: Main Ship
-      objectReference: {fileID: 0}
-    - target: {fileID: 6938698884232784794, guid: 7c2f4a2fd99211d439267619217db38a, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7022336706505972824, guid: 7c2f4a2fd99211d439267619217db38a, type: 3}
-      propertyPath: m_Extents.x
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7022336706505972824, guid: 7c2f4a2fd99211d439267619217db38a, type: 3}
-      propertyPath: m_Extents.z
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7910252201965089964, guid: 7c2f4a2fd99211d439267619217db38a, type: 3}
-      propertyPath: _attachOnInteract
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -6831,6 +6811,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1761735548 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 4453489282889875369, guid: f01dc6d958cfc3f47b5729003ec2b841, type: 3}
+  m_PrefabInstance: {fileID: 1313031855283751613}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1774685531
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8721,18 +8706,18 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1740630990}
     m_Modifications:
-    - target: {fileID: 3184812802082676991, guid: f01dc6d958cfc3f47b5729003ec2b841, type: 3}
-      propertyPath: m_Enabled
-      value: 1
+    - target: {fileID: 7153336119370978821, guid: f01dc6d958cfc3f47b5729003ec2b841, type: 3}
+      propertyPath: Duration
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 7153336119370978821, guid: f01dc6d958cfc3f47b5729003ec2b841, type: 3}
-      propertyPath: m_Enabled
-      value: 1
+      propertyPath: _attackSpeed
+      value: 100
       objectReference: {fileID: 0}
-    - target: {fileID: 8083901510940554658, guid: f01dc6d958cfc3f47b5729003ec2b841, type: 3}
-      propertyPath: m_Avatar
+    - target: {fileID: 7153336119370978821, guid: f01dc6d958cfc3f47b5729003ec2b841, type: 3}
+      propertyPath: _biteCollider
       value: 
-      objectReference: {fileID: 9000000, guid: 8497b3ff37e04194e9ee42441a307f4d, type: 3}
+      objectReference: {fileID: 1761735548}
     - target: {fileID: 8172708540713768750, guid: f01dc6d958cfc3f47b5729003ec2b841, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -8781,17 +8766,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Megalodon
       objectReference: {fileID: 0}
-    - target: {fileID: 8177713152652336292, guid: f01dc6d958cfc3f47b5729003ec2b841, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8177713152652336312, guid: f01dc6d958cfc3f47b5729003ec2b841, type: 3}
       propertyPath: _id.Value
       value: -12244
-      objectReference: {fileID: 0}
-    - target: {fileID: 8177713152652336314, guid: f01dc6d958cfc3f47b5729003ec2b841, type: 3}
-      propertyPath: m_Radius
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

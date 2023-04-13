@@ -24,6 +24,7 @@ public class MegalodonRagdollAttack : GAction
     private bool _prevUseGravity;
     private bool _hitShip;
     private Vector3 _prevSize;
+    private Vector3 _targetOriginalPosition;
 
     #endregion
 
@@ -51,6 +52,9 @@ public class MegalodonRagdollAttack : GAction
         Inventory.AddItem(Target);
 
         GWorld.Instance.GetWorld().ModifyState(_attackFreeItemName.ToString(), -1);
+
+        //Get's the target's starting position so megalodon does not lock on to ship when chasing, this allows the player to dodge the attack
+        _targetOriginalPosition = Target.transform.position;
 
         _goToZPos = true;
 
@@ -89,7 +93,9 @@ public class MegalodonRagdollAttack : GAction
         if (_goToZPos == false) { return; }
 
         var step = _attackSpeed * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(transform.position, Target.transform.position, step);
+        transform.position = Vector3.MoveTowards(transform.position, _targetOriginalPosition, step);
+
+        if(Vector3.Distance(transform.position, _targetOriginalPosition) < 2f) { _goToZPos = false; CheckIfDidntHitPlayer(); }
     }
 
     public override bool Perform()
@@ -99,7 +105,8 @@ public class MegalodonRagdollAttack : GAction
 
     public override bool PostPeform()
     {
-        _hitShip = false;
+        //close mouth
+        GAgent.StateMachine.Attack(0, false);
 
         GAgent.StateMachine.Rb.isKinematic = _prevIsKinematic;
         GAgent.StateMachine.Rb.useGravity = _prevUseGravity;
@@ -116,11 +123,22 @@ public class MegalodonRagdollAttack : GAction
         GWorld.Instance.GetWorld().ModifyState(_attackFreeItemName.ToString(), 1);
 
         Ship.Instance.FreezeShip(false);
-        Ship.Instance.Rb.AddForce(Vector3.right * 50f, ForceMode.VelocityChange);
+        //Only ragdoll ship in megalodon bit it
+        if (_hitShip) { Ship.Instance.Rb.AddForce(Vector3.right * 50f, ForceMode.VelocityChange); }
+
+        _hitShip = false;
 
         transform.localScale = _prevSize;
 
         return true;
+    }
+
+    private void CheckIfDidntHitPlayer()
+    {
+        if(_goToZPos == false && _hitShip == false)
+        {
+            GAgent.CancelPreviousActions();
+        }
     }
 
     private void EnableBodyCollider()

@@ -51,27 +51,27 @@ public class EnemyPushAttackCollider : MonoBehaviour
         EnableColliders(false);
     }
 
-    private void OnCollisionStay(Collision collision)
+    private void OnTriggerStay(Collider collider)
     {
-        CheckForSceneCollision(collision);   
+        CheckForSceneCollision(collider);
     }
 
-    private void CheckForSceneCollision(Collision collision)
+    private void CheckForSceneCollision(Collider collider)
     {
         if (_timeSincePushEnemy < 1f) { return; }
 
         //Don't push ship if hits shield
-        if(collision.gameObject.GetComponent<Shield>() != null) { Debug.Log("Hit Shield!"); return; }
+        if(collider.gameObject.GetComponent<Shield>() != null) { Debug.Log("Hit Shield!"); return; }
 
-        PushShip(collision);
+        PushShip(collider);
     }
 
-    private void PushShip(Collision collision)
+    private void PushShip(Collider collider)
     {
-        StartCoroutine(PushShipDelay(collision.contacts[0].point));
+        StartCoroutine(PushShipDelay(collider.gameObject.transform.position));
     }
 
-    private IEnumerator PushShipDelay(Vector3 contanctPoint)
+    private IEnumerator PushShipDelay(Vector3 targetPos)
     {
         yield return new WaitForEndOfFrame();
 
@@ -79,7 +79,7 @@ public class EnemyPushAttackCollider : MonoBehaviour
 
        // _pushParticles.Play();
 
-        Vector3 pushDir = transform.position - contanctPoint;
+        Vector3 pushDir = transform.position - targetPos;
 
         Ship.Instance.Rb.AddForce(-pushDir.normalized * _pushVelocity, ForceMode.VelocityChange);
 

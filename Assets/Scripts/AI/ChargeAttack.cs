@@ -70,6 +70,8 @@ public class ChargeAttack : GAction
     {
         if(GAgent.CurrentAction is not ChargeAttack) { return; }
 
+        transform.localPosition = new Vector3(135f, 2f, 6f);
+
         FinishCharge();
     }
 

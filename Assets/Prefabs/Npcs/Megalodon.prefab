@@ -4004,7 +4004,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4887968488686566316}
   - component: {fileID: 3244226790446825061}
-  - component: {fileID: 1455539024215656567}
   - component: {fileID: 594956741}
   - component: {fileID: 4449266137362916172}
   - component: {fileID: 594956742}
@@ -4023,7 +4022,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3444266730124953838}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2.585}
+  m_LocalPosition: {x: 0, y: 0, z: 2.193}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4046,19 +4045,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &1455539024215656567
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3444266730124953838}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &594956741
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -4070,7 +4056,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
-  m_Radius: 0.55
+  m_Radius: 1.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4449266137362916172
 MonoBehaviour:
@@ -5064,7 +5050,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4453489282889875348}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.299, z: 1.32}
+  m_LocalPosition: {x: 0, y: 0, z: 2.49}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5098,8 +5084,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1.4667366, z: 2.5972416}
+  m_Center: {x: 0, y: 0.012647867, z: 0.7986204}
 --- !u!114 &4453489282889875350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5673,8 +5659,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 4}
-  m_Center: {x: 0, y: 0, z: 1.3287445}
+  m_Size: {x: 2, y: 2, z: 3}
+  m_Center: {x: 0, y: 0, z: 0.88881576}
 --- !u!114 &8805694244049494945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27902,10 +27888,10 @@ Transform:
   m_Children:
   - {fileID: 4364041830307041225}
   - {fileID: 4453489282487423532}
+  - {fileID: 4887968488686566316}
   - {fileID: 4453489282889875351}
   - {fileID: 6022063796985875321}
   - {fileID: 8223282100829996152}
-  - {fileID: 4887968488686566316}
   - {fileID: 5369204394955099230}
   - {fileID: 8287263673618422385}
   m_Father: {fileID: 0}
@@ -28239,14 +28225,14 @@ MonoBehaviour:
   Cost: 1
   Target: {fileID: 0}
   TargetTag: 
-  Duration: 5
+  Duration: 2.5
   IsRunning: 0
   _attackItemTag: 3
   _attackFreeItemName: 3
   _mouthTransform: {fileID: 5854951976760682924}
-  _biteCollider: {fileID: 0}
+  _biteCollider: {fileID: 4453489282889875369}
   _bodyCollider: {fileID: 7105844370639543188}
-  _attackSpeed: 50
+  _attackSpeed: 100
 --- !u!114 &7153336119370978835
 MonoBehaviour:
   m_ObjectHideFlags: 0

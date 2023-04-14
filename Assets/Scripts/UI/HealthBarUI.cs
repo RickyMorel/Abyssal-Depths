@@ -21,6 +21,7 @@ public class HealthBarUI : MonoBehaviour
 
     private float _currentDamageFill = 1f;
     private bool _isUpdatingDamageFill = false;
+    private bool _isFlashingWhite = false;
 
     #endregion
 
@@ -54,6 +55,42 @@ public class HealthBarUI : MonoBehaviour
     {
         _healthFill.fillAmount = _ownHealth.CurrentHealth / _ownHealth.MaxHealth;
 
+       // if (!_isFlashingWhite) { StartCoroutine(FlashWhite()); }
+
         _isUpdatingDamageFill = true;
+    }
+
+    private IEnumerator FlashWhite()
+    {
+        _isFlashingWhite = true;
+
+        Color initialColor = _healthFill.color;
+        Color whiteColor = initialColor;
+        whiteColor.a = 0.3f;
+
+        float elapsedTime = 0f;
+        float waitTime = 0.3f;
+
+        while(elapsedTime < waitTime)
+        {
+            _healthFill.color = Color.Lerp(_healthFill.color, whiteColor, (elapsedTime / waitTime));
+            elapsedTime += Time.deltaTime;
+
+            yield return null;
+        }
+
+        elapsedTime = 0f;
+
+        while (elapsedTime < waitTime*1.5f)
+        {
+            _healthFill.color = Color.Lerp(_healthFill.color, initialColor, (elapsedTime / waitTime*1.5f));
+            elapsedTime += Time.deltaTime;
+
+            yield return null;
+        }
+
+        _isFlashingWhite = false;
+
+        yield return null; 
     }
 }

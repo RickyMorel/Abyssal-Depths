@@ -17,9 +17,6 @@ public class Damageable : MonoBehaviour
     [SerializeField] private float _currentHealth;
     [SerializeField] private int _maxHealth;
 
-    [Header("UI")]
-    [SerializeField] private Image _healthBarImage;
-
     [Header("FX")]
     [SerializeField] private ParticleSystem _damageParticles;
 
@@ -59,7 +56,7 @@ public class Damageable : MonoBehaviour
     public float MaxHealth => _maxHealth;
 
     public event Action<int> OnUpdateHealth;
-    public event Action<DamageTypes> OnDamaged;
+    public event Action<DamageTypes, int> OnDamaged;
     public event Action OnDie;
     public event Action<bool> OnElectrocution;
 
@@ -75,8 +72,6 @@ public class Damageable : MonoBehaviour
     public virtual void Start()
     {
         FindMeshes();
-
-        UpdateHealthUI();
 
         InstantiateDamageTypeParticles();
     }
@@ -174,8 +169,6 @@ public class Damageable : MonoBehaviour
     {
         _currentHealth = Mathf.Clamp(_currentHealth + amountAdded, 0, _maxHealth);
 
-        UpdateHealthUI();
-
         OnUpdateHealth?.Invoke(amountAdded);
     }
 
@@ -184,8 +177,6 @@ public class Damageable : MonoBehaviour
         _currentHealth = Mathf.Clamp(newHealth, 0f, MaxHealth);
 
         OnUpdateHealth?.Invoke(newHealth);
-
-        UpdateHealthUI();
 
         if (IsDead())
             Die();
@@ -229,9 +220,7 @@ public class Damageable : MonoBehaviour
 
         _currentHealth = Mathf.Clamp(_currentHealth - finalDamage, 0, _maxHealth);
 
-        UpdateHealthUI();
-
-        OnDamaged?.Invoke(_damageData.DamageTypes[index]);
+        OnDamaged?.Invoke(_damageData.DamageTypes[index], (int)finalDamage);
 
         if(finalDamage != 0) { DamagePopup.Create(transform.position, (int)finalDamage, _damageData.DamageTypes[index], isWeak); }
 
@@ -246,9 +235,7 @@ public class Damageable : MonoBehaviour
 
         _currentHealth = Mathf.Clamp(_currentHealth - damage, 0, _maxHealth);
 
-        UpdateHealthUI();
-
-        OnDamaged?.Invoke(DamageTypes.None);
+        OnDamaged?.Invoke(DamageTypes.None, damage);
 
         if (damage != 0) { DamagePopup.Create(transform.position, damage, DamageTypes.None, false); }
 
@@ -414,17 +401,6 @@ public class Damageable : MonoBehaviour
         if (isWeak && !isResistant) { damageAux = damageAux * _damageData.Weakness[index]; }
 
         return (int)damageAux;
-    }
-
-    #endregion
-
-    #region UI
-
-    public virtual void UpdateHealthUI()
-    {
-        if(_healthBarImage == null) { return; }
-
-        _healthBarImage.fillAmount = CurrentHealth / MaxHealth;
     }
 
     #endregion

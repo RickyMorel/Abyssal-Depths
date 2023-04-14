@@ -74,7 +74,7 @@ public class AttackHitBox : MonoBehaviour
             enemyHealth.DamageData = _damageData;
             enemyHealth.Damage(_damage);
         }
-        else { aiHealth.Hurt(DamageTypes.Base); }
+        else { aiHealth.Hurt(DamageTypes.Base, 0); }
 
         _ownHealth.GetComponent<PlayerComponents>()?.PlayerCamera.ShakeCamera(2f, 50f, 0.2f);
     }
@@ -84,7 +84,7 @@ public class AttackHitBox : MonoBehaviour
         if (enemyHealth is PlayerHealth)
         {
             PlayerHealth playerHealth = enemyHealth as PlayerHealth;
-            playerHealth.Hurt(DamageTypes.Base);
+            playerHealth.Hurt(DamageTypes.Base, 0);
             _ownHealth.GetComponent<PlayerComponents>()?.PlayerCamera.ShakeCamera(2f, 50f, 0.2f);
         }
 

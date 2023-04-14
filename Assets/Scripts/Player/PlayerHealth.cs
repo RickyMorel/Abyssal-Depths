@@ -40,9 +40,18 @@ public class PlayerHealth : Damageable
     public override void Start()
     {
         base.Start();
+
+        OnDamaged += UpdateBloodFX;
+        OnUpdateHealth += HandleUpdateHealth;
     }
 
-    public virtual void Hurt(DamageTypes damageType)
+    private void OnDestroy()
+    {
+        OnDamaged -= UpdateBloodFX;
+        OnUpdateHealth -= HandleUpdateHealth;
+    }
+
+    public virtual void Hurt(DamageTypes damageType, int damage)
     {
         OnHurt?.Invoke();
 
@@ -86,7 +95,12 @@ public class PlayerHealth : Damageable
         }
     }
 
-    public override void UpdateHealthUI()
+    private void HandleUpdateHealth(int damage)
+    {
+        UpdateBloodFX(DamageTypes.None, damage);
+    }
+
+    public void UpdateBloodFX(DamageTypes damageType, int damage)
     {
         if(_mesh == null) { Debug.LogError("Need to assign mesh with blood shader!: " + gameObject.name); return; }
 

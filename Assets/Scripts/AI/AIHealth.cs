@@ -50,7 +50,6 @@ public class AIHealth : PlayerHealth
 
     private void HandleDead()
     {
-        Debug.Log("HandleDead: " + gameObject.name);
         StopPreviousAction();
         _gAgent.enabled = false;
         _rb.isKinematic = false;
@@ -59,11 +58,9 @@ public class AIHealth : PlayerHealth
         Invoke(nameof(DisableSelf), 10f);
     }
 
-    public override void Hurt(DamageTypes damageType)
+    public override void Hurt(DamageTypes damageType, int damage)
     {
-        Debug.Log("Hurt: " + gameObject.name);
-
-        if (CanKill == false) { base.Hurt(damageType); }
+        if (CanKill == false) { base.Hurt(damageType, damage); }
 
         CheckIfLowHealth();
         CheckIfScared();

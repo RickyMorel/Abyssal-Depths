@@ -41,7 +41,7 @@ public class AICombat : PlayerCombat
     {
         base.Hit();
 
-        _hitParticle.Play();
+        _hitParticle?.Play();
     }
 
     public override void Shoot()

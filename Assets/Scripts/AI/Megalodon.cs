@@ -13,12 +13,21 @@ public class Megalodon : GAgent
     {
         base.Start();
 
-        OnExitAction += GetNewAction;
+        //OnExitAction += GetNewAction;
 
         GetComponent<NavMeshAgent>().updateRotation = false;
         GetComponent<NavMeshAgent>().avoidancePriority = 0;
 
-        GetNewAction();
+        //GetNewAction();
+
+        SubGoal s3 = new SubGoal("throwRock", 1, false);
+        Goals.Add(s3, 5);
+
+        //SubGoal s2 = new SubGoal("hasCharged", 1, false);
+        //Goals.Add(s2, 3);
+
+        //SubGoal s6 = new SubGoal("ragdollShip", 1, false);
+        //Goals.Add(s6, 3);
     }
 
     private void Update()

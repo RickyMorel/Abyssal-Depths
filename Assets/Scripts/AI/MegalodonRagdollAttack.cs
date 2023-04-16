@@ -14,6 +14,7 @@ public class MegalodonRagdollAttack : GAction
     [SerializeField] private Collider _biteCollider;
     [SerializeField] private Collider _bodyCollider;
     [SerializeField] private float _attackSpeed = 50f;
+    [SerializeField] private float _throwForce = 50f;
 
     #endregion
 
@@ -66,6 +67,10 @@ public class MegalodonRagdollAttack : GAction
     public void BiteShip()
     {
         if (GAgent.CurrentAction is not MegalodonRagdollAttack) { return; }
+
+        //Position the megalodon correctly to bite ship
+        transform.position = Target.transform.position;
+        transform.rotation = Target.transform.rotation;
 
         Ship.Instance.FreezeShip(true);
 
@@ -124,7 +129,7 @@ public class MegalodonRagdollAttack : GAction
 
         Ship.Instance.FreezeShip(false);
         //Only ragdoll ship in megalodon bit it
-        if (_hitShip) { Ship.Instance.Rb.AddForce(Vector3.right * 50f, ForceMode.VelocityChange); }
+        if (_hitShip) { Ship.Instance.Rb.AddForce(Vector3.right * _throwForce, ForceMode.VelocityChange); }
 
         _hitShip = false;
 

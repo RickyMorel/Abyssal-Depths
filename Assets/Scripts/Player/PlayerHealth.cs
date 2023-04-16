@@ -53,6 +53,8 @@ public class PlayerHealth : Damageable
 
     public virtual void Hurt(DamageTypes damageType, int damage)
     {
+        Debug.Log("Hurt: " + gameObject.name);
+
         OnHurt?.Invoke();
 
         StartCoroutine(HurtCoroutine());

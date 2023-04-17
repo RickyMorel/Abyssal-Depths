@@ -22,6 +22,8 @@ public class AIHealth : PlayerHealth
 
     #region Public Properties
 
+    public static event Action OnBossDied;
+
     public bool CanKill => _canKill;
 
     #endregion
@@ -96,5 +98,10 @@ public class AIHealth : PlayerHealth
     private void DisableSelf()
     {
         gameObject.SetActive(false);
+    }
+
+    public void InvokeBossDiedEvent()
+    {
+        OnBossDied?.Invoke();
     }
 }

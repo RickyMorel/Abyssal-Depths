@@ -113,9 +113,6 @@ public class MegalodonRagdollAttack : GAction
         //close mouth
         GAgent.StateMachine.Attack(0, false);
 
-        GAgent.StateMachine.Rb.isKinematic = _prevIsKinematic;
-        GAgent.StateMachine.Rb.useGravity = _prevUseGravity;
-
         //Enable hitBox after 4 seconds to prevent shield from hitting megalodon
         Invoke(nameof(EnableBodyCollider), 4f);
 
@@ -135,6 +132,8 @@ public class MegalodonRagdollAttack : GAction
 
         transform.localScale = _prevSize;
 
+        GAgent.StateMachine.CanMove = true;
+
         return true;
     }
 
@@ -149,5 +148,9 @@ public class MegalodonRagdollAttack : GAction
     private void EnableBodyCollider()
     {
         _bodyCollider.enabled = true;
+        _biteCollider.enabled = false;
+
+        GAgent.StateMachine.Rb.isKinematic = _prevIsKinematic;
+        GAgent.StateMachine.Rb.useGravity = _prevUseGravity;
     }
 }

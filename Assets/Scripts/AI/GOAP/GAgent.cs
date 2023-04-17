@@ -62,6 +62,7 @@ public class GAgent : MonoBehaviour
     public event Action OnExitAction;
 
     public AIStateMachine StateMachine => _aiStateMachine;
+    public Damageable Damageable => _damageable;
     public bool IsMoving => _isMoving;
 
     #endregion

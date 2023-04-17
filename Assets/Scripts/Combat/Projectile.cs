@@ -80,7 +80,7 @@ public class Projectile : MonoBehaviour
         transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
 
         _rb.velocity = Vector3.zero;
-        _rb.AddForce(direction.normalized * _speed, ForceMode.Impulse);
+        _rb.AddForce(direction.normalized * _rb.mass * _speed, ForceMode.Impulse);
 
         if (lookDir == default(Vector3)) { return; }
 

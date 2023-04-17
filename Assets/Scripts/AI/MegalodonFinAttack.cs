@@ -56,6 +56,7 @@ public class MegalodonFinAttack : GAction
         GAgent.StateMachine.SetMovementSpeed(1.5f);
         Agent.speed = _finChaseSpeed;
         GAgent.SetGoalDistance(_finAttackDistance);
+        GAgent.StateMachine.CanMove = true;
 
         GameObject newTargetObj = new GameObject();
         newTargetObj.transform.position = Ship.Instance.transform.position;

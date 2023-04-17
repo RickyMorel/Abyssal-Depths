@@ -13,6 +13,8 @@ public class Megalodon : GAgent
     {
         base.Start();
 
+        Damageable.OnDie += HandleBossDied;
+
         GetComponent<NavMeshAgent>().updateRotation = false;
         GetComponent<NavMeshAgent>().avoidancePriority = 0;
 
@@ -25,8 +27,20 @@ public class Megalodon : GAgent
         //SubGoal s6 = new SubGoal("ragdollShip", 1, false);
         //Goals.Add(s6, 3);
 
-        SubGoal s2 = new SubGoal("hasFlappedFins", 1, false);
-        Goals.Add(s2, 3);
+        //SubGoal s2 = new SubGoal("hasFlappedFins", 1, false);
+        //Goals.Add(s2, 3);
+    }
+
+    private void OnDestroy()
+    {
+        Damageable.OnDie -= HandleBossDied;
+    }
+
+    private void HandleBossDied()
+    {
+        AIHealth aIHealth = Damageable as AIHealth;
+
+        aIHealth.InvokeBossDiedEvent();
     }
 
     private void Update()
@@ -34,12 +48,12 @@ public class Megalodon : GAgent
         UpdateRotation();
     }
 
-    //public override void LateUpdate()
-    //{
-    //    base.LateUpdate();
+    public override void LateUpdate()
+    {
+        base.LateUpdate();
 
-    //    TryGetNewAction();
-    //}
+        TryGetNewAction();
+    }
 
     private void TryGetNewAction()
     {
@@ -48,7 +62,7 @@ public class Megalodon : GAgent
         //Set of attacks up to 50% health
         if (_damageable.CurrentHealth > _damageable.MaxHealth * 0.5f)
         {
-            int randomAttack = Random.Range(0,2);
+            int randomAttack = Random.Range(0, 2);
 
             switch (randomAttack)
             {
@@ -75,8 +89,8 @@ public class Megalodon : GAgent
                     Goals.Add(s6, 3);
                     break;
                 case 1:
-                    SubGoal s7 = new SubGoal("ragdollShip", 1, true);
-                    Goals.Add(s7, 3);
+                    SubGoal s2 = new SubGoal("hasFlappedFins", 1, true);
+                    Goals.Add(s2, 3);
                     break;
 
             }

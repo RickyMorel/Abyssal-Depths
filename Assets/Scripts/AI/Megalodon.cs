@@ -13,21 +13,20 @@ public class Megalodon : GAgent
     {
         base.Start();
 
-        //OnExitAction += GetNewAction;
-
         GetComponent<NavMeshAgent>().updateRotation = false;
         GetComponent<NavMeshAgent>().avoidancePriority = 0;
 
-        //GetNewAction();
-
-        SubGoal s3 = new SubGoal("throwRock", 1, false);
-        Goals.Add(s3, 5);
+        //SubGoal s3 = new SubGoal("throwRock", 1, false);
+        //Goals.Add(s3, 5);
 
         //SubGoal s2 = new SubGoal("hasCharged", 1, false);
         //Goals.Add(s2, 3);
 
         //SubGoal s6 = new SubGoal("ragdollShip", 1, false);
         //Goals.Add(s6, 3);
+
+        SubGoal s2 = new SubGoal("hasFlappedFins", 1, false);
+        Goals.Add(s2, 3);
     }
 
     private void Update()
@@ -35,8 +34,17 @@ public class Megalodon : GAgent
         UpdateRotation();
     }
 
-    private void GetNewAction()
+    //public override void LateUpdate()
+    //{
+    //    base.LateUpdate();
+
+    //    TryGetNewAction();
+    //}
+
+    private void TryGetNewAction()
     {
+        if(Goals.Count > 0) { return; }
+
         //Set of attacks up to 50% health
         if (_damageable.CurrentHealth > _damageable.MaxHealth * 0.5f)
         {

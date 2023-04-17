@@ -88,7 +88,7 @@ public class GAgent : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    public virtual void FixedUpdate()
     {
         if (_aiStateMachine.IsBouncingOffShield) { return; }
 
@@ -98,7 +98,7 @@ public class GAgent : MonoBehaviour
     }
 
 
-    private void LateUpdate()
+    public virtual void LateUpdate()
     {
         EnableMovement();
 

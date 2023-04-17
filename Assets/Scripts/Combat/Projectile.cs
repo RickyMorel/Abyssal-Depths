@@ -35,6 +35,7 @@ public class Projectile : MonoBehaviour
     public bool DestroyOnHit => _destroyOnHit;
     public DamageData DamageData => _damageData;
     public Weapon Weapon => _weapon;
+    public Rigidbody Rb => _rb;
     public float DealDamageAfterSeconds => _dealDamageAfterSeconds;
     public bool ShakeCameraOnHit => _shakeCameraOnHit;
 

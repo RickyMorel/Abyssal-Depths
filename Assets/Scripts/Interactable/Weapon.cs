@@ -17,6 +17,7 @@ public class Weapon : Upgradable
 
     private WeaponHumble _weaponHumble;
     private float _rotationX;
+    private bool _shouldRotate;
 
     #endregion
 
@@ -25,6 +26,12 @@ public class Weapon : Upgradable
     public GameObject ProjectilePrefab => _weaponHumble.ProjectilePrefab;
     public List<Transform> ShootTransforms => _weaponHumble.ShootTransforms;
     public Transform TurretHead => _weaponHumble.TurretHead;
+
+    #endregion
+
+    #region Getters and Setters
+
+    public bool ShouldRotate { get { return _shouldRotate; } set { _shouldRotate = value; } }
 
     #endregion
 
@@ -50,9 +57,9 @@ public class Weapon : Upgradable
     private void Update()
     {
         if (CurrentPlayer == null) { return; }
-
+        
         if (CanUse == false) { return; }
-
+        
         _weaponHumble.WeaponShoot.CheckShootInput();
         CheckRotationInput();
     }
@@ -66,7 +73,7 @@ public class Weapon : Upgradable
 
     private void CheckRotationInput()
     {
-        if(!DoesRotate()) { return; }
+        if(!DoesRotate() || !_shouldRotate) { return; }
 
         if (CurrentPlayer.MoveDirection.x == 0) { return; }
 

@@ -8,13 +8,20 @@ public class LightSaber : MeleeWeapon
 
     [SerializeField] private GameObject _handle;
     [SerializeField] private BoxCollider _bladeBoxCollider;
+    [SerializeField] private Transform _moveToForLightSaber;
+    [SerializeField] private float _speed;
+    [SerializeField] private float _returnLightSaberAfterSeconds;
+    [SerializeField] private Transform _originalPosition;
+    [SerializeField] private Transform _rotationPoint;
 
     #endregion
 
     #region Private Variables
 
-    private float _rotationSpeed = 20;
+    private Transform _shootToPosition;
     private bool _isBladeOut = false;
+    private bool _boomerangThrow = false;
+    private bool _canShootSaber = true;
 
     #endregion
 
@@ -43,14 +50,29 @@ public class LightSaber : MeleeWeapon
             TimelinesManager.Instance.LightSaberBlade.gameObject.transform.localPosition = new Vector3(0, 0, 0);
             TimelinesManager.Instance.LightSaberIn.Play();
             _bladeBoxCollider.enabled = false;
+
         }
+    }
+
+    public override void Update()
+    {
+        base.Update();
+
+        ThrowLightSaber();
+
+        CheckShootInput();
     }
 
     #endregion
 
     public override void Shoot()
     {
-        _handle.transform.Rotate(_rotationSpeed * Time.deltaTime, 0, 0);
+        if (!_canShootSaber) { return; }
+
+        _canShootSaber = false;
+        _weapon.ShouldRotate = false;
+        _shootToPosition = _moveToForLightSaber;
+        StartCoroutine(BoomerangReturn());
     }
 
     public override void CheckShootInput()
@@ -59,5 +81,25 @@ public class LightSaber : MeleeWeapon
         {
             Shoot();
         }
+    }
+
+    private void ThrowLightSaber()
+    {
+        if (_boomerangThrow) { _handle.transform.position = Vector3.MoveTowards(_handle.transform.position, _shootToPosition.position, Time.deltaTime*_speed); }
+        if (!_boomerangThrow) { _handle.transform.position = Vector3.MoveTowards(_handle.transform.position, _originalPosition.position, Time.deltaTime * _speed); }
+        if (_handle.transform.position == _originalPosition.position && !_boomerangThrow) 
+        {
+            _handle.transform.SetParent(_rotationPoint);
+            _canShootSaber = true;
+            _weapon.ShouldRotate = true;
+        }
+    }
+
+    private IEnumerator BoomerangReturn()
+    {
+        _boomerangThrow = true;
+        _handle.transform.SetParent(null);
+        yield return new WaitForSeconds(_returnLightSaberAfterSeconds);
+        _boomerangThrow = false;
     }
 }

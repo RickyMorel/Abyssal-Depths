@@ -111,10 +111,11 @@ Transform:
   m_GameObject: {fileID: 6835169869500657298}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 16, y: 16, z: 16}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5150796384332599383}
+  - {fileID: 2765143002651586586}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -161,5 +162,76 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 50
   _damageTypes: 0000000000000000
-  _particles: []
-  _shouldUnparentParticle: 0
+  _particles:
+  - {fileID: 2634233617775741582}
+  _shouldUnparentParticle: 1
+  _shakeCameraOnHit: 1
+--- !u!1001 &1836120208746534778
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 2
+    m_TransformParent: {fileID: 7837682231542152147}
+    m_Modifications:
+    - target: {fileID: 4550033597338527584, guid: 2dc071a5a7adc4b499de45cce8f261f6, type: 3}
+      propertyPath: m_RootOrder
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 4550033597338527584, guid: 2dc071a5a7adc4b499de45cce8f261f6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4550033597338527584, guid: 2dc071a5a7adc4b499de45cce8f261f6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4550033597338527584, guid: 2dc071a5a7adc4b499de45cce8f261f6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4550033597338527584, guid: 2dc071a5a7adc4b499de45cce8f261f6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4550033597338527584, guid: 2dc071a5a7adc4b499de45cce8f261f6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4550033597338527584, guid: 2dc071a5a7adc4b499de45cce8f261f6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4550033597338527584, guid: 2dc071a5a7adc4b499de45cce8f261f6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4550033597338527584, guid: 2dc071a5a7adc4b499de45cce8f261f6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4550033597338527584, guid: 2dc071a5a7adc4b499de45cce8f261f6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4550033597338527584, guid: 2dc071a5a7adc4b499de45cce8f261f6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4553950019469766298, guid: 2dc071a5a7adc4b499de45cce8f261f6, type: 3}
+      propertyPath: m_Name
+      value: RockProjectileSmashParticles
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_AddedGameObjects: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2dc071a5a7adc4b499de45cce8f261f6, type: 3}
+--- !u!198 &2634233617775741582 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4464641863540448756, guid: 2dc071a5a7adc4b499de45cce8f261f6, type: 3}
+  m_PrefabInstance: {fileID: 1836120208746534778}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2765143002651586586 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4550033597338527584, guid: 2dc071a5a7adc4b499de45cce8f261f6, type: 3}
+  m_PrefabInstance: {fileID: 1836120208746534778}
+  m_PrefabAsset: {fileID: 0}

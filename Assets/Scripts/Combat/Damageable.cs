@@ -109,11 +109,14 @@ public class Damageable : MonoBehaviour
         {
             Damage(_damageData.Damage[0]);
 
+            if (projectile.ShakeCameraOnHit) { ShipCamera.Instance.ViolentShake(); }
+
             //If the projectile has 2 different damagetypes it will also do the damage for the second damagetype, if the second is none though, it will do its impact damage
             //or if both damagetypes are same, we don't want to do anything else
             if (projectile.DamageTypes[0] != projectile.DamageTypes[1] && projectile.DamageTypes[1] != DamageTypes.None) { Damage(_damageData.Damage[1], false, false, null, 1); }
             else if (projectile.DamageTypes[0] != projectile.DamageTypes[1] && projectile.DamageTypes[1] == DamageTypes.None) { Damage(_damageData.ImpactDamage, true); }
 
+            projectile.PlayImpactParticles(other.ClosestPointOnBounds(transform.position));
             projectile.DestroySelf();
         }
         else

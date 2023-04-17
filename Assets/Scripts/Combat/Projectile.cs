@@ -12,6 +12,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] protected DamageTypes[] _damageTypes;
     [SerializeField] protected ParticleSystem[] _particles;
     [SerializeField] protected bool _shouldUnparentParticle = false;
+    [SerializeField] protected bool _shakeCameraOnHit = false;
 
     #endregion
 
@@ -35,6 +36,7 @@ public class Projectile : MonoBehaviour
     public DamageData DamageData => _damageData;
     public Weapon Weapon => _weapon;
     public float DealDamageAfterSeconds => _dealDamageAfterSeconds;
+    public bool ShakeCameraOnHit => _shakeCameraOnHit;
 
     #endregion
 
@@ -100,13 +102,18 @@ public class Projectile : MonoBehaviour
         Initialize(newOwnerTag);
     }
 
+    public void PlayImpactParticles(Vector3 impactPoint)
+    {
+        foreach (ParticleSystem particle in _particles)
+        {
+            if (_shouldUnparentParticle) { particle.transform.SetParent(null); }
+            particle.transform.position = impactPoint;
+            particle.Play();
+        }
+    }
+
     public void DestroySelf()
     {
-        if (_shouldUnparentParticle) 
-        {
-            foreach (ParticleSystem particle in _particles)
-                particle.transform.SetParent(null);
-        }
         Destroy(gameObject);
     }
 

@@ -83,8 +83,6 @@ public class EnemyPushAttackCollider : MonoBehaviour
 
         Ship.Instance.Rb.AddForce(-pushDir.normalized * _pushVelocity, ForceMode.VelocityChange);
 
-        ShipCamera.Instance.ShakeCamera(2f, 50f, 0.2f);
-
-        Debug.Log("PushShip!");
+        ShipCamera.Instance.NormalShake();
     }
 }

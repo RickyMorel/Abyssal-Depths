@@ -33,6 +33,16 @@ public class BaseCamera : MonoBehaviour
         StartCoroutine(ProcessShake(shakeAmplitude, shakeFrecuency, shakeTiming));
     }
 
+    public void NormalShake()
+    {
+        StartCoroutine(ProcessShake(2f, 50f, 0.2f));
+    }
+
+    public void ViolentShake()
+    {
+        StartCoroutine(ProcessShake(10f, 50f, 0.2f));
+    }
+
     private IEnumerator ProcessShake(float shakeAmplitude, float shakeFrecuency, float shakeTiming)
     {
         Noise(shakeAmplitude, shakeFrecuency);

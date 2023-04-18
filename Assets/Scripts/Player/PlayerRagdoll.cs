@@ -48,7 +48,7 @@ public class PlayerRagdoll : MonoBehaviour
 
     public void EnableRagdoll(bool isEnabled)
     {
-        if (_colliders.Count < 1) { if (isEnabled) { PlayDeathAnimation(); } return; }
+        if (_colliders.Count <= 1) { if (isEnabled) { PlayDeathAnimation(); } return; }
 
         if (isEnabled == false)
         {

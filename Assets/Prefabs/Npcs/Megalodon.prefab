@@ -26657,9 +26657,9 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!65 &7105844370639543188
 BoxCollider:
@@ -27619,6 +27619,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5342862816387019742}
+  - component: {fileID: 5370035049056795246}
   m_Layer: 13
   m_Name: metarig
   m_TagString: Untagged
@@ -27642,6 +27643,19 @@ Transform:
   m_Father: {fileID: 4364041830307041225}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &5370035049056795246
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7546128835301851198}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.01, y: 0.036685422, z: 0.014829581}
+  m_Center: {x: 6.025194e-10, y: -0.0052790195, z: -0.0024147914}
 --- !u!1 &7590531913283655872
 GameObject:
   m_ObjectHideFlags: 0
@@ -28349,7 +28363,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cad5356aa57c2224587c814e3c251dab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _colliders: []
+  _colliders:
+  - {fileID: 5370035049056795246}
 --- !u!114 &8177713152652336295
 MonoBehaviour:
   m_ObjectHideFlags: 0

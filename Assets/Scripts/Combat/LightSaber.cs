@@ -6,13 +6,18 @@ public class LightSaber : MeleeWeapon
 {
     #region Editor Fields
 
-    [SerializeField] private GameObject _handle;
-    [SerializeField] private BoxCollider _bladeBoxCollider;
-    [SerializeField] private Transform _moveToForLightSaber;
-    [SerializeField] private float _speed;
-    [SerializeField] private float _returnLightSaberAfterSeconds;
+    [Header("Transforms")]
     [SerializeField] private Transform _originalPosition;
     [SerializeField] private Transform _rotationPoint;
+    [SerializeField] private Transform _moveToForLightSaber;
+    [Header("Object related")]
+    [SerializeField] private GameObject _handle;
+    [SerializeField] private BoxCollider _bladeBoxCollider;
+    [Header("Floats")]
+    [SerializeField] private float _flyingSpeed;
+    [SerializeField] private float _rotationSpeed;
+    [SerializeField] private float _returnLightSaberAfterSeconds;
+
 
     #endregion
 
@@ -59,8 +64,6 @@ public class LightSaber : MeleeWeapon
         base.Update();
 
         ThrowLightSaber();
-
-        CheckShootInput();
     }
 
     #endregion
@@ -85,11 +88,20 @@ public class LightSaber : MeleeWeapon
 
     private void ThrowLightSaber()
     {
-        if (_boomerangThrow) { _handle.transform.position = Vector3.MoveTowards(_handle.transform.position, _shootToPosition.position, Time.deltaTime*_speed); }
-        if (!_boomerangThrow) { _handle.transform.position = Vector3.MoveTowards(_handle.transform.position, _originalPosition.position, Time.deltaTime * _speed); }
+        if (_boomerangThrow) 
+        { 
+            _handle.transform.position = Vector3.MoveTowards(_handle.transform.position, _shootToPosition.position, Time.deltaTime * _flyingSpeed);
+            if (!_canShootSaber) { _handle.transform.Rotate(Vector3.right * (_rotationSpeed * Time.deltaTime)); }
+        }
+        if (!_boomerangThrow) 
+        { 
+            _handle.transform.position = Vector3.MoveTowards(_handle.transform.position, _originalPosition.position, Time.deltaTime * _flyingSpeed);
+            if (!_canShootSaber) { _handle.transform.Rotate(Vector3.right * (_rotationSpeed * Time.deltaTime)); }
+        }
         if (_handle.transform.position == _originalPosition.position && !_boomerangThrow) 
         {
             _handle.transform.SetParent(_rotationPoint);
+            _handle.transform.localRotation = Quaternion.identity;
             _canShootSaber = true;
             _weapon.ShouldRotate = true;
         }

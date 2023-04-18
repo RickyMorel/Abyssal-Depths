@@ -1175,13 +1175,14 @@ MonoBehaviour:
   maxDistance: 10
   _moveForce: 50
   _maxMovementSpeed: 20
-  _handle: {fileID: 4546399973345823777}
-  _bladeBoxCollider: {fileID: 3654100921933991086}
-  _moveToForLightSaber: {fileID: 6521064220582519033}
-  _speed: 40
-  _returnLightSaberAfterSeconds: 0.3
   _originalPosition: {fileID: 31343925380297807}
   _rotationPoint: {fileID: 3597213311831459394}
+  _moveToForLightSaber: {fileID: 6521064220582519033}
+  _handle: {fileID: 4546399973345823777}
+  _bladeBoxCollider: {fileID: 3654100921933991086}
+  _flyingSpeed: 50
+  _rotationSpeed: 1000
+  _returnLightSaberAfterSeconds: 0.3
 --- !u!1 &1757680682169634164
 GameObject:
   m_ObjectHideFlags: 0
@@ -4630,7 +4631,7 @@ MonoBehaviour:
     UpgradeSO: {fileID: 11400000, guid: 861088c812900df4d89148fa68f54710, type: 2}
   - UpgradeMesh: {fileID: 989228549857933022}
     ShootTransform:
-    - {fileID: 0}
+    - {fileID: 8448180388064146202}
     UpgradeSO: {fileID: 11400000, guid: 983553a38de466746a329b27523a9d12, type: 2}
   _chipDropTransform: {fileID: 2389941571288428507}
   _rotationSpeed: 300

@@ -17,7 +17,7 @@ public class Weapon : Upgradable
 
     private WeaponHumble _weaponHumble;
     private float _rotationX;
-    private bool _shouldRotate;
+    private bool _shouldRotate = true;
 
     #endregion
 
@@ -59,7 +59,7 @@ public class Weapon : Upgradable
         if (CurrentPlayer == null) { return; }
         
         if (CanUse == false) { return; }
-        
+
         _weaponHumble.WeaponShoot.CheckShootInput();
         CheckRotationInput();
     }

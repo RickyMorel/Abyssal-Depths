@@ -44,6 +44,7 @@ public class ChargeAttack : GAction
         GAgent.StateMachine.SetMovementSpeed(2f);
         Agent.speed = _chargeSpeed;
         GAgent.SetGoalDistance(_chargeStopDistance);
+        GAgent.StateMachine.AICombat.EnablePushAttack();
         //Agent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
 
         Target = Ship.Instance.gameObject;

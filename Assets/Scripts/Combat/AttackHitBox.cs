@@ -23,6 +23,8 @@ public class AttackHitBox : MonoBehaviour
 
     #region Editor Fields
 
+    [Tooltip(" Selects a stat from EnemyDamageDataSO:\n 0-Damage element 0\n 1-Damage element 1\n 2-SecondaryValue element 0\n 3-SecondaryValue element 1\n")]
+    [SerializeField] private int _enemyDamageStat = -1;
     [SerializeField] protected Damageable _ownHealth;
     [SerializeField] protected DamageTypes[] _damageTypes;
 
@@ -91,7 +93,26 @@ public class AttackHitBox : MonoBehaviour
         if (enemyHealth is ShipHealth)
         {
             enemyHealth.DamageData = _damageData;
-            enemyHealth.Damage(_damageData.Damage[0]);
+
+            int damage = 0;
+
+            switch (_enemyDamageStat)
+            {
+                case 0|-1:
+                    damage = _damageData.Damage[0];
+                    break;
+                case 1:
+                    damage = _damageData.Damage[1];
+                    break;
+                case 2:
+                    damage = (int)_damageData.SecondaryValue[0];
+                    break;
+                case 3:
+                    damage = (int)_damageData.SecondaryValue[1];
+                    break;
+            }
+
+            enemyHealth.Damage(damage);
         }
     }
 }

@@ -1,13 +1,24 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
 public class Megalodon : GAgent
 {
+    #region Editor Fields
+
+    [SerializeField] private ParticleSystem _rockPickupParticles;
+
+    #endregion
+
+    #region Private Variables
+
     private float _currentYTarget;
+
+    #endregion
 
     public override void Start()
     {
@@ -18,8 +29,8 @@ public class Megalodon : GAgent
         GetComponent<NavMeshAgent>().updateRotation = false;
         GetComponent<NavMeshAgent>().avoidancePriority = 0;
 
-        //SubGoal s3 = new SubGoal("throwRock", 1, false);
-        //Goals.Add(s3, 5);
+        SubGoal s3 = new SubGoal("throwRock", 1, false);
+        Goals.Add(s3, 5);
 
         //SubGoal s2 = new SubGoal("hasCharged", 1, false);
         //Goals.Add(s2, 3);
@@ -48,12 +59,12 @@ public class Megalodon : GAgent
         UpdateRotation();
     }
 
-    public override void LateUpdate()
-    {
-        base.LateUpdate();
+    //public override void LateUpdate()
+    //{
+    //    base.LateUpdate();
 
-        TryGetNewAction();
-    }
+    //    TryGetNewAction();
+    //}
 
     private void TryGetNewAction()
     {
@@ -130,6 +141,11 @@ public class Megalodon : GAgent
                 StateMachine.Anim.Play("-90Turn", 0);
                 break;
         }
+    }
+    
+    public void PickupRockEvent()
+    {
+        _rockPickupParticles.Play();
     }
 }
 

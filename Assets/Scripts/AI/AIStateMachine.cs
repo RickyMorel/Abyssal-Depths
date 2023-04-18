@@ -8,6 +8,7 @@ public class AIStateMachine : BaseStateMachine
     #region Private Variables
 
     private NavMeshAgent _agent;
+    private AICombat _aiCombat;
     private bool _isBouncingOffShield = false;
     private float _movementSpeed = 1f;
 
@@ -16,6 +17,7 @@ public class AIStateMachine : BaseStateMachine
     #region Public Properties
 
     public NavMeshAgent Agent => _agent;
+    public AICombat AICombat => _aiCombat;
     public bool IsBouncingOffShield => _isBouncingOffShield;
 
     #endregion
@@ -25,6 +27,7 @@ public class AIStateMachine : BaseStateMachine
         base.Start();
 
         _agent = GetComponent<NavMeshAgent>();
+        _aiCombat = GetComponent<AICombat>();
     }
 
     public override void Move()

@@ -63,11 +63,12 @@ public class EnemyPushAttackCollider : MonoBehaviour
         //Don't push ship if hits shield
         if(collider.gameObject.GetComponent<Shield>() != null) { Debug.Log("Hit Shield!"); return; }
 
-        PushShip(collider);
+        if (collider.gameObject.tag == "MainShip") { PushShip(collider); }
     }
 
     private void PushShip(Collider collider)
     {
+        Debug.Log("Push Ship!");
         StartCoroutine(PushShipDelay(collider.gameObject.transform.position));
     }
 
@@ -81,7 +82,7 @@ public class EnemyPushAttackCollider : MonoBehaviour
 
         Vector3 pushDir = transform.position - targetPos;
 
-        Ship.Instance.Rb.AddForce(-pushDir.normalized * _pushVelocity, ForceMode.VelocityChange);
+        Ship.Instance.Rb.AddForce(-pushDir.normalized * _pushVelocity * Time.deltaTime, ForceMode.VelocityChange);
 
         ShipCamera.Instance.NormalShake();
     }

@@ -19,6 +19,9 @@ public class Interactable : MonoBehaviour
     [SerializeField] private bool _isSingleUse = false;
     [SerializeField] private float _singleUseTime = 0.5f;
 
+    [Header("FX")]
+    [SerializeField] private ParticleSystem _onInteractParticles;
+
     #endregion
 
     #region Private Variables
@@ -84,6 +87,8 @@ public class Interactable : MonoBehaviour
     public void SetCurrentPlayer(BaseInteractionController interactionController)
     {
         _humble.SetCurrentPlayer(interactionController);
+
+        if(_onInteractParticles != null) { _onInteractParticles.Play(); }
     }
 
     public void Uninteract()

@@ -10,6 +10,7 @@ public class Megalodon : GAgent
 {
     #region Editor Fields
 
+    [Header("FX")]
     [SerializeField] private ParticleSystem _rockPickupParticles;
 
     #endregion

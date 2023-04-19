@@ -26,20 +26,6 @@ public class SubGoal
 [RequireComponent(typeof(AIStateMachine))]
 public class GAgent : MonoBehaviour
 {
-    #region Public Properties
-
-    public List<GAction> Actions = new List<GAction>();
-    public Dictionary<SubGoal, int> Goals = new Dictionary<SubGoal, int>();
-    public GInventory Inventory = new GInventory();
-    public WorldStates Beliefs = new WorldStates();
-    public GAction CurrentAction;
-    public bool IsMoving => _isMoving;
-
-    public event Action OnDoAction;
-    public event Action OnExitAction;
-
-    #endregion
-
     #region Editor Fields
 
     [SerializeField] private float _goalDistance = 2f;
@@ -54,13 +40,30 @@ public class GAgent : MonoBehaviour
 
     private Vector3 _destination = Vector3.zero;
     private bool _invoked = false;
-    private bool _isMoving = false;
+    [SerializeField] private bool _isMoving = false;
 
-    private Rigidbody _rb;
-    private AIStateMachine _aiStateMachine;
-    private AIInteractionController _interactionController;
+    protected Rigidbody _rb;
+    protected AIStateMachine _aiStateMachine;
+    protected AIInteractionController _interactionController;
     private float _initialGoalDistance;
-    private Damageable _damageable;
+    protected Damageable _damageable;
+
+    #endregion
+
+    #region Public Properties
+
+    public List<GAction> Actions = new List<GAction>();
+    public Dictionary<SubGoal, int> Goals = new Dictionary<SubGoal, int>();
+    public GInventory Inventory = new GInventory();
+    public WorldStates Beliefs = new WorldStates();
+    public GAction CurrentAction;
+
+    public event Action OnDoAction;
+    public event Action OnExitAction;
+
+    public AIStateMachine StateMachine => _aiStateMachine;
+    public Damageable Damageable => _damageable;
+    public bool IsMoving => _isMoving;
 
     #endregion
 
@@ -86,7 +89,7 @@ public class GAgent : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    public virtual void FixedUpdate()
     {
         if (_aiStateMachine.IsBouncingOffShield) { return; }
 
@@ -96,7 +99,7 @@ public class GAgent : MonoBehaviour
     }
 
 
-    private void LateUpdate()
+    public virtual void LateUpdate()
     {
         EnableMovement();
 
@@ -123,6 +126,7 @@ public class GAgent : MonoBehaviour
 
                 if (!_invoked)
                 {
+                    DoActionBeforeComplete();
                     Invoke(nameof(CompleteAction), CurrentAction.Duration);
                     _invoked = true;
                     OnDoAction?.Invoke();
@@ -232,6 +236,11 @@ public class GAgent : MonoBehaviour
         CurrentAction = null;
         CancelInvoke(nameof(CompleteAction));
         _invoked = false;
+    }
+
+    private void DoActionBeforeComplete()
+    {
+        CurrentAction.Perform();
     }
 
     private void CompleteAction()

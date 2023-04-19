@@ -17,6 +17,11 @@ public class Work : GAction
         return true;
     }
 
+    public override bool Perform()
+    {
+        return true;
+    }
+
     public override bool PostPeform()
     {
         Inventory.RemoveItem(Target);

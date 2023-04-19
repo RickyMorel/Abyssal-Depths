@@ -42,6 +42,6 @@ public class FireWhip : MeleeWeapon
             aIState.BounceOffShield(pushDir, _pushForce);
         }
         Instantiate(GameAssetsManager.Instance.FireWhipCollisionParticles, _attackHitBox.transform.position, Quaternion.identity);
-        ShipCamera.Instance.ShakeCamera(2f, 50f, 0.2f);
+        ShipCamera.Instance.NormalShake();
     }
 }

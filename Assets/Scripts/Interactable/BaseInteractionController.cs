@@ -1,3 +1,5 @@
+//#define INTERACTION_DEBUGS
+
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -92,10 +94,21 @@ public class BaseInteractionController : MonoBehaviour
     {
         if (_currentInteractable == null) { return; }
 
-        if (_currentInteractable.CurrentPlayer == this) { return; }
+#if INTERACTION_DEBUGS
+        Debug.Log("6-_currentInteractable != null: " + gameObject.name);
+
+        Debug.Log($"6.5-{_currentInteractable.CurrentPlayer} == {this}: " + gameObject.name);
+#endif
+        //if (_currentInteractable.CurrentPlayer == this) { return; }
+#if INTERACTION_DEBUGS
+        Debug.Log($"7-{_currentInteractable.CurrentPlayer} == {this}: " + gameObject.name);
+#endif
 
         //if you can't use the interactable while it's broken, return
-        if(!_currentInteractable.CanUse && !IsFixing) { return; }
+        if (!_currentInteractable.CanUse && !IsFixing) { return; }
+#if INTERACTION_DEBUGS
+        Debug.Log("8-can use and is not fixing: " + gameObject.name);
+#endif
 
         float singleUseDuration = customDuration == -1 ? _currentInteractable.SingleUseTime : customDuration;
 
@@ -123,15 +136,22 @@ public class BaseInteractionController : MonoBehaviour
 
     public void SetInteraction(int interactionType, Transform playerPositionTransform)
     {
+#if INTERACTION_DEBUGS
+        Debug.Log($"SetInteraction: {gameObject.name}, " + interactionType);
+#endif
         BaseInteractionController interactionController = interactionType == 0 ? null : this;
-        if(_agent != null) { _agent.enabled = interactionType == 0; }
 
-        _currentInteractable.SetCurrentPlayer(interactionController);
+        if (_currentInteractable != null) { _currentInteractable.SetCurrentPlayer(interactionController); }
         _currentInteraction = interactionType;
 
         _anim.SetInteger("Interaction", interactionType);
-        transform.position = playerPositionTransform.position;
-        transform.rotation = playerPositionTransform.rotation;
+
+        if (CurrentInteractable.AttachOnInteract)
+        {
+            if (_agent != null) { _agent.enabled = interactionType == 0; }
+            transform.position = playerPositionTransform.position;
+            transform.rotation = playerPositionTransform.rotation;
+        }
 
         _timeSinceLastInteraction = 0f;
 

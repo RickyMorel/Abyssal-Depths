@@ -8,6 +8,13 @@ using System;
 [RequireComponent(typeof(CinemachineVirtualCamera))]
 public class ShipCamera : BaseCamera
 {
+    #region Editor Fields
+
+    [SerializeField] private Camera _mainCamera;
+    [SerializeField] private Camera _perspectiveCamera;
+
+    #endregion
+
     #region Private Variables
 
     private static ShipCamera _instance;
@@ -17,6 +24,8 @@ public class ShipCamera : BaseCamera
     private bool _isBoosting;
     private float _currentFOV;
     private float _orginalFOV;
+    private float _targetPerspectiveZ;
+    private float _targetOrthoZ;
     #endregion
 
     #region Public Properties
@@ -52,9 +61,10 @@ public class ShipCamera : BaseCamera
         _currentFOV = _orginalFOV;
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         UpdateBoostFOVEffect();
+        UpdateCameraZoom();
     }
 
     private void OnDestroy()
@@ -63,6 +73,13 @@ public class ShipCamera : BaseCamera
     }
 
     #endregion
+
+    private void UpdateCameraZoom()
+    {
+        float zoomSpeed = 5f;
+        transform.localPosition = Vector3.MoveTowards(transform.localPosition, new Vector3(0f, 0f, _targetOrthoZ), Time.deltaTime * zoomSpeed);
+        _perspectiveCamera.transform.localPosition = Vector3.MoveTowards(_perspectiveCamera.transform.localPosition, new Vector3(0f, 0f, _targetPerspectiveZ), Time.deltaTime * zoomSpeed);
+    }
 
     private void UpdateBoostFOVEffect()
     {
@@ -78,11 +95,20 @@ public class ShipCamera : BaseCamera
         _isBoosting = isBoosting;
     }
 
-    private void ShakeWhenBoosting()
+    public void ChangeToBossZoom(bool isBossZoom)
     {
-        float velocityToShakeRatio = 20f;
-        float shakeAmount = _isBoosting == true && _shipBooster.RecentlyChangedGear == false ? _shakeAmplitude : 0f;
-        float finalShakeAmount = shakeAmount * (_shipRigidbody.velocity.magnitude / velocityToShakeRatio);
-        _virtualCameraNoise.m_AmplitudeGain = finalShakeAmount;
+        if (isBossZoom)
+        {
+            _targetOrthoZ = -10.85f;
+            _targetPerspectiveZ = -40.65f;
+            _orginalFOV = 30f;
+            //_mainCamera.cullingMask = _mainCamera.cullingMask | LayerMask.LayerToName("")
+        }
+        else
+        {
+            _targetOrthoZ = -4f;
+            _targetPerspectiveZ = -18.95f;
+            _orginalFOV = 15f;
+        }
     }
 }

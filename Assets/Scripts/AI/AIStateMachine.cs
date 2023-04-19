@@ -8,13 +8,16 @@ public class AIStateMachine : BaseStateMachine
     #region Private Variables
 
     private NavMeshAgent _agent;
+    private AICombat _aiCombat;
     private bool _isBouncingOffShield = false;
+    private float _movementSpeed = 1f;
 
     #endregion
 
     #region Public Properties
 
     public NavMeshAgent Agent => _agent;
+    public AICombat AICombat => _aiCombat;
     public bool IsBouncingOffShield => _isBouncingOffShield;
 
     #endregion
@@ -24,11 +27,12 @@ public class AIStateMachine : BaseStateMachine
         base.Start();
 
         _agent = GetComponent<NavMeshAgent>();
+        _aiCombat = GetComponent<AICombat>();
     }
 
     public override void Move()
     {
-        _moveDirection.x = _canMove ? 1f : 0f;
+        _moveDirection.x = _canMove ? _movementSpeed : 0f;
     }
 
     public void BasicAttack()
@@ -36,6 +40,25 @@ public class AIStateMachine : BaseStateMachine
         if (!CanMove) { return; }
 
         StartCoroutine(SetIsShootingCoroutine());
+    }
+
+    public void Attack(int attackNumber, bool checkCanMove = true)
+    {
+        if (checkCanMove) { if (!CanMove) { return; } }
+
+        Anim.SetInteger("AttackType", attackNumber);
+        Anim.SetTrigger("Attack");
+    }
+
+    public void ResetAttacking()
+    {
+        Anim.SetInteger("AttackType", 0);
+        Anim.ResetTrigger("Attack");
+    }
+
+    public void SetIsCarryingItem(bool isCarrying)
+    {
+        Anim.SetBool("IsCarryingItem", isCarrying);
     }
 
     public IEnumerator SetIsShootingCoroutine()
@@ -69,6 +92,11 @@ public class AIStateMachine : BaseStateMachine
 
         if (!IsOnGround()) { StartCoroutine(SetBouncingOffShieldCoroutine(pushDir, pushForce)); }
         else { _isBouncingOffShield = false; }
+    }
+
+    public void SetMovementSpeed(float newSpeed)
+    {
+        _movementSpeed = newSpeed;
     }
 
     private bool IsOnGround()

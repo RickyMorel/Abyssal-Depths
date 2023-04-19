@@ -8,7 +8,7 @@ public class PlayerHealth : Damageable
     #region Editor Fields
 
     [SerializeField] private float _hurtTime = 5f;
-    [SerializeField] private Renderer _mesh;
+    [SerializeField] private Renderer[] _meshes;
     [SerializeField] protected Transform _particleParentTransform;
 
     #endregion
@@ -32,17 +32,26 @@ public class PlayerHealth : Damageable
     {
         base.Awake();
 
-        _mesh = GetComponentInChildren<MeshRenderer>();
-        if (_mesh == null) { _mesh = GetComponentInChildren<SkinnedMeshRenderer>(); }
+        _meshes = GetComponentsInChildren<MeshRenderer>();
+        if (_meshes.Length < 1) { _meshes = GetComponentsInChildren<SkinnedMeshRenderer>(); }
     }
 
     //This is for the child classes
     public override void Start()
     {
         base.Start();
+
+        OnDamaged += UpdateBloodFX;
+        OnUpdateHealth += HandleUpdateHealth;
     }
 
-    public virtual void Hurt(DamageTypes damageType)
+    private void OnDestroy()
+    {
+        OnDamaged -= UpdateBloodFX;
+        OnUpdateHealth -= HandleUpdateHealth;
+    }
+
+    public virtual void Hurt(DamageTypes damageType, int damage)
     {
         OnHurt?.Invoke();
 
@@ -86,11 +95,21 @@ public class PlayerHealth : Damageable
         }
     }
 
-    public override void UpdateHealthUI()
+    private void HandleUpdateHealth(int damage)
     {
-        if(_mesh == null) { Debug.LogError("Need to assign mesh with blood shader!: " + gameObject.name); return; }
+        UpdateBloodFX(DamageTypes.None, damage);
+    }
 
-        _mesh.material.SetFloat("Blood", 1 - (CurrentHealth / MaxHealth));
+    public void UpdateBloodFX(DamageTypes damageType, int damage)
+    {
+        if(_meshes.Length < 1) { Debug.LogError("Need to assign mesh with blood shader!: " + gameObject.name); return; }
+
+        float bloodAmount = (1 - (CurrentHealth / MaxHealth))/3;
+
+        foreach (var mesh in _meshes)
+        {
+            mesh.material.SetFloat("Blood", bloodAmount);
+        }
     }
 
     public override void Die()
@@ -112,7 +131,11 @@ public class PlayerHealth : Damageable
             currentTime += Time.deltaTime;
             float t = currentTime / duration;
             float value = Mathf.Lerp(1, 0, t);
-            _mesh.material.SetFloat("Dissolve", 1 - value);
+
+            foreach (var mesh in _meshes)
+            {
+                mesh.material.SetFloat("Dissolve", 1 - value);
+            }
 
             yield return null;
         }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider))]
+[RequireComponent(typeof(Collider))]
 [RequireComponent(typeof(Rigidbody))]
 public class Projectile : MonoBehaviour
 {
@@ -12,6 +12,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] protected DamageTypes[] _damageTypes;
     [SerializeField] protected ParticleSystem[] _particles;
     [SerializeField] protected bool _shouldUnparentParticle = false;
+    [SerializeField] protected bool _shakeCameraOnHit = false;
 
     #endregion
 
@@ -34,7 +35,9 @@ public class Projectile : MonoBehaviour
     public bool DestroyOnHit => _destroyOnHit;
     public DamageData DamageData => _damageData;
     public Weapon Weapon => _weapon;
+    public Rigidbody Rb => _rb;
     public float DealDamageAfterSeconds => _dealDamageAfterSeconds;
+    public bool ShakeCameraOnHit => _shakeCameraOnHit;
 
     #endregion
 
@@ -77,7 +80,7 @@ public class Projectile : MonoBehaviour
         transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
 
         _rb.velocity = Vector3.zero;
-        _rb.AddForce(direction.normalized * _speed, ForceMode.Impulse);
+        _rb.AddForce(direction.normalized * _rb.mass * _speed, ForceMode.Impulse);
 
         if (lookDir == default(Vector3)) { return; }
 
@@ -100,13 +103,18 @@ public class Projectile : MonoBehaviour
         Initialize(newOwnerTag);
     }
 
+    public void PlayImpactParticles(Vector3 impactPoint)
+    {
+        foreach (ParticleSystem particle in _particles)
+        {
+            if (_shouldUnparentParticle) { particle.transform.SetParent(null); }
+            particle.transform.position = impactPoint;
+            particle.Play();
+        }
+    }
+
     public void DestroySelf()
     {
-        if (_shouldUnparentParticle) 
-        {
-            foreach (ParticleSystem particle in _particles)
-                particle.transform.SetParent(null);
-        }
         Destroy(gameObject);
     }
 

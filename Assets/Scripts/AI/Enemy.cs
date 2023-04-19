@@ -36,7 +36,7 @@ public class Enemy : Damageable
 
     #endregion
 
-    private void HandleDamaged(DamageTypes damageType)
+    private void HandleDamaged(DamageTypes damageType, int damage)
     {
         _hitParticles.Play();
     }

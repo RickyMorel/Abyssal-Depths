@@ -22,6 +22,7 @@ public class BaseStateMachine : MonoBehaviourID
     [Header("State Variables")]
     [SerializeField] protected PlayerBaseState _currentState;
     [SerializeField] protected PlayerStateFactory _states;
+    [SerializeField] private string _currentStateName;  
     [SerializeField] protected bool _canMove = true;
 
     #endregion
@@ -90,6 +91,7 @@ public class BaseStateMachine : MonoBehaviourID
 
     public virtual void Update()
     {
+        _currentStateName = _currentState.ToString();
         _currentState.UpdateStates();
     }
 

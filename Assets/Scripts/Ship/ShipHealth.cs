@@ -130,7 +130,7 @@ public class ShipHealth : Damageable
     {
         base.DamageWithoutDamageData(damage, instigatorCollider);
 
-        ShipCamera.Instance.ShakeCamera(2f, 50f, 0.2f);
+        ShipCamera.Instance.NormalShake();
 
         if(instigatorCollider == null) { return; }
 
@@ -157,7 +157,7 @@ public class ShipHealth : Damageable
         CheckFlickerRedLights();
     }
 
-    private void HandleDamaged(DamageTypes damageType)
+    private void HandleDamaged(DamageTypes damageType, int damage)
     {
         _boosterHealth.SetHealth((int)CurrentHealth);
 

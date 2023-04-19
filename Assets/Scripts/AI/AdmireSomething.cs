@@ -9,6 +9,11 @@ public class AdmireSomething : GAction
         return true;
     }
 
+    public override bool Perform()
+    {
+        return true;
+    }
+
     public override bool PostPeform()
     {
         return true;

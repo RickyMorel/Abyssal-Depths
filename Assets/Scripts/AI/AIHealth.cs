@@ -9,6 +9,7 @@ public class AIHealth : PlayerHealth
     #region Editor Fields
 
     [SerializeField] private bool _canKill = false;
+    [SerializeField] private bool _stopsActionWhenHurt = true;
 
     #endregion
 
@@ -21,6 +22,8 @@ public class AIHealth : PlayerHealth
     #endregion
 
     #region Public Properties
+
+    public static event Action OnBossDied;
 
     public bool CanKill => _canKill;
 
@@ -58,9 +61,9 @@ public class AIHealth : PlayerHealth
         Invoke(nameof(DisableSelf), 10f);
     }
 
-    public override void Hurt(DamageTypes damageType)
+    public override void Hurt(DamageTypes damageType, int damage)
     {
-        if (CanKill == false) { base.Hurt(damageType); }
+        if (CanKill == false) { base.Hurt(damageType, damage); }
 
         CheckIfLowHealth();
         CheckIfScared();
@@ -70,7 +73,7 @@ public class AIHealth : PlayerHealth
     {
         if (_gAgent.Beliefs.HasState("scared")) { return; }
 
-        StopPreviousAction();
+        if (_stopsActionWhenHurt) { StopPreviousAction(); }
 
         _gAgent.Beliefs.AddState("scared", 1);
     }
@@ -82,7 +85,7 @@ public class AIHealth : PlayerHealth
 
         if (_gAgent.Beliefs.HasState("hurt")) { return; }
 
-        StopPreviousAction();
+        if (_stopsActionWhenHurt) { StopPreviousAction(); }
 
         _gAgent.Beliefs.AddState("hurt", 1);
     }
@@ -96,5 +99,10 @@ public class AIHealth : PlayerHealth
     private void DisableSelf()
     {
         gameObject.SetActive(false);
+    }
+
+    public void InvokeBossDiedEvent()
+    {
+        OnBossDied?.Invoke();
     }
 }

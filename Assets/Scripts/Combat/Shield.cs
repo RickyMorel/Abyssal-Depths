@@ -63,6 +63,8 @@ public class Shield : MonoBehaviour
         //Recursively tries to fetch the root gameobject of the collision
         Transform parentTransform = collision.transform.parent;
 
+        if(parentTransform == null) { return; }
+
         for (int i = 0; i < _getComponentTries; i++)
         {
             if (parentTransform.TryGetComponent(out AIStateMachine aIStateMachine)) { PushEnemy(aIStateMachine, collision); break; }

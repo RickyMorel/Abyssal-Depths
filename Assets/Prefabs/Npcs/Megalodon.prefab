@@ -1901,7 +1901,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -4743832610066437124, guid: 8497b3ff37e04194e9ee42441a307f4d, type: 3}
+  - {fileID: 2100000, guid: b54c8a4e498219241a28c39f2e5243da, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3582,7 +3582,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -2843772237618043288, guid: 8497b3ff37e04194e9ee42441a307f4d, type: 3}
+  - {fileID: 2100000, guid: c89ed0c145bcf694181245b7225b5287, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -28347,10 +28347,13 @@ MonoBehaviour:
   _resistanceType: 02000000
   _weaknessType: 
   _currentHealth: 0
-  _maxHealth: 3000
+  _maxHealth: 300
   _damageParticles: {fileID: 5855327306185661983}
   _hurtTime: 5
-  _mesh: {fileID: 3845674378375700691}
+  _meshes:
+  - {fileID: 3845674378375700691}
+  - {fileID: 1745265184797974313}
+  - {fileID: 1152808728074096723}
   _particleParentTransform: {fileID: 0}
   _canKill: 1
   _stopsActionWhenHurt: 0

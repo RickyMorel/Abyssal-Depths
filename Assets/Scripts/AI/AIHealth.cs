@@ -9,6 +9,7 @@ public class AIHealth : PlayerHealth
     #region Editor Fields
 
     [SerializeField] private bool _canKill = false;
+    [SerializeField] private bool _stopsActionWhenHurt = true;
 
     #endregion
 
@@ -72,7 +73,7 @@ public class AIHealth : PlayerHealth
     {
         if (_gAgent.Beliefs.HasState("scared")) { return; }
 
-        StopPreviousAction();
+        if (_stopsActionWhenHurt) { StopPreviousAction(); }
 
         _gAgent.Beliefs.AddState("scared", 1);
     }
@@ -84,7 +85,7 @@ public class AIHealth : PlayerHealth
 
         if (_gAgent.Beliefs.HasState("hurt")) { return; }
 
-        StopPreviousAction();
+        if (_stopsActionWhenHurt) { StopPreviousAction(); }
 
         _gAgent.Beliefs.AddState("hurt", 1);
     }

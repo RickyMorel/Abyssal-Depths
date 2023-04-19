@@ -27,6 +27,7 @@ public class AttackHitBox : MonoBehaviour
     [SerializeField] private int _enemyDamageStat = -1;
     [SerializeField] protected Damageable _ownHealth;
     [SerializeField] protected DamageTypes[] _damageTypes;
+    [SerializeField] private bool _damagePlayerCharacters = false;
 
     #endregion
 
@@ -85,6 +86,8 @@ public class AttackHitBox : MonoBehaviour
     {
         if (enemyHealth is PlayerHealth)
         {
+            if (!_damagePlayerCharacters) { return; }
+
             PlayerHealth playerHealth = enemyHealth as PlayerHealth;
             playerHealth.Hurt(DamageTypes.Base, 0);
             _ownHealth.GetComponent<PlayerComponents>()?.PlayerCamera.NormalShake();

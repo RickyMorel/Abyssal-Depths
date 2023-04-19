@@ -46,7 +46,7 @@ public class EnemyPushAttackCollider : MonoBehaviour
 
     private IEnumerator DisablePushAttack()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(3f);
 
         EnableColliders(false);
     }
@@ -61,28 +61,25 @@ public class EnemyPushAttackCollider : MonoBehaviour
         if (_timeSincePushEnemy < 1f) { return; }
 
         //Don't push ship if hits shield
-        if(collider.gameObject.GetComponent<Shield>() != null) { Debug.Log("Hit Shield!"); return; }
+        if(collider.gameObject.GetComponent<Shield>() != null) { return; }
 
-        if (collider.gameObject.tag == "MainShip") { PushShip(collider); }
+        if (collider.gameObject.tag == "MainShip") { PushShip(); }
     }
 
-    private void PushShip(Collider collider)
+    private void PushShip()
     {
-        Debug.Log("Push Ship!");
-        StartCoroutine(PushShipDelay(collider.gameObject.transform.position));
+        StartCoroutine(PushShipDelay());
     }
 
-    private IEnumerator PushShipDelay(Vector3 targetPos)
+    private IEnumerator PushShipDelay()
     {
         yield return new WaitForEndOfFrame();
 
         _timeSincePushEnemy = 0f;
 
-       // _pushParticles.Play();
+        Vector3 pushDir = transform.position - Ship.Instance.transform.position;
 
-        Vector3 pushDir = transform.position - targetPos;
-
-        Ship.Instance.Rb.AddForce(-pushDir.normalized * _pushVelocity * Time.deltaTime, ForceMode.VelocityChange);
+        Ship.Instance.Rb.AddForce(-pushDir.normalized * _pushVelocity, ForceMode.VelocityChange);
 
         ShipCamera.Instance.NormalShake();
     }

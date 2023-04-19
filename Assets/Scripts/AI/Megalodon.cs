@@ -29,18 +29,6 @@ public class Megalodon : GAgent
 
         GetComponent<NavMeshAgent>().updateRotation = false;
         GetComponent<NavMeshAgent>().avoidancePriority = 0;
-
-        //SubGoal s3 = new SubGoal("throwRock", 1, false);
-        //Goals.Add(s3, 5);
-
-        //SubGoal s2 = new SubGoal("hasCharged", 1, false);
-        //Goals.Add(s2, 3);
-
-        SubGoal s6 = new SubGoal("ragdollShip", 1, false);
-        Goals.Add(s6, 3);
-
-        //SubGoal s2 = new SubGoal("hasFlappedFins", 1, false);
-        //Goals.Add(s2, 3);
     }
 
     private void OnDestroy()
@@ -60,12 +48,12 @@ public class Megalodon : GAgent
         UpdateRotation();
     }
 
-    //public override void LateUpdate()
-    //{
-    //    base.LateUpdate();
+    public override void LateUpdate()
+    {
+        base.LateUpdate();
 
-    //    TryGetNewAction();
-    //}
+        TryGetNewAction();
+    }
 
     private void TryGetNewAction()
     {

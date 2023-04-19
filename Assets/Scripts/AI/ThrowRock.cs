@@ -20,8 +20,10 @@ public class ThrowRock : GAction
 
     #endregion
 
-    private void Start()
+    public override void Start()
     {
+        base.Start();
+
         _gAgent = Agent.GetComponent<GAgent>();
         _stateMachine = Agent.GetComponent<AIStateMachine>();
         _aiCombat = Agent.GetComponent<AICombat>();
@@ -44,8 +46,6 @@ public class ThrowRock : GAction
 
     public override bool Perform()
     {
-        Debug.Log("Perform: " + gameObject.name);
-
         _stateMachine.Attack(3);
 
         GAgent.StateMachine.SetIsCarryingItem(false);

@@ -55,8 +55,6 @@ public class HealthBarUI : MonoBehaviour
     {
         _healthFill.fillAmount = _ownHealth.CurrentHealth / _ownHealth.MaxHealth;
 
-       // if (!_isFlashingWhite) { StartCoroutine(FlashWhite()); }
-
         _isUpdatingDamageFill = true;
     }
 

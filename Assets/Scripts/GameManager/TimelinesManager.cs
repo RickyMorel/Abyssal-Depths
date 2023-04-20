@@ -16,12 +16,6 @@ public class TimelinesManager : MonoBehaviour
 
     [SerializeField] private GameObject _mainShipParentForTheTimeline;
 
-    [Header("LightSaber")]
-    [SerializeField] private PlayableDirector _lightSaberOut;
-    [SerializeField] private PlayableDirector _lightSaberIn;
-
-    [SerializeField] private GameObject _lightSaberBlade;
-
     #endregion
 
     #region Private Variables
@@ -41,11 +35,6 @@ public class TimelinesManager : MonoBehaviour
     public ParticleSystem BlackHoleParticle => _blackHoleParticle;
 
     public GameObject MainShipParentForTheTimeline => _mainShipParentForTheTimeline;
-
-    public PlayableDirector LightSaberOut => _lightSaberOut;
-    public PlayableDirector LightSaberIn => _lightSaberIn;
-
-    public GameObject LightSaberBlade => _lightSaberBlade;
 
     #endregion
 

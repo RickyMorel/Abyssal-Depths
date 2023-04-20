@@ -311,7 +311,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 416173610}
-  - {fileID: 9022035090510091262}
   m_Father: {fileID: 3852162812249718934}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -14696,7 +14695,7 @@ Transform:
   - {fileID: 1482258630}
   - {fileID: 1223754076}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1470298975805987252
 MonoBehaviour:
@@ -14807,9 +14806,9 @@ MonoBehaviour:
   _cameraFadeTimeline: {fileID: 5534029708008172380}
   _blackHoleParticle: {fileID: 2675537413733240257}
   _mainShipParentForTheTimeline: {fileID: 3852162812439959518}
-  _lightSaberOut: {fileID: 9022035091080611770}
-  _lightSaberIn: {fileID: 9022035090355282890}
-  _lightSaberBlade: {fileID: 9022035090441795919}
+  _lightSaberOut: {fileID: 0}
+  _lightSaberIn: {fileID: 0}
+  _lightSaberBlade: {fileID: 0}
 --- !u!114 &8430575401598289310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15017,85 +15016,6 @@ PlayableDirector:
     value: {fileID: 593870737}
   m_ExposedReferences:
     m_References: []
---- !u!1001 &4773794347219961656
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 2
-    m_TransformParent: {fileID: 1482258630}
-    m_Modifications:
-    - target: {fileID: 4542823294736716998, guid: 3979b2c74da54a340aae8fd58deaed75, type: 3}
-      propertyPath: m_RootOrder
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4542823294736716998, guid: 3979b2c74da54a340aae8fd58deaed75, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4542823294736716998, guid: 3979b2c74da54a340aae8fd58deaed75, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4542823294736716998, guid: 3979b2c74da54a340aae8fd58deaed75, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4542823294736716998, guid: 3979b2c74da54a340aae8fd58deaed75, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4542823294736716998, guid: 3979b2c74da54a340aae8fd58deaed75, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4542823294736716998, guid: 3979b2c74da54a340aae8fd58deaed75, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4542823294736716998, guid: 3979b2c74da54a340aae8fd58deaed75, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4542823294736716998, guid: 3979b2c74da54a340aae8fd58deaed75, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4542823294736716998, guid: 3979b2c74da54a340aae8fd58deaed75, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4542823294736716998, guid: 3979b2c74da54a340aae8fd58deaed75, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4542823294736716999, guid: 3979b2c74da54a340aae8fd58deaed75, type: 3}
-      propertyPath: m_Name
-      value: LightSaberTimelines
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_AddedGameObjects: []
-  m_SourcePrefab: {fileID: 100100000, guid: 3979b2c74da54a340aae8fd58deaed75, type: 3}
---- !u!320 &9022035090355282890 stripped
-PlayableDirector:
-  m_CorrespondingSourceObject: {fileID: 4542823294590264562, guid: 3979b2c74da54a340aae8fd58deaed75, type: 3}
-  m_PrefabInstance: {fileID: 4773794347219961656}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &9022035090441795919 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4542823294402051703, guid: 3979b2c74da54a340aae8fd58deaed75, type: 3}
-  m_PrefabInstance: {fileID: 4773794347219961656}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &9022035090510091262 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4542823294736716998, guid: 3979b2c74da54a340aae8fd58deaed75, type: 3}
-  m_PrefabInstance: {fileID: 4773794347219961656}
-  m_PrefabAsset: {fileID: 0}
---- !u!320 &9022035091080611770 stripped
-PlayableDirector:
-  m_CorrespondingSourceObject: {fileID: 4542823295307235458, guid: 3979b2c74da54a340aae8fd58deaed75, type: 3}
-  m_PrefabInstance: {fileID: 4773794347219961656}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8298710351486544151
 PrefabInstance:
   m_ObjectHideFlags: 0

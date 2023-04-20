@@ -17,6 +17,7 @@ public class PlayerInputHandler : MonoBehaviour
     private Player _player;
 
     private Vector2 _moveDirection;
+    private Vector2 _interactableMoveDirection;
     private bool _isShooting;
     private bool _isShooting_2;
     private bool _canPlayerSpawn = false;
@@ -42,6 +43,7 @@ public class PlayerInputHandler : MonoBehaviour
     public event Action<PlayerInputHandler> OnTrySpawn;
    
     public Vector2 MoveDirection => _moveDirection;
+    public Vector2 InteractableMoveDirection => _interactableMoveDirection;
    
     public bool IsShooting => _isShooting;
     public bool IsShooting_2 => _isShooting_2;
@@ -130,6 +132,7 @@ public class PlayerInputHandler : MonoBehaviour
         float y = CameraManager.Instance.IsInOrthoMode ? 0f : moveVertical;
 
         _moveDirection = new Vector2(moveHorizontal, y).normalized;
+        _interactableMoveDirection = new Vector2(moveHorizontal, moveVertical).normalized;
     }
 
     public void Jump()

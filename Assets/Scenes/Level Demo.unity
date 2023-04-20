@@ -2105,7 +2105,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 786859801}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -4507,6 +4507,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 62163264795271247, guid: 3a844cbb603470b44a8f4d37e7d7238d, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 653868891744190316, guid: 3a844cbb603470b44a8f4d37e7d7238d, type: 3}
       propertyPath: _maxHealth
       value: 100
@@ -9062,7 +9066,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8177713152652336292, guid: f01dc6d958cfc3f47b5729003ec2b841, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8177713152652336312, guid: f01dc6d958cfc3f47b5729003ec2b841, type: 3}
       propertyPath: _id.Value

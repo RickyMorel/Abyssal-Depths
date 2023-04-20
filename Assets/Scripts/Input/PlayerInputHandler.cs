@@ -126,7 +126,10 @@ public class PlayerInputHandler : MonoBehaviour
         float moveHorizontal = _player.GetAxisRaw("Horizontal");
         float moveVertical = _player.GetAxisRaw("Vertical");
 
-        _moveDirection = new Vector2(moveHorizontal, moveVertical).normalized;
+        //If is inside ship, don't allow z movement
+        float y = CameraManager.Instance.IsInOrthoMode ? 0f : moveVertical;
+
+        _moveDirection = new Vector2(moveHorizontal, y).normalized;
     }
 
     public void Jump()

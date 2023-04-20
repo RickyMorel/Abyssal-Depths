@@ -30,7 +30,7 @@ public class CameraManager : MonoBehaviour
 
     private void Start()
     {
-        GetAllCameras();
+        ToggleCamera(true);
     }
 
     private void Awake()
@@ -84,6 +84,8 @@ public class CameraManager : MonoBehaviour
             _cameras[i].gameObject.SetActive(!boolean);
             _vCams[i].gameObject.SetActive(!boolean);
         }
+
+        Debug.Log("ToggleCamera: " + boolean);
 
         _isInOrthoMode = boolean;
     }

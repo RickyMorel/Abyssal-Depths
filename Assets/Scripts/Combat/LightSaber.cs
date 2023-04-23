@@ -8,7 +8,8 @@ public class LightSaber : MeleeWeapon
     #region Editor Fields
 
     [Header("Transforms")]
-    [SerializeField] private Transform _originalPosition;
+    [SerializeField] private Transform _bladeOutCenterPosition;
+    [SerializeField] private Transform _bladeInPosition;
     [SerializeField] private Transform _rotationPoint;
     [SerializeField] private Transform _moveToForLightSaber;
     [Header("Object related")]
@@ -56,7 +57,6 @@ public class LightSaber : MeleeWeapon
             _isBladeOut = false;
             _lightSaberIn.Play();
             _bladeBoxCollider.enabled = false;
-
         }
     }
 
@@ -89,22 +89,29 @@ public class LightSaber : MeleeWeapon
     //To do: make the rotation right, lightsaber must not collide with ship, make it slower, have a list of enemies that it has to go first before returning, use slerp so that it doesn't go in a straight line, it must close when returning.
     private void ThrowLightSaber()
     {
+        Transform returnToPosition;
+
+        if (!_isBladeOut) { returnToPosition = _bladeInPosition; }
+        else { returnToPosition = _bladeOutCenterPosition; }
+
         if (_boomerangThrow) 
         {
+            _lightSaber.transform.SetParent(null);
             _handle.transform.SetParent(_lightSaber.transform);
             _lightSaber.transform.position = Vector3.MoveTowards(_lightSaber.transform.position, _shootToPosition.position, Time.deltaTime * _flyingSpeed);
             if (!_canShootSaber) { _lightSaber.transform.Rotate(Vector3.right * (_rotationSpeed * Time.deltaTime)); }
         }
         if (!_boomerangThrow) 
         { 
-            _lightSaber.transform.position = Vector3.MoveTowards(_lightSaber.transform.position, _originalPosition.position, Time.deltaTime * _flyingSpeed);
+            _lightSaber.transform.position = Vector3.MoveTowards(_lightSaber.transform.position, returnToPosition.position, Time.deltaTime * _flyingSpeed);
             if (!_canShootSaber) { _lightSaber.transform.Rotate(Vector3.right * (_rotationSpeed * Time.deltaTime)); }
         }
-        if (_handle.transform.position == _originalPosition.position && !_boomerangThrow) 
+        if (_lightSaber.transform.position == returnToPosition.position && !_boomerangThrow)
         {
+            _lightSaber.transform.localRotation = Quaternion.Euler(90, 0, 0);
             _lightSaber.transform.SetParent(_handle.transform);
             _handle.transform.SetParent(_rotationPoint.transform);
-            _handle.transform.localRotation = Quaternion.identity;
+            _handle.transform.localRotation = Quaternion.Euler(0, 0, 0);
             _canShootSaber = true;
             _weapon.ShouldRotate = true;
         }

@@ -45,9 +45,11 @@ public class ShipData : MonoBehaviour
         if (!_loadData) { return; }
 #endif
 
-        string loadIndexObjName = GameObject.FindGameObjectWithTag("LoadIndex").name;
+        GameObject loadIndexObj = GameObject.FindGameObjectWithTag("LoadIndex");
 
-        if(loadIndexObjName == null) { return; }
+        if(loadIndexObj == null) { return; }
+
+        string loadIndexObjName = loadIndexObj.name;
 
         string[] splitString = loadIndexObjName.Split(":");
 

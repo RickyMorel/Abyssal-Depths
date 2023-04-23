@@ -6,6 +6,7 @@ public class AICombat : PlayerCombat
 {
     #region Editor Fields
 
+    [SerializeField] private Transform _projectileHolsterTransform;
     [SerializeField] private int _enemyDamageDataID;
     [Range(2f, 100f)]
     [SerializeField] private float _attackRange = 10f;
@@ -21,6 +22,7 @@ public class AICombat : PlayerCombat
     #endregion
 
     private GAgent _gAgent;
+    private EnemyPushAttackCollider _enemyPushAttackCollider;
 
     private void Awake()
     {
@@ -32,24 +34,55 @@ public class AICombat : PlayerCombat
     private void Start()
     {
         _gAgent = GetComponent<GAgent>();
+        _enemyPushAttackCollider = GetComponentInChildren<EnemyPushAttackCollider>();  
     }
 
     public override void Hit()
     {
         base.Hit();
 
-        _hitParticle.Play();
+        _hitParticle?.Play();
     }
 
     public override void Shoot()
     {
         if(_gAgent.CurrentAction == null) { return; }
 
+        DestroyPrevHeldProjectile();
         Transform enemyTransform = _gAgent.CurrentAction.Target.transform;
         GameObject newProjectile = Instantiate(_projectilePrefab, _shootTransform.position, _shootTransform.rotation);
         newProjectile.transform.LookAt(enemyTransform);
-        newProjectile.GetComponent<Projectile>().Initialize(tag, transform);
-        newProjectile.GetComponent<Projectile>().AICombatID = _enemyDamageDataID;
+        Projectile projectile = newProjectile.GetComponent<Projectile>();
+        projectile.Initialize(tag, transform);
+        projectile.AICombatID = _enemyDamageDataID;
+    }
+
+    public void EnablePushAttack()
+    {
+        if(_enemyPushAttackCollider == null) { return; }
+
+        _enemyPushAttackCollider.PushAttack();
+    }
+
+    public void HoldProjectileInHolster()
+    {
+        DestroyPrevHeldProjectile();
+
+        GameObject projectileMesh = _projectilePrefab.transform.Find("Mesh").gameObject;
+
+        GameObject projectileMeshInstance = Instantiate(projectileMesh, _projectileHolsterTransform);
+        projectileMeshInstance.transform.localPosition = Vector3.zero;
+        projectileMeshInstance.transform.localRotation = Quaternion.identity;
+    }
+
+    public void DestroyPrevHeldProjectile()
+    {
+        foreach (Transform child in _projectileHolsterTransform)
+        {
+            if(child == _projectileHolsterTransform) { continue; }
+
+            Destroy(child.gameObject);
+        }
     }
 
     public void Aggro()

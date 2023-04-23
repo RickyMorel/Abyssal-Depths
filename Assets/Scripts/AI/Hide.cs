@@ -17,6 +17,11 @@ public class Hide : GAction
         return true;
     }
 
+    public override bool Perform()
+    {
+        return true;
+    }
+
     public override bool PostPeform()
     {
         GWorld.Instance.GetQueue(GWorld.HIDE_LOCATIONS).AddResource(Target);

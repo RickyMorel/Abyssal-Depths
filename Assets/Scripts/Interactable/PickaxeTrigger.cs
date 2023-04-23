@@ -15,7 +15,12 @@ public class PickaxeTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         CheckForMinable(other);
-        CheckForEnemy(other);
+        
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        CheckForEnemy(collision.collider);
     }
 
     private void CheckForMinable(Collider other)

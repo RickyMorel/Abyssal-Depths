@@ -10,6 +10,7 @@ public class PlayerStateMachine : BaseStateMachine
     #region Editor Fields
 
     [SerializeField] private LayerMask _collisionLayers;
+    [SerializeField] private float _timeBetweenJumps = 1f;
 
     #endregion
 
@@ -22,6 +23,7 @@ public class PlayerStateMachine : BaseStateMachine
     private Vector3 _fallVelocity;
     private bool _applyGravity;
     private Vector3 _currentBlockedDirection;
+    private float _timeSinceLastJump = float.MaxValue;
 
     #endregion
 
@@ -71,12 +73,16 @@ public class PlayerStateMachine : BaseStateMachine
 
     public override void Update()
     {
+        _timeSinceLastJump += Time.deltaTime;
+
         _currentState.UpdateStates();
     }
 
     public override void FixedUpdate()
     {
         if (_playerInteraction.IsInteracting()) { return; }
+
+        StayInShip();
 
         if (_canMove)
         {
@@ -87,7 +93,7 @@ public class PlayerStateMachine : BaseStateMachine
             ApplyGravity();
         }
 
-        CheckIfFellOutOfShip();
+        //CheckIfFellOutOfShip();
     }
 
     public void OnDestroy()
@@ -98,6 +104,18 @@ public class PlayerStateMachine : BaseStateMachine
     }
 
     #endregion
+
+    private void StayInShip()
+    {
+        if (!_isAttachedToShip) { return; }
+
+        float offsetAmount = 3.5f;
+
+        if (transform.localPosition.x > 7.5f) { transform.localPosition = new Vector3(transform.localPosition.x - offsetAmount, transform.localPosition.y, transform.localPosition.z); }
+        else if (transform.localPosition.x < -7.5f) { transform.localPosition = new Vector3(transform.localPosition.x + offsetAmount, transform.localPosition.y, transform.localPosition.z); }
+        else if (transform.localPosition.y > 7.5f) { transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y - offsetAmount, transform.localPosition.z); }
+        else if (transform.localPosition.y < -7.5f) { transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y + offsetAmount, transform.localPosition.z); }
+    }
 
     private void CustomCollisionDecection()
     {
@@ -221,6 +239,10 @@ public class PlayerStateMachine : BaseStateMachine
     private void HandleJump()
     {
         if (_isJumpPressed) { return; }
+
+        if(_timeSinceLastJump < _timeBetweenJumps) { return; }
+
+        _timeSinceLastJump = 0f;
 
         StartCoroutine(SetJumpCoroutine());
     }

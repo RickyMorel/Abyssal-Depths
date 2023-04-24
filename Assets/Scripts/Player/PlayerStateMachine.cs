@@ -109,12 +109,16 @@ public class PlayerStateMachine : BaseStateMachine
     {
         if (!_isAttachedToShip) { return; }
 
+        //Don't tp players back to ship if in safe zone
+        if (GameManager.Instance.DeathManager.IsInSafeZone) { return; }
+
+        float maxDistance = 7f;
         float offsetAmount = 3.5f;
 
-        if (transform.localPosition.x > 7.5f) { transform.localPosition = new Vector3(transform.localPosition.x - offsetAmount, transform.localPosition.y, transform.localPosition.z); }
-        else if (transform.localPosition.x < -7.5f) { transform.localPosition = new Vector3(transform.localPosition.x + offsetAmount, transform.localPosition.y, transform.localPosition.z); }
-        else if (transform.localPosition.y > 7.5f) { transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y - offsetAmount, transform.localPosition.z); }
-        else if (transform.localPosition.y < -7.5f) { transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y + offsetAmount, transform.localPosition.z); }
+        if (transform.localPosition.x > maxDistance) { transform.localPosition = new Vector3(transform.localPosition.x - offsetAmount, transform.localPosition.y, transform.localPosition.z); }
+        else if (transform.localPosition.x < -maxDistance) { transform.localPosition = new Vector3(transform.localPosition.x + offsetAmount, transform.localPosition.y, transform.localPosition.z); }
+        else if (transform.localPosition.y > maxDistance) { transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y - offsetAmount, transform.localPosition.z); }
+        else if (transform.localPosition.y < -maxDistance) { transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y + offsetAmount, transform.localPosition.z); }
     }
 
     private void CustomCollisionDecection()

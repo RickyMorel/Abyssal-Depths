@@ -92,8 +92,6 @@ public class PlayerStateMachine : BaseStateMachine
             AnimateMove();
             ApplyGravity();
         }
-
-        //CheckIfFellOutOfShip();
     }
 
     public void OnDestroy()
@@ -231,17 +229,9 @@ public class PlayerStateMachine : BaseStateMachine
         _anim.SetFloat("Movement", _playerInput.MoveDirection.magnitude);
     }
 
-    private void CheckIfFellOutOfShip()
-    {
-        if (!_isAttachedToShip) { return; }
-
-        if(Vector3.Distance(transform.position, Ship.Instance.transform.position) < 50) { return; }
-
-        transform.localPosition = Vector3.zero;
-    }
-
     private void HandleJump()
     {
+        return;
         if (_isJumpPressed) { return; }
 
         if(_timeSinceLastJump < _timeBetweenJumps) { return; }
@@ -249,6 +239,11 @@ public class PlayerStateMachine : BaseStateMachine
         _timeSinceLastJump = 0f;
 
         StartCoroutine(SetJumpCoroutine());
+    }
+
+    public void UseLadder()
+    {
+
     }
 
     private IEnumerator SetJumpCoroutine()

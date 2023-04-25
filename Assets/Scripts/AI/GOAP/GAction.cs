@@ -14,6 +14,7 @@ public abstract class GAction : MonoBehaviour
 
     #region Private Variables
 
+    private GAgent _gAgent;
     private NavMeshAgent _agent;
 
     #endregion
@@ -34,6 +35,7 @@ public abstract class GAction : MonoBehaviour
     public WorldStates Beliefs;
     public bool IsRunning = false;
 
+    public GAgent GAgent => _gAgent;
     public NavMeshAgent Agent => _agent;
 
     #endregion
@@ -49,12 +51,18 @@ public abstract class GAction : MonoBehaviour
 
     private void Awake()
     {
+        _gAgent = GetComponent<GAgent>();
         _agent = GetComponent<NavMeshAgent>();
-        Inventory = GetComponent<GAgent>().Inventory;
-        Beliefs = GetComponent<GAgent>().Beliefs;
+        Inventory = _gAgent.Inventory;
+        Beliefs = _gAgent.Beliefs;
 
         LoadPreConditions();
         LoadEffects();
+    }
+
+    public virtual void Start()
+    {
+        //For Child Classes
     }
 
     #endregion
@@ -96,5 +104,6 @@ public abstract class GAction : MonoBehaviour
     }
 
     public abstract bool PrePerform();
+    public abstract bool Perform();
     public abstract bool PostPeform();
 }

@@ -31,7 +31,6 @@ public class CameraManager : MonoBehaviour
     private void Start()
     {
         GetAllCameras();
-        _perspectiveCamera = _cameras[_cameras.Length - 1].transform.GetChild(0).gameObject;
     }
 
     private void Awake()
@@ -58,7 +57,7 @@ public class CameraManager : MonoBehaviour
         else
         {
             _cameras[_cameras.Length - 1].OutputCamera.cullingMask = LayerMask.GetMask("Ragdoll", "ShipFloor", "Orthographic", "UI");
-            _perspectiveCamera.GetComponent<Camera>().cullingMask = LayerMask.GetMask("Floor", "Default", "TransparentFX", "Ignore Raycast", "Water", "UI", "LootLayer", "Cylinder", "ItemLayer", "ItemBox", "NPC", "EnemyHitBox");
+            _perspectiveCamera.GetComponent<Camera>().cullingMask = LayerMask.GetMask("Floor", "Default", "TransparentFX", "Ignore Raycast", "Water", "UI", "LootLayer", "ItemLayer", "ItemBox", "NPC", "EnemyHitBox");
         }
     }
 
@@ -69,6 +68,8 @@ public class CameraManager : MonoBehaviour
 
         Array.Sort(_cameras, (a, b) => String.Compare(a.name, b.name));
         Array.Sort(_vCams, (a, b) => String.Compare(a.name, b.name));
+
+        _perspectiveCamera = _cameras[_cameras.Length - 1].transform.parent.Find("PerspectiveCamera").gameObject;
     }
 
     public void ToggleCamera(bool boolean)

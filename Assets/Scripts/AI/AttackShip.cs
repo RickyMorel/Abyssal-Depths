@@ -41,6 +41,11 @@ public class AttackShip : GAction
         return true;
     }
 
+    public override bool Perform()
+    {
+        return true;
+    }
+
     public override bool PostPeform()
     {
         GWorld.Instance.GetQueue(_attackItemTag.ToString()).AddResource(Target);

@@ -13,10 +13,14 @@ public class Interactable : MonoBehaviour
     [SerializeField] private InteractionType _interactionType;
     [SerializeField] private Transform _playerPositionTransform;
     [SerializeField] private bool _isAIOnlyInteractable = false;
+    [SerializeField] private bool _attachOnInteract = true;
 
     [Header("One Time Interaction Parameters")]
     [SerializeField] private bool _isSingleUse = false;
     [SerializeField] private float _singleUseTime = 0.5f;
+
+    [Header("FX")]
+    [SerializeField] private ParticleSystem _onInteractParticles;
 
     #endregion
 
@@ -46,6 +50,7 @@ public class Interactable : MonoBehaviour
     public InteractableHealth InteractableHealth => _interactableHealth;
     public Outline Outline => _outline;
     public bool IsAIOnlyInteractable => _isAIOnlyInteractable;
+    public bool AttachOnInteract => _attachOnInteract;
 
     #endregion
 
@@ -82,6 +87,8 @@ public class Interactable : MonoBehaviour
     public void SetCurrentPlayer(BaseInteractionController interactionController)
     {
         _humble.SetCurrentPlayer(interactionController);
+
+        if(_onInteractParticles != null) { _onInteractParticles.Play(); }
     }
 
     public void Uninteract()

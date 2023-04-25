@@ -71,6 +71,11 @@ public class Ship : MonoBehaviour
         _health.CrashDamageMultiplier = _shipStatsSO.CrashDamageMultiplier;
     }
 
+    public void FreezeShip(bool isFreezed)
+    {
+        _rb.isKinematic = isFreezed;
+    }
+
     public void FireRespawnEvent()
     {
         OnRespawn?.Invoke();

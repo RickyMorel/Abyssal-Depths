@@ -17,6 +17,11 @@ public class Rest : GAction
         return true;
     }
 
+    public override bool Perform()
+    {
+        return true;
+    }
+
     public override bool PostPeform()
     {
         GWorld.Instance.GetQueue(GWorld.REST_LOCATIONS).AddResource(Target);

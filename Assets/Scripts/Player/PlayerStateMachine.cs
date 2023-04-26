@@ -231,7 +231,6 @@ public class PlayerStateMachine : BaseStateMachine
 
     private void HandleJump()
     {
-        return;
         if (_isJumpPressed) { return; }
 
         if(_timeSinceLastJump < _timeBetweenJumps) { return; }

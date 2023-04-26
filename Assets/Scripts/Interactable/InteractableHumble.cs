@@ -73,6 +73,8 @@ public class InteractableHumble
     public void Uninteract()
     {
         OnUninteract?.Invoke();
+
+        _currentPlayer = null;
     }
 
     public bool RemoveCurrentPlayer()

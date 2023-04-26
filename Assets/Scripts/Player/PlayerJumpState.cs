@@ -46,7 +46,7 @@ public class PlayerJumpState : PlayerBaseState
 
     private void HandleJump()
     {
-        if (_context.PlayerInteraction.HasRecentlyInteracted()) { return; }
+        if (_context.InteractionController.HasRecentlyInteracted()) { return; }
 
         _context.Anim.SetTrigger("Jump");
 

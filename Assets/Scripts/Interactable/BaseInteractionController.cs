@@ -1,5 +1,6 @@
 //#define INTERACTION_DEBUGS
 
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -34,6 +35,8 @@ public class BaseInteractionController : MonoBehaviour
 
     public PlayerInputHandler PlayerInput => _playerInput;
     public Interactable CurrentInteractable => _currentInteractable;
+    public int CurrentInteraction => _currentInteraction;
+    public event Action OnExitInteraction;
 
     #endregion
 
@@ -87,6 +90,8 @@ public class BaseInteractionController : MonoBehaviour
         SetInteraction(0, transform);
 
         _currentInteractable.Uninteract();
+
+        OnExitInteraction?.Invoke();
     }
 
     //This calls when the player presses the interact button

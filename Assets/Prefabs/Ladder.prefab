@@ -178,6 +178,7 @@ GameObject:
   - component: {fileID: 4002527403677196110}
   - component: {fileID: 1055406464845614053}
   - component: {fileID: 6802298892756670810}
+  - component: {fileID: 6461287703805183054}
   m_Layer: 25
   m_Name: Ladder
   m_TagString: Untagged
@@ -212,8 +213,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 7.687439, z: 1}
-  m_Center: {x: 0, y: 4.0009766, z: 0}
+  m_Size: {x: 1.5, y: 7.687439, z: 3}
+  m_Center: {x: 0, y: 4.0009766, z: -1.219858}
 --- !u!54 &1055406464845614053
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -242,6 +243,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bc0270e1983edc42b2181b76de11b56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _interactionType: 99
+  _playerPositionTransform: {fileID: 0}
+  _isAIOnlyInteractable: 0
+  _attachOnInteract: 0
+  _isSingleUse: 0
+  _singleUseTime: 0.5
+  _onInteractParticles: {fileID: 0}
+  _moveSpeed: 5
+--- !u!114 &6461287703805183054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1557909048455786107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
+  _meshes: []
 --- !u!1 &3276242300460580338
 GameObject:
   m_ObjectHideFlags: 0
@@ -265,9 +293,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3276242300460580338}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3259995864127281018}
@@ -278,7 +306,7 @@ Transform:
   - {fileID: 1739193652282851090}
   m_Father: {fileID: 3776827104796205211}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &3973184346038887944
 GameObject:
   m_ObjectHideFlags: 0

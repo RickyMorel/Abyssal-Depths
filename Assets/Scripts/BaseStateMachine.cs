@@ -50,7 +50,7 @@ public class BaseStateMachine : MonoBehaviourID
     protected Animator _anim;
 
     protected bool _isJumpPressed;
-    protected Vector3 _moveDirection;
+    [SerializeField] protected Vector3 _moveDirection;
     protected bool _isShooting;
     protected Damageable _damageable;
 
@@ -58,7 +58,7 @@ public class BaseStateMachine : MonoBehaviourID
 
     #region Public Properties
 
-    public BaseInteractionController PlayerInteraction => _playerInteraction;
+    public BaseInteractionController InteractionController => _playerInteraction;
     public PlayerRagdoll PlayerRagdoll => _playerRagdoll;
     public PlayerHealth PlayerHealth => _playerHealth;
     public PlayerCarryController PlayerCarryController => _playerCarryController;
@@ -113,6 +113,7 @@ public class BaseStateMachine : MonoBehaviourID
     }
 
     #endregion
+
     //We want canMove be the opposite of OnElectrocution, so if it it is electrocuted, it can't move
     public virtual void SetCanMove(bool canMove)
     {

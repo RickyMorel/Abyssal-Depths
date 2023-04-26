@@ -42,12 +42,14 @@ public class ShipFastTravel : MonoBehaviour
         _mainShip = FindObjectOfType<Ship>();
         _isPlayerActive = FindObjectsOfType<PlayerInputHandler>();
         _shipDoor = _mainShip.GetComponentInChildren<ShipDoor>();
-        _lastRoutine = StartCoroutine(DetachFromShip());
+        _lastRoutine = StartCoroutine(DetachFromShipCoroutine());
         _cameraManager = FindObjectOfType<CameraManager>();
         TimelinesManager.Instance.BlackHoleParticle.gameObject.transform.SetParent(_mainShip.transform);
         TimelinesManager.Instance.BlackHoleParticle.gameObject.transform.localPosition =new Vector3(2.5f,0,0);
 
         _mainShip.OnRespawn += HandleRespawn;
+
+        Debug.Log("ShipFastTravel: " + gameObject.name);
     }
 
     #endregion
@@ -105,7 +107,7 @@ public class ShipFastTravel : MonoBehaviour
         if (_playersInShipList.Contains(player) == false) { return; }
 
         _cameraManager.ToggleCamera(false, 1f);
-        _lastRoutine = StartCoroutine(DetachFromShip());
+        _lastRoutine = StartCoroutine(DetachFromShipCoroutine());
         _playersInShip = Mathf.Clamp(_playersInShip-1, 0, _playersActive);
         _playersInShipList.Remove(player);
     }
@@ -128,7 +130,7 @@ public class ShipFastTravel : MonoBehaviour
         TimelinesManager.Instance.BlackHoleParticle.Stop();
     }
 
-    private void AttachToShip()
+    public void AttachToShip()
     {
         if(_isPlayerActive == null) { return; }
 
@@ -141,7 +143,12 @@ public class ShipFastTravel : MonoBehaviour
         }
     }
 
-    private IEnumerator DetachFromShip()
+    public void DetachFromShip()
+    {
+        StartCoroutine(DetachFromShipCoroutine());  
+    }
+
+    private IEnumerator DetachFromShipCoroutine()
     {
         yield return new WaitForSeconds(2);
         for (int i = 0; i < _isPlayerActive.Length; i++)

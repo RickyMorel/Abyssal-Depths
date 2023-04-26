@@ -17,14 +17,14 @@ RenderSettings:
   m_Fog: 1
   m_FogColor: {r: 0, g: 0.2931373, b: 0.4509804, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.02
+  m_FogDensity: 0.014
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.635, g: 0.696, b: 0.735, a: 0}
+  m_AmbientSkyColor: {r: 0.9433962, g: 0.88554645, b: 0.8878115, a: 0}
   m_AmbientEquatorColor: {r: 0.509, g: 0.509, b: 0.509, a: 0}
   m_AmbientGroundColor: {r: 0.389, g: 0.449, b: 0.518, a: 0}
   m_AmbientIntensity: 1
-  m_AmbientMode: 1
+  m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: 9c0fdee478e9b5d4ba07e230b6ac13c5, type: 2}
   m_HaloStrength: 0.5
@@ -3562,8 +3562,8 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.22000003, g: 0.559898, b: 1, a: 1}
-  m_Intensity: 0.63
+  m_Color: {r: 0, g: 0.3010809, b: 0.6886792, a: 1}
+  m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -6179,7 +6179,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 0.78039217, g: 0.85481066, b: 1, a: 1}
-  m_Intensity: 2.35
+  m_Intensity: 3.5
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -9173,15 +9173,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4839929997577192867, guid: 294bd90cadf9b47ee91f452762576bdf, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.702002
+      value: 9.7
       objectReference: {fileID: 0}
     - target: {fileID: 4839929997577192867, guid: 294bd90cadf9b47ee91f452762576bdf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.08
       objectReference: {fileID: 0}
     - target: {fileID: 4839929997577192867, guid: 294bd90cadf9b47ee91f452762576bdf, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.051841736
+      value: -0.05
       objectReference: {fileID: 0}
     - target: {fileID: 4839929997577192867, guid: 294bd90cadf9b47ee91f452762576bdf, type: 3}
       propertyPath: m_LocalRotation.w
@@ -10108,8 +10108,8 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 0
+  m_Color: {r: 0.9528302, g: 0.9236287, b: 0.75956744, a: 1}
+  m_Intensity: 1.8
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -18088,6 +18088,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 858919109}
     m_Modifications:
+    - target: {fileID: 7030063432493892868, guid: 348d6919305c94afe97b99f71754bda7, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4d35e92e078894630b6f0770ddebc62e, type: 2}
     - target: {fileID: 8197925356047236715, guid: 348d6919305c94afe97b99f71754bda7, type: 3}
       propertyPath: m_RootOrder
       value: -1

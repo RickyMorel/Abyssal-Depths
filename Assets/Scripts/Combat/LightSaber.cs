@@ -20,6 +20,8 @@ public class LightSaber : MeleeWeapon
     [Header("Animation")]
     [SerializeField] private PlayableDirector _lightSaberOut;
     [SerializeField] private PlayableDirector _lightSaberIn;
+    [Header("GameObject Related")]
+    [SerializeField] private Collider _trackEnemiesZone;
 
     #endregion
 
@@ -32,6 +34,8 @@ public class LightSaber : MeleeWeapon
 
     private Vector3 _handleOriginalLocalPosition;
 
+    private List<Transform> _enemiesTransform = new List<Transform>();
+
     #endregion
 
     #region Unity Loops
@@ -40,6 +44,7 @@ public class LightSaber : MeleeWeapon
     {
         base.Start();
 
+        _rotationSpeed = _rotationSpeed * _rotationSpeed;
         _handleOriginalLocalPosition = _handleTransform.localPosition;
     }
 
@@ -64,6 +69,13 @@ public class LightSaber : MeleeWeapon
         ThrowLightSaber();
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.gameObject.TryGetComponent(out AIHealth enemy)) { return; }
+
+        _enemiesTransform.Add(enemy.gameObject.transform);
+    }
+
     #endregion
 
     public override void Shoot()
@@ -72,7 +84,7 @@ public class LightSaber : MeleeWeapon
 
         _canShootSaber = false;
         _weapon.ShouldRotate = false;
-        StartCoroutine(BoomerangReturn());
+        StartCoroutine(CheckForEnemyTransforms());
     }
 
     public override void CheckShootInput()
@@ -82,13 +94,15 @@ public class LightSaber : MeleeWeapon
             Shoot();
         }
     }
-    //To do: lightsaber must not collide with ship, have a list of enemies that it has to go first before returning, use slerp so that it doesn't go in a straight line, it must close when returning.
+    //To do: Have a list of enemies that it has to go first before returning, use slerp so that it doesn't go in a straight line.
     private void ThrowLightSaber()
     {
+        Transform moveToCurrentPosition = _moveToForLightSaber;
+
         if (_boomerangThrow) 
         {
             _lightSaberVisual.SetParent(null);
-            _lightSaberVisual.position = Vector3.MoveTowards(_lightSaberVisual.position, _moveToForLightSaber.position, Time.deltaTime * _flyingSpeed);
+            _lightSaberVisual.position = Vector3.MoveTowards(_lightSaberVisual.position, moveToCurrentPosition.position, Time.deltaTime * _flyingSpeed);
             if (!_canShootSaber) { _lightSaberVisual.Rotate(Vector3.right * (_rotationSpeed * Time.deltaTime)); }
         }
         if (_lightSaberVisual.position != _centerPosition.position && !_boomerangThrow) 
@@ -115,10 +129,22 @@ public class LightSaber : MeleeWeapon
     {
         _boomerangThrow = true;
         _lightSaberVisual.transform.SetParent(null);
-        yield return new WaitForSeconds(_returnLightSaberAfterSeconds);
-        _boomerangThrow = false;
-        _checksCurrentPlayer = false;
-        _isBladeOut = false;
-        _lightSaberIn.Play();
+        if (_enemiesTransform.Count == 0)
+        {
+            yield return new WaitForSeconds(_returnLightSaberAfterSeconds);
+            _boomerangThrow = false;
+            _checksCurrentPlayer = false;
+            _isBladeOut = false;
+            _lightSaberIn.Play();
+        }
+        
+    }
+
+    private IEnumerator CheckForEnemyTransforms()
+    {
+        _trackEnemiesZone.enabled = true;
+        yield return new WaitForSeconds(0.1f);
+        _trackEnemiesZone.enabled = false;
+        StartCoroutine(BoomerangReturn());
     }
 }

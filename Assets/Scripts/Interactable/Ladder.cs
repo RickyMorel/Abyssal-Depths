@@ -16,6 +16,8 @@ public class Ladder : Interactable
 
     #endregion
 
+    #region Unity Loops
+
     public void Update()
     {
         if (CurrentPlayer == null) { return; }
@@ -28,6 +30,15 @@ public class Ladder : Interactable
 
         MovePlayer();
     }
+
+    public override void OnTriggerExit(Collider other)
+    {
+        base.OnTriggerExit(other);
+
+        RemoveCurrentPlayer();
+    }
+
+    #endregion
 
     private void CheckIfExit()
     {

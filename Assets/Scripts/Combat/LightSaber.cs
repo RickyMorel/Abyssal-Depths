@@ -27,6 +27,8 @@ public class LightSaber : MeleeWeapon
 
     #region Private Variables
 
+    int _enemyIndex = 0;
+
     private bool _isBladeOut = false;
     private bool _boomerangThrow = false;
     private bool _canShootSaber = true;
@@ -52,6 +54,7 @@ public class LightSaber : MeleeWeapon
     {
         if (_weapon.CurrentPlayer != null && !_isBladeOut && _checksCurrentPlayer) 
         {
+            Debug.Log("Wha da hell");
             _isBladeOut = true;
             _lightSaberOut.Play();
         }
@@ -65,7 +68,6 @@ public class LightSaber : MeleeWeapon
     public override void Update()
     {
         base.Update();
-
         ThrowLightSaber();
     }
 
@@ -82,8 +84,6 @@ public class LightSaber : MeleeWeapon
     {
         if (!_canShootSaber) { return; }
 
-        _canShootSaber = false;
-        _weapon.ShouldRotate = false;
         StartCoroutine(CheckForEnemyTransforms());
     }
 
@@ -94,23 +94,54 @@ public class LightSaber : MeleeWeapon
             Shoot();
         }
     }
-    //To do: Have a list of enemies that it has to go first before returning, use slerp so that it doesn't go in a straight line.
+    
     private void ThrowLightSaber()
     {
-        Transform moveToCurrentPosition = _moveToForLightSaber;
-
-        if (_boomerangThrow) 
+        if (_enemiesTransform.Count == 0) 
         {
-            _lightSaberVisual.SetParent(null);
-            _lightSaberVisual.position = Vector3.MoveTowards(_lightSaberVisual.position, moveToCurrentPosition.position, Time.deltaTime * _flyingSpeed);
-            if (!_canShootSaber) { _lightSaberVisual.Rotate(Vector3.right * (_rotationSpeed * Time.deltaTime)); }
+            Transform moveToCurrentPosition = _moveToForLightSaber;
+
+            if (_boomerangThrow && _lightSaberVisual.position != moveToCurrentPosition.position)
+            {
+                _lightSaberVisual.SetParent(null);
+                _lightSaberVisual.position = Vector3.MoveTowards(_lightSaberVisual.position, moveToCurrentPosition.position, Time.deltaTime * _flyingSpeed);
+                _lightSaberVisual.Rotate(Vector3.right * (_rotationSpeed * Time.deltaTime));
+            }
+            if (_boomerangThrow && _lightSaberVisual.position == moveToCurrentPosition.position)
+            {
+                if (!_canShootSaber) { _lightSaberVisual.Rotate(Vector3.right * (_rotationSpeed * Time.deltaTime)); }
+                StartCoroutine(BoomerangReturn());
+            }
+
+            LightSaberReturnToWeapon();
         }
-        if (_lightSaberVisual.position != _centerPosition.position && !_boomerangThrow) 
+        else
+        {
+            if (_boomerangThrow && _enemyIndex != _enemiesTransform.Count)
+            {
+                _lightSaberVisual.SetParent(null);
+                _lightSaberVisual.position = Vector3.MoveTowards(_lightSaberVisual.position, _enemiesTransform[_enemyIndex].position, Time.deltaTime * _flyingSpeed);
+                _lightSaberVisual.Rotate(Vector3.right * (_rotationSpeed * Time.deltaTime));
+                if (_lightSaberVisual.position == _enemiesTransform[_enemyIndex].position) { _enemyIndex++; }
+            }
+            if (_boomerangThrow && _enemyIndex == _enemiesTransform.Count)
+            {
+                if (!_canShootSaber) { _lightSaberVisual.Rotate(Vector3.right * (_rotationSpeed * Time.deltaTime)); }
+                StartCoroutine(BoomerangReturn());
+            }
+
+            LightSaberReturnToWeapon();
+        }
+    }
+
+    private void LightSaberReturnToWeapon()
+    {
+        if (_lightSaberVisual.position != _centerPosition.position && !_boomerangThrow)
         {
             _lightSaberVisual.SetParent(_handleTransform);
             _lightSaberVisual.position = Vector3.MoveTowards(_lightSaberVisual.position, _centerPosition.position, Time.deltaTime * _flyingSpeed);
             _handleTransform.localPosition = Vector3.MoveTowards(_handleTransform.localPosition, Vector3.zero, Time.deltaTime * _flyingSpeed);
-            if (!_canShootSaber) { _handleTransform.Rotate(Vector3.right * (_rotationSpeed * Time.deltaTime)); }
+            _handleTransform.Rotate(Vector3.right * (_rotationSpeed * Time.deltaTime));
         }
         if (_lightSaberVisual.position == _centerPosition.position && !_boomerangThrow)
         {
@@ -127,24 +158,22 @@ public class LightSaber : MeleeWeapon
 
     private IEnumerator BoomerangReturn()
     {
-        _boomerangThrow = true;
-        _lightSaberVisual.transform.SetParent(null);
-        if (_enemiesTransform.Count == 0)
-        {
-            yield return new WaitForSeconds(_returnLightSaberAfterSeconds);
-            _boomerangThrow = false;
-            _checksCurrentPlayer = false;
-            _isBladeOut = false;
-            _lightSaberIn.Play();
-        }
-        
+        yield return new WaitForSeconds(_returnLightSaberAfterSeconds);
+        _boomerangThrow = false;
+        _checksCurrentPlayer = false;
+        _isBladeOut = false;
+        _lightSaberIn.Play();
     }
 
     private IEnumerator CheckForEnemyTransforms()
     {
+        _enemyIndex = 0;
         _trackEnemiesZone.enabled = true;
         yield return new WaitForSeconds(0.1f);
         _trackEnemiesZone.enabled = false;
-        StartCoroutine(BoomerangReturn());
+        _boomerangThrow = true;
+        _lightSaberVisual.transform.SetParent(null);
+        _canShootSaber = false;
+        _weapon.ShouldRotate = false;
     }
 }

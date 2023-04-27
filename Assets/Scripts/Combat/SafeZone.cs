@@ -11,8 +11,6 @@ public class SafeZone : MonoBehaviour
         GameManager.Instance.DeathManager.IsInSafeZone = true;
 
         ShipInventory.Instance.TransferAllItemsToNewInventory(MainInventory.Instance);
-
-        Ship.Instance.ShipFastTravel.DetachFromShip();
     }
 
     private void OnTriggerExit(Collider other)
@@ -20,7 +18,5 @@ public class SafeZone : MonoBehaviour
         if (!other.gameObject.GetComponent<Ship>()) { return; }
 
         GameManager.Instance.DeathManager.IsInSafeZone = false;
-
-        Ship.Instance.ShipFastTravel.AttachToShip();
     }
 }

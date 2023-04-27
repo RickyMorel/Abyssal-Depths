@@ -2,6 +2,7 @@ using Rewired;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using static Rewired.Controller;
 
 [RequireComponent(typeof(PlayerCarryController))]
@@ -18,9 +19,12 @@ public class PlayerStateMachine : BaseStateMachine
 
     private PlayerInputHandler _playerInput;
     private CapsuleCollider _capsuleCollider;
+    private CharacterController _characterController;
+    private SC_MovingPlatform _platformAttacher;
     private float _turnSmoothVelocity;
     private bool _isAttachedToShip;
     private Vector3 _fallVelocity;
+    private float _fallSpeed;
     private bool _applyGravity;
     private Vector3 _currentBlockedDirection;
     private float _timeSinceLastJump = float.MaxValue;
@@ -32,6 +36,7 @@ public class PlayerStateMachine : BaseStateMachine
     public bool IsAttachedToShip => _isAttachedToShip;
     public override bool IsShooting => _playerInput == null ? false : _playerInput.IsShooting;
     public Vector3 FallVelocity { get { return _fallVelocity; } set { _fallVelocity = value; } }
+    public float FallSpeed { get { return _fallSpeed; } set { _fallSpeed = value; } }
 
     #endregion
 
@@ -53,21 +58,27 @@ public class PlayerStateMachine : BaseStateMachine
         _playerInteraction = GetComponent<PlayerInteractionController>();
         _playerCarryController = GetComponent<PlayerCarryController>();
         _capsuleCollider = GetComponent<CapsuleCollider>();
+        _characterController = GetComponent<CharacterController>();
+        _platformAttacher = GetComponent<SC_MovingPlatform>();
 
         _playerInput.OnJump += HandleJump;
     }
 
     public void AttachToShip(bool isAttached)
     {
+        Debug.Log("AttachToShip: " + isAttached);
+
         _isAttachedToShip = isAttached;
 
         if (isAttached)
         {
             transform.SetParent(Ship.Instance.transform);
+            _platformAttacher.SetActivePlatform(Ship.Instance.transform);
         }
         else
         {
             transform.parent = null;
+            _platformAttacher.SetActivePlatform(null);
         }
     }
 
@@ -82,15 +93,12 @@ public class PlayerStateMachine : BaseStateMachine
     {
         if (_playerInteraction.IsInteracting()) { return; }
 
-        StayInShip();
-
         if (_canMove)
         {
-            CustomCollisionDecection();
+            //CustomCollisionDecection();
             Move();
             RotateTowardsMove();
             AnimateMove();
-            ApplyGravity();
         }
     }
 
@@ -174,43 +182,44 @@ public class PlayerStateMachine : BaseStateMachine
         //check diagonal down left
         if (Physics.Raycast(feetMidPoint, new Vector3(-1f, -1f, 0f), out RaycastHit hitDL, feetRaycastLength * 1.5f, _collisionLayers))
         {
+            _characterController.enabled = false;
             transform.position += new Vector3(diagonalMoveAmount, diagonalMoveAmount, 0f);
+            _characterController.enabled = true;
         }
 
         //check diagonal down right
         if (Physics.Raycast(feetMidPoint, new Vector3(1f, -1f, 0f), out RaycastHit hitDR, feetRaycastLength * 1.5f, _collisionLayers))
         {
+            _characterController.enabled = false;
             transform.position += new Vector3(-diagonalMoveAmount, diagonalMoveAmount, 0f);
+            _characterController.enabled = true;
         }
 
-        Debug.DrawRay(feetMidPoint, new Vector3(-1f, -1f, 0f) * feetRaycastLength * 2f, Color.cyan);
-        Debug.DrawRay(feetMidPoint, new Vector3(1f, -1f, 0f) * feetRaycastLength * 2f, Color.cyan);
+        //Debug.DrawRay(feetMidPoint, new Vector3(-1f, -1f, 0f) * feetRaycastLength * 2f, Color.cyan);
+        //Debug.DrawRay(feetMidPoint, new Vector3(1f, -1f, 0f) * feetRaycastLength * 2f, Color.cyan);
     }
 
     public override void Move()
     {
         Vector3 v3MoveInput = new Vector3(_playerInput.MoveDirection.x, 0f, _playerInput.MoveDirection.y);
 
-        if(_currentBlockedDirection != Vector3.zero && v3MoveInput == _currentBlockedDirection) { return; }
+        //if(_currentBlockedDirection != Vector3.zero && v3MoveInput == _currentBlockedDirection) { return; }
 
-        float cappedSpeed = _currentSpeed / 20;
-        float zMovement = CameraManager.Instance.IsInOrthoMode ? 0f : _playerInput.MoveDirection.y * cappedSpeed;
-        _moveDirection = new Vector3(_playerInput.MoveDirection.x * cappedSpeed, 0f, zMovement);
+        float cappedSpeed = _currentSpeed;
+        float zMovement = CameraManager.Instance.IsInOrthoMode ? 0f : v3MoveInput.z * cappedSpeed;
+        Vector3 gravity = new Vector3(0f, _gravityIntensity, 0f) * Time.deltaTime;
+        _fallSpeed += gravity.y;
+        if(_fallSpeed < Physics.gravity.y) { _fallSpeed = Physics.gravity.y; }
+
+        _moveDirection = new Vector3(v3MoveInput.x * cappedSpeed, 0f, zMovement);
 
         //Caps players movement on Z axis
-        if (!WalkPlaneVisual.Instance.IsWithinBounds(transform.position + _moveDirection)) { _moveDirection.z = 0; }
+        //if (!WalkPlaneVisual.Instance.IsWithinBounds(transform.position + _moveDirection)) { _moveDirection.z = 0; }
 
-        transform.position += _moveDirection;
-    }
+        _moveDirection.y = _fallSpeed;
 
-    public void ApplyGravity()
-    {
-        if (!_applyGravity && !_isJumpPressed && _isGrounded) { _fallVelocity = Vector3.zero; return; }
-        else
-        {
-            _fallVelocity += Physics.gravity * Time.deltaTime;
-            transform.position += _fallVelocity * Time.deltaTime;
-        }
+        //transform.position += _moveDirection;
+        _characterController.Move(_moveDirection * Time.deltaTime);
     }
 
     public override void RotateTowardsMove()
@@ -238,11 +247,6 @@ public class PlayerStateMachine : BaseStateMachine
         _timeSinceLastJump = 0f;
 
         StartCoroutine(SetJumpCoroutine());
-    }
-
-    public void UseLadder()
-    {
-
     }
 
     private IEnumerator SetJumpCoroutine()

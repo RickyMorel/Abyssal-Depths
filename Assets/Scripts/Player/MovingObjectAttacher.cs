@@ -1,8 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
+//#define USE_DYNAMIC_ATTACHING
+
 using UnityEngine;
 
-public class SC_MovingPlatform : MonoBehaviour
+public class MovingObjectAttacher : MonoBehaviour
 {
     #region Private Variables
 
@@ -23,12 +23,12 @@ public class SC_MovingPlatform : MonoBehaviour
 
     #region Unity Loops
 
-    void Start()
+    private void Start()
     {
         _controller = GetComponent<CharacterController>();
     }
 
-    void Update()
+    private void Update()
     {
         if (ActivePlatform != null)
         {
@@ -43,6 +43,7 @@ public class SC_MovingPlatform : MonoBehaviour
                 // Support moving platform rotation
                 Quaternion newGlobalPlatformRotation = ActivePlatform.rotation * _activeLocalPlatformRotation;
                 Quaternion rotationDiff = newGlobalPlatformRotation * Quaternion.Inverse(_activeGlobalPlatformRotation);
+
                 // Prevent rotation of the local up vector
                 rotationDiff = Quaternion.FromToRotation(rotationDiff * Vector3.up, Vector3.up) * rotationDiff;
                 transform.rotation = rotationDiff * transform.rotation;
@@ -68,30 +69,34 @@ public class SC_MovingPlatform : MonoBehaviour
         ActivePlatform = newPlatform;
     }
 
-    //void OnControllerColliderHit(ControllerColliderHit hit)
-    //{
-    //    // Make sure we are really standing on a straight platform
-    //    // Not on the underside of one and not falling down from it either!
-    //    if (hit.moveDirection.y < -0.9 && hit.normal.y > 0.41)
-    //    {
-    //        if (activePlatform != hit.collider.transform)
-    //        {
-    //            activePlatform = hit.collider.transform;
-    //            UpdateMovingPlatform();
-    //        }
-    //    }
-    //    else
-    //    {
-    //        activePlatform = null;
-    //    }
-    //}
-
-    void UpdateMovingPlatform()
+    private void UpdateMovingPlatform()
     {
         _activeGlobalPlatformPoint = transform.position;
         _activeLocalPlatformPoint = ActivePlatform.InverseTransformPoint(transform.position);
+
         // Support moving platform rotation
         _activeGlobalPlatformRotation = transform.rotation;
         _activeLocalPlatformRotation = Quaternion.Inverse(ActivePlatform.rotation) * transform.rotation;
     }
+
+#if USE_DYNAMIC_ATTACHING
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        // Make sure we are really standing on a straight platform
+        // Not on the underside of one and not falling down from it either!
+        if (hit.moveDirection.y < -0.9 && hit.normal.y > 0.41)
+        {
+            if (ActivePlatform != hit.collider.transform)
+            {
+                ActivePlatform = hit.collider.transform;
+                UpdateMovingPlatform();
+            }
+        }
+        else
+        {
+            ActivePlatform = null;
+        }
+    }
+
+#endif
 }

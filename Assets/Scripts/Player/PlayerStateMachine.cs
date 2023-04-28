@@ -66,8 +66,6 @@ public class PlayerStateMachine : BaseStateMachine
 
     public void AttachToShip(bool isAttached)
     {
-        Debug.Log("AttachToShip: " + isAttached);
-
         _isAttachedToShip = isAttached;
 
         if (isAttached)
@@ -214,7 +212,7 @@ public class PlayerStateMachine : BaseStateMachine
         _moveDirection = new Vector3(v3MoveInput.x * cappedSpeed, 0f, zMovement);
 
         //Caps players movement on Z axis
-        //if (!WalkPlaneVisual.Instance.IsWithinBounds(transform.position + _moveDirection)) { _moveDirection.z = 0; }
+        if (!WalkPlaneVisual.Instance.IsWithinBounds(transform.position + (_moveDirection * Time.deltaTime))) { _moveDirection.z = 0; }
 
         _moveDirection.y = _fallSpeed;
 

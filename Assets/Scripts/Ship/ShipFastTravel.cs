@@ -106,7 +106,7 @@ public class ShipFastTravel : MonoBehaviour
 
         if (_playersInShipList.Contains(player) == false) { return; }
 
-        _cameraManager.ToggleCamera(false, 1f);
+        _cameraManager.ToggleCamera(false, 0.1f);
         _lastRoutine = StartCoroutine(DetachFromShipCoroutine());
         _playersInShip = Mathf.Clamp(_playersInShip-1, 0, _playersActive);
         _playersInShipList.Remove(player);

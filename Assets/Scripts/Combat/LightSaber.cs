@@ -54,7 +54,6 @@ public class LightSaber : MeleeWeapon
     {
         if (_weapon.CurrentPlayer != null && !_isBladeOut && _checksCurrentPlayer) 
         {
-            Debug.Log("Wha da hell");
             _isBladeOut = true;
             _lightSaberOut.Play();
         }
@@ -167,6 +166,7 @@ public class LightSaber : MeleeWeapon
 
     private IEnumerator CheckForEnemyTransforms()
     {
+        _enemiesTransform.Clear();
         _enemyIndex = 0;
         _trackEnemiesZone.enabled = true;
         yield return new WaitForSeconds(0.1f);

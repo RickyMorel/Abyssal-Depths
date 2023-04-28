@@ -92,31 +92,13 @@ public class PlayerStateMachine : BaseStateMachine
     {
         if (_playerInteraction.IsInteracting()) { return; }
 
-        StayInShip();
-
         if (_canMove)
         {
-            CustomCollisionDetection();
+            //CustomCollisionDetection();
             Move();
             RotateTowardsMove();
             AnimateMove();
         }
-    }
-
-    private void StayInShip()
-    {
-        if (!_isAttachedToShip) { return; }
-
-        //Don't tp players back to ship if in safe zone
-        if (GameManager.Instance.DeathManager.IsInSafeZone) { return; }
-
-        float maxDistance = 7f;
-        float offsetAmount = 3.5f;
-
-        if (transform.localPosition.x > maxDistance) { transform.localPosition = new Vector3(transform.localPosition.x - offsetAmount, transform.localPosition.y, transform.localPosition.z); }
-        else if (transform.localPosition.x < -maxDistance) { transform.localPosition = new Vector3(transform.localPosition.x + offsetAmount, transform.localPosition.y, transform.localPosition.z); }
-        else if (transform.localPosition.y > maxDistance) { transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y - offsetAmount, transform.localPosition.z); }
-        else if (transform.localPosition.y < -maxDistance) { transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y + offsetAmount, transform.localPosition.z); }
     }
 
     private void CustomCollisionDetection()

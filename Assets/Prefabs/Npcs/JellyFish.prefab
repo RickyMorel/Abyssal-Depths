@@ -352,6 +352,7 @@ MonoBehaviour:
   _jumpHeight: 3
   _gravityIntensity: -15
   _isGrounded: 1
+  _currentStateName: 
   _canMove: 1
 --- !u!114 &1401204668924913008
 MonoBehaviour:
@@ -369,12 +370,12 @@ MonoBehaviour:
   _weaknessType: 
   _currentHealth: 0
   _maxHealth: 100
-  _healthBarImage: {fileID: 6900356959868038460}
   _damageParticles: {fileID: 3696694266783197142}
   _hurtTime: 5
-  _mesh: {fileID: 0}
+  _meshes: []
   _particleParentTransform: {fileID: 0}
   _canKill: 1
+  _stopsActionWhenHurt: 1
 --- !u!114 &1401204668924913007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -416,6 +417,7 @@ MonoBehaviour:
   _attackHitbox: {fileID: 6900356959118706272}
   _projectilePrefab: {fileID: 6835169869500657298, guid: ae5425c51ae307f4bb82602a757b6b25, type: 3}
   _shootTransform: {fileID: 0}
+  _projectileHolsterTransform: {fileID: 0}
   _enemyDamageDataID: 2
   _attackRange: 2
   _hitParticle: {fileID: 440587656760761662}
@@ -431,9 +433,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 250a081dac9e8a74588f9d02355cddf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _goalDistance: 6
+  _isMoving: 0
   Actions: []
   CurrentAction: {fileID: 0}
-  _goalDistance: 6
 --- !u!114 &8086166351982876765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20854,8 +20857,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ddf72292aedb3149a43356854e9d5eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyDamageStat: -1
   _ownHealth: {fileID: 1401204668924913008}
   _damageTypes: 0100000000000000
+  _damagePlayerCharacters: 0
 --- !u!1 &6900356959868038459
 GameObject:
   m_ObjectHideFlags: 0

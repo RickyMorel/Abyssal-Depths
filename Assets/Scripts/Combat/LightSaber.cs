@@ -82,7 +82,7 @@ public class LightSaber : MeleeWeapon
     public override void Shoot()
     {
         if (!_canShootSaber) { return; }
-
+        Debug.Log("Trato de llamar coroutine");
         StartCoroutine(CheckForEnemyTransforms());
     }
 
@@ -166,14 +166,14 @@ public class LightSaber : MeleeWeapon
 
     private IEnumerator CheckForEnemyTransforms()
     {
+        _canShootSaber = false;
+        _boomerangThrow = true;
         _enemiesTransform.Clear();
         _enemyIndex = 0;
         _trackEnemiesZone.enabled = true;
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(Time.deltaTime);
         _trackEnemiesZone.enabled = false;
-        _boomerangThrow = true;
         _lightSaberVisual.transform.SetParent(null);
-        _canShootSaber = false;
         _weapon.ShouldRotate = false;
     }
 }

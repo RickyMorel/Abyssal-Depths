@@ -32,11 +32,18 @@ public class LightSaber : MeleeWeapon
     private bool _isBladeOut = false;
     private bool _boomerangThrow = false;
     private bool _canShootSaber = true;
-    private bool _checksCurrentPlayer = true;
+    private bool _checksCurrentPlayer = false;
 
     private Vector3 _handleOriginalLocalPosition;
 
     private List<Transform> _enemiesTransform = new List<Transform>();
+
+    #endregion
+
+    #region Public Properties
+
+    public bool IsBladeOut => _isBladeOut;
+    public bool BoomerangThrow => _boomerangThrow;
 
     #endregion
 
@@ -57,7 +64,7 @@ public class LightSaber : MeleeWeapon
             _isBladeOut = true;
             _lightSaberOut.Play();
         }
-        else if (_weapon.CurrentPlayer == null && _isBladeOut) 
+        else if (_weapon.CurrentPlayer == null && _isBladeOut)
         {
             _isBladeOut = false;
             _lightSaberIn.Play();
@@ -160,8 +167,11 @@ public class LightSaber : MeleeWeapon
         yield return new WaitForSeconds(_returnLightSaberAfterSeconds);
         _boomerangThrow = false;
         _checksCurrentPlayer = false;
-        _isBladeOut = false;
-        _lightSaberIn.Play();
+        if (_isBladeOut)
+        {
+            _isBladeOut = false;
+            _lightSaberIn.Play();
+        }
     }
 
     private IEnumerator CheckForEnemyTransforms()

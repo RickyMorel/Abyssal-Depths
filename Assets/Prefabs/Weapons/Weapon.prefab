@@ -229,9 +229,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ddf72292aedb3149a43356854e9d5eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyDamageStat: -1
   _ownHealth: {fileID: 2835829445178600864}
   _damageTypes: 0200000001000000
-  _isFriendlyToPlayers: 1
+  _damagePlayerCharacters: 0
 --- !u!1 &211072648925897656
 GameObject:
   m_ObjectHideFlags: 0
@@ -899,9 +900,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ddf72292aedb3149a43356854e9d5eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyDamageStat: -1
   _ownHealth: {fileID: 2835829445178600864}
   _damageTypes: 0200000001000000
-  _isFriendlyToPlayers: 1
+  _damagePlayerCharacters: 0
 --- !u!1 &574489328291009645
 GameObject:
   m_ObjectHideFlags: 0
@@ -1069,9 +1071,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ddf72292aedb3149a43356854e9d5eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyDamageStat: -1
   _ownHealth: {fileID: 2835829445178600864}
   _damageTypes: 0200000001000000
-  _isFriendlyToPlayers: 1
+  _damagePlayerCharacters: 0
 --- !u!1 &1791258052167691310
 GameObject:
   m_ObjectHideFlags: 0
@@ -1422,9 +1425,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ddf72292aedb3149a43356854e9d5eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyDamageStat: -1
   _ownHealth: {fileID: 2835829445178600864}
   _damageTypes: 0200000001000000
-  _isFriendlyToPlayers: 1
+  _damagePlayerCharacters: 0
 --- !u!1 &2483814846787299703
 GameObject:
   m_ObjectHideFlags: 0
@@ -1762,9 +1766,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ddf72292aedb3149a43356854e9d5eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyDamageStat: -1
   _ownHealth: {fileID: 2835829445178600864}
   _damageTypes: 0200000001000000
-  _isFriendlyToPlayers: 1
+  _damagePlayerCharacters: 0
 --- !u!1 &3176484016150529723
 GameObject:
   m_ObjectHideFlags: 0
@@ -2103,9 +2108,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ddf72292aedb3149a43356854e9d5eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyDamageStat: -1
   _ownHealth: {fileID: 2835829445178600864}
   _damageTypes: 0200000001000000
-  _isFriendlyToPlayers: 1
+  _damagePlayerCharacters: 0
 --- !u!1 &3843574088574756828
 GameObject:
   m_ObjectHideFlags: 0
@@ -2566,9 +2572,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ddf72292aedb3149a43356854e9d5eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyDamageStat: -1
   _ownHealth: {fileID: 2835829445178600864}
   _damageTypes: 0200000001000000
-  _isFriendlyToPlayers: 1
+  _damagePlayerCharacters: 0
 --- !u!1 &5195123832446667425
 GameObject:
   m_ObjectHideFlags: 0
@@ -3394,9 +3401,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ddf72292aedb3149a43356854e9d5eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyDamageStat: -1
   _ownHealth: {fileID: 2835829445178600864}
   _damageTypes: 0200000001000000
-  _isFriendlyToPlayers: 1
+  _damagePlayerCharacters: 0
 --- !u!1 &6253536961031130645
 GameObject:
   m_ObjectHideFlags: 0
@@ -3786,9 +3794,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a384c1e917a6d4f42afc3ab7aac31575, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyDamageStat: -1
   _ownHealth: {fileID: 2835829445178600864}
   _damageTypes: 0100000000000000
-  _isFriendlyToPlayers: 1
+  _damagePlayerCharacters: 0
   _weapon: {fileID: 7627081817445622300}
   _meleeWeapon: {fileID: 1154468729331244522}
 --- !u!138 &9098718564592703483
@@ -4217,7 +4226,7 @@ Transform:
   - {fileID: 2389941571288428507}
   - {fileID: 6567959656405035337}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!54 &7627081817445622294
 Rigidbody:
@@ -4288,8 +4297,10 @@ MonoBehaviour:
   _interactionType: 1
   _playerPositionTransform: {fileID: 7627081817470800420}
   _isAIOnlyInteractable: 0
+  _attachOnInteract: 1
   _isSingleUse: 0
   _singleUseTime: 0.5
+  _onInteractParticles: {fileID: 0}
   _upgradeSocketObjs:
   - {fileID: 7094457048451743269}
   - {fileID: 5875497789064163618}
@@ -4343,7 +4354,6 @@ MonoBehaviour:
   _weaknessType: 
   _currentHealth: 0
   _maxHealth: 100
-  _healthBarImage: {fileID: 0}
   _damageParticles: {fileID: 0}
   _fixCost: {fileID: 11400000, guid: 56de9e867278d034698076c776c8d4da, type: 2}
   _timeToFix: 8
@@ -4404,7 +4414,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7627081817470800421}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.024, y: -0.901, z: -3.226}
+  m_LocalPosition: {x: 0.024, y: -1.05, z: -3.226}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4694,9 +4704,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ddf72292aedb3149a43356854e9d5eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyDamageStat: -1
   _ownHealth: {fileID: 2835829445178600864}
   _damageTypes: 0200000001000000
-  _isFriendlyToPlayers: 1
+  _damagePlayerCharacters: 0
 --- !u!1 &8278165535455272840
 GameObject:
   m_ObjectHideFlags: 0

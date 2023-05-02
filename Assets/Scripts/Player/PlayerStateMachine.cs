@@ -171,6 +171,8 @@ public class PlayerStateMachine : BaseStateMachine
         //Don't do diagonal checks if is not falling
         if (_applyGravity == false || _fallVelocity == Vector3.zero) { return; }
 
+        //if (PlayerInteraction.HasRecentlyInteracted()) { return; }
+
         //If is strating to clip through floor, push up
         if(_isGrounded && _applyGravity)
         {

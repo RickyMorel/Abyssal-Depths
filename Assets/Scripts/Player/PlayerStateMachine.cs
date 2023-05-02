@@ -86,6 +86,10 @@ public class PlayerStateMachine : BaseStateMachine
         _timeSinceLastJump += Time.deltaTime;
 
         _currentState.UpdateStates();
+
+        //_characterController.velocity.Set(0f, 0f, 0f);
+        _rb.velocity = Vector3.zero;
+        ///_characterController.SimpleMove(Vector3.zero);
     }
 
     public override void FixedUpdate()
@@ -96,6 +100,7 @@ public class PlayerStateMachine : BaseStateMachine
         {
             //CustomCollisionDetection();
             Move();
+            ApplyGravity();
             RotateTowardsMove();
             AnimateMove();
         }
@@ -191,19 +196,37 @@ public class PlayerStateMachine : BaseStateMachine
 
         float cappedSpeed = _currentSpeed;
         float zMovement = CameraManager.Instance.IsInOrthoMode ? 0f : v3MoveInput.z * cappedSpeed;
-        Vector3 gravity = new Vector3(0f, _gravityIntensity, 0f) * Time.deltaTime;
-        _fallSpeed += gravity.y;
-        if(_fallSpeed < Physics.gravity.y) { _fallSpeed = Physics.gravity.y; }
 
         _moveDirection = new Vector3(v3MoveInput.x * cappedSpeed, 0f, zMovement);
 
         //Caps players movement on Z axis
         if (!WalkPlaneVisual.Instance.IsWithinBounds(transform.position + (_moveDirection * Time.deltaTime))) { _moveDirection.z = 0; }
 
-        _moveDirection.y = _fallSpeed;
+        if (Physics.Raycast(transform.position + (_capsuleCollider.height / 2f * Vector3.up), transform.forward, out RaycastHit hitR, 1f, _collisionLayers))
+        {
+            Debug.DrawRay(transform.position + (_capsuleCollider.height / 2f * Vector3.up), transform.forward * 1f, Color.red, 2f);
+            return;
+        }
 
-        //transform.position += _moveDirection;
         _characterController.Move(_moveDirection * Time.deltaTime);
+    }
+
+    private void ApplyGravity()
+    {
+        Vector3 gravity = new Vector3(0f, _gravityIntensity, 0f) * Time.deltaTime;
+
+        _fallSpeed += gravity.y;
+
+        if (_fallSpeed < Physics.gravity.y) { _fallSpeed = Physics.gravity.y; }
+
+        if (Physics.Raycast(transform.position + (_capsuleCollider.height * Vector3.up), transform.up, out RaycastHit hitU, 0.5f, _collisionLayers) && _fallSpeed > 0f)
+        {
+            Debug.DrawRay(transform.position + (_capsuleCollider.height * Vector3.up), transform.up * 0.5f, Color.red, 2f);
+            _fallSpeed = 0f;
+            return;
+        }
+
+        _characterController.Move(new Vector3(0f, _fallSpeed, 0f) * Time.deltaTime);
     }
 
     public override void RotateTowardsMove()

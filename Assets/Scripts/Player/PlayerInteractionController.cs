@@ -6,6 +6,7 @@ public class PlayerInteractionController : BaseInteractionController
     #region Private Variables
 
     private CharacterController _characterController;
+    private Rigidbody _rb;
 
     #endregion
 
@@ -17,6 +18,7 @@ public class PlayerInteractionController : BaseInteractionController
 
         _playerInput = GetComponent<PlayerInputHandler>();
         _characterController = GetComponent<CharacterController>();
+        _rb = GetComponent<Rigidbody>();
 
         _playerInput.OnInteract += PlayerHandleInteraction;
         _playerInput.OnJump += HandleJump;
@@ -31,6 +33,7 @@ public class PlayerInteractionController : BaseInteractionController
         IsUsing = _playerInput.IsShooting;
         IsUsing_2 = _playerInput.IsShooting_2;
         _characterController.enabled = CurrentInteraction == 0;
+        _rb.isKinematic = CurrentInteraction != 0;
     }
 
     private void OnDestroy()

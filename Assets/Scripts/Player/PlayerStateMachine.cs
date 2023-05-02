@@ -171,22 +171,12 @@ public class PlayerStateMachine : BaseStateMachine
         //Don't do diagonal checks if is not falling
         if (_applyGravity == false || _fallVelocity == Vector3.zero) { return; }
 
-        float diagonalMoveAmount = _fallVelocity.magnitude * Time.deltaTime * 5f;
-
-        //check diagonal down left
-        if (Physics.Raycast(feetMidPoint, new Vector3(-1f, -1f, 0f), out RaycastHit hitDL, feetRaycastLength * 1.5f, _collisionLayers))
+        //If is strating to clip through floor, push up
+        if(_isGrounded && _applyGravity)
         {
-            transform.position += new Vector3(diagonalMoveAmount, diagonalMoveAmount, 0f);
+            Debug.Log("Push Up!");
+            transform.position += Vector3.up * (Physics.gravity.magnitude * Time.deltaTime);
         }
-
-        //check diagonal down right
-        if (Physics.Raycast(feetMidPoint, new Vector3(1f, -1f, 0f), out RaycastHit hitDR, feetRaycastLength * 1.5f, _collisionLayers))
-        {
-            transform.position += new Vector3(-diagonalMoveAmount, diagonalMoveAmount, 0f);
-        }
-
-        Debug.DrawRay(feetMidPoint, new Vector3(-1f, -1f, 0f) * feetRaycastLength * 2f, Color.cyan);
-        Debug.DrawRay(feetMidPoint, new Vector3(1f, -1f, 0f) * feetRaycastLength * 2f, Color.cyan);
     }
 
     public override void Move()

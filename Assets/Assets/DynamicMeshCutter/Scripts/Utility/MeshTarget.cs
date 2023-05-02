@@ -42,7 +42,6 @@ namespace DynamicMeshCutter
         private MeshRenderer _meshRenderer;
         private SkinnedMeshRenderer _skinnedMeshRenderer;
         private float _destroyAfterSeconds = 4;
-        private Rigidbody _rb;
 
         #endregion
 
@@ -50,8 +49,6 @@ namespace DynamicMeshCutter
 
         protected virtual void Start()
         {
-            _rb = GetComponentInParent<Rigidbody>();
-
             if (DynamicRagdoll == null)
                 DynamicRagdoll = GetComponentInParent<DynamicRagdoll>();
         }
@@ -59,7 +56,6 @@ namespace DynamicMeshCutter
         private void OnEnable()
         {
             MeshTargetShephard.RegisterMeshTarget(this);
-            _rb.constraints = RigidbodyConstraints.FreezePositionZ;
             StartCoroutine(DestroyAfterSplit());
         }
 

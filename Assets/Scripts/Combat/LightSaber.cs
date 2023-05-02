@@ -82,7 +82,7 @@ public class LightSaber : MeleeWeapon
     public override void Shoot()
     {
         if (!_canShootSaber) { return; }
-        Debug.Log("Trato de llamar coroutine");
+
         StartCoroutine(CheckForEnemyTransforms());
     }
 

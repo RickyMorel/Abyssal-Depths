@@ -27,8 +27,6 @@ public class PlayerStateMachine : BaseStateMachine
     private bool _isAttachedToShip;
     private float _fallSpeed;
     private float _timeSinceLastJump = float.MaxValue;
-    private bool _applyGravity;
-    private Vector3 _currentBlockedDirection;
 
     #endregion
 
@@ -86,10 +84,6 @@ public class PlayerStateMachine : BaseStateMachine
         _timeSinceLastJump += Time.deltaTime;
 
         _currentState.UpdateStates();
-
-        //_characterController.velocity.Set(0f, 0f, 0f);
-        _rb.velocity = Vector3.zero;
-        ///_characterController.SimpleMove(Vector3.zero);
     }
 
     public override void FixedUpdate()
@@ -98,86 +92,12 @@ public class PlayerStateMachine : BaseStateMachine
 
         if (_canMove)
         {
-            //CustomCollisionDetection();
             Move();
             ApplyGravity();
             RotateTowardsMove();
             AnimateMove();
         }
     }
-
-    private void CustomCollisionDetection()
-    {
-        float height = _capsuleCollider.height;
-        float width = 0.5f;
-        float feetClippingHeightRatio = 8f;
-        float feetRaycastLength = height / feetClippingHeightRatio;
-        Vector3 midPoint = _capsuleCollider.height / 2f * Vector3.up;
-        Vector3 feetMidPoint = transform.position + _capsuleCollider.height / feetClippingHeightRatio * Vector3.up;
-        bool bothFeetOnFloor = true;
-        _currentBlockedDirection = Vector3.zero;
-
-        //draw 2 raycasts per side
-        for (int i = -1; i < 2; i++)
-        {
-            if (i == 0) { continue; }
-
-            Vector3 RaycastDrawPosition = transform.position + midPoint + (i * midPoint / 2f);
-
-            //check right
-            if (Physics.Raycast(RaycastDrawPosition, Vector3.right, out RaycastHit hitR, width, _collisionLayers))
-            {
-                _currentBlockedDirection = Vector3.right;
-            }
-
-            //check left
-            if (Physics.Raycast(RaycastDrawPosition, Vector3.left, out RaycastHit hitL, width, _collisionLayers))
-            {
-                _currentBlockedDirection = Vector3.left;
-            }
-
-            Vector3 feetRaycastPos = feetMidPoint + i * Vector3.right * (width / 2f);
-
-            //check down
-            if (Physics.Raycast(feetRaycastPos, Vector3.down, out RaycastHit hit2D, feetRaycastLength, _collisionLayers))
-            {
-                bothFeetOnFloor = false;
-            }
-        }
-
-        //check up
-        if (Physics.Raycast(transform.position + _capsuleCollider.height * Vector3.up, Vector3.up, out RaycastHit hit2U, 0.15f, _collisionLayers))
-        {
-            if (_fallSpeed > 0f) { _fallSpeed = 0f; }
-        }
-
-        _applyGravity = bothFeetOnFloor;
-
-        //Don't do diagonal checks if is not falling
-        if (_applyGravity == false || _fallSpeed == 0f) { return; }
-
-        float diagonalMoveAmount = _fallSpeed * Time.deltaTime * 5f;
-
-        //check diagonal down left
-        if (Physics.Raycast(feetMidPoint, new Vector3(-1f, -1f, 0f), out RaycastHit hitDL, feetRaycastLength * 1.5f, _collisionLayers))
-        {
-            _characterController.enabled = false;
-            transform.position += new Vector3(diagonalMoveAmount, diagonalMoveAmount, 0f);
-            _characterController.enabled = true;
-        }
-
-        //check diagonal down right
-        if (Physics.Raycast(feetMidPoint, new Vector3(1f, -1f, 0f), out RaycastHit hitDR, feetRaycastLength * 1.5f, _collisionLayers))
-        {
-            _characterController.enabled = false;
-            transform.position += new Vector3(-diagonalMoveAmount, diagonalMoveAmount, 0f);
-            _characterController.enabled = true;
-        }
-
-        //Debug.DrawRay(feetMidPoint, new Vector3(-1f, -1f, 0f) * feetRaycastLength * 2f, Color.cyan);
-        //Debug.DrawRay(feetMidPoint, new Vector3(1f, -1f, 0f) * feetRaycastLength * 2f, Color.cyan);
-    }
-
 
     public void OnDestroy()
     {
@@ -192,8 +112,6 @@ public class PlayerStateMachine : BaseStateMachine
     {
         Vector3 v3MoveInput = new Vector3(_playerInput.MoveDirection.x, 0f, _playerInput.MoveDirection.y);
 
-        if(_currentBlockedDirection != Vector3.zero && v3MoveInput == _currentBlockedDirection) { return; }
-
         float cappedSpeed = _currentSpeed;
         float zMovement = CameraManager.Instance.IsInOrthoMode ? 0f : v3MoveInput.z * cappedSpeed;
 
@@ -202,11 +120,7 @@ public class PlayerStateMachine : BaseStateMachine
         //Caps players movement on Z axis
         if (!WalkPlaneVisual.Instance.IsWithinBounds(transform.position + (_moveDirection * Time.deltaTime))) { _moveDirection.z = 0; }
 
-        if (Physics.Raycast(transform.position + (_capsuleCollider.height / 2f * Vector3.up), transform.forward, out RaycastHit hitR, 1f, _collisionLayers))
-        {
-            Debug.DrawRay(transform.position + (_capsuleCollider.height / 2f * Vector3.up), transform.forward * 1f, Color.red, 2f);
-            return;
-        }
+        if (Physics.Raycast(transform.position + (_capsuleCollider.height / 2f * Vector3.up), transform.forward, out RaycastHit hitR, 1f, _collisionLayers)) { return;}
 
         _characterController.Move(_moveDirection * Time.deltaTime);
     }
@@ -219,12 +133,8 @@ public class PlayerStateMachine : BaseStateMachine
 
         if (_fallSpeed < Physics.gravity.y) { _fallSpeed = Physics.gravity.y; }
 
-        if (Physics.Raycast(transform.position + (_capsuleCollider.height * Vector3.up), transform.up, out RaycastHit hitU, 0.5f, _collisionLayers) && _fallSpeed > 0f)
-        {
-            Debug.DrawRay(transform.position + (_capsuleCollider.height * Vector3.up), transform.up * 0.5f, Color.red, 2f);
-            _fallSpeed = 0f;
-            return;
-        }
+        if (Physics.Raycast(transform.position + (_capsuleCollider.height * Vector3.up),
+            transform.up, out RaycastHit hitU, 0.5f, _collisionLayers) && _fallSpeed > 0f) { _fallSpeed = 0f; return; }
 
         _characterController.Move(new Vector3(0f, _fallSpeed, 0f) * Time.deltaTime);
     }

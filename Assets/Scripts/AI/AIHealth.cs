@@ -70,8 +70,7 @@ public class AIHealth : PlayerHealth
 
     private void CutMeshIfLightSaber()
     {
-        if (!(_damageData.DamageTypes[0] == DamageTypes.Base && _damageData.DamageTypes[1] == DamageTypes.Laser)) { return; }
-        if (!(_damageData.DamageTypes[1] == DamageTypes.Laser && _damageData.DamageTypes[0] == DamageTypes.Base)) { return; }
+        if (!(_damageData.DamageTypes[0] == DamageTypes.Base && _damageData.DamageTypes[1] == DamageTypes.Laser) || !(_damageData.DamageTypes[1] == DamageTypes.Laser && _damageData.DamageTypes[0] == DamageTypes.Base)) { return; }
         _meshTarget.enabled = true;
         GetComponentInChildren<PlaneBehaviour>().Cut();
 

@@ -103,6 +103,7 @@ public class LightSaber : MeleeWeapon
     
     private void ThrowLightSaber()
     {
+        //If there is no enemy, travel a predetermined position
         if (_enemiesTransform.Count == 0) 
         {
             Transform moveToCurrentPosition = _moveToForLightSaber;
@@ -115,7 +116,7 @@ public class LightSaber : MeleeWeapon
             }
             if (_boomerangThrow && _lightSaberVisual.position == moveToCurrentPosition.position)
             {
-                if (!_canShootSaber) { _lightSaberVisual.Rotate(Vector3.right * (_rotationSpeed * Time.deltaTime)); }
+                _lightSaberVisual.Rotate(Vector3.right * (_rotationSpeed * Time.deltaTime));
                 StartCoroutine(BoomerangReturn());
             }
 
@@ -132,7 +133,7 @@ public class LightSaber : MeleeWeapon
             }
             if (_boomerangThrow && _enemyIndex == _enemiesTransform.Count)
             {
-                if (!_canShootSaber) { _lightSaberVisual.Rotate(Vector3.right * (_rotationSpeed * Time.deltaTime)); }
+                _lightSaberVisual.Rotate(Vector3.right * (_rotationSpeed * Time.deltaTime));
                 StartCoroutine(BoomerangReturn());
             }
 
@@ -156,12 +157,20 @@ public class LightSaber : MeleeWeapon
             _handleTransform.localPosition = _handleOriginalLocalPosition;
             _lightSaberVisual.localRotation = Quaternion.Euler(0, 0, 0);
             _handleTransform.localRotation = Quaternion.Euler(0, 0, 0);
-            _canShootSaber = true;
             _weapon.ShouldRotate = true;
             _checksCurrentPlayer = true;
+            StartCoroutine(CanShootSaberDelayCoroutine());
         }
     }
 
+    private IEnumerator CanShootSaberDelayCoroutine()
+    {
+        yield return new WaitForSeconds(1f);
+
+        _canShootSaber = true;
+    }
+
+    //This is for the lightsaber going in animation, and for the boomerangthrow boolean, that way in the function throwlightsaber, it knows it has to go back.
     private IEnumerator BoomerangReturn()
     {
         yield return new WaitForSeconds(_returnLightSaberAfterSeconds);

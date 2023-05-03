@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using static Rewired.Controller;
+using static Rewired.Platforms.Custom.CustomInputSource;
 
 [RequireComponent(typeof(PlayerCarryController))]
 [RequireComponent(typeof(MovingObjectAttacher))]
@@ -35,6 +36,7 @@ public class PlayerStateMachine : BaseStateMachine
     public bool IsAttachedToShip => _isAttachedToShip;
     public override bool IsShooting => _playerInput == null ? false : _playerInput.IsShooting;
     public float FallSpeed { get { return _fallSpeed; } set { _fallSpeed = value; } }
+    public bool IsMoving;
 
     #endregion
 
@@ -84,6 +86,8 @@ public class PlayerStateMachine : BaseStateMachine
         _timeSinceLastJump += Time.deltaTime;
 
         _currentState.UpdateStates();
+
+        _characterController.SimpleMove(Vector3.zero);
     }
 
     public override void FixedUpdate()
@@ -97,6 +101,8 @@ public class PlayerStateMachine : BaseStateMachine
             RotateTowardsMove();
             AnimateMove();
         }
+
+        //if (_characterController.velocity.y < Physics.gravity.y || _characterController.velocity.y > _jumpHeight) { _characterController.SimpleMove(Vector3.zero); }
     }
 
     public void OnDestroy()
@@ -110,6 +116,7 @@ public class PlayerStateMachine : BaseStateMachine
 
     public override void Move()
     {
+        IsMoving = false;
         Vector3 v3MoveInput = new Vector3(_playerInput.MoveDirection.x, 0f, _playerInput.MoveDirection.y);
 
         float cappedSpeed = _currentSpeed;
@@ -120,9 +127,20 @@ public class PlayerStateMachine : BaseStateMachine
         //Caps players movement on Z axis
         if (!WalkPlaneVisual.Instance.IsWithinBounds(transform.position + (_moveDirection * Time.deltaTime))) { _moveDirection.z = 0; }
 
-        if (Physics.Raycast(transform.position + (_capsuleCollider.height / 2f * Vector3.up), transform.forward, out RaycastHit hitR, 1f, _collisionLayers)) { return;}
+        Vector3 blockedDir = Vector3.zero;
+
+        if (Physics.Raycast(transform.position + (_capsuleCollider.height / 2f * Vector3.up), Vector3.right, out RaycastHit hitR, 1f, _collisionLayers)) { blockedDir = Vector3.right; }
+
+        if (Physics.Raycast(transform.position + (_capsuleCollider.height / 2f * Vector3.up), Vector3.left, out RaycastHit hitL, 1f, _collisionLayers)) { blockedDir = Vector3.left; }
+
+        if(blockedDir != Vector3.zero && v3MoveInput.x == blockedDir.x) { Debug.Log("Blocked: " + blockedDir); return; }
+
+        if (Mathf.Abs(_characterController.velocity.x) > 1f) { return; }
+        //if(_characterController.velocity.y < -0.3f && _fallSpeed < -9f) { return; }
 
         _characterController.Move(_moveDirection * Time.deltaTime);
+        IsMoving = true;
+        Debug.Log("X Move: " + blockedDir);
     }
 
     private void ApplyGravity()
@@ -133,10 +151,14 @@ public class PlayerStateMachine : BaseStateMachine
 
         if (_fallSpeed < Physics.gravity.y) { _fallSpeed = Physics.gravity.y; }
 
+        //Stops jumping when hitting something from above
         if (Physics.Raycast(transform.position + (_capsuleCollider.height * Vector3.up),
             transform.up, out RaycastHit hitU, 0.5f, _collisionLayers) && _fallSpeed > 0f) { _fallSpeed = 0f; return; }
 
+        //if (_characterController.velocity.y < Physics.gravity.y || _characterController.velocity.y > _jumpHeight) { _characterController.SimpleMove(Vector3.zero); return; }
+
         _characterController.Move(new Vector3(0f, _fallSpeed, 0f) * Time.deltaTime);
+        //Debug.Log($"Velocity: ${_characterController.velocity} ; FallSpeed: {FallSpeed}");
     }
 
     public override void RotateTowardsMove()

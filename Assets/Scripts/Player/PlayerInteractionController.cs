@@ -1,4 +1,5 @@
 
+using System;
 using UnityEngine;
 
 public class PlayerInteractionController : BaseInteractionController
@@ -6,6 +7,7 @@ public class PlayerInteractionController : BaseInteractionController
     #region Private Variables
 
     private CharacterController _characterController;
+    private PlayerStateMachine _playerStateMachine;
     private Rigidbody _rb;
 
     #endregion
@@ -19,10 +21,12 @@ public class PlayerInteractionController : BaseInteractionController
         _playerInput = GetComponent<PlayerInputHandler>();
         _characterController = GetComponent<CharacterController>();
         _rb = GetComponent<Rigidbody>();
+        _playerStateMachine = GetComponent<PlayerStateMachine>();
 
         _playerInput.OnInteract += PlayerHandleInteraction;
         _playerInput.OnJump += HandleJump;
         _playerHealth.OnHurt += HandleHurt;
+        OnExitInteraction += HandleExitInteraction;
     }
 
     public override void Update()
@@ -41,11 +45,17 @@ public class PlayerInteractionController : BaseInteractionController
         _playerInput.OnInteract -= PlayerHandleInteraction;
         _playerInput.OnJump -= HandleJump;
         _playerHealth.OnHurt -= HandleHurt;
+        OnExitInteraction -= HandleExitInteraction;
     }
 
     public void PlayerHandleInteraction()
     {
         HandleInteraction();
+    }
+
+    private void HandleExitInteraction()
+    {
+        _playerStateMachine.FallSpeed = Physics.gravity.y;
     }
 
     #endregion

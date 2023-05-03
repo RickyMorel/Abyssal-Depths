@@ -12,14 +12,8 @@ public class MovingPlatformController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    //private void Update()
-    //{
-    //    transform.Translate(direction * speed * Time.deltaTime);
-    //}
-
     private void FixedUpdate()
     {
-        //transform.Translate(direction * speed * Time.deltaTime);
         rb.MovePosition(rb.position + direction * speed * Time.fixedDeltaTime);
     }
 

@@ -7,6 +7,7 @@ public class MovingObjectAttacher : MonoBehaviour
     #region Private Variables
 
     private CharacterController _controller;
+    private PlayerStateMachine _playerStateMachine;
     private Vector3 _moveDirection;
     private Vector3 _activeGlobalPlatformPoint;
     private Vector3 _activeLocalPlatformPoint;
@@ -26,6 +27,7 @@ public class MovingObjectAttacher : MonoBehaviour
     private void Start()
     {
         _controller = GetComponent<CharacterController>();
+        _playerStateMachine = GetComponent<PlayerStateMachine>();
     }
 
     private void Update()
@@ -36,7 +38,7 @@ public class MovingObjectAttacher : MonoBehaviour
             _moveDirection = newGlobalPlatformPoint - _activeGlobalPlatformPoint;
             if (_moveDirection.magnitude > 0.01f)
             {
-                _controller.Move(_moveDirection);
+                if (_playerStateMachine.IsMoving) { _controller.Move(_moveDirection); }
             }
             if (ActivePlatform)
             {
@@ -57,7 +59,7 @@ public class MovingObjectAttacher : MonoBehaviour
             if (_moveDirection.magnitude > 0.01f)
             {
                 _moveDirection = Vector3.Lerp(_moveDirection, Vector3.zero, Time.deltaTime);
-                _controller.Move(_moveDirection);
+                if (_playerStateMachine.IsMoving) { _controller.Move(_moveDirection); }
             }
         }
     }

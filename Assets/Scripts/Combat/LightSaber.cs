@@ -30,8 +30,9 @@ public class LightSaber : MeleeWeapon
     private int _enemyIndex = 0;
 
     private bool _isBladeOut = false;
-    private bool _boomerangThrow = false;
-    private bool _canShootSaber = true;
+    [SerializeField] private bool _boomerangThrow = false;
+    private bool _isBoomerangReturning = false;
+    [SerializeField] private bool _canShootSaber = true;
     private bool _checksCurrentPlayer = false;
 
     private Vector3 _handleOriginalLocalPosition;
@@ -91,6 +92,8 @@ public class LightSaber : MeleeWeapon
     public override void Shoot()
     {
         if (!_canShootSaber) { return; }
+        if (_boomerangThrow) { return; }
+        if (_isBoomerangReturning) { return; }
 
         _canShootSaber = false;
         _boomerangThrow = true;
@@ -147,15 +150,16 @@ public class LightSaber : MeleeWeapon
 
     private void LightSaberReturnToWeapon()
     {
-        if (_lightSaberVisual.position != _centerPosition.position && !_boomerangThrow)
+        if (_lightSaberVisual.position != _centerPosition.position && _isBoomerangReturning)
         {
             _lightSaberVisual.SetParent(_handleTransform);
             _lightSaberVisual.position = Vector3.MoveTowards(_lightSaberVisual.position, _centerPosition.position, Time.deltaTime * _flyingSpeed);
             _handleTransform.localPosition = Vector3.MoveTowards(_handleTransform.localPosition, Vector3.zero, Time.deltaTime * _flyingSpeed);
             _handleTransform.Rotate(Vector3.right * (_rotationSpeed * Time.deltaTime));
         }
-        if (_lightSaberVisual.position == _centerPosition.position && !_boomerangThrow)
+        if (_lightSaberVisual.position == _centerPosition.position && _isBoomerangReturning)
         {
+            Debug.Log("is this if being called???????");
             _handleTransform.SetParent(_lightSaberVisual);
             _lightSaberVisual.SetParent(_rotationPoint.transform);
             _handleTransform.localPosition = _handleOriginalLocalPosition;
@@ -163,6 +167,7 @@ public class LightSaber : MeleeWeapon
             _handleTransform.localRotation = Quaternion.Euler(0, 0, 0);
             _weapon.ShouldRotate = true;
             _checksCurrentPlayer = true;
+            _isBoomerangReturning = false;
             StartCoroutine(CanShootSaberDelayCoroutine());
         }
     }
@@ -179,6 +184,7 @@ public class LightSaber : MeleeWeapon
     {
         yield return new WaitForSeconds(_returnLightSaberAfterSeconds);
         _boomerangThrow = false;
+        _isBoomerangReturning = true;
         _checksCurrentPlayer = false;
         if (_isBladeOut)
         {

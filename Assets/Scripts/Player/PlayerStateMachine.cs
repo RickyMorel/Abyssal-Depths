@@ -68,15 +68,16 @@ public class PlayerStateMachine : BaseStateMachine
     public void AttachToShip(bool isAttached)
     {
         _isAttachedToShip = isAttached;
+        transform.parent = null;
 
         if (isAttached)
         {
-            transform.SetParent(Ship.Instance.transform);
+            //transform.SetParent(Ship.Instance.transform);
             _platformAttacher.SetActivePlatform(Ship.Instance.transform);
         }
         else
         {
-            transform.parent = null;
+            //transform.parent = null;
             _platformAttacher.SetActivePlatform(null);
         }
     }
@@ -135,8 +136,12 @@ public class PlayerStateMachine : BaseStateMachine
 
         if(blockedDir != Vector3.zero && v3MoveInput.x == blockedDir.x) { Debug.Log("Blocked: " + blockedDir); return; }
 
+        //Stop horizontal movement if top is blocked
+        if (Physics.Raycast(transform.position + (_capsuleCollider.height * Vector3.up),
+            transform.up, out RaycastHit hitU, 0.5f, _collisionLayers) && _fallSpeed > 0f) { return; }
+
         if (Mathf.Abs(_characterController.velocity.x) > 1f) { return; }
-        //if(_characterController.velocity.y < -0.3f && _fallSpeed < -9f) { return; }
+        //if(_characterController.velocity.y < -0.1f && _fallSpeed < -9.8f) { Debug.Log("Stop movement because of fall speed"); return; }
 
         _characterController.Move(_moveDirection * Time.deltaTime);
         IsMoving = true;
@@ -155,10 +160,8 @@ public class PlayerStateMachine : BaseStateMachine
         if (Physics.Raycast(transform.position + (_capsuleCollider.height * Vector3.up),
             transform.up, out RaycastHit hitU, 0.5f, _collisionLayers) && _fallSpeed > 0f) { _fallSpeed = 0f; return; }
 
-        //if (_characterController.velocity.y < Physics.gravity.y || _characterController.velocity.y > _jumpHeight) { _characterController.SimpleMove(Vector3.zero); return; }
-
         _characterController.Move(new Vector3(0f, _fallSpeed, 0f) * Time.deltaTime);
-        //Debug.Log($"Velocity: ${_characterController.velocity} ; FallSpeed: {FallSpeed}");
+        Debug.Log($"Velocity: ${_characterController.velocity} ; FallSpeed: {FallSpeed}");
     }
 
     public override void RotateTowardsMove()

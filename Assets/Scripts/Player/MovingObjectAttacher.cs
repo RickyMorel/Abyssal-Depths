@@ -30,7 +30,7 @@ public class MovingObjectAttacher : MonoBehaviour
         _playerStateMachine = GetComponent<PlayerStateMachine>();
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         if (ActivePlatform != null)
         {
@@ -38,7 +38,7 @@ public class MovingObjectAttacher : MonoBehaviour
             _moveDirection = newGlobalPlatformPoint - _activeGlobalPlatformPoint;
             if (_moveDirection.magnitude > 0.01f)
             {
-                if (_playerStateMachine.IsMoving) { _controller.Move(_moveDirection); }
+                _controller.Move(_moveDirection);
             }
             if (ActivePlatform)
             {
@@ -59,7 +59,7 @@ public class MovingObjectAttacher : MonoBehaviour
             if (_moveDirection.magnitude > 0.01f)
             {
                 _moveDirection = Vector3.Lerp(_moveDirection, Vector3.zero, Time.deltaTime);
-                if (_playerStateMachine.IsMoving) { _controller.Move(_moveDirection); }
+                _controller.Move(_moveDirection); 
             }
         }
     }

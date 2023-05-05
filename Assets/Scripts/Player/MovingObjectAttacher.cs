@@ -32,14 +32,17 @@ public class MovingObjectAttacher : MonoBehaviour
 
     private void LateUpdate()
     {
+        Vector3 gravityVector = new Vector3(0f, _playerStateMachine.FallSpeed, 0f) * Time.deltaTime;
+        Vector3 movementVector = _playerStateMachine.MoveDirection * Time.deltaTime;
+        Debug.Log("playerStateMachine.MoveDirection: " + _playerStateMachine.MoveDirection);
         if (ActivePlatform != null)
         {
             Vector3 newGlobalPlatformPoint = ActivePlatform.TransformPoint(_activeLocalPlatformPoint);
             _moveDirection = newGlobalPlatformPoint - _activeGlobalPlatformPoint;
-            if (_moveDirection.magnitude > 0.01f)
-            {
-                _controller.Move(_moveDirection);
-            }
+            //if (_moveDirection.magnitude > 0.01f)
+            //{
+                _controller.Move(_moveDirection + movementVector + gravityVector);
+           // }
             if (ActivePlatform)
             {
                 // Support moving platform rotation
@@ -54,14 +57,14 @@ public class MovingObjectAttacher : MonoBehaviour
                 UpdateMovingPlatform();
             }
         }
-        else
-        {
-            if (_moveDirection.magnitude > 0.01f)
-            {
-                _moveDirection = Vector3.Lerp(_moveDirection, Vector3.zero, Time.deltaTime);
-                _controller.Move(_moveDirection); 
-            }
-        }
+        //else
+        //{
+        //    if (_moveDirection.magnitude > 0.01f)
+        //    {
+        //        _moveDirection = Vector3.Lerp(_moveDirection, Vector3.zero, Time.deltaTime);
+        //        _controller.Move(_moveDirection + movementVector + gravityVector); 
+        //    }
+        //}
     }
 
     #endregion

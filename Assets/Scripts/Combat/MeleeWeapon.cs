@@ -52,7 +52,7 @@ public abstract class MeleeWeapon : WeaponShoot
         //For child classes
     }
 
-    private void FixedUpdate()
+    public virtual void FixedUpdate()
     {
         if (_weapon.CurrentPlayer == null) { return; }
         if(_weapon.CanUse == false) { return; }

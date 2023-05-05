@@ -33,7 +33,7 @@ public class LightSaber : MeleeWeapon
     [SerializeField] private bool _boomerangThrow = false;
     private bool _isBoomerangReturning = false;
     [SerializeField] private bool _canShootSaber = true;
-    private bool _checksCurrentPlayer = false;
+    private bool _checksCurrentPlayer = true;
 
     private Vector3 _handleOriginalLocalPosition;
 
@@ -97,6 +97,7 @@ public class LightSaber : MeleeWeapon
 
         _canShootSaber = false;
         _boomerangThrow = true;
+        _weapon.ShouldRotate = false;
         StartCoroutine(CheckForEnemyTransforms());
     }
 
@@ -159,7 +160,6 @@ public class LightSaber : MeleeWeapon
         }
         if (_lightSaberVisual.position == _centerPosition.position && _isBoomerangReturning)
         {
-            Debug.Log("is this if being called???????");
             _handleTransform.SetParent(_lightSaberVisual);
             _lightSaberVisual.SetParent(_rotationPoint.transform);
             _handleTransform.localPosition = _handleOriginalLocalPosition;
@@ -201,6 +201,5 @@ public class LightSaber : MeleeWeapon
         yield return new WaitForSeconds(Time.deltaTime*100);
         _trackEnemiesZone.enabled = false;
         _lightSaberVisual.transform.SetParent(null);
-        _weapon.ShouldRotate = false;
     }
 }

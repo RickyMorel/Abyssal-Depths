@@ -30,9 +30,9 @@ public class LightSaber : MeleeWeapon
     private int _enemyIndex = 0;
 
     private bool _isBladeOut = false;
-    [SerializeField] private bool _boomerangThrow = false;
+    private bool _boomerangThrow = false;
     private bool _isBoomerangReturning = false;
-    [SerializeField] private bool _canShootSaber = true;
+    private bool _canShootSaber = true;
     private bool _checksCurrentPlayer = true;
 
     private Vector3 _handleOriginalLocalPosition;
@@ -179,7 +179,7 @@ public class LightSaber : MeleeWeapon
         _canShootSaber = true;
     }
 
-    //This is for the lightsaber going in animation, and for the boomerangthrow boolean, that way in the function throwlightsaber, it knows it has to go back.
+    //This is for the lightsaber going in animation, and for the boomerangthrow boolean, that way, in the function throwlightsaber, it knows it has to go back.
     private IEnumerator BoomerangReturn()
     {
         yield return new WaitForSeconds(_returnLightSaberAfterSeconds);
@@ -199,7 +199,5 @@ public class LightSaber : MeleeWeapon
         _enemyIndex = 0;
         _trackEnemiesZone.enabled = true;
         yield return new WaitForSeconds(Time.deltaTime*100);
-        _trackEnemiesZone.enabled = false;
-        _lightSaberVisual.transform.SetParent(null);
-    }
+        _trackEnemiesZone.enabled = false;    }
 }

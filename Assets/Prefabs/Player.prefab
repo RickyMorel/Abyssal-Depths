@@ -5187,7 +5187,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8235309464086857810}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.071, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5221,7 +5221,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.15
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8235309464086857808
 MonoBehaviour:
@@ -5399,10 +5399,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id:
     Value: 
-  _currentSpeed: 2
-  _runSpeed: 2
+  _currentSpeed: 6
+  _runSpeed: 6
   _turnSmoothTime: 0.05
-  _jumpHeight: 14
+  _jumpHeight: 3
   _gravityIntensity: -15
   _isGrounded: 0
   _currentStateName: 
@@ -5412,7 +5412,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 16777280
   _timeBetweenJumps: 1
-  IsMoving: 0
+  _isAttachedToShip: 0
 --- !u!114 &8900917374660638783
 MonoBehaviour:
   m_ObjectHideFlags: 0

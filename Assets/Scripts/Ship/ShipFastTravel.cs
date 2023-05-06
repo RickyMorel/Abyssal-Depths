@@ -150,7 +150,7 @@ public class ShipFastTravel : MonoBehaviour
 
     private IEnumerator DetachFromShipCoroutine()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(0.1f);
         for (int i = 0; i < _isPlayerActive.Length; i++)
         {
             if (_isPlayerActive[i].IsPlayerActive == true)

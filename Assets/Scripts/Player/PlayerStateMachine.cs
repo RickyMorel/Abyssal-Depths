@@ -18,7 +18,7 @@ public class PlayerStateMachine : BaseStateMachine
     private CharacterController _characterController;
     private CapsuleCollider _capsuleCollider;
     private float _turnSmoothVelocity;
-    [SerializeField] private bool _isAttachedToShip;
+    private bool _isAttachedToShip;
     private float _fallSpeed;
     private float _timeSinceLastJump = float.MaxValue;
     private Vector3 _fallVelocity;
@@ -82,8 +82,6 @@ public class PlayerStateMachine : BaseStateMachine
         _timeSinceLastJump += Time.deltaTime;
 
         _currentState.UpdateStates();
-
-        _characterController.SimpleMove(Vector3.zero);
     }
 
     public override void FixedUpdate()
@@ -182,12 +180,9 @@ public class PlayerStateMachine : BaseStateMachine
         //Don't do diagonal checks if is not falling
         if (_applyGravity == false || _fallVelocity == Vector3.zero) { return; }
 
-        //if (PlayerInteraction.HasRecentlyInteracted()) { return; }
-
         //If is strating to clip through floor, push up
         if (_isGrounded && _applyGravity)
         {
-            Debug.Log("Push Up!");
             transform.position += Vector3.up * (Physics.gravity.magnitude * Time.deltaTime);
         }
     }
@@ -243,11 +238,6 @@ public class PlayerStateMachine : BaseStateMachine
             transform.up, out RaycastHit hitU, 0.5f, _collisionLayers) && _fallSpeed > 0f) { _moveDirection = Vector3.zero; return; }
 
         _characterController.Move(_moveDirection * Time.deltaTime);
-    }
-
-    private bool IsInShip()
-    {
-        return _isAttachedToShip;
     }
 
     private void ApplyGravity()

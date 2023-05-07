@@ -34,7 +34,6 @@ public class PlayerInteractionController : BaseInteractionController
         MoveDirection = _playerInput.InteractableMoveDirection;
         IsUsing = _playerInput.IsShooting;
         IsUsing_2 = _playerInput.IsShooting_2;
-        //transform.SetParent(CurrentInteraction != 0 ? Ship.Instance.transform : null);
     }
 
     private void OnDestroy()
@@ -53,7 +52,6 @@ public class PlayerInteractionController : BaseInteractionController
     private void HandleExitInteraction()
     {
         _playerStateMachine.FallSpeed = Physics.gravity.y;
-        Debug.Log("Exited Interaction!");
     }
 
     #endregion

@@ -50,7 +50,7 @@ public class BaseStateMachine : MonoBehaviourID
     protected Animator _anim;
 
     protected bool _isJumpPressed;
-    [SerializeField] protected Vector3 _moveDirection;
+    protected Vector3 _moveDirection;
     protected bool _isShooting;
     protected Damageable _damageable;
 

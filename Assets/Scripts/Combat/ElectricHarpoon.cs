@@ -25,23 +25,15 @@ public class ElectricHarpoon : MeleeWeapon
 
     #region Private Variables
 
-    private int _enemyIndex = 0;
-
-    private bool _isBladeOut = false;
-    private bool _boomerangThrow = false;
-    private bool _isBoomerangReturning = false;
-    private bool _canShootSaber = true;
-    private bool _checksCurrentPlayer = true;
-
     private List<Transform> _enemyTransforms = new List<Transform>();
+    private Vector3 _originalHarpoonPosition;
     private Quaternion _originalHarpoonRotation;
+    [SerializeField] private ThrowState _throwState = ThrowState.Attached;
 
     #endregion
 
     #region Public Properties
 
-    public bool IsBladeOut => _isBladeOut;
-    public bool BoomerangThrow => _boomerangThrow;
 
     #endregion
 
@@ -52,26 +44,14 @@ public class ElectricHarpoon : MeleeWeapon
         base.Start();
 
         _rotationSpeed = _rotationSpeed * _rotationSpeed;
+        _originalHarpoonPosition = _lightSaberVisual.transform.localPosition;
         _originalHarpoonRotation = _lightSaberVisual.transform.localRotation;
-    }
-
-    public override void FixedUpdate()
-    {
-        if (_weapon.CurrentPlayer != null && !_isBladeOut && _checksCurrentPlayer) 
-        {
-            _isBladeOut = true;
-            //_lightSaberOut.Play();
-        }
-        else if (_weapon.CurrentPlayer == null && _isBladeOut)
-        {
-            _isBladeOut = false;
-            //_lightSaberIn.Play();
-        }
     }
 
     public override void Update()
     {
         base.Update();
+
         ThrowLightSaber();
     }
 
@@ -88,12 +68,14 @@ public class ElectricHarpoon : MeleeWeapon
 
     public override void Shoot()
     {
-        if (!_canShootSaber) { return; }
-        if (_boomerangThrow) { return; }
-        if (_isBoomerangReturning) { return; }
+        if (_throwState != ThrowState.Attached) 
+        { 
+            if(_throwState == ThrowState.Arrived) { ReturnHarpoon(); }
 
-        _canShootSaber = false;
-        _boomerangThrow = true;
+            return; 
+        }
+
+        _throwState = ThrowState.Throwing;
         _weapon.ShouldRotate = false;
         StartCoroutine(CheckForEnemyTransforms());
     }
@@ -108,53 +90,35 @@ public class ElectricHarpoon : MeleeWeapon
     
     private void ThrowLightSaber()
     {
-        //If there is no enemy, travel a predetermined position
-        if (_enemyTransforms.Count == 0) 
+        Transform moveToCurrentPosition = _moveToForLightSaber;
+
+        if (_throwState == ThrowState.Throwing && _lightSaberVisual.position != moveToCurrentPosition.position)
         {
-            Transform moveToCurrentPosition = _moveToForLightSaber;
+            _lightSaberVisual.SetParent(null);
+            _lightSaberVisual.position = Vector3.MoveTowards(_lightSaberVisual.position, moveToCurrentPosition.position, Time.deltaTime * _flyingSpeed);
 
-            if (_boomerangThrow && _lightSaberVisual.position != moveToCurrentPosition.position)
-            {
-                _lightSaberVisual.SetParent(null);
-                _lightSaberVisual.position = Vector3.MoveTowards(_lightSaberVisual.position, moveToCurrentPosition.position, Time.deltaTime * _flyingSpeed);
-            }
-            if (_boomerangThrow && _lightSaberVisual.position == moveToCurrentPosition.position)
-            {
-                StartCoroutine(BoomerangReturn());
-            }
-
-            LightSaberReturnToWeapon();
+            if(Vector3.Distance(_lightSaberVisual.position, moveToCurrentPosition.position) < 2f) { _throwState = ThrowState.Arrived; }
         }
-        else
-        {
-            if (_boomerangThrow && _enemyIndex != _enemyTransforms.Count)
-            {
-                _lightSaberVisual.SetParent(null);
-                _lightSaberVisual.position = Vector3.MoveTowards(_lightSaberVisual.position, _enemyTransforms[_enemyIndex].position, Time.deltaTime * _flyingSpeed);
-                if (_lightSaberVisual.position == _enemyTransforms[_enemyIndex].position) { _enemyIndex++; }
-            }
-            if (_boomerangThrow && _enemyIndex == _enemyTransforms.Count)
-            {
-                StartCoroutine(BoomerangReturn());
-            }
+        //if (_throwState == ThrowState.Throwing && _lightSaberVisual.position == moveToCurrentPosition.position)
+        //{
+            //StartCoroutine(BoomerangReturn());
+        //}
 
-            LightSaberReturnToWeapon();
-        }
+        LightSaberReturnToWeapon();
     }
 
     private void LightSaberReturnToWeapon()
     {
-        if (_lightSaberVisual.position != _handleTransform.position && _isBoomerangReturning)
+        if (_lightSaberVisual.position != _handleTransform.position && _throwState == ThrowState.Returning)
         {
             _lightSaberVisual.position = Vector3.MoveTowards(_lightSaberVisual.position, _handleTransform.position, Time.deltaTime * _flyingSpeed);
         }
-        if (_lightSaberVisual.position == _handleTransform.position && _isBoomerangReturning)
+        if (_lightSaberVisual.position == _handleTransform.position && _throwState == ThrowState.Returning)
         {
             _lightSaberVisual.SetParent(_handleTransform);
+            _lightSaberVisual.localPosition = _originalHarpoonPosition;
             _lightSaberVisual.localRotation = _originalHarpoonRotation;
             _weapon.ShouldRotate = true;
-            _checksCurrentPlayer = true;
-            _isBoomerangReturning = false;
             StartCoroutine(CanShootSaberDelayCoroutine());
         }
     }
@@ -163,28 +127,35 @@ public class ElectricHarpoon : MeleeWeapon
     {
         yield return new WaitForSeconds(1f);
 
-        _canShootSaber = true;
+        _throwState = ThrowState.Attached;
     }
 
     //This is for the lightsaber going in animation, and for the boomerangthrow boolean, that way, in the function throwlightsaber, it knows it has to go back.
     private IEnumerator BoomerangReturn()
     {
         yield return new WaitForSeconds(_returnLightSaberAfterSeconds);
-        _boomerangThrow = false;
-        _isBoomerangReturning = true;
-        _checksCurrentPlayer = false;
-        if (_isBladeOut)
-        {
-            _isBladeOut = false;
-            //_lightSaberIn.Play();
-        }
+
+        _throwState = ThrowState.Returning;
+    }
+
+    private void ReturnHarpoon()
+    {
+        _throwState = ThrowState.Returning;
     }
 
     private IEnumerator CheckForEnemyTransforms()
     {
         _enemyTransforms.Clear();
-        _enemyIndex = 0;
         _trackEnemiesZone.enabled = true;
         yield return new WaitForSeconds(Time.deltaTime*100);
-        _trackEnemiesZone.enabled = false;    }
+        _trackEnemiesZone.enabled = false;    
+    }
+
+    public enum ThrowState
+    {
+        Attached,
+        Throwing,
+        Arrived,
+        Returning
+    }
 }

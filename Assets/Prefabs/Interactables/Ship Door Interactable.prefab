@@ -28,6 +28,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4577673005683245132}
   m_RootOrder: 0
@@ -108,6 +109,7 @@ Transform:
   m_LocalRotation: {x: 0.70710677, y: 0, z: 0, w: 0.70710677}
   m_LocalPosition: {x: -0.0184, y: 0.221, z: -0.268}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4577673005683245132}
   m_RootOrder: 1
@@ -142,11 +144,12 @@ Transform:
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 5.843, y: -3.62, z: 1.349}
   m_LocalScale: {x: 5, y: 5, z: 5}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 548867336734424115}
   - {fileID: 4577673004725961343}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!114 &4577673005683245120
 MonoBehaviour:
@@ -195,7 +198,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5, z: 0.5}
+  m_Size: {x: 0.15, y: 0.5, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4577673005683245133
 MonoBehaviour:
@@ -211,10 +214,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactionType: 5
   _playerPositionTransform: {fileID: 4577673004725961343}
+  _isAIOnlyInteractable: 0
+  _attachOnInteract: 1
   _isSingleUse: 1
   _singleUseTime: 0.5
+  _onInteractParticles: {fileID: 0}
   _shipDoor: {fileID: 0}
   _closedZRotation: 120
   _openZRotation: 150
-  _isWantedDoorOpen: 0
-  _isDoorOpen: 0
+  IsWantedDoorOpen: 0

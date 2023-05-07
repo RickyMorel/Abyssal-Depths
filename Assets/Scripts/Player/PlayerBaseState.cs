@@ -46,7 +46,7 @@ public abstract class PlayerBaseState
             _currentSuperState.SetSubState(newState);
         }
 
-        _context.PlayerInteraction.HandleChangeState(newState, _isRootState);
+        _context.InteractionController.HandleChangeState(newState, _isRootState);
     }
     protected void SetSuperState(PlayerBaseState newSuperState) 
     {

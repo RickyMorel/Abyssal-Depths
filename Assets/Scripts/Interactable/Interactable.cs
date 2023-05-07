@@ -65,6 +65,16 @@ public class Interactable : MonoBehaviour
         _humble = new InteractableHumble(_isAIOnlyInteractable);
     }
 
+    //Ensures that CurrentPlayer gets set to null when player is done interacting
+    private void LateUpdate()
+    {
+        if(CurrentPlayer == null) { return; }
+
+        if(CurrentPlayer.CurrentInteraction != 0) { return; }
+
+        _humble.SetCurrentPlayer(null);
+    }
+
     public virtual void OnTriggerEnter(Collider other)
     {
         SetCurrentInteractable(other, true);

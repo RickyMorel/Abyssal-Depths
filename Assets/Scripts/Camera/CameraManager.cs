@@ -30,7 +30,7 @@ public class CameraManager : MonoBehaviour
 
     private void Start()
     {
-        GetAllCameras();
+        ToggleCamera(true);
     }
 
     private void Awake()
@@ -72,8 +72,17 @@ public class CameraManager : MonoBehaviour
         _perspectiveCamera = _cameras[_cameras.Length - 1].transform.parent.Find("PerspectiveCamera").gameObject;
     }
 
-    public void ToggleCamera(bool boolean)
+    public void ToggleCamera(bool boolean, float timeTillToggle = 0f)
     {
+        //Stops previous camera toggle functions from calling
+        StopAllCoroutines();
+        StartCoroutine(ToggleCameraCoroutine(boolean, timeTillToggle));
+    }
+
+    public IEnumerator ToggleCameraCoroutine(bool boolean, float timeTillToggle)
+    {
+        yield return new WaitForSeconds(timeTillToggle);
+
         GetAllCameras();
 
         _cameras[_cameras.Length - 1].gameObject.SetActive(boolean);

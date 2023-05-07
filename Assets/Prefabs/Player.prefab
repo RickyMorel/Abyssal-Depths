@@ -4908,11 +4908,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ddf72292aedb3149a43356854e9d5eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyDamageStat: -1
   _ownHealth: {fileID: 8900917374660638782}
-  _isFriendlyToPlayers: 0
   _damageTypes: 
-  _weapon: {fileID: 0}
-  _mace: {fileID: 0}
+  _damagePlayerCharacters: 0
 --- !u!1 &4936333524319843810
 GameObject:
   m_ObjectHideFlags: 0
@@ -5188,7 +5187,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8235309464086857810}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.071, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5222,7 +5221,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.15
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8235309464086857808
 MonoBehaviour:
@@ -5236,8 +5235,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f758275dfc32f74fbcfeea82ba655ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _floorMask: 6
-  _shipFloorMask: 24
   _floorLayers:
     serializedVersion: 2
     m_Bits: 16777280
@@ -5253,6 +5250,7 @@ GameObject:
   - component: {fileID: 8235309464947500825}
   - component: {fileID: 8235309464947500829}
   - component: {fileID: 8235309464947500828}
+  - component: {fileID: 8523176060915961835}
   - component: {fileID: 6133349847735832925}
   - component: {fileID: 8235309464947500831}
   - component: {fileID: 31071801577900501}
@@ -5262,6 +5260,7 @@ GameObject:
   - component: {fileID: 8683001855490978692}
   - component: {fileID: 3100667788472722230}
   - component: {fileID: 7936679602822478339}
+  - component: {fileID: 8125227216913311040}
   m_Layer: 12
   m_Name: Player
   m_TagString: Player
@@ -5288,7 +5287,7 @@ Transform:
   - {fileID: 680569614875381212}
   - {fileID: 5236102578785787110}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!136 &8235309464947500829
 CapsuleCollider:
@@ -5324,6 +5323,24 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!143 &8523176060915961835
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8235309464947500824}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6133349847735832925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5382,16 +5399,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id:
     Value: 
-  _currentSpeed: 2
-  _runSpeed: 2
+  _currentSpeed: 6
+  _runSpeed: 6
   _turnSmoothTime: 0.05
   _jumpHeight: 3
   _gravityIntensity: -15
   _isGrounded: 0
+  _currentStateName: 
   _canMove: 1
+  _moveDirection: {x: 0, y: 0, z: 0}
   _collisionLayers:
     serializedVersion: 2
     m_Bits: 16777280
+  _timeBetweenJumps: 1
+  _isAttachedToShip: 0
 --- !u!114 &8900917374660638783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5432,10 +5453,9 @@ MonoBehaviour:
   _weaknessType: 
   _currentHealth: 0
   _maxHealth: 100
-  _healthBarImage: {fileID: 0}
   _damageParticles: {fileID: 0}
   _hurtTime: 5
-  _mesh: {fileID: 0}
+  _meshes: []
   _particleParentTransform: {fileID: 0}
 --- !u!114 &8683001855490978692
 MonoBehaviour:
@@ -5487,6 +5507,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _chipPickupPrefab: {fileID: 7517285669250702529, guid: 33c642c6393f4f04d87e7307bb977fc0, type: 3}
   _handTransform: {fileID: 377705278079410084}
+--- !u!114 &8125227216913311040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8235309464947500824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1396d6dcf17bbd4458366caff72a405f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActivePlatform: {fileID: 0}
 --- !u!1 &8935917602542925056
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,24 +1,26 @@
-using Rewired;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
-using static Rewired.Controller;
 
 [RequireComponent(typeof(PlayerCarryController))]
+[RequireComponent(typeof(CharacterController))]
 public class PlayerStateMachine : BaseStateMachine
 {
     #region Editor Fields
 
     [SerializeField] private LayerMask _collisionLayers;
+    [SerializeField] private float _timeBetweenJumps = 1f;
 
     #endregion
 
     #region Private Variables
 
     private PlayerInputHandler _playerInput;
+    private CharacterController _characterController;
     private CapsuleCollider _capsuleCollider;
     private float _turnSmoothVelocity;
     private bool _isAttachedToShip;
+    private float _fallSpeed;
+    private float _timeSinceLastJump = float.MaxValue;
     private Vector3 _fallVelocity;
     private bool _applyGravity;
     private Vector3 _currentBlockedDirection;
@@ -29,7 +31,9 @@ public class PlayerStateMachine : BaseStateMachine
 
     public bool IsAttachedToShip => _isAttachedToShip;
     public override bool IsShooting => _playerInput == null ? false : _playerInput.IsShooting;
+    public float FallSpeed { get { return _fallSpeed; } set { _fallSpeed = value; } }
     public Vector3 FallVelocity { get { return _fallVelocity; } set { _fallVelocity = value; } }
+    public Vector3 PlayerMoveDirection => _moveDirection;
 
     #endregion
 
@@ -50,7 +54,9 @@ public class PlayerStateMachine : BaseStateMachine
         _playerInput = GetComponent<PlayerInputHandler>();
         _playerInteraction = GetComponent<PlayerInteractionController>();
         _playerCarryController = GetComponent<PlayerCarryController>();
+        _characterController = GetComponent<CharacterController>();
         _capsuleCollider = GetComponent<CapsuleCollider>();
+        _characterController.detectCollisions = false;
 
         _playerInput.OnJump += HandleJump;
     }
@@ -58,6 +64,8 @@ public class PlayerStateMachine : BaseStateMachine
     public void AttachToShip(bool isAttached)
     {
         _isAttachedToShip = isAttached;
+        transform.parent = null;
+        _characterController.enabled = !_isAttachedToShip;
 
         if (isAttached)
         {
@@ -71,6 +79,8 @@ public class PlayerStateMachine : BaseStateMachine
 
     public override void Update()
     {
+        _timeSinceLastJump += Time.deltaTime;
+
         _currentState.UpdateStates();
     }
 
@@ -80,14 +90,21 @@ public class PlayerStateMachine : BaseStateMachine
 
         if (_canMove)
         {
-            CustomCollisionDecection();
-            Move();
+            if (_isAttachedToShip)
+            {
+                MoveTransform();
+                ApplyGravityTransform();
+                CustomCollisionDecection();
+                StayInShip();
+            }
+            else
+            {
+                Move();
+                ApplyGravity();
+            }
             RotateTowardsMove();
             AnimateMove();
-            ApplyGravity();
         }
-
-        CheckIfFellOutOfShip();
     }
 
     public void OnDestroy()
@@ -98,6 +115,20 @@ public class PlayerStateMachine : BaseStateMachine
     }
 
     #endregion
+
+    private void StayInShip()
+    {
+        //Don't tp players back to ship if in safe zone
+        if (GameManager.Instance.DeathManager.IsInSafeZone) { return; }
+
+        float maxDistance = 7f;
+        float offsetAmount = 3.5f;
+
+        if (transform.localPosition.x > maxDistance) { transform.localPosition = new Vector3(transform.localPosition.x - offsetAmount, transform.localPosition.y, transform.localPosition.z); }
+        else if (transform.localPosition.x < -maxDistance) { transform.localPosition = new Vector3(transform.localPosition.x + offsetAmount, transform.localPosition.y, transform.localPosition.z); }
+        else if (transform.localPosition.y > maxDistance) { transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y - offsetAmount, transform.localPosition.z); }
+        else if (transform.localPosition.y < -maxDistance) { transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y + offsetAmount, transform.localPosition.z); }
+    }
 
     private void CustomCollisionDecection()
     {
@@ -113,7 +144,7 @@ public class PlayerStateMachine : BaseStateMachine
         //draw 2 raycasts per side
         for (int i = -1; i < 2; i++)
         {
-            if(i == 0) { continue; }
+            if (i == 0) { continue; }
 
             Vector3 RaycastDrawPosition = transform.position + midPoint + (i * midPoint / 2f);
 
@@ -129,7 +160,7 @@ public class PlayerStateMachine : BaseStateMachine
                 _currentBlockedDirection = Vector3.left;
             }
 
-            Vector3 feetRaycastPos = feetMidPoint + i * Vector3.right * (width/2f);
+            Vector3 feetRaycastPos = feetMidPoint + i * Vector3.right * (width / 2f);
 
             //check down
             if (Physics.Raycast(feetRaycastPos, Vector3.down, out RaycastHit hit2D, feetRaycastLength, _collisionLayers))
@@ -149,31 +180,20 @@ public class PlayerStateMachine : BaseStateMachine
         //Don't do diagonal checks if is not falling
         if (_applyGravity == false || _fallVelocity == Vector3.zero) { return; }
 
-        float diagonalMoveAmount = _fallVelocity.magnitude * Time.deltaTime * 5f;
-
-        //check diagonal down left
-        if (Physics.Raycast(feetMidPoint, new Vector3(-1f, -1f, 0f), out RaycastHit hitDL, feetRaycastLength * 1.5f, _collisionLayers))
+        //If is strating to clip through floor, push up
+        if (_isGrounded && _applyGravity)
         {
-            transform.position += new Vector3(diagonalMoveAmount, diagonalMoveAmount, 0f);
+            transform.position += Vector3.up * (Physics.gravity.magnitude * Time.deltaTime);
         }
-
-        //check diagonal down right
-        if (Physics.Raycast(feetMidPoint, new Vector3(1f, -1f, 0f), out RaycastHit hitDR, feetRaycastLength * 1.5f, _collisionLayers))
-        {
-            transform.position += new Vector3(-diagonalMoveAmount, diagonalMoveAmount, 0f);
-        }
-
-        Debug.DrawRay(feetMidPoint, new Vector3(-1f, -1f, 0f) * feetRaycastLength * 2f, Color.cyan);
-        Debug.DrawRay(feetMidPoint, new Vector3(1f, -1f, 0f) * feetRaycastLength * 2f, Color.cyan);
     }
 
-    public override void Move()
+    public  void MoveTransform()
     {
         Vector3 v3MoveInput = new Vector3(_playerInput.MoveDirection.x, 0f, _playerInput.MoveDirection.y);
 
-        if(_currentBlockedDirection != Vector3.zero && v3MoveInput == _currentBlockedDirection) { return; }
+        if (_currentBlockedDirection != Vector3.zero && v3MoveInput == _currentBlockedDirection) { return; }
 
-        float cappedSpeed = _currentSpeed / 20;
+        float cappedSpeed = _currentSpeed / 60;
         float zMovement = CameraManager.Instance.IsInOrthoMode ? 0f : _playerInput.MoveDirection.y * cappedSpeed;
         _moveDirection = new Vector3(_playerInput.MoveDirection.x * cappedSpeed, 0f, zMovement);
 
@@ -183,7 +203,7 @@ public class PlayerStateMachine : BaseStateMachine
         transform.position += _moveDirection;
     }
 
-    public void ApplyGravity()
+    public void ApplyGravityTransform()
     {
         if (!_applyGravity && !_isJumpPressed && _isGrounded) { _fallVelocity = Vector3.zero; return; }
         else
@@ -191,6 +211,48 @@ public class PlayerStateMachine : BaseStateMachine
             _fallVelocity += Physics.gravity * Time.deltaTime;
             transform.position += _fallVelocity * Time.deltaTime;
         }
+    }
+
+    public override void Move()
+    {
+        Vector3 v3MoveInput = new Vector3(_playerInput.MoveDirection.x, 0f, _playerInput.MoveDirection.y);
+
+        float cappedSpeed = _currentSpeed;
+        float zMovement = CameraManager.Instance.IsInOrthoMode ? 0f : v3MoveInput.z * cappedSpeed;
+
+        _moveDirection = new Vector3(v3MoveInput.x * cappedSpeed, 0f, zMovement);
+
+        //Caps players movement on Z axis
+        if (!WalkPlaneVisual.Instance.IsWithinBounds(transform.position + (_moveDirection * Time.deltaTime))) { _moveDirection.z = 0; }
+
+        Vector3 blockedDir = Vector3.zero;
+
+        if (Physics.Raycast(transform.position + (_capsuleCollider.height / 2f * Vector3.up), Vector3.right, out RaycastHit hitR, 1f, _collisionLayers)) { blockedDir = Vector3.right; }
+
+        if (Physics.Raycast(transform.position + (_capsuleCollider.height / 2f * Vector3.up), Vector3.left, out RaycastHit hitL, 1f, _collisionLayers)) { blockedDir = Vector3.left; }
+
+        if (blockedDir != Vector3.zero && v3MoveInput.x == blockedDir.x) { _moveDirection = Vector3.zero; return; }
+
+        //Stop horizontal movement if top is blocked
+        if (Physics.Raycast(transform.position + (_capsuleCollider.height * Vector3.up),
+            transform.up, out RaycastHit hitU, 0.5f, _collisionLayers) && _fallSpeed > 0f) { _moveDirection = Vector3.zero; return; }
+
+        _characterController.Move(_moveDirection * Time.deltaTime);
+    }
+
+    private void ApplyGravity()
+    {
+        Vector3 gravity = new Vector3(0f, _gravityIntensity, 0f) * Time.deltaTime;
+
+        _fallSpeed += gravity.y;
+
+        if (_fallSpeed < Physics.gravity.y) { _fallSpeed = Physics.gravity.y; }
+
+        //Stops jumping when hitting something from above
+        if (Physics.Raycast(transform.position + (_capsuleCollider.height * Vector3.up),
+            transform.up, out RaycastHit hitU, 0.5f, _collisionLayers) && _fallSpeed > 0f) { _fallSpeed = 0f; return; }
+
+        _characterController.Move(new Vector3(0f, _fallSpeed, 0f) * Time.deltaTime);
     }
 
     public override void RotateTowardsMove()
@@ -209,18 +271,13 @@ public class PlayerStateMachine : BaseStateMachine
         _anim.SetFloat("Movement", _playerInput.MoveDirection.magnitude);
     }
 
-    private void CheckIfFellOutOfShip()
-    {
-        if (!_isAttachedToShip) { return; }
-
-        if(Vector3.Distance(transform.position, Ship.Instance.transform.position) < 50) { return; }
-
-        transform.localPosition = Vector3.zero;
-    }
-
     private void HandleJump()
     {
         if (_isJumpPressed) { return; }
+
+        if(_timeSinceLastJump < _timeBetweenJumps) { return; }
+
+        _timeSinceLastJump = 0f;
 
         StartCoroutine(SetJumpCoroutine());
     }

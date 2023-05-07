@@ -14,4 +14,5 @@ public enum InteractionType
     Fixing = 10,
     AttachedAttacking = 11,
     GrabRock = 12,
+    Ladder = 99,
 }

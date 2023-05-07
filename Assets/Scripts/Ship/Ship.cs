@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(ShipHealth))]
+[RequireComponent(typeof(ShipFastTravel))]
 [RequireComponent(typeof(ShipData))]
 [RequireComponent(typeof(Rigidbody))]
 public class Ship : MonoBehaviour
@@ -17,6 +18,7 @@ public class Ship : MonoBehaviour
     private static Ship _instance;
     private ShipHealth _health;
     private ShipData _shipData;
+    private ShipFastTravel _shipFastTravel;
     private Rigidbody _rb;
 
     private float _topSpeed;
@@ -31,6 +33,7 @@ public class Ship : MonoBehaviour
     public ShipStatsSO ShipStatsSO => _shipStatsSO;
     public ShipHealth ShipHealth => _health;
     public ShipData ShipData => _shipData;
+    public ShipFastTravel ShipFastTravel => _shipFastTravel;
     public Rigidbody Rb => _rb;
     public float TopSpeed => _topSpeed;
     public float BoostTimeAfterGearChange => _boostTimeAfterGearChange;
@@ -56,7 +59,8 @@ public class Ship : MonoBehaviour
     {
         _health = GetComponent<ShipHealth>();
         _shipData = GetComponent<ShipData>();
-        _rb = GetComponent<Rigidbody>();    
+        _rb = GetComponent<Rigidbody>();
+        _shipFastTravel = GetComponent<ShipFastTravel>();
 
         SetShipStats();
     }

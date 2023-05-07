@@ -48,8 +48,6 @@ public class ShipFastTravel : MonoBehaviour
         TimelinesManager.Instance.BlackHoleParticle.gameObject.transform.localPosition = new Vector3(2.5f,0,0);
 
         _mainShip.OnRespawn += HandleRespawn;
-
-        Debug.Log("ShipFastTravel: " + gameObject.name);
     }
 
     #endregion

@@ -59,8 +59,8 @@ public class ShipCamera : BaseCamera
 
         _orginalFOV = _virtualCamera.m_Lens.OrthographicSize;
         _currentFOV = _orginalFOV;
-
-        ChangeToBossZoom(false);
+        
+        ChangeToBossZoom(true);
     }
 
     private void LateUpdate()

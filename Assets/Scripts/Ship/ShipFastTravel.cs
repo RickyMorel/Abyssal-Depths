@@ -45,7 +45,7 @@ public class ShipFastTravel : MonoBehaviour
         _lastRoutine = StartCoroutine(DetachFromShipCoroutine());
         _cameraManager = FindObjectOfType<CameraManager>();
         TimelinesManager.Instance.BlackHoleParticle.gameObject.transform.SetParent(_mainShip.transform);
-        TimelinesManager.Instance.BlackHoleParticle.gameObject.transform.localPosition =new Vector3(2.5f,0,0);
+        TimelinesManager.Instance.BlackHoleParticle.gameObject.transform.localPosition = new Vector3(2.5f,0,0);
 
         _mainShip.OnRespawn += HandleRespawn;
 

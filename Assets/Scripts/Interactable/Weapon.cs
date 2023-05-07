@@ -17,6 +17,7 @@ public class Weapon : Upgradable
 
     private WeaponHumble _weaponHumble;
     private float _rotationX;
+    private bool _shouldRotate = true;
 
     #endregion
 
@@ -25,6 +26,12 @@ public class Weapon : Upgradable
     public GameObject ProjectilePrefab => _weaponHumble.ProjectilePrefab;
     public List<Transform> ShootTransforms => _weaponHumble.ShootTransforms;
     public Transform TurretHead => _weaponHumble.TurretHead;
+
+    #endregion
+
+    #region Getters and Setters
+
+    public bool ShouldRotate { get { return _shouldRotate; } set { _shouldRotate = value; } }
 
     #endregion
 
@@ -50,7 +57,7 @@ public class Weapon : Upgradable
     private void Update()
     {
         if (CurrentPlayer == null) { return; }
-
+        
         if (CanUse == false) { return; }
 
         _weaponHumble.WeaponShoot.CheckShootInput();
@@ -66,7 +73,7 @@ public class Weapon : Upgradable
 
     private void CheckRotationInput()
     {
-        if(!DoesRotate()) { return; }
+        if(!DoesRotate() || !_shouldRotate) { return; }
 
         if (CurrentPlayer.MoveDirection.x == 0) { return; }
 
@@ -77,9 +84,11 @@ public class Weapon : Upgradable
     {
         if(_selectedUpgrade == null) { return true; }
 
-        //if is harpoon gun
-        if (_selectedUpgrade.UpgradeSO.Socket_1 == ChipType.Base && _selectedUpgrade.UpgradeSO.Socket_1 == ChipType.Electric) { return true; }
-        if (_selectedUpgrade.UpgradeSO.Socket_1 == ChipType.Electric && _selectedUpgrade.UpgradeSO.Socket_1 == ChipType.Base) { return true; }
+        //if is harpoon gun or lightsaber
+        if (_selectedUpgrade.UpgradeSO.Socket_1 == ChipType.Base && _selectedUpgrade.UpgradeSO.Socket_2 == ChipType.Electric) { return true; }
+        if (_selectedUpgrade.UpgradeSO.Socket_1 == ChipType.Electric && _selectedUpgrade.UpgradeSO.Socket_2 == ChipType.Base) { return true; }
+        if (_selectedUpgrade.UpgradeSO.Socket_1 == ChipType.Base && _selectedUpgrade.UpgradeSO.Socket_2 == ChipType.Laser) { return true; }
+        if (_selectedUpgrade.UpgradeSO.Socket_1 == ChipType.Laser && _selectedUpgrade.UpgradeSO.Socket_2 == ChipType.Base) { return true; }
 
         //if is any other base weapon
         if (_selectedUpgrade.UpgradeSO.Socket_1 == ChipType.Base || _selectedUpgrade.UpgradeSO.Socket_2 == ChipType.Base) { return false; }

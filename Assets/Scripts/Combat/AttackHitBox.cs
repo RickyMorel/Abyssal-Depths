@@ -15,7 +15,6 @@ public class AttackHitBox : MonoBehaviour
 
     #region Private Variable
 
-    protected int _damage;
     protected DamageData _damageData;
     private int _aiCombatID = -1;
 
@@ -69,13 +68,14 @@ public class AttackHitBox : MonoBehaviour
         OnHit?.Invoke(other.gameObject);
     }
 
-    public void DealDamageToEnemies(AIHealth enemyHealth)
+    public void DealDamageToEnemies(AIHealth enemyHealth, int damage, int secondaryDamage = 0)
     {
         AIHealth aiHealth = enemyHealth;
         if (aiHealth.CanKill)
         {
             enemyHealth.DamageData = _damageData;
-            enemyHealth.Damage(_damage);
+            enemyHealth.Damage(damage);
+            if (secondaryDamage != 0) { enemyHealth.Damage(secondaryDamage, false, false, null, 1); }
         }
         else { aiHealth.Hurt(DamageTypes.Base, 0); }
 

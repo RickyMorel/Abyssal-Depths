@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DynamicMeshCutter;
 
 [RequireComponent(typeof(Rigidbody))]
 public class AIHealth : PlayerHealth
@@ -18,7 +19,8 @@ public class AIHealth : PlayerHealth
     private GAgent _gAgent;
     private AIInteractionController _interactionController;
     private Rigidbody _rb;
-
+    private MeshTarget _meshTarget;
+    
     #endregion
 
     #region Public Properties
@@ -39,6 +41,9 @@ public class AIHealth : PlayerHealth
         _interactionController = GetComponent<AIInteractionController>();
         _rb = GetComponent<Rigidbody>();
 
+        _meshTarget = GetComponentInChildren<MeshTarget>();
+        _meshTarget.enabled = false;
+
         OnDamaged += Hurt;
         OnDie += HandleDead;
     }
@@ -53,12 +58,23 @@ public class AIHealth : PlayerHealth
 
     private void HandleDead()
     {
+        CutMeshIfLightSaber();
+
         StopPreviousAction();
         _gAgent.enabled = false;
         _rb.isKinematic = false;
         _rb.useGravity = true;
 
         Invoke(nameof(DisableSelf), 10f);
+    }
+
+    private void CutMeshIfLightSaber()
+    {
+        if (!(_damageData.DamageTypes[0] == DamageTypes.Base && _damageData.DamageTypes[1] == DamageTypes.Laser) || !(_damageData.DamageTypes[1] == DamageTypes.Laser && _damageData.DamageTypes[0] == DamageTypes.Base)) { return; }
+        _meshTarget.enabled = true;
+        GetComponentInChildren<PlaneBehaviour>().Cut();
+
+        Invoke(nameof(DisableSelf), 0.1f);
     }
 
     public override void Hurt(DamageTypes damageType, int damage)

@@ -2037,8 +2037,9 @@ Transform:
   - {fileID: 2146908363670135102}
   - {fileID: 8585098842728100779}
   - {fileID: 690493084674786053}
+  - {fileID: 1316366319795656837}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!54 &690493083869517231
 Rigidbody:
@@ -2124,6 +2125,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 514135a66a5760447b1b21fd2a3341c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _id:
+    Value: 
   _currentSpeed: 2
   _runSpeed: 2
   _turnSmoothTime: 0
@@ -2145,12 +2148,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _resistanceType: 
   _weaknessType: 
+  _currentHealth: 0
   _maxHealth: 100
   _healthBarImage: {fileID: 0}
   _damageParticles: {fileID: 0}
   _hurtTime: 5
   _mesh: {fileID: 0}
-  _id: 
+  _particleParentTransform: {fileID: 0}
   _canKill: 0
 --- !u!114 &3789420751372200378
 MonoBehaviour:
@@ -6075,6 +6079,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4683448319378514890}
   - component: {fileID: 3787390551838979862}
+  - component: {fileID: 1643753399436809143}
   m_Layer: 13
   m_Name: SM_Chr_Alien_01
   m_TagString: Untagged
@@ -6199,6 +6204,30 @@ SkinnedMeshRenderer:
     m_Center: {x: 0, y: 0.8265775, z: -0.055950202}
     m_Extent: {x: 1.0245618, y: 0.9276708, z: 0.30054608}
   m_DirtyAABB: 0
+--- !u!114 &1643753399436809143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3468057540821132968}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74d075e443ddc624db302098f7826153, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameobjectRoot: {fileID: 6618236498338728187}
+  OverrideFaceMaterial: {fileID: 2100000, guid: 9efedd2a02a24ac479e285d244f6b34e, type: 2}
+  SeparateMeshes: 0
+  ApplyTranslation: 1
+  DefaultBehaviour: 0000000000000000
+  DynamicRagdoll: {fileID: 0}
+  Animator: {fileID: 0}
+  GroupBehaviours: []
+  CreateRigidbody: 0101
+  CreateMeshCollider: 0101
+  Physics: 0200000002000000
+  Inherit: 0000
 --- !u!1 &3799108189346548507
 GameObject:
   m_ObjectHideFlags: 0
@@ -6467,6 +6496,57 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.00000011920929, y: 0.84481454, z: -0.06076073}
     m_Extent: {x: 1.0228081, y: 0.9432366, z: 0.26525828}
   m_DirtyAABB: 0
+--- !u!1 &4836114285254131812
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1316366319795656837}
+  - component: {fileID: 3216462657736150702}
+  m_Layer: 0
+  m_Name: PlaneCutter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1316366319795656837
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4836114285254131812}
+  m_LocalRotation: {x: 0.5128715, y: 0.49657655, z: 0.43658513, w: 0.54751074}
+  m_LocalPosition: {x: -0.027, y: 0.4766636, z: -0.08013885}
+  m_LocalScale: {x: 0.2272667, y: 0.2272667, z: 0.22726667}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5668680312401534128}
+  m_Father: {fileID: 690493083869517235}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 172.645, y: 631.112, z: 264.636}
+--- !u!114 &3216462657736150702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4836114285254131812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7da90c7c25b7364d8bb2164631559c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Separation: 0.02
+  DestroyTargets: 0
+  UseAsync: 1
+  VertexCreationThreshold: 0
+  DefaultMaterial: {fileID: 2100000, guid: 9efedd2a02a24ac479e285d244f6b34e, type: 2}
+  DebugPlaneLength: 1
 --- !u!1 &5244745316587034610
 GameObject:
   m_ObjectHideFlags: 0
@@ -6870,6 +6950,89 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.000000059604645, y: 0.8428183, z: -0.02750656}
     m_Extent: {x: 1.0221846, y: 0.9457055, z: 0.2726041}
   m_DirtyAABB: 0
+--- !u!1 &6070311125296093372
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5668680312401534128}
+  - component: {fileID: 7635086409474971353}
+  - component: {fileID: 361045204135295167}
+  m_Layer: 0
+  m_Name: Plane cut visual
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &5668680312401534128
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6070311125296093372}
+  m_LocalRotation: {x: 0.7037087, y: 0.06754442, z: -0.015150426, w: 0.70710844}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1316366319795656837}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 85.745, y: 89.643, z: 82.934}
+--- !u!33 &7635086409474971353
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6070311125296093372}
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &361045204135295167
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6070311125296093372}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &6618236498338728187
 GameObject:
   m_ObjectHideFlags: 0
@@ -7694,6 +7857,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3486256346682243482}
   - component: {fileID: 6561436703652542909}
+  - component: {fileID: 9186344524947032189}
   m_Layer: 13
   m_Name: SM_Chr_Attach_SpaceSoldier_Armour_01
   m_TagString: Untagged
@@ -7810,6 +7974,30 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.00000029802322, y: 0.84610176, z: -0.065847635}
     m_Extent: {x: 0.9351954, y: 0.86749196, z: 0.3238942}
   m_DirtyAABB: 0
+--- !u!114 &9186344524947032189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8585951350423439668}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74d075e443ddc624db302098f7826153, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameobjectRoot: {fileID: 6618236498338728187}
+  OverrideFaceMaterial: {fileID: 2100000, guid: 9efedd2a02a24ac479e285d244f6b34e, type: 2}
+  SeparateMeshes: 0
+  ApplyTranslation: 1
+  DefaultBehaviour: 0000000000000000
+  DynamicRagdoll: {fileID: 0}
+  Animator: {fileID: 0}
+  GroupBehaviours: []
+  CreateRigidbody: 0101
+  CreateMeshCollider: 0101
+  Physics: 0200000002000000
+  Inherit: 0000
 --- !u!1 &8731692265578828794
 GameObject:
   m_ObjectHideFlags: 0

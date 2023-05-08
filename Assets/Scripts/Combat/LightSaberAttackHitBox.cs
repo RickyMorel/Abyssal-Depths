@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponAttackHitBox : AttackHitBox
+public class LightSaberAttackHitBox : AttackHitBox
 {
     #region Editors Field
 

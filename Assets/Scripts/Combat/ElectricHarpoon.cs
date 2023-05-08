@@ -10,7 +10,7 @@ public class ElectricHarpoon : MeleeWeapon
     [Header("Transforms")]
     [SerializeField] private Transform _moveToForLightSaber;
     [SerializeField] private Transform _handleTransform;
-    [SerializeField] private Transform _lightSaberVisual;
+    [SerializeField] private Rigidbody _harpoonRb;
     [Header("Floats")]
     [SerializeField] private float _flyingSpeed;
     [SerializeField] private float _rotationSpeed;
@@ -44,13 +44,15 @@ public class ElectricHarpoon : MeleeWeapon
         base.Start();
 
         _rotationSpeed = _rotationSpeed * _rotationSpeed;
-        _originalHarpoonPosition = _lightSaberVisual.transform.localPosition;
-        _originalHarpoonRotation = _lightSaberVisual.transform.localRotation;
+        _originalHarpoonPosition = _harpoonRb.transform.localPosition;
+        _originalHarpoonRotation = _harpoonRb.transform.localRotation;
     }
 
     public override void Update()
     {
         base.Update();
+
+        _harpoonRb.isKinematic = _throwState == ThrowState.Attached;
 
         ThrowLightSaber();
     }
@@ -92,12 +94,13 @@ public class ElectricHarpoon : MeleeWeapon
     {
         Transform moveToCurrentPosition = _moveToForLightSaber;
 
-        if (_throwState == ThrowState.Throwing && _lightSaberVisual.position != moveToCurrentPosition.position)
+        if (_throwState == ThrowState.Throwing && _harpoonRb.transform.position != moveToCurrentPosition.position)
         {
-            _lightSaberVisual.SetParent(null);
-            _lightSaberVisual.position = Vector3.MoveTowards(_lightSaberVisual.position, moveToCurrentPosition.position, Time.deltaTime * _flyingSpeed);
+            _harpoonRb.transform.SetParent(null);
+            Vector3 forceDir = moveToCurrentPosition.position - _harpoonRb.transform.position;
+            _harpoonRb.AddForce(forceDir.normalized * _flyingSpeed * Time.deltaTime);
         }
-        else if (_throwState == ThrowState.Throwing && _lightSaberVisual.position == moveToCurrentPosition.position)
+        if (_throwState == ThrowState.Throwing && Vector3.Distance(_harpoonRb.transform.position, moveToCurrentPosition.position) < 2f)
         {
             _throwState = ThrowState.Arrived;
         }
@@ -107,15 +110,15 @@ public class ElectricHarpoon : MeleeWeapon
 
     private void LightSaberReturnToWeapon()
     {
-        if (_lightSaberVisual.position != _handleTransform.position && _throwState == ThrowState.Returning)
+        if (_harpoonRb.transform.position != _handleTransform.position && _throwState == ThrowState.Returning)
         {
-            _lightSaberVisual.position = Vector3.MoveTowards(_lightSaberVisual.position, _handleTransform.position, Time.deltaTime * _flyingSpeed);
+            _harpoonRb.transform.position = Vector3.MoveTowards(_harpoonRb.transform.position, _handleTransform.position, Time.deltaTime * _flyingSpeed);
         }
-        if (_lightSaberVisual.position == _handleTransform.position && _throwState == ThrowState.Returning)
+        if (_harpoonRb.transform.position == _handleTransform.position && _throwState == ThrowState.Returning)
         {
-            _lightSaberVisual.SetParent(_handleTransform);
-            _lightSaberVisual.localPosition = _originalHarpoonPosition;
-            _lightSaberVisual.localRotation = _originalHarpoonRotation;
+            _harpoonRb.transform.SetParent(_handleTransform);
+            _harpoonRb.transform.localPosition = _originalHarpoonPosition;
+            _harpoonRb.transform.localRotation = _originalHarpoonRotation;
             _weapon.ShouldRotate = true;
             _throwState = ThrowState.Attached;
         }

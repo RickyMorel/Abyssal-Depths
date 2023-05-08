@@ -1291,7 +1291,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 40
   m_CollisionDetection: 0
 --- !u!114 &710119995481018906
 MonoBehaviour:
@@ -2859,12 +2859,12 @@ Transform:
   - {fileID: 9022696720169125016}
   - {fileID: 214664165200199418}
   - {fileID: 3328248252010218411}
-  - {fileID: 6618979975181068107}
   - {fileID: 1478579386179318920}
-  - {fileID: 614701210243229810}
-  - {fileID: 730470189423982080}
-  - {fileID: 7276366194653516949}
   - {fileID: 8131076543406427801}
+  - {fileID: 6618979975181068107}
+  - {fileID: 730470189423982080}
+  - {fileID: 614701210243229810}
+  - {fileID: 7276366194653516949}
   m_Father: {fileID: 7604218662156677272}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
@@ -5527,11 +5527,11 @@ Transform:
   - {fileID: 5193264706460301601}
   - {fileID: 6604739293253934666}
   - {fileID: 7424556976892892671}
-  - {fileID: 241945024543853549}
-  - {fileID: 453665099025199642}
-  - {fileID: 3498198392574577075}
-  - {fileID: 7604218662156677272}
   - {fileID: 3478999079501111672}
+  - {fileID: 241945024543853549}
+  - {fileID: 7604218662156677272}
+  - {fileID: 3498198392574577075}
+  - {fileID: 453665099025199642}
   - {fileID: 123331636840979940}
   - {fileID: 4068686218534063606}
   - {fileID: 250850403662324574}
@@ -6080,8 +6080,8 @@ MonoBehaviour:
   _maxMovementSpeed: 20
   _moveToForLightSaber: {fileID: 3723684905174871181}
   _handleTransform: {fileID: 7249053710051695991}
-  _lightSaberVisual: {fileID: 4243051640575754238}
-  _flyingSpeed: 40
+  _harpoonRb: {fileID: 1923111374589575767}
+  _flyingSpeed: 4000
   _rotationSpeed: 40
   _returnLightSaberAfterSeconds: 0.2
   _lightSaberOut: {fileID: 0}

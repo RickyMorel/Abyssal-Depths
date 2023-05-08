@@ -96,13 +96,11 @@ public class ElectricHarpoon : MeleeWeapon
         {
             _lightSaberVisual.SetParent(null);
             _lightSaberVisual.position = Vector3.MoveTowards(_lightSaberVisual.position, moveToCurrentPosition.position, Time.deltaTime * _flyingSpeed);
-
-            if(Vector3.Distance(_lightSaberVisual.position, moveToCurrentPosition.position) < 2f) { _throwState = ThrowState.Arrived; }
         }
-        //if (_throwState == ThrowState.Throwing && _lightSaberVisual.position == moveToCurrentPosition.position)
-        //{
-            //StartCoroutine(BoomerangReturn());
-        //}
+        else if (_throwState == ThrowState.Throwing && _lightSaberVisual.position == moveToCurrentPosition.position)
+        {
+            _throwState = ThrowState.Arrived;
+        }
 
         LightSaberReturnToWeapon();
     }
@@ -119,23 +117,8 @@ public class ElectricHarpoon : MeleeWeapon
             _lightSaberVisual.localPosition = _originalHarpoonPosition;
             _lightSaberVisual.localRotation = _originalHarpoonRotation;
             _weapon.ShouldRotate = true;
-            StartCoroutine(CanShootSaberDelayCoroutine());
+            _throwState = ThrowState.Attached;
         }
-    }
-
-    private IEnumerator CanShootSaberDelayCoroutine()
-    {
-        yield return new WaitForSeconds(1f);
-
-        _throwState = ThrowState.Attached;
-    }
-
-    //This is for the lightsaber going in animation, and for the boomerangthrow boolean, that way, in the function throwlightsaber, it knows it has to go back.
-    private IEnumerator BoomerangReturn()
-    {
-        yield return new WaitForSeconds(_returnLightSaberAfterSeconds);
-
-        _throwState = ThrowState.Returning;
     }
 
     private void ReturnHarpoon()

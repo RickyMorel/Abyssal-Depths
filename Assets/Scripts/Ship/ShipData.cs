@@ -41,13 +41,18 @@ public class ShipData : MonoBehaviour
 
     private void Start()
     {
-#if UNITY_EDITOR
-        if (!_loadData) { return; }
-#endif
-
         GameObject loadIndexObj = GameObject.FindGameObjectWithTag("LoadIndex");
 
-        if(loadIndexObj == null) { return; }
+#if UNITY_EDITOR
+        if (!_loadData) { return; }
+        else if(loadIndexObj == null)
+        {
+            _currentSaveIndex = 0;
+            StartCoroutine(LateStart()); 
+        }
+#endif
+
+        if (loadIndexObj == null) { return; }
 
         string loadIndexObjName = loadIndexObj.name;
 

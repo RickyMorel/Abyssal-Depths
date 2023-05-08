@@ -13,11 +13,6 @@ public class ElectricHarpoon : MeleeWeapon
     [SerializeField] private Rigidbody _harpoonRb;
     [Header("Floats")]
     [SerializeField] private float _flyingSpeed;
-    [SerializeField] private float _rotationSpeed;
-    [SerializeField] private float _returnLightSaberAfterSeconds;
-    [Header("Animation")]
-    [SerializeField] private PlayableDirector _lightSaberOut;
-    [SerializeField] private PlayableDirector _lightSaberIn;
     [Header("GameObject Related")]
     [SerializeField] private Collider _trackEnemiesZone;
 
@@ -43,16 +38,15 @@ public class ElectricHarpoon : MeleeWeapon
     {
         base.Start();
 
-        _rotationSpeed = _rotationSpeed * _rotationSpeed;
         _originalHarpoonPosition = _harpoonRb.transform.localPosition;
         _originalHarpoonRotation = _harpoonRb.transform.localRotation;
     }
 
-    public override void Update()
+    public override void FixedUpdate()
     {
-        base.Update();
+        base.FixedUpdate();
 
-        _harpoonRb.isKinematic = _throwState == ThrowState.Attached;
+        _harpoonRb.isKinematic = _throwState == ThrowState.Attached || _throwState == ThrowState.Returning || _throwState == ThrowState.Stuck;
 
         ThrowLightSaber();
     }
@@ -72,11 +66,12 @@ public class ElectricHarpoon : MeleeWeapon
     {
         if (_throwState != ThrowState.Attached) 
         { 
-            if(_throwState == ThrowState.Arrived) { ReturnHarpoon(); }
+            if(_throwState == ThrowState.Arrived || _throwState == ThrowState.Stuck) { ReturnHarpoon(); }
 
             return; 
         }
 
+        Debug.Log("Set To Throwing State");
         _throwState = ThrowState.Throwing;
         _weapon.ShouldRotate = false;
         StartCoroutine(CheckForEnemyTransforms());
@@ -98,6 +93,7 @@ public class ElectricHarpoon : MeleeWeapon
         {
             _harpoonRb.transform.SetParent(null);
             Vector3 forceDir = moveToCurrentPosition.position - _harpoonRb.transform.position;
+            Debug.Log("Add Force");
             _harpoonRb.AddForce(forceDir.normalized * _flyingSpeed * Time.deltaTime);
         }
         if (_throwState == ThrowState.Throwing && Vector3.Distance(_harpoonRb.transform.position, moveToCurrentPosition.position) < 2f)
@@ -112,7 +108,7 @@ public class ElectricHarpoon : MeleeWeapon
     {
         if (_harpoonRb.transform.position != _handleTransform.position && _throwState == ThrowState.Returning)
         {
-            _harpoonRb.transform.position = Vector3.MoveTowards(_harpoonRb.transform.position, _handleTransform.position, Time.deltaTime * _flyingSpeed);
+            _harpoonRb.transform.position = Vector3.MoveTowards(_harpoonRb.transform.position, _handleTransform.position, Time.deltaTime * (_flyingSpeed / 100));
         }
         if (_harpoonRb.transform.position == _handleTransform.position && _throwState == ThrowState.Returning)
         {
@@ -124,8 +120,19 @@ public class ElectricHarpoon : MeleeWeapon
         }
     }
 
+    //Invoked by UnityEvent
+    public void OnCollide()
+    {
+        if(_throwState == ThrowState.Attached) { return; }
+        if(_throwState == ThrowState.Returning) { return; }
+
+        _throwState = ThrowState.Stuck;
+        Debug.Log("Set To Arrived State!");
+    }
+
     private void ReturnHarpoon()
     {
+        Debug.Log("Returning State!");
         _throwState = ThrowState.Returning;
     }
 
@@ -142,6 +149,7 @@ public class ElectricHarpoon : MeleeWeapon
         Attached,
         Throwing,
         Arrived,
+        Stuck,
         Returning
     }
 }

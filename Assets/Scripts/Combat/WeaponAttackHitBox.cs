@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class WeaponAttackHitBox : AttackHitBox
 {
@@ -8,6 +9,12 @@ public class WeaponAttackHitBox : AttackHitBox
 
     [SerializeField] protected Weapon _weapon;
     [SerializeField] private MeleeWeapon _meleeWeapon;
+
+    #endregion
+
+    #region Public Properties
+
+    public UnityEvent OnHitSomething;
 
     #endregion
 
@@ -20,9 +27,21 @@ public class WeaponAttackHitBox : AttackHitBox
 
     #endregion
 
-    //layer 6 is floor
+    private void OnCollisionEnter(Collision collision)
+    {
+        Impact(collision.collider);
+    }
+
     public override void OnTriggerEnter(Collider other)
     {
+        Impact(other);
+    }
+
+    private void Impact(Collider other)
+    {
+        OnHitSomething?.Invoke();
+
+        //layer 6 is floor
         if (other.gameObject.layer == 6) { InvokeHitParticles(other); }
 
         if (!other.gameObject.TryGetComponent(out Damageable enemyHealth)) { return; }

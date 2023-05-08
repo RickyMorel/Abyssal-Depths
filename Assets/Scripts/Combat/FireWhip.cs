@@ -41,7 +41,7 @@ public class FireWhip : MeleeWeapon
             Vector3 pushDir = _rb.velocity;
             aIState.BounceOffShield(pushDir, _pushForce);
         }
-        Instantiate(GameAssetsManager.Instance.FireWhipCollisionParticles, _attackHitBox.transform.position, Quaternion.identity);
+        Instantiate(GameAssetsManager.Instance.FireWhipCollisionParticles, _attackHitBox[0].transform.position, Quaternion.identity);
         ShipCamera.Instance.NormalShake();
     }
 }

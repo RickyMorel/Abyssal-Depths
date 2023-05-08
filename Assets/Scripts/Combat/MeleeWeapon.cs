@@ -7,7 +7,7 @@ public abstract class MeleeWeapon : WeaponShoot
 {
     #region Editor Fields
 
-    [SerializeField] protected AttackHitBox _attackHitBox;
+    [SerializeField] protected AttackHitBox[] _attackHitBox = { null };
     [SerializeField] protected Transform _parentTransform;
     [SerializeField] protected float maxDistance = 10f;
     [SerializeField] protected float _moveForce = 50f;
@@ -32,14 +32,14 @@ public abstract class MeleeWeapon : WeaponShoot
 
     public virtual void Awake()
     {
-        _rb = _attackHitBox.GetComponent<Rigidbody>();
+        _rb = _attackHitBox[0].GetComponent<Rigidbody>();
 
-        _attackHitBox.OnHit += HandleHitParticles;
+        _attackHitBox[0].OnHit += HandleHitParticles;
     }
 
     public virtual void OnDestroy()
     {
-        _attackHitBox.OnHit -= HandleHitParticles;
+        _attackHitBox[0].OnHit -= HandleHitParticles;
     }
 
     public virtual void OnEnable()
@@ -55,7 +55,7 @@ public abstract class MeleeWeapon : WeaponShoot
     public virtual void FixedUpdate()
     {
         if (_weapon.CurrentPlayer == null) { return; }
-        if(_weapon.CanUse == false) { return; }
+        if (_weapon.CanUse == false) { return; }
 
         _rb.AddForce(_weapon.CurrentPlayer.MoveDirection * _moveForce);
         _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, _maxMovementSpeed);
@@ -75,9 +75,9 @@ public abstract class MeleeWeapon : WeaponShoot
 
     public virtual void HandleHitParticles(GameObject obj)
     {
-        if(obj.tag == "MainShip") { return; }
+        if (obj.tag == "MainShip") { return; }
 
-        Instantiate(GameAssetsManager.Instance.MeleeFloorHitParticles, _attackHitBox.transform.position, Quaternion.identity);
+        Instantiate(GameAssetsManager.Instance.MeleeFloorHitParticles, _attackHitBox[0].transform.position, Quaternion.identity);
         ShipCamera.Instance.ShakeCamera(5f, 50f, 0.2f);
     }
 }

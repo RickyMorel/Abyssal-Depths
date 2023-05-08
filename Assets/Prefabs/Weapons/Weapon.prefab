@@ -77,7 +77,7 @@ GameObject:
   - component: {fileID: 276307485090092476}
   - component: {fileID: 5182509267000652949}
   - component: {fileID: 2689676381375660832}
-  - component: {fileID: 6166857848428133}
+  - component: {fileID: 799135744817863008}
   m_Layer: 25
   m_Name: RopeJoint 3
   m_TagString: Untagged
@@ -217,7 +217,7 @@ SpringJoint:
   m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &6166857848428133
+--- !u!114 &799135744817863008
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -226,15 +226,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 152825002426599899}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d17c5d644c4d26439d06f123a9455d3, type: 3}
+  m_Script: {fileID: 11500000, guid: 6a5bac870b2518a4aab5e6ba81989146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyDamageStat: -1
   _ownHealth: {fileID: 2835829445178600864}
-  _damageTypes: 0100000002000000
+  _damageTypes: 0200000001000000
   _damagePlayerCharacters: 0
   _weapon: {fileID: 7627081817445622300}
-  _damageMultiplierForBladeThrow: 0
+  _meleeWeapon: {fileID: 8711923388874455362}
 --- !u!1 &211072648925897656
 GameObject:
   m_ObjectHideFlags: 0
@@ -889,7 +889,7 @@ GameObject:
   - component: {fileID: 2962584694816309638}
   - component: {fileID: 3522449581121772784}
   - component: {fileID: 8079556884941504820}
-  - component: {fileID: 7331257848398177445}
+  - component: {fileID: 8883656962577775904}
   m_Layer: 25
   m_Name: RopeJointTip_1
   m_TagString: Untagged
@@ -1029,7 +1029,7 @@ SpringJoint:
   m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &7331257848398177445
+--- !u!114 &8883656962577775904
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1038,15 +1038,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 531503494910745630}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d17c5d644c4d26439d06f123a9455d3, type: 3}
+  m_Script: {fileID: 11500000, guid: 6a5bac870b2518a4aab5e6ba81989146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyDamageStat: -1
   _ownHealth: {fileID: 2835829445178600864}
-  _damageTypes: 0100000002000000
+  _damageTypes: 0200000001000000
   _damagePlayerCharacters: 0
   _weapon: {fileID: 7627081817445622300}
-  _damageMultiplierForBladeThrow: 0
+  _meleeWeapon: {fileID: 8711923388874455362}
 --- !u!1 &559003739114286805
 GameObject:
   m_ObjectHideFlags: 0
@@ -1159,7 +1159,7 @@ GameObject:
   - component: {fileID: 1980739983136112609}
   - component: {fileID: 2416271731536494006}
   - component: {fileID: 840616849485625080}
-  - component: {fileID: 1786458941546850097}
+  - component: {fileID: 1537619024225535964}
   m_Layer: 25
   m_Name: RopeJoint
   m_TagString: Untagged
@@ -1299,7 +1299,7 @@ SpringJoint:
   m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &1786458941546850097
+--- !u!114 &1537619024225535964
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1308,15 +1308,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 574489328291009645}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d17c5d644c4d26439d06f123a9455d3, type: 3}
+  m_Script: {fileID: 11500000, guid: 6a5bac870b2518a4aab5e6ba81989146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyDamageStat: -1
   _ownHealth: {fileID: 2835829445178600864}
-  _damageTypes: 0100000002000000
+  _damageTypes: 0200000001000000
   _damagePlayerCharacters: 0
   _weapon: {fileID: 7627081817445622300}
-  _damageMultiplierForBladeThrow: 0
+  _meleeWeapon: {fileID: 8711923388874455362}
 --- !u!1 &681095823651050718
 GameObject:
   m_ObjectHideFlags: 0
@@ -1639,7 +1639,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeBetweenShots: 0.2
-  _attackHitBox: {fileID: 2210373744117651719}
+  _attackHitBox: []
   _parentTransform: {fileID: 3597213311831459394}
   maxDistance: 10
   _moveForce: 50
@@ -2565,7 +2565,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyDamageStat: -1
   _ownHealth: {fileID: 2835829445178600864}
-  _damageTypes: 0100000000000000
+  _damageTypes: 0100000001000000
   _damagePlayerCharacters: 0
   _weapon: {fileID: 7627081817445622300}
   _meleeWeapon: {fileID: 6505382577852551691}
@@ -2699,7 +2699,7 @@ GameObject:
   - component: {fileID: 2633415939197012608}
   - component: {fileID: 8135713297823078631}
   - component: {fileID: 5912137667063056779}
-  - component: {fileID: 8945137619343830554}
+  - component: {fileID: 1134795134805927463}
   m_Layer: 25
   m_Name: RopeJoint 5
   m_TagString: Untagged
@@ -2839,7 +2839,7 @@ SpringJoint:
   m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &8945137619343830554
+--- !u!114 &1134795134805927463
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2848,15 +2848,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 2434028037322214561}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d17c5d644c4d26439d06f123a9455d3, type: 3}
+  m_Script: {fileID: 11500000, guid: 6a5bac870b2518a4aab5e6ba81989146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyDamageStat: -1
   _ownHealth: {fileID: 2835829445178600864}
-  _damageTypes: 0100000002000000
+  _damageTypes: 0200000001000000
   _damagePlayerCharacters: 0
   _weapon: {fileID: 7627081817445622300}
-  _damageMultiplierForBladeThrow: 0
+  _meleeWeapon: {fileID: 8711923388874455362}
 --- !u!1 &2483814846787299703
 GameObject:
   m_ObjectHideFlags: 0
@@ -2982,7 +2982,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyDamageStat: -1
   _ownHealth: {fileID: 2835829445178600864}
-  _damageTypes: 0100000000000000
+  _damageTypes: 0100000001000000
   _damagePlayerCharacters: 0
   _weapon: {fileID: 7627081817445622300}
   _meleeWeapon: {fileID: 6505382577852551691}
@@ -3408,7 +3408,7 @@ GameObject:
   - component: {fileID: 4825183387695651053}
   - component: {fileID: 4414912669710259747}
   - component: {fileID: 8430188254844944621}
-  - component: {fileID: 346198322341041975}
+  - component: {fileID: 7233677570973183513}
   m_Layer: 25
   m_Name: RopeJoint 7
   m_TagString: Untagged
@@ -3548,7 +3548,7 @@ SpringJoint:
   m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &346198322341041975
+--- !u!114 &7233677570973183513
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3557,15 +3557,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 2904383521686303237}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d17c5d644c4d26439d06f123a9455d3, type: 3}
+  m_Script: {fileID: 11500000, guid: 6a5bac870b2518a4aab5e6ba81989146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyDamageStat: -1
   _ownHealth: {fileID: 2835829445178600864}
-  _damageTypes: 0100000002000000
+  _damageTypes: 0200000001000000
   _damagePlayerCharacters: 0
   _weapon: {fileID: 7627081817445622300}
-  _damageMultiplierForBladeThrow: 0
+  _meleeWeapon: {fileID: 8711923388874455362}
 --- !u!1 &3176484016150529723
 GameObject:
   m_ObjectHideFlags: 0
@@ -3835,7 +3835,7 @@ GameObject:
   - component: {fileID: 4223988706063276385}
   - component: {fileID: 1692138828129546465}
   - component: {fileID: 5874816816055094282}
-  - component: {fileID: 5814610111654821878}
+  - component: {fileID: 2240026308002091368}
   m_Layer: 25
   m_Name: RopeJoint 6
   m_TagString: Untagged
@@ -3975,7 +3975,7 @@ SpringJoint:
   m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &5814610111654821878
+--- !u!114 &2240026308002091368
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3984,15 +3984,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 3719382172353877384}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d17c5d644c4d26439d06f123a9455d3, type: 3}
+  m_Script: {fileID: 11500000, guid: 6a5bac870b2518a4aab5e6ba81989146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyDamageStat: -1
   _ownHealth: {fileID: 2835829445178600864}
-  _damageTypes: 0100000002000000
+  _damageTypes: 0200000001000000
   _damagePlayerCharacters: 0
   _weapon: {fileID: 7627081817445622300}
-  _damageMultiplierForBladeThrow: 0
+  _meleeWeapon: {fileID: 8711923388874455362}
 --- !u!1 &3843574088574756828
 GameObject:
   m_ObjectHideFlags: 0
@@ -4385,7 +4385,7 @@ GameObject:
   - component: {fileID: 3298486394234165286}
   - component: {fileID: 3003392747562624298}
   - component: {fileID: 1441868364432980848}
-  - component: {fileID: 3534398689506640594}
+  - component: {fileID: 6960238921899043062}
   m_Layer: 25
   m_Name: RopeJoint 2
   m_TagString: Untagged
@@ -4525,7 +4525,7 @@ SpringJoint:
   m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &3534398689506640594
+--- !u!114 &6960238921899043062
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4534,15 +4534,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 4770871619055533768}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d17c5d644c4d26439d06f123a9455d3, type: 3}
+  m_Script: {fileID: 11500000, guid: 6a5bac870b2518a4aab5e6ba81989146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyDamageStat: -1
   _ownHealth: {fileID: 2835829445178600864}
-  _damageTypes: 0100000002000000
+  _damageTypes: 0200000001000000
   _damagePlayerCharacters: 0
   _weapon: {fileID: 7627081817445622300}
-  _damageMultiplierForBladeThrow: 0
+  _meleeWeapon: {fileID: 8711923388874455362}
 --- !u!1 &5195123832446667425
 GameObject:
   m_ObjectHideFlags: 0
@@ -5231,22 +5231,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeBetweenShots: 0.2
-  _attackHitBox: {fileID: 5276970666108204579}
+  _attackHitBox:
+  - {fileID: 8883656962577775904}
   _parentTransform: {fileID: 5941236623131322626}
   maxDistance: 10
   _moveForce: 300
   _maxMovementSpeed: 20
   _pushForce: 20
   _attackHitBoxes:
-  - {fileID: 1786458941546850097}
-  - {fileID: 3534398689506640594}
-  - {fileID: 6166857848428133}
-  - {fileID: 3391367016531950007}
-  - {fileID: 8945137619343830554}
-  - {fileID: 5814610111654821878}
-  - {fileID: 346198322341041975}
-  - {fileID: 7331257848398177445}
-  - {fileID: 5276970666108204579}
+  - {fileID: 1537619024225535964}
+  - {fileID: 6960238921899043062}
+  - {fileID: 799135744817863008}
+  - {fileID: 578197386843031259}
+  - {fileID: 1134795134805927463}
+  - {fileID: 2240026308002091368}
+  - {fileID: 7233677570973183513}
+  - {fileID: 8883656962577775904}
+  - {fileID: 7294416428919681600}
 --- !u!1 &5849193822041755191
 GameObject:
   m_ObjectHideFlags: 0
@@ -5355,7 +5356,7 @@ GameObject:
   - component: {fileID: 3349481274045934122}
   - component: {fileID: 9036988271096413677}
   - component: {fileID: 2096985211537706682}
-  - component: {fileID: 5276970666108204579}
+  - component: {fileID: 7294416428919681600}
   m_Layer: 25
   m_Name: RopeJointTip_2
   m_TagString: Untagged
@@ -5495,7 +5496,7 @@ SpringJoint:
   m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &5276970666108204579
+--- !u!114 &7294416428919681600
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5504,15 +5505,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 6055857612148425036}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d17c5d644c4d26439d06f123a9455d3, type: 3}
+  m_Script: {fileID: 11500000, guid: 6a5bac870b2518a4aab5e6ba81989146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyDamageStat: -1
   _ownHealth: {fileID: 2835829445178600864}
-  _damageTypes: 0100000002000000
+  _damageTypes: 0200000001000000
   _damagePlayerCharacters: 0
   _weapon: {fileID: 7627081817445622300}
-  _damageMultiplierForBladeThrow: 0
+  _meleeWeapon: {fileID: 8711923388874455362}
 --- !u!1 &6172056145850985847
 GameObject:
   m_ObjectHideFlags: 0
@@ -5612,7 +5613,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeBetweenShots: 0.2
-  _attackHitBox: {fileID: 4430334402676682469}
+  _attackHitBox:
+  - {fileID: 4430334402676682469}
+  - {fileID: 3093107579359035929}
+  - {fileID: 5124044352928224022}
   _parentTransform: {fileID: 5278333056582099178}
   maxDistance: 10
   _moveForce: 110
@@ -5677,8 +5681,8 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6430652577594705509}
   - {fileID: 5278333056582099178}
+  - {fileID: 6430652577594705509}
   - {fileID: 9019701206039430885}
   - {fileID: 1788968957649364199}
   m_Father: {fileID: 3290805855147573357}
@@ -7366,6 +7370,7 @@ MonoBehaviour:
   - {fileID: 7430681213098550767}
   - {fileID: 231005324032254681}
   - {fileID: 457473744826260656}
+  - {fileID: 5690369232586464998}
   - {fileID: 989228549857933022}
   - {fileID: 6172056145850985847}
 --- !u!114 &7627081817445622300
@@ -7419,7 +7424,7 @@ MonoBehaviour:
     UpgradeSO: {fileID: 11400000, guid: 6452576b3217a0841b56c053e8c6001a, type: 2}
   - UpgradeMesh: {fileID: 5690369232586464998}
     ShootTransform:
-    - {fileID: 0}
+    - {fileID: 3319714389778575836}
     UpgradeSO: {fileID: 11400000, guid: 861088c812900df4d89148fa68f54710, type: 2}
   - UpgradeMesh: {fileID: 989228549857933022}
     ShootTransform:
@@ -7648,7 +7653,7 @@ GameObject:
   - component: {fileID: 59528433735109791}
   - component: {fileID: 1164073580766917776}
   - component: {fileID: 5382903792213395522}
-  - component: {fileID: 3391367016531950007}
+  - component: {fileID: 578197386843031259}
   m_Layer: 25
   m_Name: RopeJoint 4
   m_TagString: Untagged
@@ -7788,7 +7793,7 @@ SpringJoint:
   m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &3391367016531950007
+--- !u!114 &578197386843031259
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7797,15 +7802,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 7918753510434613219}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d17c5d644c4d26439d06f123a9455d3, type: 3}
+  m_Script: {fileID: 11500000, guid: 6a5bac870b2518a4aab5e6ba81989146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyDamageStat: -1
   _ownHealth: {fileID: 2835829445178600864}
-  _damageTypes: 0100000002000000
+  _damageTypes: 0200000001000000
   _damagePlayerCharacters: 0
   _weapon: {fileID: 7627081817445622300}
-  _damageMultiplierForBladeThrow: 0
+  _meleeWeapon: {fileID: 8711923388874455362}
 --- !u!1 &8139259148825714515
 GameObject:
   m_ObjectHideFlags: 0
@@ -8293,7 +8298,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyDamageStat: -1
   _ownHealth: {fileID: 2835829445178600864}
-  _damageTypes: 0100000000000000
+  _damageTypes: 0100000001000000
   _damagePlayerCharacters: 0
   _weapon: {fileID: 7627081817445622300}
   _meleeWeapon: {fileID: 6505382577852551691}
@@ -8442,7 +8447,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeBetweenShots: 0.2
-  _attackHitBox: {fileID: 6166615154732534096}
+  _attackHitBox:
+  - {fileID: 6166615154732534096}
   _parentTransform: {fileID: 4564376745032513126}
   maxDistance: 10
   _moveForce: 110

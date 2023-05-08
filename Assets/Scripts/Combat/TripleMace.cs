@@ -10,6 +10,18 @@ public class TripleMace : MeleeWeapon
 
     #endregion
 
+    #region Unity Loops
+
+    public override void Awake()
+    {
+        _rb = _attackHitBox[0].GetComponent<Rigidbody>();
+    }
+
+    public override void OnDestroy()
+    {
+        //do nothing
+    }
+
     public override void OnEnable()
     {
         for (int i = 0; i < _maceHead.Length; i++)
@@ -28,11 +40,10 @@ public class TripleMace : MeleeWeapon
         }
     }
 
+    #endregion
+
     public override void HandleHitParticles(GameObject obj)
     {
-        if (obj.tag == "MainShip") { return; }
-
-        Instantiate(GameAssetsManager.Instance.MeleeFloorHitParticles, _maceHead.transform.position, Quaternion.identity);
-        ShipCamera.Instance.ShakeCamera(5f, 50f, 0.2f);
+        //do nothing
     }
 }

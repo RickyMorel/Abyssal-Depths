@@ -102,7 +102,8 @@ public class UpgradableHumble : InteractableHumble
         foreach (Upgrade upgrade in upgrades)
         {
             upgradeMeshIndex++;
-            if (upgrade.UpgradeSO.Socket_1 == socket_1_chip_type && upgrade.UpgradeSO.Socket_2 == socket_2_chip_type)
+            if ((upgrade.UpgradeSO.Socket_1 == socket_1_chip_type && upgrade.UpgradeSO.Socket_2 == socket_2_chip_type) || 
+                (upgrade.UpgradeSO.Socket_2 == socket_1_chip_type && upgrade.UpgradeSO.Socket_1 == socket_2_chip_type))
             {
                 break;
             }

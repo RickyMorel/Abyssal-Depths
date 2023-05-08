@@ -20,6 +20,7 @@ public class WeaponAttackHitBox : AttackHitBox
 
     #endregion
 
+    //layer 6 is floor
     public override void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == 6) { InvokeHitParticles(other); }

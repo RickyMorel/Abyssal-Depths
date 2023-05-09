@@ -59,7 +59,19 @@ public class TripleMace : MeleeWeapon
 
     private void ApplyForceToMace(int index)
     {
-        _rbs[index].AddForce(_weapon.CurrentPlayer.MoveDirection * _moveForce);
+        switch(index)
+        {
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+        }
+        Debug.Log("x" + _weapon.CurrentPlayer.MoveDirection.x);
+        Debug.Log("y" + _weapon.CurrentPlayer.MoveDirection.y);
+        Debug.Log("z" + _weapon.CurrentPlayer.MoveDirection.z);
+        _rbs[index].AddForce(new Vector3(_weapon.CurrentPlayer.MoveDirection.x, _weapon.CurrentPlayer.MoveDirection.y, _weapon.CurrentPlayer.MoveDirection.z) * _moveForce);
         _rbs[index].velocity = Vector3.ClampMagnitude(_rbs[index].velocity, _maxMovementSpeed);
     }
 

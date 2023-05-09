@@ -19,16 +19,6 @@ public class MaceAttackHitBox : AttackHitBox
 
     #region Unity Loops
 
-    public virtual void Awake()
-    {
-        OnHit += HandleHitParticles;
-    }
-
-    public virtual void OnDestroy()
-    {
-        OnHit -= HandleHitParticles;
-    }
-
     public override void Start()
     {
         _damageData = DamageData.GetDamageData(_damageTypes, _weapon, -1);
@@ -71,13 +61,5 @@ public class MaceAttackHitBox : AttackHitBox
             _damage = (int)((_damage * damagePercentage) / 100);
         }
         else { _damage = _damageData.Damage[0]; }
-    }
-
-    private void HandleHitParticles(GameObject obj)
-    {
-        if (obj.tag == "MainShip") { return; }
-
-        Instantiate(GameAssetsManager.Instance.MeleeFloorHitParticles, transform.position, Quaternion.identity);
-        ShipCamera.Instance.ShakeCamera(5f, 50f, 0.2f);
     }
 }

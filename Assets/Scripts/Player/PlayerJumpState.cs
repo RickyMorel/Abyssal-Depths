@@ -46,14 +46,17 @@ public class PlayerJumpState : PlayerBaseState
 
     private void HandleJump()
     {
-        if (_context.PlayerInteraction.HasRecentlyInteracted()) { return; }
+        if (_context.InteractionController.HasRecentlyInteracted()) { return; }
 
         _context.Anim.SetTrigger("Jump");
+
+        PlayerStateMachine stateMachine = _context as PlayerStateMachine;
 
         float jumpingVelocity = Mathf.Sqrt(-2 * _context.GravityIntensity * _context.JumpHeight);
         Vector3 playerVelocity = _context.MoveDirection;
         playerVelocity.y = jumpingVelocity;
-        PlayerStateMachine stateMachine = _context as PlayerStateMachine;
         stateMachine.FallVelocity = playerVelocity;
+
+        stateMachine.FallSpeed = _context.JumpHeight * 4;
     }
 }

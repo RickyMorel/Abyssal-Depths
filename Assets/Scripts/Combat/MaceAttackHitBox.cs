@@ -6,8 +6,14 @@ public class MaceAttackHitBox : AttackHitBox
 {
     #region Editors Field
 
-    [SerializeField] private Weapon _weapon;
+    [SerializeField] protected Weapon _weapon;
     [SerializeField] private MeleeWeapon _meleeWeapon;
+
+    #endregion
+
+    #region Private Variables
+
+    private int _damage;
 
     #endregion
 
@@ -34,11 +40,11 @@ public class MaceAttackHitBox : AttackHitBox
         {
             CalculateDamage();
 
-            DealDamageToEnemies((AIHealth)enemyHealth);
+            DealDamageToEnemies((AIHealth)enemyHealth, _damage);
         }
     }
 
-    private void CalculateDamage()
+    public virtual void CalculateDamage()
     {
         _damage = (int)_damageData.SecondaryValue[0];
         if (Mathf.Abs(_meleeWeapon.rb.velocity.x) >= (_meleeWeapon.MaxMovementSpeed / 2) || Mathf.Abs(_meleeWeapon.rb.velocity.y) >= (_meleeWeapon.MaxMovementSpeed / 2))

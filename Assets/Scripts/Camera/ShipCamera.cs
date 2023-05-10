@@ -59,6 +59,8 @@ public class ShipCamera : BaseCamera
 
         _orginalFOV = _virtualCamera.m_Lens.OrthographicSize;
         _currentFOV = _orginalFOV;
+        
+        ChangeToBossZoom(true);
     }
 
     private void LateUpdate()
@@ -102,7 +104,6 @@ public class ShipCamera : BaseCamera
             _targetOrthoZ = -10.85f;
             _targetPerspectiveZ = -40.65f;
             _orginalFOV = 30f;
-            //_mainCamera.cullingMask = _mainCamera.cullingMask | LayerMask.LayerToName("")
         }
         else
         {

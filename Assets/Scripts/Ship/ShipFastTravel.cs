@@ -42,10 +42,10 @@ public class ShipFastTravel : MonoBehaviour
         _mainShip = FindObjectOfType<Ship>();
         _isPlayerActive = FindObjectsOfType<PlayerInputHandler>();
         _shipDoor = _mainShip.GetComponentInChildren<ShipDoor>();
-        _lastRoutine = StartCoroutine(DetachFromShip());
+        _lastRoutine = StartCoroutine(DetachFromShipCoroutine());
         _cameraManager = FindObjectOfType<CameraManager>();
         TimelinesManager.Instance.BlackHoleParticle.gameObject.transform.SetParent(_mainShip.transform);
-        TimelinesManager.Instance.BlackHoleParticle.gameObject.transform.localPosition =new Vector3(2.5f,0,0);
+        TimelinesManager.Instance.BlackHoleParticle.gameObject.transform.localPosition = new Vector3(2.5f,0,0);
 
         _mainShip.OnRespawn += HandleRespawn;
     }
@@ -85,7 +85,7 @@ public class ShipFastTravel : MonoBehaviour
 
     public void OnPlayerTriggerEnter(Collider other)
     {
-        if (!other.gameObject.TryGetComponent<PlayerInputHandler>(out PlayerInputHandler player)) { return; }
+        if (!other.gameObject.TryGetComponent(out PlayerInputHandler player)) { return; }
 
         if (_playersInShipList.Contains(player)) { return; }
 
@@ -100,12 +100,12 @@ public class ShipFastTravel : MonoBehaviour
 
     public void OnPlayerTriggerExit(Collider other)
     {
-        if (!other.gameObject.TryGetComponent<PlayerInputHandler>(out PlayerInputHandler player)) { return; }
+        if (!other.gameObject.TryGetComponent(out PlayerInputHandler player)) { return; }
 
         if (_playersInShipList.Contains(player) == false) { return; }
 
-        _cameraManager.ToggleCamera(false);
-        _lastRoutine = StartCoroutine(DetachFromShip());
+        _cameraManager.ToggleCamera(false, 0.1f);
+        _lastRoutine = StartCoroutine(DetachFromShipCoroutine());
         _playersInShip = Mathf.Clamp(_playersInShip-1, 0, _playersActive);
         _playersInShipList.Remove(player);
     }
@@ -128,7 +128,7 @@ public class ShipFastTravel : MonoBehaviour
         TimelinesManager.Instance.BlackHoleParticle.Stop();
     }
 
-    private void AttachToShip()
+    public void AttachToShip()
     {
         if(_isPlayerActive == null) { return; }
 
@@ -141,9 +141,14 @@ public class ShipFastTravel : MonoBehaviour
         }
     }
 
-    private IEnumerator DetachFromShip()
+    public void DetachFromShip()
     {
-        yield return new WaitForSeconds(2);
+        StartCoroutine(DetachFromShipCoroutine());  
+    }
+
+    private IEnumerator DetachFromShipCoroutine()
+    {
+        yield return new WaitForSeconds(0.1f);
         for (int i = 0; i < _isPlayerActive.Length; i++)
         {
             if (_isPlayerActive[i].IsPlayerActive == true)

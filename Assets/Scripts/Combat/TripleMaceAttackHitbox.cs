@@ -55,6 +55,15 @@ public class TripleMaceAttackHitbox : AttackHitBox
         }
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (!other.gameObject.TryGetComponent(out TripleMaceAttackHitbox otherMace)) { return; }
+
+        Vector3 pos = otherMace.gameObject.transform.position;
+        Vector3 dir = (transform.position - pos).normalized;
+        _tripleMace.ApplyForceToMace(_whichRbsToUse, dir);
+    }
+
     public virtual void CalculateDamage()
     {
         _damage = (int)_damageData.SecondaryValue[0];

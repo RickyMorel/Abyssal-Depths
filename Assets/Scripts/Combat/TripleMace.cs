@@ -50,31 +50,16 @@ public class TripleMace : MeleeWeapon
         if (_weapon.CurrentPlayer == null) { return; }
         if (_weapon.CanUse == false) { return; }
 
-        ApplyForceToMace(0);
-        ApplyForceToMace(1);
-        ApplyForceToMace(2);
+        ApplyForceToMace(0, _weapon.CurrentPlayer.MoveDirection);
+        ApplyForceToMace(1, _weapon.CurrentPlayer.MoveDirection);
+        ApplyForceToMace(2, _weapon.CurrentPlayer.MoveDirection);
     }
 
     #endregion
 
-    private void ApplyForceToMace(int index)
+    public void ApplyForceToMace(int index, Vector3 moveDirection)
     {
-        float speedMultiplier = 0;
-
-        switch(index)
-        {
-            case 0:
-                speedMultiplier = 0.6f;
-                break;
-            case 1:
-                speedMultiplier = 0.8f;
-                break;
-            case 2:
-                speedMultiplier = 1;
-                break;
-        }
-
-        _rbs[index].AddForce(new Vector3(_weapon.CurrentPlayer.MoveDirection.x, _weapon.CurrentPlayer.MoveDirection.y, _weapon.CurrentPlayer.MoveDirection.z) * _moveForce * speedMultiplier);
+        _rbs[index].AddForce(moveDirection * _moveForce);
         _rbs[index].velocity = Vector3.ClampMagnitude(_rbs[index].velocity, _maxMovementSpeed);
     }
 

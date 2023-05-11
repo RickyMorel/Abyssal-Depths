@@ -8,6 +8,7 @@ public class TripleMace : MeleeWeapon
 
     [SerializeField] private GameObject[] _maceHead;
     [SerializeField] private Rigidbody[] _rbs;
+    [SerializeField] private Transform _moveLimits;
 
     #endregion
 
@@ -59,6 +60,16 @@ public class TripleMace : MeleeWeapon
 
     public void ApplyForceToMace(int index, Vector3 moveDirection)
     {
+        if (_rbs[index].transform.position.x >= _moveLimits.transform.position.x && moveDirection.x > 0) 
+        {
+            _rbs[index].velocity = Vector3.zero;
+            return; 
+        }
+        else if (_rbs[index].transform.position.x >= _moveLimits.transform.position.x)
+        {
+            _rbs[index].velocity = Vector3.zero;
+        }
+
         _rbs[index].AddForce(moveDirection * _moveForce);
         _rbs[index].velocity = Vector3.ClampMagnitude(_rbs[index].velocity, _maxMovementSpeed);
     }

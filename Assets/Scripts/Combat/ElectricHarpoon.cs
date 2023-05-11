@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.UIElements;
 
 public class ElectricHarpoon : MeleeWeapon
 {
@@ -13,8 +14,11 @@ public class ElectricHarpoon : MeleeWeapon
     [SerializeField] private Rigidbody _harpoonRb;
     [Header("Floats")]
     [SerializeField] private float _flyingSpeed;
+    [SerializeField] private float _grappleSpeedSpeed;
+    [SerializeField] private float _maxTetherDistance;
     [Header("GameObject Related")]
     [SerializeField] private Collider _trackEnemiesZone;
+    [SerializeField] private GameObject _electructionZonePrefab;
 
     #endregion
 
@@ -23,10 +27,11 @@ public class ElectricHarpoon : MeleeWeapon
     private List<Transform> _enemyTransforms = new List<Transform>();
     private Vector3 _originalHarpoonPosition;
     private Quaternion _originalHarpoonRotation;
-    private ThrowState _throwState = ThrowState.Attached;
+    [SerializeField] private ThrowState _throwState = ThrowState.Attached;
     private bool _prevInputState;
     private float _timePassedReturning;
     private LineRenderer _lr;
+    //private GameObject _electrocutionZoneInstance;
 
     #endregion
 
@@ -43,6 +48,7 @@ public class ElectricHarpoon : MeleeWeapon
 
         _lr = GetComponent<LineRenderer>();
         _lr.positionCount = 2;
+       // _electrocutionZoneInstance = Instantiate(_electructionZonePrefab);
 
         _originalHarpoonPosition = _harpoonRb.transform.localPosition;
         _originalHarpoonRotation = _harpoonRb.transform.localRotation;
@@ -87,14 +93,20 @@ public class ElectricHarpoon : MeleeWeapon
         _weapon.ShouldRotate = false;
 
         _harpoonRb.transform.SetParent(null);
-        Vector3 forceDir = _moveToForLightSaber.position - _harpoonRb.transform.position;
-        _harpoonRb.AddForce(forceDir.normalized * _flyingSpeed, ForceMode.Impulse);
 
         StartCoroutine(CheckForEnemyTransforms());
     }
 
     public override void CheckShootInput()
     {
+        if (_weapon.CurrentPlayer.IsUsing_2 && _throwState == ThrowState.Stuck)
+        {
+            Vector3 grappleDirection = _harpoonRb.transform.position - Ship.Instance.transform.position;
+            Vector3 finalForce = grappleDirection.normalized * _grappleSpeedSpeed * Time.deltaTime;
+            Ship.Instance.AddForceToShip(finalForce, ForceMode.Force);
+            return;
+        }
+
         if(_weapon.CurrentPlayer.IsUsing == _prevInputState) { return; }
 
         _prevInputState = _weapon.CurrentPlayer.IsUsing;
@@ -111,6 +123,12 @@ public class ElectricHarpoon : MeleeWeapon
 
         Transform moveToCurrentPosition = _moveToForLightSaber;
 
+        if (_throwState == ThrowState.Throwing)
+        {
+            Vector3 forceDir = _moveToForLightSaber.position - _harpoonRb.transform.position;
+            _harpoonRb.AddForce(forceDir.normalized * _flyingSpeed, ForceMode.Force);
+        }
+
         if (_throwState == ThrowState.Throwing && Vector3.Distance(_harpoonRb.transform.position, moveToCurrentPosition.position) < 2f)
         {
             _throwState = ThrowState.Arrived;
@@ -118,6 +136,37 @@ public class ElectricHarpoon : MeleeWeapon
 
         LightSaberReturnToWeapon();
     }
+
+    //private void AdjustElectrocutionZone()
+    //{
+    //    _electrocutionZoneInstance.transform.localScale = 
+    //        new Vector3(
+    //            Vector3.Distance(_harpoonRb.transform.position, _handleTransform.position),
+    //            _electrocutionZoneInstance.transform.localScale.y,
+    //            _electrocutionZoneInstance.transform.localScale.z
+    //            );
+
+    //    _electrocutionZoneInstance.transform.position =
+    //        new Vector3(
+    //            (_harpoonRb.transform.position.x + _handleTransform.transform.position.x)/2f,
+    //            _handleTransform.transform.position.y,
+    //            _handleTransform.transform.position.z
+    //            );
+
+    //    Vector3 direction = _harpoonRb.transform.position - _handleTransform.position;
+    //    float angle = Vector3.Angle(direction, transform.up);
+
+    //    //Determine if angle is negative
+    //    Vector3 cross = Vector3.Cross(direction, transform.up);
+    //    if (cross.y < 0)
+    //    {
+    //        angle = -angle;
+    //    }
+
+    //    Quaternion targetRotation = Quaternion.Euler(0f, 0f, angle);
+
+    //    _electrocutionZoneInstance.transform.rotation = targetRotation;
+    //}
 
     private void LightSaberReturnToWeapon()
     {
@@ -152,6 +201,17 @@ public class ElectricHarpoon : MeleeWeapon
         if(_throwState == ThrowState.Returning) { return; }
 
         _throwState = ThrowState.Stuck;
+
+        CreateSpringObject();
+    }
+
+    private void CreateSpringObject()
+    {
+        SpringJoint springInstance = Ship.Instance.gameObject.AddComponent<SpringJoint>();
+
+        springInstance.connectedBody = _harpoonRb;
+        springInstance.maxDistance = Vector3.Distance(Ship.Instance.transform.position, _harpoonRb.transform.position);
+        springInstance.massScale = Ship.Instance.Rb.mass;
     }
 
     private void ReturnHarpoon()

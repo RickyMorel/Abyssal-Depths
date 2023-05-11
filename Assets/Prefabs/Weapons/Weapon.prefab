@@ -593,7 +593,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 286164223635417134}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a5bac870b2518a4aab5e6ba81989146, type: 3}
   m_Name: 
@@ -4236,9 +4236,12 @@ GameObject:
   - component: {fileID: 6963554075171237634}
   - component: {fileID: 150267816179729708}
   - component: {fileID: 2365087979781089243}
-  - component: {fileID: 937491600864345933}
-  - component: {fileID: 7663150770846270121}
+  - component: {fileID: 2382000830290867069}
   - component: {fileID: 1555483855309671028}
+  - component: {fileID: 7663150770846270121}
+  - component: {fileID: 170308862108712894}
+  - component: {fileID: 7833815286417841882}
+  - component: {fileID: 73209081242868493}
   m_Layer: 25
   m_Name: Electric Harpoon
   m_TagString: Untagged
@@ -4312,7 +4315,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!54 &937491600864345933
+--- !u!54 &2382000830290867069
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4326,31 +4329,8 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 72
+  m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &7663150770846270121
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6356078261117588642}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f52daf2bdebcfe4418ad9018ef1b7be5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _timeBetweenShots: 0.2
-  _attackHitBox: {fileID: 2922026450815305462}
-  _parentTransform: {fileID: 8870349433133957839}
-  maxDistance: 10
-  _moveForce: 50
-  _maxMovementSpeed: 20
-  _moveToForLightSaber: {fileID: 5109726736624522019}
-  _handleTransform: {fileID: 2367695852931752527}
-  _harpoonRb: {fileID: 7820839840813908243}
-  _flyingSpeed: 400
-  _trackEnemiesZone: {fileID: 1674460243667513449}
 --- !u!120 &1555483855309671028
 LineRenderer:
   serializedVersion: 2
@@ -4454,6 +4434,80 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &7663150770846270121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6356078261117588642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f52daf2bdebcfe4418ad9018ef1b7be5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _timeBetweenShots: 0.2
+  _attackHitBox: {fileID: 2922026450815305462}
+  _parentTransform: {fileID: 8870349433133957839}
+  maxDistance: 10
+  _moveForce: 50
+  _maxMovementSpeed: 20
+  _moveToForLightSaber: {fileID: 5109726736624522019}
+  _handleTransform: {fileID: 2367695852931752527}
+  _harpoonRb: {fileID: 7820839840813908243}
+  _flyingSpeed: 2000
+  _grappleSpeedSpeed: 400
+  _maxTetherDistance: 10
+  _trackEnemiesZone: {fileID: 1674460243667513449}
+  _electructionZonePrefab: {fileID: 1306905336849389043, guid: 1ea2a4d60501ff5499a6bf141faf054a, type: 3}
+  _throwState: 0
+--- !u!114 &170308862108712894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6356078261117588642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd891f3c51d5c8d4a8d92cbbf5a55eea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!64 &7833815286417841882
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6356078261117588642}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
+--- !u!114 &73209081242868493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6356078261117588642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a5bac870b2518a4aab5e6ba81989146, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyDamageStat: -1
+  _ownHealth: {fileID: 2835829445178600864}
+  _damageTypes: 0100000004000000
+  _damagePlayerCharacters: 0
+  _weapon: {fileID: 7627081817445622300}
+  _meleeWeapon: {fileID: 7663150770846270121}
+  OnHitSomething:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &6603226165107517176
 GameObject:
   m_ObjectHideFlags: 0

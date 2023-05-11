@@ -14,7 +14,7 @@ public class ElectricHarpoon : MeleeWeapon
     [SerializeField] private Rigidbody _harpoonRb;
     [Header("Floats")]
     [SerializeField] private float _flyingSpeed;
-    [SerializeField] private float _grappleSpeedSpeed;
+    [SerializeField] private float _grappleSpeed;
     [SerializeField] private float _maxTetherDistance;
     [Header("GameObject Related")]
     [SerializeField] private Collider _trackEnemiesZone;
@@ -32,6 +32,7 @@ public class ElectricHarpoon : MeleeWeapon
     private float _timePassedReturning;
     private LineRenderer _lr;
     private SpringJoint _tetherSpringInstance;
+    private AIStateMachine _tetheredEnemy;
     //private GameObject _electrocutionZoneInstance;
 
     #endregion
@@ -59,7 +60,9 @@ public class ElectricHarpoon : MeleeWeapon
     {
         base.FixedUpdate();
 
-        _harpoonRb.isKinematic = _throwState == ThrowState.Attached || _throwState == ThrowState.Returning || _throwState == ThrowState.Stuck;
+        _harpoonRb.isKinematic = _throwState == ThrowState.Attached || _throwState == ThrowState.Returning || _throwState == ThrowState.Stuck || _throwState == ThrowState.GrabbingEnemy;
+
+        if(_throwState == ThrowState.GrabbingEnemy && _tetheredEnemy != null) { _harpoonRb.transform.position = _tetheredEnemy.transform.position; }
 
         ThrowLightSaber();
     }
@@ -84,7 +87,7 @@ public class ElectricHarpoon : MeleeWeapon
     {
         if (_throwState != ThrowState.Attached) 
         { 
-            if(_throwState == ThrowState.Arrived || _throwState == ThrowState.Stuck) { ReturnHarpoon(); }
+            if(_throwState == ThrowState.Arrived || _throwState == ThrowState.Stuck || _throwState == ThrowState.GrabbingEnemy) { ReturnHarpoon(); }
 
             return; 
         }
@@ -103,7 +106,7 @@ public class ElectricHarpoon : MeleeWeapon
         if (_weapon.CurrentPlayer.IsUsing_2 && _throwState == ThrowState.Stuck)
         {
             Vector3 grappleDirection = _harpoonRb.transform.position - Ship.Instance.transform.position;
-            Vector3 finalForce = grappleDirection.normalized * _grappleSpeedSpeed * Time.deltaTime;
+            Vector3 finalForce = grappleDirection.normalized * _grappleSpeed * Time.deltaTime;
             Ship.Instance.AddForceToShip(finalForce, ForceMode.Force);
             return;
         }
@@ -200,31 +203,41 @@ public class ElectricHarpoon : MeleeWeapon
     {
         if(_throwState == ThrowState.Attached) { return; }
         if(_throwState == ThrowState.Returning) { return; }
+        if(_throwState == ThrowState.GrabbingEnemy) { return; }
 
         if(collider.transform.root.tag == "MainShip") { return; }
 
         _throwState = ThrowState.Stuck;
 
-        CreateSpringObject();
+        if (collider.transform.TryGetComponent(out AIStateMachine aIState)) { _throwState = ThrowState.GrabbingEnemy; aIState.SetRagdollState(true); }
+
+        CreateSpringObject(aIState);
     }
 
-    private void CreateSpringObject()
+    private void CreateSpringObject(AIStateMachine enemy = null)
     {
         Destroy(_tetherSpringInstance);
 
-        if (_throwState != ThrowState.Stuck) { return; }
+        if (_throwState != ThrowState.Stuck && _throwState != ThrowState.GrabbingEnemy) { return; }
 
         _tetherSpringInstance = Ship.Instance.gameObject.AddComponent<SpringJoint>();
 
-        _tetherSpringInstance.connectedBody = _harpoonRb;
+        _tetherSpringInstance.connectedBody = enemy ? enemy.Rb : _harpoonRb;
         _tetherSpringInstance.maxDistance = Vector3.Distance(Ship.Instance.transform.position, _harpoonRb.transform.position);
         _tetherSpringInstance.massScale = Ship.Instance.Rb.mass;
+        _tetherSpringInstance.connectedMassScale = enemy ? enemy.Rb.mass : 1f;
+        _tetheredEnemy = enemy;
     }
 
     private void ReturnHarpoon()
     {
         _throwState = ThrowState.Returning;
         Destroy(_tetherSpringInstance);
+
+        if(_tetheredEnemy == null) { return; }
+
+        _tetheredEnemy.SetRagdollState(false);
+        _tetheredEnemy = null;
     }
 
     private IEnumerator CheckForEnemyTransforms()
@@ -241,6 +254,7 @@ public class ElectricHarpoon : MeleeWeapon
         Throwing,
         Arrived,
         Stuck,
+        GrabbingEnemy,
         Returning
     }
 }

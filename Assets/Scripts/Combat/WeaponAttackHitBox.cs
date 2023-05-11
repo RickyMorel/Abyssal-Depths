@@ -14,7 +14,7 @@ public class WeaponAttackHitBox : AttackHitBox
 
     #region Public Properties
 
-    public UnityEvent OnHitSomething;
+    public UnityEvent<Collider> OnHitSomething;
 
     #endregion
 
@@ -39,7 +39,7 @@ public class WeaponAttackHitBox : AttackHitBox
 
     private void Impact(Collider other)
     {
-        OnHitSomething?.Invoke();
+        OnHitSomething?.Invoke(other);
 
         //layer 6 is floor
         if (other.gameObject.layer == 6) { InvokeHitParticles(other); }

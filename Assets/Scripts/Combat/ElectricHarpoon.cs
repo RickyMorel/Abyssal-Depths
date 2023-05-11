@@ -31,6 +31,7 @@ public class ElectricHarpoon : MeleeWeapon
     private bool _prevInputState;
     private float _timePassedReturning;
     private LineRenderer _lr;
+    private SpringJoint _tetherSpringInstance;
     //private GameObject _electrocutionZoneInstance;
 
     #endregion
@@ -195,10 +196,12 @@ public class ElectricHarpoon : MeleeWeapon
     }
 
     //Invoked by UnityEvent
-    public void OnCollide()
+    public void OnCollide(Collider collider)
     {
         if(_throwState == ThrowState.Attached) { return; }
         if(_throwState == ThrowState.Returning) { return; }
+
+        if(collider.transform.root.tag == "MainShip") { return; }
 
         _throwState = ThrowState.Stuck;
 
@@ -207,16 +210,21 @@ public class ElectricHarpoon : MeleeWeapon
 
     private void CreateSpringObject()
     {
-        SpringJoint springInstance = Ship.Instance.gameObject.AddComponent<SpringJoint>();
+        Destroy(_tetherSpringInstance);
 
-        springInstance.connectedBody = _harpoonRb;
-        springInstance.maxDistance = Vector3.Distance(Ship.Instance.transform.position, _harpoonRb.transform.position);
-        springInstance.massScale = Ship.Instance.Rb.mass;
+        if (_throwState != ThrowState.Stuck) { return; }
+
+        _tetherSpringInstance = Ship.Instance.gameObject.AddComponent<SpringJoint>();
+
+        _tetherSpringInstance.connectedBody = _harpoonRb;
+        _tetherSpringInstance.maxDistance = Vector3.Distance(Ship.Instance.transform.position, _harpoonRb.transform.position);
+        _tetherSpringInstance.massScale = Ship.Instance.Rb.mass;
     }
 
     private void ReturnHarpoon()
     {
         _throwState = ThrowState.Returning;
+        Destroy(_tetherSpringInstance);
     }
 
     private IEnumerator CheckForEnemyTransforms()

@@ -9,6 +9,7 @@ public class WeaponAttackHitBox : AttackHitBox
 
     [SerializeField] protected Weapon _weapon;
     [SerializeField] private MeleeWeapon _meleeWeapon;
+    [SerializeField] private bool _doesOnTriggerStayDamage = false;
 
     #endregion
 
@@ -27,14 +28,33 @@ public class WeaponAttackHitBox : AttackHitBox
 
     #endregion
 
+    public void Initialize(Weapon weapon, Damageable ownHealth, MeleeWeapon meleeWeapon)
+    {
+        _weapon = weapon;
+        _ownHealth = ownHealth;
+        _meleeWeapon = meleeWeapon;
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
+        if (_doesOnTriggerStayDamage) { return; }
+
         Impact(collision.collider);
     }
 
     public override void OnTriggerEnter(Collider other)
     {
+        if (_doesOnTriggerStayDamage) { return; }
+
         Impact(other);
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        //Ask Ariel where I can find time between electrocutions and what is StunRaduis used for in ChipDataSO
+        if (!_doesOnTriggerStayDamage) { return; }
+
+        //Impact(other);
     }
 
     private void Impact(Collider other)

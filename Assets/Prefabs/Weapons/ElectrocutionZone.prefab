@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1306905336849389044}
   - component: {fileID: 1306905336849389045}
   - component: {fileID: 1306905336849389042}
+  - component: {fileID: 1236612757376330376}
   m_Layer: 25
   m_Name: ElectrocutionZone
   m_TagString: Untagged
@@ -33,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1306905336849389047
 MeshFilter:
@@ -114,3 +115,25 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1236612757376330376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1306905336849389043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a5bac870b2518a4aab5e6ba81989146, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyDamageStat: -1
+  _ownHealth: {fileID: 0}
+  _damageTypes: 0400000004000000
+  _damagePlayerCharacters: 0
+  _weapon: {fileID: 0}
+  _meleeWeapon: {fileID: 0}
+  _doesOnTriggerStayDamage: 1
+  OnHitSomething:
+    m_PersistentCalls:
+      m_Calls: []

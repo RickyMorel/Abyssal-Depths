@@ -66,11 +66,6 @@ public class Booster : RotationalInteractable
     {
         yield return new WaitForEndOfFrame();
 
-        //Stops ship from randomly moving due to physics collisions
-        SetIsBoosting(true);
-
-        yield return new WaitForEndOfFrame();
-
         SetIsBoosting(false);
         StabilizeShip();
     }

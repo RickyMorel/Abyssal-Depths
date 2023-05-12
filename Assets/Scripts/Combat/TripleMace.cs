@@ -48,12 +48,20 @@ public class TripleMace : MeleeWeapon
 
     public override void FixedUpdate()
     {
-        if (_weapon.CurrentPlayer == null) { return; }
-        if (_weapon.CanUse == false) { return; }
+        Vector3 moveDirection;
 
-        ApplyForceToMace(0, _weapon.CurrentPlayer.MoveDirection);
-        ApplyForceToMace(1, _weapon.CurrentPlayer.MoveDirection);
-        ApplyForceToMace(2, _weapon.CurrentPlayer.MoveDirection);
+        if (_weapon.CurrentPlayer == null)
+        {
+            moveDirection = Vector3.zero;
+        }
+        else
+        {
+            moveDirection = _weapon.CurrentPlayer.MoveDirection;
+        }
+
+        ApplyForceToMace(0, moveDirection);
+        ApplyForceToMace(1, moveDirection);
+        ApplyForceToMace(2, moveDirection);
     }
 
     #endregion

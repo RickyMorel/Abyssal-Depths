@@ -19,6 +19,7 @@ public class ElectricHarpoon : MeleeWeapon
     [Header("GameObject Related")]
     [SerializeField] private Collider _trackEnemiesZone;
     [SerializeField] private GameObject _electructionZonePrefab;
+    [SerializeField] private GameObject _electricWireBeaconPrefab;
 
     #endregion
 
@@ -29,11 +30,13 @@ public class ElectricHarpoon : MeleeWeapon
     private Quaternion _originalHarpoonRotation;
     [SerializeField] private ThrowState _throwState = ThrowState.Attached;
     private bool _prevInputState;
+    private bool _prevInput2State;
     private float _timePassedReturning;
     private LineRenderer _lr;
     private SpringJoint _tetherSpringInstance;
+    private ElectricZoneInstanceClass _electrocutionZoneInstance;
     private AIStateMachine _tetheredEnemy;
-    private WeaponAttackHitBox _electrocutionZoneInstance;
+    private List<GameObject> _electricWireBeacons = new List<GameObject>();
 
     #endregion
 
@@ -50,8 +53,8 @@ public class ElectricHarpoon : MeleeWeapon
 
         _lr = GetComponent<LineRenderer>();
         _lr.positionCount = 2;
-        _electrocutionZoneInstance = Instantiate(_electructionZonePrefab).GetComponent<WeaponAttackHitBox>();
-        _electrocutionZoneInstance.Initialize(_weapon, _weapon.InteractableHealth, this);
+        _electrocutionZoneInstance = new ElectricZoneInstanceClass(Instantiate(_electructionZonePrefab));
+        _electrocutionZoneInstance.AttackHitBox.Initialize(_weapon, _weapon.InteractableHealth, this);
 
         _originalHarpoonPosition = _harpoonRb.transform.localPosition;
         _originalHarpoonRotation = _harpoonRb.transform.localRotation;
@@ -72,6 +75,8 @@ public class ElectricHarpoon : MeleeWeapon
     private void LateUpdate()
     {
         DrawRope();
+        //Update line positions every frame
+        if (_electricWireBeacons.Count == 2) { SetupElectricWire(); }
     }
 
     private void OnTriggerStay(Collider other)
@@ -103,6 +108,7 @@ public class ElectricHarpoon : MeleeWeapon
 
     public override void CheckShootInput()
     {
+        //Grapple ship towards harpoon
         if (_weapon.CurrentPlayer.IsUsing_2 && _throwState == ThrowState.Stuck)
         {
             Vector3 grappleDirection = _harpoonRb.transform.position - Ship.Instance.transform.position;
@@ -111,6 +117,9 @@ public class ElectricHarpoon : MeleeWeapon
             return;
         }
 
+        CheckShootBeacons();
+
+        //Shoots harpoon
         if (_weapon.CurrentPlayer.IsUsing == _prevInputState) { return; }
 
         _prevInputState = _weapon.CurrentPlayer.IsUsing;
@@ -118,6 +127,21 @@ public class ElectricHarpoon : MeleeWeapon
         if (_weapon.CurrentPlayer.IsUsing)
         {
             Shoot();
+        }
+    }
+
+    private void CheckShootBeacons()
+    {
+        if (_weapon.CurrentPlayer.IsUsing_2 == _prevInput2State) { return; }
+
+        _prevInput2State = _weapon.CurrentPlayer.IsUsing_2;
+
+        //Shoot electric wire beacons
+        if (_weapon.CurrentPlayer.IsUsing_2 && _throwState != ThrowState.Stuck && _throwState != ThrowState.GrabbingEnemy)
+        {
+            TrySpawnWireOrSpawnBeacon();
+
+            return;
         }
     }
 
@@ -137,6 +161,37 @@ public class ElectricHarpoon : MeleeWeapon
         _harpoonRb.transform.SetParent(null);
 
         StartCoroutine(CheckForEnemyTransforms());
+    }
+
+    private void TrySpawnWireOrSpawnBeacon()
+    {
+        //Destroy previous beacons
+        if(_electricWireBeacons.Count >= 2)
+        {
+            foreach (GameObject beacon in _electricWireBeacons)
+            {
+                Destroy(beacon);
+            }
+            _electricWireBeacons.Clear();
+        }
+
+        GameObject beaconInstance = Instantiate(_electricWireBeaconPrefab, _harpoonRb.transform.position, Quaternion.identity);
+        Projectile beaconProjectileScript = beaconInstance.GetComponent<Projectile>();
+        beaconProjectileScript.WeaponReference = _weapon;
+        beaconProjectileScript.Launch(_harpoonRb.transform.up);
+
+        _electricWireBeacons.Add(beaconInstance);
+
+        SetupElectricWire();
+    }
+
+    private void SetupElectricWire()
+    {
+        if(_electricWireBeacons.Count < 2) { _electrocutionZoneInstance.Lr.enabled = false; return; }
+
+        _electrocutionZoneInstance.Lr.enabled = true;
+        _electrocutionZoneInstance.Lr.SetPosition(0, _electricWireBeacons[0].transform.position);
+        _electrocutionZoneInstance.Lr.SetPosition(1, _electricWireBeacons[1].transform.position);
     }
     
     private void ThrowLightSaber()
@@ -161,14 +216,16 @@ public class ElectricHarpoon : MeleeWeapon
 
     private void AdjustElectrocutionZone()
     {
-        _electrocutionZoneInstance.transform.localScale =
+        GameObject electricZoneObj = _electrocutionZoneInstance.ElectricZoneGameobject;
+
+        electricZoneObj.transform.localScale =
             new Vector3(
                 Vector3.Distance(_harpoonRb.transform.position, _handleTransform.position),
-                _electrocutionZoneInstance.transform.localScale.y,
-                _electrocutionZoneInstance.transform.localScale.z
+                electricZoneObj.transform.localScale.y,
+                electricZoneObj.transform.localScale.z
                 );
 
-        _electrocutionZoneInstance.transform.position =
+        electricZoneObj.transform.position =
             new Vector3(
                 (_harpoonRb.transform.position.x + _handleTransform.transform.position.x) / 2f,
                 _handleTransform.transform.position.y,
@@ -187,7 +244,7 @@ public class ElectricHarpoon : MeleeWeapon
 
         Quaternion targetRotation = Quaternion.Euler(0f, 0f, angle);
 
-        _electrocutionZoneInstance.transform.rotation = targetRotation;
+        electricZoneObj.transform.rotation = targetRotation;
     }
 
     private void LightSaberReturnToWeapon()
@@ -196,8 +253,6 @@ public class ElectricHarpoon : MeleeWeapon
         {
             _timePassedReturning += Time.deltaTime;
             _harpoonRb.transform.position = Vector3.MoveTowards(_harpoonRb.transform.position, _handleTransform.position, Time.deltaTime * (_flyingSpeed / 10f) * _timePassedReturning);
-            //_harpoonRb.transform.rotation = Quaternion.AngleAxis(Vector3.Angle(_harpoonRb.transform.position, _handleTransform.position)
-            //    * Time.deltaTime * (_flyingSpeed/10f), Vector3.forward);
         }
         if (_harpoonRb.transform.position == _handleTransform.position && _throwState == ThrowState.Returning)
         {
@@ -258,5 +313,19 @@ public class ElectricHarpoon : MeleeWeapon
         Stuck,
         GrabbingEnemy,
         Returning
+    }
+
+    private class ElectricZoneInstanceClass
+    {
+        public ElectricZoneInstanceClass(GameObject electricZoneInstance)
+        {
+            ElectricZoneGameobject = electricZoneInstance;
+            AttackHitBox = electricZoneInstance.GetComponent<WeaponAttackHitBox>();
+            Lr = electricZoneInstance.GetComponent<LineRenderer>();
+        }
+
+        public GameObject ElectricZoneGameobject;
+        public WeaponAttackHitBox AttackHitBox;
+        public LineRenderer Lr;
     }
 }

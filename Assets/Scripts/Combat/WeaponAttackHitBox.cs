@@ -49,14 +49,6 @@ public class WeaponAttackHitBox : AttackHitBox
         Impact(other);
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        //Ask Ariel where I can find time between electrocutions and what is StunRaduis used for in ChipDataSO
-        if (!_doesOnTriggerStayDamage) { return; }
-
-        //Impact(other);
-    }
-
     private void Impact(Collider other)
     {
         OnHitSomething?.Invoke(other);

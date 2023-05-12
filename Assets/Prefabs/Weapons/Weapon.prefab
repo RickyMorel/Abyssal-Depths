@@ -4248,7 +4248,6 @@ GameObject:
   - component: {fileID: 2382000830290867069}
   - component: {fileID: 1555483855309671028}
   - component: {fileID: 7663150770846270121}
-  - component: {fileID: 2203820078961489666}
   m_Layer: 25
   m_Name: Electric Harpoon
   m_TagString: Untagged
@@ -4359,7 +4358,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1cc7d178eb2c3d941a5ad10fff81485d, type: 2}
+  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4385,7 +4384,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 2
+    widthMultiplier: 0.3
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -4403,8 +4402,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
+      key0: {r: 0, g: 0, b: 0, a: 1}
+      key1: {r: 0.2264151, g: 0.2264151, b: 0.2264151, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -4469,24 +4468,6 @@ MonoBehaviour:
   _electructionZonePrefab: {fileID: 1306905336849389043, guid: 1ea2a4d60501ff5499a6bf141faf054a, type: 3}
   _electricWireBeaconPrefab: {fileID: 7746866216529117493, guid: 670fbdf495ba7f5439faf8e0c27272f7, type: 3}
   _throwState: 0
---- !u!114 &2203820078961489666
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6356078261117588642}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 094862c809b5e93409f7cf924aa5f8e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _textures:
-  - {fileID: 2800000, guid: c0b5f44eb9cc5d54bb4cb15368078c9d, type: 3}
-  - {fileID: 2800000, guid: 422c1429e27d4144086c64867b6e6376, type: 3}
-  - {fileID: 2800000, guid: d02aa8ef9b14c6049b3e90b82a0634a6, type: 3}
-  - {fileID: 2800000, guid: cacb446a54079ca42aaf6bd51b637d8c, type: 3}
-  _fps: 30
 --- !u!1 &6603226165107517176
 GameObject:
   m_ObjectHideFlags: 0

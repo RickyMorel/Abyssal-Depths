@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class ElectricWireBeacon : Projectile
 {
-    #region Editor Fields
-
-    [SerializeField] private LayerMask _attachLayers;
-
-    #endregion
-
     #region Private Variables
 
     private bool _hasLaunched = false;

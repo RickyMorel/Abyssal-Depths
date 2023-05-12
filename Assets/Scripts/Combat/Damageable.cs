@@ -418,9 +418,9 @@ public class Damageable : MonoBehaviour
     //    if (_rb == null) { return; }
     //    if (_prevVelocity < _minCrashSpeed) { return; }
 
-    //    _currentDamage = (int)CalculateCrashDamage();
-    //    DamageWithoutDamageData((int)_currentDamage, collision.collider);
-    //    if (collision.gameObject.TryGetComponent(out AIHealth enemyHealth)) { enemyHealth.Damage((int)_currentDamage); }
+    //    int damage = (int)CalculateCrashDamage();
+    //    DamageWithoutDamageData(damage, collision.collider);
+    //    if (collision.gameObject.TryGetComponent(out AIHealth enemyHealth)) { enemyHealth.Damage(damage); }
     //}
 
     #endregion

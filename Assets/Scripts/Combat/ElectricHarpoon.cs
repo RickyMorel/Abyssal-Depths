@@ -25,10 +25,9 @@ public class ElectricHarpoon : MeleeWeapon
 
     #region Private Variables
 
-    private List<Transform> _enemyTransforms = new List<Transform>();
     private Vector3 _originalHarpoonPosition;
     private Quaternion _originalHarpoonRotation;
-    [SerializeField] private ThrowState _throwState = ThrowState.Attached;
+    private ThrowState _throwState = ThrowState.Attached;
     private bool _prevInputState;
     private bool _prevInput2State;
     private float _timePassedReturning;
@@ -37,6 +36,7 @@ public class ElectricHarpoon : MeleeWeapon
     private ElectricZoneInstanceClass _electrocutionZoneInstance;
     private AIStateMachine _tetheredEnemy;
     private List<GameObject> _electricWireBeacons = new List<GameObject>();
+    private float _timeSincePressInput2;
 
     #endregion
 
@@ -68,24 +68,19 @@ public class ElectricHarpoon : MeleeWeapon
 
         if(_throwState == ThrowState.GrabbingEnemy && _tetheredEnemy != null) { _harpoonRb.transform.position = _tetheredEnemy.transform.position; }
 
-        ThrowLightSaber();
+        ThrowHarpoon();
+
         if (_throwState == ThrowState.Stuck || _throwState == ThrowState.GrabbingEnemy) { AdjustElectrocutionZone(); }
     }
 
     private void LateUpdate()
     {
+        _timeSincePressInput2 += Time.deltaTime;
+
         DrawRope();
+
         //Update line positions every frame
         if (_electricWireBeacons.Count == 2) { SetupElectricWire(); }
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (!other.gameObject.TryGetComponent(out AIHealth enemy)) { return; }
-
-        if (_enemyTransforms.Contains(enemy.gameObject.transform)) { return; }
-
-        _enemyTransforms.Add(enemy.gameObject.transform);
     }
 
     //Invoked by UnityEvent
@@ -105,6 +100,8 @@ public class ElectricHarpoon : MeleeWeapon
     }
 
     #endregion
+
+    #region Shoot Functions
 
     public override void CheckShootInput()
     {
@@ -132,9 +129,19 @@ public class ElectricHarpoon : MeleeWeapon
 
     private void CheckShootBeacons()
     {
+        if (_weapon.CurrentPlayer.PlayerInput.DetectDoubleTap())
+        {
+            DestroyBeacons();
+            return;
+        }
+
+        if(_timeSincePressInput2 < 0.4f) { return; }
+
         if (_weapon.CurrentPlayer.IsUsing_2 == _prevInput2State) { return; }
 
         _prevInput2State = _weapon.CurrentPlayer.IsUsing_2;
+
+        _timeSincePressInput2 = 0f;
 
         //Shoot electric wire beacons
         if (_weapon.CurrentPlayer.IsUsing_2 && _throwState != ThrowState.Stuck && _throwState != ThrowState.GrabbingEnemy)
@@ -159,21 +166,16 @@ public class ElectricHarpoon : MeleeWeapon
         _weapon.ShouldRotate = false;
 
         _harpoonRb.transform.SetParent(null);
-
-        StartCoroutine(CheckForEnemyTransforms());
     }
+
+    #endregion
+
+    #region Electric Wire Functions
 
     private void TrySpawnWireOrSpawnBeacon()
     {
         //Destroy previous beacons
-        if(_electricWireBeacons.Count >= 2)
-        {
-            foreach (GameObject beacon in _electricWireBeacons)
-            {
-                Destroy(beacon);
-            }
-            _electricWireBeacons.Clear();
-        }
+        if (_electricWireBeacons.Count >= 2) { DestroyBeacons(); }
 
         GameObject beaconInstance = Instantiate(_electricWireBeaconPrefab, _harpoonRb.transform.position, Quaternion.identity);
         Projectile beaconProjectileScript = beaconInstance.GetComponent<Projectile>();
@@ -185,6 +187,17 @@ public class ElectricHarpoon : MeleeWeapon
         SetupElectricWire();
     }
 
+    private void DestroyBeacons()
+    {
+        foreach (GameObject beacon in _electricWireBeacons)
+        {
+            Destroy(beacon);
+        }
+        _electricWireBeacons.Clear();
+
+        SetupElectricWire();
+    }
+
     private void SetupElectricWire()
     {
         if(_electricWireBeacons.Count < 2) { _electrocutionZoneInstance.Lr.enabled = false; return; }
@@ -192,26 +205,6 @@ public class ElectricHarpoon : MeleeWeapon
         _electrocutionZoneInstance.Lr.enabled = true;
         _electrocutionZoneInstance.Lr.SetPosition(0, _electricWireBeacons[0].transform.position);
         _electrocutionZoneInstance.Lr.SetPosition(1, _electricWireBeacons[1].transform.position);
-    }
-    
-    private void ThrowLightSaber()
-    {
-        if (_throwState == ThrowState.Arrived) { return; }
-
-        Transform moveToCurrentPosition = _moveToForLightSaber;
-
-        if (_throwState == ThrowState.Throwing)
-        {
-            Vector3 forceDir = _moveToForLightSaber.position - _harpoonRb.transform.position;
-            _harpoonRb.AddForce(forceDir.normalized * _flyingSpeed, ForceMode.Force);
-        }
-
-        if (_throwState == ThrowState.Throwing && Vector3.Distance(_harpoonRb.transform.position, moveToCurrentPosition.position) < 2f)
-        {
-            _throwState = ThrowState.Arrived;
-        }
-
-        LightSaberReturnToWeapon();
     }
 
     private void AdjustElectrocutionZone()
@@ -247,7 +240,31 @@ public class ElectricHarpoon : MeleeWeapon
         electricZoneObj.transform.rotation = targetRotation;
     }
 
-    private void LightSaberReturnToWeapon()
+    #endregion
+
+    #region Harpoon Functions
+
+    private void ThrowHarpoon()
+    {
+        if (_throwState == ThrowState.Arrived) { return; }
+
+        Transform moveToCurrentPosition = _moveToForLightSaber;
+
+        if (_throwState == ThrowState.Throwing)
+        {
+            Vector3 forceDir = _moveToForLightSaber.position - _harpoonRb.transform.position;
+            _harpoonRb.AddForce(forceDir.normalized * _flyingSpeed, ForceMode.Force);
+        }
+
+        if (_throwState == ThrowState.Throwing && Vector3.Distance(_harpoonRb.transform.position, moveToCurrentPosition.position) < 2f)
+        {
+            _throwState = ThrowState.Arrived;
+        }
+
+        ReturnHarpoonToWeapon();
+    }
+
+    private void ReturnHarpoonToWeapon()
     {
         if (_harpoonRb.transform.position != _handleTransform.position && _throwState == ThrowState.Returning)
         {
@@ -297,13 +314,9 @@ public class ElectricHarpoon : MeleeWeapon
         _tetheredEnemy = null;
     }
 
-    private IEnumerator CheckForEnemyTransforms()
-    {
-        _enemyTransforms.Clear();
-        _trackEnemiesZone.enabled = true;
-        yield return new WaitForSeconds(Time.deltaTime*100);
-        _trackEnemiesZone.enabled = false;    
-    }
+    #endregion
+
+    #region Helper Classes
 
     public enum ThrowState
     {
@@ -328,4 +341,6 @@ public class ElectricHarpoon : MeleeWeapon
         public WeaponAttackHitBox AttackHitBox;
         public LineRenderer Lr;
     }
+
+    #endregion
 }

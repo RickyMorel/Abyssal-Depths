@@ -75,8 +75,20 @@ public class CameraManager : MonoBehaviour
     public void ToggleCamera(bool boolean, float timeTillToggle = 0f)
     {
         //Stops previous camera toggle functions from calling
-        StopAllCoroutines();
-        StartCoroutine(ToggleCameraCoroutine(boolean, timeTillToggle));
+        //StopAllCoroutines();
+        //StartCoroutine(ToggleCameraCoroutine(boolean, timeTillToggle));
+        GetAllCameras();
+
+        _cameras[_cameras.Length - 1].gameObject.SetActive(boolean);
+        _vCams[_vCams.Length - 1].gameObject.SetActive(boolean);
+
+        for (int i = 0; i < _cameras.Length - 1; i++)
+        {
+            _cameras[i].gameObject.SetActive(!boolean);
+            _vCams[i].gameObject.SetActive(!boolean);
+        }
+
+        _isInOrthoMode = boolean;
     }
 
     public IEnumerator ToggleCameraCoroutine(bool boolean, float timeTillToggle)

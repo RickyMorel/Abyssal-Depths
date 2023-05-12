@@ -122,7 +122,9 @@ public class PlayerJoinManager : MonoBehaviour
 
         yield return new WaitForSeconds(2.5f);
 
+        playerInput.GetComponent<CharacterController>().enabled = false;
         playerInput.transform.position = _playerJoinNPC[_playerJoinNPCIndex].SpawnLocations[indexAux].transform.position;
+        playerInput.GetComponent<CharacterController>().enabled = true;
 
         yield return new WaitForSeconds(1);
 

@@ -18,7 +18,7 @@ public class PlayerStateMachine : BaseStateMachine
     private CharacterController _characterController;
     private CapsuleCollider _capsuleCollider;
     private float _turnSmoothVelocity;
-    private bool _isAttachedToShip;
+    [SerializeField] private bool _isAttachedToShip;
     private float _fallSpeed;
     private float _timeSinceLastJump = float.MaxValue;
     private Vector3 _fallVelocity;
@@ -205,6 +205,7 @@ public class PlayerStateMachine : BaseStateMachine
 
     public void ApplyGravityTransform()
     {
+        Debug.Log("ApplyGravityTransform");
         if (!_applyGravity && !_isJumpPressed && _isGrounded) { _fallVelocity = Vector3.zero; return; }
         else
         {
@@ -242,6 +243,7 @@ public class PlayerStateMachine : BaseStateMachine
 
     private void ApplyGravity()
     {
+        Debug.Log("ApplyGravity");
         Vector3 gravity = new Vector3(0f, _gravityIntensity, 0f) * Time.deltaTime;
 
         _fallSpeed += gravity.y;

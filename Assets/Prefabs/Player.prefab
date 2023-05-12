@@ -4910,8 +4910,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyDamageStat: -1
   _ownHealth: {fileID: 8900917374660638782}
-  _damageTypes: 
-  _damagePlayerCharacters: 0
+  _damageTypes: 0100000001000000
+  _damagePlayerCharacters: 1
 --- !u!1 &4936333524319843810
 GameObject:
   m_ObjectHideFlags: 0
@@ -5260,7 +5260,6 @@ GameObject:
   - component: {fileID: 8683001855490978692}
   - component: {fileID: 3100667788472722230}
   - component: {fileID: 7936679602822478339}
-  - component: {fileID: 8125227216913311040}
   m_Layer: 12
   m_Name: Player
   m_TagString: Player
@@ -5407,7 +5406,6 @@ MonoBehaviour:
   _isGrounded: 0
   _currentStateName: 
   _canMove: 1
-  _moveDirection: {x: 0, y: 0, z: 0}
   _collisionLayers:
     serializedVersion: 2
     m_Bits: 16777280
@@ -5507,19 +5505,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _chipPickupPrefab: {fileID: 7517285669250702529, guid: 33c642c6393f4f04d87e7307bb977fc0, type: 3}
   _handTransform: {fileID: 377705278079410084}
---- !u!114 &8125227216913311040
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8235309464947500824}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1396d6dcf17bbd4458366caff72a405f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ActivePlatform: {fileID: 0}
 --- !u!1 &8935917602542925056
 GameObject:
   m_ObjectHideFlags: 0

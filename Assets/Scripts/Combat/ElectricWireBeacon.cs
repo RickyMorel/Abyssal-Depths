@@ -18,7 +18,7 @@ public class ElectricWireBeacon : Projectile
         _destroyOnHit = false;
     }
 
-    //Do nothing
+    //Do nothing, don't calculate damage because it doesn't do damage
     public override void Start()
     {
         

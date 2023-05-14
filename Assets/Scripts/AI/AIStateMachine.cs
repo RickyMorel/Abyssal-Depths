@@ -79,7 +79,6 @@ public class AIStateMachine : BaseStateMachine
         //Disables enemy ragdoll once it touches the floor
         else
         {
-            Debug.Log("SetRagdollState False");
             StartCoroutine(SetBouncingOffShieldCoroutine(Vector3.zero, 0f));
         }
     }

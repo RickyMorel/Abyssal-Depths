@@ -12,6 +12,7 @@ public class ElectricHarpoon : MeleeWeapon
     [SerializeField] private Transform _moveToForLightSaber;
     [SerializeField] private Transform _handleTransform;
     [SerializeField] private Rigidbody _harpoonRb;
+    [SerializeField] private Collider _harpoonCollider;
     [Header("Floats")]
     [SerializeField] private float _flyingSpeed;
     [SerializeField] private float _grappleSpeed;
@@ -65,12 +66,13 @@ public class ElectricHarpoon : MeleeWeapon
         base.FixedUpdate();
 
         _harpoonRb.isKinematic = _throwState == ThrowState.Attached || _throwState == ThrowState.Returning || _throwState == ThrowState.Stuck || _throwState == ThrowState.GrabbingEnemy;
+        //set's harpoon collider to trigger when grabbing enemy to prevent weird physics collisions
+        _harpoonCollider.isTrigger = _throwState == ThrowState.GrabbingEnemy;
 
-        if(_throwState == ThrowState.GrabbingEnemy && _tetheredEnemy != null) { _harpoonRb.transform.position = _tetheredEnemy.transform.position; }
+
+        if (_throwState == ThrowState.GrabbingEnemy && _tetheredEnemy != null) { _harpoonRb.transform.position = _tetheredEnemy.transform.position; }
 
         ThrowHarpoon();
-
-        if (_throwState == ThrowState.Stuck || _throwState == ThrowState.GrabbingEnemy) { AdjustElectrocutionZone(); }
     }
 
     private void LateUpdate()
@@ -200,11 +202,14 @@ public class ElectricHarpoon : MeleeWeapon
 
     private void SetupElectricWire()
     {
-        if(_electricWireBeacons.Count < 2) { _electrocutionZoneInstance.Lr.enabled = false; return; }
+        if(_electricWireBeacons.Count < 2) { _electrocutionZoneInstance.Lr.enabled = false; _electrocutionZoneInstance.ElectricZoneGameobject.SetActive(false); return; }
 
         _electrocutionZoneInstance.Lr.enabled = true;
+        _electrocutionZoneInstance.ElectricZoneGameobject.SetActive(true);
         _electrocutionZoneInstance.Lr.SetPosition(0, _electricWireBeacons[0].transform.position);
         _electrocutionZoneInstance.Lr.SetPosition(1, _electricWireBeacons[1].transform.position);
+
+        AdjustElectrocutionZone();
     }
 
     private void AdjustElectrocutionZone()
@@ -213,24 +218,25 @@ public class ElectricHarpoon : MeleeWeapon
 
         electricZoneObj.transform.localScale =
             new Vector3(
-                Vector3.Distance(_harpoonRb.transform.position, _handleTransform.position),
+                Vector3.Distance(_electricWireBeacons[0].transform.position, _electricWireBeacons[1].transform.position),
                 electricZoneObj.transform.localScale.y,
                 electricZoneObj.transform.localScale.z
                 );
 
         electricZoneObj.transform.position =
             new Vector3(
-                (_harpoonRb.transform.position.x + _handleTransform.transform.position.x) / 2f,
-                _handleTransform.transform.position.y,
+                (_electricWireBeacons[0].transform.position.x + _electricWireBeacons[1].transform.position.x) / 2f,
+                (_electricWireBeacons[0].transform.position.y + _electricWireBeacons[1].transform.position.y) / 2f,
                 _handleTransform.transform.position.z
                 );
 
-        Vector3 direction = _harpoonRb.transform.position - _handleTransform.position;
+        Vector3 direction = _electricWireBeacons[0].transform.position - _electricWireBeacons[1].transform.position;
         float angle = Vector3.Angle(direction, transform.up);
 
-        //Determine if angle is negative
+        //Determine if angle is positive
         Vector3 cross = Vector3.Cross(direction, transform.up);
-        if (cross.y < 0)
+
+        if (cross.z > 0)
         {
             angle = -angle;
         }

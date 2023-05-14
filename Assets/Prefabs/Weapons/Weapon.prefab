@@ -235,7 +235,7 @@ MonoBehaviour:
   _damagePlayerCharacters: 0
   _weapon: {fileID: 7627081817445622300}
   _meleeWeapon: {fileID: 8711923388874455362}
-  _doesOnTriggerStayDamage: 0
+  _timeBetweenDamages: -1
   OnHitSomething:
     m_PersistentCalls:
       m_Calls: []
@@ -569,8 +569,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.22353408, y: 0.860907, z: 0.016872004}
-  m_Center: {x: -3.430528e-14, y: 0.6031487, z: -0.000000007450581}
+  m_Size: {x: 0.22353408, y: 0.66467726, z: 0.5}
+  m_Center: {x: 0.000000050944365, y: 0.5050333, z: -0.00000001983222}
 --- !u!54 &7820839840813908243
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -594,18 +594,18 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 286164223635417134}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a5bac870b2518a4aab5e6ba81989146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyDamageStat: -1
   _ownHealth: {fileID: 2835829445178600864}
-  _damageTypes: 0100000004000000
+  _damageTypes: 0000000001000000
   _damagePlayerCharacters: 0
   _weapon: {fileID: 7627081817445622300}
   _meleeWeapon: {fileID: 7663150770846270121}
-  _doesOnTriggerStayDamage: 0
+  _timeBetweenDamages: -1
   OnHitSomething:
     m_PersistentCalls:
       m_Calls:
@@ -1187,7 +1187,7 @@ MonoBehaviour:
   _damagePlayerCharacters: 0
   _weapon: {fileID: 7627081817445622300}
   _meleeWeapon: {fileID: 8711923388874455362}
-  _doesOnTriggerStayDamage: 0
+  _timeBetweenDamages: -1
   OnHitSomething:
     m_PersistentCalls:
       m_Calls: []
@@ -1461,7 +1461,7 @@ MonoBehaviour:
   _damagePlayerCharacters: 0
   _weapon: {fileID: 7627081817445622300}
   _meleeWeapon: {fileID: 8711923388874455362}
-  _doesOnTriggerStayDamage: 0
+  _timeBetweenDamages: -1
   OnHitSomething:
     m_PersistentCalls:
       m_Calls: []
@@ -1987,7 +1987,7 @@ MonoBehaviour:
   _damagePlayerCharacters: 0
   _weapon: {fileID: 7627081817445622300}
   _meleeWeapon: {fileID: 8711923388874455362}
-  _doesOnTriggerStayDamage: 0
+  _timeBetweenDamages: -1
   OnHitSomething:
     m_PersistentCalls:
       m_Calls: []
@@ -2365,7 +2365,7 @@ MonoBehaviour:
   _damagePlayerCharacters: 0
   _weapon: {fileID: 7627081817445622300}
   _meleeWeapon: {fileID: 8711923388874455362}
-  _doesOnTriggerStayDamage: 0
+  _timeBetweenDamages: -1
   OnHitSomething:
     m_PersistentCalls:
       m_Calls: []
@@ -2713,7 +2713,7 @@ MonoBehaviour:
   _damagePlayerCharacters: 0
   _weapon: {fileID: 7627081817445622300}
   _meleeWeapon: {fileID: 8711923388874455362}
-  _doesOnTriggerStayDamage: 0
+  _timeBetweenDamages: -1
   OnHitSomething:
     m_PersistentCalls:
       m_Calls: []
@@ -3364,7 +3364,7 @@ MonoBehaviour:
   _damagePlayerCharacters: 0
   _weapon: {fileID: 7627081817445622300}
   _meleeWeapon: {fileID: 8711923388874455362}
-  _doesOnTriggerStayDamage: 0
+  _timeBetweenDamages: -1
   OnHitSomething:
     m_PersistentCalls:
       m_Calls: []
@@ -4199,7 +4199,7 @@ MonoBehaviour:
   _damagePlayerCharacters: 0
   _weapon: {fileID: 7627081817445622300}
   _meleeWeapon: {fileID: 8711923388874455362}
-  _doesOnTriggerStayDamage: 0
+  _timeBetweenDamages: -1
   OnHitSomething:
     m_PersistentCalls:
       m_Calls: []
@@ -4461,6 +4461,7 @@ MonoBehaviour:
   _moveToForLightSaber: {fileID: 5109726736624522019}
   _handleTransform: {fileID: 2367695852931752527}
   _harpoonRb: {fileID: 7820839840813908243}
+  _harpoonCollider: {fileID: 9167567839145680277}
   _flyingSpeed: 2000
   _grappleSpeed: 4000
   _maxTetherDistance: 10
@@ -6078,7 +6079,7 @@ MonoBehaviour:
   _damagePlayerCharacters: 0
   _weapon: {fileID: 7627081817445622300}
   _meleeWeapon: {fileID: 8711923388874455362}
-  _doesOnTriggerStayDamage: 0
+  _timeBetweenDamages: -1
   OnHitSomething:
     m_PersistentCalls:
       m_Calls: []

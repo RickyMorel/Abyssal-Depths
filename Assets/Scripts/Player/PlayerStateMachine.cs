@@ -205,7 +205,6 @@ public class PlayerStateMachine : BaseStateMachine
 
     public void ApplyGravityTransform()
     {
-        Debug.Log("ApplyGravityTransform");
         if (!_applyGravity && !_isJumpPressed && _isGrounded) { _fallVelocity = Vector3.zero; return; }
         else
         {
@@ -243,7 +242,6 @@ public class PlayerStateMachine : BaseStateMachine
 
     private void ApplyGravity()
     {
-        Debug.Log("ApplyGravity");
         Vector3 gravity = new Vector3(0f, _gravityIntensity, 0f) * Time.deltaTime;
 
         _fallSpeed += gravity.y;

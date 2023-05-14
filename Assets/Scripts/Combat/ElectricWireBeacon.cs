@@ -18,6 +18,12 @@ public class ElectricWireBeacon : Projectile
         _destroyOnHit = false;
     }
 
+    //Do nothing
+    public override void Start()
+    {
+        
+    }
+
     private void FixedUpdate()
     {
         if (!_hasLaunched) 

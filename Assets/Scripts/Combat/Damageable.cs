@@ -407,21 +407,4 @@ public class Damageable : MonoBehaviour
     }
 
     #endregion
-
-    #region Crash Damage Functions
-
-    //public void TryInflictCrashDamage(Collision collision)
-    //{
-    //    if (_invunerableToCrash) { return; }
-    //    if ((1 << collision.gameObject.layer & _crashLayers) == 0) { return; }
-    //    if (collision.gameObject.GetComponent<Projectile>() != null) { return; }
-    //    if (_rb == null) { return; }
-    //    if (_prevVelocity < _minCrashSpeed) { return; }
-
-    //    int damage = (int)CalculateCrashDamage();
-    //    DamageWithoutDamageData(damage, collision.collider);
-    //    if (collision.gameObject.TryGetComponent(out AIHealth enemyHealth)) { enemyHealth.Damage(damage); }
-    //}
-
-    #endregion
 }

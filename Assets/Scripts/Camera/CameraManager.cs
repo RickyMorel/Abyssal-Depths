@@ -11,7 +11,7 @@ public class CameraManager : MonoBehaviour
 
     private static CameraManager _instance;
 
-    [SerializeField] private CinemachineBrain[] _cameras;
+    private CinemachineBrain[] _cameras;
     private CinemachineVirtualCamera[] _vCams;
     
     private GameObject _perspectiveCamera;
@@ -75,8 +75,6 @@ public class CameraManager : MonoBehaviour
     public void ToggleCamera(bool boolean, float timeTillToggle = 0f)
     {
         //Stops previous camera toggle functions from calling
-        //StopAllCoroutines();
-        //StartCoroutine(ToggleCameraCoroutine(boolean, timeTillToggle));
         GetAllCameras();
 
         _cameras[_cameras.Length - 1].gameObject.SetActive(boolean);
@@ -120,9 +118,6 @@ public class CameraManager : MonoBehaviour
             _cameras[1].OutputCamera.cullingMask |= 1 << LayerMask.NameToLayer("Player2Cam");
             //Turn Off Layer
             _cameras[1].OutputCamera.cullingMask &= ~(1 << LayerMask.NameToLayer("Player1Cam"));
-
-            Debug.Log("_cameras[0]: " + _cameras[0]);
-            Debug.Log("_cameras[0].OutputCamera: " + _cameras[0].OutputCamera);
 
             _cameras[1].OutputCamera.rect = new Rect(0, 0.5f, 1, 0.5f);
             _cameras[0].GetComponent<Camera>().rect = new Rect(0, 0, 1, 0.5f);

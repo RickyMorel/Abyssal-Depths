@@ -7,7 +7,6 @@ using Random = UnityEngine.Random;
 
 public class Booster : RotationalInteractable
 {
-
     #region Editor Fields
 
     [Header("Booster Stats")]
@@ -41,6 +40,12 @@ public class Booster : RotationalInteractable
     public static event Action<int> OnGearChanged;
 
     public bool RecentlyChangedGear => _recentlyChangedGear;
+
+    public float Acceleration => _acceleration;
+
+    public Rigidbody RB => _rb;
+
+    public bool IsBoosting => _isBoosting;
 
     #endregion
 

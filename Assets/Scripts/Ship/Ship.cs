@@ -75,6 +75,18 @@ public class Ship : MonoBehaviour
         _health.CrashDamageMultiplier = _shipStatsSO.CrashDamageMultiplier;
     }
 
+    public void AddForceToShip(Vector3 force, ForceMode forceMode)
+    {
+        if(forceMode != ForceMode.VelocityChange)
+        {
+            _rb.AddForce(force * _rb.mass, forceMode);
+        }
+        else
+        {
+            _rb.AddForce(force, forceMode);
+        }
+    }
+
     public void FreezeShip(bool isFreezed)
     {
         _rb.isKinematic = isFreezed;

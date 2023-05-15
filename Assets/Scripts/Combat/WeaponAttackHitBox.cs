@@ -70,8 +70,6 @@ public class WeaponAttackHitBox : AttackHitBox
         _timeSinceLastDamage = 0f;
 
         Impact(other);
-
-        Debug.Log($"{gameObject.name} hit {other.gameObject.name}");
     }
 
     private void Impact(Collider other)

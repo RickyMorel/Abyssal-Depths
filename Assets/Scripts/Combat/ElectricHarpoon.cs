@@ -9,7 +9,7 @@ public class ElectricHarpoon : MeleeWeapon
     #region Editor Fields
 
     [Header("Transforms")]
-    [SerializeField] private Transform _moveToForLightSaber;
+    [SerializeField] private Transform _moveToTransform;
     [SerializeField] private Transform _handleTransform;
     [SerializeField] private Rigidbody _harpoonRb;
     [SerializeField] private Collider _harpoonCollider;
@@ -261,11 +261,11 @@ public class ElectricHarpoon : MeleeWeapon
     {
         if (_throwState == ThrowState.Arrived) { return; }
 
-        Transform moveToCurrentPosition = _moveToForLightSaber;
+        Transform moveToCurrentPosition = _moveToTransform;
 
         if (_throwState == ThrowState.Throwing)
         {
-            Vector3 forceDir = _moveToForLightSaber.position - _harpoonRb.transform.position;
+            Vector3 forceDir = _moveToTransform.position - _harpoonRb.transform.position;
             _harpoonRb.AddForce(forceDir.normalized * _flyingSpeed, ForceMode.Force);
         }
 

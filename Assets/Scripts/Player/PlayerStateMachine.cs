@@ -18,7 +18,7 @@ public class PlayerStateMachine : BaseStateMachine
     private CharacterController _characterController;
     private CapsuleCollider _capsuleCollider;
     private float _turnSmoothVelocity;
-    [SerializeField] private bool _isAttachedToShip;
+    private bool _isAttachedToShip;
     private float _fallSpeed;
     private float _timeSinceLastJump = float.MaxValue;
     private Vector3 _fallVelocity;

@@ -16,7 +16,7 @@ public class ElectricHarpoon : MeleeWeapon
     [Header("Floats")]
     [SerializeField] private float _flyingSpeed;
     [SerializeField] private float _grappleSpeed;
-    [SerializeField] private float _maxTetherDistance;
+    [SerializeField] private float _maxElectricBeaconDistance;
     [Header("GameObject Related")]
     [SerializeField] private Collider _trackEnemiesZone;
     [SerializeField] private GameObject _electructionZonePrefab;
@@ -185,6 +185,13 @@ public class ElectricHarpoon : MeleeWeapon
         beaconProjectileScript.Launch(_harpoonRb.transform.up);
 
         _electricWireBeacons.Add(beaconInstance);
+
+        if(_electricWireBeacons.Count > 1 && 
+            Vector3.Distance(_electricWireBeacons[0].transform.position, _electricWireBeacons[1].transform.position) > _maxElectricBeaconDistance)
+        {
+            Debug.Log("Distance: " + Vector3.Distance(_electricWireBeacons[0].transform.position, _electricWireBeacons[1].transform.position));
+            DestroyBeacons();
+        }
 
         SetupElectricWire();
     }

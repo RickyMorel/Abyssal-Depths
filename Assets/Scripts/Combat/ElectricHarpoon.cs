@@ -189,8 +189,8 @@ public class ElectricHarpoon : MeleeWeapon
         if(_electricWireBeacons.Count > 1 && 
             Vector3.Distance(_electricWireBeacons[0].transform.position, _electricWireBeacons[1].transform.position) > _maxElectricBeaconDistance)
         {
-            Debug.Log("Distance: " + Vector3.Distance(_electricWireBeacons[0].transform.position, _electricWireBeacons[1].transform.position));
             DestroyBeacons();
+            TrySpawnWireOrSpawnBeacon();
         }
 
         SetupElectricWire();

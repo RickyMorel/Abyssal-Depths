@@ -37,12 +37,7 @@ public class ElectricHarpoon : MeleeWeapon
     private ElectricZoneInstanceClass _electrocutionZoneInstance;
     private AIStateMachine _tetheredEnemy;
     private List<GameObject> _electricWireBeacons = new List<GameObject>();
-    private float _timeSincePressInput2;
-
-    #endregion
-
-    #region Public Properties
-
+    private float _timeSincePressInput;
 
     #endregion
 
@@ -77,7 +72,7 @@ public class ElectricHarpoon : MeleeWeapon
 
     private void LateUpdate()
     {
-        _timeSincePressInput2 += Time.deltaTime;
+        _timeSincePressInput += Time.deltaTime;
 
         DrawRope();
 
@@ -137,13 +132,13 @@ public class ElectricHarpoon : MeleeWeapon
             return;
         }
 
-        if(_timeSincePressInput2 < 0.4f) { return; }
+        if(_timeSincePressInput < 0.4f) { return; }
 
         if (_weapon.CurrentPlayer.IsUsing_2 == _prevInput2State) { return; }
 
         _prevInput2State = _weapon.CurrentPlayer.IsUsing_2;
 
-        _timeSincePressInput2 = 0f;
+        _timeSincePressInput = 0f;
 
         //Shoot electric wire beacons
         if (_weapon.CurrentPlayer.IsUsing_2 && _throwState != ThrowState.Stuck && _throwState != ThrowState.GrabbingEnemy)

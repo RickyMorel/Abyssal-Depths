@@ -9,7 +9,6 @@ public class TripleMace : MeleeWeapon
     [SerializeField] private GameObject[] _maceHead;
     [SerializeField] private Rigidbody[] _rbs;
     [SerializeField] private Transform _moveLimits;
-    [SerializeField] private Booster _booster;
 
     #endregion
 
@@ -23,12 +22,12 @@ public class TripleMace : MeleeWeapon
 
     public override void Awake()
     {
-        Booster.OnBoostUpdated += ApplyBoostToMace;
+        //do nothing
     }
 
     public override void OnDestroy()
     {
-        Booster.OnBoostUpdated -= ApplyBoostToMace;
+        //do nothing
     }
 
     public override void FixedUpdate()
@@ -47,8 +46,6 @@ public class TripleMace : MeleeWeapon
         ApplyForceToMace(0, moveDirection);
         ApplyForceToMace(1, moveDirection);
         ApplyForceToMace(2, moveDirection);
-
-        ApplyBoostToMace(_booster.IsBoosting);
     }
 
     #endregion
@@ -67,15 +64,6 @@ public class TripleMace : MeleeWeapon
 
         _rbs[index].AddForce(moveDirection * _moveForce);
         _rbs[index].velocity = Vector3.ClampMagnitude(_rbs[index].velocity, _maxMovementSpeed);
-    }
-
-    private void ApplyBoostToMace(bool isBoosting)
-    {
-        if (!isBoosting) { return; }
-        Debug.Log(_booster);
-        _rbs[0].AddForce(_booster.RotatorTransform.transform.up * _booster.Acceleration * _booster.RB.mass);
-
-        _rbs[0].velocity = Vector3.ClampMagnitude(_booster.RB.velocity, Ship.Instance.TopSpeed);
     }
 
     public override void HandleHitParticles(GameObject obj)

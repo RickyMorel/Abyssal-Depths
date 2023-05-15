@@ -258,7 +258,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3202526020130925241}
   - component: {fileID: 1820024759489623012}
-  - component: {fileID: 330522192}
   m_Layer: 0
   m_Name: Player Object Prefab
   m_TagString: Untagged
@@ -282,7 +281,7 @@ Transform:
   - {fileID: 5655384044177075644}
   - {fileID: 4682079588890727139}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1820024759489623012
 MonoBehaviour:
@@ -296,27 +295,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17bfd5c1952b5e94a90c46238f3aa64f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!50 &330522192
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3202526020130925240}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1 &4062555416825309661
 GameObject:
   m_ObjectHideFlags: 0

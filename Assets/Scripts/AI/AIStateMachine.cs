@@ -70,6 +70,19 @@ public class AIStateMachine : BaseStateMachine
         _isShooting = false;
     }
 
+    public void SetRagdollState(bool isEnabled)
+    {
+        if (isEnabled)
+        {
+            _isBouncingOffShield = isEnabled;
+        }
+        //Disables enemy ragdoll once it touches the floor
+        else
+        {
+            StartCoroutine(SetBouncingOffShieldCoroutine(Vector3.zero, 0f));
+        }
+    }
+
     public void BounceOffShield(Vector3 pushDir, float pushForce)
     {
         if (_isBouncingOffShield) { return; }

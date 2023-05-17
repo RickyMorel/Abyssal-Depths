@@ -60,6 +60,8 @@ public class ShipFastTravel : MonoBehaviour
 
     private void CheckPlayersInShip()
     {
+        if(_isPlayerActive == null) { return; }
+
         _playersActive = 0;
         for (int i = 0; i < _isPlayerActive.Length; i++)
         {

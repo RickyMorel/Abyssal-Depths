@@ -25,6 +25,17 @@ public class PlayerJoinManager : MonoBehaviour
 
     #endregion
 
+    #region Getters and Setters
+
+    //only for testing
+    public GameObject PlayerPrefab { get { return _playerPrefab; } set { _playerPrefab = value; } }
+    public PlayerJoinNPC[] PlayerJoinNPCs { get { return _playerJoinNPC; } set { _playerJoinNPC = value; } }
+    public int AmountOfActivePlayers { get { return _amountOfPlayersActive; } set { _amountOfPlayersActive = value; } }
+    public int PlayerJoinNpcIndex { get { return _playerJoinNPCIndex; } set { _playerJoinNPCIndex = value; } }
+    //
+
+    #endregion
+
     #region Unity Loops
 
     private void Start()
@@ -44,7 +55,12 @@ public class PlayerJoinManager : MonoBehaviour
 
     #endregion
 
-    public void SpawnPlayer(Player playerInputs, int playerID)
+    public GameObject SpawnPlayerWithNoInput(int playerID)
+    {
+        return SpawnPlayer(null, playerID);
+    }
+
+    public GameObject SpawnPlayer(Player playerInputs, int playerID)
     {
         GameObject player = Instantiate(_playerPrefab, _spawnPos.position, Quaternion.identity);
         PlayerInputHandler playerInput = player.GetComponentInChildren<PlayerInputHandler>();
@@ -54,9 +70,11 @@ public class PlayerJoinManager : MonoBehaviour
         playerInput.CanPlayerSpawn = true;
         playerInput.PlayerId = playerID;
         playerInput.PlayerInputs = playerInputs;
+
+        return player;
     }
 
-    private void HandleSpawn(PlayerInputHandler playerInput)
+    public void HandleSpawn(PlayerInputHandler playerInput)
     {
         if (!playerInput.CanPlayerSpawn) { return; }
 
@@ -70,7 +88,7 @@ public class PlayerJoinManager : MonoBehaviour
 
     }
 
-    private void TransportToSpawnLocation(PlayerInputHandler playerInput)
+    public void TransportToSpawnLocation(PlayerInputHandler playerInput)
     {
         if (_amountOfPlayersActive == 2)
         {
@@ -98,8 +116,10 @@ public class PlayerJoinManager : MonoBehaviour
         }
     }
 
-    private int FindCorrectPlayerJoinNPC()
+    public int FindCorrectPlayerJoinNPC()
     {
+        Debug.Log("_playerJoinNPC.Length: " + _playerJoinNPC.Length);
+
         for (int i = 0; i < _playerJoinNPC.Length; i++)
         {
             if (_playerJoinNPC[i].CurrentPlayer != null)

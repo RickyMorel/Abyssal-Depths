@@ -37,6 +37,8 @@ public class DeathManager : MonoBehaviour
 
     private void Start()
     {
+        if(Ship.Instance == null) { enabled = false; return; }
+
         _shipHealth = Ship.Instance.GetComponent<ShipHealth>();
     }
 

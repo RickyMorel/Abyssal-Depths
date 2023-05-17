@@ -41,10 +41,10 @@ public class PlayerInputHandler : MonoBehaviour
     public event Action OnCancel;
     public event Action OnUpgrade;
     public event Action<PlayerInputHandler> OnTrySpawn;
-   
+
     public Vector2 MoveDirection => _moveDirection;
     public Vector2 InteractableMoveDirection => _interactableMoveDirection;
-   
+
     public bool IsShooting => _isShooting;
     public bool IsShooting_2 => _isShooting_2;
 
@@ -121,12 +121,12 @@ public class PlayerInputHandler : MonoBehaviour
         return doubleTapDetected;
     }
 
-    public void Move()
+    public void Move(Vector2 autoMoveVector = default(Vector2))
     {
         if (!IsPlayerActive) { return; }
 
-        float moveHorizontal = _player.GetAxisRaw("Horizontal");
-        float moveVertical = _player.GetAxisRaw("Vertical");
+        float moveHorizontal = autoMoveVector == default(Vector2) ? _player.GetAxisRaw("Horizontal") : autoMoveVector.x;
+        float moveVertical = autoMoveVector == default(Vector2) ? _player.GetAxisRaw("Vertical") : autoMoveVector.y;
 
         //If is inside ship, don't allow z movement
         float y = CameraManager.Instance.IsInOrthoMode ? 0f : moveVertical;
@@ -179,11 +179,11 @@ public class PlayerInputHandler : MonoBehaviour
         OnSpecialAction?.Invoke(this, value);
     }
 
-    public void Interact()
+    public void Interact(bool autoInteract = false)
     {
         if (!IsPlayerActive) { return; }
 
-        if (!_player.GetButtonDown("Interact")) { return; }
+        if (autoInteract == false && !_player.GetButtonDown("Interact")) { return; }
 
         OnInteract?.Invoke();
     }
@@ -209,5 +209,25 @@ public class PlayerInputHandler : MonoBehaviour
         if (!IsPlayerActive) { return; }
 
         _isShooting_2 = _player.GetButton("Shoot2");
+    }
+
+    /// <summary>
+    /// This function is used to move the player during play tests
+    /// </summary>
+    /// <param name="destination"></param>
+    /// <returns></returns>
+    public bool AutoRunToLocation(Vector3 destination)
+    {
+        Debug.Log("AutoRunToLocation: " + destination);
+
+        Vector3 dir = destination - transform.position;
+
+        Vector2 inputVector = new Vector2(dir.x, dir.z).normalized;
+
+        Move(inputVector);
+
+        if (Vector3.Distance(destination, transform.position) < 0.8f) { return false; }
+
+        return true;
     }
 }

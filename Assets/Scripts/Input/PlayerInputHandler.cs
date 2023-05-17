@@ -135,9 +135,9 @@ public class PlayerInputHandler : MonoBehaviour
         _interactableMoveDirection = new Vector2(moveHorizontal, moveVertical).normalized;
     }
 
-    public void Jump()
+    public void Jump(bool autoInteract = false)
     {
-        if (!_player.GetButtonDown("Jump")) { return; }
+        if (autoInteract == false && !_player.GetButtonDown("Jump")) { return; }
 
         if (CanPlayerSpawn)
         {
@@ -218,8 +218,6 @@ public class PlayerInputHandler : MonoBehaviour
     /// <returns></returns>
     public bool AutoRunToLocation(Vector3 destination)
     {
-        Debug.Log("AutoRunToLocation: " + destination);
-
         Vector3 dir = destination - transform.position;
 
         Vector2 inputVector = new Vector2(dir.x, dir.z).normalized;

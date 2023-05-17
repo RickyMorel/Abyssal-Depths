@@ -27,12 +27,7 @@ public class PlayerJoinManager : MonoBehaviour
 
     #region Getters and Setters
 
-    //only for testing
-    public GameObject PlayerPrefab { get { return _playerPrefab; } set { _playerPrefab = value; } }
     public PlayerJoinNPC[] PlayerJoinNPCs { get { return _playerJoinNPC; } set { _playerJoinNPC = value; } }
-    public int AmountOfActivePlayers { get { return _amountOfPlayersActive; } set { _amountOfPlayersActive = value; } }
-    public int PlayerJoinNpcIndex { get { return _playerJoinNPCIndex; } set { _playerJoinNPCIndex = value; } }
-    //
 
     #endregion
 
@@ -62,6 +57,7 @@ public class PlayerJoinManager : MonoBehaviour
 
     public GameObject SpawnPlayer(Player playerInputs, int playerID)
     {
+        Debug.Log("Spawn Player: " + playerID);
         GameObject player = Instantiate(_playerPrefab, _spawnPos.position, Quaternion.identity);
         PlayerInputHandler playerInput = player.GetComponentInChildren<PlayerInputHandler>();
         _playerInputs.Add(playerInput);
@@ -76,6 +72,7 @@ public class PlayerJoinManager : MonoBehaviour
 
     public void HandleSpawn(PlayerInputHandler playerInput)
     {
+        Debug.Log("HandlePlayerSpawn");
         if (!playerInput.CanPlayerSpawn) { return; }
 
         _playerJoinNPCIndex = FindCorrectPlayerJoinNPC();
@@ -131,6 +128,7 @@ public class PlayerJoinManager : MonoBehaviour
     }
     private IEnumerator PlayerJoinAnimation(int index, PlayerInputHandler playerInput)
     {
+        Debug.Log("PlayerJoinAnimation: " + _playerInputs[_playerJoinNPCIndex].transform.root.gameObject.name);
         int indexAux = index;
         _playerInputs[_playerJoinNPCIndex].IsPlayerActive = false;
         playerInput.CanPlayerSpawn = false;

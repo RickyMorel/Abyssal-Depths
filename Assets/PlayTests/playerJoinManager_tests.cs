@@ -100,24 +100,38 @@ public class playerJoinManager_tests
         yield return null;
     }
 
-    //[UnityTest]
-    //public IEnumerator check_if_playerJoinAnimation_teleports_player_correctly()
-    //{
-    //    PlayerInputHandler playerInstance = _playerJoinManager.SpawnPlayerWithNoInput(0).GetComponent<PlayerInputHandler>();
+    [UnityTest]
+    public IEnumerator check_if_playerJoinAnimation_teleports_player_correctly()
+    {
+        while (!_sceneLoaded) { yield return null; }
 
-    //    yield return new WaitForEndOfFrame();
-    //    yield return new WaitForEndOfFrame();
-    //    yield return new WaitForEndOfFrame();
+        while (_startingPlayer.AutoRunToLocation(_joinNpc.transform.position)){ yield return new WaitForEndOfFrame(); }
 
-    //    _playerJoinManager.AmountOfActivePlayers = 2;
-    //    _playerJoinManager.PlayerJoinNpcIndex = 0;
-    //    _playerJoinManager.TransportToSpawnLocation(playerInstance);
+        _startingPlayer.Interact(true);
 
-    //    Assert.IsTrue(playerInstance.IsPlayerActive == false, "IsPlayerActive didn't get set to false");
-    //    Assert.IsTrue(playerInstance.CanPlayerSpawn == false, "CanPlayerSpawn didn't get set to false");
+        GameObject playerInstance = _playerJoinManager.SpawnPlayerWithNoInput(1);
+        PlayerInputHandler playerInput = playerInstance.GetComponentInChildren<PlayerInputHandler>();
 
-    //    yield return null;
-    //}
+        yield return new WaitForEndOfFrame();
+
+        playerInput.Jump(true);
+
+        yield return new WaitForSeconds(1f);
+
+        Debug.Log("Do Checks");
+
+        Assert.IsTrue(playerInput.IsPlayerActive == false, "IsPlayerActive didn't get set to false");
+        Assert.IsTrue(playerInput.CanPlayerSpawn == false, "CanPlayerSpawn didn't get set to false");
+
+        yield return new WaitForSeconds(4f);
+
+       // _playerJoinManager.HandleSpawn(playerInstance);
+
+        //_playerJoinManager.AmountOfActivePlayers = 2;
+        //_playerJoinManager.TransportToSpawnLocation(playerInstance);
+
+        yield return null;
+    }
 
     [TearDown]
     public void Teardown()

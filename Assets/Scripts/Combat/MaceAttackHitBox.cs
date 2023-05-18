@@ -24,7 +24,12 @@ public class MaceAttackHitBox : AttackHitBox
         _damageData = DamageData.GetDamageData(_damageTypes, _weapon, -1);
     }
 
-    #endregion
+    public void Update()
+    {
+        Debug.Log(Vector2.Angle(-new Vector2(transform.localPosition.y, transform.localPosition.z), new Vector2(_weapon.transform.localPosition.y, _weapon.transform.localPosition.z)));
+        transform.localRotation = Quaternion.Euler(Vector2.Angle(-new Vector2(transform.localPosition.y, transform.localPosition.z), new Vector2(_weapon.transform.localPosition.y, _weapon.transform.localPosition.z)), 0, 0);
+        transform.localPosition = new Vector3(0, transform.localPosition.y, transform.localPosition.z);
+    }
 
     public override void OnTriggerEnter(Collider other)
     {
@@ -43,6 +48,8 @@ public class MaceAttackHitBox : AttackHitBox
             DealDamageToEnemies((AIHealth)enemyHealth, _damage);
         }
     }
+
+    #endregion
 
     public virtual void CalculateDamage()
     {

@@ -5190,6 +5190,7 @@ GameObject:
   - component: {fileID: 5973874330681602645}
   - component: {fileID: 409126996031750208}
   - component: {fileID: 4307862494821043307}
+  - component: {fileID: 7459140733230780775}
   m_Layer: 25
   m_Name: Mace Rotator Mesh
   m_TagString: MainShip
@@ -5279,6 +5280,30 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!145 &7459140733230780775
+SpringJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5637972506420225586}
+  m_ConnectedBody: {fileID: 6339893265388052966}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 0, y: 1.0336025, z: 0}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  serializedVersion: 2
+  m_Spring: 15
+  m_Damper: 0.2
+  m_MinDistance: 0
+  m_MaxDistance: 10
+  m_Tolerance: 0.025
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!1 &5690369232586464998
 GameObject:
   m_ObjectHideFlags: 0
@@ -6430,7 +6455,6 @@ GameObject:
   - component: {fileID: 4880904848387659598}
   - component: {fileID: 9171795821542709802}
   - component: {fileID: 6166615154732534096}
-  - component: {fileID: 1971433768110517991}
   m_Layer: 25
   m_Name: MaceHead
   m_TagString: MainShip
@@ -6446,7 +6470,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6670758329025972589}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6515,30 +6539,6 @@ MonoBehaviour:
   _damagePlayerCharacters: 0
   _weapon: {fileID: 7627081817445622300}
   _meleeWeapon: {fileID: 1154468729331244522}
---- !u!145 &1971433768110517991
-SpringJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6670758329025972589}
-  m_ConnectedBody: {fileID: 4307862494821043307}
-  m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 1.0336025, z: 0}
-  m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.000000037314223, y: 2.6256032, z: -0.04300022}
-  serializedVersion: 2
-  m_Spring: 10
-  m_Damper: 0.2
-  m_MinDistance: 0
-  m_MaxDistance: 10
-  m_Tolerance: 0.025
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
 --- !u!1 &6899352226445069142
 GameObject:
   m_ObjectHideFlags: 0

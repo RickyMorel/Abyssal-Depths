@@ -57,7 +57,7 @@ public class Mace : MeleeWeapon
     {
         base.FixedUpdate();
 
-        ThrowHarpoon();
+        //ThrowHarpoon();
     }
 
     #endregion

@@ -560,6 +560,7 @@ GameObject:
   - component: {fileID: 5451009106100606197}
   - component: {fileID: 4745660032379977993}
   - component: {fileID: 7180890346634682509}
+  - component: {fileID: 6757351687050639641}
   m_Layer: 26
   m_Name: Handle
   m_TagString: Untagged
@@ -649,6 +650,30 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!145 &6757351687050639641
+SpringJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 217392354552986556}
+  m_ConnectedBody: {fileID: 7820839840813908243}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 0, y: 1.0336025, z: 0}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: 0.2067205, y: 0.19999991, z: 0}
+  serializedVersion: 2
+  m_Spring: 10
+  m_Damper: 0.2
+  m_MinDistance: 0
+  m_MaxDistance: 10
+  m_Tolerance: 0.025
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!1 &231005324032254681
 GameObject:
   m_ObjectHideFlags: 0
@@ -763,7 +788,6 @@ GameObject:
   - component: {fileID: 9167567839145680277}
   - component: {fileID: 7820839840813908243}
   - component: {fileID: 2922026450815305462}
-  - component: {fileID: 2247738364287367790}
   m_Layer: 26
   m_Name: 'Harpoon '
   m_TagString: Untagged
@@ -778,7 +802,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 286164223635417134}
-  m_LocalRotation: {x: 0.5000001, y: 0.5, z: 0.5000001, w: 0.49999988}
+  m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
   m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
@@ -863,7 +887,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 40
+  m_Constraints: 56
   m_CollisionDetection: 0
 --- !u!114 &2922026450815305462
 MonoBehaviour:
@@ -899,30 +923,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!145 &2247738364287367790
-SpringJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 286164223635417134}
-  m_ConnectedBody: {fileID: 7180890346634682509}
-  m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 1.0336025, z: 0}
-  m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.00000070013294, y: -0.0000026002526, z: 4.168014}
-  serializedVersion: 2
-  m_Spring: 10
-  m_Damper: 0.2
-  m_MinDistance: 0
-  m_MaxDistance: 10
-  m_Tolerance: 0.025
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
 --- !u!1 &400743127517945688
 GameObject:
   m_ObjectHideFlags: 0
@@ -4818,7 +4818,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5193264706460301601
 Transform:
   m_ObjectHideFlags: 0
@@ -5291,7 +5291,7 @@ SpringJoint:
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 1.0336025, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: 0.00000005502666, y: -0.21639717, z: 0}
   serializedVersion: 2
   m_Spring: 15
   m_Damper: 0.2
@@ -6093,6 +6093,7 @@ MonoBehaviour:
   _trackEnemiesZone: {fileID: 1674460243667513449}
   _electructionZonePrefab: {fileID: 1306905336849389043, guid: 1ea2a4d60501ff5499a6bf141faf054a, type: 3}
   _electricWireBeaconPrefab: {fileID: 7746866216529117493, guid: 670fbdf495ba7f5439faf8e0c27272f7, type: 3}
+  _lineSegments: 60
 --- !u!1 &6524459616367734395
 GameObject:
   m_ObjectHideFlags: 0
@@ -8591,7 +8592,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3498198392574577075
 Transform:
   m_ObjectHideFlags: 0

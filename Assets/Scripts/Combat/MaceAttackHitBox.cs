@@ -65,7 +65,6 @@ public class MaceAttackHitBox : AttackHitBox
         angle = Mathf.Asin(senA);
         
         float degAngle = Mathf.Rad2Deg*angle;
-        Debug.Log("Angle: " + degAngle);
         return degAngle;
     }
 

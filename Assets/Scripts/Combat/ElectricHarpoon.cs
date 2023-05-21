@@ -11,6 +11,7 @@ public class ElectricHarpoon : MeleeWeapon
     [Header("Transforms")]
     [SerializeField] private Transform _moveToTransform;
     [SerializeField] private Transform _handleTransform;
+    [SerializeField] private Transform _middleOfTheRope;
     [SerializeField] private Rigidbody _harpoonRb;
     [SerializeField] private Collider _harpoonCollider;
     [Header("Floats")]
@@ -21,6 +22,8 @@ public class ElectricHarpoon : MeleeWeapon
     [SerializeField] private Collider _trackEnemiesZone;
     [SerializeField] private GameObject _electructionZonePrefab;
     [SerializeField] private GameObject _electricWireBeaconPrefab;
+    [Header("Integers")]
+    [SerializeField] private int _lineSegments = 12;
 
     #endregion
 
@@ -48,12 +51,27 @@ public class ElectricHarpoon : MeleeWeapon
         base.Start();
 
         _lr = GetComponent<LineRenderer>();
-        _lr.positionCount = 2;
+        _lr.positionCount = _lineSegments;
         _electrocutionZoneInstance = new ElectricZoneInstanceClass(Instantiate(_electructionZonePrefab));
         _electrocutionZoneInstance.AttackHitBox.Initialize(_weapon, _weapon.InteractableHealth, this);
 
         _originalHarpoonPosition = _harpoonRb.transform.localPosition;
         _originalHarpoonRotation = _harpoonRb.transform.localRotation;
+    }
+
+    public override void Update()
+    {
+        base.Update();
+
+        if(_harpoonRb.transform.parent != null)
+        {
+            _harpoonRb.transform.rotation = Quaternion.Euler(0, 0, 90 - CalculateAngle());
+            _harpoonRb.transform.position = new Vector3(_harpoonRb.transform.position.x, _harpoonRb.transform.position.y, 0);
+        }
+        else
+        {
+            _harpoonRb.transform.rotation = Quaternion.Euler(0, 90, 90);
+        }
     }
 
     public override void FixedUpdate()
@@ -97,6 +115,23 @@ public class ElectricHarpoon : MeleeWeapon
     }
 
     #endregion
+
+    private float CalculateAngle()
+    {
+        float y;
+        float z;
+        float h;
+        y = _harpoonRb.transform.position.x - transform.position.x;
+        z = _harpoonRb.transform.position.y - transform.position.y;
+        h = Mathf.Sqrt(y * y + z * z);
+        float senA;
+        senA = z / h;
+        float angle;
+        angle = Mathf.Asin(senA);
+
+        float degAngle = Mathf.Rad2Deg * angle;
+        return degAngle;
+    }
 
     #region Shoot Functions
 
@@ -292,8 +327,26 @@ public class ElectricHarpoon : MeleeWeapon
 
     private void DrawRope()
     {
-        _lr.SetPosition(0, _harpoonRb.transform.position);
-        _lr.SetPosition(1, _handleTransform.position);
+        GetMiddleOfTheRope();
+        var pointList = new List<Vector3>();
+
+        for (float ratio = 0; ratio <= 1; ratio += 1 / _lineSegments)
+        {
+            var tangent1 = Vector3.Lerp(_harpoonRb.transform.position, _middleOfTheRope.position, ratio);
+            var tangent2 = Vector3.Lerp(_harpoonRb.transform.position, _middleOfTheRope.position, ratio);
+            var curve = Vector3.Lerp(tangent1, tangent2, ratio);
+
+            pointList.Add(curve);
+        }
+
+        _lr.positionCount = pointList.Count;
+        _lr.SetPositions(pointList.ToArray());
+    }
+
+    private void GetMiddleOfTheRope()
+    {
+        _middleOfTheRope.position = new Vector3((_harpoonRb.transform.position.x + _handleTransform.position.x)/2, (_harpoonRb.transform.position.y + _handleTransform.position.y) / 2, (_harpoonRb.transform.position.z + _handleTransform.position.z) / 2);
+
     }
 
     private void CreateSpringObject(AIStateMachine enemy = null)

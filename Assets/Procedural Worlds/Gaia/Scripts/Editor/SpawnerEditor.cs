@@ -1143,7 +1143,7 @@ namespace Gaia
                     //force the rebuild of terrain layers in this case
                     profile.terrainLayerAssetRebuild = true;
                     profile.cachedTerrainLayers = new TerrainLayer[0];
-                    CTSGX.AddCTSProfile(profileName);
+                   // CTSGX.AddCTSProfile(profileName);
                 }
 
                 EditorGUIUtility.PingObject(profile);
@@ -1225,7 +1225,7 @@ namespace Gaia
                         //force the rebuild of terrain layers in this case
                         m_spawner.ConnectedCTSProfile.terrainLayerAssetRebuild = true;
                         m_spawner.ConnectedCTSProfile.cachedTerrainLayers = new TerrainLayer[0];
-                        CTSGX.AddCTSProfile(m_spawner.ConnectedCTSProfile.name);
+                       // CTSGX.AddCTSProfile(m_spawner.ConnectedCTSProfile.name);
                     }
 
                 }
@@ -1237,7 +1237,7 @@ namespace Gaia
                     //force the rebuild of terrain layers in this case
                     m_spawner.ConnectedCTSProfile.terrainLayerAssetRebuild = true;
                     m_spawner.ConnectedCTSProfile.cachedTerrainLayers = new TerrainLayer[0];
-                    CTSGX.AddCTSProfile(m_spawner.ConnectedCTSProfile.name);
+                    //CTSGX.AddCTSProfile(m_spawner.ConnectedCTSProfile.name);
                 }
             }
 

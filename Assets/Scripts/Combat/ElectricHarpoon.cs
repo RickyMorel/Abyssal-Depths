@@ -54,6 +54,7 @@ public class ElectricHarpoon : MeleeWeapon
         _lr.positionCount = _lineSegments;
         _electrocutionZoneInstance = new ElectricZoneInstanceClass(Instantiate(_electructionZonePrefab));
         _electrocutionZoneInstance.AttackHitBox.Initialize(_weapon, _weapon.InteractableHealth, this);
+        _middleOfTheRope.position = new Vector3((_harpoonRb.transform.position.x + _handleTransform.position.x) / 2, (_harpoonRb.transform.position.y + _handleTransform.position.y) / 2, (_harpoonRb.transform.position.z + _handleTransform.position.z) / 2);
 
         _originalHarpoonPosition = _harpoonRb.transform.localPosition;
         _originalHarpoonRotation = _harpoonRb.transform.localRotation;
@@ -328,6 +329,7 @@ public class ElectricHarpoon : MeleeWeapon
     private void DrawRope()
     {
         GetMiddleOfTheRope();
+
         var pointList = new List<Vector3>();
 
         for (float ratio = 0; ratio <= 1; ratio += 1 / _lineSegments)
@@ -345,8 +347,25 @@ public class ElectricHarpoon : MeleeWeapon
 
     private void GetMiddleOfTheRope()
     {
-        _middleOfTheRope.position = new Vector3((_harpoonRb.transform.position.x + _handleTransform.position.x)/2, (_harpoonRb.transform.position.y + _handleTransform.position.y) / 2, (_harpoonRb.transform.position.z + _handleTransform.position.z) / 2);
+        if (Vector3.Distance(_middleOfTheRope.position, _handleTransform.position) < 15 || Vector3.Distance(_middleOfTheRope.position, _harpoonRb.transform.position) < 15)
+        {
+            _middleOfTheRope.position = _middleOfTheRope.position;
+        }
+        else
+        {
+            Vector3 moveToForMiddleRope;
 
+            moveToForMiddleRope = new Vector3((_harpoonRb.transform.position.x + _handleTransform.position.x) / 2, (_harpoonRb.transform.position.y + _handleTransform.position.y) / 2, (_harpoonRb.transform.position.z + _handleTransform.position.z) / 2);
+            float moveToBiggestValue = 0;
+
+            if (Mathf.Abs(moveToForMiddleRope.x) > Mathf.Abs(moveToForMiddleRope.y) && Mathf.Abs(moveToForMiddleRope.x) > Mathf.Abs(moveToForMiddleRope.z)) { moveToBiggestValue = Mathf.Abs(moveToForMiddleRope.x); }
+            else if (Mathf.Abs(moveToForMiddleRope.y) > Mathf.Abs(moveToForMiddleRope.x) && Mathf.Abs(moveToForMiddleRope.y) > Mathf.Abs(moveToForMiddleRope.z)) { moveToBiggestValue = Mathf.Abs(moveToForMiddleRope.y); }
+            else if (Mathf.Abs(moveToForMiddleRope.z) > Mathf.Abs(moveToForMiddleRope.x) && Mathf.Abs(moveToForMiddleRope.z) > Mathf.Abs(moveToForMiddleRope.y)) { moveToBiggestValue = Mathf.Abs(moveToForMiddleRope.z); }
+
+            moveToForMiddleRope = new Vector3(moveToForMiddleRope.x / moveToBiggestValue, moveToForMiddleRope.y / moveToBiggestValue, moveToForMiddleRope.z / moveToBiggestValue);
+
+            _middleOfTheRope.Translate(moveToForMiddleRope * Time.deltaTime);
+        }
     }
 
     private void CreateSpringObject(AIStateMachine enemy = null)

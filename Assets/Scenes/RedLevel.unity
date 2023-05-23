@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0017001239, g: 0.2526717, b: 0.40953436, a: 1}
+  m_IndirectSpecularColor: {r: 0.0091232695, g: 0.12818113, b: 0.20449163, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8582,6 +8582,279 @@ Transform:
   m_Father: {fileID: 487039015}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!21 &270677694
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: CTS/URP/CTS Terrain Shader Basic:RedBiomeProfile
+  m_Shader: {fileID: 4800000, guid: 003bab664c6b42a4fa775c190b620ba3, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - _USE_AO_ON
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _Global_Color_Map:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Global_Normal_Map:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture_Array_Albedo:
+        m_Texture: {fileID: 18700000, guid: d5c8a50fae510f84cb8e065ac69a1098, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture_Array_Normal:
+        m_Texture: {fileID: 18700000, guid: ab2943f21fa5ea047b4cf21876ed0f2e, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture_Geological_Map:
+        m_Texture: {fileID: 2800000, guid: a8b026679658e0a458404f9f86468a66, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture_Glitter:
+        m_Texture: {fileID: 2800000, guid: 0dd347c4b5067a2428dea9a70c418d05, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture_Splat_1:
+        m_Texture: {fileID: -5149130832934861833, guid: 6d122e7ff86398c46ab82bad8f3a9855, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture_Splat_2:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture_Splat_3:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture_Splat_4:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Ambient_Occlusion_Power: 1
+    - _Geological_Map_Close_Power: 0.1
+    - _Geological_Map_Far_Power: 0.05
+    - _Geological_Map_Offset_Close: 0.028
+    - _Geological_Map_Offset_Far: 0
+    - _Geological_Tiling_Close: 142
+    - _Geological_Tiling_Far: 100
+    - _Gliter_Color_Power: 0.2
+    - _Glitter_Noise_Threshold: 0.991
+    - _Glitter_Refreshing_Speed: 4
+    - _Glitter_Smoothness: 0.9
+    - _Glitter_Specular: 0.2
+    - _Glitter_Tiling: 2.5
+    - _Global_Color_Map_Close_Power: 0
+    - _Global_Color_Map_Far_Power: 0
+    - _Global_Color_Map_Scale: 1
+    - _Global_Color_Opacity_Power: 0
+    - _Global_Normalmap_Power: 0
+    - _Perlin_Normal_Power: 1
+    - _Perlin_Normal_Power_Close: 1
+    - _Perlin_Normal_Tiling_Close: 60
+    - _Perlin_Normal_Tiling_Far: 300
+    - _Snow_Amount: 0
+    - _Snow_Blend_Normal: 0.9
+    - _Snow_Maximum_Angle: 22.9
+    - _Snow_Maximum_Angle_Hardness: 1
+    - _Snow_Min_Height: 145
+    - _Snow_Min_Height_Blending: 27
+    - _Snow_Noise_Power: 0.8
+    - _Snow_Noise_Tiling: 0.02
+    - _Snow_Normal_Scale: 1
+    - _Snow_Perlin_Power: 1
+    - _Snow_Specular: 1
+    - _Snow_Tiling: 6.9
+    - _Terrain_Smoothness: 0.47
+    - _Terrain_Specular: 0.73
+    - _Texture_10_Albedo_Index: -1
+    - _Texture_10_Far_Multiplier: 3
+    - _Texture_10_Geological_Power: 1
+    - _Texture_10_Normal_Index: -1
+    - _Texture_10_Normal_Power: 1
+    - _Texture_10_Perlin_Power: 0
+    - _Texture_10_Snow_Reduction: 0
+    - _Texture_10_Tiling: 15
+    - _Texture_10_Triplanar: 0
+    - _Texture_11_Albedo_Index: -1
+    - _Texture_11_Far_Multiplier: 3
+    - _Texture_11_Geological_Power: 1
+    - _Texture_11_Normal_Index: -1
+    - _Texture_11_Normal_Power: 1
+    - _Texture_11_Perlin_Power: 0
+    - _Texture_11_Snow_Reduction: 0
+    - _Texture_11_Tiling: 15
+    - _Texture_11_Triplanar: 0
+    - _Texture_12_Albedo_Index: -1
+    - _Texture_12_Far_Multiplier: 3
+    - _Texture_12_Geological_Power: 1
+    - _Texture_12_Normal_Index: -1
+    - _Texture_12_Normal_Power: 1
+    - _Texture_12_Perlin_Power: 0
+    - _Texture_12_Snow_Reduction: 0
+    - _Texture_12_Tiling: 15
+    - _Texture_12_Triplanar: 0
+    - _Texture_13_Albedo_Index: -1
+    - _Texture_13_Far_Multiplier: 3
+    - _Texture_13_Geological_Power: 1
+    - _Texture_13_Normal_Index: -1
+    - _Texture_13_Normal_Power: 1
+    - _Texture_13_Perlin_Power: 0
+    - _Texture_13_Snow_Reduction: 0
+    - _Texture_13_Tiling: 15
+    - _Texture_13_Triplanar: 0
+    - _Texture_14_Albedo_Index: -1
+    - _Texture_14_Far_Multiplier: 3
+    - _Texture_14_Geological_Power: 1
+    - _Texture_14_Normal_Index: -1
+    - _Texture_14_Normal_Power: 1
+    - _Texture_14_Perlin_Power: 0
+    - _Texture_14_Snow_Reduction: 0
+    - _Texture_14_Tiling: 15
+    - _Texture_14_Triplanar: 0
+    - _Texture_15_Albedo_Index: -1
+    - _Texture_15_Far_Multiplier: 3
+    - _Texture_15_Geological_Power: 1
+    - _Texture_15_Normal_Index: -1
+    - _Texture_15_Normal_Power: 1
+    - _Texture_15_Perlin_Power: 0
+    - _Texture_15_Snow_Reduction: 0
+    - _Texture_15_Tiling: 15
+    - _Texture_15_Triplanar: 0
+    - _Texture_16_Albedo_Index: -1
+    - _Texture_16_Far_Multiplier: 3
+    - _Texture_16_Geological_Power: 1
+    - _Texture_16_Normal_Index: -1
+    - _Texture_16_Normal_Power: 1
+    - _Texture_16_Perlin_Power: 0
+    - _Texture_16_Snow_Reduction: 0
+    - _Texture_16_Tiling: 15
+    - _Texture_16_Triplanar: 0
+    - _Texture_1_Albedo_Index: 0
+    - _Texture_1_Far_Multiplier: 3
+    - _Texture_1_Geological_Power: 1
+    - _Texture_1_Normal_Index: 0
+    - _Texture_1_Normal_Power: 2.18
+    - _Texture_1_Perlin_Power: 1
+    - _Texture_1_Snow_Reduction: 0
+    - _Texture_1_Tiling: 11.26
+    - _Texture_1_Triplanar: 0
+    - _Texture_2_Albedo_Index: 1
+    - _Texture_2_Far_Multiplier: 3
+    - _Texture_2_Geological_Power: 1
+    - _Texture_2_Normal_Index: 1
+    - _Texture_2_Normal_Power: 0
+    - _Texture_2_Perlin_Power: 1
+    - _Texture_2_Snow_Reduction: 0
+    - _Texture_2_Tiling: 10
+    - _Texture_2_Triplanar: 0
+    - _Texture_3_Albedo_Index: 2
+    - _Texture_3_Far_Multiplier: 3
+    - _Texture_3_Geological_Power: 1
+    - _Texture_3_Normal_Index: 2
+    - _Texture_3_Normal_Power: 1
+    - _Texture_3_Perlin_Power: 1
+    - _Texture_3_Snow_Reduction: 0
+    - _Texture_3_Tiling: 10
+    - _Texture_3_Triplanar: 0
+    - _Texture_4_Albedo_Index: -1
+    - _Texture_4_Far_Multiplier: 3
+    - _Texture_4_Geological_Power: 1
+    - _Texture_4_Normal_Index: -1
+    - _Texture_4_Normal_Power: 1
+    - _Texture_4_Perlin_Power: 0
+    - _Texture_4_Snow_Reduction: 0
+    - _Texture_4_Tiling: 15
+    - _Texture_4_Triplanar: 0
+    - _Texture_5_Albedo_Index: -1
+    - _Texture_5_Far_Multiplier: 3
+    - _Texture_5_Geological_Power: 1
+    - _Texture_5_Normal_Index: -1
+    - _Texture_5_Normal_Power: 1
+    - _Texture_5_Perlin_Power: 0
+    - _Texture_5_Snow_Reduction: 0
+    - _Texture_5_Tiling: 15
+    - _Texture_5_Triplanar: 0
+    - _Texture_6_Albedo_Index: -1
+    - _Texture_6_Far_Multiplier: 3
+    - _Texture_6_Geological_Power: 1
+    - _Texture_6_Normal_Index: -1
+    - _Texture_6_Normal_Power: 1
+    - _Texture_6_Perlin_Power: 0
+    - _Texture_6_Snow_Reduction: 0
+    - _Texture_6_Tiling: 15
+    - _Texture_6_Triplanar: 0
+    - _Texture_7_Albedo_Index: -1
+    - _Texture_7_Far_Multiplier: 3
+    - _Texture_7_Geological_Power: 1
+    - _Texture_7_Normal_Index: -1
+    - _Texture_7_Normal_Power: 1
+    - _Texture_7_Perlin_Power: 0
+    - _Texture_7_Snow_Reduction: 0
+    - _Texture_7_Tiling: 15
+    - _Texture_7_Triplanar: 0
+    - _Texture_8_Albedo_Index: -1
+    - _Texture_8_Far_Multiplier: 3
+    - _Texture_8_Geological_Power: 1
+    - _Texture_8_Normal_Index: -1
+    - _Texture_8_Normal_Power: 1
+    - _Texture_8_Perlin_Power: 0
+    - _Texture_8_Snow_Reduction: 0
+    - _Texture_8_Tiling: 15
+    - _Texture_8_Triplanar: 0
+    - _Texture_9_Albedo_Index: -1
+    - _Texture_9_Far_Multiplier: 3
+    - _Texture_9_Geological_Power: 1
+    - _Texture_9_Normal_Index: -1
+    - _Texture_9_Normal_Power: 1
+    - _Texture_9_Perlin_Power: 0
+    - _Texture_9_Snow_Reduction: 0
+    - _Texture_9_Tiling: 15
+    - _Texture_9_Triplanar: 0
+    - _Texture_Perlin_Normal_Index: 3
+    - _Texture_Snow_Index: -1
+    - _Texture_Snow_Normal_Index: -1
+    - _UV_Mix_Power: 3
+    - _UV_Mix_Start_Distance: 400.0029
+    - _Use_AO: 1
+    m_Colors:
+    - _Global_Color_Map_Offset: {r: 0, g: 0, b: 0, a: 0}
+    - _Snow_Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Texture_10_Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Texture_11_Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Texture_12_Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Texture_13_Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Texture_14_Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Texture_15_Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Texture_16_Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Texture_1_Color: {r: 0.85098046, g: 0.4039216, b: 0.015686275, a: 1}
+    - _Texture_2_Color: {r: 1.137255, g: 0.16470589, b: 0.054901965, a: 0}
+    - _Texture_3_Color: {r: 0.8962264, g: 0.49529427, b: 0.14711636, a: 1}
+    - _Texture_4_Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Texture_5_Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Texture_6_Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Texture_7_Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Texture_8_Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Texture_9_Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Texture_Snow_Average: {r: 0, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []
 --- !u!224 &271422105 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1627622975, guid: cfab57151a7cda643b55453339523b08, type: 3}
@@ -9451,7 +9724,7 @@ PrefabInstance:
     - target: {fileID: 23208537420212126, guid: 3c81ca27a55c3ee4bb402e04f3313bd4, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 4cb348d49a3a48d4cb32ba56f6c48e67, type: 2}
+      objectReference: {fileID: 2100000, guid: 4d8655784a13446a28fc4e76cdf4e1e2, type: 2}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c81ca27a55c3ee4bb402e04f3313bd4, type: 3}
@@ -11274,10 +11547,10 @@ Transform:
   - {fileID: 515910504}
   - {fileID: 612626313}
   - {fileID: 965875915}
-  - {fileID: 1095944155}
-  - {fileID: 88605196}
   - {fileID: 1704916036}
   - {fileID: 724104640}
+  - {fileID: 1095944155}
+  - {fileID: 88605196}
   - {fileID: 246841518}
   - {fileID: 761155629}
   - {fileID: 648529277}
@@ -11317,16 +11590,16 @@ MonoBehaviour:
   NoiseScaleTree: 5
   NoiseScaleObject: 5
   NoiseScaleLargeObject: 5
-  Id: 
+  Id: d32fade5-01b7-4620-9567-543781104ee3
   IncludeVegetationType: 0
   Nodes:
   - Selected: 0
-    Position: {x: 24.943495, y: 0, z: 27.574202}
+    Position: {x: 24.944654, y: 0, z: 27.574202}
     OverrideWidth: 0
     CustomWidth: 2
     Active: 1
   - Selected: 0
-    Position: {x: 15.995345, y: 0.8679749, z: 26.804499}
+    Position: {x: 15.995821, y: 0.8679749, z: 26.804499}
     OverrideWidth: 0
     CustomWidth: 2
     Active: 1
@@ -11336,7 +11609,7 @@ MonoBehaviour:
     CustomWidth: 2
     Active: 1
   - Selected: 0
-    Position: {x: 25.15919, y: 2.221515, z: -39.37924}
+    Position: {x: 25.1603, y: 2.221515, z: -39.381096}
     OverrideWidth: 0
     CustomWidth: 2
     Active: 1
@@ -13488,7 +13761,7 @@ PrefabInstance:
     - target: {fileID: 23885909206438236, guid: 8827d0a34b4944148b1d4e49e1c66ed6, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 4cb348d49a3a48d4cb32ba56f6c48e67, type: 2}
+      objectReference: {fileID: 2100000, guid: 4d8655784a13446a28fc4e76cdf4e1e2, type: 2}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 8827d0a34b4944148b1d4e49e1c66ed6, type: 3}
@@ -13584,7 +13857,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &519241731
 Transform:
   m_ObjectHideFlags: 0
@@ -14865,7 +15138,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 2.23e-43, y: 2.6256e-41, z: 6e-44, w: 2.524355e-29}
+  m_BoundingSphereOverride: {x: 2.41e-43, y: 6.1147e-41, z: 6e-44, w: 2.524355e-29}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -17352,7 +17625,7 @@ PrefabInstance:
     - target: {fileID: 3256098864590932930, guid: 747c92d9479d079409dcd3d6bf5da092, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 4cb348d49a3a48d4cb32ba56f6c48e67, type: 2}
+      objectReference: {fileID: 2100000, guid: 4d8655784a13446a28fc4e76cdf4e1e2, type: 2}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 747c92d9479d079409dcd3d6bf5da092, type: 3}
@@ -19698,7 +19971,7 @@ PrefabInstance:
     - target: {fileID: 5688160923992735173, guid: 567d02c01dfe30146b9c6515187b9efd, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 4cb348d49a3a48d4cb32ba56f6c48e67, type: 2}
+      objectReference: {fileID: 2100000, guid: 4d8655784a13446a28fc4e76cdf4e1e2, type: 2}
     - target: {fileID: 5688160923994989447, guid: 567d02c01dfe30146b9c6515187b9efd, type: 3}
       propertyPath: m_Name
       value: Rock 7
@@ -20368,7 +20641,7 @@ PrefabInstance:
     - target: {fileID: 23885909206438236, guid: 8827d0a34b4944148b1d4e49e1c66ed6, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 4cb348d49a3a48d4cb32ba56f6c48e67, type: 2}
+      objectReference: {fileID: 2100000, guid: 4d8655784a13446a28fc4e76cdf4e1e2, type: 2}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 8827d0a34b4944148b1d4e49e1c66ed6, type: 3}
@@ -22110,7 +22383,7 @@ PrefabInstance:
     - target: {fileID: 8318137576587983086, guid: 9222dfefb1eba8a49b3861b2b4cb4fb8, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 4cb348d49a3a48d4cb32ba56f6c48e67, type: 2}
+      objectReference: {fileID: 2100000, guid: 4d8655784a13446a28fc4e76cdf4e1e2, type: 2}
     - target: {fileID: 8318137576589911596, guid: 9222dfefb1eba8a49b3861b2b4cb4fb8, type: 3}
       propertyPath: m_Name
       value: Large Cliff 4
@@ -26592,7 +26865,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 6.4e-44, y: 4.8683e-41, z: 6e-44, w: 2.524355e-29}
+  m_BoundingSphereOverride: {x: 1.18e-43, y: 4.8982e-41, z: 6e-44, w: 2.524355e-29}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -27125,7 +27398,7 @@ PrefabInstance:
     - target: {fileID: 6006662305794066103, guid: 817ba601c1e8fc54898e2c7b60118b7a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 4cb348d49a3a48d4cb32ba56f6c48e67, type: 2}
+      objectReference: {fileID: 2100000, guid: 4d8655784a13446a28fc4e76cdf4e1e2, type: 2}
     - target: {fileID: 6006662305795835025, guid: 817ba601c1e8fc54898e2c7b60118b7a, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -33407,7 +33680,7 @@ PrefabInstance:
     - target: {fileID: 23885909206438236, guid: 8827d0a34b4944148b1d4e49e1c66ed6, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 4cb348d49a3a48d4cb32ba56f6c48e67, type: 2}
+      objectReference: {fileID: 2100000, guid: 4d8655784a13446a28fc4e76cdf4e1e2, type: 2}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 8827d0a34b4944148b1d4e49e1c66ed6, type: 3}
@@ -33599,7 +33872,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 6.7e-44, y: 4.0186e-41, z: 6e-44, w: 2.524355e-29}
+  m_BoundingSphereOverride: {x: 1.51e-43, y: 2.2201e-41, z: 6e-44, w: 2.524355e-29}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -40142,7 +40415,7 @@ PrefabInstance:
     - target: {fileID: 23208537420212126, guid: 3c81ca27a55c3ee4bb402e04f3313bd4, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 4cb348d49a3a48d4cb32ba56f6c48e67, type: 2}
+      objectReference: {fileID: 2100000, guid: 4d8655784a13446a28fc4e76cdf4e1e2, type: 2}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c81ca27a55c3ee4bb402e04f3313bd4, type: 3}
@@ -40187,7 +40460,7 @@ MonoBehaviour:
   IncludeVegetationType: 0
   Nodes:
   - Selected: 0
-    Position: {x: 6.4076266, y: 1.5058044, z: 11.156472}
+    Position: {x: 6.40943, y: 1.5061585, z: 11.156472}
     OverrideWidth: 0
     CustomWidth: 2
     Active: 1
@@ -40197,7 +40470,7 @@ MonoBehaviour:
     CustomWidth: 2
     Active: 1
   - Selected: 0
-    Position: {x: -5.3077316, y: 2.5387025, z: -26.99439}
+    Position: {x: -5.3113513, y: 2.5442321, z: -27.008844}
     OverrideWidth: 0
     CustomWidth: 2
     Active: 1
@@ -40340,7 +40613,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1366950541}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 943.2617, y: 0, z: -38.28125}
+  m_LocalPosition: {x: 939.35547, y: 0, z: -81.93359}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -43181,7 +43454,7 @@ PrefabInstance:
     - target: {fileID: 8318137576587983086, guid: 9222dfefb1eba8a49b3861b2b4cb4fb8, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 4cb348d49a3a48d4cb32ba56f6c48e67, type: 2}
+      objectReference: {fileID: 2100000, guid: 4d8655784a13446a28fc4e76cdf4e1e2, type: 2}
     - target: {fileID: 8318137576589911596, guid: 9222dfefb1eba8a49b3861b2b4cb4fb8, type: 3}
       propertyPath: m_Name
       value: Large Cliff 4 (1)
@@ -47168,7 +47441,7 @@ Terrain:
   m_DrawTreesAndFoliage: 0
   m_StaticShadowCaster: 0
   m_ReflectionProbeUsage: 1
-  m_MaterialTemplate: {fileID: 1697697020}
+  m_MaterialTemplate: {fileID: 270677694}
   m_BakeLightProbesForTrees: 1
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 0
@@ -47471,279 +47744,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5208189814252731599, guid: 3e0af2b5f58b740418fcf089a07469eb, type: 3}
   m_PrefabInstance: {fileID: 1574317667815133516}
   m_PrefabAsset: {fileID: 0}
---- !u!21 &1697697020
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: CTS/URP/CTS Terrain Shader Basic:RedBiomeProfile
-  m_Shader: {fileID: 4800000, guid: 003bab664c6b42a4fa775c190b620ba3, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
-  - _USE_AO_ON
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _Global_Color_Map:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Global_Normal_Map:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Texture_Array_Albedo:
-        m_Texture: {fileID: 18700000, guid: d5c8a50fae510f84cb8e065ac69a1098, type: 2}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Texture_Array_Normal:
-        m_Texture: {fileID: 18700000, guid: ab2943f21fa5ea047b4cf21876ed0f2e, type: 2}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Texture_Geological_Map:
-        m_Texture: {fileID: 2800000, guid: a8b026679658e0a458404f9f86468a66, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Texture_Glitter:
-        m_Texture: {fileID: 2800000, guid: 0dd347c4b5067a2428dea9a70c418d05, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Texture_Splat_1:
-        m_Texture: {fileID: -5149130832934861833, guid: 6d122e7ff86398c46ab82bad8f3a9855, type: 2}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Texture_Splat_2:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Texture_Splat_3:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Texture_Splat_4:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _Ambient_Occlusion_Power: 1
-    - _Geological_Map_Close_Power: 0.1
-    - _Geological_Map_Far_Power: 0.05
-    - _Geological_Map_Offset_Close: 0.028
-    - _Geological_Map_Offset_Far: 0
-    - _Geological_Tiling_Close: 142
-    - _Geological_Tiling_Far: 100
-    - _Gliter_Color_Power: 0.2
-    - _Glitter_Noise_Threshold: 0.991
-    - _Glitter_Refreshing_Speed: 4
-    - _Glitter_Smoothness: 0.9
-    - _Glitter_Specular: 0.2
-    - _Glitter_Tiling: 2.5
-    - _Global_Color_Map_Close_Power: 0
-    - _Global_Color_Map_Far_Power: 0
-    - _Global_Color_Map_Scale: 1
-    - _Global_Color_Opacity_Power: 0
-    - _Global_Normalmap_Power: 0
-    - _Perlin_Normal_Power: 1
-    - _Perlin_Normal_Power_Close: 1
-    - _Perlin_Normal_Tiling_Close: 60
-    - _Perlin_Normal_Tiling_Far: 300
-    - _Snow_Amount: 0
-    - _Snow_Blend_Normal: 0.9
-    - _Snow_Maximum_Angle: 22.9
-    - _Snow_Maximum_Angle_Hardness: 1
-    - _Snow_Min_Height: 145
-    - _Snow_Min_Height_Blending: 27
-    - _Snow_Noise_Power: 0.8
-    - _Snow_Noise_Tiling: 0.02
-    - _Snow_Normal_Scale: 1
-    - _Snow_Perlin_Power: 1
-    - _Snow_Specular: 1
-    - _Snow_Tiling: 6.9
-    - _Terrain_Smoothness: 0.47
-    - _Terrain_Specular: 0.73
-    - _Texture_10_Albedo_Index: -1
-    - _Texture_10_Far_Multiplier: 3
-    - _Texture_10_Geological_Power: 1
-    - _Texture_10_Normal_Index: -1
-    - _Texture_10_Normal_Power: 1
-    - _Texture_10_Perlin_Power: 0
-    - _Texture_10_Snow_Reduction: 0
-    - _Texture_10_Tiling: 15
-    - _Texture_10_Triplanar: 0
-    - _Texture_11_Albedo_Index: -1
-    - _Texture_11_Far_Multiplier: 3
-    - _Texture_11_Geological_Power: 1
-    - _Texture_11_Normal_Index: -1
-    - _Texture_11_Normal_Power: 1
-    - _Texture_11_Perlin_Power: 0
-    - _Texture_11_Snow_Reduction: 0
-    - _Texture_11_Tiling: 15
-    - _Texture_11_Triplanar: 0
-    - _Texture_12_Albedo_Index: -1
-    - _Texture_12_Far_Multiplier: 3
-    - _Texture_12_Geological_Power: 1
-    - _Texture_12_Normal_Index: -1
-    - _Texture_12_Normal_Power: 1
-    - _Texture_12_Perlin_Power: 0
-    - _Texture_12_Snow_Reduction: 0
-    - _Texture_12_Tiling: 15
-    - _Texture_12_Triplanar: 0
-    - _Texture_13_Albedo_Index: -1
-    - _Texture_13_Far_Multiplier: 3
-    - _Texture_13_Geological_Power: 1
-    - _Texture_13_Normal_Index: -1
-    - _Texture_13_Normal_Power: 1
-    - _Texture_13_Perlin_Power: 0
-    - _Texture_13_Snow_Reduction: 0
-    - _Texture_13_Tiling: 15
-    - _Texture_13_Triplanar: 0
-    - _Texture_14_Albedo_Index: -1
-    - _Texture_14_Far_Multiplier: 3
-    - _Texture_14_Geological_Power: 1
-    - _Texture_14_Normal_Index: -1
-    - _Texture_14_Normal_Power: 1
-    - _Texture_14_Perlin_Power: 0
-    - _Texture_14_Snow_Reduction: 0
-    - _Texture_14_Tiling: 15
-    - _Texture_14_Triplanar: 0
-    - _Texture_15_Albedo_Index: -1
-    - _Texture_15_Far_Multiplier: 3
-    - _Texture_15_Geological_Power: 1
-    - _Texture_15_Normal_Index: -1
-    - _Texture_15_Normal_Power: 1
-    - _Texture_15_Perlin_Power: 0
-    - _Texture_15_Snow_Reduction: 0
-    - _Texture_15_Tiling: 15
-    - _Texture_15_Triplanar: 0
-    - _Texture_16_Albedo_Index: -1
-    - _Texture_16_Far_Multiplier: 3
-    - _Texture_16_Geological_Power: 1
-    - _Texture_16_Normal_Index: -1
-    - _Texture_16_Normal_Power: 1
-    - _Texture_16_Perlin_Power: 0
-    - _Texture_16_Snow_Reduction: 0
-    - _Texture_16_Tiling: 15
-    - _Texture_16_Triplanar: 0
-    - _Texture_1_Albedo_Index: 0
-    - _Texture_1_Far_Multiplier: 3
-    - _Texture_1_Geological_Power: 1
-    - _Texture_1_Normal_Index: 0
-    - _Texture_1_Normal_Power: 2.18
-    - _Texture_1_Perlin_Power: 1
-    - _Texture_1_Snow_Reduction: 0
-    - _Texture_1_Tiling: 11.26
-    - _Texture_1_Triplanar: 0
-    - _Texture_2_Albedo_Index: 1
-    - _Texture_2_Far_Multiplier: 3
-    - _Texture_2_Geological_Power: 1
-    - _Texture_2_Normal_Index: 1
-    - _Texture_2_Normal_Power: 0
-    - _Texture_2_Perlin_Power: 1
-    - _Texture_2_Snow_Reduction: 0
-    - _Texture_2_Tiling: 10
-    - _Texture_2_Triplanar: 0
-    - _Texture_3_Albedo_Index: 2
-    - _Texture_3_Far_Multiplier: 3
-    - _Texture_3_Geological_Power: 1
-    - _Texture_3_Normal_Index: 2
-    - _Texture_3_Normal_Power: 1
-    - _Texture_3_Perlin_Power: 1
-    - _Texture_3_Snow_Reduction: 0
-    - _Texture_3_Tiling: 10
-    - _Texture_3_Triplanar: 0
-    - _Texture_4_Albedo_Index: -1
-    - _Texture_4_Far_Multiplier: 3
-    - _Texture_4_Geological_Power: 1
-    - _Texture_4_Normal_Index: -1
-    - _Texture_4_Normal_Power: 1
-    - _Texture_4_Perlin_Power: 0
-    - _Texture_4_Snow_Reduction: 0
-    - _Texture_4_Tiling: 15
-    - _Texture_4_Triplanar: 0
-    - _Texture_5_Albedo_Index: -1
-    - _Texture_5_Far_Multiplier: 3
-    - _Texture_5_Geological_Power: 1
-    - _Texture_5_Normal_Index: -1
-    - _Texture_5_Normal_Power: 1
-    - _Texture_5_Perlin_Power: 0
-    - _Texture_5_Snow_Reduction: 0
-    - _Texture_5_Tiling: 15
-    - _Texture_5_Triplanar: 0
-    - _Texture_6_Albedo_Index: -1
-    - _Texture_6_Far_Multiplier: 3
-    - _Texture_6_Geological_Power: 1
-    - _Texture_6_Normal_Index: -1
-    - _Texture_6_Normal_Power: 1
-    - _Texture_6_Perlin_Power: 0
-    - _Texture_6_Snow_Reduction: 0
-    - _Texture_6_Tiling: 15
-    - _Texture_6_Triplanar: 0
-    - _Texture_7_Albedo_Index: -1
-    - _Texture_7_Far_Multiplier: 3
-    - _Texture_7_Geological_Power: 1
-    - _Texture_7_Normal_Index: -1
-    - _Texture_7_Normal_Power: 1
-    - _Texture_7_Perlin_Power: 0
-    - _Texture_7_Snow_Reduction: 0
-    - _Texture_7_Tiling: 15
-    - _Texture_7_Triplanar: 0
-    - _Texture_8_Albedo_Index: -1
-    - _Texture_8_Far_Multiplier: 3
-    - _Texture_8_Geological_Power: 1
-    - _Texture_8_Normal_Index: -1
-    - _Texture_8_Normal_Power: 1
-    - _Texture_8_Perlin_Power: 0
-    - _Texture_8_Snow_Reduction: 0
-    - _Texture_8_Tiling: 15
-    - _Texture_8_Triplanar: 0
-    - _Texture_9_Albedo_Index: -1
-    - _Texture_9_Far_Multiplier: 3
-    - _Texture_9_Geological_Power: 1
-    - _Texture_9_Normal_Index: -1
-    - _Texture_9_Normal_Power: 1
-    - _Texture_9_Perlin_Power: 0
-    - _Texture_9_Snow_Reduction: 0
-    - _Texture_9_Tiling: 15
-    - _Texture_9_Triplanar: 0
-    - _Texture_Perlin_Normal_Index: 3
-    - _Texture_Snow_Index: -1
-    - _Texture_Snow_Normal_Index: -1
-    - _UV_Mix_Power: 3
-    - _UV_Mix_Start_Distance: 400.0028
-    - _Use_AO: 1
-    m_Colors:
-    - _Global_Color_Map_Offset: {r: 0, g: 0, b: 0, a: 0}
-    - _Snow_Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Texture_10_Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Texture_11_Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Texture_12_Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Texture_13_Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Texture_14_Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Texture_15_Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Texture_16_Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Texture_1_Color: {r: 0.85098046, g: 0.4039216, b: 0.015686275, a: 1}
-    - _Texture_2_Color: {r: 1.137255, g: 0.16470589, b: 0.054901965, a: 0}
-    - _Texture_3_Color: {r: 0.8962264, g: 0.49529427, b: 0.14711636, a: 1}
-    - _Texture_4_Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Texture_5_Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Texture_6_Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Texture_7_Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Texture_8_Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Texture_9_Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Texture_Snow_Average: {r: 0, g: 0, b: 0, a: 0}
-  m_BuildTextureStacks: []
 --- !u!1 &1704687243
 GameObject:
   m_ObjectHideFlags: 0
@@ -47973,7 +47973,7 @@ PrefabInstance:
     - target: {fileID: 23885909206438236, guid: 8827d0a34b4944148b1d4e49e1c66ed6, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 4cb348d49a3a48d4cb32ba56f6c48e67, type: 2}
+      objectReference: {fileID: 2100000, guid: 4d8655784a13446a28fc4e76cdf4e1e2, type: 2}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 8827d0a34b4944148b1d4e49e1c66ed6, type: 3}
@@ -55299,7 +55299,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1740630990
 Transform:
   m_ObjectHideFlags: 0
@@ -59500,7 +59500,7 @@ PrefabInstance:
     - target: {fileID: 3819826199413019007, guid: b1e92dc90ddf08a45ae6e9a385fbcdbc, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 4cb348d49a3a48d4cb32ba56f6c48e67, type: 2}
+      objectReference: {fileID: 2100000, guid: 4d8655784a13446a28fc4e76cdf4e1e2, type: 2}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: b1e92dc90ddf08a45ae6e9a385fbcdbc, type: 3}
@@ -68453,8 +68453,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2119065216}
-  m_LocalRotation: {x: 0.13274987, y: 0.28006676, z: -0.03511281, w: 0.95010906}
-  m_LocalPosition: {x: 943.2764, y: -345.58215, z: -38.37082}
+  m_LocalRotation: {x: -0.176135, y: -0.14528757, z: 0.022654204, w: -0.9733215}
+  m_LocalPosition: {x: 939.4067, y: -332.04572, z: -81.94397}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

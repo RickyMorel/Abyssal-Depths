@@ -581,6 +581,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9166578342678737865}
+  - {fileID: 8526038097527690976}
   m_Father: {fileID: 1791815409729386673}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5873,6 +5874,7 @@ GameObject:
   - component: {fileID: 2382000830290867069}
   - component: {fileID: 1555483855309671028}
   - component: {fileID: 7663150770846270121}
+  - component: {fileID: 9130052822378954116}
   m_Layer: 25
   m_Name: Electric Harpoon
   m_TagString: Untagged
@@ -6087,12 +6089,29 @@ MonoBehaviour:
   _handleTransform: {fileID: 2367695852931752527}
   _harpoonRb: {fileID: 7820839840813908243}
   _harpoonCollider: {fileID: 9167567839145680277}
+  _bendPoint: {fileID: 8526038097527690976}
   _flyingSpeed: 2000
   _grappleSpeed: 4000
   _maxElectricBeaconDistance: 30
   _trackEnemiesZone: {fileID: 1674460243667513449}
   _electructionZonePrefab: {fileID: 1306905336849389043, guid: 1ea2a4d60501ff5499a6bf141faf054a, type: 3}
   _electricWireBeaconPrefab: {fileID: 7746866216529117493, guid: 670fbdf495ba7f5439faf8e0c27272f7, type: 3}
+--- !u!114 &9130052822378954116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6356078261117588642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12212104f97dbe440a6c055e45810844, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _point1: {fileID: 2367695852931752527}
+  _point2: {fileID: 8526038097527690976}
+  _point3: {fileID: 9166578342678737865}
+  _vertexCount: 12
 --- !u!1 &6524459616367734395
 GameObject:
   m_ObjectHideFlags: 0
@@ -8458,6 +8477,37 @@ SpringJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!1 &8857822842196066686
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8526038097527690976}
+  m_Layer: 26
+  m_Name: BendPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8526038097527690976
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8857822842196066686}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2367695852931752527}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8876212252485309317
 GameObject:
   m_ObjectHideFlags: 0

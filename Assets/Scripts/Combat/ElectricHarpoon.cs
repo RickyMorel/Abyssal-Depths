@@ -13,6 +13,7 @@ public class ElectricHarpoon : MeleeWeapon
     [SerializeField] private Transform _handleTransform;
     [SerializeField] private Rigidbody _harpoonRb;
     [SerializeField] private Collider _harpoonCollider;
+    [SerializeField] private Transform _bendPoint;
     [Header("Floats")]
     [SerializeField] private float _flyingSpeed;
     [SerializeField] private float _grappleSpeed;
@@ -21,6 +22,7 @@ public class ElectricHarpoon : MeleeWeapon
     [SerializeField] private Collider _trackEnemiesZone;
     [SerializeField] private GameObject _electructionZonePrefab;
     [SerializeField] private GameObject _electricWireBeaconPrefab;
+
     
     #endregion
 
@@ -32,8 +34,6 @@ public class ElectricHarpoon : MeleeWeapon
     private bool _prevInputState;
     private bool _prevInput2State;
     private float _timePassedReturning;
-    private LineRenderer _lr;
-    private int _lineSegments = 60;
     private SpringJoint _tetherSpringInstance;
     private ElectricZoneInstanceClass _electrocutionZoneInstance;
     private AIStateMachine _tetheredEnemy;
@@ -48,7 +48,6 @@ public class ElectricHarpoon : MeleeWeapon
     {
         base.Start();
 
-        _lr = GetComponent<LineRenderer>();
         _electrocutionZoneInstance = new ElectricZoneInstanceClass(Instantiate(_electructionZonePrefab));
         _electrocutionZoneInstance.AttackHitBox.Initialize(_weapon, _weapon.InteractableHealth, this);
 
@@ -323,6 +322,7 @@ public class ElectricHarpoon : MeleeWeapon
         {
             _timePassedReturning += Time.deltaTime;
             _harpoonRb.transform.position = Vector3.MoveTowards(_harpoonRb.transform.position, _handleTransform.position, Time.deltaTime * (_flyingSpeed / 10f) * _timePassedReturning);
+            _bendPoint.position = Vector3.MoveTowards(_bendPoint.transform.position, _handleTransform.position, Time.deltaTime * (_flyingSpeed / 10f) * _timePassedReturning);
         }
         if (_harpoonRb.transform.position == _handleTransform.position && _throwState == ThrowState.Returning)
         {
@@ -332,19 +332,23 @@ public class ElectricHarpoon : MeleeWeapon
             _weapon.ShouldRotate = true;
             _throwState = ThrowState.Attached;
             _timePassedReturning = 0f;
+            _bendPoint.position = _handleTransform.position;
         }
     }
 
     private void DrawRope()
     {
-        _lr.SetPosition(0, _harpoonRb.transform.position);
-        _lr.SetPosition(60, _handleTransform.position);
+        if (_throwState == ThrowState.Returning || _throwState == ThrowState.Attached) { return; }
 
-        Vector3 middleOfTheRope = new Vector3((_harpoonRb.transform.position.x + _handleTransform.position.x) / 2, (_harpoonRb.transform.position.y + _handleTransform.position.y) / 2, (_harpoonRb.transform.position.z + _handleTransform.position.z) / 2);
+        Vector3 moveToForMiddleRope = new Vector3((_harpoonRb.transform.position.x + _handleTransform.position.x) / 2, (_harpoonRb.transform.position.y + _handleTransform.position.y) / 2, (_harpoonRb.transform.position.z + _handleTransform.position.z) / 2);
 
-        if (Vector3.Distance(middleOfTheRope, _handleTransform.position) < 15 || Vector3.Distance(middleOfTheRope, _harpoonRb.transform.position) < 15)
+        if (Vector3.Distance(_bendPoint.position, _handleTransform.position) > 15 || Vector3.Distance(_bendPoint.position, _harpoonRb.transform.position) > 15)
         {
-            //_lr.SetPosition()
+            _bendPoint.position = _bendPoint.position;
+        }
+        else
+        {
+            _bendPoint.position = Vector3.MoveTowards(_bendPoint.position, moveToForMiddleRope, Time.deltaTime * 3);
         }
     }
 
@@ -372,6 +376,15 @@ public class ElectricHarpoon : MeleeWeapon
 
         _tetheredEnemy.SetRagdollState(false);
         _tetheredEnemy = null;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawCube(_harpoonRb.transform.position, Vector3.one * 2);
+        Gizmos.DrawCube(_handleTransform.transform.position, Vector3.one * 2);
+        Gizmos.DrawCube(_bendPoint.transform.position, Vector3.one * 2);
+        Vector3 moveToForMiddleRope = new Vector3((_harpoonRb.transform.position.x + _handleTransform.position.x) / 2, (_harpoonRb.transform.position.y + _handleTransform.position.y) / 2, (_harpoonRb.transform.position.z + _handleTransform.position.z) / 2);
+        Gizmos.DrawCube(moveToForMiddleRope, Vector3.one * 2);
     }
 
     #endregion

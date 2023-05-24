@@ -22,12 +22,12 @@ public class MaceAttackHitBox : AttackHitBox
     public override void Start()
     {
         _damageData = DamageData.GetDamageData(_damageTypes, _weapon, -1);
-        this.transform.SetParent(null);
+        transform.SetParent(null);
     }
 
     public void Update()
     {
-        transform.rotation = Quaternion.Euler(0, 0, 90-CalculateAngle());
+        transform.rotation = Quaternion.Euler(0, CalculateAngleY(), 90-CalculateAngleZ());
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
     }
 
@@ -51,21 +51,35 @@ public class MaceAttackHitBox : AttackHitBox
 
     #endregion
 
-    private float CalculateAngle()
+    private float CalculateAngleZ()
     {
+        float x;
         float y;
-        float z;
         float h;
-        y = transform.position.x - _weapon.transform.position.x;
-        z = transform.position.y - _weapon.transform.position.y;
-        h = Mathf.Sqrt(y*y + z*z);
         float senA;
-        senA = z / h;
         float angle;
+
+        x = transform.position.x - _weapon.transform.position.x;
+        y = transform.position.y - _weapon.transform.position.y;
+
+        h = Mathf.Sqrt(x * x + y * y);
+        senA = y / h;
         angle = Mathf.Asin(senA);
-        
-        float degAngle = Mathf.Rad2Deg*angle;
+
+        float degAngle = Mathf.Rad2Deg * angle;
         return degAngle;
+    }
+
+    private float CalculateAngleY()
+    {
+        if (transform.position.x < _weapon.transform.position.x)
+        {
+            return 0;
+        }
+        else
+        {
+            return 180;
+        }
     }
 
     public virtual void CalculateDamage()

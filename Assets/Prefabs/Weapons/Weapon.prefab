@@ -802,14 +802,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 286164223635417134}
-  m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: -0.5}
   m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2367695852931752527}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 270}
 --- !u!33 &7484825750789325328
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -884,7 +884,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 56
@@ -5879,7 +5879,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6963554075171237634
 Transform:
   m_ObjectHideFlags: 0
@@ -6085,7 +6085,6 @@ MonoBehaviour:
   _maxMovementSpeed: 20
   _moveToTransform: {fileID: 5109726736624522019}
   _handleTransform: {fileID: 2367695852931752527}
-  _middleOfTheRope: {fileID: 8870349433133957839}
   _harpoonRb: {fileID: 7820839840813908243}
   _harpoonCollider: {fileID: 9167567839145680277}
   _flyingSpeed: 2000
@@ -6094,7 +6093,6 @@ MonoBehaviour:
   _trackEnemiesZone: {fileID: 1674460243667513449}
   _electructionZonePrefab: {fileID: 1306905336849389043, guid: 1ea2a4d60501ff5499a6bf141faf054a, type: 3}
   _electricWireBeaconPrefab: {fileID: 7746866216529117493, guid: 670fbdf495ba7f5439faf8e0c27272f7, type: 3}
-  _lineSegments: 60
 --- !u!1 &6524459616367734395
 GameObject:
   m_ObjectHideFlags: 0

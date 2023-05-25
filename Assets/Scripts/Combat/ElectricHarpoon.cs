@@ -352,6 +352,18 @@ public class ElectricHarpoon : MeleeWeapon
         }
     }
 
+    private void BendPointMovementLimits()
+    {
+        if (Vector3.Distance(_bendPoint.position, _handleTransform.position) != Vector3.Distance(_bendPoint.position, _harpoonRb.transform.position))
+        {
+            float sideA = Vector3.Distance(_bendPoint.position, _handleTransform.position);
+            float sideB = Vector3.Distance(_bendPoint.position, _harpoonRb.transform.position);
+            float sideC = Mathf.Sqrt(sideA * sideA + sideB * sideB);
+            float height = (sideA * sideB) / sideC;
+
+        }
+    }
+
     private void CreateSpringObject(AIStateMachine enemy = null)
     {
         Destroy(_tetherSpringInstance);

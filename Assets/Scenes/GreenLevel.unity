@@ -5503,7 +5503,7 @@ MonoBehaviour:
   PersistentVegetationStorage: {fileID: 174903442}
   PredictiveCellLoaderCellsPerFrame: 1
   LoadPotentialVegetationCells: 1
-  CurrentTabIndex: 5
+  CurrentTabIndex: 2
   VegetationPackageIndex: 0
   SeaLevel: 0
   ExcludeSeaLevelCells: 0
@@ -29906,7 +29906,7 @@ MonoBehaviour:
   m_spawnRuleStampsToggleAllState: 1
   m_drawPreview: 0
   m_previewRuleIds: 02000000
-  m_maxWorldHeight: 449.58115
+  m_maxWorldHeight: 449.9794
   m_minWorldHeight: 0
   m_showSeaLevelinStampPreview: 1
   m_rulePanelUnfolded: 1
@@ -41622,7 +41622,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1366950541}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 329.39453, y: 0, z: 0.87890625}
+  m_LocalPosition: {x: 280.95703, y: 0, z: -43.45703}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -46461,7 +46461,7 @@ MonoBehaviour:
       m_imageMaskLocation: 1
       m_strength: 1
       m_seaLevel: 0
-      m_maxWorldHeight: 449.58115
+      m_maxWorldHeight: 449.9794
       m_minWorldHeight: 0
       m_xOffSet: 0
       m_zOffSet: 0
@@ -46707,7 +46707,7 @@ MonoBehaviour:
       m_imageMaskLocation: 1
       m_strength: 1
       m_seaLevel: 0
-      m_maxWorldHeight: 449.58115
+      m_maxWorldHeight: 449.9794
       m_minWorldHeight: 0
       m_xOffSet: 0
       m_zOffSet: 0
@@ -48889,8 +48889,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1674545248}
-  - component: {fileID: 1674545247}
   - component: {fileID: 1674545246}
+  - component: {fileID: 1674545250}
   - component: {fileID: 1674545249}
   m_Layer: 6
   m_Name: Terrain
@@ -48908,42 +48908,8 @@ TerrainCollider:
   m_GameObject: {fileID: 1674545245}
   m_Material: {fileID: 0}
   m_Enabled: 1
-  m_TerrainData: {fileID: 15600000, guid: 6d122e7ff86398c46ab82bad8f3a9855, type: 2}
+  m_TerrainData: {fileID: 15600000, guid: ca909fb328450b0449f5ef2a24cfdec2, type: 2}
   m_EnableTreeColliders: 1
---- !u!218 &1674545247
-Terrain:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1674545245}
-  m_Enabled: 1
-  serializedVersion: 6
-  m_TerrainData: {fileID: 15600000, guid: 6d122e7ff86398c46ab82bad8f3a9855, type: 2}
-  m_TreeDistance: 5000
-  m_TreeBillboardDistance: 50
-  m_TreeCrossFadeLength: 5
-  m_TreeMaximumFullLODCount: 50
-  m_DetailObjectDistance: 80
-  m_DetailObjectDensity: 1
-  m_HeightmapPixelError: 5
-  m_SplatMapDistance: 1000
-  m_HeightmapMaximumLOD: 0
-  m_ShadowCastingMode: 1
-  m_DrawHeightmap: 1
-  m_DrawInstanced: 1
-  m_DrawTreesAndFoliage: 0
-  m_StaticShadowCaster: 0
-  m_ReflectionProbeUsage: 1
-  m_MaterialTemplate: {fileID: 2100000, guid: 594ea882c5a793440b60ff72d896021e, type: 2}
-  m_BakeLightProbesForTrees: 1
-  m_PreserveTreePrototypeLayers: 0
-  m_DeringLightProbesForTrees: 0
-  m_ScaleInLightmap: 0.0256
-  m_LightmapParameters: {fileID: 15203, guid: 0000000000000000f000000000000000, type: 0}
-  m_GroupingID: 0
-  m_RenderingLayerMask: 1
-  m_AllowAutoConnect: 1
 --- !u!4 &1674545248
 Transform:
   m_ObjectHideFlags: 0
@@ -48971,12 +48937,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf174cc73e4d7a645a1cca7654887aba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Terrain: {fileID: 1674545247}
+  Terrain: {fileID: 1674545250}
   TerrainMaterialOverridden: 0
   DisableTerrainTreesAndDetails: 1
   AutoAddToVegegetationSystem: 0
   TerrainSourceID: 0
   TerrainPosition: {x: -82, y: -595, z: -50}
+--- !u!218 &1674545250
+Terrain:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1674545245}
+  m_Enabled: 1
+  serializedVersion: 6
+  m_TerrainData: {fileID: 15600000, guid: ca909fb328450b0449f5ef2a24cfdec2, type: 2}
+  m_TreeDistance: 5000
+  m_TreeBillboardDistance: 50
+  m_TreeCrossFadeLength: 5
+  m_TreeMaximumFullLODCount: 50
+  m_DetailObjectDistance: 80
+  m_DetailObjectDensity: 1
+  m_HeightmapPixelError: 5
+  m_SplatMapDistance: 1000
+  m_HeightmapMaximumLOD: 0
+  m_ShadowCastingMode: 2
+  m_DrawHeightmap: 1
+  m_DrawInstanced: 0
+  m_DrawTreesAndFoliage: 0
+  m_StaticShadowCaster: 0
+  m_ReflectionProbeUsage: 1
+  m_MaterialTemplate: {fileID: 2100000, guid: 594ea882c5a793440b60ff72d896021e, type: 2}
+  m_BakeLightProbesForTrees: 1
+  m_PreserveTreePrototypeLayers: 0
+  m_DeringLightProbesForTrees: 1
+  m_ScaleInLightmap: 1
+  m_LightmapParameters: {fileID: 15203, guid: 0000000000000000f000000000000000, type: 0}
+  m_GroupingID: 0
+  m_RenderingLayerMask: 1
+  m_AllowAutoConnect: 0
 --- !u!1 &1675973568
 GameObject:
   m_ObjectHideFlags: 0
@@ -66792,7 +66792,7 @@ MonoBehaviour:
   m_spawnRuleStampsToggleAllState: 1
   m_drawPreview: 0
   m_previewRuleIds: 01000000
-  m_maxWorldHeight: 449.58115
+  m_maxWorldHeight: 449.9794
   m_minWorldHeight: 0
   m_showSeaLevelinStampPreview: 1
   m_rulePanelUnfolded: 1
@@ -70118,8 +70118,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2119065216}
-  m_LocalRotation: {x: 0.10410835, y: -0.2616189, z: 0.03019898, w: 0.95906466}
-  m_LocalPosition: {x: 329.46783, y: -273.15607, z: 0.90036774}
+  m_LocalRotation: {x: -0.16100113, y: -0.18833756, z: 0.030997023, w: -0.9683217}
+  m_LocalPosition: {x: 281.00122, y: -337.02496, z: -43.48526}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

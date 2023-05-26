@@ -406,11 +406,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ddf72292aedb3149a43356854e9d5eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyDamageStat: -1
   _ownHealth: {fileID: 7153336119383687660}
-  _isFriendlyToPlayers: 0
   _damageTypes: 0100000000000000
-  _weapon: {fileID: 0}
-  _mace: {fileID: 0}
+  _damagePlayerCharacters: 0
 --- !u!1 &3455716033785055655
 GameObject:
   m_ObjectHideFlags: 0
@@ -21306,7 +21305,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 038bb926cc2feb54ab44c8cb11e309b4, type: 2}
+  - {fileID: 2100000, guid: 79dd3e6579f3dd74296f728993fe97f0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -21770,7 +21769,7 @@ Transform:
   - {fileID: 3455716032967025346}
   - {fileID: 4731726961228027436}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!54 &7153336119383687656
 Rigidbody:
@@ -21863,6 +21862,7 @@ MonoBehaviour:
   _jumpHeight: 3
   _gravityIntensity: -15
   _isGrounded: 1
+  _currentStateName: 
   _canMove: 1
 --- !u!114 &7153336119383687660
 MonoBehaviour:
@@ -21880,12 +21880,12 @@ MonoBehaviour:
   _weaknessType: 
   _currentHealth: 0
   _maxHealth: 100
-  _healthBarImage: {fileID: 3455716033785055648}
   _damageParticles: {fileID: 4862373215728599882}
   _hurtTime: 5
-  _mesh: {fileID: 0}
+  _meshes: []
   _particleParentTransform: {fileID: 0}
   _canKill: 1
+  _stopsActionWhenHurt: 1
 --- !u!114 &7153336119383687667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21927,8 +21927,10 @@ MonoBehaviour:
   _attackHitbox: {fileID: 3455716032967025404}
   _projectilePrefab: {fileID: 6835169869500657298, guid: ae5425c51ae307f4bb82602a757b6b25, type: 3}
   _shootTransform: {fileID: 0}
+  _projectileHolsterTransform: {fileID: 0}
   _enemyDamageDataID: 2
   _attackRange: 2
+  _hitParticle: {fileID: 0}
 --- !u!114 &7153336119383687664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21941,9 +21943,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 250a081dac9e8a74588f9d02355cddf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _goalDistance: 6
+  _isMoving: 0
   Actions: []
   CurrentAction: {fileID: 0}
-  _goalDistance: 6
 --- !u!114 &1788001473
 MonoBehaviour:
   m_ObjectHideFlags: 0

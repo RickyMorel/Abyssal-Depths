@@ -65,7 +65,7 @@ public class ElectricHarpoon : MeleeWeapon
         }
         else
         {
-            _harpoonRb.transform.rotation = Quaternion.Euler(0, CalculateAngleY(), CalculateAngleZ() - 90);
+            _harpoonRb.transform.rotation = Quaternion.Euler(0, CalculateAngleY(), CalculateAngle() - 90);
         }
     }
 
@@ -111,7 +111,7 @@ public class ElectricHarpoon : MeleeWeapon
 
     #endregion
 
-    private float CalculateAngleZ()
+    private float CalculateAngle()
     {
         float x;
         float y;
@@ -342,25 +342,33 @@ public class ElectricHarpoon : MeleeWeapon
 
         Vector3 moveToForMiddleRope = new Vector3((_harpoonRb.transform.position.x + _handleTransform.position.x) / 2, (_harpoonRb.transform.position.y + _handleTransform.position.y) / 2, (_harpoonRb.transform.position.z + _handleTransform.position.z) / 2);
 
-        if (Vector3.Distance(_bendPoint.position, _handleTransform.position) > 15 || Vector3.Distance(_bendPoint.position, _harpoonRb.transform.position) > 15)
+        _bendPoint.LookAt(_harpoonRb.transform);
+
+        float height, distanceA, distanceB, distanceC;
+
+        distanceA = Mathf.Clamp(Vector3.Distance(_bendPoint.position, _handleTransform.position), 1f, float.MaxValue);
+        distanceB = Vector3.Distance(_bendPoint.position, _harpoonRb.position);
+        distanceC = Mathf.Sqrt(distanceA * distanceA + distanceB * distanceB);
+        height = (distanceA * distanceB) / distanceC;
+
+        if (Vector3.Distance(_bendPoint.position, _handleTransform.position) > 100 || Vector3.Distance(_bendPoint.position, _harpoonRb.transform.position) > 100)
         {
-            _bendPoint.position = _bendPoint.position;
+            //_bendPoint.localPosition = moveToForMiddleRope;
         }
         else
         {
-            _bendPoint.position = Vector3.MoveTowards(_bendPoint.position, moveToForMiddleRope, Time.deltaTime * 3);
+            
         }
-    }
 
-    private void BendPointMovementLimits()
-    {
-        if (Vector3.Distance(_bendPoint.position, _handleTransform.position) != Vector3.Distance(_bendPoint.position, _harpoonRb.transform.position))
+        _bendPoint.position = moveToForMiddleRope;
+
+        if (_harpoonRb.velocity.y > 0)
         {
-            float sideA = Vector3.Distance(_bendPoint.position, _handleTransform.position);
-            float sideB = Vector3.Distance(_bendPoint.position, _harpoonRb.transform.position);
-            float sideC = Mathf.Sqrt(sideA * sideA + sideB * sideB);
-            float height = (sideA * sideB) / sideC;
-
+            _bendPoint.position += _bendPoint.up * height;
+        }
+        else
+        {
+            _bendPoint.position += -_bendPoint.up * height;
         }
     }
 

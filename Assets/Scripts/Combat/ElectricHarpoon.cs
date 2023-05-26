@@ -39,6 +39,7 @@ public class ElectricHarpoon : MeleeWeapon
     private AIStateMachine _tetheredEnemy;
     private List<GameObject> _electricWireBeacons = new List<GameObject>();
     private float _timeSincePressInput;
+    private Transform _middlePointTransform;
 
     #endregion
 
@@ -50,6 +51,8 @@ public class ElectricHarpoon : MeleeWeapon
 
         _electrocutionZoneInstance = new ElectricZoneInstanceClass(Instantiate(_electructionZonePrefab));
         _electrocutionZoneInstance.AttackHitBox.Initialize(_weapon, _weapon.InteractableHealth, this);
+
+        _middlePointTransform = new GameObject("MiddlePointTransform").transform;
 
         _originalHarpoonPosition = _harpoonRb.transform.localPosition;
         _originalHarpoonRotation = _harpoonRb.transform.localRotation;
@@ -340,7 +343,8 @@ public class ElectricHarpoon : MeleeWeapon
     {
         if (_throwState == ThrowState.Returning || _throwState == ThrowState.Attached) { return; }
 
-        Vector3 moveToForMiddleRope = new Vector3((_harpoonRb.transform.position.x + _handleTransform.position.x) / 2, (_harpoonRb.transform.position.y + _handleTransform.position.y) / 2, (_harpoonRb.transform.position.z + _handleTransform.position.z) / 2);
+        _middlePointTransform.position = new Vector3((_harpoonRb.transform.position.x + _handleTransform.position.x) / 2, (_harpoonRb.transform.position.y + _handleTransform.position.y) / 2, (_harpoonRb.transform.position.z + _handleTransform.position.z) / 2);
+        _middlePointTransform.LookAt(_harpoonRb.transform);
 
         _bendPoint.LookAt(_harpoonRb.transform);
 
@@ -351,25 +355,25 @@ public class ElectricHarpoon : MeleeWeapon
         distanceC = Mathf.Sqrt(distanceA * distanceA + distanceB * distanceB);
         height = (distanceA * distanceB) / distanceC;
 
-        if (Vector3.Distance(_bendPoint.position, _handleTransform.position) > 100 || Vector3.Distance(_bendPoint.position, _harpoonRb.transform.position) > 100)
+        if (Vector3.Distance(_bendPoint.position, _handleTransform.position) > 10 || Vector3.Distance(_bendPoint.position, _harpoonRb.transform.position) > 10)
         {
-            //_bendPoint.localPosition = moveToForMiddleRope;
-        }
-        else
-        {
-            
+            _bendPoint.position = Vector3.MoveTowards(_bendPoint.position, _middlePointTransform.position, Time.deltaTime * 16);
+
+            return;
         }
 
-        _bendPoint.position = moveToForMiddleRope;
+        Vector3 bendPointTargetPosition = Vector3.zero;
 
-        if (_harpoonRb.velocity.y > 0)
+        if (_harpoonRb.velocity.y < 0)
         {
-            _bendPoint.position += _bendPoint.up * height;
+            bendPointTargetPosition = _middlePointTransform.position + _middlePointTransform.up * height;
         }
-        else
+        else if (_harpoonRb.velocity.y > 0)
         {
-            _bendPoint.position += -_bendPoint.up * height;
+            bendPointTargetPosition = _middlePointTransform.position + _middlePointTransform.up * -height;
         }
+
+        _bendPoint.position = Vector3.MoveTowards(_bendPoint.position, bendPointTargetPosition, Time.deltaTime * 8);
     }
 
     private void CreateSpringObject(AIStateMachine enemy = null)

@@ -34,7 +34,7 @@ namespace DistantLands
 		// Update is called once per frame
 		void Update()
 		{
-			HandleGoalPos();
+			//HandleGoalPos();
 		}
 
 		void HandleGoalPos()

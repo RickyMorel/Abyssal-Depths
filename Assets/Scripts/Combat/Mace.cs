@@ -7,6 +7,7 @@ public class Mace : MeleeWeapon
 {
     #region Editor Fields
 
+    [SerializeField] private float _pushForce = 20f;
     [SerializeField] private GameObject _maceHead;
 
     #endregion
@@ -27,6 +28,11 @@ public class Mace : MeleeWeapon
     {
         if(obj.tag == "MainShip") { return; }
 
+        if (obj.TryGetComponent(out AIStateMachine aIState))
+        {
+            Vector3 pushDir = _rb.velocity;
+            aIState.BounceOffShield(pushDir, _pushForce);
+        }
         Instantiate(GameAssetsManager.Instance.MeleeFloorHitParticles, _maceHead.transform.position, Quaternion.identity);
         ShipCamera.Instance.ShakeCamera(5f, 50f, 0.2f);
     }

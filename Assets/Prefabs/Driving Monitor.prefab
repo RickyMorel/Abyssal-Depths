@@ -194,8 +194,10 @@ MonoBehaviour:
   _interactionType: 1
   _playerPositionTransform: {fileID: 1688170152322542363}
   _isAIOnlyInteractable: 0
+  _attachOnInteract: 1
   _isSingleUse: 0
   _singleUseTime: 0.5
+  _onInteractParticles: {fileID: 0}
   _upgradeSocketObjs:
   - {fileID: 1184923613242633005}
   - {fileID: 3062101694037517811}
@@ -218,12 +220,10 @@ MonoBehaviour:
   - MaxSpeed: 55
   _speedReductionTolerance: 8
   _rb: {fileID: 0}
-  _boosterParticle: {fileID: 0}
-  _stabilizerBoosterParticles:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  _boosterStabilizer:
+    Particles: {fileID: 0}
+    LightComponent: {fileID: 0}
+  _boosterStabilizers: []
 --- !u!114 &3031896794887204772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,8 +238,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _resistanceType: 
   _weaknessType: 
+  _currentHealth: 0
   _maxHealth: 100
-  _healthBarImage: {fileID: 0}
   _damageParticles: {fileID: 0}
   _fixCost: {fileID: 11400000, guid: 5980c9c518217fe498cc9b85953ea003, type: 2}
   _timeToFix: 2
@@ -479,6 +479,14 @@ PrefabInstance:
     - target: {fileID: 4718567469637786, guid: d8b3fd841d886024dbb23b69fa362205, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4797991658114679524, guid: d8b3fd841d886024dbb23b69fa362205, type: 3}
+      propertyPath: _upgradable
+      value: 
+      objectReference: {fileID: 8939861088303502654}
+    - target: {fileID: 4797991658114679524, guid: d8b3fd841d886024dbb23b69fa362205, type: 3}
+      propertyPath: _transparencyChangeSpeed
+      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 64452019701053878, guid: d8b3fd841d886024dbb23b69fa362205, type: 3}

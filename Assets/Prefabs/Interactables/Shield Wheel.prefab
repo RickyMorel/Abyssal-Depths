@@ -237,8 +237,10 @@ MonoBehaviour:
   _interactionType: 1
   _playerPositionTransform: {fileID: 1052606829203341393}
   _isAIOnlyInteractable: 0
+  _attachOnInteract: 1
   _isSingleUse: 0
   _singleUseTime: 0.5
+  _onInteractParticles: {fileID: 0}
   _upgradeSocketObjs:
   - {fileID: 3418516141112142185}
   - {fileID: 3154696156972176293}
@@ -388,6 +390,14 @@ PrefabInstance:
     - target: {fileID: 3222912536792213419, guid: a00cf22d468e6bd439ea4ff97db6d260, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.1499998
+      objectReference: {fileID: 0}
+    - target: {fileID: 4255615337847072310, guid: a00cf22d468e6bd439ea4ff97db6d260, type: 3}
+      propertyPath: _upgradable
+      value: 
+      objectReference: {fileID: 1052606829067686161}
+    - target: {fileID: 4255615337847072310, guid: a00cf22d468e6bd439ea4ff97db6d260, type: 3}
+      propertyPath: _transparencyChangeSpeed
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 5978533818139340758, guid: a00cf22d468e6bd439ea4ff97db6d260, type: 3}
       propertyPath: m_Layer

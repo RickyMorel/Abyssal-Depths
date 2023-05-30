@@ -7,7 +7,6 @@ public class OpacityForChairs : MonoBehaviour
     #region Editor Fields
 
     [SerializeField] private Upgradable _upgradable;
-    [SerializeField] private float _transparencyChangeSpeed;
     [SerializeField] private MeshRenderer _chairMaterial;
 
     #endregion

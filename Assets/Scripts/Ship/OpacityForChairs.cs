@@ -8,12 +8,13 @@ public class OpacityForChairs : MonoBehaviour
 
     [SerializeField] private Upgradable _upgradable;
     [SerializeField] private float _transparencyChangeSpeed;
+    [SerializeField] private MeshRenderer _chairMaterial;
 
     #endregion
 
     #region Private Variables
 
-    private Color _meshRenderer;
+    private float _timer = 0;
 
     #endregion
 
@@ -21,23 +22,25 @@ public class OpacityForChairs : MonoBehaviour
 
     private void Start()
     {
-        _meshRenderer = GetComponent<MeshRenderer>().material.color;
-        _meshRenderer.a = 255;
+        _chairMaterial.material.color = new Color(_chairMaterial.material.color.r, _chairMaterial.material.color.g, _chairMaterial.material.color.b, 1);
     }
 
     private void Update()
     {
-        if (_upgradable.CurrentPlayer == null && _meshRenderer.a >= 255) { Debug.Log("1"); return; }
+        if (_upgradable.CurrentPlayer == null && _chairMaterial.material.color.a == 1) { return; }
 
-        if (_upgradable.CurrentPlayer != null && _meshRenderer.a < 128)
+        if (_upgradable.CurrentPlayer != null && _chairMaterial.material.color.a > 0.5f)
         {
-            Debug.Log("2");
-            _meshRenderer.a = Mathf.Lerp(_meshRenderer.a, 128, Time.deltaTime * _transparencyChangeSpeed);
+            _timer += Time.deltaTime;
+            _chairMaterial.material.color = new Color(_chairMaterial.material.color.r, _chairMaterial.material.color.g, _chairMaterial.material.color.b, Mathf.Lerp(1, 0.5f, _timer)); 
         }
-        else if (_upgradable.CurrentPlayer == null && _meshRenderer.a < 255)
+
+        if (_upgradable.CurrentPlayer == null && _chairMaterial.material.color.a < 1)
         {
-            Debug.Log(_upgradable.name + " " +"3");
-            _meshRenderer.a = Mathf.Lerp(_meshRenderer.a, 255, Time.deltaTime * _transparencyChangeSpeed);
+            if (_timer > 1) { _timer = 1; }
+
+            _timer -= Time.deltaTime;
+            this._chairMaterial.material.color = new Color(_chairMaterial.material.color.r, _chairMaterial.material.color.g, _chairMaterial.material.color.b, Mathf.Lerp(1, 0.5f, _timer)); 
         }
     }
 

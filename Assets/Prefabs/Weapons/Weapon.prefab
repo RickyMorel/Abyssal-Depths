@@ -4254,7 +4254,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6963554075171237634
 Transform:
   m_ObjectHideFlags: 0
@@ -4458,7 +4458,7 @@ MonoBehaviour:
   maxDistance: 10
   _moveForce: 50
   _maxMovementSpeed: 20
-  _moveToForLightSaber: {fileID: 5109726736624522019}
+  _moveToTransform: {fileID: 0}
   _handleTransform: {fileID: 2367695852931752527}
   _harpoonRb: {fileID: 7820839840813908243}
   _harpoonCollider: {fileID: 9167567839145680277}
@@ -6472,6 +6472,7 @@ MonoBehaviour:
   maxDistance: 10
   _moveForce: 110
   _maxMovementSpeed: 30
+  _pushForce: 20
   _maceHead: {fileID: 6670758329025972589}
 --- !u!1 &8974005135444582100
 GameObject:
@@ -7092,6 +7093,14 @@ PrefabInstance:
     - target: {fileID: 3222912536792213419, guid: a00cf22d468e6bd439ea4ff97db6d260, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.1499998
+      objectReference: {fileID: 0}
+    - target: {fileID: 4255615337847072310, guid: a00cf22d468e6bd439ea4ff97db6d260, type: 3}
+      propertyPath: _upgradable
+      value: 
+      objectReference: {fileID: 7627081817445622300}
+    - target: {fileID: 4255615337847072310, guid: a00cf22d468e6bd439ea4ff97db6d260, type: 3}
+      propertyPath: _transparencyChangeSpeed
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5978533818139340758, guid: a00cf22d468e6bd439ea4ff97db6d260, type: 3}
       propertyPath: m_Layer

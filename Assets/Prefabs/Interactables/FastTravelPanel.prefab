@@ -167,7 +167,7 @@ Transform:
   - {fileID: 1829247473203020297}
   - {fileID: 7922761870105412684}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: -269.999, z: 0}
 --- !u!33 &8413489966724227784
 MeshFilter:
@@ -197,7 +197,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4cee7a5983b187943adc589b9cb1f084, type: 2}
+  - {fileID: 2100000, guid: d4fce24403ee8b14baa6951dacc65919, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -492,6 +492,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23987171954927072, guid: d8b3fd841d886024dbb23b69fa362205, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d4fce24403ee8b14baa6951dacc65919, type: 2}
     m_RemovedComponents:
     - {fileID: 64452019701053878, guid: d8b3fd841d886024dbb23b69fa362205, type: 3}
     m_AddedGameObjects: []

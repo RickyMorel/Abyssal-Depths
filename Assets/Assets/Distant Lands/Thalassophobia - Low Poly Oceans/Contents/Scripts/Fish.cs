@@ -62,7 +62,7 @@ namespace DistantLands
 		{
 			GameObject[] gos;
 			gos = flock.allFish.ToArray();
-
+			
 			speed = Random.Range(0.5f, 1.5f) * averageSpeed;
 
 

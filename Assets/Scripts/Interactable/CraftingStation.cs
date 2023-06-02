@@ -2,12 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class CraftingStation : Interactable
 {
     #region Editor Fields
 
     [SerializeField] private Transform _itemSpawnTransform;
+    [SerializeField] private ParticleSystem _craftingParticle;
 
     #endregion
 
@@ -35,7 +37,7 @@ public class CraftingStation : Interactable
     {
         if (!CraftingManager.CanCraft(craftingRecipy)) { return; }
 
-        Craft(craftingRecipy, craftingRecipy.CraftingIngredients);
+        PlayCraftingAnimation(craftingRecipy, craftingRecipy.CraftingIngredients);
     }
 
     private void Craft(CraftingRecipy craftingRecipy, List<ItemQuantity> usedResources)
@@ -58,5 +60,16 @@ public class CraftingStation : Interactable
     private void HandleUnInteract()
     {
         CraftingManager.Instance.EnableCanvas(false, null, this);
+    }
+
+    private IEnumerator PlayCraftingAnimation(CraftingRecipy craftingRecipy, List<ItemQuantity> usedResources)
+    {
+        if (TryGetComponent(out PlayableDirector playableDirector)) { playableDirector.Play(); }
+
+        yield return new WaitForSeconds(1.2f);
+
+        _craftingParticle.Play();
+
+        Craft(craftingRecipy, usedResources);
     }
 }

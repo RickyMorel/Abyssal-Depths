@@ -6,7 +6,7 @@ public class OpacityForChairs : MonoBehaviour
 {
     #region Editor Fields
 
-    [SerializeField] private Upgradable _upgradable;
+    [SerializeField] private Interactable _interactable;
     [SerializeField] private MeshRenderer _chairMaterial;
 
     #endregion
@@ -26,15 +26,15 @@ public class OpacityForChairs : MonoBehaviour
 
     private void Update()
     {
-        if (_upgradable.CurrentPlayer == null && _chairMaterial.material.color.a == 1) { return; }
+        if (_interactable.CurrentPlayer == null && _chairMaterial.material.color.a == 1) { return; }
 
-        if (_upgradable.CurrentPlayer != null && _chairMaterial.material.color.a > 0.5f)
+        if (_interactable.CurrentPlayer != null && _chairMaterial.material.color.a > 0.5f)
         {
             _timer += Time.deltaTime;
             _chairMaterial.material.color = new Color(_chairMaterial.material.color.r, _chairMaterial.material.color.g, _chairMaterial.material.color.b, Mathf.Lerp(1, 0.5f, _timer)); 
         }
 
-        if (_upgradable.CurrentPlayer == null && _chairMaterial.material.color.a < 1)
+        if (_interactable.CurrentPlayer == null && _chairMaterial.material.color.a < 1)
         {
             if (_timer > 1) { _timer = 1; }
 

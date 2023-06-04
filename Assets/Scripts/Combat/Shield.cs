@@ -106,6 +106,6 @@ public class Shield : MonoBehaviour
 
         Ship.Instance.Rb.AddForce(-pushDir.normalized * rb.mass, ForceMode.Impulse);
 
-        aIStateMachine.BounceOffShield(pushDir, _shipPushForce);
+        aIStateMachine.BounceOffShield(pushDir, _enemyPushForce + Ship.Instance.Rb.velocity.magnitude);
     }
 }

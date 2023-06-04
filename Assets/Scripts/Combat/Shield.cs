@@ -86,7 +86,6 @@ public class Shield : MonoBehaviour
 
     private void PushEnemy(AIStateMachine aIStateMachine, Collision collision)
     {
-        Debug.Log("PushEnemy: " + aIStateMachine.gameObject.name);
         StartCoroutine(PushEnemyDelay(aIStateMachine, collision.contacts[0].point));
     }
 

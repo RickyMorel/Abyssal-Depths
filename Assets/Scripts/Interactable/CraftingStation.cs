@@ -10,6 +10,7 @@ public class CraftingStation : Interactable
 
     [SerializeField] private Transform _itemSpawnTransform;
     [SerializeField] private ParticleSystem _craftingParticle;
+    [SerializeField] private PlayableDirector _craftingTimeline;
 
     #endregion
 
@@ -36,6 +37,9 @@ public class CraftingStation : Interactable
     public void TryCraft(CraftingRecipy craftingRecipy)
     {
         if (!CraftingManager.CanCraft(craftingRecipy)) { return; }
+
+        HandleUnInteract();
+        CurrentPlayer = null;
 
         StartCoroutine(PlayCraftingAnimation(craftingRecipy, craftingRecipy.CraftingIngredients));
     }
@@ -64,12 +68,11 @@ public class CraftingStation : Interactable
 
     private IEnumerator PlayCraftingAnimation(CraftingRecipy craftingRecipy, List<ItemQuantity> usedResources)
     {
-        if (TryGetComponent(out PlayableDirector playableDirector)) { playableDirector.Play(); }
+        _craftingTimeline.Play();
 
-        yield return new WaitForSeconds(1.2f);
+        yield return new WaitForSeconds(0.8f);
 
         _craftingParticle.Play();
-
         Craft(craftingRecipy, usedResources);
     }
 }

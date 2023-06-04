@@ -38,6 +38,7 @@ public class Interactable : MonoBehaviour
     public InteractionType InteractionType { get { return _interactionType; } set { _interactionType = value; } }
     public bool IsSingleUse { get { return _isSingleUse; } set { _isSingleUse = value; } }
     public bool CanUse { get { return _canUse; } set { _canUse = value; } }
+    public BaseInteractionController CurrentPlayer { get { return _humble.CurrentPlayer; } set { _humble.CurrentPlayer = value; } }
 
     #endregion
 
@@ -45,7 +46,6 @@ public class Interactable : MonoBehaviour
 
     public InteractableHumble Humble => _humble;
     public Transform PlayerPositionTransform => _playerPositionTransform;
-    public BaseInteractionController CurrentPlayer => _humble.CurrentPlayer;
     public float SingleUseTime => _singleUseTime;
     public InteractableHealth InteractableHealth => _interactableHealth;
     public Outline Outline => _outline;

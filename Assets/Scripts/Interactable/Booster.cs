@@ -17,8 +17,8 @@ public class Booster : RotationalInteractable
     [SerializeField] private List<Gear> _gears = new List<Gear>();
     [SerializeField] private float _speedReductionTolerance = 8f;
     [SerializeField] private Rigidbody _rb;
-    [SerializeField] private ParticleSystem _boosterParticle;
-    [SerializeField] private ParticleSystem[] _stabilizerBoosterParticles;
+    [SerializeField] private BoosterStabilizer _boosterStabilizer;
+    [SerializeField] private BoosterStabilizer[] _boosterStabilizers;
 
     #endregion
 
@@ -146,7 +146,16 @@ public class Booster : RotationalInteractable
 
         _isBoosting = isBoosting;
 
-        if (_isBoosting) _boosterParticle.Play(); else _boosterParticle.Stop();
+        if (_isBoosting)
+        {
+            _boosterStabilizer.Particles.Play();
+            _boosterStabilizer.LightComponent.enabled = true;
+        }
+        else
+        {
+            _boosterStabilizer.Particles.Stop();
+            _boosterStabilizer.LightComponent.enabled = false;
+        }
 
         OnBoostUpdated?.Invoke(isBoosting);
 
@@ -161,9 +170,18 @@ public class Booster : RotationalInteractable
 
         _isHovering = isHovering;
 
-        foreach (ParticleSystem particle in _stabilizerBoosterParticles)
+        foreach (BoosterStabilizer stabilizer in _boosterStabilizers)
         {
-            if (_isHovering) particle.Play(); else particle.Stop();
+            if (_isHovering)
+            {
+                stabilizer.Particles.Play();
+                stabilizer.LightComponent.enabled = true;
+            }
+            else 
+            {
+                stabilizer.Particles.Stop();
+                stabilizer.LightComponent.enabled = false;
+            }
         }
     }
 
@@ -219,6 +237,13 @@ public class Booster : RotationalInteractable
 public class Gear
 {
     public float MaxSpeed;
+}
+
+[System.Serializable]
+public class BoosterStabilizer
+{
+    public ParticleSystem Particles;
+    public Light LightComponent;
 }
 
 #endregion

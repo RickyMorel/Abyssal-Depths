@@ -194,8 +194,10 @@ MonoBehaviour:
   _interactionType: 1
   _playerPositionTransform: {fileID: 1688170152322542363}
   _isAIOnlyInteractable: 0
+  _attachOnInteract: 1
   _isSingleUse: 0
   _singleUseTime: 0.5
+  _onInteractParticles: {fileID: 0}
   _upgradeSocketObjs:
   - {fileID: 1184923613242633005}
   - {fileID: 3062101694037517811}
@@ -218,12 +220,10 @@ MonoBehaviour:
   - MaxSpeed: 55
   _speedReductionTolerance: 8
   _rb: {fileID: 0}
-  _boosterParticle: {fileID: 0}
-  _stabilizerBoosterParticles:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  _boosterStabilizer:
+    Particles: {fileID: 0}
+    LightComponent: {fileID: 0}
+  _boosterStabilizers: []
 --- !u!114 &3031896794887204772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,8 +238,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _resistanceType: 
   _weaknessType: 
+  _currentHealth: 0
   _maxHealth: 100
-  _healthBarImage: {fileID: 0}
   _damageParticles: {fileID: 0}
   _fixCost: {fileID: 11400000, guid: 5980c9c518217fe498cc9b85953ea003, type: 2}
   _timeToFix: 2
@@ -406,6 +406,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -180
       objectReference: {fileID: 0}
+    - target: {fileID: 23073742103938808, guid: 50d2935532bcb5d47a8e0409d7db789b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 01fe5e9db53b3ae4991e5969cc4b298c, type: 2}
     m_RemovedComponents:
     - {fileID: 64346781012507822, guid: 50d2935532bcb5d47a8e0409d7db789b, type: 3}
     m_AddedGameObjects: []
@@ -480,6 +484,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4797991658114679524, guid: d8b3fd841d886024dbb23b69fa362205, type: 3}
+      propertyPath: _upgradable
+      value: 
+      objectReference: {fileID: 8939861088303502654}
+    - target: {fileID: 4797991658114679524, guid: d8b3fd841d886024dbb23b69fa362205, type: 3}
+      propertyPath: _chairMaterial
+      value: 
+      objectReference: {fileID: 5326550984547026763}
+    - target: {fileID: 4797991658114679524, guid: d8b3fd841d886024dbb23b69fa362205, type: 3}
+      propertyPath: _transparencyChangeSpeed
+      value: 200
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 64452019701053878, guid: d8b3fd841d886024dbb23b69fa362205, type: 3}
     m_AddedGameObjects: []
@@ -487,6 +503,11 @@ PrefabInstance:
 --- !u!4 &5309267123091309105 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4718567469637786, guid: d8b3fd841d886024dbb23b69fa362205, type: 3}
+  m_PrefabInstance: {fileID: 5313840545580507819}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &5326550984547026763 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 23987171954927072, guid: d8b3fd841d886024dbb23b69fa362205, type: 3}
   m_PrefabInstance: {fileID: 5313840545580507819}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5971308806976388420
@@ -634,6 +655,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23600118499739126, guid: 2b58d0b3fe7ca6a42bc23d936b7f83bc, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 01fe5e9db53b3ae4991e5969cc4b298c, type: 2}
     m_RemovedComponents:
     - {fileID: 64611107894033396, guid: 2b58d0b3fe7ca6a42bc23d936b7f83bc, type: 3}
     - {fileID: 64633343494369284, guid: 2b58d0b3fe7ca6a42bc23d936b7f83bc, type: 3}

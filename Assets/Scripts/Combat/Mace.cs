@@ -12,6 +12,7 @@ public class Mace : MeleeWeapon
     [SerializeField] private Transform _handleTransform;
     [SerializeField] private Transform _moveToTransform;
     [Header("Floats")]
+    [SerializeField] private float _pushForce = 20f;
     [SerializeField] private float _grappleSpeed;
     [SerializeField] private float _flyingSpeed;
 
@@ -66,6 +67,11 @@ public class Mace : MeleeWeapon
     {
         if(obj.tag == "MainShip") { return; }
 
+        if (obj.TryGetComponent(out AIStateMachine aIState))
+        {
+            Vector3 pushDir = _rb.velocity;
+            aIState.BounceOffShield(pushDir, _pushForce);
+        }
         Instantiate(GameAssetsManager.Instance.MeleeFloorHitParticles, _maceHead.transform.position, Quaternion.identity);
         ShipCamera.Instance.ShakeCamera(5f, 50f, 0.2f);
     }

@@ -37,7 +37,7 @@ public class CraftingStation : Interactable
     {
         if (!CraftingManager.CanCraft(craftingRecipy)) { return; }
 
-        PlayCraftingAnimation(craftingRecipy, craftingRecipy.CraftingIngredients);
+        StartCoroutine(PlayCraftingAnimation(craftingRecipy, craftingRecipy.CraftingIngredients));
     }
 
     private void Craft(CraftingRecipy craftingRecipy, List<ItemQuantity> usedResources)

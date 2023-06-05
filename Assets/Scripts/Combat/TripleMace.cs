@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TripleMace : MeleeWeapon
+public class TripleMace : MonoBehaviour
 {
     #region Editor Fields
 
-    [SerializeField] private GameObject[] _maceHead;
+    [SerializeField] private Mace[] _maces;
     [SerializeField] private Rigidbody[] _rbs;
     [SerializeField] private Transform _moveLimits;
 
@@ -20,27 +20,17 @@ public class TripleMace : MeleeWeapon
 
     #region Unity Loops
 
-    public override void Awake()
-    {
-        //do nothing
-    }
-
-    public override void OnDestroy()
-    {
-        //do nothing
-    }
-
-    public override void FixedUpdate()
+    public void FixedUpdate()
     {
         Vector3 moveDirection;
 
-        if (_weapon.CurrentPlayer == null)
+        if (_maces[0].Weapon.CurrentPlayer == null)
         {
             moveDirection = Vector3.zero;
         }
         else
         {
-            moveDirection = _weapon.CurrentPlayer.MoveDirection;
+            moveDirection = _maces[0].Weapon.CurrentPlayer.MoveDirection;
         }
 
         ApplyForceToMace(0, moveDirection);
@@ -52,22 +42,17 @@ public class TripleMace : MeleeWeapon
 
     public void ApplyForceToMace(int index, Vector3 moveDirection)
     {
-        if (_rbs[index].transform.position.x >= _moveLimits.transform.position.x && moveDirection.x > 0) 
+        if (_rbs[index].transform.position.x >= _moveLimits.transform.position.x && moveDirection.x > 0)
         {
             _rbs[index].velocity = Vector3.zero;
-            return; 
+            return;
         }
         else if (_rbs[index].transform.position.x >= _moveLimits.transform.position.x)
         {
             _rbs[index].velocity = Vector3.zero;
         }
 
-        _rbs[index].AddForce(moveDirection * _moveForce);
-        _rbs[index].velocity = Vector3.ClampMagnitude(_rbs[index].velocity, _maxMovementSpeed);
-    }
-
-    public override void HandleHitParticles(GameObject obj)
-    {
-        //do nothing
+        _rbs[index].AddForce(moveDirection * _maces[index].MoveForce);
+        _rbs[index].velocity = Vector3.ClampMagnitude(_rbs[index].velocity, _maces[index].MaxMovementSpeed);
     }
 }

@@ -23,6 +23,7 @@ public abstract class MeleeWeapon : WeaponShoot
 
     #region Public Properties
 
+    public float MoveForce => _moveForce;
     public float MaxMovementSpeed => _maxMovementSpeed;
     public Rigidbody rb => _rb;
 

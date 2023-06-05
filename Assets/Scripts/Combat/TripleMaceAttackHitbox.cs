@@ -61,26 +61,26 @@ public class TripleMaceAttackHitbox : AttackHitBox
 
         Vector3 pos = otherMace.gameObject.transform.position;
         Vector3 dir = (transform.position - pos).normalized;
-        _tripleMace.ApplyForceToMace(_whichRbsToUse, dir);
+         _tripleMace.ApplyForceToMace(_whichRbsToUse, dir);
     }
 
     public virtual void CalculateDamage()
     {
-        _damage = (int)_damageData.SecondaryValue[0];
-        if (Mathf.Abs(_tripleMace.rbs[_whichRbsToUse].velocity.x) >= (_tripleMace.MaxMovementSpeed / 2) || Mathf.Abs(_tripleMace.rbs[_whichRbsToUse].velocity.y) >= (_tripleMace.MaxMovementSpeed / 2))
-        {
-            float damagePercentage;
-            if (Mathf.Abs(_tripleMace.rbs[_whichRbsToUse].velocity.x) >= Mathf.Abs(_tripleMace.rbs[_whichRbsToUse].velocity.y))
-            {
-                damagePercentage = (Mathf.Abs(_tripleMace.rbs[_whichRbsToUse].velocity.x) * 100) / _tripleMace.MaxMovementSpeed;
-            }
-            else
-            {
-                damagePercentage = (Mathf.Abs(_tripleMace.rbs[_whichRbsToUse].velocity.y) * 100) / _tripleMace.MaxMovementSpeed;
-            }
-            _damage = (int)((_damage * damagePercentage) / 100);
-        }
-        else { _damage = _damageData.Damage[0]; }
+        //_damage = (int)_damageData.SecondaryValue[0];
+        //if (Mathf.Abs(_tripleMace.rbs[_whichRbsToUse].velocity.x) >= (_tripleMace.MaxMovementSpeed / 2) || Mathf.Abs(_tripleMace.rbs[_whichRbsToUse].velocity.y) >= (_tripleMace.MaxMovementSpeed / 2))
+        //{
+        //    float damagePercentage;
+        //    if (Mathf.Abs(_tripleMace.rbs[_whichRbsToUse].velocity.x) >= Mathf.Abs(_tripleMace.rbs[_whichRbsToUse].velocity.y))
+        //    {
+        //        damagePercentage = (Mathf.Abs(_tripleMace.rbs[_whichRbsToUse].velocity.x) * 100) / _tripleMace.MaxMovementSpeed;
+        //    }
+        //    else
+        //    {
+        //        damagePercentage = (Mathf.Abs(_tripleMace.rbs[_whichRbsToUse].velocity.y) * 100) / _tripleMace.MaxMovementSpeed;
+        //    }
+        //    _damage = (int)((_damage * damagePercentage) / 100);
+        //}
+        //else { _damage = _damageData.Damage[0]; }
     }
 
     public virtual void HandleHitParticles(GameObject obj)

@@ -21,8 +21,6 @@ public class Mace : MeleeWeaponWithRope
 
     public override void Update()
     {
-     //   base.Update();
-
         CheckShootInput();
     }
 

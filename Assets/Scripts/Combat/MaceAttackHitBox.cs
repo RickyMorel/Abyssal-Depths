@@ -25,12 +25,6 @@ public class MaceAttackHitBox : AttackHitBox
         transform.SetParent(null);
     }
 
-    public void Update()
-    {
-        transform.rotation = Quaternion.Euler(0, CalculateAngleY(), 90-CalculateAngleZ());
-        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
-    }
-
     public override void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == 6) { InvokeHitParticles(other); }

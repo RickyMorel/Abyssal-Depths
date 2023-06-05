@@ -23,7 +23,7 @@ public class MeleeWeaponWithRope : MeleeWeapon
     protected float _timePassedReturning;
     protected Vector3 _originalWeaponHeadPosition;
     protected Quaternion _originalWeaponHeadRotation;
-    [SerializeField] protected bool _prevInputState;
+    protected bool _prevInputState;
 
     #endregion
 
@@ -49,11 +49,12 @@ public class MeleeWeaponWithRope : MeleeWeapon
 
         if (_weaponHeadRb.transform.parent != null)
         {
-            _weaponHeadRb.transform.localRotation = Quaternion.Euler(0, 270, 270);
+            _weaponHeadRb.transform.localRotation = _originalWeaponHeadRotation;
         }
         else
         {
             _weaponHeadRb.transform.rotation = Quaternion.Euler(0, CalculateAngleY(), CalculateAngle() - 90);
+            _weaponHeadRb.transform.position = new Vector3(_weaponHeadRb.transform.position.x, _weaponHeadRb.transform.position.y, 0);
         }
     }
 
@@ -79,7 +80,6 @@ public class MeleeWeaponWithRope : MeleeWeapon
 
     public override void Shoot()
     {
-        Debug.Log("Shoot");
         if (_throwState != ThrowState.Attached)
         {
             if (_throwState == ThrowState.Arrived || _throwState == ThrowState.Stuck || _throwState == ThrowState.GrabbingEnemy) { ReturnWeaponHead(); }

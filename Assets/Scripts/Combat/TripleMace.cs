@@ -22,26 +22,9 @@ public class TripleMace : MonoBehaviour
 
     public void FixedUpdate()
     {
-        //Vector3 moveDirection;
-
-        //if (_maces[0].Weapon.CurrentPlayer == null)
-        //{
-        //    moveDirection = Vector3.zero;
-        //}
-        //else
-        //{
-        //    moveDirection = _maces[0].Weapon.CurrentPlayer.MoveDirection;
-        //}
-
-        //ApplyForceToMace(0, moveDirection);
-        //ApplyForceToMace(1, moveDirection);
-        //ApplyForceToMace(2, moveDirection);
-
         if(_maces[0].Weapon.CurrentPlayer == null) { return; }
 
         float yDir = Mathf.RoundToInt(_maces[0].Weapon.CurrentPlayer.MoveDirection.y);
-
-        Debug.Log("yDir: " + yDir);
 
         if (Vector3.Distance(_rbs[0].transform.position, _rbs[1].transform.position) < _maceDistance)
         {
@@ -56,17 +39,6 @@ public class TripleMace : MonoBehaviour
                 ApplyForceToMace(0, dir.normalized);
             }
         }
-
-        //if (Vector3.Distance(_rbs[0].transform.position, _rbs[1].transform.position) < _maceDistance)
-        //{
-        //    Vector3 dir = _rbs[1].transform.position - _rbs[0].transform.position;
-        //    ApplyForceToMace(1, dir.normalized);
-        //}
-        //if (Vector3.Distance(_rbs[0].transform.position, _rbs[2].transform.position) < _maceDistance)
-        //{
-        //    Vector3 dir = _rbs[2].transform.position - _rbs[0].transform.position;
-        //    ApplyForceToMace(2, dir.normalized);
-        //}
     }
 
     #endregion

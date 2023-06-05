@@ -8,7 +8,7 @@ public class TripleMace : MonoBehaviour
 
     [SerializeField] private Mace[] _maces;
     [SerializeField] private Rigidbody[] _rbs;
-    [SerializeField] private Transform _moveLimits;
+    [SerializeField] private float _maceDistance = 8f;
 
     #endregion
 
@@ -22,36 +22,57 @@ public class TripleMace : MonoBehaviour
 
     public void FixedUpdate()
     {
-        Vector3 moveDirection;
+        //Vector3 moveDirection;
 
-        if (_maces[0].Weapon.CurrentPlayer == null)
+        //if (_maces[0].Weapon.CurrentPlayer == null)
+        //{
+        //    moveDirection = Vector3.zero;
+        //}
+        //else
+        //{
+        //    moveDirection = _maces[0].Weapon.CurrentPlayer.MoveDirection;
+        //}
+
+        //ApplyForceToMace(0, moveDirection);
+        //ApplyForceToMace(1, moveDirection);
+        //ApplyForceToMace(2, moveDirection);
+
+        if(_maces[0].Weapon.CurrentPlayer == null) { return; }
+
+        float yDir = Mathf.RoundToInt(_maces[0].Weapon.CurrentPlayer.MoveDirection.y);
+
+        Debug.Log("yDir: " + yDir);
+
+        if (Vector3.Distance(_rbs[0].transform.position, _rbs[1].transform.position) < _maceDistance)
         {
-            moveDirection = Vector3.zero;
-        }
-        else
-        {
-            moveDirection = _maces[0].Weapon.CurrentPlayer.MoveDirection;
+            if (yDir == 1)
+            {
+                Vector3 dir = _rbs[1].transform.position - _rbs[0].transform.position;
+                ApplyForceToMace(1, dir.normalized);
+            }
+            else if (yDir == -1)
+            {
+                Vector3 dir = _rbs[0].transform.position - _rbs[1].transform.position;
+                ApplyForceToMace(0, dir.normalized);
+            }
         }
 
-        ApplyForceToMace(0, moveDirection);
-        ApplyForceToMace(1, moveDirection);
-        ApplyForceToMace(2, moveDirection);
+        //if (Vector3.Distance(_rbs[0].transform.position, _rbs[1].transform.position) < _maceDistance)
+        //{
+        //    Vector3 dir = _rbs[1].transform.position - _rbs[0].transform.position;
+        //    ApplyForceToMace(1, dir.normalized);
+        //}
+        //if (Vector3.Distance(_rbs[0].transform.position, _rbs[2].transform.position) < _maceDistance)
+        //{
+        //    Vector3 dir = _rbs[2].transform.position - _rbs[0].transform.position;
+        //    ApplyForceToMace(2, dir.normalized);
+        //}
     }
 
     #endregion
 
     public void ApplyForceToMace(int index, Vector3 moveDirection)
     {
-        if (_rbs[index].transform.position.x >= _moveLimits.transform.position.x && moveDirection.x > 0)
-        {
-            _rbs[index].velocity = Vector3.zero;
-            return;
-        }
-        else if (_rbs[index].transform.position.x >= _moveLimits.transform.position.x)
-        {
-            _rbs[index].velocity = Vector3.zero;
-        }
-
         _rbs[index].AddForce(moveDirection * _maces[index].MoveForce);
         _rbs[index].velocity = Vector3.ClampMagnitude(_rbs[index].velocity, _maces[index].MaxMovementSpeed);
     }

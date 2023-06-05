@@ -23,7 +23,6 @@ public class ElectricHarpoon : MeleeWeaponWithRope
 
     #region Private Variables
 
-    private bool _prevInputState;
     private bool _prevInput2State;
     private SpringJoint _tetherSpringInstance;
     private ElectricZoneInstanceClass _electrocutionZoneInstance;

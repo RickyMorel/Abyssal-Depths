@@ -17,10 +17,13 @@ public class MeleeWeaponWithRope : MeleeWeapon
     #region Private Variables
 
     private Transform _middlePointTransform;
-    [SerializeField] protected ThrowState _throwState = ThrowState.Attached;
+    private LineRenderer _lr;
+
+    protected ThrowState _throwState = ThrowState.Attached;
     protected float _timePassedReturning;
     protected Vector3 _originalWeaponHeadPosition;
     protected Quaternion _originalWeaponHeadRotation;
+    [SerializeField] protected bool _prevInputState;
 
     #endregion
 
@@ -30,10 +33,14 @@ public class MeleeWeaponWithRope : MeleeWeapon
     {
         base.Start();
 
+        _lr = GetComponent<LineRenderer>();
+
         _originalWeaponHeadPosition = _weaponHeadRb.transform.localPosition;
         _originalWeaponHeadRotation = _weaponHeadRb.transform.localRotation;
 
         _middlePointTransform = new GameObject("MiddlePointTransform").transform;
+
+        ReturnWeaponHead();
     }
 
     public override void Update()
@@ -57,8 +64,22 @@ public class MeleeWeaponWithRope : MeleeWeapon
 
     #endregion
 
+    public override void CheckShootInput()
+    {
+        //Shoots weapon head
+        if (_weapon.CurrentPlayer.IsUsing == _prevInputState) { return; }
+
+        _prevInputState = _weapon.CurrentPlayer.IsUsing;
+
+        if (_weapon.CurrentPlayer.IsUsing)
+        {
+            Shoot();
+        }
+    }
+
     public override void Shoot()
     {
+        Debug.Log("Shoot");
         if (_throwState != ThrowState.Attached)
         {
             if (_throwState == ThrowState.Arrived || _throwState == ThrowState.Stuck || _throwState == ThrowState.GrabbingEnemy) { ReturnWeaponHead(); }
@@ -75,6 +96,10 @@ public class MeleeWeaponWithRope : MeleeWeapon
 
     public virtual void DrawRope()
     {
+        if(_throwState == ThrowState.Attached) { _lr.enabled = false; return; }
+
+        _lr.enabled = true;
+
         _middlePointTransform.position = new Vector3((_weaponHeadRb.transform.position.x + _handleTransform.position.x) / 2, (_weaponHeadRb.transform.position.y + _handleTransform.position.y) / 2, (_weaponHeadRb.transform.position.z + _handleTransform.position.z) / 2);
         _middlePointTransform.LookAt(_weaponHeadRb.transform);
 

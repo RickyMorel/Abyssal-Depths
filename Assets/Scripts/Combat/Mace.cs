@@ -12,12 +12,6 @@ public class Mace : MeleeWeaponWithRope
 
     #endregion
 
-    #region Private Variables
-
-    private bool _prevInputState;
-
-    #endregion
-
     #region Unity Loops
 
     public override void OnEnable()
@@ -27,15 +21,16 @@ public class Mace : MeleeWeaponWithRope
 
     public override void Update()
     {
-        base.Update();
+     //   base.Update();
 
-        if (_weapon.CurrentPlayer == null && _throwState == (MeleeWeaponWithRope.ThrowState)ThrowState.Throwing) { ReturnWeaponHead(); return; }
-        if (_weapon.CurrentPlayer != null) { _throwState = (MeleeWeaponWithRope.ThrowState)ThrowState.Throwing; }
+        CheckShootInput();
     }
 
     public override void FixedUpdate()
     {
         base.FixedUpdate();
+
+        _weaponHeadRb.isKinematic = _throwState == (MeleeWeaponWithRope.ThrowState)ThrowState.Attached || _throwState == (MeleeWeaponWithRope.ThrowState)ThrowState.Returning;
 
         ThrowWeaponHead();
     }
@@ -46,6 +41,18 @@ public class Mace : MeleeWeaponWithRope
     }
 
     #endregion
+
+    public override void CheckShootInput()
+    {
+        bool isUsing = _weapon.CurrentPlayer != null;
+
+        //Shoots weapon head
+        if (isUsing == _prevInputState) { return; }
+
+        _prevInputState = isUsing;
+
+        Shoot();
+    }
 
     public override void HandleHitParticles(GameObject obj)
     {

@@ -11,6 +11,7 @@ public class CraftingStation : Interactable
     [SerializeField] private Transform _itemSpawnTransform;
     [SerializeField] private ParticleSystem _craftingParticle;
     [SerializeField] private PlayableDirector _craftingTimeline;
+    [SerializeField] private  _craftingText
 
     #endregion
 
@@ -38,9 +39,6 @@ public class CraftingStation : Interactable
     {
         if (!CraftingManager.CanCraft(craftingRecipy)) { return; }
 
-        HandleUnInteract();
-        CurrentPlayer = null;
-
         StartCoroutine(PlayCraftingAnimation(craftingRecipy, craftingRecipy.CraftingIngredients));
     }
 
@@ -52,6 +50,8 @@ public class CraftingStation : Interactable
         if(spawnedItem.TryGetComponent<ChipPickup>(out ChipPickup chipPickup)) { chipPickup.Initialize(craftingRecipy.CraftedItem.Item); }
 
         OnCraft?.Invoke();
+
+        RemoveCurrentPlayer();
     }
 
     private void HandleInteract()
@@ -70,7 +70,7 @@ public class CraftingStation : Interactable
     {
         _craftingTimeline.Play();
 
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(1.2f);
 
         _craftingParticle.Play();
         Craft(craftingRecipy, usedResources);

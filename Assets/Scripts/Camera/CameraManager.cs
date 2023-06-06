@@ -14,7 +14,6 @@ public class CameraManager : MonoBehaviour
     private CinemachineBrain[] _cameras;
     private CinemachineVirtualCamera[] _vCams;
     
-    private GameObject _perspectiveCamera;
     private bool _isInOrthoMode = false;
 
     #endregion
@@ -52,12 +51,12 @@ public class CameraManager : MonoBehaviour
         if (boolean)
         {
             _cameras[_cameras.Length - 1].OutputCamera.cullingMask = -1;
-            _perspectiveCamera.GetComponent<Camera>().cullingMask = LayerMask.GetMask("Floor");
+            ShipCamera.Instance.PerspectiveCamera.cullingMask = LayerMask.GetMask("Floor");
         }
         else
         {
             _cameras[_cameras.Length - 1].OutputCamera.cullingMask = LayerMask.GetMask("Ragdoll", "ShipFloor", "Orthographic", "UI", "LightSaber");
-            _perspectiveCamera.GetComponent<Camera>().cullingMask = LayerMask.GetMask("Floor", "Default", "TransparentFX", "Ignore Raycast", "Water", "UI", "LootLayer", "ItemLayer", "ItemBox", "NPC", "EnemyHitBox");
+            ShipCamera.Instance.PerspectiveCamera.cullingMask = LayerMask.GetMask("Floor", "Default", "TransparentFX", "Ignore Raycast", "Water", "UI", "LootLayer", "ItemLayer", "ItemBox", "NPC", "EnemyHitBox");
         }
     }
 
@@ -68,8 +67,6 @@ public class CameraManager : MonoBehaviour
 
         Array.Sort(_cameras, (a, b) => String.Compare(a.name, b.name));
         Array.Sort(_vCams, (a, b) => String.Compare(a.name, b.name));
-
-        _perspectiveCamera = _cameras[_cameras.Length - 1].transform.parent.Find("PerspectiveCamera").gameObject;
     }
 
     public void ToggleCamera(bool boolean, float timeTillToggle = 0f)
@@ -77,8 +74,9 @@ public class CameraManager : MonoBehaviour
         //Stops previous camera toggle functions from calling
         GetAllCameras();
 
-        _cameras[_cameras.Length - 1].gameObject.SetActive(boolean);
-        _vCams[_vCams.Length - 1].gameObject.SetActive(boolean);
+        ShipCamera.Instance.MainCamera.gameObject.SetActive(boolean);
+        ShipCamera.Instance.PerspectiveCamera.gameObject.SetActive(boolean);
+        ShipCamera.Instance.BossCamera.gameObject.SetActive(boolean);
 
         for (int i = 0; i < _cameras.Length - 1; i++)
         {
@@ -95,8 +93,9 @@ public class CameraManager : MonoBehaviour
 
         GetAllCameras();
 
-        _cameras[_cameras.Length - 1].gameObject.SetActive(boolean);
-        _vCams[_vCams.Length - 1].gameObject.SetActive(boolean);
+        ShipCamera.Instance.MainCamera.gameObject.SetActive(boolean);
+        ShipCamera.Instance.PerspectiveCamera.gameObject.SetActive(boolean);
+        ShipCamera.Instance.BossCamera.gameObject.SetActive(boolean);
 
         for (int i = 0; i < _cameras.Length - 1; i++)
         {

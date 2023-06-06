@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(SphereCollider))]
 public class ShipFastTravel : MonoBehaviour
@@ -22,7 +23,7 @@ public class ShipFastTravel : MonoBehaviour
     private bool _wantToTravel = false;
 
     private ShipDoor _shipDoor;
-    private PlayerInputHandler[] _isPlayerActive;
+    [SerializeField] private PlayerInputHandler[] _isPlayerActive;
     private List<PlayerInputHandler> _playersInShipList = new List<PlayerInputHandler>();
 
     private FastTravelNPC _fastTravelNPC;
@@ -37,6 +38,11 @@ public class ShipFastTravel : MonoBehaviour
 
     #region Unity Loops
 
+    private void Awake()
+    {
+        PlayerJoinManager.OnPlayerJoin += HandleNewPlayer;
+    }
+
     private void Start()
     {
         _mainShip = FindObjectOfType<Ship>();
@@ -50,7 +56,17 @@ public class ShipFastTravel : MonoBehaviour
         _mainShip.OnRespawn += HandleRespawn;
     }
 
+    private void OnDestroy()
+    {
+        PlayerJoinManager.OnPlayerJoin -= HandleNewPlayer;
+    }
+
     #endregion
+
+    private void HandleNewPlayer()
+    {
+        _isPlayerActive = FindObjectsOfType<PlayerInputHandler>();
+    }
 
     private void HandleRespawn()
     {
@@ -71,7 +87,8 @@ public class ShipFastTravel : MonoBehaviour
 
         if (_playersActive != _playersInShip) { return; }
 
-        _cameraManager.ToggleCamera(true);
+        if (SceneManager.GetActiveScene().name != "SpaceStations") { _cameraManager.ToggleCamera(true); }
+        else { _cameraManager.ToggleCamera(false); }
 
         if (_shipDoor.IsWantedDoorOpen == true) { return; }
 
@@ -149,12 +166,12 @@ public class ShipFastTravel : MonoBehaviour
     private IEnumerator DetachFromShipCoroutine()
     {
         yield return new WaitForSeconds(0.1f);
-        for (int i = 0; i < _isPlayerActive.Length; i++)
-        {
-            if (_isPlayerActive[i].IsPlayerActive == true)
-            {
-                _isPlayerActive[i].GetComponentInParent<PlayerStateMachine>().AttachToShip(false);
-            }
-        }
+        //for (int i = 0; i < _isPlayerActive.Length; i++)
+        //{
+        //    if (_isPlayerActive[i].IsPlayerActive == true)
+        //    {
+        //        _isPlayerActive[i].GetComponentInParent<PlayerStateMachine>().AttachToShip(false);
+        //    }
+        //}
     }
 }

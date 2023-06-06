@@ -12,6 +12,7 @@ public class ShipCamera : BaseCamera
 
     [SerializeField] private Camera _mainCamera;
     [SerializeField] private Camera _perspectiveCamera;
+    [SerializeField] private Camera _bossCamera;
 
     #endregion
 
@@ -31,6 +32,9 @@ public class ShipCamera : BaseCamera
     #region Public Properties
 
     public static ShipCamera Instance { get { return _instance; } }
+    public Camera MainCamera => _mainCamera;
+    public Camera PerspectiveCamera => _perspectiveCamera;
+    public Camera BossCamera => _bossCamera;
 
     #endregion
 
@@ -60,7 +64,7 @@ public class ShipCamera : BaseCamera
         _orginalFOV = _virtualCamera.m_Lens.OrthographicSize;
         _currentFOV = _orginalFOV;
         
-        ChangeToBossZoom(false);
+        ChangeToBossZoom(true);
     }
 
     private void LateUpdate()

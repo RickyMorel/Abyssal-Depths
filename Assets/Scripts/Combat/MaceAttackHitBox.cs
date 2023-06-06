@@ -45,37 +45,6 @@ public class MaceAttackHitBox : AttackHitBox
 
     #endregion
 
-    private float CalculateAngleZ()
-    {
-        float x;
-        float y;
-        float h;
-        float senA;
-        float angle;
-
-        x = transform.position.x - _weapon.transform.position.x;
-        y = transform.position.y - _weapon.transform.position.y;
-
-        h = Mathf.Sqrt(x * x + y * y);
-        senA = y / h;
-        angle = Mathf.Asin(senA);
-
-        float degAngle = Mathf.Rad2Deg * angle;
-        return degAngle;
-    }
-
-    private float CalculateAngleY()
-    {
-        if (transform.position.x < _weapon.transform.position.x)
-        {
-            return 0;
-        }
-        else
-        {
-            return 180;
-        }
-    }
-
     public virtual void CalculateDamage()
     {
         _damage = (int)_damageData.SecondaryValue[0];

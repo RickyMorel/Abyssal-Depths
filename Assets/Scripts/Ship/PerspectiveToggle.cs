@@ -53,7 +53,7 @@ public class PerspectiveToggle : MonoBehaviour
             _everythingElse[i].SetActive(boolean);
         }
 
-        _collosal.SetActive(!boolean);
+        _collosal?.SetActive(!boolean);
         _cameraManager.CullingMaskToggle(boolean);
     }
 }

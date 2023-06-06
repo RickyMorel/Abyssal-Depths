@@ -19,7 +19,7 @@ public class MeleeWeaponWithRope : MeleeWeapon
     private Transform _middlePointTransform;
     private LineRenderer _lr;
 
-    protected ThrowState _throwState = ThrowState.Attached;
+    [SerializeField] protected ThrowState _throwState = ThrowState.Attached;
     protected float _timePassedReturning;
     protected Vector3 _originalWeaponHeadPosition;
     protected Quaternion _originalWeaponHeadRotation;
@@ -29,14 +29,19 @@ public class MeleeWeaponWithRope : MeleeWeapon
 
     #region Unity Loops
 
+    public override void Awake()
+    {
+        base.Awake();
+
+        _originalWeaponHeadPosition = _weaponHeadRb.transform.localPosition;
+        _originalWeaponHeadRotation = _weaponHeadRb.transform.localRotation;
+    }
+
     public override void Start()
     {
         base.Start();
 
         _lr = GetComponent<LineRenderer>();
-
-        _originalWeaponHeadPosition = _weaponHeadRb.transform.localPosition;
-        _originalWeaponHeadRotation = _weaponHeadRb.transform.localRotation;
 
         _middlePointTransform = new GameObject("MiddlePointTransform").transform;
 
@@ -142,7 +147,7 @@ public class MeleeWeaponWithRope : MeleeWeapon
         if (_throwState == ThrowState.Throwing)
         {
             Vector3 forceDir = _moveToTransform.position - _weaponHeadRb.transform.position;
-            _weaponHeadRb.AddForce(forceDir.normalized * _flyingSpeed, ForceMode.Force);
+            _weaponHeadRb.AddForce(forceDir.normalized * _flyingSpeed * Time.deltaTime, ForceMode.Force);
         }
 
         if (_throwState == ThrowState.Throwing && Vector3.Distance(_weaponHeadRb.transform.position, moveToCurrentPosition.position) < 2f)

@@ -1,6 +1,8 @@
+using Rewired;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(DeathManager))]
 public class GameManager : MonoBehaviour
@@ -38,5 +40,34 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         _deathManager = GetComponent<DeathManager>();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            Destroy(Ship.Instance.gameObject);
+
+            PlayerInputHandler[] players = FindObjectsOfType<PlayerInputHandler>(true);
+            PlayerCamera[] playerCameras = FindObjectsOfType<PlayerCamera>(true);
+            AttackHitBox[] attackHitboxes = FindObjectsOfType<AttackHitBox>();
+
+            foreach (var player in players)
+            {
+                Destroy(player.transform.root.gameObject);
+            }
+
+            foreach (var playerCamera in playerCameras)
+            {
+                Destroy(playerCamera.transform.root.gameObject);
+            }
+
+            foreach (var hitbox in attackHitboxes)
+            {
+                Destroy(hitbox.transform.root.gameObject);
+            }
+
+            SceneManager.LoadScene(0);
+        }
     }
 }

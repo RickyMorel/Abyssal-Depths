@@ -51,7 +51,25 @@ public class Mace : MeleeWeaponWithRope
 
         _prevInputState = isUsing;
 
+        Debug.Log("Shoot Mace");
+
         Shoot();
+    }
+
+    public override void Shoot()
+    {
+        if(_weapon.CurrentPlayer == null)
+        {
+            ReturnWeaponHead();
+        }
+        else
+        {
+            _throwState = (MeleeWeaponWithRope.ThrowState)ThrowState.Throwing;
+            _weaponHeadRb.isKinematic = false;
+            _weapon.ShouldRotate = false;
+
+            _weaponHeadRb.transform.SetParent(null);
+        }
     }
 
     public override void HandleHitParticles(GameObject obj)

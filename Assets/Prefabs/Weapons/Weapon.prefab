@@ -1750,7 +1750,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1665629398017217854}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 5.92}
+  m_LocalPosition: {x: -0, y: 0, z: 3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2926,7 +2926,7 @@ MonoBehaviour:
   _weaponHeadRb: {fileID: 2648002606139682233}
   _bendPoint: {fileID: 2463328991605081281}
   _flyingSpeed: 2000
-  _prevInputState: 0
+  _throwState: 0
   _pushForce: 20
 --- !u!120 &2742091706783387941
 LineRenderer:
@@ -5071,8 +5071,8 @@ MonoBehaviour:
   _handleTransform: {fileID: 2367695852931752527}
   _weaponHeadRb: {fileID: 7820839840813908243}
   _bendPoint: {fileID: 8526038097527690976}
-  _flyingSpeed: 2000
-  _prevInputState: 0
+  _flyingSpeed: 20000
+  _throwState: 0
   _harpoonCollider: {fileID: 9167567839145680277}
   _grappleSpeed: 4000
   _maxElectricBeaconDistance: 30
@@ -5599,7 +5599,7 @@ MonoBehaviour:
   _weaponHeadRb: {fileID: 6221752352383463488}
   _bendPoint: {fileID: 6385066510830540865}
   _flyingSpeed: 2000
-  _prevInputState: 0
+  _throwState: 0
   _pushForce: 20
 --- !u!120 &2703890156010222440
 LineRenderer:
@@ -7576,7 +7576,7 @@ MonoBehaviour:
   _weaponHeadRb: {fileID: 6339893265388052966}
   _bendPoint: {fileID: 2226713214663701580}
   _flyingSpeed: 2000
-  _prevInputState: 0
+  _throwState: 0
   _pushForce: 20
 --- !u!120 &6064604383850676083
 LineRenderer:

@@ -26,6 +26,7 @@ public class TripleMace : MonoBehaviour
 
         float yDir = Mathf.RoundToInt(_maces[0].Weapon.CurrentPlayer.MoveDirection.y);
 
+        //Separates maces according to which one is closest to the target position
         if (Vector3.Distance(_rbs[0].transform.position, _rbs[1].transform.position) < _maceDistance)
         {
             if (yDir == 1)

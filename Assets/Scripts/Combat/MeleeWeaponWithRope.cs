@@ -19,7 +19,7 @@ public class MeleeWeaponWithRope : MeleeWeapon
     private Transform _middlePointTransform;
     private LineRenderer _lr;
 
-    [SerializeField] protected ThrowState _throwState = ThrowState.Attached;
+    protected ThrowState _throwState = ThrowState.Attached;
     protected float _timePassedReturning;
     protected Vector3 _originalWeaponHeadPosition;
     protected Quaternion _originalWeaponHeadRotation;

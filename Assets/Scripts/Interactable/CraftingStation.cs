@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
+using TMPro;
 
 public class CraftingStation : Interactable
 {
@@ -11,7 +12,15 @@ public class CraftingStation : Interactable
     [SerializeField] private Transform _itemSpawnTransform;
     [SerializeField] private ParticleSystem _craftingParticle;
     [SerializeField] private PlayableDirector _craftingTimeline;
-    [SerializeField] private  _craftingText
+    [SerializeField] private TextMeshPro _craftingText;
+
+    #endregion
+
+    #region Private Variables
+
+    private int _counter = 0;
+    private bool _shouldCountUp = true;
+    private Coroutine _lastRoutine;
 
     #endregion
 
@@ -20,6 +29,14 @@ public class CraftingStation : Interactable
     public static event Action OnCraft;
 
     #endregion
+
+    #region Unity Loops
+
+    private void Start()
+    {
+        _craftingText.text = "Waiting";
+        _lastRoutine = StartCoroutine(CraftingText(_craftingText));
+    }
 
     public override void Awake()
     {
@@ -35,9 +52,18 @@ public class CraftingStation : Interactable
         Humble.OnUninteract -= HandleUnInteract;
     }
 
+    #endregion
+
     public void TryCraft(CraftingRecipy craftingRecipy)
     {
         if (!CraftingManager.CanCraft(craftingRecipy)) { return; }
+
+        _craftingText.text = "Crafting";
+        _shouldCountUp = true;
+
+        if(_lastRoutine != null) { StopCoroutine(_lastRoutine); }
+
+        _lastRoutine = StartCoroutine(CraftingText(_craftingText));
 
         StartCoroutine(PlayCraftingAnimation(craftingRecipy, craftingRecipy.CraftingIngredients));
     }
@@ -52,6 +78,12 @@ public class CraftingStation : Interactable
         OnCraft?.Invoke();
 
         RemoveCurrentPlayer();
+
+        StopCoroutine(_lastRoutine);
+
+        _craftingText.text = "Waiting";
+        _shouldCountUp = true;
+        _lastRoutine = StartCoroutine(CraftingText(_craftingText));
     }
 
     private void HandleInteract()
@@ -74,5 +106,51 @@ public class CraftingStation : Interactable
 
         _craftingParticle.Play();
         Craft(craftingRecipy, usedResources);
+    }
+
+    private IEnumerator CraftingText(TextMeshPro text)
+    {
+        yield return new WaitForSeconds(0.1f);
+        if (_shouldCountUp && _counter < 3) 
+        { 
+            _counter += 1;
+            text.text = text.text + ".";
+
+            StopCoroutine(_lastRoutine);
+
+            _lastRoutine = StartCoroutine(CraftingText(text));
+
+            yield break;
+        }
+        else if (_shouldCountUp && _counter >= 3) 
+        { 
+            _shouldCountUp = false;
+
+            StopCoroutine(_lastRoutine);
+
+            _lastRoutine = StartCoroutine(CraftingText(text));
+
+            yield break; }
+        else if (!_shouldCountUp && _counter > 0)
+        {
+            _counter -= 1;
+            text.text = text.text.Remove(text.text.Length);
+
+            StopCoroutine(_lastRoutine);
+
+            _lastRoutine = StartCoroutine(CraftingText(text));
+
+            yield break;
+        }
+        else if (!_shouldCountUp && _counter <= 0) 
+        { 
+            _shouldCountUp = true;
+
+            StopCoroutine(_lastRoutine);
+
+            _lastRoutine = StartCoroutine(CraftingText(text));
+
+            yield break; 
+        }
     }
 }

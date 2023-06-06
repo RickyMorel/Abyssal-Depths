@@ -76,27 +76,27 @@ namespace DistantLands
 			int groupSize = 0;
 
 
-			foreach (GameObject go in gos)
-			{
-				if (go != this.gameObject)
-				{
-					dist = Vector3.Distance(go.transform.position, this.transform.position);
-					if (dist <= neighborDistance)
-					{
-						vCenter += go.transform.position;
-						groupSize++;
+			//foreach (GameObject go in gos)
+			//{
+			//	if (go != this.gameObject)
+			//	{
+			//		dist = Vector3.Distance(go.transform.position, this.transform.position);
+			//		if (dist <= neighborDistance)
+			//		{
+			//			vCenter += go.transform.position;
+			//			groupSize++;
 
-						if (dist < 0.75f)
-						{
-							vAvoid = vAvoid + (this.transform.position - go.transform.position);
-						}
+			//			if (dist < 0.75f)
+			//			{
+			//				vAvoid = vAvoid + (this.transform.position - go.transform.position);
+			//			}
 
-						Fish anotherFish = go.GetComponent<Fish>();
-						gSpeed += anotherFish.speed;
-					}
+			//			Fish anotherFish = go.GetComponent<Fish>();
+			//			gSpeed += anotherFish.speed;
+			//		}
 
-				}
-			}
+			//	}
+			//}
 
 			if (groupSize > 0)
 			{

@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class WeaponShoot : MonoBehaviour
 {
+    #region Editor Fields
+
+    [SerializeField] protected float _timeBetweenShots = 0.2f;
+
+    #endregion
+
     #region Private Variable
 
     protected Weapon _weapon;
@@ -11,9 +17,9 @@ public class WeaponShoot : MonoBehaviour
 
     #endregion
 
-    #region
+    #region Public Properties
 
-    [SerializeField] protected float _timeBetweenShots = 0.2f;
+    public Weapon Weapon => _weapon;
 
     #endregion
 

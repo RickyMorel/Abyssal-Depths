@@ -22,9 +22,8 @@ public class MaceAttackHitBox : AttackHitBox
     public override void Start()
     {
         _damageData = DamageData.GetDamageData(_damageTypes, _weapon, -1);
+        transform.SetParent(null);
     }
-
-    #endregion
 
     public override void OnTriggerEnter(Collider other)
     {
@@ -43,6 +42,8 @@ public class MaceAttackHitBox : AttackHitBox
             DealDamageToEnemies((AIHealth)enemyHealth, _damage);
         }
     }
+
+    #endregion
 
     public virtual void CalculateDamage()
     {

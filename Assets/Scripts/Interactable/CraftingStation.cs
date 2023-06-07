@@ -12,7 +12,10 @@ public class CraftingStation : Interactable
     [SerializeField] private Transform _itemSpawnTransform;
     [SerializeField] private ParticleSystem _craftingParticle;
     [SerializeField] private PlayableDirector _craftingTimeline;
+    [Header("Text related")]
     [SerializeField] private TextMeshPro _craftingText;
+    [SerializeField] private string _waitingString = "Craft?";
+    [SerializeField] private string _craftingString = "Crafting";
 
     #endregion
 
@@ -34,8 +37,7 @@ public class CraftingStation : Interactable
 
     private void Start()
     {
-        _craftingText.text = "Waiting";
-        _lastRoutine = StartCoroutine(CraftingText(_craftingText));
+        _craftingText.text = _waitingString;
     }
 
     public override void Awake()
@@ -58,7 +60,7 @@ public class CraftingStation : Interactable
     {
         if (!CraftingManager.CanCraft(craftingRecipy)) { return; }
 
-        _craftingText.text = "Crafting";
+        _craftingText.text = _craftingString;
         _shouldCountUp = true;
         _counter = 0;
 
@@ -82,10 +84,9 @@ public class CraftingStation : Interactable
 
         StopCoroutine(_lastRoutine);
 
-        _craftingText.text = "Waiting";
+        _craftingText.text = _waitingString;
         _shouldCountUp = true;
         _counter = 0;
-        _lastRoutine = StartCoroutine(CraftingText(_craftingText));
     }
 
     private void HandleInteract()

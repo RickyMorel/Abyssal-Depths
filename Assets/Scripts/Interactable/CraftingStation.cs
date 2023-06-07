@@ -60,6 +60,7 @@ public class CraftingStation : Interactable
 
         _craftingText.text = "Crafting";
         _shouldCountUp = true;
+        _counter = 0;
 
         if(_lastRoutine != null) { StopCoroutine(_lastRoutine); }
 
@@ -83,6 +84,7 @@ public class CraftingStation : Interactable
 
         _craftingText.text = "Waiting";
         _shouldCountUp = true;
+        _counter = 0;
         _lastRoutine = StartCoroutine(CraftingText(_craftingText));
     }
 
@@ -110,7 +112,7 @@ public class CraftingStation : Interactable
 
     private IEnumerator CraftingText(TextMeshPro text)
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.2f);
         if (_shouldCountUp && _counter < 3) 
         { 
             _counter += 1;
@@ -123,7 +125,7 @@ public class CraftingStation : Interactable
             yield break;
         }
         else if (_shouldCountUp && _counter >= 3) 
-        { 
+        {
             _shouldCountUp = false;
 
             StopCoroutine(_lastRoutine);
@@ -134,7 +136,7 @@ public class CraftingStation : Interactable
         else if (!_shouldCountUp && _counter > 0)
         {
             _counter -= 1;
-            text.text = text.text.Remove(text.text.Length);
+            text.text = text.text.Remove(text.text.Length-1);
 
             StopCoroutine(_lastRoutine);
 

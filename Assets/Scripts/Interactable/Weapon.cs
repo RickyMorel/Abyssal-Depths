@@ -60,7 +60,7 @@ public class Weapon : Upgradable
         
         if (CanUse == false) { return; }
 
-        _weaponHumble.WeaponShoot.CheckShootInput();
+        _weaponHumble?.WeaponShoot?.CheckShootInput();
         CheckRotationInput();
     }
 

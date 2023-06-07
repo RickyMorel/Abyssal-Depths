@@ -23,6 +23,7 @@ public abstract class MeleeWeapon : WeaponShoot
 
     #region Public Properties
 
+    public float MoveForce => _moveForce;
     public float MaxMovementSpeed => _maxMovementSpeed;
     public Rigidbody rb => _rb;
 
@@ -55,7 +56,7 @@ public abstract class MeleeWeapon : WeaponShoot
     public virtual void FixedUpdate()
     {
         if (_weapon.CurrentPlayer == null) { return; }
-        if(_weapon.CanUse == false) { return; }
+        if (_weapon.CanUse == false) { return; }
 
         _rb.AddForce(_weapon.CurrentPlayer.MoveDirection * _moveForce);
         _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, _maxMovementSpeed);
@@ -75,7 +76,7 @@ public abstract class MeleeWeapon : WeaponShoot
 
     public virtual void HandleHitParticles(GameObject obj)
     {
-        if(obj.tag == "MainShip") { return; }
+        if (obj.tag == "MainShip") { return; }
 
         Instantiate(GameAssetsManager.Instance.MeleeFloorHitParticles, _attackHitBox.transform.position, Quaternion.identity);
         ShipCamera.Instance.ShakeCamera(5f, 50f, 0.2f);

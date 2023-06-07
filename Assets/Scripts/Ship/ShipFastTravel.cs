@@ -23,7 +23,7 @@ public class ShipFastTravel : MonoBehaviour
     private bool _wantToTravel = false;
 
     private ShipDoor _shipDoor;
-    [SerializeField] private PlayerInputHandler[] _isPlayerActive;
+    private PlayerInputHandler[] _isPlayerActive;
     private List<PlayerInputHandler> _playersInShipList = new List<PlayerInputHandler>();
 
     private FastTravelNPC _fastTravelNPC;
@@ -41,6 +41,7 @@ public class ShipFastTravel : MonoBehaviour
     private void Awake()
     {
         PlayerJoinManager.OnPlayerJoin += HandleNewPlayer;
+        SceneManager.sceneLoaded += HandleSceneLoaded;
     }
 
     private void Start()
@@ -59,9 +60,15 @@ public class ShipFastTravel : MonoBehaviour
     private void OnDestroy()
     {
         PlayerJoinManager.OnPlayerJoin -= HandleNewPlayer;
+        SceneManager.sceneLoaded -= HandleSceneLoaded;
     }
 
     #endregion
+
+    private void HandleSceneLoaded(Scene scene, LoadSceneMode loadMode)
+    {
+        CheckPlayersInShip();
+    }
 
     private void HandleNewPlayer()
     {

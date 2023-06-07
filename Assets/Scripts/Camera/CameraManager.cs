@@ -50,12 +50,12 @@ public class CameraManager : MonoBehaviour
     {
         if (boolean)
         {
-            _cameras[_cameras.Length - 1].OutputCamera.cullingMask = -1;
+            ShipCamera.Instance.MainCamera.cullingMask = -1;
             ShipCamera.Instance.PerspectiveCamera.cullingMask = LayerMask.GetMask("Floor");
         }
         else
         {
-            _cameras[_cameras.Length - 1].OutputCamera.cullingMask = LayerMask.GetMask("Ragdoll", "ShipFloor", "Orthographic", "UI", "LightSaber");
+            ShipCamera.Instance.MainCamera.cullingMask = LayerMask.GetMask("Ragdoll", "ShipFloor", "Orthographic", "UI", "LightSaber");
             ShipCamera.Instance.PerspectiveCamera.cullingMask = LayerMask.GetMask("Floor", "Default", "TransparentFX", "Ignore Raycast", "Water", "UI", "LootLayer", "ItemLayer", "ItemBox", "NPC", "EnemyHitBox");
         }
     }
@@ -73,6 +73,8 @@ public class CameraManager : MonoBehaviour
     {
         //Stops previous camera toggle functions from calling
         GetAllCameras();
+
+        Debug.Log("ToggleCamera, isOrtho: " + boolean);
 
         ShipCamera.Instance.MainCamera.gameObject.SetActive(boolean);
         ShipCamera.Instance.PerspectiveCamera.gameObject.SetActive(boolean);

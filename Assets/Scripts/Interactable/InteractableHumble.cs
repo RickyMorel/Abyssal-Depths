@@ -19,17 +19,12 @@ public class InteractableHumble
 
     #endregion
 
-    #region Getters and Setter
-
-    public BaseInteractionController CurrentPlayer => _currentPlayer;
-
-    #endregion
-
     #region Public Properties
 
     public event Action OnInteract;
     public event Action OnUninteract;
     public event Action OnSetInteractable;
+    public BaseInteractionController CurrentPlayer => _currentPlayer;
 
     #endregion
 

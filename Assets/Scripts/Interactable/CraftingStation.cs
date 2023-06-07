@@ -60,11 +60,7 @@ public class CraftingStation : Interactable
     {
         if (!CraftingManager.CanCraft(craftingRecipy)) { return; }
 
-        _craftingText.text = _craftingString;
-        _shouldCountUp = true;
-        _counter = 0;
-
-        if(_lastRoutine != null) { StopCoroutine(_lastRoutine); }
+        ResetText(_craftingString);
 
         _lastRoutine = StartCoroutine(CraftingText(_craftingText));
 
@@ -82,11 +78,16 @@ public class CraftingStation : Interactable
 
         RemoveCurrentPlayer();
 
-        StopCoroutine(_lastRoutine);
+        ResetText(_waitingString);
+    }
 
-        _craftingText.text = _waitingString;
+    private void ResetText(string text)
+    {
+        _craftingText.text = text;
         _shouldCountUp = true;
         _counter = 0;
+
+        if (_lastRoutine != null) { StopCoroutine(_lastRoutine); }
     }
 
     private void HandleInteract()

@@ -23,10 +23,15 @@ public class SceneLoader : MonoBehaviour
 
         if (_startedLoadingScene) { return; }
 
-        AsyncOperation operation = SceneManager.LoadSceneAsync(_sceneToLoad);
-
-        LoadScreenUI.Instance.LoadScene(operation);
+        LoadScene(_sceneToLoad);
 
         _startedLoadingScene = true;
+    }
+
+    public static void LoadScene(int sceneToLoad)
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneToLoad);
+
+        LoadScreenUI.Instance.LoadScene(operation);
     }
 }

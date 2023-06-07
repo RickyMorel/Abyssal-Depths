@@ -57,6 +57,13 @@ public class ShipFastTravel : MonoBehaviour
         _mainShip.OnRespawn += HandleRespawn;
     }
 
+    private void LateUpdate()
+    {
+        if (!_wantToTravel) { return; }
+
+        CheckPlayersInShip();
+    }
+
     private void OnDestroy()
     {
         PlayerJoinManager.OnPlayerJoin -= HandleNewPlayer;
@@ -143,9 +150,12 @@ public class ShipFastTravel : MonoBehaviour
         //Stops the animation and takes the main ship out of its parent
         yield return new WaitForSeconds(2);
         TimelinesManager.Instance.StartFastTravelTimeline.Stop();
+
+        SceneLoader.LoadScene(_fastTravelNPC.CurrentFastTravelLocation.SceneIndex);
+
         TimelinesManager.Instance.EndFastTravelTimeline.Play();
         _mainShip.gameObject.transform.SetParent(null);
-        _mainShip.gameObject.transform.position = _fastTravelNPC.TravelToPosition.transform.position;
+        _mainShip.gameObject.transform.position = _fastTravelNPC.CurrentFastTravelLocation.TravelPosition;
         //Stops all remaining animations
         yield return new WaitForSeconds(2);
         TimelinesManager.Instance.EndFastTravelTimeline.Stop();

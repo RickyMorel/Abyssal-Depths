@@ -2039,7 +2039,7 @@ Transform:
   - {fileID: 690493084674786053}
   - {fileID: 1316366319795656837}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!54 &690493083869517231
 Rigidbody:
@@ -2133,6 +2133,7 @@ MonoBehaviour:
   _jumpHeight: 3
   _gravityIntensity: -15
   _isGrounded: 1
+  _currentStateName: 
   _canMove: 1
 --- !u!114 &7935086362498502750
 MonoBehaviour:
@@ -2150,12 +2151,12 @@ MonoBehaviour:
   _weaknessType: 
   _currentHealth: 0
   _maxHealth: 100
-  _healthBarImage: {fileID: 0}
   _damageParticles: {fileID: 0}
   _hurtTime: 5
-  _mesh: {fileID: 0}
+  _meshes: []
   _particleParentTransform: {fileID: 0}
   _canKill: 0
+  _stopsActionWhenHurt: 1
 --- !u!114 &3789420751372200378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2205,9 +2206,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afacabbcfd9b6ad4180f8cb37fd9be88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _goalDistance: 2
+  _isMoving: 0
   Actions: []
   CurrentAction: {fileID: 0}
-  _goalDistance: 2
 --- !u!114 &1742940126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2371,12 +2373,17 @@ MonoBehaviour:
   _interactionType: 4
   _playerPositionTransform: {fileID: 8585098842728100779}
   _isAIOnlyInteractable: 0
+  _attachOnInteract: 1
   _isSingleUse: 0
   _singleUseTime: 0.5
-  _travelPos:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  _onInteractParticles: {fileID: 0}
+  _travelLocations:
+  - SceneIndex: 2
+    TravelPosition: {x: 142.76, y: -321.95, z: 0}
+  - SceneIndex: 3
+    TravelPosition: {x: 841.7, y: -328.8, z: 0}
+  - SceneIndex: 4
+    TravelPosition: {x: 598.8, y: -574.5, z: 0}
   _fastTravelOptions: {fileID: 690493084674786058}
 --- !u!1 &690493083889834447
 GameObject:

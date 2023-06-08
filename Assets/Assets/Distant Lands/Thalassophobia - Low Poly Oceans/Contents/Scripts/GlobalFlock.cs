@@ -14,10 +14,9 @@ namespace DistantLands
 
 		public int numFish = 30;
 		[HideInInspector]
-		public List<GameObject> allFish;
+		public List<GameObject> allFish = new List<GameObject>();
 		public static Vector3 goalPos = Vector3.zero;
 
-		// Use this for initialization
 		void Start()
 		{
 			for (int i = 0; i < numFish; i++)
@@ -31,7 +30,6 @@ namespace DistantLands
 			}
 		}
 
-		// Update is called once per frame
 		void Update()
 		{
 			//HandleGoalPos();
@@ -58,7 +56,5 @@ namespace DistantLands
 
 
 		}
-
-
 	}
 }

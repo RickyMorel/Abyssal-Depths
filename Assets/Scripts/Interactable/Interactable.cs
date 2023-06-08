@@ -45,12 +45,12 @@ public class Interactable : MonoBehaviour
 
     public InteractableHumble Humble => _humble;
     public Transform PlayerPositionTransform => _playerPositionTransform;
-    public BaseInteractionController CurrentPlayer => _humble.CurrentPlayer;
     public float SingleUseTime => _singleUseTime;
     public InteractableHealth InteractableHealth => _interactableHealth;
     public Outline Outline => _outline;
     public bool IsAIOnlyInteractable => _isAIOnlyInteractable;
     public bool AttachOnInteract => _attachOnInteract;
+    public BaseInteractionController CurrentPlayer => _humble.CurrentPlayer;
 
     #endregion
 

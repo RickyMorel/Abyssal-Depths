@@ -21,11 +21,10 @@ public class InteractableHumble
 
     #region Public Properties
 
-    public BaseInteractionController CurrentPlayer => _currentPlayer;
-
     public event Action OnInteract;
     public event Action OnUninteract;
     public event Action OnSetInteractable;
+    public BaseInteractionController CurrentPlayer => _currentPlayer;
 
     #endregion
 

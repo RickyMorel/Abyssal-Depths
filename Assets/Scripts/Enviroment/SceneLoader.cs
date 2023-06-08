@@ -39,4 +39,9 @@ public class SceneLoader : MonoBehaviour
 
         LoadScreenUI.Instance.LoadScene(operation);
     }
+
+    public static bool IsInGarageScene()
+    {
+        return SceneManager.GetActiveScene().name == "SpaceStations";
+    }
 }

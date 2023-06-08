@@ -30,6 +30,8 @@ public class ShipDoor : Interactable
     private void Start()
     {
         Humble.OnInteract += HandleButtonPress;
+
+        if (SceneLoader.IsInGarageScene()) { IsWantedDoorOpen = true; }
     }
 
     private void OnDestroy()

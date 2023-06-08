@@ -101,17 +101,11 @@ public class ShipFastTravel : MonoBehaviour
 
         if (_playersActive != _playersInShip) { return; }
 
-        Debug.Log("All Players are in ship!");
-
         StartCoroutine(CheckIfCameraNeedsOrthoMode());
 
         if (_shipDoor.IsWantedDoorOpen == true) { return; }
 
-        Debug.Log("Door is closed!");
-
         if (!_wantToTravel) { return; }
-
-        Debug.Log("WantToTravel is true!");
 
         _wantToTravel = false;
         _mainShip.gameObject.transform.SetParent(TimelinesManager.Instance.MainShipParentForTheTimeline.transform);
@@ -123,14 +117,13 @@ public class ShipFastTravel : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
 
-        Debug.Log("_cameraManager: " + _cameraManager.gameObject.name);
         if (SceneManager.GetActiveScene().name != "SpaceStations") { _cameraManager.ToggleCamera(true); }
         else { _cameraManager.ToggleCamera(false); }
     }
 
     public void OnPlayerTriggerEnter(Collider other)
     {
-        if (SceneManager.GetActiveScene().name != "SpaceStations") { return; }
+        if (!SceneLoader.IsInGarageScene()) { return; }
 
         if (!other.gameObject.TryGetComponent(out PlayerInputHandler player)) { return; }
 
@@ -147,7 +140,7 @@ public class ShipFastTravel : MonoBehaviour
 
     public void OnPlayerTriggerExit(Collider other)
     {
-        if (SceneManager.GetActiveScene().name != "SpaceStations") { return; }
+        if (!SceneLoader.IsInGarageScene()) { return; }
 
         if (!other.gameObject.TryGetComponent(out PlayerInputHandler player)) { return; }
 
@@ -155,8 +148,11 @@ public class ShipFastTravel : MonoBehaviour
 
         _cameraManager.ToggleCamera(false, 0.1f);
         _lastRoutine = StartCoroutine(DetachFromShipCoroutine());
-        _playersInShip = Mathf.Clamp(_playersInShip-1, 0, _playersActive);
+        _playersInShip = Mathf.Clamp(_playersInShip - 1, 0, _playersActive);
         _playersInShipList.Remove(player);
+
+        //Opens door if no players are in ship, to prevent players from being stuck outside
+        if(_playersInShipList.Count == 0) { _shipDoor.IsWantedDoorOpen = true; }
     }
 
     private IEnumerator FastTravelCoroutine()
@@ -182,7 +178,9 @@ public class ShipFastTravel : MonoBehaviour
 
     public void AttachToShip()
     {
-        if(_isPlayerActive == null) { return; }
+        if (SceneLoader.IsInGarageScene()) { return; }
+
+        if (_isPlayerActive == null) { return; }
 
         for (int i = 0; i < _isPlayerActive.Length; i++)
         {

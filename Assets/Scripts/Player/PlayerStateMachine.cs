@@ -107,8 +107,10 @@ public class PlayerStateMachine : BaseStateMachine
         }
     }
 
-    public void OnDestroy()
+    public override void OnDestroy()
     {
+        base.OnDestroy();
+
         if (_playerInput == null) { return; }
 
         _playerInput.OnJump -= HandleJump;

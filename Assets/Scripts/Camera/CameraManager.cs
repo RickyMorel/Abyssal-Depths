@@ -74,8 +74,6 @@ public class CameraManager : MonoBehaviour
         //Stops previous camera toggle functions from calling
         GetAllCameras();
 
-        Debug.Log("ToggleCamera, isOrtho: " + boolean);
-
         ShipCamera.Instance.MainCamera.gameObject.SetActive(boolean);
         ShipCamera.Instance.PerspectiveCamera.gameObject.SetActive(boolean);
         ShipCamera.Instance.BossCamera.gameObject.SetActive(boolean);

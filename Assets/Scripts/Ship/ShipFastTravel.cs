@@ -30,7 +30,7 @@ public class ShipFastTravel : MonoBehaviour
 
     private Ship _mainShip;
 
-    private CameraManager _cameraManager;
+    [SerializeField] private CameraManager _cameraManager;
 
     private Coroutine _lastRoutine = null;
 
@@ -74,7 +74,7 @@ public class ShipFastTravel : MonoBehaviour
 
     private void HandleSceneLoaded(Scene scene, LoadSceneMode loadMode)
     {
-        CheckPlayersInShip();
+        StartCoroutine(CheckIfCameraNeedsOrthoMode());
     }
 
     private void HandleNewPlayer()
@@ -101,12 +101,17 @@ public class ShipFastTravel : MonoBehaviour
 
         if (_playersActive != _playersInShip) { return; }
 
-        if (SceneManager.GetActiveScene().name != "SpaceStations") { _cameraManager.ToggleCamera(true); }
-        else { _cameraManager.ToggleCamera(false); }
+        Debug.Log("All Players are in ship!");
+
+        StartCoroutine(CheckIfCameraNeedsOrthoMode());
 
         if (_shipDoor.IsWantedDoorOpen == true) { return; }
 
+        Debug.Log("Door is closed!");
+
         if (!_wantToTravel) { return; }
+
+        Debug.Log("WantToTravel is true!");
 
         _wantToTravel = false;
         _mainShip.gameObject.transform.SetParent(TimelinesManager.Instance.MainShipParentForTheTimeline.transform);
@@ -114,8 +119,19 @@ public class ShipFastTravel : MonoBehaviour
         AttachToShip();
     }
 
+    private IEnumerator CheckIfCameraNeedsOrthoMode()
+    {
+        yield return new WaitForEndOfFrame();
+
+        Debug.Log("_cameraManager: " + _cameraManager.gameObject.name);
+        if (SceneManager.GetActiveScene().name != "SpaceStations") { _cameraManager.ToggleCamera(true); }
+        else { _cameraManager.ToggleCamera(false); }
+    }
+
     public void OnPlayerTriggerEnter(Collider other)
     {
+        if (SceneManager.GetActiveScene().name != "SpaceStations") { return; }
+
         if (!other.gameObject.TryGetComponent(out PlayerInputHandler player)) { return; }
 
         if (_playersInShipList.Contains(player)) { return; }
@@ -131,6 +147,8 @@ public class ShipFastTravel : MonoBehaviour
 
     public void OnPlayerTriggerExit(Collider other)
     {
+        if (SceneManager.GetActiveScene().name != "SpaceStations") { return; }
+
         if (!other.gameObject.TryGetComponent(out PlayerInputHandler player)) { return; }
 
         if (_playersInShipList.Contains(player) == false) { return; }

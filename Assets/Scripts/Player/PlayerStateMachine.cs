@@ -63,7 +63,6 @@ public class PlayerStateMachine : BaseStateMachine
 
     public void AttachToShip(bool isAttached)
     {
-        Debug.Log($"Attach to ship: {isAttached} ; {transform.root.gameObject.name}");
         _isAttachedToShip = isAttached;
         transform.parent = null;
         _characterController.enabled = !_isAttachedToShip;

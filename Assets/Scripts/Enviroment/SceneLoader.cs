@@ -8,6 +8,7 @@ public class SceneLoader : MonoBehaviour
     #region Editor Fields
 
     [SerializeField] private int _sceneToLoad = -1;
+    [SerializeField] private Vector3 _shipPosition;
 
     #endregion
 
@@ -24,6 +25,8 @@ public class SceneLoader : MonoBehaviour
         if (_startedLoadingScene) { return; }
 
         LoadScene(_sceneToLoad);
+
+        Ship.Instance.transform.position = _shipPosition;
 
         _startedLoadingScene = true;
     }

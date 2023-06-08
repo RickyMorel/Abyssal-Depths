@@ -3595,7 +3595,7 @@ Transform:
   - {fileID: 791078358833065963}
   - {fileID: 3677184556596846185}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!208 &7022336706505972824
 NavMeshObstacle:
@@ -3742,6 +3742,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 630c2e0d578a7204ab7373b37620a954, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _cameraManager: {fileID: 0}
 --- !u!114 &9184728779062188578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31306,6 +31307,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 6356078261117588642, guid: 20cad5e47f5409748bf2cdc17e679a11, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7627081817410386980, guid: 20cad5e47f5409748bf2cdc17e679a11, type: 3}
       propertyPath: m_LocalPosition.z
       value: -6.55
@@ -31800,6 +31805,10 @@ PrefabInstance:
     - target: {fileID: 5305554702842702138, guid: 20cad5e47f5409748bf2cdc17e679a11, type: 3}
       propertyPath: m_Layer
       value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6356078261117588642, guid: 20cad5e47f5409748bf2cdc17e679a11, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6582263465908832466, guid: 20cad5e47f5409748bf2cdc17e679a11, type: 3}
       propertyPath: m_ConnectedAnchor.y
@@ -32612,6 +32621,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 6356078261117588642, guid: 20cad5e47f5409748bf2cdc17e679a11, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6582263465908832466, guid: 20cad5e47f5409748bf2cdc17e679a11, type: 3}
       propertyPath: m_ConnectedAnchor.x
       value: 0.58399916
@@ -33372,6 +33385,10 @@ PrefabInstance:
     - target: {fileID: 5305554702842702138, guid: 20cad5e47f5409748bf2cdc17e679a11, type: 3}
       propertyPath: m_Layer
       value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6356078261117588642, guid: 20cad5e47f5409748bf2cdc17e679a11, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6582263465908832466, guid: 20cad5e47f5409748bf2cdc17e679a11, type: 3}
       propertyPath: m_ConnectedAnchor.x
@@ -34586,7 +34603,7 @@ PrefabInstance:
     - target: {fileID: 1254155752037179313, guid: 33c642c6393f4f04d87e7307bb977fc0, type: 3}
       propertyPath: _itemSO
       value: 
-      objectReference: {fileID: 11400000, guid: ee5efa56bf2e2574697b60d2abc9a9b7, type: 2}
+      objectReference: {fileID: 11400000, guid: a5c5b4b2acd5c714395741aefd2d9e74, type: 2}
     - target: {fileID: 2390910292159705110, guid: 33c642c6393f4f04d87e7307bb977fc0, type: 3}
       propertyPath: m_UseGravity
       value: 0

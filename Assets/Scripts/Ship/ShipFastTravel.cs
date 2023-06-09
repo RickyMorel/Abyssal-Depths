@@ -123,7 +123,7 @@ public class ShipFastTravel : MonoBehaviour
 
     public void OnPlayerTriggerEnter(Collider other)
     {
-        if (!SceneLoader.IsInGarageScene()) { return; }
+        if (SceneLoader.IsInGarageScene()) { return; }
 
         if (!other.gameObject.TryGetComponent(out PlayerInputHandler player)) { return; }
 
@@ -140,7 +140,7 @@ public class ShipFastTravel : MonoBehaviour
 
     public void OnPlayerTriggerExit(Collider other)
     {
-        if (!SceneLoader.IsInGarageScene()) { return; }
+        if (SceneLoader.IsInGarageScene()) { return; }
 
         if (!other.gameObject.TryGetComponent(out PlayerInputHandler player)) { return; }
 

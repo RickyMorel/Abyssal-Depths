@@ -59,7 +59,7 @@ public class ShipCamera : BaseCamera
         base.Start();
 
         _shipRigidbody = FindObjectOfType<ShipHealth>().GetComponent<Rigidbody>();
-        _shipBooster = _shipRigidbody.GetComponentInChildren<Booster>();
+        _shipBooster = _shipRigidbody.transform.root.GetComponentInChildren<Booster>();
 
         _orginalFOV = _virtualCamera.m_Lens.OrthographicSize;
         _currentFOV = _orginalFOV;

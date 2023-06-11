@@ -12,7 +12,7 @@ public class WeaponShoot : MonoBehaviour
 
     #region Private Variable
 
-    protected Weapon _weapon;
+    [SerializeField] protected Weapon _weapon;
     protected float _timeSinceLastShot;
 
     #endregion
@@ -27,7 +27,7 @@ public class WeaponShoot : MonoBehaviour
 
     public virtual void Start()
     {
-        _weapon = GetComponentInParent<Weapon>();
+        //_weapon = GetComponentInParent<Weapon>();
     }
 
     public virtual void Update()

@@ -58,6 +58,21 @@ public class PlayerInputHandler : MonoBehaviour
 
     #endregion
 
+    private void Awake()
+    {
+        //Deletes duplicates of same player when loading new scenes
+        PlayerInputHandler[] players = FindObjectsOfType<PlayerInputHandler>();
+
+        foreach (PlayerInputHandler player in players)
+        {
+            //Don't compare to self
+            if(player.gameObject == gameObject) { continue; }
+
+            //Destroy self if finds another player with active id
+            if(player.PlayerId == PlayerId) { Destroy(transform.root.gameObject); }
+        }
+    }
+
     private void Start()
     {
         _player = ReInput.players.GetPlayer(_playerId);

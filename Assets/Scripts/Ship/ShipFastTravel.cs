@@ -17,10 +17,10 @@ public class ShipFastTravel : MonoBehaviour
 
     #region Private Variables
 
-    private int _playersInShip = 0;
+    [SerializeField] private int _playersInShip = 0;
     private int _playersActive = 0;
 
-    private bool _wantToTravel = false;
+    [SerializeField] private bool _wantToTravel = false;
 
     private ShipDoor _shipDoor;
     private PlayerInputHandler[] _isPlayerActive;
@@ -48,7 +48,7 @@ public class ShipFastTravel : MonoBehaviour
     {
         _mainShip = FindObjectOfType<Ship>();
         _isPlayerActive = FindObjectsOfType<PlayerInputHandler>();
-        _shipDoor = _mainShip.GetComponentInChildren<ShipDoor>();
+        _shipDoor = _mainShip.transform.root.GetComponentInChildren<ShipDoor>();
         _lastRoutine = StartCoroutine(DetachFromShipCoroutine());
         _cameraManager = FindObjectOfType<CameraManager>();
         TimelinesManager.Instance.BlackHoleParticle.gameObject.transform.SetParent(_mainShip.transform);
@@ -101,9 +101,13 @@ public class ShipFastTravel : MonoBehaviour
 
         if (_playersActive != _playersInShip) { return; }
 
+        Debug.Log("Players in ship!");
+
         StartCoroutine(CheckIfCameraNeedsOrthoMode());
 
         if (_shipDoor.IsWantedDoorOpen == true) { return; }
+
+        Debug.Log("ship door is closed");
 
         if (!_wantToTravel) { return; }
 
@@ -123,8 +127,6 @@ public class ShipFastTravel : MonoBehaviour
 
     public void OnPlayerTriggerEnter(Collider other)
     {
-        if (SceneLoader.IsInGarageScene()) { return; }
-
         if (!other.gameObject.TryGetComponent(out PlayerInputHandler player)) { return; }
 
         if (_playersInShipList.Contains(player)) { return; }
@@ -140,13 +142,11 @@ public class ShipFastTravel : MonoBehaviour
 
     public void OnPlayerTriggerExit(Collider other)
     {
-        if (SceneLoader.IsInGarageScene()) { return; }
-
         if (!other.gameObject.TryGetComponent(out PlayerInputHandler player)) { return; }
 
         if (_playersInShipList.Contains(player) == false) { return; }
 
-        _cameraManager.ToggleCamera(false, 0.1f);
+        _cameraManager.ToggleCamera(false);
         _lastRoutine = StartCoroutine(DetachFromShipCoroutine());
         _playersInShip = Mathf.Clamp(_playersInShip - 1, 0, _playersActive);
         _playersInShipList.Remove(player);

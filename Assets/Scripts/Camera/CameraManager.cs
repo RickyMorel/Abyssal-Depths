@@ -4,6 +4,7 @@ using UnityEngine;
 using Cinemachine;
 using System.Linq;
 using System;
+using UnityEngine.Analytics;
 
 public class CameraManager : MonoBehaviour
 {
@@ -26,11 +27,6 @@ public class CameraManager : MonoBehaviour
     #endregion
 
     #region Unity Loops
-
-    private void Start()
-    {
-        ToggleCamera(true);
-    }
 
     private void Awake()
     {
@@ -69,29 +65,12 @@ public class CameraManager : MonoBehaviour
         Array.Sort(_vCams, (a, b) => String.Compare(a.name, b.name));
     }
 
-    public void ToggleCamera(bool boolean, float timeTillToggle = 0f)
+    public void ToggleCamera(bool boolean)
     {
         //Stops previous camera toggle functions from calling
         GetAllCameras();
 
-        ShipCamera.Instance.MainCamera.gameObject.SetActive(boolean);
-        ShipCamera.Instance.PerspectiveCamera.gameObject.SetActive(boolean);
-        ShipCamera.Instance.BossCamera.gameObject.SetActive(boolean);
-
-        for (int i = 0; i < _cameras.Length - 1; i++)
-        {
-            _cameras[i].gameObject.SetActive(!boolean);
-            _vCams[i].gameObject.SetActive(!boolean);
-        }
-
-        _isInOrthoMode = boolean;
-    }
-
-    public IEnumerator ToggleCameraCoroutine(bool boolean, float timeTillToggle)
-    {
-        yield return new WaitForSeconds(timeTillToggle);
-
-        GetAllCameras();
+        Debug.Log("Toggle Camera: " + boolean + " " + _cameras.Length);
 
         ShipCamera.Instance.MainCamera.gameObject.SetActive(boolean);
         ShipCamera.Instance.PerspectiveCamera.gameObject.SetActive(boolean);
@@ -99,6 +78,10 @@ public class CameraManager : MonoBehaviour
 
         for (int i = 0; i < _cameras.Length - 1; i++)
         {
+            if (_cameras[i].tag == "MainCamera") { continue; }
+
+            Debug.Log("Toggle Cam: " + _cameras[i].gameObject.name);
+
             _cameras[i].gameObject.SetActive(!boolean);
             _vCams[i].gameObject.SetActive(!boolean);
         }

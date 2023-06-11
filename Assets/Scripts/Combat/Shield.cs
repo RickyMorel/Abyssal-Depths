@@ -21,7 +21,7 @@ public class Shield : MonoBehaviour
 
     private void Start()
     {
-        _shipHealth = transform.root.GetComponent<ShipHealth>();
+        _shipHealth = Ship.Instance.ShipHealth;
     }
 
     private void Update()
@@ -48,7 +48,6 @@ public class Shield : MonoBehaviour
 
     private void CheckForSceneCollision(Collision collision)
     {
-        Debug.Log("CheckForSceneCollision: " + collision.gameObject.name);
         if(_timeSincePushEnemy < 1f) { return; }
 
         PushShip(collision);

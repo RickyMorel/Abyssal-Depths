@@ -36,7 +36,7 @@ public class Shield : MonoBehaviour
         if(LayerMask.LayerToName(collision.gameObject.layer) == "NPC") { CheckForEnemyCollision(collision); }
 
         //If object layer is one of the crash layers, except for NPC
-        if (_shipHealth.CrashLayers == (_shipHealth.CrashLayers | (1 << collision.gameObject.layer))) { CheckForSceneCollision(collision); }
+       // if (_shipHealth.CrashLayers == (_shipHealth.CrashLayers | (1 << collision.gameObject.layer))) { CheckForSceneCollision(collision); }
     }
 
     private void ReflectProjectile(Projectile projectile)

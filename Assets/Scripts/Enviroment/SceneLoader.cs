@@ -33,8 +33,6 @@ public class SceneLoader : MonoBehaviour
 
     public static void LoadScene(int sceneToLoad)
     {
-        Debug.Log("LoadScene!!!");
-
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneToLoad);
 
         LoadScreenUI.Instance.LoadScene(operation);

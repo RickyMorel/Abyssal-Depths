@@ -83,13 +83,10 @@ public class CraftingStation : Interactable
 
     private void ResetText(string text)
     {
-        Debug.Log($"ResetText: {text}");
         StopAllCoroutines();
         _craftingText.text = text;
         _shouldCountUp = true;
         _counter = 0;
-
-        //if (_lastRoutine != null) { StopCoroutine(_lastRoutine); StopAllCoroutines(); }
     }
 
     private void HandleInteract()
@@ -116,7 +113,6 @@ public class CraftingStation : Interactable
 
     private IEnumerator CraftingText(TextMeshPro text)
     {
-        Debug.Log("CraftingText");
         yield return new WaitForSeconds(0.2f);
         if (_shouldCountUp && _counter < 3) 
         { 

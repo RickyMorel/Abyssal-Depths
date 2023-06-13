@@ -53,11 +53,12 @@ public class Ship : MonoBehaviour
         {
             _instance = this;
         }
+
+        _health = GetComponent<ShipHealth>();
     }
 
     private void Start()
     {
-        _health = GetComponent<ShipHealth>();
         _shipData = GetComponent<ShipData>();
         _rb = GetComponent<Rigidbody>();
         _shipFastTravel = GetComponent<ShipFastTravel>();

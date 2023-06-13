@@ -12,7 +12,7 @@ public class WeaponShoot : MonoBehaviour
 
     #region Private Variable
 
-    [SerializeField] protected Weapon _weapon;
+    protected Weapon _weapon;
     protected float _timeSinceLastShot;
 
     #endregion

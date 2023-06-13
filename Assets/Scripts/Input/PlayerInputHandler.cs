@@ -192,8 +192,6 @@ public class PlayerInputHandler : MonoBehaviour
 
         if (!_player.GetButtonDown("SpecialAction")) { return; }
 
-        Debug.Log("SpecialAction");
-
         bool value = _player.GetButton("SpecialAction");
         OnSpecialAction?.Invoke(this, value);
     }
@@ -212,8 +210,6 @@ public class PlayerInputHandler : MonoBehaviour
         if (!IsPlayerActive) { return; }
 
         if (!_player.GetButtonDown("Upgrade")) { return; }
-
-        Debug.Log("uPGRADE");
 
         OnUpgrade?.Invoke();
     }

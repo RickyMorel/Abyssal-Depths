@@ -64,9 +64,7 @@ public class PlayerStateMachine : BaseStateMachine
 
     public void AttachToShip(bool isAttached)
     {
-        //_isAttachedToShip = isAttached;
         transform.parent = null;
-        //_characterController.enabled = !_isAttachedToShip;
 
         if (isAttached)
         {

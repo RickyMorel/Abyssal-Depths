@@ -30,6 +30,7 @@ public class ShipHealth : Damageable
 
     #region Public Properties
 
+    public static event Action OnRespawn;
     public LayerMask CrashLayers => _crashLayers;
     public Rigidbody Rb => _rb;
 
@@ -183,5 +184,12 @@ public class ShipHealth : Damageable
 
         if (!IsDead()) { yield return null; }
         else { StartCoroutine(FlickerRedLights()); }
+    }
+
+    public void Respawn()
+    {
+        HandleFix();
+
+        OnRespawn?.Invoke();
     }
 }

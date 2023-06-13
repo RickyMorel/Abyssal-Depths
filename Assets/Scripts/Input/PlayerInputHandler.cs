@@ -62,6 +62,8 @@ public class PlayerInputHandler : MonoBehaviour
     {
         _player = ReInput.players.GetPlayer(_playerId);
 
+        DestroyDuplicatePlayers();
+
         StartCoroutine(LateStart());
     }
 
@@ -86,6 +88,21 @@ public class PlayerInputHandler : MonoBehaviour
         Upgrade();
         Shoot();
         Shoot2();
+    }
+
+    private void DestroyDuplicatePlayers()
+    {
+        //Deletes duplicates of same player when loading new scenes
+        PlayerInputHandler[] players = FindObjectsOfType<PlayerInputHandler>();
+
+        foreach (PlayerInputHandler player in players)
+        {
+            //Don't compare to self
+            if (player.gameObject == gameObject) { continue; }
+
+            //Destroy self if finds another player with active id
+            if (player.PlayerId == PlayerId) { Destroy(transform.root.gameObject); }
+        }
     }
 
     public bool DetectDoubleTap()

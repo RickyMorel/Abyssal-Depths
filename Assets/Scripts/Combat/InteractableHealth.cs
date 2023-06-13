@@ -43,6 +43,7 @@ public class InteractableHealth : Damageable
 
         _interactable.Humble.OnInteract += TryStartFix;
         _interactable.Humble.OnUninteract += TryStopFix;
+        ShipHealth.OnRespawn += HandleRespawn;
     }
 
     public override void Start()
@@ -56,6 +57,7 @@ public class InteractableHealth : Damageable
     {
         _interactable.Humble.OnInteract -= TryStartFix;
         _interactable.Humble.OnUninteract -= TryStopFix;
+        ShipHealth.OnRespawn -= HandleRespawn;
     }
 
     private void Update()
@@ -94,6 +96,11 @@ public class InteractableHealth : Damageable
     }
 
     #endregion
+
+    private void HandleRespawn()
+    {
+        FixInteractable(false);
+    }
 
     private void TryStartFix()
     {

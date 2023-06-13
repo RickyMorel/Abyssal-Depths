@@ -27,7 +27,7 @@ public class WeaponShoot : MonoBehaviour
 
     public virtual void Start()
     {
-        _weapon = GetComponentInParent<Weapon>();
+        //do nothing
     }
 
     public virtual void Update()
@@ -36,6 +36,11 @@ public class WeaponShoot : MonoBehaviour
     }
 
     #endregion
+
+    public void SetWeaponInteractable(Weapon weaponInteractable)
+    {
+        _weapon = weaponInteractable;
+    }
 
     public virtual void CheckShootInput()
     {

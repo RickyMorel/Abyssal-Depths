@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(SphereCollider))]
 public class ShipFastTravel : MonoBehaviour
@@ -31,26 +32,52 @@ public class ShipFastTravel : MonoBehaviour
 
     private CameraManager _cameraManager;
 
-    private Coroutine _lastRoutine = null;
-
     #endregion
 
     #region Unity Loops
+
+    private void Awake()
+    {
+        PlayerJoinManager.OnPlayerJoin += HandleNewPlayer;
+        SceneManager.sceneLoaded += HandleSceneLoaded;
+    }
 
     private void Start()
     {
         _mainShip = FindObjectOfType<Ship>();
         _isPlayerActive = FindObjectsOfType<PlayerInputHandler>();
-        _shipDoor = _mainShip.GetComponentInChildren<ShipDoor>();
-        _lastRoutine = StartCoroutine(DetachFromShipCoroutine());
+        _shipDoor = _mainShip.transform.root.GetComponentInChildren<ShipDoor>();
         _cameraManager = FindObjectOfType<CameraManager>();
         TimelinesManager.Instance.BlackHoleParticle.gameObject.transform.SetParent(_mainShip.transform);
-        TimelinesManager.Instance.BlackHoleParticle.gameObject.transform.localPosition = new Vector3(2.5f,0,0);
+        TimelinesManager.Instance.BlackHoleParticle.gameObject.transform.localPosition = Vector3.zero;
 
         _mainShip.OnRespawn += HandleRespawn;
     }
 
+    private void LateUpdate()
+    {
+        if (!_wantToTravel) { return; }
+
+        CheckPlayersInShip();
+    }
+
+    private void OnDestroy()
+    {
+        PlayerJoinManager.OnPlayerJoin -= HandleNewPlayer;
+        SceneManager.sceneLoaded -= HandleSceneLoaded;
+    }
+
     #endregion
+
+    private void HandleSceneLoaded(Scene scene, LoadSceneMode loadMode)
+    {
+        StartCoroutine(ChangeToOrthoMode());
+    }
+
+    private void HandleNewPlayer()
+    {
+        _isPlayerActive = FindObjectsOfType<PlayerInputHandler>();
+    }
 
     private void HandleRespawn()
     {
@@ -71,7 +98,7 @@ public class ShipFastTravel : MonoBehaviour
 
         if (_playersActive != _playersInShip) { return; }
 
-        _cameraManager.ToggleCamera(true);
+        StartCoroutine(ChangeToOrthoMode());
 
         if (_shipDoor.IsWantedDoorOpen == true) { return; }
 
@@ -81,6 +108,14 @@ public class ShipFastTravel : MonoBehaviour
         _mainShip.gameObject.transform.SetParent(TimelinesManager.Instance.MainShipParentForTheTimeline.transform);
         StartCoroutine(FastTravelCoroutine());
         AttachToShip();
+    }
+
+    private IEnumerator ChangeToOrthoMode()
+    {
+        yield return new WaitForEndOfFrame();
+
+        if (SceneManager.GetActiveScene().name != "SpaceStations") { _cameraManager.ToggleCamera(true); }
+        else { _cameraManager.ToggleCamera(false); }
     }
 
     public void OnPlayerTriggerEnter(Collider other)
@@ -93,7 +128,6 @@ public class ShipFastTravel : MonoBehaviour
 
         _playersInShip = Mathf.Clamp(_playersInShip+1, 0, _playersActive);
 
-        if (_lastRoutine != null) { StopCoroutine(_lastRoutine); }
         AttachToShip();
         CheckPlayersInShip();
     }
@@ -104,10 +138,12 @@ public class ShipFastTravel : MonoBehaviour
 
         if (_playersInShipList.Contains(player) == false) { return; }
 
-        _cameraManager.ToggleCamera(false, 0.1f);
-        _lastRoutine = StartCoroutine(DetachFromShipCoroutine());
-        _playersInShip = Mathf.Clamp(_playersInShip-1, 0, _playersActive);
+        _cameraManager.ToggleCamera(false);
+        _playersInShip = Mathf.Clamp(_playersInShip - 1, 0, _playersActive);
         _playersInShipList.Remove(player);
+
+        //Opens door if no players are in ship, to prevent players from being stuck outside
+        if(_playersInShipList.Count == 0) { _shipDoor.IsWantedDoorOpen = true; }
     }
 
     private IEnumerator FastTravelCoroutine()
@@ -119,9 +155,12 @@ public class ShipFastTravel : MonoBehaviour
         //Stops the animation and takes the main ship out of its parent
         yield return new WaitForSeconds(2);
         TimelinesManager.Instance.StartFastTravelTimeline.Stop();
+
+        SceneLoader.LoadScene(_fastTravelNPC.CurrentFastTravelLocation.SceneIndex);
+
         TimelinesManager.Instance.EndFastTravelTimeline.Play();
         _mainShip.gameObject.transform.SetParent(null);
-        _mainShip.gameObject.transform.position = _fastTravelNPC.TravelToPosition.transform.position;
+        _mainShip.gameObject.transform.position = _fastTravelNPC.CurrentFastTravelLocation.TravelPosition;
         //Stops all remaining animations
         yield return new WaitForSeconds(2);
         TimelinesManager.Instance.EndFastTravelTimeline.Stop();
@@ -130,30 +169,15 @@ public class ShipFastTravel : MonoBehaviour
 
     public void AttachToShip()
     {
-        if(_isPlayerActive == null) { return; }
+        if (SceneLoader.IsInGarageScene()) { return; }
+
+        if (_isPlayerActive == null) { return; }
 
         for (int i = 0; i < _isPlayerActive.Length; i++)
         {
             if (_isPlayerActive[i].IsPlayerActive == true)
             {
                _isPlayerActive[i].GetComponentInParent<PlayerStateMachine>().AttachToShip(true);
-            }
-        }
-    }
-
-    public void DetachFromShip()
-    {
-        StartCoroutine(DetachFromShipCoroutine());  
-    }
-
-    private IEnumerator DetachFromShipCoroutine()
-    {
-        yield return new WaitForSeconds(0.1f);
-        for (int i = 0; i < _isPlayerActive.Length; i++)
-        {
-            if (_isPlayerActive[i].IsPlayerActive == true)
-            {
-                _isPlayerActive[i].GetComponentInParent<PlayerStateMachine>().AttachToShip(false);
             }
         }
     }

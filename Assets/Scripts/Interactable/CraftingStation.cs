@@ -76,18 +76,17 @@ public class CraftingStation : Interactable
 
         OnCraft?.Invoke();
 
-        RemoveCurrentPlayer();
-
         ResetText(_waitingString);
+
+        RemoveCurrentPlayer();
     }
 
     private void ResetText(string text)
     {
+        StopAllCoroutines();
         _craftingText.text = text;
         _shouldCountUp = true;
         _counter = 0;
-
-        if (_lastRoutine != null) { StopCoroutine(_lastRoutine); }
     }
 
     private void HandleInteract()

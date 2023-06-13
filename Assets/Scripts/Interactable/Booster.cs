@@ -163,7 +163,7 @@ public class Booster : RotationalInteractable
             BoostImpulse();
     }
 
-    private void SetIsHovering(bool isHovering)
+    public void SetIsHovering(bool isHovering)
     {
         //If value is the same, don't update
         if (_isHovering == isHovering) { return; }

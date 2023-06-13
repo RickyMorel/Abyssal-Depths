@@ -101,13 +101,9 @@ public class ShipFastTravel : MonoBehaviour
 
         if (_playersActive != _playersInShip) { return; }
 
-        Debug.Log("Players in ship!");
-
         StartCoroutine(CheckIfCameraNeedsOrthoMode());
 
         if (_shipDoor.IsWantedDoorOpen == true) { return; }
-
-        Debug.Log("ship door is closed");
 
         if (!_wantToTravel) { return; }
 

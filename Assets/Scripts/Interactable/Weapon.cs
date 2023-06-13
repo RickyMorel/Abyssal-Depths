@@ -7,6 +7,8 @@ public class Weapon : Upgradable
 {
     #region Editor Fields
 
+    [SerializeField] private int _weaponId = -1;
+
     [Header("Rotation Variables")]
     [SerializeField] private float _rotationSpeed = 10f;
     [SerializeField] private Vector2 _rotationLimits;
@@ -23,6 +25,7 @@ public class Weapon : Upgradable
 
     #region Public Properties
 
+    public int WeaponId => _weaponId;
     public GameObject ProjectilePrefab => _weaponHumble.ProjectilePrefab;
     public List<Transform> ShootTransforms => _weaponHumble.ShootTransforms;
     public Transform TurretHead => _weaponHumble.TurretHead;

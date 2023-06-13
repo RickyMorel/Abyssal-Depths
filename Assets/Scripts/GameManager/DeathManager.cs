@@ -82,11 +82,15 @@ public class DeathManager : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
 
-        SaveSystem.Save(Ship.Instance.ShipData.CurrentSaveIndex);
+        //SaveSystem.Save(Ship.Instance.ShipData.CurrentSaveIndex);
 
         ShowDeathScreen();
 
         yield return new WaitForSeconds((float)DeathPanelUI.Instance.DeathPanelTimeLine.duration);
+
+        Ship.Instance.ShipHealth.Respawn();
+
+        yield return new WaitForEndOfFrame();
 
         ReloadScene();
     }

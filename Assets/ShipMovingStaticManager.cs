@@ -49,16 +49,7 @@ public class ShipMovingStaticManager : MonoBehaviour
 
         _rb = ShipMovingObj.GetComponent<Rigidbody>();
 
-        //HandlSceneChange(SceneManager.GetActiveScene(), LoadSceneMode.Single);
         HandlSceneChange(SceneManager.GetActiveScene(), LoadSceneMode.Single);
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            StartCoroutine(EnableStaticShipCamDelayed());
-        }
     }
 
     private void OnDestroy()
@@ -79,9 +70,7 @@ public class ShipMovingStaticManager : MonoBehaviour
 
         ShipRenderCanvas.SetActive(!isInGarage);
 
-        //ShipStaticObj.isStatic = false;
         ShipStaticObj.transform.localPosition = isInGarage ? Vector3.zero : new Vector3(0f, -500f, 0f);
-        //ShipStaticObj.isStatic = true;
 
         _staticShipCam.SetActive(!isInGarage);
 
@@ -121,7 +110,6 @@ public class ShipMovingStaticManager : MonoBehaviour
 
     private IEnumerator EnableStaticShipCamDelayed()
     {
-        Debug.Log("EnableStaticShipCamDelayed");
         _staticShipCam.SetActive(false);
 
         yield return new WaitForEndOfFrame();

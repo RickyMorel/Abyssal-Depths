@@ -58,24 +58,11 @@ public class PlayerInputHandler : MonoBehaviour
 
     #endregion
 
-    private void Awake()
-    {
-        //Deletes duplicates of same player when loading new scenes
-        PlayerInputHandler[] players = FindObjectsOfType<PlayerInputHandler>();
-
-        foreach (PlayerInputHandler player in players)
-        {
-            //Don't compare to self
-            if(player.gameObject == gameObject) { continue; }
-
-            //Destroy self if finds another player with active id
-            if(player.PlayerId == PlayerId) { Destroy(transform.root.gameObject); }
-        }
-    }
-
     private void Start()
     {
         _player = ReInput.players.GetPlayer(_playerId);
+
+        DestroyDuplicatePlayers();
 
         StartCoroutine(LateStart());
     }
@@ -101,6 +88,21 @@ public class PlayerInputHandler : MonoBehaviour
         Upgrade();
         Shoot();
         Shoot2();
+    }
+
+    private void DestroyDuplicatePlayers()
+    {
+        //Deletes duplicates of same player when loading new scenes
+        PlayerInputHandler[] players = FindObjectsOfType<PlayerInputHandler>();
+
+        foreach (PlayerInputHandler player in players)
+        {
+            //Don't compare to self
+            if (player.gameObject == gameObject) { continue; }
+
+            //Destroy self if finds another player with active id
+            if (player.PlayerId == PlayerId) { Destroy(transform.root.gameObject); }
+        }
     }
 
     public bool DetectDoubleTap()
@@ -190,6 +192,8 @@ public class PlayerInputHandler : MonoBehaviour
 
         if (!_player.GetButtonDown("SpecialAction")) { return; }
 
+        Debug.Log("SpecialAction");
+
         bool value = _player.GetButton("SpecialAction");
         OnSpecialAction?.Invoke(this, value);
     }
@@ -208,6 +212,8 @@ public class PlayerInputHandler : MonoBehaviour
         if (!IsPlayerActive) { return; }
 
         if (!_player.GetButtonDown("Upgrade")) { return; }
+
+        Debug.Log("uPGRADE");
 
         OnUpgrade?.Invoke();
     }

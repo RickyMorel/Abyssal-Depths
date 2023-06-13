@@ -134,13 +134,14 @@ public class InteractableHealth : Damageable
 
         AddHealth((int)MaxHealth);
 
+        if(usedItems) { _interactable.CurrentPlayer.GetComponent<PlayerUpgradesController>().DestroyHeldFixPart(); }
+
         _interactable.CanUse = true;
         _interactable.InteractionType = _prevInteractableState.InteractionType;
         _interactable.IsSingleUse = _prevInteractableState.IsSingleUse;
         _interactable.Outline.OutlineColor = _originalOutlineColor;
         _timeSpentFixing = 0f;
         _interactable.RemoveCurrentPlayer();
-        if (usedItems) { MainInventory.Instance.RemoveItems(_fixCost.CraftingIngredients); }
         OnFix?.Invoke();
 
         DestroyAllParticles();

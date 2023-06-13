@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 [RequireComponent(typeof(PlayerCarryController))]
 [RequireComponent(typeof(CharacterController))]
@@ -63,9 +64,7 @@ public class PlayerStateMachine : BaseStateMachine
 
     public void AttachToShip(bool isAttached)
     {
-        _isAttachedToShip = isAttached;
         transform.parent = null;
-        _characterController.enabled = !_isAttachedToShip;
 
         if (isAttached)
         {
@@ -107,14 +106,34 @@ public class PlayerStateMachine : BaseStateMachine
         }
     }
 
-    public void OnDestroy()
+    public override void OnDestroy()
     {
+        base.OnDestroy();
+
         if (_playerInput == null) { return; }
 
         _playerInput.OnJump -= HandleJump;
     }
 
     #endregion
+
+    public void Teleport(Vector3 position)
+    {
+        StartCoroutine(TeleportCoroutine(position));
+    }
+
+    private IEnumerator TeleportCoroutine(Vector3 position)
+    {
+        _characterController.enabled = false;
+
+        yield return new WaitForEndOfFrame();
+
+        transform.position = position;
+
+        yield return new WaitForEndOfFrame();
+
+        _characterController.enabled = true;
+    }
 
     private void StayInShip()
     {

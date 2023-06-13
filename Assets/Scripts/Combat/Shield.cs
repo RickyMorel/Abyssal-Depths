@@ -21,7 +21,7 @@ public class Shield : MonoBehaviour
 
     private void Start()
     {
-        _shipHealth = transform.root.GetComponent<ShipHealth>();
+        _shipHealth = Ship.Instance.ShipHealth;
     }
 
     private void Update()
@@ -33,13 +33,12 @@ public class Shield : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent(out Projectile projectile)) { ReflectProjectile(projectile); }
 
-        if(LayerMask.LayerToName(collision.gameObject.layer) == "NPC") { CheckForEnemyCollision(collision); return; }
-    }
+        if(LayerMask.LayerToName(collision.gameObject.layer) == "NPC") { CheckForEnemyCollision(collision); }
 
-    private void OnCollisionEnter(Collision collision)
-    {
+
+        //Will uncomment later
         //If object layer is one of the crash layers, except for NPC
-        if (_shipHealth.CrashLayers == (_shipHealth.CrashLayers | (1 << collision.gameObject.layer))) { CheckForSceneCollision(collision); return; }
+        //if (_shipHealth.CrashLayers == (_shipHealth.CrashLayers | (1 << collision.gameObject.layer))) { CheckForSceneCollision(collision); }
     }
 
     private void ReflectProjectile(Projectile projectile)

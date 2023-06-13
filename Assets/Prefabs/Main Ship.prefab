@@ -752,7 +752,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1074782143
 Transform:
   m_ObjectHideFlags: 0
@@ -2013,7 +2013,7 @@ GameObject:
   - component: {fileID: 7238815909928439104}
   - component: {fileID: 1132603600175419452}
   - component: {fileID: 838019690864109674}
-  m_Layer: 25
+  m_Layer: 22
   m_Name: DefaultShield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3607,7 +3607,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 11, y: 1, z: 11}
+  m_Extents: {x: 6.8, y: 1, z: 6.8}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 0
@@ -3742,6 +3742,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 630c2e0d578a7204ab7373b37620a954, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _cameraManager: {fileID: 0}
 --- !u!114 &9184728779062188578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24999,6 +25000,7 @@ MonoBehaviour:
   _expandedFovToVelocityRatio: 0.15
   _mainCamera: {fileID: 508254513682835084}
   _perspectiveCamera: {fileID: 7327961128584826560}
+  _bossCamera: {fileID: 1452053366740833372}
 --- !u!1 &6226824351192044934
 GameObject:
   m_ObjectHideFlags: 0
@@ -30598,7 +30600,7 @@ PrefabInstance:
       objectReference: {fileID: 1764295146}
     - target: {fileID: 8939861088303502654, guid: 581c7f4916d4ee34ea8aad735c61ff19, type: 3}
       propertyPath: _acceleration
-      value: 200
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8939861088303502654, guid: 581c7f4916d4ee34ea8aad735c61ff19, type: 3}
       propertyPath: _pivotTransform
@@ -31305,6 +31307,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 6356078261117588642, guid: 20cad5e47f5409748bf2cdc17e679a11, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7627081817410386980, guid: 20cad5e47f5409748bf2cdc17e679a11, type: 3}
       propertyPath: m_LocalPosition.z
       value: -6.55
@@ -31800,6 +31806,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 6356078261117588642, guid: 20cad5e47f5409748bf2cdc17e679a11, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6582263465908832466, guid: 20cad5e47f5409748bf2cdc17e679a11, type: 3}
       propertyPath: m_ConnectedAnchor.y
       value: 0.0000011920929
@@ -32042,6 +32052,22 @@ PrefabInstance:
     - target: {fileID: 8200422040961970704, guid: 7b5c4f2fc62c539468705c811c9b2d9c, type: 3}
       propertyPath: m_Name
       value: ShipCrashParticles
+      objectReference: {fileID: 0}
+    - target: {fileID: 8290620055844140058, guid: 7b5c4f2fc62c539468705c811c9b2d9c, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8290663376109313466, guid: 7b5c4f2fc62c539468705c811c9b2d9c, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8290721222251322352, guid: 7b5c4f2fc62c539468705c811c9b2d9c, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8290828906038875244, guid: 7b5c4f2fc62c539468705c811c9b2d9c, type: 3}
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -32610,6 +32636,10 @@ PrefabInstance:
     - target: {fileID: 5305554702842702138, guid: 20cad5e47f5409748bf2cdc17e679a11, type: 3}
       propertyPath: m_Layer
       value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6356078261117588642, guid: 20cad5e47f5409748bf2cdc17e679a11, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6582263465908832466, guid: 20cad5e47f5409748bf2cdc17e679a11, type: 3}
       propertyPath: m_ConnectedAnchor.x
@@ -33371,6 +33401,10 @@ PrefabInstance:
     - target: {fileID: 5305554702842702138, guid: 20cad5e47f5409748bf2cdc17e679a11, type: 3}
       propertyPath: m_Layer
       value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6356078261117588642, guid: 20cad5e47f5409748bf2cdc17e679a11, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6582263465908832466, guid: 20cad5e47f5409748bf2cdc17e679a11, type: 3}
       propertyPath: m_ConnectedAnchor.x

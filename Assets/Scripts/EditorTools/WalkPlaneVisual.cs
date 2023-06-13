@@ -75,8 +75,8 @@ public class WalkPlaneVisual : MonoBehaviour
 
     public bool IsWithinBounds(Vector3 pos)
     {
-        if (pos.z > transform.position.z + transform.localScale.z / 2) { Debug.Log("IsWithinBounds: " + false); return false; }
-        if (pos.z < transform.position.z - transform.localScale.z / 2) { Debug.Log("IsWithinBounds: " + false); return false; }
+        if (pos.z > transform.position.z + transform.localScale.z / 2) { return false; }
+        if (pos.z < transform.position.z - transform.localScale.z / 2) { return false; }
 
         return true;
     }

@@ -6,7 +6,7 @@ public class FastTravelNPC : NPC
 {
     #region Editor Fields
 
-    [SerializeField] private Transform[] _travelPos;
+    [SerializeField] private FastTravelLocation[] _travelLocations;
 
     [SerializeField] private GameObject _fastTravelOptions;
 
@@ -14,13 +14,13 @@ public class FastTravelNPC : NPC
 
     #region Public Properties
 
-    public Transform TravelToPosition => _travelToPosition;
+    public FastTravelLocation CurrentFastTravelLocation => _currentFastTravelLocation;
 
     #endregion
 
     #region Private Variables
 
-    private Transform _travelToPosition;
+    private FastTravelLocation _currentFastTravelLocation;
 
     #endregion
 
@@ -49,8 +49,19 @@ public class FastTravelNPC : NPC
     {
         ShipFastTravel shipFastTravel = Ship.Instance.GetComponent<ShipFastTravel>();
         shipFastTravel.FastTravelNPC = this;
-        _travelToPosition = _travelPos[posIndex];
+        _currentFastTravelLocation = _travelLocations[posIndex];
         shipFastTravel.WantToTravel = true;
         CurrentPlayer.GetComponent<PlayerInteractionController>().CheckExitInteraction();
     }
+
+    #region Helper Classes
+
+    [System.Serializable]
+    public class FastTravelLocation
+    {
+        public int SceneIndex = -1;
+        public Vector3 TravelPosition;
+    }
+
+    #endregion
 }

@@ -25,6 +25,12 @@ public class PlayerJoinManager : MonoBehaviour
 
     #endregion
 
+    #region Public Properties
+
+    public static event Action OnPlayerJoin;
+
+    #endregion
+
     #region Unity Loops
 
     private void Start()
@@ -132,6 +138,7 @@ public class PlayerJoinManager : MonoBehaviour
         playerInput.IsPlayerActive = true;
         _playerInputs[_playerJoinNPCIndex].IsPlayerActive = true;
         CameraManager.Instance.SplitScreen(index);
+        OnPlayerJoin?.Invoke();
     }
 
     private void HandleJump()

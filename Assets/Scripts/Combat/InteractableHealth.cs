@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Analytics;
+using Random = UnityEngine.Random;
 
 public class InteractableHealth : Damageable
 {
@@ -12,6 +13,10 @@ public class InteractableHealth : Damageable
     [SerializeField] private float _timeToFix = 8f;
     [SerializeField] private bool _canUseWhenBroken = false;
     [SerializeField] private Transform _particleSpawnTransform;
+
+    [Header("Fix Parts Variables")]
+    [SerializeField] private int _fixPartSpawnAmount = 2;
+    [SerializeField] private GameObject _fixPartPickupPrefab;
 
     #endregion
 
@@ -30,6 +35,8 @@ public class InteractableHealth : Damageable
     private Color _originalOutlineColor;
     private GameObject _currentRepairPopup;
     private GameObject _currentRepairCanvas;
+    private GameObject _currentRepairStatePopup;
+    private int _partLeftToRepair = 0;
 
     #endregion
 
@@ -116,7 +123,7 @@ public class InteractableHealth : Damageable
 
         _timeSpentFixing = 0f;
 
-        _currentRepairPopup = RepairPopup.Create(transform, _particleSpawnTransform.localPosition, _timeToFix - _timeSpentFixing).gameObject;
+        _currentRepairPopup = RepairPopup.Create(transform, _particleSpawnTransform.localPosition + new Vector3(2f, 0f, 0f), _timeToFix - _timeSpentFixing).gameObject;
 
         _interactable.CanUse = false;
     }
@@ -134,7 +141,18 @@ public class InteractableHealth : Damageable
 
         AddHealth((int)MaxHealth);
 
-        if(usedItems) { _interactable.CurrentPlayer.GetComponent<PlayerUpgradesController>().DestroyHeldFixPart(); }
+        if(usedItems) 
+        {
+            _interactable.CurrentPlayer.GetComponent<PlayerUpgradesController>().DestroyHeldFixPart();
+            _partLeftToRepair--;
+
+            CreateRepairStatePopup();
+
+            //Stay broken until player adds all parts
+            if (_partLeftToRepair > 0) { return; }
+        }
+
+        CreateRepairStatePopup(true);
 
         _interactable.CanUse = true;
         _interactable.InteractionType = _prevInteractableState.InteractionType;
@@ -185,6 +203,39 @@ public class InteractableHealth : Damageable
         _interactable.InteractionType = InteractionType.Fixing;
         _interactable.IsSingleUse = false;
         _interactable.Outline.OutlineColor = Color.red;
+
+        SpawnFixParts();
+    }
+
+    private void SpawnFixParts()
+    {
+        for (int i = 0; i < _fixPartSpawnAmount; i++)
+        {
+            GameObject fixPartPickupInstance = Instantiate(_fixPartPickupPrefab, transform.position, Quaternion.identity);
+
+            Rigidbody rb = fixPartPickupInstance.GetComponent<Rigidbody>();
+
+            Vector3 forceDir = Random.insideUnitSphere * 50f;
+
+            rb.AddForce(forceDir, ForceMode.Impulse);
+
+            _partLeftToRepair++;
+        }
+
+        CreateRepairStatePopup();
+    }
+
+    private void CreateRepairStatePopup(bool justDestroy = false)
+    {
+        if(_currentRepairStatePopup != null) 
+        {
+            Destroy(_currentRepairStatePopup.gameObject);
+
+            if (justDestroy) { return; }
+        }
+
+        _currentRepairStatePopup = RepairPopup.CreateStatePopup(transform, _particleSpawnTransform.localPosition,
+            _fixPartSpawnAmount - _partLeftToRepair, _fixPartSpawnAmount).gameObject;
     }
 
     #region Helper Classes

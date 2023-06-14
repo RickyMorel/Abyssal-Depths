@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +15,7 @@ public class ShipHealth : Damageable
 
     [Header("FX")]
     [SerializeField] private GameObject _redLights;
+    [SerializeField] private TextMeshPro[] _timerTexts;
 
     #endregion
 
@@ -142,6 +144,7 @@ public class ShipHealth : Damageable
     private void HandleFix()
     {
         AddHealth((int)MaxHealth);
+        UpdateDeathTimeTexts(0f);
     }
 
     private float CalculateCrashDamage()
@@ -184,6 +187,15 @@ public class ShipHealth : Damageable
 
         if (!IsDead()) { yield return null; }
         else { StartCoroutine(FlickerRedLights()); }
+    }
+
+    public void UpdateDeathTimeTexts(float timeLeft)
+    {
+        foreach (TextMeshPro text in _timerTexts)
+        {
+            text.gameObject.SetActive(IsDead());
+            text.text = string.Format("{0:F1}", timeLeft);
+        }
     }
 
     public void Respawn()

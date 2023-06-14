@@ -37,6 +37,7 @@ public class BaseInteractionController : MonoBehaviour
     public Interactable CurrentInteractable => _currentInteractable;
     public int CurrentInteraction => _currentInteraction;
     public event Action OnExitInteraction;
+    public event Action OnFix;
 
     #endregion
 
@@ -66,6 +67,11 @@ public class BaseInteractionController : MonoBehaviour
     }
 
     #endregion
+
+    public void HandleFix()
+    {
+
+    }
 
     public void HandleJump()
     {

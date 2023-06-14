@@ -72,6 +72,7 @@ public class DeathManager : MonoBehaviour
     private void UpdateDeathTime(float multiplier)
     {
         _timeSinceDeath = Mathf.Clamp(_timeSinceDeath + (Time.deltaTime * multiplier), 0f, Ship.Instance.TimeTillDeath);
+        Ship.Instance.ShipHealth.UpdateDeathTimeTexts(Ship.Instance.TimeTillDeath - _timeSinceDeath);
         AddEyeClosingFX();
     }
 

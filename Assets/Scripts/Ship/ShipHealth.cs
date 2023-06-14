@@ -115,7 +115,7 @@ public class ShipHealth : Damageable
         if (_rb == null) { return; }
         if (_prevVelocity < _minCrashSpeed) { return; }
 
-        _currentDamage = (int)CalculateCrashDamage();
+        _currentDamage = (int)CalculateCrashDamage(_rb, _crashDamageMultiplier);
         DamageWithoutDamageData((int)_currentDamage, collision.collider);
         if (collision.gameObject.TryGetComponent(out AIHealth enemyHealth)) { enemyHealth.Damage((int)_currentDamage); }
 
@@ -145,13 +145,6 @@ public class ShipHealth : Damageable
     {
         AddHealth((int)MaxHealth);
         UpdateDeathTimeTexts(0f);
-    }
-
-    private float CalculateCrashDamage()
-    {
-        float finalDamage = _rb.velocity.magnitude* _crashDamageMultiplier;
-
-        return finalDamage;
     }
 
     private void HandleUpdateHealth(int healthAdded)

@@ -24,6 +24,7 @@ public class ItemPickup : MonoBehaviour
     private Outline _outline;
     private Rigidbody _rb;
     private PlayerCarryController _prevPlayerCarryController = null;
+    private ParticleSystem _collisionParticles;
 
     #endregion
 
@@ -33,8 +34,15 @@ public class ItemPickup : MonoBehaviour
     {
         _outline = GetComponent<Outline>();
         _rb = GetComponent<Rigidbody>();
+        _collisionParticles = Instantiate(GameAssetsManager.Instance.ItemPickupCollisionParticles, transform).GetComponent<ParticleSystem>();
 
         EnableOutline(false);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        _collisionParticles.transform.position = collision.contacts[0].point;
+        _collisionParticles.Play();
     }
 
     #endregion

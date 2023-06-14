@@ -16,7 +16,13 @@ public class PlayerRagdoll : MonoBehaviour
     private Collider _mainCollider;
     private Animator _anim;
     private NavMeshAgent _agent;
+    private Rigidbody _rb;
+    private PlayerHealth _health;
+    private ParticleSystem _bubbleParticles;
 
+    private bool _isKinematicInitialState;
+    private bool _useGravityInitialState;
+    private bool _agentEnabledInitialState;
     #endregion
 
     #region Unity Loops
@@ -25,14 +31,30 @@ public class PlayerRagdoll : MonoBehaviour
     {
         _mainCollider = GetComponent<Collider>();
         _anim = GetComponent<Animator>();
-
         _agent = GetComponent<NavMeshAgent>();
+        _rb = GetComponent<Rigidbody>();
+        _health = GetComponent<PlayerHealth>();
     }
 
     private void Start()
     {
+        _bubbleParticles = Instantiate(GameAssetsManager.Instance.RagdollBubbleParticles, transform).GetComponent<ParticleSystem>();
+
+        _isKinematicInitialState = _rb.isKinematic;
+        _useGravityInitialState = _rb.useGravity;
+        _agentEnabledInitialState = _agent.enabled;
+
         LockZPos();
-        EnableRagdoll(false);
+        EnableDeadRagdoll(false);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(_rb == null) { return; }
+
+        if(LayerMask.LayerToName(collision.gameObject.layer) == "ShieldLayer") { return; }
+
+        _health.DamageWithoutDamageData((int)_health.CalculateCrashDamage(_rb, 1f));
     }
 
     #endregion
@@ -46,8 +68,32 @@ public class PlayerRagdoll : MonoBehaviour
         }
     }
 
-    public void EnableRagdoll(bool isEnabled)
+    public void EnableLivingRagdoll(bool isEnabled)
     {
+        if (isEnabled)
+        {
+            _rb.isKinematic = false;
+            _rb.useGravity = true;
+            _agent.enabled = false;
+            _mainCollider.isTrigger = false;
+            _bubbleParticles.Play();
+        }
+        else
+        {
+            _rb.isKinematic = _isKinematicInitialState;
+            _rb.useGravity = _useGravityInitialState;
+            _agent.enabled = _agentEnabledInitialState;
+            _mainCollider.isTrigger = true;
+            _bubbleParticles.Stop();
+        }
+
+        if (isEnabled) _bubbleParticles.Play(); else _bubbleParticles.Stop();
+    }
+
+    public void EnableDeadRagdoll(bool isEnabled)
+    {
+        if (isEnabled) _bubbleParticles.Play(); else _bubbleParticles.Stop();
+
         if (_colliders.Count <= 1) { if (isEnabled) { PlayDeathAnimation(); } return; }
 
         if (isEnabled == false)

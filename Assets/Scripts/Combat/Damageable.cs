@@ -227,7 +227,7 @@ public class Damageable : MonoBehaviour
 
         if(finalDamage != 0) { DamagePopup.Create(transform.position, (int)finalDamage, _damageData.DamageTypes[index], isWeak); }
 
-        if (_damageParticles != null && _damageData.DamageTypes[index] != DamageTypes.None) { _damageParticles.Play(); }
+        if (_damageData.DamageTypes[index] != DamageTypes.None) { PlayDamageFX(); }
 
         if (_currentHealth == 0) { Die(); }
     }
@@ -242,7 +242,7 @@ public class Damageable : MonoBehaviour
 
         if (damage != 0) { DamagePopup.Create(transform.position, damage, DamageTypes.None, false); }
 
-        if (_damageParticles != null) { _damageParticles.Play(); }
+        PlayDamageFX();
 
         if (_currentHealth == 0) { Die(); }
     }
@@ -260,6 +260,18 @@ public class Damageable : MonoBehaviour
     public void SetMaxHealth(int newMaxHealth)
     {
         _maxHealth = newMaxHealth;
+    }
+
+    public void PlayDamageFX()
+    {
+        if (_damageParticles != null) { _damageParticles.Play(); }
+    }
+
+    public float CalculateCrashDamage(Rigidbody selfRb, float crashDamageMultiplier = 10f)
+    {
+        float finalDamage = selfRb.velocity.magnitude * crashDamageMultiplier;
+
+        return finalDamage;
     }
 
     #region Damage Type Functions

@@ -56,6 +56,8 @@ public class WeaponShoot : MonoBehaviour
 
         _timeSinceLastShot = 0f;
         InstantiateProjectile(_weapon.ShootTransforms[0]);
+
+        Ship.Instance.AddForceToShip(-_weapon.TurretHead.transform.forward * 2.5f, ForceMode.Impulse);
     }
 
     public void ProjectileShootFromOtherBarrels(int shootNumber)

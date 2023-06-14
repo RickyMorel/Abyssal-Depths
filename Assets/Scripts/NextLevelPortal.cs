@@ -7,10 +7,9 @@ public class NextLevelPortal : MonoBehaviour
 {
     #region Editor Fields
 
-    [SerializeField] private Item _portalKey;
     [SerializeField] private ItemQuantity _portalKeyQuantity;
     [SerializeField] private PlayableDirector _entranceAnimation;
-
+    [SerializeField] private ParticleSystem _portalAnimation;
 
     #endregion
 
@@ -24,7 +23,7 @@ public class NextLevelPortal : MonoBehaviour
     {
         if (!other.gameObject.TryGetComponent(out Booster booster)) { return; }
 
-        if (MainInventory.Instance.InventoryDictionary.TryGetValue(_portalKey, out _portalKeyQuantity))
+        if (MainInventory.Instance.InventoryDictionary.TryGetValue(_portalKeyQuantity.Item, out _portalKeyQuantity))
 
         _booster = booster;
 
@@ -48,7 +47,7 @@ public class NextLevelPortal : MonoBehaviour
 
     private IEnumerator PortalPhase3()
     {
-        Play(_entranceAnimation);
+        _entranceAnimation.Play();
 
         yield return new WaitForSeconds(30f);
 
@@ -57,7 +56,7 @@ public class NextLevelPortal : MonoBehaviour
 
     private IEnumerator PortalPhase4()
     {
-        Play(_portalAnimation);
+        _portalAnimation.Play();
 
         yield return new WaitForSeconds(1f);
 

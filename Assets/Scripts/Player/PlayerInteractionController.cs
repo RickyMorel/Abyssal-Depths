@@ -6,7 +6,6 @@ public class PlayerInteractionController : BaseInteractionController
 {
     #region Private Variables
 
-    private CharacterController _characterController;
     private PlayerStateMachine _playerStateMachine;
 
     #endregion
@@ -18,7 +17,6 @@ public class PlayerInteractionController : BaseInteractionController
         base.Start();
 
         _playerInput = GetComponent<PlayerInputHandler>();
-        _characterController = GetComponent<CharacterController>();
         _playerStateMachine = GetComponent<PlayerStateMachine>();
 
         _playerInput.OnInteract += PlayerHandleInteraction;

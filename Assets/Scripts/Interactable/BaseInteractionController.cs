@@ -103,6 +103,9 @@ public class BaseInteractionController : MonoBehaviour
     //This calls when the player presses the interact button
     public void HandleInteraction(float customDuration = -1)
     {
+        //Don't interact when grabbing items
+        if (_playerCarryController.HasRecentlyGrabbedItem()) { return; }
+
         if (_currentInteractable == null) { return; }
 
 #if INTERACTION_DEBUGS
@@ -110,7 +113,7 @@ public class BaseInteractionController : MonoBehaviour
 
         Debug.Log($"6.5-{_currentInteractable.CurrentPlayer} == {this}: " + gameObject.name);
 #endif
-        //if (_currentInteractable.CurrentPlayer == this) { return; }
+
 #if INTERACTION_DEBUGS
         Debug.Log($"7-{_currentInteractable.CurrentPlayer} == {this}: " + gameObject.name);
 #endif

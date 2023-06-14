@@ -6,6 +6,7 @@ public class WeaponShoot : MonoBehaviour
 {
     #region Editor Fields
 
+    [SerializeField] protected float _recoilForce = 2.5f;
     [SerializeField] protected float _timeBetweenShots = 0.2f;
 
     #endregion
@@ -57,7 +58,7 @@ public class WeaponShoot : MonoBehaviour
         _timeSinceLastShot = 0f;
         InstantiateProjectile(_weapon.ShootTransforms[0]);
 
-        Ship.Instance.AddForceToShip(-_weapon.TurretHead.transform.forward * 2.5f, ForceMode.Impulse);
+        Ship.Instance.AddForceToShip(-_weapon.TurretHead.transform.forward * _recoilForce, ForceMode.Impulse);
     }
 
     public void ProjectileShootFromOtherBarrels(int shootNumber)

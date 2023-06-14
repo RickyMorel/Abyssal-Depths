@@ -111,11 +111,10 @@ public class InteractableHealth : Damageable
 
     private void TryStartFix()
     {
+        Debug.Log("TryStartFix");
         if (!IsDead()) { return; }
 
         if (_currentRepairPopup != null) { Destroy(_currentRepairPopup); }
-
-        if (!CraftingManager.CanCraft(_fixCost)) { return; }
 
         if (_interactable.CurrentPlayer == null) { return; }
 
@@ -139,18 +138,19 @@ public class InteractableHealth : Damageable
     {
         if(_prevInteractableState == null) { return; }
 
-        AddHealth((int)MaxHealth);
-
         if(usedItems) 
         {
             _interactable.CurrentPlayer.GetComponent<PlayerUpgradesController>().DestroyHeldFixPart();
             _partLeftToRepair--;
 
             CreateRepairStatePopup();
+            _interactable.RemoveCurrentPlayer();
 
             //Stay broken until player adds all parts
             if (_partLeftToRepair > 0) { return; }
         }
+
+        AddHealth((int)MaxHealth);
 
         CreateRepairStatePopup(true);
 
@@ -159,7 +159,6 @@ public class InteractableHealth : Damageable
         _interactable.IsSingleUse = _prevInteractableState.IsSingleUse;
         _interactable.Outline.OutlineColor = _originalOutlineColor;
         _timeSpentFixing = 0f;
-        _interactable.RemoveCurrentPlayer();
         OnFix?.Invoke();
 
         DestroyAllParticles();
@@ -211,7 +210,7 @@ public class InteractableHealth : Damageable
     {
         for (int i = 0; i < _fixPartSpawnAmount; i++)
         {
-            GameObject fixPartPickupInstance = Instantiate(_fixPartPickupPrefab, transform.position, Quaternion.identity);
+            GameObject fixPartPickupInstance = Instantiate(_fixPartPickupPrefab, _particleSpawnTransform.position, Quaternion.identity);
 
             Rigidbody rb = fixPartPickupInstance.GetComponent<Rigidbody>();
 

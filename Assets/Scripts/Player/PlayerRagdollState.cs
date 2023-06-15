@@ -14,7 +14,7 @@ public class PlayerRagdollState : PlayerBaseState
     public override void EnterState()
     {
         _context.CanMove = false;
-        _context.PlayerRagdoll.EnableRagdoll(true);
+        _context.PlayerRagdoll.EnableDeadRagdoll(true);
     }
 
     public override void UpdateState()
@@ -25,7 +25,7 @@ public class PlayerRagdollState : PlayerBaseState
     public override void ExitState() 
     {
         _context.CanMove = true;
-        _context.PlayerRagdoll.EnableRagdoll(false);
+        _context.PlayerRagdoll.EnableDeadRagdoll(false);
     }
 
     public override void InitializeSubStates() { }

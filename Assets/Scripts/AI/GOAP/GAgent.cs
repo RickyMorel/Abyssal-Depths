@@ -63,7 +63,6 @@ public class GAgent : MonoBehaviour
 
     public AIStateMachine StateMachine => _aiStateMachine;
     public Damageable Damageable => _damageable;
-    public bool IsMoving => _isMoving;
 
     #endregion
 
@@ -229,6 +228,10 @@ public class GAgent : MonoBehaviour
     }
 
     #endregion
+    public bool IsMoving()
+    {
+        return (_aiStateMachine.CanMove && _isMoving);
+    }
 
     public void CancelPreviousActions()
     {

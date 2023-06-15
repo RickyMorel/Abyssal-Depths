@@ -15016,7 +15016,7 @@ Transform:
   - {fileID: 1223754076}
   - {fileID: 2558993358216678496}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1470298975805987252
 MonoBehaviour:
@@ -15042,8 +15042,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afd5dd6b137e5b94686d0f7ddf58bbb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inventoryPanel: {fileID: 8742352093002527802}
-  _contentTransform: {fileID: 53511179670888735}
+  _inventoryPanel: {fileID: 0}
+  _contentTransform: {fileID: 0}
   _inventoryItemUIPrefab: {fileID: 6916972730889110830, guid: edccdd73148f84d4d9f411b08aee8310, type: 3}
   _preloadedItems:
   - Item: {fileID: 11400000, guid: f88120d63d6e366428afa9504c07b5f8, type: 2}
@@ -15103,6 +15103,8 @@ MonoBehaviour:
   _fireParticles: {fileID: 8765800227001637491, guid: 6992756f0fe5ec94eb3c36a2a0058a91, type: 3}
   _meleeFloorHitParticles: {fileID: 5173471006138777106, guid: b635e807ed608f3438395f8b96856e31, type: 3}
   _fireWhipCollisionParticles: {fileID: 687036664214822378, guid: 2feb0bab6d812794c8f7a824a0e6ba14, type: 3}
+  _itemPickupCollisionParticles: {fileID: 3047848899332420928, guid: 7e87e1cf1ca7eb24b98ca35a7d084f9a, type: 3}
+  _ragdollBubbleParticles: {fileID: 8692640581620935335, guid: 552047dd452386643809270871634a6e, type: 3}
   _stunnedParticles:
   - {fileID: 1334071670866236, guid: edf12e91890b8434eb8ea701f9bc40a2, type: 3}
   - {fileID: 1380238739168988, guid: e35f4911d07c78949bd6fcee2e707765, type: 3}
@@ -15139,11 +15141,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60bcb2f1a9ffda045adb021e6bccd0fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _itemNameText: {fileID: 435206840094803442}
-  _itemDescriptionText: {fileID: 490174108811128788}
-  _ingredientsContentTransform: {fileID: 3681686904917465666}
-  _craftingPanel: {fileID: 8742352093002527802}
-  _contentTransform: {fileID: 53511179670888735}
+  _itemNameText: {fileID: 0}
+  _itemDescriptionText: {fileID: 0}
+  _ingredientsContentTransform: {fileID: 0}
+  _craftingPanel: {fileID: 0}
+  _contentTransform: {fileID: 0}
   _craftingItemUIPrefab: {fileID: 6916972730889110830, guid: f6665c47c775c8748bf9a3b40055cb00, type: 3}
   _craftingRecipyList: []
 --- !u!114 &9185013131034128382

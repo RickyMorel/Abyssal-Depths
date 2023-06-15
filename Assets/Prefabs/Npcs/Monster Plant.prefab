@@ -1797,7 +1797,7 @@ MonoBehaviour:
   _resistanceType: 
   _weaknessType: 
   _currentHealth: 0
-  _maxHealth: 10000
+  _maxHealth: 400
   _damageParticles: {fileID: 4330216161463991999}
   _hurtTime: 5
   _meshes: []
@@ -1847,7 +1847,7 @@ MonoBehaviour:
   _shootTransform: {fileID: 5807305311339477148}
   _projectileHolsterTransform: {fileID: 5807305311339477148}
   _enemyDamageDataID: 1
-  _attackRange: 20
+  _attackRange: 30
   _hitParticle: {fileID: 0}
 --- !u!114 &2028690528299777055
 MonoBehaviour:
@@ -2284,7 +2284,7 @@ GameObject:
   - component: {fileID: 4528312263231508403}
   - component: {fileID: 4330743696071456381}
   - component: {fileID: 4331092799460177461}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: FX_Explosion_Body_Body_Fire_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2522,8 +2522,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 1.5
-      minScalar: 0.5
+      scalar: 3
+      minScalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -7006,7 +7006,7 @@ GameObject:
   - component: {fileID: 4524114987256736729}
   - component: {fileID: 4330216161463991999}
   - component: {fileID: 4331543403216460857}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: FX_Explosion_Body_Bloody_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7247,8 +7247,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 4
-      minScalar: 1
+      scalar: 6
+      minScalar: 2
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -11650,7 +11650,7 @@ GameObject:
   - component: {fileID: 4528040164112701233}
   - component: {fileID: 4352517876195258339}
   - component: {fileID: 4332122219463623475}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: FX_Explosion_Body_Chunk_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11888,8 +11888,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 2
-      minScalar: 1
+      scalar: 6
+      minScalar: 3
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -16309,7 +16309,7 @@ GameObject:
   - component: {fileID: 4527848402127123667}
   - component: {fileID: 4352456933018841983}
   - component: {fileID: 4331114274575018595}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: FX_Explosion_Body_Blood_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16547,8 +16547,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.01
-      minScalar: 0.005
+      scalar: 0.05
+      minScalar: 0.025
       maxCurve:
         serializedVersion: 2
         m_Curve:

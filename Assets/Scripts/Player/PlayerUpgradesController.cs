@@ -90,10 +90,19 @@ public class PlayerUpgradesController : MonoBehaviour
 
         if (_interactionController.IsInteracting()) { return false; }
 
+        if (_playerCarryController.CurrentSingleObjInstance.tag != "FixPart") { return false; }
+
         _interactionController.IsFixing = true;
 
         _interactionController.HandleInteraction();
 
         return true;
+    }
+
+    public void DestroyHeldFixPart()
+    {
+        if (_playerCarryController.CurrentSingleObjInstance.tag != "FixPart") { return; }
+
+        Destroy(_playerCarryController.CurrentSingleObjInstance.gameObject);
     }
 }

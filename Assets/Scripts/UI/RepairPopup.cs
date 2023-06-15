@@ -15,6 +15,7 @@ public class RepairPopup : MonoBehaviour
     #region Private Variables
 
     private float _repairTime;
+    private bool _isStatePopup = false;
 
     #endregion
 
@@ -31,6 +32,19 @@ public class RepairPopup : MonoBehaviour
         return repairPopup;
     }
 
+    public static RepairPopup CreateStatePopup(Transform interatableTransform, Vector3 localPos, int currentParts,int maxParts)
+    {
+        GameObject repairPopupObj = Instantiate(GameAssetsManager.Instance.RepairPopup, interatableTransform);
+        repairPopupObj.transform.localPosition = new Vector3(localPos.x, localPos.y+1f, localPos.z);
+
+        RepairPopup repairPopup = repairPopupObj.GetComponent<RepairPopup>();
+        repairPopup.SetupStatePopup(currentParts, maxParts);
+
+        repairPopupObj.transform.localScale = repairPopupObj.transform.localScale / 1.5f;
+
+        return repairPopup;
+    }
+
     #endregion
 
     private void Awake()
@@ -40,15 +54,30 @@ public class RepairPopup : MonoBehaviour
 
     private void Update()
     {
+        if (_isStatePopup) { return; }
+
+        UpdateRepairTime();
+    }
+
+    private void UpdateRepairTime()
+    {
         _repairTime = Mathf.Clamp(_repairTime - Time.deltaTime, 0f, 999f);
         int repairTimeInt = (int)_repairTime;
         _timerText.text = repairTimeInt.ToString();
 
-        if(_repairTime <= 1f) { Destroy(gameObject); }
+        if (_repairTime <= 1f) { Destroy(gameObject); }
     }
 
     public void Setup(float repairTime)
     {
         _repairTime = repairTime + 1f;
+        _timerText.fontSize = _timerText.fontSize * 0.7f;
+    }
+
+    public void SetupStatePopup(int currentParts,int maxParts)
+    {
+        _timerText.text = $"{currentParts}/{maxParts}";
+
+        _isStatePopup = true;
     }
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Analytics;
+using Random = UnityEngine.Random;
 
 public class InteractableHealth : Damageable
 {
@@ -12,6 +13,10 @@ public class InteractableHealth : Damageable
     [SerializeField] private float _timeToFix = 8f;
     [SerializeField] private bool _canUseWhenBroken = false;
     [SerializeField] private Transform _particleSpawnTransform;
+
+    [Header("Fix Parts Variables")]
+    [SerializeField] private int _fixPartSpawnAmount = 2;
+    [SerializeField] private GameObject _fixPartPickupPrefab;
 
     #endregion
 
@@ -30,6 +35,8 @@ public class InteractableHealth : Damageable
     private Color _originalOutlineColor;
     private GameObject _currentRepairPopup;
     private GameObject _currentRepairCanvas;
+    private GameObject _currentRepairStatePopup;
+    private int _partLeftToRepair = 0;
 
     #endregion
 
@@ -67,8 +74,6 @@ public class InteractableHealth : Damageable
         if(_interactable.CurrentPlayer.IsFixing == false) { return; }
 
         if (!IsDead()) { return; }
-
-        if (!CraftingManager.CanCraft(_fixCost)) { _interactable.RemoveCurrentPlayer(); return; }
 
         _timeSpentFixing += Time.deltaTime;
 
@@ -108,15 +113,13 @@ public class InteractableHealth : Damageable
 
         if (_currentRepairPopup != null) { Destroy(_currentRepairPopup); }
 
-        if (!CraftingManager.CanCraft(_fixCost)) { return; }
-
         if (_interactable.CurrentPlayer == null) { return; }
 
         if (_interactable.CurrentPlayer.IsFixing == false) { return; }
 
         _timeSpentFixing = 0f;
 
-        _currentRepairPopup = RepairPopup.Create(transform, _particleSpawnTransform.localPosition, _timeToFix - _timeSpentFixing).gameObject;
+        _currentRepairPopup = RepairPopup.Create(transform, _particleSpawnTransform.localPosition + new Vector3(0f, -0.8f, 0f), _timeToFix - _timeSpentFixing).gameObject;
 
         _interactable.CanUse = false;
     }
@@ -132,15 +135,27 @@ public class InteractableHealth : Damageable
     {
         if(_prevInteractableState == null) { return; }
 
+        if(usedItems) 
+        {
+            _interactable.CurrentPlayer.GetComponent<PlayerUpgradesController>().DestroyHeldFixPart();
+            _partLeftToRepair--;
+
+            CreateRepairStatePopup();
+            _interactable.RemoveCurrentPlayer();
+
+            //Stay broken until player adds all parts
+            if (_partLeftToRepair > 0) { return; }
+        }
+
         AddHealth((int)MaxHealth);
+
+        CreateRepairStatePopup(true);
 
         _interactable.CanUse = true;
         _interactable.InteractionType = _prevInteractableState.InteractionType;
         _interactable.IsSingleUse = _prevInteractableState.IsSingleUse;
         _interactable.Outline.OutlineColor = _originalOutlineColor;
         _timeSpentFixing = 0f;
-        _interactable.RemoveCurrentPlayer();
-        if (usedItems) { MainInventory.Instance.RemoveItems(_fixCost.CraftingIngredients); }
         OnFix?.Invoke();
 
         DestroyAllParticles();
@@ -184,6 +199,39 @@ public class InteractableHealth : Damageable
         _interactable.InteractionType = InteractionType.Fixing;
         _interactable.IsSingleUse = false;
         _interactable.Outline.OutlineColor = Color.red;
+
+        SpawnFixParts();
+    }
+
+    private void SpawnFixParts()
+    {
+        for (int i = 0; i < _fixPartSpawnAmount; i++)
+        {
+            GameObject fixPartPickupInstance = Instantiate(_fixPartPickupPrefab, _particleSpawnTransform.position, Quaternion.identity);
+
+            Rigidbody rb = fixPartPickupInstance.GetComponent<Rigidbody>();
+
+            Vector3 forceDir = Random.insideUnitSphere * 50f;
+
+            rb.AddForce(forceDir, ForceMode.Impulse);
+
+            _partLeftToRepair++;
+        }
+
+        CreateRepairStatePopup();
+    }
+
+    private void CreateRepairStatePopup(bool justDestroy = false)
+    {
+        if(_currentRepairStatePopup != null) 
+        {
+            Destroy(_currentRepairStatePopup.gameObject);
+
+            if (justDestroy) { return; }
+        }
+
+        _currentRepairStatePopup = RepairPopup.CreateStatePopup(transform, _particleSpawnTransform.localPosition,
+            _fixPartSpawnAmount - _partLeftToRepair, _fixPartSpawnAmount).gameObject;
     }
 
     #region Helper Classes

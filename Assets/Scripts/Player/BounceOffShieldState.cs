@@ -12,22 +12,12 @@ public class BounceOffShieldState : PlayerBaseState
     }
 
     private AIStateMachine _aiContext;
-    private bool _isKinematicInitialState;
-    private bool _useGravityInitialState;
-    private bool _agentEnabledInitialState;
 
     public override void EnterState() 
     {
         _aiContext = _context as AIStateMachine;
 
-        _isKinematicInitialState = _context.Rb.isKinematic;
-        _useGravityInitialState = _context.Rb.useGravity;
-        _agentEnabledInitialState = _aiContext.Agent.enabled;
-
-        _context.Rb.isKinematic = false;
-        _context.Rb.useGravity = true;
-        _aiContext.Agent.enabled = false;
-        _context.GetComponent<Collider>().isTrigger = false; 
+        _context.PlayerRagdoll.EnableLivingRagdoll(true);
     }
 
     public override void UpdateState()
@@ -37,10 +27,7 @@ public class BounceOffShieldState : PlayerBaseState
 
     public override void ExitState() 
     {
-        _context.Rb.isKinematic = _isKinematicInitialState;
-        _context.Rb.useGravity = _useGravityInitialState;
-        _aiContext.Agent.enabled = _agentEnabledInitialState;
-        _context.GetComponent<Collider>().isTrigger = true;
+        _context.PlayerRagdoll.EnableLivingRagdoll(false);
     }
 
     public override void InitializeSubStates() { }

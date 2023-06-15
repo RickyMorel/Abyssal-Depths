@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ShipDoor : Interactable
 {
@@ -23,19 +24,24 @@ public class ShipDoor : Interactable
 
     private bool _isDoorOpen = false;
     private float _doorZRotation;
-    private GameObject _isAttached;
 
     #endregion
 
     private void Start()
     {
+        SceneManager.sceneLoaded += HandleSceneLoaded;
         Humble.OnInteract += HandleButtonPress;
+    }
 
+    private void HandleSceneLoaded(Scene scene, LoadSceneMode loadMode)
+    {
         if (SceneLoader.IsInGarageScene()) { IsWantedDoorOpen = true; }
+        else { IsWantedDoorOpen = false; }
     }
 
     private void OnDestroy()
     {
+        SceneManager.sceneLoaded -= HandleSceneLoaded;
         Humble.OnInteract -= HandleButtonPress;
     }
 

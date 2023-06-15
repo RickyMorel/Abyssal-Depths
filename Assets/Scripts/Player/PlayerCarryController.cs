@@ -23,6 +23,7 @@ public class PlayerCarryController : MonoBehaviour
     private float _carryWalkSpeed = 1f;
     private float _maxCarryAmount = 10f;
     private float _itemCarryResetDistance = 0.5f;
+    private float _timeSinceGrabItem;
     private Item _currentSingleItem;
     private GameObject _currentSingleObjInstance;
 
@@ -57,7 +58,9 @@ public class PlayerCarryController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(_carryBoxCollider == null) { return; }
+        _timeSinceGrabItem += Time.deltaTime;
+
+        if (_carryBoxCollider == null) { return; }
 
         Vector3 boxPos = _carryBoxCollider.transform.position;
         float boxYOffset = 0.2f;
@@ -73,6 +76,11 @@ public class PlayerCarryController : MonoBehaviour
 
     #endregion
 
+    public bool HasRecentlyGrabbedItem()
+    {
+        return _timeSinceGrabItem < 0.5f;
+    }
+
     public void CarrySingle(ItemPickup itemPickup)
     {
         DropAllItems();
@@ -83,11 +91,14 @@ public class PlayerCarryController : MonoBehaviour
         _currentSingleObjInstance.transform.localPosition = Vector3.zero;
 
         Destroy(itemPickup.gameObject);
+
+        _timeSinceGrabItem = 0f;
     }
 
     public void DropSingle()
     {
         if (_currentSingleItem == null) { return; }
+        if(_currentSingleObjInstance == null) { return; }
 
         GameObject chipPickupInstance = Instantiate(_currentSingleItem.ItemPickupPrefab, transform.position, Quaternion.identity);
         chipPickupInstance.GetComponent<ItemPickup>().Initialize(_currentSingleItem);

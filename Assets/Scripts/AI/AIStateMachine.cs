@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+[RequireComponent(typeof(GAgent))]
+[RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(AICombat))]
 public class AIStateMachine : BaseStateMachine
 {
     #region Private Variables
 
+    private GAgent _gAgent;
     private NavMeshAgent _agent;
     private AICombat _aiCombat;
     private bool _isBouncingOffShield = false;
@@ -28,11 +32,12 @@ public class AIStateMachine : BaseStateMachine
 
         _agent = GetComponent<NavMeshAgent>();
         _aiCombat = GetComponent<AICombat>();
+        _gAgent = GetComponent<GAgent>();
     }
 
     public override void Move()
     {
-        _moveDirection.x = _canMove ? _movementSpeed : 0f;
+        _moveDirection.x = _gAgent.IsMoving() ? _movementSpeed : 0f;
     }
 
     public void BasicAttack()

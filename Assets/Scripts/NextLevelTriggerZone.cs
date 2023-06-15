@@ -13,7 +13,8 @@ public class NextLevelTriggerZone : MonoBehaviour
 
     #region Private Variables
 
-    private Ship _ship = null;
+    private Booster _booster;
+    private Ship _ship;
 
     #endregion
 
@@ -21,13 +22,14 @@ public class NextLevelTriggerZone : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log("Hola");
-        if (!other.gameObject.TryGetComponent(out Shader ship)) { Debug.Log("1"); return; }
+        if (!other.gameObject.TryGetComponent(out Shield shield)) { return; }
+        Debug.Log(other);
+        if (_booster == null) { shield.transform.parent.GetComponentInChildren<Booster>(); }
 
-        if (booster.CanUse != false) { booster.CanUse = false; }
+        if (_ship == null) { shield.transform.parent.GetComponentInChildren<Ship>(); }
+        Debug.Log(_booster);
+        if (_booster.CanUse != false) { _booster.CanUse = false; }
 
-        if (_ship == null) { _ship = booster.GetComponent<Ship>(); }
-        Debug.Log("2");
         _ship.AddForceToShip((transform.position - _ship.transform.position).normalized * _portalSuctionSpeed, ForceMode.Force);
     }
 

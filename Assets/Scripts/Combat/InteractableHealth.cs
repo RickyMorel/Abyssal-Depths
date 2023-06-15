@@ -109,20 +109,13 @@ public class InteractableHealth : Damageable
 
     private void TryStartFix()
     {
-        Debug.Log("TryStartFix");
         if (!IsDead()) { return; }
-
-        Debug.Log("Is dead");
 
         if (_currentRepairPopup != null) { Destroy(_currentRepairPopup); }
 
         if (_interactable.CurrentPlayer == null) { return; }
 
-        Debug.Log("CurrentPlayer is not null");
-
         if (_interactable.CurrentPlayer.IsFixing == false) { return; }
-
-        Debug.Log("CurrentPlayer is fixing");
 
         _timeSpentFixing = 0f;
 

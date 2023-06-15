@@ -86,15 +86,11 @@ public class PlayerUpgradesController : MonoBehaviour
 
     private bool HandleFix()
     {
-        Debug.Log("HandleFix");
         if (!_interactionController.CurrentInteractable.IsBroken()) { HandleUpgrade(); return false; }
-        Debug.Log("IsBroken");
 
         if (_interactionController.IsInteracting()) { return false; }
-        Debug.Log("IsInteracting = false");
 
         if (_playerCarryController.CurrentSingleObjInstance.tag != "FixPart") { return false; }
-        Debug.Log("has fix part");
 
         _interactionController.IsFixing = true;
 

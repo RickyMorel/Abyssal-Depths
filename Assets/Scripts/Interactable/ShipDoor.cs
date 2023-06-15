@@ -16,7 +16,7 @@ public class ShipDoor : Interactable
 
     #region Public Properties
 
-    [SerializeField] public bool IsWantedDoorOpen = false;
+    public bool IsWantedDoorOpen = false;
 
     #endregion
 
@@ -24,7 +24,6 @@ public class ShipDoor : Interactable
 
     private bool _isDoorOpen = false;
     private float _doorZRotation;
-    private GameObject _isAttached;
 
     #endregion
 

@@ -4758,8 +4758,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1090059822590048}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5261301, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.017}
+  m_LocalScale: {x: 25.857504, y: 49.1466, z: 49.1466}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4823669919546516}
@@ -14198,7 +14198,7 @@ GameObject:
   - component: {fileID: 198266297317100038}
   - component: {fileID: 199749858846785334}
   - component: {fileID: 5510746560317828059}
-  - component: {fileID: 2263289973138344499}
+  - component: {fileID: 2042159852}
   m_Layer: 0
   m_Name: Next Level Portal
   m_TagString: Untagged
@@ -14215,7 +14215,7 @@ Transform:
   m_GameObject: {fileID: 1840157041260602}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 1, z: 1}
+  m_LocalScale: {x: 16.10772, y: 32.21544, z: 32.21544}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4925014735358366}
@@ -14223,7 +14223,7 @@ Transform:
   - {fileID: 4728965431245924}
   - {fileID: 4131126107835394}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &198266297317100038
 ParticleSystem:
@@ -18934,9 +18934,9 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.904919, y: 4.2599998, z: 2.0927005}
-  m_Center: {x: -0.32246026, y: 0, z: 0.13709396}
---- !u!114 &2263289973138344499
+  m_Size: {x: 11.002652, y: 6.656288, z: 2.0927005}
+  m_Center: {x: 1.4847142, y: 0.12619129, z: 0.13709396}
+--- !u!114 &2042159852
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -18945,9 +18945,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1840157041260602}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db8c20932baab1b4fba3341da8c27512, type: 3}
+  m_Script: {fileID: 11500000, guid: e66c39ba026b493409ba63ac70723583, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _nextLevelTriggerZone: {fileID: 5510746560317828059}
+  _portalSuctionSpeed: 50
+  _sceneLoader: {fileID: 0}
+  _nextLevel: 3
 --- !u!1 &1884357876729754
 GameObject:
   m_ObjectHideFlags: 0
@@ -18974,8 +18978,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1884357876729754}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.234}
-  m_LocalScale: {x: 0.517945, y: 0.9053174, z: 0.9682843}
+  m_LocalPosition: {x: -0.11, y: 0, z: 0.115}
+  m_LocalScale: {x: 14.60903, y: 25.535164, z: 27.31119}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4823669919546516}

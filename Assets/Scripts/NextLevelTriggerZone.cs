@@ -1,37 +1,72 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class NextLevelTriggerZone : MonoBehaviour
 {
     #region Editor Fields
 
-    [SerializeField] private BoxCollider _nextLevelTriggerZone;
-    [SerializeField] private float _portalSuctionSpeed = 500;
-    [SerializeField] private SceneLoader _sceneLoader;
+    [SerializeField] private ItemQuantity _portalKeyQuantity;
+    [SerializeField] private PlayableDirector _entranceAnimation;
+    [SerializeField] private ParticleSystem _portalParticle;
+    [SerializeField] private ParticleSystem _rockDustParticle;
 
     #endregion
 
-    #region Unity Loops
+    #region Private Variable
 
-    private void OnTriggerStay(Collider other)
+    private Booster _booster;
+
+    #endregion
+
+    private void OnTriggerEnter(Collider other)
     {
         if (!other.gameObject.TryGetComponent(out Shield _)) { return; }
 
-        if (Ship.Instance.ShipLandingController.Booster.CanUse != false) { Ship.Instance.ShipLandingController.Booster.TurnOffEngine(); }
+        if (MainInventory.Instance.InventoryDictionary.TryGetValue(_portalKeyQuantity.Item, out _portalKeyQuantity))
 
-        if (Vector3.Distance(transform.position, other.transform.position) > 15) { Ship.Instance.AddForceToShip((transform.position - other.transform.position).normalized * _portalSuctionSpeed, ForceMode.Force); }
-        else { StartCoroutine(NextLevel()); }
+        PortalPhase1();
     }
 
-    private IEnumerator NextLevel()
+    private void PortalPhase1()
     {
-        TimelinesManager.Instance.CameraFadeTimeline.Play();
+        Ship.Instance.ShipLandingController.Booster.SetIsHovering(true);
+
+        MainInventory.Instance.RemoveItem(_portalKeyQuantity);
+
+        PortalPhase2();
+    }
+
+    private void PortalPhase2()
+    {
+        //todo: minigame or something idk
+        StartCoroutine(PortalPhase3());
+    }
+
+    private IEnumerator PortalPhase3()
+    {
+        //_entranceAnimation.Play();
+
+        Ship.Instance.GetComponentInChildren<ShipCamera>().ShakeCamera(5, 5, 30);
+
+        _rockDustParticle.Play();
+
+        yield return new WaitForSeconds(30f);
+
+        _rockDustParticle.Stop();
+
+        StartCoroutine(PortalPhase4());
+    }
+
+    private IEnumerator PortalPhase4()
+    {
+        _portalParticle.Play();
 
         yield return new WaitForSeconds(1f);
-
-        _sceneLoader.LoadScene(3);
     }
-
-    #endregion
+    //1 esta cerrado en los estados siguientes la nave no se debe mover hasta el final, quedandose en el lugar flotando
+    //2 el jugador interactua con la puerta y esta vibra
+    //3 la puerta empieza a hacer algo y vienen enemigos por 30 segundos
+    //4 la puerta se abre
 }

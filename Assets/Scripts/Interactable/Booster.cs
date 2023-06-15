@@ -229,6 +229,13 @@ public class Booster : RotationalInteractable
         _canStutter = true;
     }
 
+    public void TurnOffEngine()
+    {
+        _lockHovering = false;
+
+        if (CurrentPlayer != null) { CurrentPlayer.CheckExitInteraction(); }
+    }
+
 }
 
 #region Helper Classes

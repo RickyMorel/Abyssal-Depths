@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Outline))]
 public class ItemPickup : MonoBehaviour
@@ -37,6 +38,13 @@ public class ItemPickup : MonoBehaviour
         _collisionParticles = Instantiate(GameAssetsManager.Instance.ItemPickupCollisionParticles, transform).GetComponent<ParticleSystem>();
 
         EnableOutline(false);
+    }
+
+    private void FixedUpdate()
+    {
+        if (SceneLoader.IsInGarageScene()) { return; }
+
+        _rb.AddForce(-Ship.Instance.Rb.velocity, ForceMode.Force);
     }
 
     private void OnCollisionEnter(Collision collision)

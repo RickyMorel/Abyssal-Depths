@@ -89,6 +89,8 @@ public class PlayerHealth : Damageable
             //Play initial hit particles
             GameObject stunHitParticles = Instantiate(GameAssetsManager.Instance.StunnedParticles[0], wantedTransform.position, wantedTransform.rotation);
 
+            if(SceneLoader.IsInGarageScene() == false) { stunHitParticles.transform.localScale *= 3f; }
+
             //Play looping stun particles
             if (_stunnedParticleInstance != null) { return; }
 

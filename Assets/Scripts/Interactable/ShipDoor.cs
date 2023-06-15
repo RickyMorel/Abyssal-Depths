@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ShipDoor : Interactable
 {
@@ -15,7 +16,7 @@ public class ShipDoor : Interactable
 
     #region Public Properties
 
-    public bool IsWantedDoorOpen = false;
+    [SerializeField] public bool IsWantedDoorOpen = false;
 
     #endregion
 
@@ -29,13 +30,19 @@ public class ShipDoor : Interactable
 
     private void Start()
     {
+        SceneManager.sceneLoaded += HandleSceneLoaded;
         Humble.OnInteract += HandleButtonPress;
+    }
 
+    private void HandleSceneLoaded(Scene scene, LoadSceneMode loadMode)
+    {
         if (SceneLoader.IsInGarageScene()) { IsWantedDoorOpen = true; }
+        else { IsWantedDoorOpen = false; }
     }
 
     private void OnDestroy()
     {
+        SceneManager.sceneLoaded -= HandleSceneLoaded;
         Humble.OnInteract -= HandleButtonPress;
     }
 

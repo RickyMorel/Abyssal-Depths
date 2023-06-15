@@ -89,7 +89,7 @@ public class Damageable : MonoBehaviour
         TryDamageWithProjectile(collision.collider);
     }
 
-    private void OnTriggerStay(Collider other)
+    public void OnTriggerStay(Collider other)
     {
         TryDamageWithProjectile(other);
     }

@@ -38,6 +38,8 @@ public class AttackShip : GAction
 
         _gAgent.SetGoalDistance(_aiCombat.AttackRange);
 
+        Debug.Log($"Current Distance: {Vector3.Distance(transform.position, Target.transform.position)} ; SetGoalDistance: {_aiCombat.AttackRange}");
+
         return true;
     }
 

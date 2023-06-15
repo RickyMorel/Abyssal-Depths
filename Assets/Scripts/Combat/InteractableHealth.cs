@@ -75,8 +75,6 @@ public class InteractableHealth : Damageable
 
         if (!IsDead()) { return; }
 
-        if (!CraftingManager.CanCraft(_fixCost)) { _interactable.RemoveCurrentPlayer(); return; }
-
         _timeSpentFixing += Time.deltaTime;
 
         if(_timeSpentFixing > _timeToFix) { FixInteractable(); }
@@ -114,15 +112,21 @@ public class InteractableHealth : Damageable
         Debug.Log("TryStartFix");
         if (!IsDead()) { return; }
 
+        Debug.Log("Is dead");
+
         if (_currentRepairPopup != null) { Destroy(_currentRepairPopup); }
 
         if (_interactable.CurrentPlayer == null) { return; }
 
+        Debug.Log("CurrentPlayer is not null");
+
         if (_interactable.CurrentPlayer.IsFixing == false) { return; }
+
+        Debug.Log("CurrentPlayer is fixing");
 
         _timeSpentFixing = 0f;
 
-        _currentRepairPopup = RepairPopup.Create(transform, _particleSpawnTransform.localPosition + new Vector3(2f, 0f, 0f), _timeToFix - _timeSpentFixing).gameObject;
+        _currentRepairPopup = RepairPopup.Create(transform, _particleSpawnTransform.localPosition + new Vector3(0f, -0.8f, 0f), _timeToFix - _timeSpentFixing).gameObject;
 
         _interactable.CanUse = false;
     }

@@ -40,9 +40,12 @@ public class PlayerRagdoll : MonoBehaviour
     {
         _bubbleParticles = Instantiate(GameAssetsManager.Instance.RagdollBubbleParticles, transform).GetComponent<ParticleSystem>();
 
-        _isKinematicInitialState = _rb.isKinematic;
-        _useGravityInitialState = _rb.useGravity;
-        _agentEnabledInitialState = _agent.enabled;
+        if(_rb != null)
+        {
+            _isKinematicInitialState = _rb.isKinematic;
+            _useGravityInitialState = _rb.useGravity;
+            _agentEnabledInitialState = _agent.enabled;
+        }
 
         LockZPos();
         EnableDeadRagdoll(false);

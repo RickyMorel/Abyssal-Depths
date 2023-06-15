@@ -35,7 +35,7 @@ public class RepairPopup : MonoBehaviour
     public static RepairPopup CreateStatePopup(Transform interatableTransform, Vector3 localPos, int currentParts,int maxParts)
     {
         GameObject repairPopupObj = Instantiate(GameAssetsManager.Instance.RepairPopup, interatableTransform);
-        repairPopupObj.transform.localPosition = new Vector3(-0.5f, localPos.y, localPos.z);
+        repairPopupObj.transform.localPosition = new Vector3(localPos.x, localPos.y+1f, localPos.z);
 
         RepairPopup repairPopup = repairPopupObj.GetComponent<RepairPopup>();
         repairPopup.SetupStatePopup(currentParts, maxParts);
@@ -71,6 +71,7 @@ public class RepairPopup : MonoBehaviour
     public void Setup(float repairTime)
     {
         _repairTime = repairTime + 1f;
+        _timerText.fontSize = _timerText.fontSize * 0.7f;
     }
 
     public void SetupStatePopup(int currentParts,int maxParts)

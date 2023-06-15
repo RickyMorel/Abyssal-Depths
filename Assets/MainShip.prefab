@@ -9707,8 +9707,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6940924926161758797}
-  m_RootOrder: 11
+  m_Father: {fileID: 7222867460073603918}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &2171531802400466103
 Rigidbody:
@@ -32017,7 +32017,7 @@ Transform:
   - {fileID: 6940924926161758797}
   - {fileID: 7222867460073603918}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &211462086
 MonoBehaviour:
@@ -32031,9 +32031,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc09678fb2728a843b3a6e938c0d0e14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShipMovingObj: {fileID: 6499011484432103920}
-  ShipStaticObj: {fileID: 7222867460073603919}
-  ShipRenderCanvas: {fileID: 7222867460814323779}
+  _shipMovingObj: {fileID: 6499011484432103920}
+  _shipStaticObj: {fileID: 7222867460073603919}
+  _shipRenderCanvas: {fileID: 7222867460814323779}
   _staticShipCam: {fileID: 7222867459201267400}
 --- !u!114 &211462087
 MonoBehaviour:
@@ -38744,7 +38744,6 @@ Transform:
   - {fileID: 5630174634551786701}
   - {fileID: 3868184424716574197}
   - {fileID: 7222867460496918043}
-  - {fileID: 1880653003547930284}
   - {fileID: 8260525542732622043}
   - {fileID: 7476888895666652294}
   - {fileID: 6272283793640975741}
@@ -52757,6 +52756,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1880653003547930284}
   - {fileID: 118330980211264812}
   - {fileID: 9004773764657602768}
   - {fileID: 7982276557846384252}
@@ -54003,7 +54003,7 @@ GameObject:
   - component: {fileID: 7222867460814323788}
   - component: {fileID: 7222867460814323789}
   m_Layer: 25
-  m_Name: Canvas
+  m_Name: ShipRenderCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

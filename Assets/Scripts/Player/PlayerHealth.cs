@@ -55,16 +55,23 @@ public class PlayerHealth : Damageable
     {
         OnHurt?.Invoke();
 
-        StartCoroutine(HurtCoroutine());
+        StartCoroutine(HurtCoroutine(_hurtTime));
     }
 
-    private IEnumerator HurtCoroutine()
+    public virtual void Hurt(DamageTypes damageType, int damage, float customHurtTime)
+    {
+        OnHurt?.Invoke();
+
+        StartCoroutine(HurtCoroutine(customHurtTime));
+    }
+
+    private IEnumerator HurtCoroutine(float hurtTime)
     {
         _isHurt = true;
         
         EnableStunFX(true);
 
-        yield return new WaitForSeconds(_hurtTime);
+        yield return new WaitForSeconds(hurtTime);
 
         EnableStunFX(false);
 

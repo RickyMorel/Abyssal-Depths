@@ -8,9 +8,9 @@ public class ShipMovingStaticManager : MonoBehaviour
 {
     #region Editor Fields
 
-    [SerializeField] private GameObject ShipMovingObj;
-    [SerializeField] private GameObject ShipStaticObj;
-    [SerializeField] private GameObject ShipRenderCanvas;
+    [SerializeField] private GameObject _shipMovingObj;
+    [SerializeField] private GameObject _shipStaticObj;
+    [SerializeField] private GameObject _shipRenderCanvas;
 
     [Header("Cameras")]
     [SerializeField] private GameObject _staticShipCam;
@@ -28,6 +28,8 @@ public class ShipMovingStaticManager : MonoBehaviour
     #region Public Properties
 
     public static ShipMovingStaticManager Instance { get { return _instance; } }
+    public GameObject ShipMovingObj => _shipMovingObj;
+    public GameObject ShipStaticObj => _shipStaticObj;
 
     #endregion
 
@@ -47,7 +49,7 @@ public class ShipMovingStaticManager : MonoBehaviour
     {
         SceneManager.sceneLoaded += HandlSceneChange;
 
-        _rb = ShipMovingObj.GetComponent<Rigidbody>();
+        _rb = _shipMovingObj.GetComponent<Rigidbody>();
 
         HandlSceneChange(SceneManager.GetActiveScene(), LoadSceneMode.Single);
     }
@@ -68,17 +70,17 @@ public class ShipMovingStaticManager : MonoBehaviour
         _rb.isKinematic = isInGarage;
         _rb.useGravity = !isInGarage;
 
-        ShipRenderCanvas.SetActive(!isInGarage);
+        _shipRenderCanvas.SetActive(!isInGarage);
 
-        ShipStaticObj.transform.localPosition = isInGarage ? Vector3.zero : new Vector3(0f, -500f, 0f);
+        _shipStaticObj.transform.localPosition = isInGarage ? Vector3.zero : new Vector3(0f, -500f, 0f);
 
         _staticShipCam.SetActive(!isInGarage);
 
         if (!isInGarage) { StartCoroutine(EnableStaticShipCamDelayed()); }
         else 
         {
-            ShipMovingObj.transform.parent = transform;
-            ShipMovingObj.transform.localPosition = Vector3.zero;
+            _shipMovingObj.transform.parent = transform;
+            _shipMovingObj.transform.localPosition = Vector3.zero;
         }
 
         StartCoroutine(TeleportPlayersDelayed());
@@ -96,7 +98,7 @@ public class ShipMovingStaticManager : MonoBehaviour
 
         foreach (PlayerStateMachine player in players)
         {
-            player.Teleport(ShipStaticObj.transform.position);
+            player.Teleport(_shipStaticObj.transform.position);
             player.InteractionController.CheckExitInteraction();
         }
     }

@@ -106,6 +106,8 @@ public class BaseInteractionController : MonoBehaviour
         //Don't interact when grabbing items
         if (_playerCarryController.HasRecentlyGrabbedItem()) { return; }
 
+        if (_playerHealth.IsHurt) { return; }
+
         if (_currentInteractable == null) { return; }
 
 #if INTERACTION_DEBUGS

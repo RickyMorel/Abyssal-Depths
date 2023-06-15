@@ -34,6 +34,12 @@ public class ShipFastTravel : MonoBehaviour
 
     #endregion
 
+    #region Public Properties
+
+    public List<PlayerInputHandler> PlayersInShipList => _playersInShipList;
+
+    #endregion
+
     #region Unity Loops
 
     private void Awake()
@@ -177,7 +183,7 @@ public class ShipFastTravel : MonoBehaviour
         {
             if (_isPlayerActive[i].IsPlayerActive == true)
             {
-               _isPlayerActive[i].GetComponentInParent<PlayerStateMachine>().AttachToShip(true);
+               //_isPlayerActive[i].GetComponentInParent<PlayerStateMachine>().AttachToShip(true);
             }
         }
     }

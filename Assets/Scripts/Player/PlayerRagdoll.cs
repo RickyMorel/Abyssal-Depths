@@ -25,6 +25,12 @@ public class PlayerRagdoll : MonoBehaviour
     private bool _agentEnabledInitialState;
     #endregion
 
+    #region Public Properties
+
+    public Rigidbody Hips => _colliders[0].attachedRigidbody;
+
+    #endregion
+
     #region Unity Loops
 
     private void Awake()

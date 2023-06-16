@@ -17,9 +17,23 @@ public class NextLevelTriggerZone : MonoBehaviour
     #region Private Variables
 
     private bool _updateCheck = false;
+    private bool _canInteract = false;
     private PlayerInputHandler _playerInput;
+    private PlayerCarryController _playerCarryController;
 
     #endregion
+
+    #region Unity Loops
+
+    private void Start()
+    {
+        _playerInput.OnUpgrade += PortalPhase1;
+    }
+
+    private void OnDestroy()
+    {
+        _playerInput.OnUpgrade -= PortalPhase1;
+    }
 
     private void Update()
     {
@@ -36,11 +50,28 @@ public class NextLevelTriggerZone : MonoBehaviour
 
         if (Ship.Instance.ShipLandingController.Booster.CurrentPlayer == null) { return; }
 
-        if (Ship.Instance.ShipLandingController.Booster.CurrentPlayer.GetComponent<PlayerInputHandler>()) PortalPhase1();
+        if (_playerInput == null) { _playerInput = Ship.Instance.ShipLandingController.Booster.CurrentPlayer.GetComponent<PlayerInputHandler>(); }
+
+        if (_playerCarryController == null) { _playerCarryController = Ship.Instance.ShipLandingController.Booster.CurrentPlayer.GetComponent<PlayerCarryController>(); }
+
+        if (_playerCarryController.CurrentSingleItem != null) { return; }
+
+        _canInteract = true;
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (!other.gameObject.TryGetComponent(out Shield _)) { return; }
+
+        _canInteract = false;
+    }
+
+    #endregion
 
     private void PortalPhase1()
     {
+        if (!_canInteract) { return; }
+
         Ship.Instance.ShipLandingController.Booster.LockHovering = true;
         Ship.Instance.ShipLandingController.Booster.SetIsHovering(true);
         MainInventory.Instance.RemoveItem(_portalKeyQuantity);

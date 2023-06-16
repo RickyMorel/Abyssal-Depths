@@ -9,6 +9,7 @@ public class Minable : Lootable
     //The impact force the pickaxe needs to damage the minable object
     [SerializeField] private float _damageForce;
     [SerializeField] private float _maxHealth;
+    [SerializeField] private ParticleSystem _damageParticles;
 
     #endregion
 
@@ -36,6 +37,8 @@ public class Minable : Lootable
         _currentHealth -= damage;
 
         DamagePopup.Create(transform.position, (int)damage, DamageTypes.None, true);
+
+        _damageParticles.Play();
 
         CheckIfBreak();
     }

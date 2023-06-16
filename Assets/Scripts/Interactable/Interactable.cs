@@ -85,7 +85,7 @@ public class Interactable : MonoBehaviour
         SetCurrentInteractable(other, false);
     }
 
-    private void SetCurrentInteractable(Collider other, bool isSetting)
+    public void SetCurrentInteractable(Collider other, bool isSetting)
     {
         if(!_humble.SetCurrentInteractable(other, isSetting, out BaseInteractionController interactionController, out bool setInteractable, out bool setOutline)) { return; }
 

@@ -14,26 +14,37 @@ public class NextLevelTriggerZone : MonoBehaviour
 
     #endregion
 
-    #region Private Variable
+    #region Private Variables
 
-    private Booster _booster;
+    private bool _updateCheck = false;
+    private PlayerInputHandler _playerInput;
 
     #endregion
 
-    private void OnTriggerEnter(Collider other)
+    private void Update()
+    {
+        if (!_updateCheck) { return; }
+
+        if (Ship.Instance.ShipLandingController.Booster.CurrentPlayer != null) { Ship.Instance.ShipLandingController.Booster.CurrentPlayer.CheckExitInteraction(); }
+    }
+
+    private void OnTriggerStay(Collider other)
     {
         if (!other.gameObject.TryGetComponent(out Shield _)) { return; }
 
-        if (MainInventory.Instance.InventoryDictionary.TryGetValue(_portalKeyQuantity.Item, out _portalKeyQuantity))
+        if (!MainInventory.Instance.InventoryDictionary.TryGetValue(_portalKeyQuantity.Item, out _portalKeyQuantity)) { return; }
 
-        PortalPhase1();
+        if (Ship.Instance.ShipLandingController.Booster.CurrentPlayer == null) { return; }
+
+        if (Ship.Instance.ShipLandingController.Booster.CurrentPlayer.GetComponent<PlayerInputHandler>()) PortalPhase1();
     }
 
     private void PortalPhase1()
     {
+        Ship.Instance.ShipLandingController.Booster.LockHovering = true;
         Ship.Instance.ShipLandingController.Booster.SetIsHovering(true);
-
         MainInventory.Instance.RemoveItem(_portalKeyQuantity);
+        _updateCheck = true;
 
         PortalPhase2();
     }
@@ -56,14 +67,13 @@ public class NextLevelTriggerZone : MonoBehaviour
 
         _rockDustParticle.Stop();
 
-        StartCoroutine(PortalPhase4());
+        PortalPhase4();
     }
 
-    private IEnumerator PortalPhase4()
+    private void PortalPhase4()
     {
         _portalParticle.Play();
-
-        yield return new WaitForSeconds(1f);
+        _updateCheck = false;
     }
     //1 esta cerrado en los estados siguientes la nave no se debe mover hasta el final, quedandose en el lugar flotando
     //2 el jugador interactua con la puerta y esta vibra

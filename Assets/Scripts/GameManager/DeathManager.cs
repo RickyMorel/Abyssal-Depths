@@ -105,7 +105,7 @@ public class DeathManager : MonoBehaviour
     private void ReloadScene()
     {
         _isReloadingScene = true;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneLoader.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void KillAllPlayers()

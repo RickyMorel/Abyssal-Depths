@@ -16,7 +16,6 @@ public class PlayerHealth : Damageable
     #region Private Variables
 
     private bool _isHurt;
-    private GameObject _stunnedParticleInstance;
 
     #endregion
 
@@ -68,40 +67,10 @@ public class PlayerHealth : Damageable
     private IEnumerator HurtCoroutine(float hurtTime)
     {
         _isHurt = true;
-        
-        EnableStunFX(true);
 
         yield return new WaitForSeconds(hurtTime);
 
-        EnableStunFX(false);
-
         _isHurt = false;
-    }
-
-    private void EnableStunFX(bool enable)
-    {
-        if (enable)
-        {
-            Transform wantedTransform = GetComponent<PlayerRagdoll>() ? GetComponent<PlayerRagdoll>().GetHeadTransform() : transform;
-
-            if (wantedTransform == null) { return; }
-
-            //Play initial hit particles
-            GameObject stunHitParticles = Instantiate(GameAssetsManager.Instance.StunnedParticles[0], wantedTransform.position, wantedTransform.rotation);
-
-            if(SceneLoader.IsInGarageScene() == false) { stunHitParticles.transform.localScale *= 3f; }
-
-            //Play looping stun particles
-            if (_stunnedParticleInstance != null) { return; }
-
-            _stunnedParticleInstance = Instantiate(GameAssetsManager.Instance.StunnedParticles[1], wantedTransform);
-        }
-        else
-        {
-            if(_stunnedParticleInstance == null) { return; }
-
-            _stunnedParticleInstance.GetComponent<ParticleSystem>().Stop();
-        }
     }
 
     private void HandleUpdateHealth(int damage)

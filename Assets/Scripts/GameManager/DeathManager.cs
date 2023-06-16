@@ -64,9 +64,11 @@ public class DeathManager : MonoBehaviour
         _isInSafeZone = false;
         _isLoadingScene = false;
         _timeSinceDeath = 0f;
-        Ship.Instance.GetComponent<ShipData>().ReloadLevel();
+        //Will uncomment later
+        // Ship.Instance.GetComponent<ShipData>().ReloadLevel();
         _isReloadingScene = false;
         Ship.Instance.FireRespawnEvent();
+        Ship.Instance.transform.position = GameObject.FindGameObjectWithTag("SpawnPoint").transform.position;
     }
 
     private void UpdateDeathTime(float multiplier)

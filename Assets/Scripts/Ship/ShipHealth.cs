@@ -145,10 +145,6 @@ public class ShipHealth : Damageable
 
             PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
             playerHealth.Hurt(DamageTypes.Base, 0, 2f);
-
-            PlayerRagdoll playerRagdoll = player.GetComponent<PlayerRagdoll>();
-            Vector3 pushForce = (crashPoint - player.transform.position).normalized * 200f;
-            playerRagdoll.Hips.AddForce(pushForce, ForceMode.Impulse);
         }
     }
 

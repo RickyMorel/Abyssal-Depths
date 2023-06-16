@@ -8,6 +8,7 @@ public class PlayerRagdoll : MonoBehaviour
     #region Editor Fields
 
     [SerializeField] private List<Collider> _colliders = new List<Collider>();
+    [SerializeField] private Transform _stunParticlesTransform;
 
     #endregion
 
@@ -19,6 +20,7 @@ public class PlayerRagdoll : MonoBehaviour
     private Rigidbody _rb;
     private PlayerHealth _health;
     private ParticleSystem _bubbleParticles;
+    private GameObject _stunnedParticleInstance;
 
     private bool _isKinematicInitialState;
     private bool _useGravityInitialState;
@@ -86,6 +88,7 @@ public class PlayerRagdoll : MonoBehaviour
             _agent.enabled = false;
             _mainCollider.isTrigger = false;
             _bubbleParticles.Play();
+            EnableStunFX(true);
         }
         else
         {
@@ -94,9 +97,51 @@ public class PlayerRagdoll : MonoBehaviour
             _agent.enabled = _agentEnabledInitialState;
             _mainCollider.isTrigger = true;
             _bubbleParticles.Stop();
+            EnableStunFX(false);
+        }
+    }
+
+    public void EnableStunFX(bool enable)
+    {
+        Debug.Log("EnableStunFX: " + enable + " " + gameObject.name);
+        if (enable)
+        {
+            Transform wantedTransform = GetHeadTransform() != null ? GetHeadTransform() : transform;
+
+            if (wantedTransform == null) { return; }
+
+            Debug.Log("Spawned stun particles: " + gameObject.name);
+
+            //Play initial hit particles
+            GameObject stunHitParticles = Instantiate(GameAssetsManager.Instance.StunnedParticles[0], wantedTransform.position, wantedTransform.rotation);
+            Debug.Log("stunHitParticles: " + stunHitParticles);
+
+            if (SceneLoader.IsInGarageScene() == false) { stunHitParticles.transform.localScale *= 3f; }
+
+            //Play looping stun particles
+            if (_stunnedParticleInstance != null) { return; }
+
+            _stunnedParticleInstance = Instantiate(GameAssetsManager.Instance.StunnedParticles[1], wantedTransform);
+            _stunnedParticleInstance.transform.localScale = _stunParticlesTransform.localScale;
+        }
+        else
+        {
+            if (_stunnedParticleInstance == null) { return; }
+
+            _stunnedParticleInstance.GetComponent<ParticleSystem>().Stop();
+        }
+    }
+
+    public Transform GetHeadTransform()
+    {
+        foreach (Collider collider in _colliders)
+        {
+            if (!collider.gameObject.name.Contains("Head")) { continue; }
+
+            return collider.transform;
         }
 
-        if (isEnabled) _bubbleParticles.Play(); else _bubbleParticles.Stop();
+        return _stunParticlesTransform;
     }
 
     public void EnableDeadRagdoll(bool isEnabled)
@@ -116,6 +161,8 @@ public class PlayerRagdoll : MonoBehaviour
         {
             collider.enabled = isEnabled;
         }
+
+        if(!_health.IsDead()) { EnableStunFX(isEnabled); }
     }
 
     private void DisableMovement(bool isEnabled, bool hasRagdoll)
@@ -123,18 +170,6 @@ public class PlayerRagdoll : MonoBehaviour
         _mainCollider.enabled = !isEnabled;
         if (hasRagdoll) { _anim.enabled = !isEnabled; }
         if (_agent != null) { _agent.enabled = !isEnabled; }
-    }
-
-    public Transform GetHeadTransform()
-    {
-        foreach (Collider collider in _colliders)
-        {
-            if (!collider.gameObject.name.Contains("Head")) { continue; }
-
-            return collider.transform;
-        }
-
-        return null;
     }
 
     private void PlayDeathAnimation()

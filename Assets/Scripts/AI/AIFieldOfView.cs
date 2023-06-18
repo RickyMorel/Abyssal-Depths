@@ -6,7 +6,13 @@ public class AIFieldOfView : MonoBehaviour
 {
     #region Editor Fields
 
-    [SerializeField] private AICombat[] _enemyAiList;
+    [SerializeField] private List<AICombat> _enemyAiList = new List<AICombat>();
+
+    #endregion
+
+    #region Private Variables
+
+    private bool _hasEnemy = false;
 
     #endregion
 
@@ -20,5 +26,25 @@ public class AIFieldOfView : MonoBehaviour
 
             ai.Aggro();
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.TryGetComponent(out AICombat enemyAi)) { return; }
+
+        foreach (AICombat enemyList in _enemyAiList)
+        {
+            if (enemyList.Equals(enemyAi))
+            {
+                _hasEnemy = true;
+            }
+        }
+
+        if (!_hasEnemy) 
+        { 
+            _enemyAiList.Add(enemyAi);
+        }
+
+        _hasEnemy = false;
     }
 }

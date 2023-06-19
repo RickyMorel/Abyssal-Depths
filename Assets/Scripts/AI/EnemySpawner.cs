@@ -9,6 +9,7 @@ public class EnemySpawner : MonoBehaviour
 
     [SerializeField] private List<AICombat> _enemyWaveList = new List<AICombat>();
     [SerializeField] private AIFieldOfView _enemyFovZone;
+    [SerializeField] private Transform _enemySpawnZone;
 
     #endregion
 
@@ -16,15 +17,7 @@ public class EnemySpawner : MonoBehaviour
 
     private bool _canSpawnEnemies = false;
     private bool _shouldSpawnEnemies = false;
-    private EnemySpawner _otherSpawner;
     private NextLevelTriggerZone _nextLevelTriggerZone;
-    private Transform _enemySpawnDistance;
-
-    #endregion
-
-    #region Public Properties
-
-    public bool CanSpawnEnemies => _canSpawnEnemies;
 
     #endregion
 
@@ -33,32 +26,22 @@ public class EnemySpawner : MonoBehaviour
     private void Start()
     {
         _nextLevelTriggerZone = GetComponentInParent<NextLevelTriggerZone>();
-
-        for (int i = 0; i < _nextLevelTriggerZone.GetComponentsInChildren<EnemySpawner>().Length; i++)
-        {
-            if (_nextLevelTriggerZone.GetComponentsInChildren<EnemySpawner>()[i] != this) { _otherSpawner = _nextLevelTriggerZone.GetComponentsInChildren<EnemySpawner>()[i]; }
-        }
     }
 
     private void Update()
-    {
+    { 
         if (!_canSpawnEnemies) { return; }
 
-        EnemySpawnerFunction(_enemySpawnDistance);
+        CheckIfAllEnemiesAreDefeated();
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (!other.gameObject.TryGetComponent(out Ship ship)) { return; }
+        if (!other.gameObject.TryGetComponent(out Ship _)) { return; }
 
-        if (_otherSpawner.CanSpawnEnemies || !_nextLevelTriggerZone.IsInPhase3) { return; }
-
-        _enemySpawnDistance = ship.transform;
-        _enemySpawnDistance.position = _enemySpawnDistance.position - new Vector3(-70, 0, 0);
-
+        if (!_nextLevelTriggerZone.IsInPhase3) { return; }
+        
         _canSpawnEnemies = true;
-
-        if (_enemyFovZone)
     }
 
     private void OnTriggerExit(Collider other)
@@ -72,11 +55,31 @@ public class EnemySpawner : MonoBehaviour
 
     private void EnemySpawnerFunction(Transform transform)
     {
-        _canSpawnEnemies = false;
+        if (!_shouldSpawnEnemies) { return; }
+
+        _shouldSpawnEnemies = false;
 
         foreach (AICombat enemy in _enemyWaveList)
         {
             Instantiate(enemy, transform);
+        }
+    }
+
+    private void CheckIfAllEnemiesAreDefeated()
+    {
+        int count = 0;
+        foreach (AICombat enemy in _enemyFovZone.EnemyAiList)
+        {
+            if (enemy == null || !enemy.gameObject.activeSelf)
+            {
+                count++;
+            }
+        }
+        if (count == _enemyFovZone.EnemyAiList.Count)
+        {
+            _shouldSpawnEnemies = true; 
+            _enemyFovZone.ClearEnemyList(); 
+            EnemySpawnerFunction(_enemySpawnZone); 
         }
     }
 }

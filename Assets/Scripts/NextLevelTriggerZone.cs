@@ -11,6 +11,8 @@ public class NextLevelTriggerZone : MonoBehaviour
     [SerializeField] private PlayableDirector _entranceAnimation;
     [SerializeField] private ParticleSystem _portalParticle;
     [SerializeField] private ParticleSystem _rockDustParticle;
+    [SerializeField] private Transform _transformForImmobileShip;
+    [SerializeField] private float _immobileShipMoveSpeed = 10;
 
     #endregion
 
@@ -20,6 +22,7 @@ public class NextLevelTriggerZone : MonoBehaviour
     private bool _isInteracting = false;
     private PlayerInputHandler _playerInput;
     private PlayerCarryController _playerCarryController;
+    private bool _isInPhase2 = false;
     private bool _isInPhase3 = false;
 
     #endregion
@@ -37,6 +40,10 @@ public class NextLevelTriggerZone : MonoBehaviour
         if (!_updateCheck) { return; }
 
         if (Ship.Instance.ShipLandingController.Booster.CurrentPlayer != null) { Ship.Instance.ShipLandingController.Booster.CurrentPlayer.CheckExitInteraction(); }
+
+        if (!_isInPhase2 && !_isInPhase3) { return; }
+
+        Ship.Instance.AddForceToShip((_transformForImmobileShip.position - Ship.Instance.transform.position).normalized * _immobileShipMoveSpeed, ForceMode.Force);
     }
 
     private void OnTriggerStay(Collider other)
@@ -64,7 +71,7 @@ public class NextLevelTriggerZone : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (!other.gameObject.TryGetComponent(out Shield _)) { return; }
+        if (!other.gameObject.TryGetComponent(out Ship _)) { return; }
 
         _isInteracting = false;
     }
@@ -86,12 +93,17 @@ public class NextLevelTriggerZone : MonoBehaviour
     private void PortalPhase2()
     {
         //todo: minigame or something idk
+        
+        _isInPhase2 = true;
+
+        _isInPhase2 = false;
+
         StartCoroutine(PortalPhase3());
     }
 
     private IEnumerator PortalPhase3()
     {
-        //_entranceAnimation.Play();
+        _entranceAnimation.Play();
 
         //Ship.Instance.GetComponentInChildren<ShipCamera>().ShakeCamera(5, 5, 30);
 

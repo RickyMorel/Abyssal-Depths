@@ -16,6 +16,12 @@ public class AIFieldOfView : MonoBehaviour
 
     #endregion
 
+    #region Public Properties
+
+    public List<AICombat> EnemyAiList => _enemyAiList;
+
+    #endregion
+
     private void OnTriggerStay(Collider other)
     {
         if(!other.TryGetComponent<Ship>(out Ship ship)) { return; }
@@ -46,5 +52,10 @@ public class AIFieldOfView : MonoBehaviour
         }
 
         _hasEnemy = false;
+    }
+
+    public void ClearEnemyList()
+    {
+        _enemyAiList.Clear();
     }
 }

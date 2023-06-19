@@ -40,6 +40,8 @@ public class Item : ScriptableObject
 
     public GameObject SpawnItemPickup(Transform spawnTransform)
     {
+        if(ItemPickupPrefab == null) { return null; }
+
         GameObject itemInstance = Instantiate(ItemPickupPrefab, spawnTransform.position, spawnTransform.rotation);
 
         return itemInstance;

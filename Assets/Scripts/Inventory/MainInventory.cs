@@ -29,4 +29,11 @@ public class MainInventory : Inventory
 
         base.Awake();
     }
+
+    public override void AddItems(List<ItemQuantity> addedItems)
+    {
+        base.AddItems(addedItems);
+
+        LootUI.Instance.DisplayLootedItems(addedItems);
+    }
 }

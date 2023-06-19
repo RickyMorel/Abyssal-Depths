@@ -23,6 +23,7 @@ public class GameAssetsManager : MonoBehaviour
     [SerializeField] private GameObject _fireWhipCollisionParticles;
     [SerializeField] private GameObject _itemPickupCollisionParticles;
     [SerializeField] private GameObject _ragdollBubbleParticles;
+    [SerializeField] private GameObject _minableHitDefault;
     [SerializeField] private GameObject[] _stunnedParticles;
     [ColorUsageAttribute(false, true), SerializeField] private Color _laserHeatColor;
 
@@ -54,6 +55,7 @@ public class GameAssetsManager : MonoBehaviour
     public GameObject FireWhipCollisionParticles => _fireWhipCollisionParticles;
     public GameObject ItemPickupCollisionParticles => _itemPickupCollisionParticles;
     public GameObject RagdollBubbleParticles => _ragdollBubbleParticles;
+    public GameObject MinableHitDefault => _minableHitDefault;
     public GameObject[] StunnedParticles => _stunnedParticles;
     public Color LaserHeatColor => _laserHeatColor;
     public ChipDataSO ChipDataSO => _chipDataSO;

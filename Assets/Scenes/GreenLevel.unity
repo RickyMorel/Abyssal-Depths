@@ -13833,6 +13833,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86295c27df4ce804980f148abdc00b76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyWaveList:
+  - {fileID: 1401204668924913013, guid: ef739bd36fbce304e9d9d85afdec7251, type: 3}
+  - {fileID: 1401204668924913013, guid: ef739bd36fbce304e9d9d85afdec7251, type: 3}
+  - {fileID: 1401204668924913013, guid: ef739bd36fbce304e9d9d85afdec7251, type: 3}
+  - {fileID: 1401204668924913013, guid: ef739bd36fbce304e9d9d85afdec7251, type: 3}
+  _enemyFovZone: {fileID: 896365309}
 --- !u!65 &495048370
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13844,8 +13850,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 117.184326, y: 113.12225, z: 18.093813}
-  m_Center: {x: 20.917114, y: 8.16037, z: 2.744831}
+  m_Size: {x: 112.5188, y: 114.05493, z: 18.093813}
+  m_Center: {x: 23.249878, y: 7.694031, z: 2.744831}
 --- !u!54 &495048371
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -26293,8 +26299,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 323.8385, y: 76.2, z: 20}
-  m_Center: {x: 47.604813, y: 0, z: 0}
+  m_Size: {x: 323.8385, y: 179.43217, z: 20}
+  m_Center: {x: 47.604813, y: 51.61615, z: 0}
 --- !u!54 &896365311
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -31562,11 +31568,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1061101671}
   m_Mesh: {fileID: 4300026, guid: 18aba36922f6bb241b40a57338e1b63d, type: 3}
---- !u!20 &1061760209 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 7147609971250628379, guid: 2a1c639440cd69640835c75e7833c7d7, type: 3}
-  m_PrefabInstance: {fileID: 1864781860}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1063601202
 GameObject:
   m_ObjectHideFlags: 0
@@ -40391,7 +40392,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_sceneProfile: {fileID: 206566776}
-  m_mainCamera: {fileID: 1061760209}
+  m_mainCamera: {fileID: 7147609972003133247}
   WaterMaterial: {fileID: 0}
   m_currentIsUserProfile: 0
   m_typeOfLighting: Morning
@@ -42350,7 +42351,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1366950541}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 1081.7383, y: 0, z: -36.816406}
+  m_LocalPosition: {x: 1067.8711, y: 0, z: -54.39453}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -45648,6 +45649,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86295c27df4ce804980f148abdc00b76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyWaveList:
+  - {fileID: 2028690528299777052, guid: b3991de570f6479418e4e1572b99969b, type: 3}
+  - {fileID: 2028690528299777052, guid: b3991de570f6479418e4e1572b99969b, type: 3}
+  - {fileID: 1401204668924913013, guid: ef739bd36fbce304e9d9d85afdec7251, type: 3}
+  _enemyFovZone: {fileID: 896365309}
 --- !u!65 &1494608174
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -45659,8 +45665,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 92.32715, y: 51.867126, z: 16.612608}
-  m_Center: {x: 45.663574, y: -6.9956665, z: 1.0903406}
+  m_Size: {x: 98.32129, y: 51.867126, z: 16.612608}
+  m_Center: {x: 42.666504, y: -6.9956665, z: 1.0903406}
 --- !u!54 &1494608175
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -46773,7 +46779,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Rotation: {x: 0, y: 0, z: 0}
   TouchReactCamera: {fileID: 1366950543}
-  SelectedCamera: {fileID: 1061760209}
+  SelectedCamera: {fileID: 7147609972003133247}
   AutoselectCamera: 1
   CameraYPosition: -1000
   TouchReactQuality: 1
@@ -47232,8 +47238,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1569686314}
-  m_LocalRotation: {x: -0.1437654, y: -0.043592643, z: 0.004177342, w: -0.9886424}
-  m_LocalPosition: {x: 1081.7822, y: -305.42, z: -36.86008}
+  m_LocalRotation: {x: -0.13477486, y: -0.16616866, z: 0.020978773, w: -0.97661847}
+  m_LocalPosition: {x: 1067.9255, y: -313.9702, z: -54.40201}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -73081,6 +73087,11 @@ MonoBehaviour:
     m_Bits: 0
   VegetationTypeList: []
   ReductionTolerance: 0.2
+--- !u!20 &7147609972003133247 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 7147609971250628379, guid: 2a1c639440cd69640835c75e7833c7d7, type: 3}
+  m_PrefabInstance: {fileID: 1864781860}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &7153336119370978817 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8177713152652336316, guid: f01dc6d958cfc3f47b5729003ec2b841, type: 3}

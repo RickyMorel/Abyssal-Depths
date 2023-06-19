@@ -20,6 +20,13 @@ public class NextLevelTriggerZone : MonoBehaviour
     private bool _isInteracting = false;
     private PlayerInputHandler _playerInput;
     private PlayerCarryController _playerCarryController;
+    private bool _isInPhase3 = false;
+
+    #endregion
+
+    #region Public Properties
+
+    public bool IsInPhase3 => _isInPhase3;
 
     #endregion
 
@@ -88,11 +95,13 @@ public class NextLevelTriggerZone : MonoBehaviour
 
         //Ship.Instance.GetComponentInChildren<ShipCamera>().ShakeCamera(5, 5, 30);
 
+        _isInPhase3 = true;
         _rockDustParticle.Play();
 
         yield return new WaitForSeconds(30f);
 
         _rockDustParticle.Stop();
+        _isInPhase3 = false;
 
         PortalPhase4();
     }

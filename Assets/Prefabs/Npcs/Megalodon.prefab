@@ -28207,6 +28207,7 @@ GameObject:
   - component: {fileID: 7153336119370978835}
   - component: {fileID: 7451160490255089617}
   - component: {fileID: 8177713152652336318}
+  - component: {fileID: 2616697968569662506}
   m_Layer: 16
   m_Name: Megalodon
   m_TagString: Enemy
@@ -28347,7 +28348,7 @@ MonoBehaviour:
   _resistanceType: 02000000
   _weaknessType: 
   _currentHealth: 0
-  _maxHealth: 10000
+  _maxHealth: 200
   _damageParticles: {fileID: 5855327306185661983}
   _hurtTime: 5
   _meshes:
@@ -28371,6 +28372,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _colliders:
   - {fileID: 5370035049056795246}
+  _stunParticlesTransform: {fileID: 0}
 --- !u!114 &8177713152652336295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28645,6 +28647,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thisAgent: {fileID: 398723808698627166}
+--- !u!114 &2616697968569662506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8177713152652336292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e444f29c14e86d44a3ca58c929419ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id:
+    Value: 
+  _loot:
+  - Item: {fileID: 11400000, guid: 0b5f7adce99cc12469b1c4e3874cea8b, type: 2}
+    Amount: 2
+  _canLoot: 0
 --- !u!1 &8205080243867600555
 GameObject:
   m_ObjectHideFlags: 0

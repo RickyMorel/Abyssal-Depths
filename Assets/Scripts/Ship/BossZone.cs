@@ -75,5 +75,7 @@ public class BossZone : MonoBehaviour
         if (isEnabled) _bossDoorParticles.Play(); else _bossDoorParticles.Stop();
 
         _bossDoorCollider.enabled = isEnabled;
+
+        ShipCamera.Instance.BossCamera.gameObject.SetActive(isEnabled);
     }
 }

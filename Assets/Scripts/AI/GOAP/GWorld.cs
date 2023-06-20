@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ResourceQueue
 {
@@ -95,6 +97,16 @@ public sealed class GWorld
 
     static GWorld()
     {
+        SceneManager.sceneLoaded += HandleSceneLoaded;
+
+        InitializeWorld();
+
+        //Leave this here for future testing
+        //Time.timeScale = 5;
+    }
+
+    private static void InitializeWorld()
+    {
         _world = new WorldStates();
         _eatingChairs = new ResourceQueue("EatingChair", FREE_EATINGCHAIR, _world);
         _shops = new ResourceQueue("Shop", FREE_SHOPS, _world);
@@ -106,6 +118,8 @@ public sealed class GWorld
         _rockPickupPoints = new ResourceQueue("RockPickupPoint", FREE_ROCK_PICKUP_POINTS, _world);
         _megalodonRagdollPoints = new ResourceQueue("MegalodonRagdollPoint", AttackFreeTags.FreeMegalodonRagdollPoint.ToString(), _world);
 
+        _resources.Clear();
+
         _resources.Add(EATINGCHAIRS, _eatingChairs);
         _resources.Add(SHOPS, _shops);
         _resources.Add(HIDE_LOCATIONS, _hideLocations);
@@ -115,9 +129,11 @@ public sealed class GWorld
         _resources.Add(HEAL_POINTS, _healPoints);
         _resources.Add(ROCK_PICKUP_POINTS, _rockPickupPoints);
         _resources.Add(AttackTags.megalodonRagdollPoints.ToString(), _megalodonRagdollPoints);
+    }
 
-        //Leave this here for future testing
-        //Time.timeScale = 5;
+    private static void HandleSceneLoaded(Scene arg0, LoadSceneMode arg1)
+    {
+        InitializeWorld();
     }
 
     public ResourceQueue GetQueue(string type)

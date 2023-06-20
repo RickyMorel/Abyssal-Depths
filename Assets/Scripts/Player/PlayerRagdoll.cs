@@ -103,18 +103,14 @@ public class PlayerRagdoll : MonoBehaviour
 
     public void EnableStunFX(bool enable)
     {
-        Debug.Log("EnableStunFX: " + enable + " " + gameObject.name);
         if (enable)
         {
             Transform wantedTransform = GetHeadTransform() != null ? GetHeadTransform() : transform;
 
             if (wantedTransform == null) { return; }
 
-            Debug.Log("Spawned stun particles: " + gameObject.name);
-
             //Play initial hit particles
             GameObject stunHitParticles = Instantiate(GameAssetsManager.Instance.StunnedParticles[0], wantedTransform.position, wantedTransform.rotation);
-            Debug.Log("stunHitParticles: " + stunHitParticles);
 
             if (SceneLoader.IsInGarageScene() == false) { stunHitParticles.transform.localScale *= 3f; }
 

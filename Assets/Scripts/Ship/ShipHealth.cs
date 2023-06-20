@@ -139,7 +139,6 @@ public class ShipHealth : Damageable
         foreach (PlayerInputHandler player in Ship.Instance.PlayersInShip)
         {
             float playerDistance = Mathf.Abs(Vector3.Distance(player.transform.position, crashPoint) - staticShipDistance);
-            Debug.Log($"player: {player.gameObject.name} ; Distance: {playerDistance}");
 
             if (playerDistance > Ship.Instance.ShipStatsSO.CrashPlayerRagdollRadius) { continue; }
 

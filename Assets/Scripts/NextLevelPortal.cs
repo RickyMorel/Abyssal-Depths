@@ -32,7 +32,7 @@ public class NextLevelPortal : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
 
-        _sceneLoader.LoadScene(_nextLevel);
+        SceneLoader.LoadSceneOperation(_nextLevel);
     }
 
     #endregion

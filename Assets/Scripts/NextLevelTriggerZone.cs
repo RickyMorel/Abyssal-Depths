@@ -23,7 +23,7 @@ public class NextLevelTriggerZone : MonoBehaviour
     private PlayerInputHandler _playerInput;
     private PlayerCarryController _playerCarryController;
     private bool _isInPhase2 = false;
-    private bool _isInPhase3 = false;
+    [SerializeField] private bool _isInPhase3 = false;
 
     #endregion
 
@@ -54,6 +54,8 @@ public class NextLevelTriggerZone : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         if (!other.gameObject.TryGetComponent(out Ship _)) { return; }
+
+        Debug.Log("NextLevelTriggerZone: " + other.gameObject.name);
 
         if (Ship.Instance.ShipLandingController.Booster.CurrentPlayer == null) { return; }
 

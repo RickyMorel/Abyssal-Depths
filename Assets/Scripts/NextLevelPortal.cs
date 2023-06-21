@@ -30,7 +30,7 @@ public class NextLevelPortal : MonoBehaviour
     {
         TimelinesManager.Instance.CameraFadeTimeline.Play();
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
         _sceneLoader.LoadScene(_nextLevel);
     }

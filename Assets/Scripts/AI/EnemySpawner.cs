@@ -68,14 +68,14 @@ public class EnemySpawner : MonoBehaviour
     private void CheckIfAllEnemiesAreDefeated()
     {
         int count = 0;
-        foreach (AICombat enemy in _enemyFovZone.EnemyAiList)
+        foreach (AICombat enemy in _enemyFovZone.AiList)
         {
             if (enemy == null || !enemy.gameObject.activeSelf)
             {
                 count++;
             }
         }
-        if (count == _enemyFovZone.EnemyAiList.Count)
+        if (count == _enemyFovZone.AiList.Count)
         {
             _shouldSpawnEnemies = true; 
             _enemyFovZone.ClearEnemyList(); 

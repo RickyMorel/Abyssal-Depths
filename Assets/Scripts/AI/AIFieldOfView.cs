@@ -6,19 +6,19 @@ public class AIFieldOfView : MonoBehaviour
 {
     #region Editor Fields
 
-    [SerializeField] private List<AICombat> _enemyAiList = new List<AICombat>();
+    [SerializeField] private List<AICombat> _aiList = new List<AICombat>();
 
     #endregion
 
     #region Private Variables
 
-    private bool _hasEnemy = false;
+    private bool _hasAiInList = false;
 
     #endregion
 
     #region Public Properties
 
-    public List<AICombat> EnemyAiList => _enemyAiList;
+    public List<AICombat> AiList => _aiList;
 
     #endregion
 
@@ -26,7 +26,7 @@ public class AIFieldOfView : MonoBehaviour
     {
         if(!other.TryGetComponent<Ship>(out Ship ship)) { return; }
 
-        foreach (AICombat ai in _enemyAiList)
+        foreach (AICombat ai in _aiList)
         {
             if(ai.gameObject.activeInHierarchy == false) { continue; }
 
@@ -38,24 +38,24 @@ public class AIFieldOfView : MonoBehaviour
     {
         if (!other.TryGetComponent(out AICombat enemyAi)) { return; }
 
-        foreach (AICombat enemyList in _enemyAiList)
+        foreach (AICombat enemyList in _aiList)
         {
             if (enemyList.Equals(enemyAi))
             {
-                _hasEnemy = true;
+                _hasAiInList = true;
             }
         }
 
-        if (!_hasEnemy) 
+        if (!_hasAiInList) 
         { 
-            _enemyAiList.Add(enemyAi);
+            _aiList.Add(enemyAi);
         }
 
-        _hasEnemy = false;
+        _hasAiInList = false;
     }
 
     public void ClearEnemyList()
     {
-        _enemyAiList.Clear();
+        _aiList.Clear();
     }
 }

@@ -14,6 +14,12 @@ public class NextLevelPortal : MonoBehaviour
 
     #endregion
 
+    #region Private Variables
+
+    private bool _loadingScene = false;
+
+    #endregion
+
     #region Unity Loops
 
     private void OnTriggerStay(Collider other)
@@ -23,11 +29,13 @@ public class NextLevelPortal : MonoBehaviour
         if (Ship.Instance.ShipLandingController.Booster.CanUse != false) { Ship.Instance.ShipLandingController.Booster.TurnOffEngine(); }
 
         if (Vector3.Distance(transform.position, other.transform.position) > 15) { Ship.Instance.AddForceToShip((transform.position - other.transform.position).normalized * _portalSuctionSpeed, ForceMode.Force); }
-        else { StartCoroutine(NextLevel()); }
+        else if(!_loadingScene) { StartCoroutine(NextLevel()); }
     }
 
     private IEnumerator NextLevel()
     {
+        _loadingScene = true;
+
         TimelinesManager.Instance.CameraFadeTimeline.Play();
 
         yield return new WaitForSeconds(0.5f);

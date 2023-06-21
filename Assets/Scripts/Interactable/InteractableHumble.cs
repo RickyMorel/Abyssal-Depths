@@ -39,6 +39,8 @@ public class InteractableHumble
         setInteractable = false;
         interactionController = null;
 
+        if (CurrentPlayer != null) { return false; }
+
         if (!other.gameObject.TryGetComponent(out BaseInteractionController InteractionController)) { return false; }
 
         interactionController = InteractionController;

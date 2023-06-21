@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.ParticleSystem;
 using Random = UnityEngine.Random;
 
 public class Booster : RotationalInteractable
@@ -46,6 +45,12 @@ public class Booster : RotationalInteractable
     public Rigidbody RB => _rb;
 
     public bool IsBoosting => _isBoosting;
+
+    #endregion
+
+    #region Getters and Setters
+
+    public bool LockHovering { get { return _lockHovering; } set { _lockHovering = value; } }
 
     #endregion
 
@@ -163,7 +168,7 @@ public class Booster : RotationalInteractable
             BoostImpulse();
     }
 
-    private void SetIsHovering(bool isHovering)
+    public void SetIsHovering(bool isHovering)
     {
         //If value is the same, don't update
         if (_isHovering == isHovering) { return; }
@@ -210,7 +215,7 @@ public class Booster : RotationalInteractable
 
         if (_isStuttering) { return; }
 
-        _rb.AddForce((RotatorTransform.transform.up * _acceleration * _rb.mass));
+        _rb.AddForce(RotatorTransform.transform.up * _acceleration * _rb.mass);
 
         _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, Ship.Instance.TopSpeed);
     }
@@ -227,6 +232,13 @@ public class Booster : RotationalInteractable
         yield return new WaitForSeconds(Random.Range(0.3f, 2f));
 
         _canStutter = true;
+    }
+
+    public void TurnOffEngine()
+    {
+        _lockHovering = false;
+
+        if (CurrentPlayer != null) { CurrentPlayer.CheckExitInteraction(); }
     }
 
 }

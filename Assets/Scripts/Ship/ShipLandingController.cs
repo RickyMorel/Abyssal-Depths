@@ -25,6 +25,12 @@ public class ShipLandingController : MonoBehaviour
 
     #endregion
 
+    #region Public Properties
+
+    public Booster Booster => _booster;
+
+    #endregion
+
     #region Unity Loops
 
     private void Start()

@@ -156,7 +156,7 @@ public class ShipFastTravel : MonoBehaviour
         yield return new WaitForSeconds(2);
         TimelinesManager.Instance.StartFastTravelTimeline.Stop();
 
-        SceneLoader.LoadScene(_fastTravelNPC.CurrentFastTravelLocation.SceneIndex);
+        SceneLoader.LoadSceneOperation(_fastTravelNPC.CurrentFastTravelLocation.SceneIndex);
 
         TimelinesManager.Instance.EndFastTravelTimeline.Play();
         _mainShip.gameObject.transform.SetParent(null);

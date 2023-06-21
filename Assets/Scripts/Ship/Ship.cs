@@ -18,7 +18,7 @@ public class Ship : MonoBehaviour
     private static Ship _instance;
     private ShipHealth _health;
     private ShipData _shipData;
-    private ShipFastTravel _shipFastTravel;
+    private ShipLandingController _shipLandingController;
     private Rigidbody _rb;
 
     private float _topSpeed;
@@ -33,7 +33,7 @@ public class Ship : MonoBehaviour
     public ShipStatsSO ShipStatsSO => _shipStatsSO;
     public ShipHealth ShipHealth => _health;
     public ShipData ShipData => _shipData;
-    public ShipFastTravel ShipFastTravel => _shipFastTravel;
+    public ShipLandingController ShipLandingController => _shipLandingController;
     public Rigidbody Rb => _rb;
     public float TopSpeed => _topSpeed;
     public float BoostTimeAfterGearChange => _boostTimeAfterGearChange;
@@ -60,8 +60,8 @@ public class Ship : MonoBehaviour
     private void Start()
     {
         _shipData = GetComponent<ShipData>();
+        _shipLandingController = GetComponent<ShipLandingController>();
         _rb = GetComponent<Rigidbody>();
-        _shipFastTravel = GetComponent<ShipFastTravel>();
 
         SetShipStats();
     }

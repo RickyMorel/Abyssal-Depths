@@ -118,7 +118,7 @@ public class PlayerRagdoll : MonoBehaviour
             if (_stunnedParticleInstance != null) { return; }
 
             _stunnedParticleInstance = Instantiate(GameAssetsManager.Instance.StunnedParticles[1], wantedTransform);
-            _stunnedParticleInstance.transform.localScale = _stunParticlesTransform.localScale;
+            _stunnedParticleInstance.transform.localScale = wantedTransform.localScale;
         }
         else
         {
@@ -130,6 +130,8 @@ public class PlayerRagdoll : MonoBehaviour
 
     public Transform GetHeadTransform()
     {
+        if(_stunParticlesTransform != null) { return _stunParticlesTransform; }
+
         foreach (Collider collider in _colliders)
         {
             if (!collider.gameObject.name.Contains("Head")) { continue; }
@@ -137,7 +139,7 @@ public class PlayerRagdoll : MonoBehaviour
             return collider.transform;
         }
 
-        return _stunParticlesTransform;
+        return null;
     }
 
     public void EnableDeadRagdoll(bool isEnabled)

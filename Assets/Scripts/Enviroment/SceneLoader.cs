@@ -22,16 +22,21 @@ public class SceneLoader : MonoBehaviour
     {
         if(other.transform.root.gameObject.GetComponentInChildren<Ship>() == null) { return; }
 
+        LoadScene(_sceneToLoad);
+    }
+
+    public void LoadScene(int sceneToLoad)
+    {
         if (_startedLoadingScene) { return; }
 
-        LoadScene(_sceneToLoad);
+        LoadSceneOperation(sceneToLoad);
 
         Ship.Instance.transform.position = _shipPosition;
 
         _startedLoadingScene = true;
     }
 
-    public static void LoadScene(int sceneToLoad)
+    public static void LoadSceneOperation(int sceneToLoad)
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneToLoad);
 

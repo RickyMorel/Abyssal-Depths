@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1150499352573862
+--- !u!1 &2436809842209992445
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,47 +8,47 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4454136516422988}
-  - component: {fileID: 33315026860963910}
-  - component: {fileID: 23819050950947110}
-  - component: {fileID: 7555673148184187675}
-  m_Layer: 0
-  m_Name: SM_Prop_Keycard_03
+  - component: {fileID: 8629261495981985123}
+  - component: {fileID: 8521288853980124899}
+  - component: {fileID: 6672985459819935566}
+  - component: {fileID: 5209269560309338356}
+  m_Layer: 13
+  m_Name: GreenPortalKeyItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4454136516422988
+--- !u!4 &8629261495981985123
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1150499352573862}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: -0.0045593497, z: 0}
-  m_LocalScale: {x: 2.237761, y: 3.54178, z: 0.112693}
+  m_GameObject: {fileID: 2436809842209992445}
+  m_LocalRotation: {x: 0.49999854, y: 0.4999999, z: -0.5000001, w: 0.50000155}
+  m_LocalPosition: {x: 0.016, y: 0.003, z: -0.125}
+  m_LocalScale: {x: 2.74, y: 4.32, z: 0.112693}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &33315026860963910
+  m_Father: {fileID: 3357711323268162487}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: -90}
+--- !u!33 &8521288853980124899
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1150499352573862}
+  m_GameObject: {fileID: 2436809842209992445}
   m_Mesh: {fileID: 4300000, guid: eed2f9fba32ddd14a836630392ea04ae, type: 3}
---- !u!23 &23819050950947110
+--- !u!23 &6672985459819935566
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1150499352573862}
+  m_GameObject: {fileID: 2436809842209992445}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -84,13 +84,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &7555673148184187675
+--- !u!114 &5209269560309338356
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1150499352573862}
+  m_GameObject: {fileID: 2436809842209992445}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
@@ -643,4 +643,36 @@ MonoBehaviour:
     - {x: 0.42085522, y: 0.5733593, z: 0.7029509}
     - {x: 0.47686574, y: 0.69408035, z: 0.5393065}
   _meshes:
-  - {fileID: 0}
+  - {fileID: 2436809842209992445}
+--- !u!1 &5631874954783067478
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3357711323268162487}
+  m_Layer: 13
+  m_Name: GreenPortalKeyPrefab
+  m_TagString: GreenPortalKey
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3357711323268162487
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5631874954783067478}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8629261495981985123}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

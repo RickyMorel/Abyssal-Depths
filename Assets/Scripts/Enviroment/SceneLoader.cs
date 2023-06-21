@@ -20,7 +20,7 @@ public class SceneLoader : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.transform.root.gameObject.tag != "MainShip") { return; }
+        if(other.transform.root.gameObject.GetComponentInChildren<Ship>() == null) { return; }
 
         if (_startedLoadingScene) { return; }
 

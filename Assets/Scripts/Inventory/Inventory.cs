@@ -80,7 +80,15 @@ public abstract class Inventory : MonoBehaviour
     //This is temporary while we don't have an inventory system
     public virtual void Start()
     {
-        AddItems(_preloadedItems);
+
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            AddItems(_preloadedItems);
+        }
     }
     //
 

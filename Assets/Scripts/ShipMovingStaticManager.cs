@@ -87,6 +87,9 @@ public class ShipMovingStaticManager : MonoBehaviour
 
         StartCoroutine(ToggleCameraDelayed(isInGarage));
 
+        //Heal everything when enter garage
+        if (isInGarage) { Ship.Instance.ShipHealth.Respawn(); }
+
         _isInGarage = isInGarage;
     }
 

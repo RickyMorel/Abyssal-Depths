@@ -18,7 +18,7 @@ public class NextLevelPortal : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (!other.gameObject.TryGetComponent(out Shield _)) { return; }
+        if (!other.gameObject.TryGetComponent(out Ship _)) { return; }
 
         if (Ship.Instance.ShipLandingController.Booster.CanUse != false) { Ship.Instance.ShipLandingController.Booster.TurnOffEngine(); }
 

@@ -12,7 +12,7 @@ public class CameraManager : MonoBehaviour
 
     private static CameraManager _instance;
 
-    private CinemachineBrain[] _cameras;
+    [SerializeField] private CinemachineBrain[] _cameras;
     private CinemachineVirtualCamera[] _vCams;
     
     private bool _isInOrthoMode = false;
@@ -42,20 +42,6 @@ public class CameraManager : MonoBehaviour
 
     #endregion
 
-    public void CullingMaskToggle(bool boolean)
-    {
-        if (boolean)
-        {
-            ShipCamera.Instance.MainCamera.cullingMask = -1;
-            ShipCamera.Instance.PerspectiveCamera.cullingMask = LayerMask.GetMask("Floor");
-        }
-        else
-        {
-            ShipCamera.Instance.MainCamera.cullingMask = LayerMask.GetMask("Ragdoll", "ShipFloor", "Orthographic", "UI", "LightSaber");
-            ShipCamera.Instance.PerspectiveCamera.cullingMask = LayerMask.GetMask("Floor", "Default", "TransparentFX", "Ignore Raycast", "Water", "UI", "LootLayer", "ItemLayer", "ItemBox", "NPC", "EnemyHitBox");
-        }
-    }
-
     private void GetAllCameras()
     {
         _cameras = FindObjectsOfType<CinemachineBrain>(true);
@@ -70,16 +56,12 @@ public class CameraManager : MonoBehaviour
         //Stops previous camera toggle functions from calling
         GetAllCameras();
 
-        ShipCamera.Instance.MainCamera.gameObject.SetActive(boolean);
         ShipCamera.Instance.PerspectiveCamera.gameObject.SetActive(boolean);
-        ShipCamera.Instance.BossCamera.gameObject.SetActive(boolean);
 
-        for (int i = 0; i < _cameras.Length - 1; i++)
+        for (int i = 0; i < _cameras.Length; i++)
         {
-            if (_cameras[i].tag == "MainCamera") { continue; }
-
-            _cameras[i].gameObject.SetActive(!boolean);
             _vCams[i].gameObject.SetActive(!boolean);
+            _cameras[i].gameObject.SetActive(!boolean);
         }
 
         _isInOrthoMode = boolean;
@@ -96,6 +78,7 @@ public class CameraManager : MonoBehaviour
             _cameras[1].OutputCamera.cullingMask |= 1 << LayerMask.NameToLayer("Player2Cam");
             //Turn Off Layer
             _cameras[1].OutputCamera.cullingMask &= ~(1 << LayerMask.NameToLayer("Player1Cam"));
+            EnablePlayerCamera(1);
 
             _cameras[1].OutputCamera.rect = new Rect(0, 0f, 1, 0.5f);
             _cameras[0].GetComponent<Camera>().rect = new Rect(0, 0.5f, 1, 0.5f);
@@ -105,6 +88,7 @@ public class CameraManager : MonoBehaviour
             _vCams[0].gameObject.layer = 30;
             _cameras[2].OutputCamera.cullingMask |= 1 << LayerMask.NameToLayer("Player3Cam");
             _cameras[2].OutputCamera.cullingMask &= ~(1 << LayerMask.NameToLayer("Player1Cam"));
+            EnablePlayerCamera(2);
 
             _cameras[2].OutputCamera.rect = new Rect(0, 0.5f, 0.5f, 0.5f);
             _cameras[1].OutputCamera.rect = new Rect(0.5f, 0.5f, 0.5f, 0.5f);
@@ -115,11 +99,20 @@ public class CameraManager : MonoBehaviour
             _vCams[0].gameObject.layer = 31;
             _cameras[3].OutputCamera.cullingMask |= 1 << LayerMask.NameToLayer("Player4Cam");
             _cameras[3].OutputCamera.cullingMask &= ~(1 << LayerMask.NameToLayer("Player1Cam"));
+            EnablePlayerCamera(3);
 
             _cameras[3].OutputCamera.rect = new Rect(0, 0.5f, 0.5f, 0.5f);
             _cameras[2].OutputCamera.rect = new Rect(0.5f, 0.5f, 0.5f, 0.5f);
             _cameras[1].OutputCamera.rect = new Rect(0, 0, 0.5f, 0.5f);
             _cameras[0].OutputCamera.rect = new Rect(0.5f, 0, 0.5f, 0.5f);
         }
+    }
+
+    private void EnablePlayerCamera(int cameraIndex)
+    {
+        Debug.Log("EnablePlayerCamera: " + cameraIndex);
+        _cameras[cameraIndex].gameObject.SetActive(true);
+        _vCams[cameraIndex].gameObject.SetActive(true);
+
     }
 }

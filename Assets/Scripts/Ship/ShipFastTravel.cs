@@ -104,7 +104,7 @@ public class ShipFastTravel : MonoBehaviour
 
         if (_playersActive != _playersInShip) { return; }
 
-        StartCoroutine(ChangeToOrthoMode());
+        //StartCoroutine(ChangeToOrthoMode());
 
         if (_shipDoor.IsWantedDoorOpen == true) { return; }
 
@@ -144,7 +144,7 @@ public class ShipFastTravel : MonoBehaviour
 
         if (_playersInShipList.Contains(player) == false) { return; }
 
-        _cameraManager.ToggleCamera(false);
+        //_cameraManager.ToggleCamera(false);
         _playersInShip = Mathf.Clamp(_playersInShip - 1, 0, _playersActive);
         _playersInShipList.Remove(player);
 

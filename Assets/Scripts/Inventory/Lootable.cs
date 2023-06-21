@@ -63,7 +63,7 @@ public class Lootable : MonoBehaviourID
         if(this is DeathLoot) { LootUI.Instance.PlayRetrievedItems(); }
 
         if (this is Minable) { gameObject.SetActive(false); }
-        else { Destroy(gameObject); }
+        else if(this is not EnemyLootable) { Destroy(gameObject); }
     }
 
     public void SetCanLoot(bool canLoot)

@@ -17,8 +17,17 @@ public class RunAway : GAction
 
     private GameObject _currentRunAwayObj;
     private int _navMeshMask = NavMesh.AllAreas;
+    private Vector3 _startPosition;
+    private float _timeSinceDoAction;
 
     #endregion
+
+    public override void Start()
+    {
+        base.Start();
+
+        _startPosition = transform.position;   
+    }
 
     public override bool PrePerform()
     {
@@ -33,9 +42,24 @@ public class RunAway : GAction
 
         Target = newTargetObj;
 
+        _timeSinceDoAction = 0f;
+
         if (Target == null) { return false; }
 
         return true;
+    }
+
+    private void Update()
+    {
+        if(GAgent.CurrentAction != this) { return; }
+
+        _timeSinceDoAction += Time.deltaTime;
+
+        if(_timeSinceDoAction < 8f) { return; }
+
+        transform.position = _startPosition;
+
+        GAgent.CancelPreviousActions();
     }
 
     public override bool Perform()

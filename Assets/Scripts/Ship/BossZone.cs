@@ -20,6 +20,7 @@ public class BossZone : MonoBehaviour
     #region Private Variables
 
     private Collider _collider;
+    private bool _bossIsDead = false;
 
     #endregion
 
@@ -52,7 +53,10 @@ public class BossZone : MonoBehaviour
     {
         if (other.gameObject.GetComponent<Ship>() == null) { return; }
 
+        if (_bossIsDead) { return; }
+
         _bossObject.SetActive(true);
+
         EnableDoor(true);
     }
 
@@ -67,6 +71,7 @@ public class BossZone : MonoBehaviour
 
     private void HandleBossDied()
     {
+        _bossIsDead = true;
         EnableDoor(false);
     }
 
@@ -75,7 +80,5 @@ public class BossZone : MonoBehaviour
         if (isEnabled) _bossDoorParticles.Play(); else _bossDoorParticles.Stop();
 
         _bossDoorCollider.enabled = isEnabled;
-
-        ShipCamera.Instance.BossCamera.gameObject.SetActive(isEnabled);
     }
 }

@@ -7,12 +7,12 @@ public class NextLevelTriggerZone : MonoBehaviour
 {
     #region Editor Fields
 
-    [SerializeField] private ItemQuantity _portalKeyNeededQuantity;
     [SerializeField] private PlayableDirector _entranceAnimation;
     [SerializeField] private ParticleSystem _portalParticle;
     [SerializeField] private ParticleSystem _rockDustParticle;
     [SerializeField] private Transform _transformForImmobileShip;
     [SerializeField] private float _immobileShipMoveSpeed = 10;
+    [SerializeField] private Canvas _portalKeyInteractionCanvas;
 
     #endregion
 
@@ -35,6 +35,11 @@ public class NextLevelTriggerZone : MonoBehaviour
 
     #region Unity Loops
 
+    private void Start()
+    {
+        _portalKeyInteractionCanvas.gameObject.SetActive(false);
+    }
+
     private void Update()
     {
         if (!_updateCheck) { return; }
@@ -50,15 +55,17 @@ public class NextLevelTriggerZone : MonoBehaviour
     {
         if (!other.gameObject.TryGetComponent(out Ship _)) { return; }
 
-        if (!MainInventory.Instance.InventoryDictionary.TryGetValue(_portalKeyNeededQuantity.Item, out ItemQuantity inventoryPortalKey)) { return; }
-
         if (Ship.Instance.ShipLandingController.Booster.CurrentPlayer == null) { return; }
-        
+
         if (_playerInput == null) { _playerInput = Ship.Instance.ShipLandingController.Booster.CurrentPlayer.GetComponent<PlayerInputHandler>(); }
 
         if (_playerCarryController == null) { _playerCarryController = _playerInput.GetComponent<PlayerCarryController>(); }
-        
-        if (_playerCarryController.CurrentSingleItem != null) { return; }
+
+        if (_playerCarryController.CurrentSingleObjInstance.tag == null) { _portalKeyInteractionCanvas.gameObject.SetActive(false); return; }
+
+        if (_playerCarryController.CurrentSingleObjInstance.tag != "GreenPortalKey") { _portalKeyInteractionCanvas.gameObject.SetActive(false); return; }
+
+        _portalKeyInteractionCanvas.gameObject.SetActive(true);
 
         if (!_playerInput.IsShooting_2) { return; }
         
@@ -66,7 +73,7 @@ public class NextLevelTriggerZone : MonoBehaviour
 
         _isInteracting = true;
 
-        PortalPhase1(inventoryPortalKey);
+        PortalPhase1();
     }
 
     private void OnTriggerExit(Collider other)
@@ -74,17 +81,20 @@ public class NextLevelTriggerZone : MonoBehaviour
         if (!other.gameObject.TryGetComponent(out Ship _)) { return; }
 
         _isInteracting = false;
+
+        _portalKeyInteractionCanvas.gameObject.SetActive(false);
     }
 
     #endregion
 
-    private void PortalPhase1(ItemQuantity inventoryPortalKey)
+    private void PortalPhase1()
     {
         if (!_isInteracting) { return; }
 
+        _portalKeyInteractionCanvas.gameObject.SetActive(false);
+        Destroy(_playerCarryController.CurrentSingleObjInstance);
         Ship.Instance.ShipLandingController.Booster.LockHovering = true;
         Ship.Instance.ShipLandingController.Booster.SetIsHovering(true);
-        MainInventory.Instance.RemoveItem(inventoryPortalKey);
         _updateCheck = true;
 
         PortalPhase2();

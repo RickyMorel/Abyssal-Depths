@@ -72,7 +72,17 @@ public class CraftingStation : Interactable
         MainInventory.Instance.RemoveItems(usedResources);
 
         GameObject spawnedItem = craftingRecipy.CraftedItem.Item.SpawnItemPickup(_itemSpawnTransform);
-        if(spawnedItem.TryGetComponent<ChipPickup>(out ChipPickup chipPickup)) { chipPickup.Initialize(craftingRecipy.CraftedItem.Item); }
+
+        //If item is not a pickup, then add material to inventory
+        if(spawnedItem == null) 
+        {
+            List<ItemQuantity> craftedItems = new List<ItemQuantity>();
+            craftedItems.Add(craftingRecipy.CraftedItem);
+
+            MainInventory.Instance.AddItems(craftedItems); 
+        }
+
+        if(spawnedItem != null && spawnedItem.TryGetComponent(out ChipPickup chipPickup)) { chipPickup.Initialize(craftingRecipy.CraftedItem.Item); }
 
         OnCraft?.Invoke();
 

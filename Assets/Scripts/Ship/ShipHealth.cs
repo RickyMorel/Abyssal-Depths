@@ -127,6 +127,24 @@ public class ShipHealth : Damageable
 
         Vector3 hitPos = collision.contacts[0].point;
         GameObject shipCrashParticles = Instantiate(Ship.Instance.ShipStatsSO.ShipCrashParticles.gameObject, hitPos, Quaternion.identity);
+
+        RagdollNearbyPlayers(collision.contacts[0].point);
+    }
+
+    private void RagdollNearbyPlayers(Vector3 crashPoint)
+    {
+        float staticShipDistance = Vector3.Distance(ShipMovingStaticManager.Instance.ShipMovingObj.transform.position,
+                                        ShipMovingStaticManager.Instance.ShipStaticObj.transform.position);
+
+        foreach (PlayerInputHandler player in Ship.Instance.PlayersInShip)
+        {
+            float playerDistance = Mathf.Abs(Vector3.Distance(player.transform.position, crashPoint) - staticShipDistance);
+
+            if (playerDistance > Ship.Instance.ShipStatsSO.CrashPlayerRagdollRadius) { continue; }
+
+            PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
+            playerHealth.Hurt(DamageTypes.Base, 0, 2f);
+        }
     }
 
     public override void DamageWithoutDamageData(int damage, Collider instigatorCollider = null)

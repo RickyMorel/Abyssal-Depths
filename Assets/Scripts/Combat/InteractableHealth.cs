@@ -12,6 +12,7 @@ public class InteractableHealth : Damageable
     [SerializeField] private CraftingRecipy _fixCost;
     [SerializeField] private float _timeToFix = 8f;
     [SerializeField] private bool _canUseWhenBroken = false;
+    [SerializeField] private bool _destroyOnDie = false;
     [SerializeField] private Transform _particleSpawnTransform;
 
     [Header("Fix Parts Variables")]
@@ -177,14 +178,6 @@ public class InteractableHealth : Damageable
     {
         base.Die();
 
-        _currentParticles = Instantiate(Ship.Instance.ShipStatsSO.InteractableFriedParticles.gameObject, transform);
-        _currentParticles.transform.localPosition = new Vector3(
-            _particleSpawnTransform.localPosition.x,
-            _particleSpawnTransform.localPosition.y,
-            _particleSpawnTransform.localPosition.z);
-
-        _currentParticles.transform.parent = _particleSpawnTransform;
-
         if (_canUseWhenBroken == false) 
         {
             _interactable.CanUse = false; 
@@ -199,6 +192,16 @@ public class InteractableHealth : Damageable
         _interactable.InteractionType = InteractionType.Fixing;
         _interactable.IsSingleUse = false;
         _interactable.Outline.OutlineColor = Color.red;
+
+        if (_destroyOnDie) { Destroy(gameObject); return; }
+
+        _currentParticles = Instantiate(Ship.Instance.ShipStatsSO.InteractableFriedParticles.gameObject, transform);
+        _currentParticles.transform.localPosition = new Vector3(
+            _particleSpawnTransform.localPosition.x,
+            _particleSpawnTransform.localPosition.y,
+            _particleSpawnTransform.localPosition.z);
+
+        _currentParticles.transform.parent = _particleSpawnTransform;
 
         SpawnFixParts();
     }

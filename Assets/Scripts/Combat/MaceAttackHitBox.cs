@@ -35,11 +35,15 @@ public class MaceAttackHitBox : AttackHitBox
 
         InvokeHitParticles(other);
 
+        CalculateDamage();
+
         if (enemyHealth is AIHealth) 
         {
-            CalculateDamage();
-
             DealDamageToEnemies((AIHealth)enemyHealth, _damage);
+        }
+        else if(enemyHealth is not PlayerHealth && enemyHealth is not ShipHealth)
+        {
+            DealDamageToOther(enemyHealth, _damage);
         }
     }
 

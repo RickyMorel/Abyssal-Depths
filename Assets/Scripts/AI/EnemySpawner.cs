@@ -18,6 +18,7 @@ public class EnemySpawner : MonoBehaviour
     private bool _canSpawnEnemies = false;
     private bool _shouldSpawnEnemies = false;
     private NextLevelTriggerZone _nextLevelTriggerZone;
+    private List<GameObject> _spawnedEnemies = new List<GameObject>();
 
     #endregion
 
@@ -61,24 +62,26 @@ public class EnemySpawner : MonoBehaviour
 
         foreach (AICombat enemy in _enemyWaveList)
         {
-            Instantiate(enemy, transform);
+            GameObject newEnemy = Instantiate(enemy, transform).gameObject;
+
+            _spawnedEnemies.Add(newEnemy);
         }
     }
 
     private void CheckIfAllEnemiesAreDefeated()
     {
         int count = 0;
-        foreach (AICombat enemy in _enemyFovZone.AiList)
+        foreach (GameObject enemy in _spawnedEnemies)
         {
-            if (enemy == null || !enemy.gameObject.activeSelf)
+            if (enemy == null || !enemy.activeSelf)
             {
                 count++;
             }
         }
-        if (count == _enemyFovZone.AiList.Count)
+        if (count == _spawnedEnemies.Count)
         {
-            _shouldSpawnEnemies = true; 
-            _enemyFovZone.ClearEnemyList(); 
+            _shouldSpawnEnemies = true;
+            _spawnedEnemies.Clear();
             EnemySpawnerFunction(_enemySpawnZone); 
         }
     }

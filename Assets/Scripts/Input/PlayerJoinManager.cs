@@ -12,6 +12,7 @@ public class PlayerJoinManager : MonoBehaviour
 
     [SerializeField] private GameObject _playerPrefab;
     [SerializeField] private Transform _spawnPos;
+    [SerializeField] private Color[] _playerColors;
 
     #endregion
 
@@ -60,6 +61,8 @@ public class PlayerJoinManager : MonoBehaviour
         playerInput.CanPlayerSpawn = true;
         playerInput.PlayerId = playerID;
         playerInput.PlayerInputs = playerInputs;
+        Outline outline = playerInput.transform.Find("Mesh").GetComponent<Outline>();
+        outline.OutlineColor = _playerColors[playerID];
     }
 
     private void HandleSpawn(PlayerInputHandler playerInput)

@@ -28,6 +28,7 @@ public class HealthBarUI : MonoBehaviour
     private void Awake()
     {
         _ownHealth.OnDamaged += HandleDamaged;
+        _ownHealth.OnUpdateHealth += HandleUpdateHealth;
     }
 
     private void Start()
@@ -56,6 +57,12 @@ public class HealthBarUI : MonoBehaviour
         _healthFill.fillAmount = _ownHealth.CurrentHealth / _ownHealth.MaxHealth;
 
         _isUpdatingDamageFill = true;
+    }
+
+    private void HandleUpdateHealth(int amountAdded)
+    {
+        _healthFill.fillAmount = _ownHealth.CurrentHealth / _ownHealth.MaxHealth;
+        _currentDamageFill = _ownHealth.CurrentHealth / _ownHealth.MaxHealth;
     }
 
     private IEnumerator FlashWhite()

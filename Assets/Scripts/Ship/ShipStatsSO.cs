@@ -16,6 +16,7 @@ public class ShipStatsSO : ScriptableObject
     [Header("Crashing")]
     public float MinCrashSpeed = 10f;
     public float CrashDamageMultiplier = 10f;
+    public float CrashPlayerRagdollRadius = 10f;
 
     [Header("Particle FX")]
     public ParticleSystem ShipCrashParticles;

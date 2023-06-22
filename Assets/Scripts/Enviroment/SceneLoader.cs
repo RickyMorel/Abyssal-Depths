@@ -20,7 +20,7 @@ public class SceneLoader : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.transform.root.gameObject.tag != "MainShip") { return; }
+        if(other.transform.root.gameObject.GetComponentInChildren<Ship>() == null) { return; }
 
         LoadScene(_sceneToLoad);
     }
@@ -32,8 +32,6 @@ public class SceneLoader : MonoBehaviour
         LoadSceneOperation(sceneToLoad);
 
         Ship.Instance.transform.position = _shipPosition;
-
-        _startedLoadingScene = true;
     }
 
     public static void LoadSceneOperation(int sceneToLoad)

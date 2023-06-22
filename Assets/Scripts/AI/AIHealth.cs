@@ -45,19 +45,20 @@ public class AIHealth : PlayerHealth
         _meshTarget.enabled = false;
 
         OnDamaged += Hurt;
-        OnDie += HandleDead;
     }
 
     private void OnDestroy()
     {
         OnDamaged -= Hurt;
-        OnDie -= HandleDead;
     }
 
     #endregion
 
-    private void HandleDead()
+    public override void Die()
     {
+        base.Die();
+
+        Debug.Log("HandleDead");
         CutMeshIfLightSaber();
 
         StopPreviousAction();
@@ -65,7 +66,7 @@ public class AIHealth : PlayerHealth
         _rb.isKinematic = false;
         _rb.useGravity = true;
 
-        Invoke(nameof(DisableSelf), 10f);
+        Invoke(nameof(DisableSelf), 5f);
     }
 
     private void CutMeshIfLightSaber()

@@ -82,6 +82,15 @@ public class AttackHitBox : MonoBehaviour
         _ownHealth.GetComponent<PlayerComponents>()?.PlayerCamera.NormalShake();
     }
 
+    public void DealDamageToOther(Damageable damageable, int damage, int secondaryDamage = 0)
+    {
+        damageable.DamageData = _damageData;
+        damageable.Damage(damage);
+        if (secondaryDamage != 0) { damageable.Damage(secondaryDamage, false, false, null, 1); }
+
+        _ownHealth.GetComponent<PlayerComponents>()?.PlayerCamera.NormalShake();
+    }
+
     public void DealDamageToPlayerOrShip(Damageable enemyHealth)
     {
         if (enemyHealth is PlayerHealth)

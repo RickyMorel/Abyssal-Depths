@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(ShipHealth))]
@@ -19,6 +20,7 @@ public class Ship : MonoBehaviour
     private ShipHealth _health;
     private ShipData _shipData;
     private ShipLandingController _shipLandingController;
+    private ShipFastTravel _shipFastTravel;
     private Rigidbody _rb;
 
     private float _topSpeed;
@@ -38,7 +40,7 @@ public class Ship : MonoBehaviour
     public float TopSpeed => _topSpeed;
     public float BoostTimeAfterGearChange => _boostTimeAfterGearChange;
     public float TimeTillDeath => _timeTillDeath;
-
+    public List<PlayerInputHandler> PlayersInShip => _shipFastTravel.PlayersInShipList;
     public event Action OnRespawn;
 
     #endregion
@@ -61,6 +63,7 @@ public class Ship : MonoBehaviour
     {
         _shipData = GetComponent<ShipData>();
         _shipLandingController = GetComponent<ShipLandingController>();
+        _shipFastTravel = GetComponent<ShipFastTravel>();
         _rb = GetComponent<Rigidbody>();
 
         SetShipStats();

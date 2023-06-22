@@ -65,10 +65,9 @@ public class DeathManager : MonoBehaviour
         _isLoadingScene = false;
         _timeSinceDeath = 0f;
         //Will uncomment later
-        // Ship.Instance.GetComponent<ShipData>().ReloadLevel();
+        Ship.Instance.GetComponent<ShipData>().ReloadLevel();
         _isReloadingScene = false;
         Ship.Instance.FireRespawnEvent();
-        Ship.Instance.transform.position = GameObject.FindGameObjectWithTag("SpawnPoint").transform.position;
     }
 
     private void UpdateDeathTime(float multiplier)
@@ -86,7 +85,7 @@ public class DeathManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         //Will uncomment later
-        //SaveSystem.Save(Ship.Instance.ShipData.CurrentSaveIndex);
+        SaveSystem.Save(Ship.Instance.ShipData.CurrentSaveIndex);
 
         ShowDeathScreen();
 

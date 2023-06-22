@@ -11,10 +11,11 @@ public class SaveData
     public readonly string LocationName;
     public readonly float PlayedTime;
 
+    public int CurrentSceneIndex;
+
     public UpgradableData BoosterData;
     public UpgradableData[] WeaponDatas = { null, null, null, null };
     public float[] ShipPos = { 0f, 0f, 0f};
-    public int CurrentSceneIndex;
     public List<EnemyData> enemiesInScene = new List<EnemyData>();
     public List<MinableData> _minablesInScene = new List<MinableData>();
     public List<ItemData> _mainInventory = new List<ItemData>();
@@ -115,6 +116,10 @@ public class SaveData
 
         for (int i = 0; i < shipData.Weapons.Length; i++)
         {
+            Debug.Log("shipData: " + shipData);
+            Debug.Log("shipData.Weapons[i]: " + shipData.Weapons[i]);
+            Debug.Log("shipData.Weapons[i]: " + shipData.Weapons[i]);
+            Debug.Log("shipData.Weapons[i].UpgradeSockets[0]: " + shipData.Weapons[i].UpgradeSockets[0]);
             string socket_w1_id = shipData.Weapons[i].UpgradeSockets[0] == null ? " " : shipData.Weapons[i].UpgradeSockets[0].Id;
             string socket_w2_id = shipData.Weapons[i].UpgradeSockets[1] == null ? " " : shipData.Weapons[i].UpgradeSockets[1].Id;
             float health_w = shipData.Weapons[i].CurrentHealth == null ? 0 : shipData.Weapons[i].CurrentHealth.Value;

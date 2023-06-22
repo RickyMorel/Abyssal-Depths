@@ -43,6 +43,9 @@ public class ShipMovingStaticManager : MonoBehaviour
         {
             _instance = this;
         }
+
+        //Always set ShipParent position to Original SpaceStation location, it prevents sceneloading bugs
+        transform.position = new Vector3(151.6f, -328.8f, 0f);
     }
 
     private void Start()

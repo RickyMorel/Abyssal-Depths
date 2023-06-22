@@ -32,22 +32,27 @@ public static class SaveSystem
     {
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + $"/abyssalDepths{saveIndex}.sav";
-        FileStream stream = new FileStream(path, FileMode.Create);
+        FileStream stream = new FileStream(path, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite);
 
         ShipData shipData = Ship.Instance.ShipData;
         SaveData saveData = new SaveData(shipData);
 
-        ScreenshotHandler.Instance.TakeScreenshot(1080, 1080, (Texture2D screenshotTexture) =>
-        {
-            byte[] screenshotByteArray = screenshotTexture.EncodeToPNG();
+        //ScreenshotHandler.Instance.TakeScreenshot(1080, 1080, (Texture2D screenshotTexture) =>
+        //{
+        //    byte[] screenshotByteArray = screenshotTexture.EncodeToPNG();
 
-            saveData.ScreenShotBytes = screenshotByteArray;
+        //    saveData.ScreenShotBytes = screenshotByteArray;
 
-            formatter.Serialize(stream, saveData);
-            stream.Close();
-            //Left here on purpose
-            Debug.Log("Saved! " + path);
-        });
+        //    formatter.Serialize(stream, "adasd");
+
+        //    stream.Close();
+        //    //Left here on purpose
+        //    Debug.Log("Saved! " + path);
+        //});
+
+        formatter.Serialize(stream, saveData);
+
+        stream.Close();
     }
 
     public static SaveData Load(int saveIndex)

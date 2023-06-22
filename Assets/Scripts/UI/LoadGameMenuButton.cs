@@ -21,12 +21,14 @@ public class LoadGameMenuButton : MonoBehaviour
     #region Private Variables
 
     private int _saveIndex;
+    private int _sceneIndex;
 
     #endregion
 
     public void DisplayData(SaveData saveData, int saveIndex)
     {
         _saveIndex = saveIndex;
+        _sceneIndex = saveData.CurrentSceneIndex;
 
         _icon.sprite = SaveUtils.ConvertBytesToTexture2D(saveData.ScreenShotBytes);
         _playerNameText.text = saveData.ShipName;
@@ -98,7 +100,7 @@ public class LoadGameMenuButton : MonoBehaviour
     public void LoadGame()
     {
         MainMenuUI.CreateLoadObj(_saveIndex);
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(_sceneIndex);
     }
 
     private string PadNumber(float number)

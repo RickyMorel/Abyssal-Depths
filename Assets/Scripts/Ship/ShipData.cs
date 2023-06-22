@@ -69,12 +69,15 @@ public class ShipData : MonoBehaviour
 
         SaveData saveData = SaveSystem.Load(_currentSaveIndex);
 
-        SetFileData(saveData);
-        LoadMinables(saveData);
-        LoadEnemies(saveData);
-        LoadInventories(saveData);
-        LoadChips(saveData);
-        TryLoadDeathLoot(saveData);
+        if(saveData != null)
+        {
+            SetFileData(saveData);
+            LoadMinables(saveData);
+            LoadEnemies(saveData);
+            LoadInventories(saveData);
+            LoadChips(saveData);
+            TryLoadDeathLoot(saveData);
+        }
     }
 
     public void ReloadLevel()
@@ -82,7 +85,7 @@ public class ShipData : MonoBehaviour
         SaveData saveData = SaveSystem.Load(_currentSaveIndex);
 
         LoadInventories(saveData);
-        LoadChips(saveData, new Vector3(270f, -320f, 0f));
+        LoadChips(saveData, GameObject.FindGameObjectWithTag(GameTagsManager.SPAWN_POINT).transform.position);
         TryLoadDeathLoot(saveData);
 
         Booster.TrySetHealth(int.MaxValue, this, true);

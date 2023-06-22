@@ -49,6 +49,7 @@ public class CraftingManager : MonoBehaviour
         }
 
         _itemUIPrefab = (GameObject)Resources.Load("ItemUIButton");
+        //Will uncomment later
         //_craftingRecipyList = Resources.LoadAll<CraftingRecipy>("ScriptableObjs/CraftingRecipies").ToList();
     }
 

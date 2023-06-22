@@ -32,8 +32,6 @@ public class SceneLoader : MonoBehaviour
         LoadSceneOperation(sceneToLoad);
 
         Ship.Instance.transform.position = _shipPosition;
-
-        _startedLoadingScene = true;
     }
 
     public static void LoadSceneOperation(int sceneToLoad)

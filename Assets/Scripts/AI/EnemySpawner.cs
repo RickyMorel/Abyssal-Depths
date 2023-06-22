@@ -15,8 +15,8 @@ public class EnemySpawner : MonoBehaviour
 
     #region Private Variables
 
-    [SerializeField] private bool _canSpawnEnemies = false;
-    [SerializeField] private bool _shouldSpawnEnemies = false;
+    private bool _canSpawnEnemies = false;
+    private bool _shouldSpawnEnemies = false;
     private NextLevelTriggerZone _nextLevelTriggerZone;
     private List<GameObject> _spawnedEnemies = new List<GameObject>();
 
@@ -39,8 +39,6 @@ public class EnemySpawner : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         if (!other.gameObject.TryGetComponent(out Ship _)) { return; }
-
-        Debug.Log("EnemySpawner: " + other.gameObject.name);
 
         if (!_nextLevelTriggerZone.IsInPhase3) { return; }
         

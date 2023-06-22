@@ -43,7 +43,6 @@ public class MaceAttackHitBox : AttackHitBox
         }
         else if(enemyHealth is not PlayerHealth && enemyHealth is not ShipHealth)
         {
-            Debug.Log("Damage!: " + enemyHealth.gameObject.name);
             DealDamageToOther(enemyHealth, _damage);
         }
     }

@@ -104,8 +104,6 @@ public class ShipFastTravel : MonoBehaviour
 
         if (_playersActive != _playersInShip) { return; }
 
-        //StartCoroutine(ChangeToOrthoMode());
-
         if (_shipDoor.IsWantedDoorOpen == true) { return; }
 
         if (!_wantToTravel) { return; }
@@ -113,7 +111,6 @@ public class ShipFastTravel : MonoBehaviour
         _wantToTravel = false;
         _mainShip.gameObject.transform.SetParent(TimelinesManager.Instance.MainShipParentForTheTimeline.transform);
         StartCoroutine(FastTravelCoroutine());
-        AttachToShip();
     }
 
     private IEnumerator ChangeToOrthoMode()
@@ -134,7 +131,6 @@ public class ShipFastTravel : MonoBehaviour
 
         _playersInShip = Mathf.Clamp(_playersInShip+1, 0, _playersActive);
 
-        AttachToShip();
         CheckPlayersInShip();
     }
 
@@ -144,7 +140,6 @@ public class ShipFastTravel : MonoBehaviour
 
         if (_playersInShipList.Contains(player) == false) { return; }
 
-        //_cameraManager.ToggleCamera(false);
         _playersInShip = Mathf.Clamp(_playersInShip - 1, 0, _playersActive);
         _playersInShipList.Remove(player);
 
@@ -171,20 +166,5 @@ public class ShipFastTravel : MonoBehaviour
         yield return new WaitForSeconds(2);
         TimelinesManager.Instance.EndFastTravelTimeline.Stop();
         TimelinesManager.Instance.BlackHoleParticle.Stop();
-    }
-
-    public void AttachToShip()
-    {
-        if (SceneLoader.IsInGarageScene()) { return; }
-
-        if (_isPlayerActive == null) { return; }
-
-        for (int i = 0; i < _isPlayerActive.Length; i++)
-        {
-            if (_isPlayerActive[i].IsPlayerActive == true)
-            {
-               //_isPlayerActive[i].GetComponentInParent<PlayerStateMachine>().AttachToShip(true);
-            }
-        }
     }
 }

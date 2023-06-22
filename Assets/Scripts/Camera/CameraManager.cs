@@ -12,7 +12,7 @@ public class CameraManager : MonoBehaviour
 
     private static CameraManager _instance;
 
-    [SerializeField] private CinemachineBrain[] _cameras;
+    private CinemachineBrain[] _cameras;
     private CinemachineVirtualCamera[] _vCams;
     
     private bool _isInOrthoMode = false;

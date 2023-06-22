@@ -81,6 +81,8 @@ public class ShipMovingStaticManager : MonoBehaviour
         {
             _shipMovingObj.transform.parent = transform;
             _shipMovingObj.transform.localPosition = Vector3.zero;
+
+            StartCoroutine(DestroyAllFixParts());
         }
 
         StartCoroutine(TeleportPlayersDelayed());
@@ -91,6 +93,18 @@ public class ShipMovingStaticManager : MonoBehaviour
         if (isInGarage) { Ship.Instance.ShipHealth.Respawn(); }
 
         _isInGarage = isInGarage;
+    }
+
+    private IEnumerator DestroyAllFixParts()
+    {
+        yield return new WaitForEndOfFrame();
+
+        PlayerUpgradesController[] players = FindObjectsOfType<PlayerUpgradesController>();
+
+        foreach (PlayerUpgradesController player in players)
+        {
+            player.DestroyHeldFixPart();
+        }
     }
 
     private IEnumerator TeleportPlayersDelayed()

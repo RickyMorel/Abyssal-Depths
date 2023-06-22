@@ -63,7 +63,7 @@ public class NextLevelTriggerZone : MonoBehaviour
 
         if (_playerCarryController.CurrentSingleObjInstance.tag == null) { _portalKeyInteractionCanvas.gameObject.SetActive(false); return; }
 
-        if (_playerCarryController.CurrentSingleObjInstance.tag != "GreenPortalKey") { _portalKeyInteractionCanvas.gameObject.SetActive(false); return; }
+        if (_playerCarryController.CurrentSingleObjInstance.tag != GameTagsManager.PORTAL_KEY) { _portalKeyInteractionCanvas.gameObject.SetActive(false); return; }
 
         _portalKeyInteractionCanvas.gameObject.SetActive(true);
 

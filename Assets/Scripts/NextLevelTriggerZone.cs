@@ -44,7 +44,7 @@ public class NextLevelTriggerZone : MonoBehaviour
     {
         if (!_updateCheck) { return; }
 
-        if (Ship.Instance.ShipLandingController.Booster.CurrentPlayer != null) { Ship.Instance.ShipLandingController.Booster.CurrentPlayer.CheckExitInteraction(); }
+        if (Ship.Instance.ShipLandingController.Booster.CurrentPlayer != null) { Ship.Instance.ShipLandingController.Booster.CurrentPlayer.CheckExitInteractionWhenNotRepairing(); }
 
         if (!_isInPhase2 && !_isInPhase3) { return; }
 

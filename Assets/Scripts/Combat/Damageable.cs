@@ -257,7 +257,7 @@ public class Damageable : MonoBehaviour
         return CurrentHealth <= 0f;
     }
 
-    public void SetMaxHealth(int newMaxHealth)
+    public virtual void SetMaxHealth(int newMaxHealth)
     {
         _maxHealth = newMaxHealth;
     }

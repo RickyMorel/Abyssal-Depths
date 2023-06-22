@@ -57,7 +57,7 @@ public class RunAway : GAction
 
         if(_timeSinceDoAction < 8f) { return; }
 
-        transform.position = _startPosition;
+        //transform.position = _startPosition;
 
         GAgent.CancelPreviousActions();
     }

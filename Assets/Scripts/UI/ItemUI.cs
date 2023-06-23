@@ -61,7 +61,9 @@ public class ItemUI : MonoBehaviour
         }
 
         if (_itemInInventory == null) { _amountText.text = $"{itemQuantity.Amount}/0"; }
-        else { _amountText.text = $"{itemQuantity.Amount}/{_itemInInventory.Amount}"; }
+        else { _amountText.text = $"{_itemInInventory.Amount}/{itemQuantity.Amount}"; }
+
+        _amountText.fontSize *= 1.5f;
 
         SetGreyScale(0);
 

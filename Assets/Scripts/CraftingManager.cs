@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using System.Linq;
 using UnityEngine.Analytics;
 
 public class CraftingManager : MonoBehaviour
@@ -19,6 +18,9 @@ public class CraftingManager : MonoBehaviour
     [SerializeField] private Transform _contentTransform;
     [SerializeField] private GameObject _craftingItemUIPrefab;
     [SerializeField] private List<CraftingRecipy> _craftingRecipyList = new List<CraftingRecipy>();
+
+    [Header("Main Inventory Panel")]
+    [SerializeField] private Transform _inventoryContentTransform;
 
     #endregion
 
@@ -85,7 +87,10 @@ public class CraftingManager : MonoBehaviour
         DestroyItemsUI(_ingredientsContentTransform);
 
         if (isEnabled)
+        {
             LoadItems();
+            LoadInventory();
+        }
     }
 
     public static void LoadIngredients(CraftingRecipy craftingRecipy, Transform contentTransform)
@@ -94,8 +99,21 @@ public class CraftingManager : MonoBehaviour
 
         foreach (ItemQuantity ingredient in craftingRecipy.CraftingIngredients)
         {
+            Debug.Log(_itemUIPrefab);
+            Debug.Log(contentTransform);
             GameObject itemUI = Instantiate(_itemUIPrefab, contentTransform);
-            itemUI.GetComponent<ItemUI>().Initialize(ingredient, null);
+            itemUI.GetComponent<ItemUI>().Initialize(ingredient);
+        }
+    }
+
+    public void LoadInventory()
+    {
+        DestroyItemsUI(_inventoryContentTransform);
+
+        foreach (ItemQuantity material in MainInventory.Instance.InventoryDictionary.Values)
+        {
+            GameObject itemUI = Instantiate(_itemUIPrefab, _inventoryContentTransform);
+            itemUI.GetComponent<ItemUI>().Initialize(material, null);
         }
     }
 

@@ -99,8 +99,10 @@ public class CraftingManager : MonoBehaviour
 
         foreach (ItemQuantity ingredient in craftingRecipy.CraftingIngredients)
         {
+            Debug.Log(_itemUIPrefab);
+            Debug.Log(contentTransform);
             GameObject itemUI = Instantiate(_itemUIPrefab, contentTransform);
-            itemUI.GetComponent<ItemUI>().Initialize(ingredient, null);
+            itemUI.GetComponent<ItemUI>().Initialize(ingredient);
         }
     }
 
@@ -108,9 +110,7 @@ public class CraftingManager : MonoBehaviour
     {
         DestroyItemsUI(_inventoryContentTransform);
 
-        List<ItemQuantity> listNumber = new List<ItemQuantity>(MainInventory.Instance.InventoryDictionary.Values);
-
-        foreach (ItemQuantity material in listNumber)
+        foreach (ItemQuantity material in MainInventory.Instance.InventoryDictionary.Values)
         {
             GameObject itemUI = Instantiate(_itemUIPrefab, _inventoryContentTransform);
             itemUI.GetComponent<ItemUI>().Initialize(material, null);

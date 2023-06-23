@@ -104,6 +104,8 @@ public class MeleeWeaponWithRope : MeleeWeapon
         if(_throwState == ThrowState.Attached) { _lr.enabled = false; return; }
 
         _lr.enabled = true;
+        
+        if (_middlePointTransform == null) { _middlePointTransform = new GameObject("MiddlePointTransform").transform; }
 
         _middlePointTransform.position = new Vector3((_weaponHeadRb.transform.position.x + _handleTransform.position.x) / 2, (_weaponHeadRb.transform.position.y + _handleTransform.position.y) / 2, (_weaponHeadRb.transform.position.z + _handleTransform.position.z) / 2);
         _middlePointTransform.LookAt(_weaponHeadRb.transform);

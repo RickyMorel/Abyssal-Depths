@@ -57,15 +57,14 @@ public class Ship : MonoBehaviour
         }
 
         _health = GetComponent<ShipHealth>();
-    }
-
-    private void Start()
-    {
         _shipData = GetComponent<ShipData>();
         _shipLandingController = GetComponent<ShipLandingController>();
         _shipFastTravel = GetComponent<ShipFastTravel>();
         _rb = GetComponent<Rigidbody>();
+    }
 
+    private void Start()
+    {
         SetShipStats();
     }
 

@@ -36,28 +36,29 @@ public class ResourceQueue
 
     public GameObject RemoveResource()
     {
-        if(Queue.Count == 0) { return null; }
+        if(Queue.Count == 0) { Debug.Log("Remove Returned NULL"); return null; }
 
         return Queue.Dequeue();
     }
 }
 
-public sealed class GWorld
+public sealed class GWorld : MonoBehaviour
 {
     #region Private Variables
 
-    private static readonly GWorld _instance = new GWorld();
-    private static WorldStates _world;
-    private static ResourceQueue _eatingChairs;
-    private static ResourceQueue _shops;
-    private static ResourceQueue _hideLocations;
-    private static ResourceQueue _restLocations;
-    private static ResourceQueue _shipAttackPoints;
-    private static ResourceQueue _shipTurretAttackPoints;
-    private static ResourceQueue _healPoints;
-    private static ResourceQueue _rockPickupPoints;
-    private static ResourceQueue _megalodonRagdollPoints;
-    private static Dictionary<string, ResourceQueue> _resources = new Dictionary<string, ResourceQueue>();
+    private static GWorld _instance;
+
+    private WorldStates _world;
+    private ResourceQueue _eatingChairs;
+    private ResourceQueue _shops;
+    private ResourceQueue _hideLocations;
+    private ResourceQueue _restLocations;
+    private ResourceQueue _shipAttackPoints;
+    private ResourceQueue _shipTurretAttackPoints;
+    private ResourceQueue _healPoints;
+    private ResourceQueue _rockPickupPoints;
+    private ResourceQueue _megalodonRagdollPoints;
+    private Dictionary<string, ResourceQueue> _resources = new Dictionary<string, ResourceQueue>();
 
     #endregion
 
@@ -95,18 +96,35 @@ public sealed class GWorld
 
     #endregion
 
-    static GWorld()
+    private void Awake()
     {
-        SceneManager.sceneLoaded += HandleSceneLoaded;
-
-        InitializeWorld();
-
-        //Leave this here for future testing
-        //Time.timeScale = 5;
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
     }
 
-    private static void InitializeWorld()
+    private void Start()
     {
+        StartCoroutine(LateStart());
+    }
+
+    //Calls InitializeWorld() later in order to prevent storing duplicate scene resources
+    private IEnumerator LateStart()
+    {
+        yield return new WaitForEndOfFrame();
+
+        InitializeWorld();
+    }
+
+    private void InitializeWorld()
+    {
+        ClearOldData();
+
         _world = new WorldStates();
         _eatingChairs = new ResourceQueue("EatingChair", FREE_EATINGCHAIR, _world);
         _shops = new ResourceQueue("Shop", FREE_SHOPS, _world);
@@ -117,8 +135,6 @@ public sealed class GWorld
         _healPoints = new ResourceQueue("HealPoint", FREE_HEAL_POINTS, _world);
         _rockPickupPoints = new ResourceQueue("RockPickupPoint", FREE_ROCK_PICKUP_POINTS, _world);
         _megalodonRagdollPoints = new ResourceQueue("MegalodonRagdollPoint", AttackFreeTags.FreeMegalodonRagdollPoint.ToString(), _world);
-
-        _resources.Clear();
 
         _resources.Add(EATINGCHAIRS, _eatingChairs);
         _resources.Add(SHOPS, _shops);
@@ -131,9 +147,19 @@ public sealed class GWorld
         _resources.Add(AttackTags.megalodonRagdollPoints.ToString(), _megalodonRagdollPoints);
     }
 
-    private static void HandleSceneLoaded(Scene arg0, LoadSceneMode arg1)
+    private void ClearOldData()
     {
-        InitializeWorld();
+        _world = null;
+        _eatingChairs = null;
+        _shops = null;
+        _hideLocations = null;
+        _restLocations = null;
+        _shipAttackPoints = null;
+        _shipTurretAttackPoints = null;
+        _healPoints = null;
+        _rockPickupPoints = null;
+        _megalodonRagdollPoints = null;
+        _resources.Clear();
     }
 
     public ResourceQueue GetQueue(string type)

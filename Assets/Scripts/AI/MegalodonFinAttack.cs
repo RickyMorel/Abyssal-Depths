@@ -73,6 +73,8 @@ public class MegalodonFinAttack : GAction
 
     public override bool Perform()
     {
+        base.Perform();
+
         GAgent.StateMachine.Attack(4);
 
         return true;

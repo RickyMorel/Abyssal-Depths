@@ -1,7 +1,5 @@
 //#define INTERACTION_DEBUGS
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AIInteractionController : BaseInteractionController
@@ -69,15 +67,6 @@ public class AIInteractionController : BaseInteractionController
 
         base.SetCurrentInteractable(interactable);
 
-        Interactable wantedInteractable = _gAgent?.CurrentAction?.Target?.GetComponent<Interactable>();
-
-        if(interactable == wantedInteractable)
-        {
-#if INTERACTION_DEBUGS
-            Debug.Log("5-is wanted Interaction!: " + gameObject.name);
-#endif
-            HandleInteraction(_gAgent.CurrentAction.Duration);
-        }
     }
 
     public override void HandleChangeState(PlayerBaseState newState, bool isRootState)

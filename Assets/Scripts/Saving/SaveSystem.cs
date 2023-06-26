@@ -52,6 +52,8 @@ public static class SaveSystem
 
         formatter.Serialize(stream, saveData);
 
+        Debug.Log("Saved! " + path);
+
         stream.Close();
     }
 

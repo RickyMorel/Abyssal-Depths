@@ -55,6 +55,8 @@ public class ChargeAttack : GAction
 
     public override bool Perform()
     {
+        base.Perform();
+
         return true;
     }
 

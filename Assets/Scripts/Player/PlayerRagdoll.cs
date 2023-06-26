@@ -9,6 +9,7 @@ public class PlayerRagdoll : MonoBehaviour
 
     [SerializeField] private List<Collider> _colliders = new List<Collider>();
     [SerializeField] private Transform _stunParticlesTransform;
+    [SerializeField] private bool _canBeRagdolled = true;
 
     #endregion
 
@@ -81,6 +82,8 @@ public class PlayerRagdoll : MonoBehaviour
 
     public void EnableLivingRagdoll(bool isEnabled)
     {
+        if (!_canBeRagdolled) { return; }
+
         if (isEnabled)
         {
             _rb.isKinematic = false;

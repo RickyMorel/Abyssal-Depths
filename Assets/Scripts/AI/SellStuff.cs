@@ -19,6 +19,8 @@ public class SellStuff : GAction
 
     public override bool Perform()
     {
+        base.Perform();
+
         return true;
     }
 

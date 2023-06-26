@@ -105,6 +105,8 @@ public class MegalodonRagdollAttack : GAction
 
     public override bool Perform()
     {
+        base.Perform();
+
         return true;
     }
 

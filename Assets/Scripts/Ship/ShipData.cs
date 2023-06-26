@@ -23,6 +23,7 @@ public class ShipData : MonoBehaviour
     public string Location { get; private set; }
     public float PlayTime { get; private set; }
     public int CurrentSaveIndex => _currentSaveIndex;
+    public bool LoadData => _loadData;
 
     #endregion
 
@@ -45,6 +46,7 @@ public class ShipData : MonoBehaviour
 
 #if UNITY_EDITOR
         if (!_loadData) { return; }
+
         else if(loadIndexObj == null)
         {
             _currentSaveIndex = 0;

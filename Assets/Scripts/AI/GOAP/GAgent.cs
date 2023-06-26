@@ -1,4 +1,5 @@
 //#define DISTANCE_DEBUGS
+//#define GOAL_DEBUGS
 
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,8 +30,12 @@ public class GAgent : MonoBehaviour
     #region Editor Fields
 
     [SerializeField] private float _goalDistance = 2f;
+#if GOAL_DEBUGS
+    [SerializeField] private List<GAction> _actionsQueueList;
+#endif
+    [SerializeField] private Transform _target;
 
-    #endregion
+#endregion
 
     #region Private Variables
 
@@ -61,6 +66,7 @@ public class GAgent : MonoBehaviour
     public event Action OnDoAction;
     public event Action OnExitAction;
 
+    public AIInteractionController InteractionController => _interactionController;
     public AIStateMachine StateMachine => _aiStateMachine;
     public Damageable Damageable => _damageable;
 
@@ -101,6 +107,8 @@ public class GAgent : MonoBehaviour
     public virtual void LateUpdate()
     {
         EnableMovement();
+
+        _target = CurrentAction != null && CurrentAction.Target != null ? CurrentAction.Target.transform : null;
 
         if (CurrentAction != null && CurrentAction.IsRunning)
         {
@@ -172,6 +180,10 @@ public class GAgent : MonoBehaviour
         if (_actionQueue == null || _actionQueue.Count < 1) { return; }
 
         CurrentAction = _actionQueue.Dequeue();
+#if GOAL_DEBUGS
+        UpdateActionQueueList();
+#endif
+
         if (CurrentAction.PrePerform())
         {
             if (CurrentAction.Target == null && CurrentAction.TargetTag != "")
@@ -185,16 +197,35 @@ public class GAgent : MonoBehaviour
                 Transform dest = CurrentAction.Target.transform.Find("Destination");
                 if (dest != null) { _destination = dest.position; }
 
-                CurrentAction.Agent.SetDestination(_destination);
-
-                
+                CurrentAction.Agent.SetDestination(_destination);         
+            }
+            else
+            {
+                //May Cause Problems later on
+               // CompleteAction();
             }
         }
         else
         {
-            _actionQueue = null;
+            //_actionQueue = null;
+#if GOAL_DEBUGS
+            UpdateActionQueueList();
+#endif
         }
     }
+#if GOAL_DEBUGS
+    private void UpdateActionQueueList()
+    {
+        _actionsQueueList.Clear();
+
+        if(_actionQueue == null) { return; }
+
+        foreach (var item in _actionQueue)
+        {
+            _actionsQueueList.Add(item);
+        }
+    }
+#endif
 
     private void CheckIfRemoveGoal()
     {
@@ -219,6 +250,9 @@ public class GAgent : MonoBehaviour
         foreach (KeyValuePair<SubGoal, int> subGoal in sortedGoals)
         {
             _actionQueue = _planner.Plan(Actions, subGoal.Key.Sgoals, Beliefs);
+#if GOAL_DEBUGS
+            UpdateActionQueueList();
+#endif
             if (_actionQueue != null)
             {
                 _currentGoal = subGoal.Key;

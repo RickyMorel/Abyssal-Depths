@@ -24,19 +24,21 @@ public class CollectRock : GAction
         return true;
     }
 
-    private void Update()
-    {
-        if (GAgent.CurrentAction != this) { return; }
+    //private void Update()
+    //{
+    //    if (GAgent.CurrentAction != this) { return; }
 
-        _timeSinceDoAction += Time.deltaTime;
+    //    _timeSinceDoAction += Time.deltaTime;
 
-        if (_timeSinceDoAction < 10f) { return; }
+    //    if (_timeSinceDoAction < 10f) { return; }
 
-        GAgent.CancelPreviousActions();
-    }
+    //    GAgent.CancelPreviousActions();
+    //}
 
     public override bool Perform()
     {
+        base.Perform();
+
         return true;
     }
 

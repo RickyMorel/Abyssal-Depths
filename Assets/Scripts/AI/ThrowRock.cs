@@ -46,6 +46,8 @@ public class ThrowRock : GAction
 
     public override bool Perform()
     {
+        base.Perform();
+
         _stateMachine.Attack(3);
 
         GAgent.StateMachine.SetIsCarryingItem(false);

@@ -111,7 +111,7 @@ public abstract class GAction : MonoBehaviour
         if(interactable == null) { interactable = Target.GetComponent<Interactable>(); }
 
         if (interactable != null)
-        {
+        { 
             GAgent.InteractionController.SetCurrentInteractable(interactable);
 
             GAgent.InteractionController.HandleInteraction(Duration);

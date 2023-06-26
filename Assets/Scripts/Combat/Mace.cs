@@ -51,8 +51,6 @@ public class Mace : MeleeWeaponWithRope
 
         _prevInputState = isUsing;
 
-        Debug.Log("Shoot Mace");
-
         Shoot();
     }
 
@@ -84,12 +82,6 @@ public class Mace : MeleeWeaponWithRope
         Instantiate(GameAssetsManager.Instance.MeleeFloorHitParticles, _weaponHeadRb.transform.position, Quaternion.identity);
         ShipCamera.Instance.ShakeCamera(5f, 50f, 0.2f);
     }
-
-    #region Shoot Functions
-
-
-
-    #endregion
 
     #region Helper Classes
 

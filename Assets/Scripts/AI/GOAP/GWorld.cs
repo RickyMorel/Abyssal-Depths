@@ -36,7 +36,7 @@ public class ResourceQueue
 
     public GameObject RemoveResource()
     {
-        if(Queue.Count == 0) { Debug.Log("Remove Returned NULL"); return null; }
+        if(Queue.Count == 0) { return null; }
 
         return Queue.Dequeue();
     }

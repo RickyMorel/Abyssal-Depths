@@ -135,7 +135,7 @@ public class ShipMovingStaticManager : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
 
-        CameraManager.Instance.ToggleCamera(!isInGarage);
+        //CameraManager.Instance.ToggleCamera(!isInGarage);
     }
 
     private IEnumerator EnableStaticShipCamDelayed()

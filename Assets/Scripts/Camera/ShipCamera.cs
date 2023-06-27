@@ -79,7 +79,7 @@ public class ShipCamera : BaseCamera
     private void UpdateCameraZoom()
     {
         float zoomSpeed = 5f;
-        transform.localPosition = Vector3.MoveTowards(transform.localPosition, new Vector3(0f, 0f, _targetOrthoZ), Time.deltaTime * zoomSpeed);
+        transform.localPosition = Vector3.MoveTowards(transform.localPosition, new Vector3(0f, 0f, _targetPerspectiveZ), Time.deltaTime * zoomSpeed);
         _perspectiveCamera.transform.localPosition = Vector3.MoveTowards(_perspectiveCamera.transform.localPosition, new Vector3(0f, 0f, _targetPerspectiveZ), Time.deltaTime * zoomSpeed);
     }
 

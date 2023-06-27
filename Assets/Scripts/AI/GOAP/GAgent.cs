@@ -1,5 +1,5 @@
 //#define DISTANCE_DEBUGS
-//#define GOAL_DEBUGS
+#define GOAL_DEBUGS
 
 using System.Collections.Generic;
 using UnityEngine;
@@ -45,7 +45,7 @@ public class GAgent : MonoBehaviour
 
     private Vector3 _destination = Vector3.zero;
     private bool _invoked = false;
-    [SerializeField] private bool _isMoving = false;
+    private bool _isMoving = false;
 
     protected Rigidbody _rb;
     protected AIStateMachine _aiStateMachine;
@@ -207,7 +207,7 @@ public class GAgent : MonoBehaviour
         }
         else
         {
-            //_actionQueue = null;
+            _actionQueue = null;
 #if GOAL_DEBUGS
             UpdateActionQueueList();
 #endif
@@ -244,6 +244,8 @@ public class GAgent : MonoBehaviour
         if (_planner != null && _actionQueue != null) { return; }
 
         _planner = new GPlanner();
+
+        Debug.Log("Get new plan");
 
         var sortedGoals = from entry in Goals orderby entry.Value descending select entry;
 

@@ -67,6 +67,8 @@ public class ThrowRock : GAction
 
         _gAgent.ResetGoalDistance();
 
+        GAgent.StateMachine.AICombat.DestroyPrevHeldProjectile();
+
         return true;
     }
 }

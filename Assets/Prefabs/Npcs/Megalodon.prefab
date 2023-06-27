@@ -28380,7 +28380,7 @@ MonoBehaviour:
   _resistanceType: 02000000
   _weaknessType: 
   _currentHealth: 0
-  _maxHealth: 5000
+  _maxHealth: 500
   _damageParticles: {fileID: 5855327306185661983}
   _hurtTime: 5
   _meshes:
@@ -28405,7 +28405,7 @@ MonoBehaviour:
   _colliders:
   - {fileID: 5370035049056795246}
   _stunParticlesTransform: {fileID: 1493867839302322554}
-  _canBeRagdolled: 1
+  _canBeRagdolled: 0
 --- !u!114 &8177713152652336295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28451,8 +28451,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _goalDistance: 12
+  _actionsQueueList: []
   _target: {fileID: 0}
-  _isMoving: 0
   Actions: []
   CurrentAction: {fileID: 0}
   _rockPickupParticles: {fileID: 3167892082095838966}
@@ -28533,7 +28533,7 @@ MonoBehaviour:
   - key: hasRock
     value: 0
   ActionName: Get Rock
-  Cost: 1
+  Cost: 2
   Target: {fileID: 0}
   TargetTag: 
   Duration: 2
@@ -28579,7 +28579,7 @@ MonoBehaviour:
   - key: hasDistance
     value: 0
   ActionName: Get Distance
-  Cost: 1
+  Cost: 2
   Target: {fileID: 0}
   TargetTag: 
   Duration: 0.5

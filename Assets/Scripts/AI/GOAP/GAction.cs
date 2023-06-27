@@ -106,12 +106,14 @@ public abstract class GAction : MonoBehaviour
     public abstract bool PrePerform();
     public virtual bool Perform()
     {
-        Interactable interactable = GAgent.InteractionController.CurrentInteractable;
+        //Interactable interactable = GAgent.InteractionController.CurrentInteractable;
+        Interactable interactable = null;
 
-        if(interactable == null) { interactable = Target.GetComponent<Interactable>(); }
+        if(interactable == null) { Debug.Log("GOT ITEM FROM OBJECT REFERENCE!"); interactable = Target.GetComponent<Interactable>(); }
 
         if (interactable != null)
-        { 
+        {
+            Debug.Log("Interacted with item!");
             GAgent.InteractionController.SetCurrentInteractable(interactable);
 
             GAgent.InteractionController.HandleInteraction(Duration);

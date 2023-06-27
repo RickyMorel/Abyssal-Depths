@@ -61,7 +61,7 @@ public class NextLevelTriggerZone : MonoBehaviour
 
         if (_playerCarryController == null) { _playerCarryController = _playerInput.GetComponent<PlayerCarryController>(); }
 
-        if (_playerCarryController.CurrentSingleObjInstance.tag == null) { _portalKeyInteractionCanvas.gameObject.SetActive(false); return; }
+        if (_playerCarryController.CurrentSingleObjInstance == null) { _portalKeyInteractionCanvas.gameObject.SetActive(false); return; }
 
         if (_playerCarryController.CurrentSingleObjInstance.tag != GameTagsManager.PORTAL_KEY) { _portalKeyInteractionCanvas.gameObject.SetActive(false); return; }
 
@@ -115,7 +115,7 @@ public class NextLevelTriggerZone : MonoBehaviour
     {
         _entranceAnimation.Play();
 
-        //Ship.Instance.GetComponentInChildren<ShipCamera>().ShakeCamera(5, 5, 30);
+        ShipCamera.Instance.ShakeCamera(2, 5, 30);
 
         _isInPhase3 = true;
         _rockDustParticle.Play();

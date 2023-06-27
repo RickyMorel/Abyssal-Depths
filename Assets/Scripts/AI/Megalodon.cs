@@ -64,21 +64,18 @@ public class Megalodon : GAgent
         {
             int randomAttack = Random.Range(0, 2);
 
-            SubGoal s3 = new SubGoal("throwRock", 1, true);
-            Goals.Add(s3, 5);
+            switch (randomAttack)
+            {
+                case 0:
+                    SubGoal s2 = new SubGoal("hasCharged", 1, true);
+                    Goals.Add(s2, 3);
+                    break;
+                case 1:
+                    SubGoal s3 = new SubGoal("throwRock", 1, true);
+                    Goals.Add(s3, 5);
+                    break;
 
-            //switch (randomAttack)
-            //{
-            //    case 0:
-            //        SubGoal s2 = new SubGoal("hasCharged", 1, true);
-            //        Goals.Add(s2, 3);
-            //        break;
-            //    case 1:
-            //        SubGoal s3 = new SubGoal("throwRock", 1, true);
-            //        Goals.Add(s3, 5);
-            //        break;
-
-            //}
+            }
         }
         //Set of attacks below 50% health
         else

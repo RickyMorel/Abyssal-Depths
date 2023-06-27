@@ -19,6 +19,7 @@ public class ItemUI : MonoBehaviour
     protected ItemQuantity _itemQuantity;
     protected PlayerInputHandler _currentPlayer;
     protected bool _gotClicked = false;
+    private ItemQuantity _itemInInventory;
 
     #endregion
 
@@ -41,6 +42,32 @@ public class ItemUI : MonoBehaviour
         _itemQuantity = itemQuantity;
 
         _currentPlayer = currentPlayer;
+
+        if (MainInventory.Instance.HasEnoughItem(itemQuantity)) { return; }
+
+        _amountText.color = Color.red;
+        SetGreyScale(1);
+    }
+
+    //This is for the ingredients that appear while crafting
+    public void Initialize(ItemQuantity itemQuantity)
+    {
+        _icon.sprite = itemQuantity.Item.Icon;
+        _itemInInventory = null;
+
+        foreach (ItemQuantity item in MainInventory.Instance.InventoryDictionary.Values)
+        {
+            if (itemQuantity.Item == item.Item) { _itemInInventory = item; break; }
+        }
+
+        if (_itemInInventory == null) { _amountText.text = $"{itemQuantity.Amount}/0"; }
+        else { _amountText.text = $"{_itemInInventory.Amount}/{itemQuantity.Amount}"; }
+
+        _amountText.fontSize *= 1.5f;
+
+        SetGreyScale(0);
+
+        _itemQuantity = itemQuantity;
 
         if (MainInventory.Instance.HasEnoughItem(itemQuantity)) { return; }
 

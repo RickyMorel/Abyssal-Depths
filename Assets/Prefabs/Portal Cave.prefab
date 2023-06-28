@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 3793467746433607882}
   - component: {fileID: 3793467746433607885}
   - component: {fileID: 3793467746433607883}
+  - component: {fileID: 3716952056382107307}
   m_Layer: 25
   m_Name: Portal Cave
   m_TagString: Untagged
@@ -74,7 +75,7 @@ Transform:
   - {fileID: 3793467747675368378}
   - {fileID: 3793467747558983870}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3793467746433607882
 MonoBehaviour:
@@ -123,6 +124,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!208 &3716952056382107307
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3793467746433607887}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 59.9, y: 108.05, z: 97.8}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 115.5, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &3793467746665953294
 GameObject:
   m_ObjectHideFlags: 0
@@ -504,7 +521,6 @@ MonoBehaviour:
   - {fileID: 1401204668924913013, guid: ef739bd36fbce304e9d9d85afdec7251, type: 3}
   _enemyFovZone: {fileID: 0}
   _enemySpawnZone: {fileID: 3793467747675368378}
-  _canSpawnEnemies: 0
 --- !u!1001 &3793467746292092132
 PrefabInstance:
   m_ObjectHideFlags: 0

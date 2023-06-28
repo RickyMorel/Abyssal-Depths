@@ -22,6 +22,7 @@ public class MegalodonFinAttack : GAction
 
     private GameObject _currentTargetObj;
     private float _defaultSpeed;
+    private float _initialZPosition;
 
     #endregion
 
@@ -30,6 +31,7 @@ public class MegalodonFinAttack : GAction
         base.Start();
 
         _defaultSpeed = Agent.speed;
+        _initialZPosition = transform.position.z;
     }
 
     //Start playing headbutt animation before you reach the target
@@ -76,6 +78,9 @@ public class MegalodonFinAttack : GAction
         base.Perform();
 
         GAgent.StateMachine.Attack(4);
+
+        //Prevents Megalodon from moving in the Z plane
+        transform.position = new Vector3(transform.position.x, transform.position.y, _initialZPosition);
 
         return true;
     }

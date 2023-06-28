@@ -40,6 +40,12 @@ public class PlayerInputHandler : MonoBehaviour
     public event Action OnConfirm;
     public event Action OnCancel;
     public event Action OnUpgrade;
+    public event Action OnUIHorizontal;
+    public event Action OnUIVertical;
+    public event Action OnUISubmit;
+    public event Action OnUICancel;
+    public event Action OnShoulderLeft;
+    public event Action OnShoulderRight;
     public event Action<PlayerInputHandler> OnTrySpawn;
    
     public Vector2 MoveDirection => _moveDirection;
@@ -88,6 +94,12 @@ public class PlayerInputHandler : MonoBehaviour
         Upgrade();
         Shoot();
         Shoot2();
+        UIHorizontal();
+        UIVertical();
+        UISubmit();
+        UICancel();
+        ShoulderLeft();
+        ShoulderRight();
     }
 
     private void DestroyDuplicatePlayers()
@@ -226,5 +238,59 @@ public class PlayerInputHandler : MonoBehaviour
         if (!IsPlayerActive) { return; }
 
         _isShooting_2 = _player.GetButton("Shoot2");
+    }
+
+    public void UIHorizontal()
+    {
+        if (!IsPlayerActive) { return; }
+
+        if (!_player.GetButton("UIHorizontal")) { return; }
+
+        OnUIHorizontal?.Invoke();
+    }
+
+    public void UIVertical()
+    {
+        if (!IsPlayerActive) { return; }
+
+        if (!_player.GetButton("UIVertical")) { return; }
+
+        OnUIVertical?.Invoke();
+    }
+
+    public void UISubmit()
+    {
+        if (!IsPlayerActive) { return; }
+
+        if (!_player.GetButton("UISubmit")) { return; }
+
+        OnUISubmit?.Invoke();
+    }
+
+    public void UICancel()
+    {
+        if (!IsPlayerActive) { return; }
+
+        if (!_player.GetButton("UICancel")) { return; }
+
+        OnUICancel?.Invoke();
+    }
+
+    public void ShoulderLeft()
+    {
+        if (!IsPlayerActive) { return; }
+
+        if (!_player.GetButton("ShoulderLeft")) { return; }
+
+        OnShoulderLeft?.Invoke();
+    }
+
+    public void ShoulderRight()
+    {
+        if (!IsPlayerActive) { return; }
+
+        if (!_player.GetButton("ShoulderRight")) { return; }
+
+        OnShoulderRight?.Invoke();
     }
 }

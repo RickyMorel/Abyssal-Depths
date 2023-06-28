@@ -494,6 +494,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 095073ca705494647888fd3a4b729b8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _recoilForce: 2.5
   _timeBetweenShots: 0
   _laserBallSize: 2
   _scaleDuration: 1
@@ -876,6 +877,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7b4a1ca6217b23418b624c856a3ceb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _recoilForce: 2.5
   _timeBetweenShots: 0.2
   _maxRotationSpeed: 500
 --- !u!1 &458250032658626900
@@ -1554,7 +1556,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 610219083015777924}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.446, z: 0}
+  m_LocalPosition: {x: 0, y: 1.77, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1660,6 +1662,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9b57675429360b429a90131771996de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _recoilForce: 2.5
   _timeBetweenShots: 0.2
   _attackHitBox: {fileID: 2210373744117651719}
   _parentTransform: {fileID: 3597213311831459394}
@@ -2915,6 +2918,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fc93c931ab17af4cb70d416172c41b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _recoilForce: 2.5
   _timeBetweenShots: 0.2
   _attackHitBox: {fileID: 5892049097406821286}
   _parentTransform: {fileID: 4660003316404302014}
@@ -4016,6 +4020,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce79472da175b8d4fbb53c560911e0b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _recoilForce: 2.5
   _timeBetweenShots: 0.2
 --- !u!1 &5196958495453686589
 GameObject:
@@ -4440,6 +4445,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 500f131c8b153a74095c2061c5ddea9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _recoilForce: 2.5
   _timeBetweenShots: 0.2
   _attackHitBox: {fileID: 79462081498386862}
   _parentTransform: {fileID: 5941236623131322626}
@@ -5060,6 +5066,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f52daf2bdebcfe4418ad9018ef1b7be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _recoilForce: 2.5
   _timeBetweenShots: 0.2
   _attackHitBox: {fileID: 2922026450815305462}
   _parentTransform: {fileID: 8870349433133957839}
@@ -5358,6 +5365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39943a8037654f5489fcf5e70489a0fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _recoilForce: 2.5
   _timeBetweenShots: 1.2
 --- !u!1 &6670758329025972589
 GameObject:
@@ -5586,6 +5594,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fc93c931ab17af4cb70d416172c41b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _recoilForce: 2.5
   _timeBetweenShots: 0.2
   _attackHitBox: {fileID: 59105737852778015}
   _parentTransform: {fileID: 7557053423725300789}
@@ -6255,6 +6264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e03a851b2d57e2d4ab8ed704086fef28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _recoilForce: 2.5
   _timeBetweenShots: 0.8
   _shootSpreadSeparationAngle: 5
   _amountOfProjectiles: 5
@@ -6569,7 +6579,7 @@ Transform:
   - {fileID: 2389941571288428507}
   - {fileID: 6567959656405035337}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!54 &7627081817445622294
 Rigidbody:
@@ -6694,6 +6704,7 @@ MonoBehaviour:
     - {fileID: 217392354552986556}
     UpgradeSO: {fileID: 11400000, guid: 81a4530311556c74e91337fda6b61e1d, type: 2}
   _chipDropTransform: {fileID: 2389941571288428507}
+  _weaponId: -1
   _rotationSpeed: 300
   _rotationLimits: {x: -190, y: 10}
 --- !u!114 &2835829445178600864
@@ -6716,7 +6727,10 @@ MonoBehaviour:
   _fixCost: {fileID: 11400000, guid: 56de9e867278d034698076c776c8d4da, type: 2}
   _timeToFix: 8
   _canUseWhenBroken: 0
+  _destroyOnDie: 0
   _particleSpawnTransform: {fileID: 6567959656405035337}
+  _fixPartSpawnAmount: 2
+  _fixPartPickupPrefab: {fileID: 0}
 --- !u!320 &336286044842936113
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -7483,7 +7497,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3498198392574577075
 Transform:
   m_ObjectHideFlags: 0
@@ -7562,6 +7576,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fc93c931ab17af4cb70d416172c41b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _recoilForce: 2.5
   _timeBetweenShots: 0.2
   _attackHitBox: {fileID: 6166615154732534096}
   _parentTransform: {fileID: 4564376745032513126}

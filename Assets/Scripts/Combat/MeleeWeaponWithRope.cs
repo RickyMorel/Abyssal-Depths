@@ -24,6 +24,7 @@ public class MeleeWeaponWithRope : MeleeWeapon
     protected Vector3 _originalWeaponHeadPosition;
     protected Quaternion _originalWeaponHeadRotation;
     protected bool _prevInputState;
+    protected int _ogLayer;
 
     #endregion
 
@@ -46,6 +47,9 @@ public class MeleeWeaponWithRope : MeleeWeapon
         _middlePointTransform = new GameObject("MiddlePointTransform").transform;
 
         ReturnWeaponHead();
+
+        //25 = orthographic
+        _ogLayer = 25;
     }
 
     public override void Update()
@@ -104,6 +108,8 @@ public class MeleeWeaponWithRope : MeleeWeapon
         if(_throwState == ThrowState.Attached) { _lr.enabled = false; return; }
 
         _lr.enabled = true;
+        
+        if (_middlePointTransform == null) { _middlePointTransform = new GameObject("MiddlePointTransform").transform; }
 
         _middlePointTransform.position = new Vector3((_weaponHeadRb.transform.position.x + _handleTransform.position.x) / 2, (_weaponHeadRb.transform.position.y + _handleTransform.position.y) / 2, (_weaponHeadRb.transform.position.z + _handleTransform.position.z) / 2);
         _middlePointTransform.LookAt(_weaponHeadRb.transform);
@@ -175,12 +181,15 @@ public class MeleeWeaponWithRope : MeleeWeapon
             _throwState = ThrowState.Attached;
             _timePassedReturning = 0f;
             _bendPoint.position = _handleTransform.position;
+            _weaponHeadRb.gameObject.layer = _ogLayer;
         }
     }
 
     public virtual void ReturnWeaponHead()
     {
         _throwState = ThrowState.Returning;
+        //2 = Ignore Raycast
+        _weaponHeadRb.gameObject.layer = 2;
     }
 
     private float CalculateAngle()

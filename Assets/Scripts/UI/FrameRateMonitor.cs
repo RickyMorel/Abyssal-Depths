@@ -4,11 +4,31 @@ using UnityEngine;
 
 public class FrameRateMonitor : MonoBehaviour
 {
+    #region Private Variables
+
+    private static FrameRateMonitor _instance;
     private int _avgFrameRate;
     private GUIStyle _style;
 
+    #endregion
+
+    #region Public Properties
+
+    public static FrameRateMonitor Instance { get { return _instance; } }
+
+    #endregion
+
     private void Awake()
     {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+
         DontDestroyOnLoad(gameObject);
     }
 

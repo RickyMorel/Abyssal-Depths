@@ -8,8 +8,12 @@ public class Projectile : MonoBehaviour
 {
     #region Editor Fields
 
+    [Header("Damage Data")]
     [SerializeField] private float _speed;
     [SerializeField] protected DamageTypes[] _damageTypes;
+    [SerializeField] protected bool _stunPlayersInShipOnHit = false;
+
+    [Header("FX")]
     [SerializeField] protected ParticleSystem[] _particles;
     [SerializeField] protected bool _shouldUnparentParticle = false;
     [SerializeField] protected bool _shakeCameraOnHit = false;
@@ -112,6 +116,13 @@ public class Projectile : MonoBehaviour
             particle.transform.position = impactPoint;
             particle.Play();
         }
+    }
+
+    public void TryRagdollPlayers()
+    {
+        if (!_stunPlayersInShipOnHit) { return; }
+
+        Ship.Instance.ShipHealth.RagdollPlayersInShip();
     }
 
     public void DestroySelf()

@@ -152,6 +152,15 @@ public class ShipHealth : Damageable
         }
     }
 
+    public void RagdollPlayersInShip()
+    {
+        foreach (PlayerInputHandler player in Ship.Instance.PlayersInShip)
+        {
+            PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
+            playerHealth.Hurt(DamageTypes.Base, 0, 2f);
+        }
+    }
+
     public override void DamageWithoutDamageData(int damage, Collider instigatorCollider = null)
     {
         base.DamageWithoutDamageData(damage, instigatorCollider);

@@ -20,6 +20,7 @@ public class PlayerRagdoll : MonoBehaviour
     private NavMeshAgent _agent;
     private Rigidbody _rb;
     private PlayerHealth _health;
+    private PlayerStateMachine _playerStateMachine;
     private ParticleSystem _bubbleParticles;
     private GameObject _stunnedParticleInstance;
 
@@ -43,6 +44,7 @@ public class PlayerRagdoll : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
         _rb = GetComponent<Rigidbody>();
         _health = GetComponent<PlayerHealth>();
+        _playerStateMachine = GetComponent<PlayerStateMachine>();
     }
 
     private void Start()
@@ -151,10 +153,7 @@ public class PlayerRagdoll : MonoBehaviour
 
         if (_colliders.Count <= 1) { if (isEnabled) { PlayDeathAnimation(); } return; }
 
-        if (isEnabled == false)
-        {
-            transform.position = _colliders[0].transform.position;
-        }
+        if (!isEnabled && _playerStateMachine != null) { _playerStateMachine.Teleport(_colliders[0].transform.position); }
 
         DisableMovement(isEnabled, true);
 
@@ -163,7 +162,7 @@ public class PlayerRagdoll : MonoBehaviour
             collider.enabled = isEnabled;
         }
 
-        if(!_health.IsDead()) { EnableStunFX(isEnabled); }
+        if (!_health.IsDead()) { EnableStunFX(isEnabled); }
     }
 
     private void DisableMovement(bool isEnabled, bool hasRagdoll)

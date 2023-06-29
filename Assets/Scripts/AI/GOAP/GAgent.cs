@@ -1,5 +1,5 @@
 //#define DISTANCE_DEBUGS
-#define GOAL_DEBUGS
+//#define GOAL_DEBUGS
 
 using System.Collections.Generic;
 using UnityEngine;
@@ -200,11 +200,6 @@ public class GAgent : MonoBehaviour
                 if (dest != null) { _destination = dest.position; }
 
                 CurrentAction.Agent.SetDestination(_destination);         
-            }
-            else
-            {
-                //May Cause Problems later on
-               // CompleteAction();
             }
         }
         else

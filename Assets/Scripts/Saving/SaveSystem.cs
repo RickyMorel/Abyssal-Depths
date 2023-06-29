@@ -37,6 +37,7 @@ public static class SaveSystem
         ShipData shipData = Ship.Instance.ShipData;
         SaveData saveData = new SaveData(shipData);
 
+        //Will Uncomment Later
         //ScreenshotHandler.Instance.TakeScreenshot(1080, 1080, (Texture2D screenshotTexture) =>
         //{
         //    byte[] screenshotByteArray = screenshotTexture.EncodeToPNG();

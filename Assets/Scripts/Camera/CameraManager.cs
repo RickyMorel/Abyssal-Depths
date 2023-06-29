@@ -8,13 +8,16 @@ using UnityEngine.Analytics;
 
 public class CameraManager : MonoBehaviour
 {
-    #region Private Variables
-
-    private static CameraManager _instance;
+    #region Editor Fields
 
     [SerializeField] private CinemachineBrain[] _cameras;
     [SerializeField] private CinemachineVirtualCamera[] _vCams;
-    
+
+    #endregion
+
+    #region Private Variables
+
+    private static CameraManager _instance;
     private bool _isInOrthoMode = false;
 
     #endregion

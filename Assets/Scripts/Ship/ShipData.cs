@@ -74,13 +74,6 @@ public class ShipData : MonoBehaviour
 
         SaveData saveData = SaveSystem.Load(_currentSaveIndex);
 
-        Debug.Log("LateStart ShipData, : " + saveData._levelDataArray.Length);
-
-        foreach (var item in saveData._levelDataArray)
-        {
-            Debug.Log($"{item.BuildIndex}, {item.IsBossDefeated}");
-        }
-
         if(saveData != null)
         {
             SetFileData(saveData);

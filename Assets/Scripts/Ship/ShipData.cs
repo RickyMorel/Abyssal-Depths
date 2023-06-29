@@ -24,6 +24,7 @@ public class ShipData : MonoBehaviour
     public float PlayTime { get; private set; }
     public int CurrentSaveIndex => _currentSaveIndex;
     public bool LoadData => _loadData;
+    public SaveData.LevelData[] LevelData => GameManager.Instance.LevelData.LevelDataArray;
 
     #endregion
 
@@ -34,6 +35,8 @@ public class ShipData : MonoBehaviour
     public Upgradable[] Weapons;
 
     #endregion
+
+    #region Unity Loops
 
     private void Awake()
     {
@@ -71,6 +74,13 @@ public class ShipData : MonoBehaviour
 
         SaveData saveData = SaveSystem.Load(_currentSaveIndex);
 
+        Debug.Log("LateStart ShipData, : " + saveData._levelDataArray.Length);
+
+        foreach (var item in saveData._levelDataArray)
+        {
+            Debug.Log($"{item.BuildIndex}, {item.IsBossDefeated}");
+        }
+
         if(saveData != null)
         {
             SetFileData(saveData);
@@ -79,8 +89,18 @@ public class ShipData : MonoBehaviour
             LoadInventories(saveData);
             LoadChips(saveData);
             TryLoadDeathLoot(saveData);
+            GameManager.Instance.LevelData.LoadLevelData(saveData); 
         }
     }
+
+    private void Update()
+    {
+        PlayTime += Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.K)) { SaveSystem.Save(_currentSaveIndex); }
+    }
+
+    #endregion
 
     public void ReloadLevel()
     {
@@ -96,13 +116,6 @@ public class ShipData : MonoBehaviour
         {
             Weapons[i].TrySetHealth(int.MaxValue, this, false);
         }
-    }
-
-    private void Update()
-    {
-        PlayTime += Time.deltaTime;
-
-        if (Input.GetKeyDown(KeyCode.K)) { SaveSystem.Save(_currentSaveIndex); }
     }
 
     public void SetFileData(SaveData saveData)

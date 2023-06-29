@@ -124,6 +124,8 @@ public class PlayerStateMachine : BaseStateMachine
 
     private IEnumerator TeleportCoroutine(Vector3 position)
     {
+        if(_characterController == null) { yield break; }
+
         _characterController.enabled = false;
 
         yield return new WaitForEndOfFrame();

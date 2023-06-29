@@ -69,7 +69,7 @@ public class BossZone : MonoBehaviour
         _collider.enabled = true;
     }
 
-    private void HandleBossDied()
+    private void HandleBossDied(int sceneBuildIndex)
     {
         _bossIsDead = true;
         EnableDoor(false);

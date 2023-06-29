@@ -20,6 +20,7 @@ public class SaveData
     public List<MinableData> _minablesInScene = new List<MinableData>();
     public List<ItemData> _mainInventory = new List<ItemData>();
     public List<ItemData> _shipInventory = new List<ItemData>();
+    public LevelData[] _levelDataArray;
     public DeathLootData _deathLootData;
     public byte[] ScreenShotBytes;
 
@@ -35,6 +36,7 @@ public class SaveData
         ShipName = shipData.ShipName;
         LocationName = shipData.Location;
         PlayedTime = shipData.PlayTime;
+        _levelDataArray = shipData.LevelData;
 
         SaveChipData(shipData);
         SaveShipPosition(shipData);
@@ -201,6 +203,21 @@ public class SaveData
         {
             Id = itemQuantity.Item.Id;
             Amount = itemQuantity.Amount;
+        }
+    }
+
+    [System.Serializable]
+    public class LevelData
+    {
+        public int BuildIndex;
+        public bool IsBossDefeated;
+        public bool IsCompleted;
+
+        public LevelData(int buildIndex, bool isCompleted = false, bool isBossDefaeated = false)
+        {
+            BuildIndex = buildIndex;
+            IsBossDefeated = isBossDefaeated;
+            IsCompleted = isCompleted;
         }
     }
 }

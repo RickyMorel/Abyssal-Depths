@@ -106,6 +106,8 @@ public class GAgent : MonoBehaviour
 
     public virtual void LateUpdate()
     {
+        if(GWorld.Instance.GetWorld() == null) { return; }
+
         EnableMovement();
 
         _target = CurrentAction != null && CurrentAction.Target != null ? CurrentAction.Target.transform : null;
@@ -244,8 +246,6 @@ public class GAgent : MonoBehaviour
         if (_planner != null && _actionQueue != null) { return; }
 
         _planner = new GPlanner();
-
-        Debug.Log("Get new plan");
 
         var sortedGoals = from entry in Goals orderby entry.Value descending select entry;
 

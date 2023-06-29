@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
 
 public class NextLevelTriggerZone : MonoBehaviour
 {
@@ -29,6 +31,7 @@ public class NextLevelTriggerZone : MonoBehaviour
 
     #region Public Properties
 
+    public static event Action<int> OnLevelCompleted;
     public bool IsInPhase3 => _isInPhase3;
 
     #endregion
@@ -128,10 +131,12 @@ public class NextLevelTriggerZone : MonoBehaviour
         PortalPhase4();
     }
 
-    private void PortalPhase4()
+    public void PortalPhase4()
     {
         _portalParticle.Play();
         _updateCheck = false;
+
+        OnLevelCompleted?.Invoke(SceneManager.GetActiveScene().buildIndex);
     }
     //1 esta cerrado en los estados siguientes la nave no se debe mover hasta el final, quedandose en el lugar flotando
     //2 el jugador interactua con la puerta y esta vibra

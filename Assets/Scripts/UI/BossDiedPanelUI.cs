@@ -21,7 +21,7 @@ public class BossDiedPanelUI : MonoBehaviour
         AIHealth.OnBossDied -= PlayBossDiedTimeline;
     }
 
-    public void PlayBossDiedTimeline()
+    public void PlayBossDiedTimeline(int sceneBuildIndex)
     {
         _bossDiedPanelTimeline.Play();
     }

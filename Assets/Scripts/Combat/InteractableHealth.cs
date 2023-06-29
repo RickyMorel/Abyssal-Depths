@@ -157,6 +157,7 @@ public class InteractableHealth : Damageable
         _interactable.IsSingleUse = _prevInteractableState.IsSingleUse;
         _interactable.Outline.OutlineColor = _originalOutlineColor;
         _timeSpentFixing = 0f;
+        _partLeftToRepair = 0;
         OnFix?.Invoke();
 
         DestroyAllParticles();

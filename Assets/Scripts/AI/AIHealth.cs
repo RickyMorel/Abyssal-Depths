@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DynamicMeshCutter;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody))]
 public class AIHealth : PlayerHealth
@@ -11,6 +12,7 @@ public class AIHealth : PlayerHealth
 
     [SerializeField] private bool _canKill = false;
     [SerializeField] private bool _stopsActionWhenHurt = true;
+    [SerializeField] private bool _isBoss = false;
 
     #endregion
 
@@ -25,9 +27,10 @@ public class AIHealth : PlayerHealth
 
     #region Public Properties
 
-    public static event Action OnBossDied;
+    public static event Action<int> OnBossDied;
 
     public bool CanKill => _canKill;
+    public bool IsBoss => _isBoss;
 
     #endregion
 
@@ -42,7 +45,7 @@ public class AIHealth : PlayerHealth
         _rb = GetComponent<Rigidbody>();
 
         _meshTarget = GetComponentInChildren<MeshTarget>();
-        _meshTarget.enabled = false;
+        if(_meshTarget != null) { _meshTarget.enabled = false; }
 
         OnDamaged += Hurt;
     }
@@ -58,13 +61,14 @@ public class AIHealth : PlayerHealth
     {
         base.Die();
 
-        Debug.Log("HandleDead");
         CutMeshIfLightSaber();
 
         StopPreviousAction();
         _gAgent.enabled = false;
         _rb.isKinematic = false;
         _rb.useGravity = true;
+
+        if (_isBoss) { InvokeBossDiedEvent(); }
 
         Invoke(nameof(DisableSelf), 5f);
     }
@@ -74,7 +78,7 @@ public class AIHealth : PlayerHealth
         if (_damageData == null) { return; }
 
         if (!(_damageData.DamageTypes[0] == DamageTypes.Base && _damageData.DamageTypes[1] == DamageTypes.Laser) || !(_damageData.DamageTypes[1] == DamageTypes.Laser && _damageData.DamageTypes[0] == DamageTypes.Base)) { return; }
-        _meshTarget.enabled = true;
+        if (_meshTarget != null) { _meshTarget.enabled = true; }
         GetComponentInChildren<PlaneBehaviour>().Cut();
 
         Invoke(nameof(DisableSelf), 0.1f);
@@ -122,6 +126,6 @@ public class AIHealth : PlayerHealth
 
     public void InvokeBossDiedEvent()
     {
-        OnBossDied?.Invoke();
+        OnBossDied?.Invoke(SceneManager.GetActiveScene().buildIndex);
     }
 }

@@ -117,6 +117,7 @@ public class Damageable : MonoBehaviour
             else if (projectile.DamageTypes[0] != projectile.DamageTypes[1] && projectile.DamageTypes[1] == DamageTypes.None) { Damage(_damageData.ImpactDamage, true); }
 
             projectile.PlayImpactParticles(other.ClosestPointOnBounds(transform.position));
+            projectile.TryRagdollPlayers();
             projectile.DestroySelf();
         }
         else
@@ -257,7 +258,7 @@ public class Damageable : MonoBehaviour
         return CurrentHealth <= 0f;
     }
 
-    public void SetMaxHealth(int newMaxHealth)
+    public virtual void SetMaxHealth(int newMaxHealth)
     {
         _maxHealth = newMaxHealth;
     }

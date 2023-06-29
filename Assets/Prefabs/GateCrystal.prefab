@@ -9844,8 +9844,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4894450769137565134}
   - component: {fileID: 4892836010768462887}
-  - component: {fileID: 4891933552012859074}
   - component: {fileID: 4892836010768462886}
+  - component: {fileID: 5528845860829706152}
   m_Layer: 6
   m_Name: GateCrystal
   m_TagString: Untagged
@@ -9871,7 +9871,7 @@ Transform:
   - {fileID: 5630605644196401403}
   - {fileID: 1521072923568565005}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &4892836010768462887
 Rigidbody:
@@ -9889,27 +9889,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 8
   m_CollisionDetection: 0
---- !u!114 &4891933552012859074
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4892836010768462880}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e4807ebe6148e4439ead0e7f9507bbd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _id:
-    Value: 
-  _loot:
-  - Item: {fileID: 11400000, guid: 3ad86382688a18148b29e7284765e83c, type: 2}
-    Amount: 1
-  _canLoot: 0
-  _damageForce: 80
-  _maxHealth: 100
-  _damageParticles: {fileID: 5544636398889134703}
 --- !u!65 &4892836010768462886
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9923,6 +9902,27 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.6, y: 11.656921, z: 5.7}
   m_Center: {x: 0, y: 5.3284607, z: 0}
+--- !u!114 &5528845860829706152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4892836010768462880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d312f68fda41454493c2b664a9b3db6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id:
+    Value: 
+  _loot:
+  - Item: {fileID: 11400000, guid: 3ad86382688a18148b29e7284765e83c, type: 2}
+    Amount: 1
+  _canLoot: 0
+  _damageForce: 80
+  _maxHealth: 100
+  _damageParticles: {fileID: 5544636398889134703}
 --- !u!1 &5635683296638048513
 GameObject:
   m_ObjectHideFlags: 0

@@ -44,6 +44,8 @@ public class RunAway : GAction
 
         _timeSinceDoAction = 0f;
 
+        GAgent.StateMachine.AICombat.DestroyPrevHeldProjectile();
+
         if (Target == null) { return false; }
 
         return true;
@@ -57,13 +59,13 @@ public class RunAway : GAction
 
         if(_timeSinceDoAction < 8f) { return; }
 
-        transform.position = _startPosition;
-
         GAgent.CancelPreviousActions();
     }
 
     public override bool Perform()
     {
+        base.Perform();
+
         return true;
     }
 

@@ -55,8 +55,6 @@ public class ShipHealth : Damageable
         OnUpdateHealth += HandleUpdateHealth;
         OnDamaged += HandleDamaged;
         _boosterHealth.OnFix += HandleFix;
-
-        _boosterHealth.SetMaxHealth((int)MaxHealth);
     }
 
     public override void Start()
@@ -96,6 +94,13 @@ public class ShipHealth : Damageable
     public void SetInvunerableToCrash(float invunerableTime = 1f)
     {
         StartCoroutine(InvunerableToCrashCoroutine(invunerableTime));
+    }
+
+    public override void SetMaxHealth(int newMaxHealth)
+    {
+        base.SetMaxHealth(newMaxHealth);
+
+        _boosterHealth.SetMaxHealth(newMaxHealth);
     }
 
     private IEnumerator InvunerableToCrashCoroutine(float invunerableTime)
@@ -142,6 +147,15 @@ public class ShipHealth : Damageable
 
             if (playerDistance > Ship.Instance.ShipStatsSO.CrashPlayerRagdollRadius) { continue; }
 
+            PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
+            playerHealth.Hurt(DamageTypes.Base, 0, 2f);
+        }
+    }
+
+    public void RagdollPlayersInShip()
+    {
+        foreach (PlayerInputHandler player in Ship.Instance.PlayersInShip)
+        {
             PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
             playerHealth.Hurt(DamageTypes.Base, 0, 2f);
         }

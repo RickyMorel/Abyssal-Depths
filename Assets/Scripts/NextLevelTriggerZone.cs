@@ -1,15 +1,25 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
+using UnityEngine.Timeline;
 
 public class NextLevelTriggerZone : MonoBehaviour
 {
     #region Editor Fields
 
-    [SerializeField] private PlayableDirector _entranceAnimation;
+    [Header("Timeline")]
+    [SerializeField] private PlayableDirector _playableDirector;
+    [SerializeField] private TimelineAsset _entranceTimeline;
+    [SerializeField] private TimelineAsset _openTimeline;
+
+    [Header("Particles")]
     [SerializeField] private ParticleSystem _portalParticle;
     [SerializeField] private ParticleSystem _rockDustParticle;
+
+    [Header("Interaction")]
     [SerializeField] private Transform _transformForImmobileShip;
     [SerializeField] private float _immobileShipMoveSpeed = 10;
     [SerializeField] private Canvas _portalKeyInteractionCanvas;
@@ -29,6 +39,7 @@ public class NextLevelTriggerZone : MonoBehaviour
 
     #region Public Properties
 
+    public static event Action<int> OnLevelCompleted;
     public bool IsInPhase3 => _isInPhase3;
 
     #endregion
@@ -44,7 +55,7 @@ public class NextLevelTriggerZone : MonoBehaviour
     {
         if (!_updateCheck) { return; }
 
-        if (Ship.Instance.ShipLandingController.Booster.CurrentPlayer != null) { Ship.Instance.ShipLandingController.Booster.CurrentPlayer.CheckExitInteraction(); }
+        if (Ship.Instance.ShipLandingController.Booster.CurrentPlayer != null) { Ship.Instance.ShipLandingController.Booster.CurrentPlayer.CheckExitInteractionWhenNotRepairing(); }
 
         if (!_isInPhase2 && !_isInPhase3) { return; }
 
@@ -61,9 +72,9 @@ public class NextLevelTriggerZone : MonoBehaviour
 
         if (_playerCarryController == null) { _playerCarryController = _playerInput.GetComponent<PlayerCarryController>(); }
 
-        if (_playerCarryController.CurrentSingleObjInstance.tag == null) { _portalKeyInteractionCanvas.gameObject.SetActive(false); return; }
+        if (_playerCarryController.CurrentSingleObjInstance == null) { _portalKeyInteractionCanvas.gameObject.SetActive(false); return; }
 
-        if (_playerCarryController.CurrentSingleObjInstance.tag != "GreenPortalKey") { _portalKeyInteractionCanvas.gameObject.SetActive(false); return; }
+        if (_playerCarryController.CurrentSingleObjInstance.tag != GameTagsManager.PORTAL_KEY) { _portalKeyInteractionCanvas.gameObject.SetActive(false); return; }
 
         _portalKeyInteractionCanvas.gameObject.SetActive(true);
 
@@ -113,9 +124,10 @@ public class NextLevelTriggerZone : MonoBehaviour
 
     private IEnumerator PortalPhase3()
     {
-        _entranceAnimation.Play();
+        _playableDirector.playableAsset = _entranceTimeline;
+        _playableDirector.Play();
 
-        //Ship.Instance.GetComponentInChildren<ShipCamera>().ShakeCamera(5, 5, 30);
+        ShipCamera.Instance.ShakeCamera(2, 5, 30);
 
         _isInPhase3 = true;
         _rockDustParticle.Play();
@@ -128,10 +140,15 @@ public class NextLevelTriggerZone : MonoBehaviour
         PortalPhase4();
     }
 
-    private void PortalPhase4()
+    public void PortalPhase4()
     {
+        _playableDirector.playableAsset = _openTimeline;
+        _playableDirector.Play();
+
         _portalParticle.Play();
         _updateCheck = false;
+
+        OnLevelCompleted?.Invoke(SceneManager.GetActiveScene().buildIndex);
     }
     //1 esta cerrado en los estados siguientes la nave no se debe mover hasta el final, quedandose en el lugar flotando
     //2 el jugador interactua con la puerta y esta vibra

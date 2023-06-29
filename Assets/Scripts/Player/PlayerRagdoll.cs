@@ -9,6 +9,7 @@ public class PlayerRagdoll : MonoBehaviour
 
     [SerializeField] private List<Collider> _colliders = new List<Collider>();
     [SerializeField] private Transform _stunParticlesTransform;
+    [SerializeField] private bool _canBeRagdolled = true;
 
     #endregion
 
@@ -19,6 +20,7 @@ public class PlayerRagdoll : MonoBehaviour
     private NavMeshAgent _agent;
     private Rigidbody _rb;
     private PlayerHealth _health;
+    private PlayerStateMachine _playerStateMachine;
     private ParticleSystem _bubbleParticles;
     private GameObject _stunnedParticleInstance;
 
@@ -42,6 +44,7 @@ public class PlayerRagdoll : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
         _rb = GetComponent<Rigidbody>();
         _health = GetComponent<PlayerHealth>();
+        _playerStateMachine = GetComponent<PlayerStateMachine>();
     }
 
     private void Start()
@@ -56,7 +59,7 @@ public class PlayerRagdoll : MonoBehaviour
         }
 
         LockZPos();
-        EnableDeadRagdoll(false);
+        EnableDeadRagdoll(false, true);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -81,6 +84,8 @@ public class PlayerRagdoll : MonoBehaviour
 
     public void EnableLivingRagdoll(bool isEnabled)
     {
+        if (!_canBeRagdolled) { return; }
+
         if (isEnabled)
         {
             _rb.isKinematic = false;
@@ -142,16 +147,13 @@ public class PlayerRagdoll : MonoBehaviour
         return null;
     }
 
-    public void EnableDeadRagdoll(bool isEnabled)
+    public void EnableDeadRagdoll(bool isEnabled, bool isStart = false)
     {
         if (isEnabled) _bubbleParticles.Play(); else _bubbleParticles.Stop();
 
         if (_colliders.Count <= 1) { if (isEnabled) { PlayDeathAnimation(); } return; }
 
-        if (isEnabled == false)
-        {
-            transform.position = _colliders[0].transform.position;
-        }
+        if (!isEnabled && _playerStateMachine != null && !isStart) { _playerStateMachine.Teleport(_colliders[0].transform.position); }
 
         DisableMovement(isEnabled, true);
 
@@ -160,7 +162,7 @@ public class PlayerRagdoll : MonoBehaviour
             collider.enabled = isEnabled;
         }
 
-        if(!_health.IsDead()) { EnableStunFX(isEnabled); }
+        if (!_health.IsDead()) { EnableStunFX(isEnabled); }
     }
 
     private void DisableMovement(bool isEnabled, bool hasRagdoll)

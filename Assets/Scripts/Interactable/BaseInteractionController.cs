@@ -100,6 +100,13 @@ public class BaseInteractionController : MonoBehaviour
         OnExitInteraction?.Invoke();
     }
 
+    public void CheckExitInteractionWhenNotRepairing()
+    {
+        if (IsFixing) { return; }
+
+        CheckExitInteraction();
+    }
+
     //This calls when the player presses the interact button
     public void HandleInteraction(float customDuration = -1)
     {

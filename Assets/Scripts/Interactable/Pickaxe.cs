@@ -62,7 +62,7 @@ public class Pickaxe : RotationalInteractable
 
     private void ApplyDrag()
     {
-        if(CurrentAngle == 0) { return; }
+        if(CurrentAngle == 0f) { return; }
 
         if(CurrentPlayer != null && (_isBoosting || CurrentPlayer.MoveDirection.magnitude > 0) && CurrentAngle < _topSpeed) { return; }
 
@@ -93,10 +93,10 @@ public class Pickaxe : RotationalInteractable
     {
         float acceleration = RotationSpeed * CurrentPlayer.MoveDirection.x * Time.deltaTime;
 
-        //Start slowing down if surpassed top speed
-        if (Mathf.Abs(CurrentAngle) > _topSpeed) { acceleration = 0; }
-
         CurrentAngle = CurrentAngle + acceleration;
+
+        //Slow down if surpassed top speed
+        CurrentAngle = Mathf.Clamp(CurrentAngle, -_topSpeed, _topSpeed);
 
         RotatorTransform.RotateAround(PivotTransform.position, Vector3.forward, -CurrentAngle);
     }

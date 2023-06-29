@@ -142,10 +142,10 @@ public abstract class Inventory : MonoBehaviour
             loadedItemsList.Add(itemQuantity);
         }
 
-        AddItems(loadedItemsList);
+        AddItems(loadedItemsList, false);
     }
 
-    public virtual void AddItems(List<ItemQuantity> addedItems)
+    public virtual void AddItems(List<ItemQuantity> addedItems, bool displayAddedItems = true)
     {
         foreach (ItemQuantity itemQuantity in addedItems)
         {
@@ -192,6 +192,17 @@ public abstract class Inventory : MonoBehaviour
 
         if (_inventory[itemQuantity.Item].Amount < 1)
             _inventory.Remove(itemQuantity.Item);
+
+        OnUpdatedInventory?.Invoke();
+
+        LoadItems();
+    }
+
+    public void RemoveItemsOfType(Item item)
+    {
+        if (!_inventory.ContainsKey(item)) { Debug.LogError("TRYING TO REMOVE ITEM THAT DOESN'T EXIST: " + item); return; }
+
+        _inventory.Remove(item);
 
         OnUpdatedInventory?.Invoke();
 

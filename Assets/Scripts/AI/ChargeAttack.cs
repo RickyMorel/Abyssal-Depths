@@ -44,7 +44,8 @@ public class ChargeAttack : GAction
         GAgent.StateMachine.SetMovementSpeed(2f);
         Agent.speed = _chargeSpeed;
         GAgent.SetGoalDistance(_chargeStopDistance);
-        //Agent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
+
+        GAgent.StateMachine.AICombat.DestroyPrevHeldProjectile();
 
         Target = Ship.Instance.gameObject;
 
@@ -55,6 +56,8 @@ public class ChargeAttack : GAction
 
     public override bool Perform()
     {
+        base.Perform();
+
         return true;
     }
 

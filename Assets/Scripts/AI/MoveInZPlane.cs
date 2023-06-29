@@ -57,6 +57,8 @@ public class MoveInZPlane : GAction
 
     public override bool Perform()
     {
+        base.Perform();
+
         return true;
     }
 

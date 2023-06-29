@@ -46,6 +46,8 @@ public class ThrowRock : GAction
 
     public override bool Perform()
     {
+        base.Perform();
+
         _stateMachine.Attack(3);
 
         GAgent.StateMachine.SetIsCarryingItem(false);
@@ -64,6 +66,8 @@ public class ThrowRock : GAction
         Beliefs.RemoveState("hasRock");
 
         _gAgent.ResetGoalDistance();
+
+        GAgent.StateMachine.AICombat.DestroyPrevHeldProjectile();
 
         return true;
     }

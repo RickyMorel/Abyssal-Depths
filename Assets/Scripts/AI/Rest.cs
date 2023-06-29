@@ -19,6 +19,8 @@ public class Rest : GAction
 
     public override bool Perform()
     {
+        base.Perform();
+
         return true;
     }
 

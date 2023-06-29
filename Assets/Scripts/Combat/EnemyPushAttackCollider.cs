@@ -8,6 +8,7 @@ public class EnemyPushAttackCollider : MonoBehaviour
     #region Editor Fields
 
     [SerializeField] private float _pushVelocity = 10f;
+    [SerializeField] private bool _stunOnPush = false;
     [SerializeField] private ParticleSystem _pushParticles;
 
     #endregion
@@ -80,6 +81,8 @@ public class EnemyPushAttackCollider : MonoBehaviour
         Vector3 pushDir = transform.position - Ship.Instance.transform.position;
 
         Ship.Instance.Rb.AddForce(-pushDir.normalized * _pushVelocity, ForceMode.VelocityChange);
+
+        if (_stunOnPush) { Ship.Instance.ShipHealth.RagdollPlayersInShip(); }
 
         ShipCamera.Instance.NormalShake();
     }

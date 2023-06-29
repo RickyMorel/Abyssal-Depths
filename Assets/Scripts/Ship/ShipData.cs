@@ -23,6 +23,8 @@ public class ShipData : MonoBehaviour
     public string Location { get; private set; }
     public float PlayTime { get; private set; }
     public int CurrentSaveIndex => _currentSaveIndex;
+    public bool LoadData => _loadData;
+    public SaveData.LevelData[] LevelData => GameManager.Instance.LevelData.LevelDataArray;
 
     #endregion
 
@@ -33,6 +35,8 @@ public class ShipData : MonoBehaviour
     public Upgradable[] Weapons;
 
     #endregion
+
+    #region Unity Loops
 
     private void Awake()
     {
@@ -45,6 +49,7 @@ public class ShipData : MonoBehaviour
 
 #if UNITY_EDITOR
         if (!_loadData) { return; }
+
         else if(loadIndexObj == null)
         {
             _currentSaveIndex = 0;
@@ -69,27 +74,19 @@ public class ShipData : MonoBehaviour
 
         SaveData saveData = SaveSystem.Load(_currentSaveIndex);
 
-        SetFileData(saveData);
-        LoadMinables(saveData);
-        LoadEnemies(saveData);
-        LoadInventories(saveData);
-        LoadChips(saveData);
-        TryLoadDeathLoot(saveData);
-    }
-
-    public void ReloadLevel()
-    {
-        SaveData saveData = SaveSystem.Load(_currentSaveIndex);
-
-        LoadInventories(saveData);
-        LoadChips(saveData, new Vector3(270f, -320f, 0f));
-        TryLoadDeathLoot(saveData);
-
-        Booster.TrySetHealth(int.MaxValue, this, true);
-
-        for (int i = 0; i < Weapons.Length; i++)
+        if(saveData != null)
         {
-            Weapons[i].TrySetHealth(int.MaxValue, this, false);
+            SetFileData(saveData);
+            LoadMinables(saveData);
+            LoadEnemies(saveData);
+            LoadInventories(saveData);
+            LoadChips(saveData);
+            TryLoadDeathLoot(saveData);
+            GameManager.Instance.LevelData.LoadLevelData(saveData); 
+        }
+        else
+        {
+            transform.position = GameObject.FindGameObjectWithTag(GameTagsManager.SPAWN_POINT).transform.position;
         }
     }
 
@@ -98,6 +95,24 @@ public class ShipData : MonoBehaviour
         PlayTime += Time.deltaTime;
 
         if (Input.GetKeyDown(KeyCode.K)) { SaveSystem.Save(_currentSaveIndex); }
+    }
+
+    #endregion
+
+    public void ReloadLevel()
+    {
+        SaveData saveData = SaveSystem.Load(_currentSaveIndex);
+
+        LoadInventories(saveData);
+        LoadChips(saveData, GameObject.FindGameObjectWithTag(GameTagsManager.SPAWN_POINT).transform.position);
+        TryLoadDeathLoot(saveData);
+
+        Booster.TrySetHealth(int.MaxValue, this, true);
+
+        for (int i = 0; i < Weapons.Length; i++)
+        {
+            Weapons[i].TrySetHealth(int.MaxValue, this, false);
+        }
     }
 
     public void SetFileData(SaveData saveData)
@@ -144,8 +159,7 @@ public class ShipData : MonoBehaviour
             Weapons[i].LoadChips(saveData.WeaponDatas[i], this, false);
         }
 
-        Vector3 spawnPos = new Vector3(saveData.ShipPos[0], saveData.ShipPos[1], saveData.ShipPos[2]);
-        transform.position = wantedSpawnPosition == default(Vector3) ? spawnPos : wantedSpawnPosition;
+        transform.position = GameObject.FindGameObjectWithTag(GameTagsManager.SPAWN_POINT).transform.position;
 
         SpawnPlayers();
     }

@@ -26,6 +26,8 @@ public class AttachAttack : GAction
 
     public override bool Perform()
     {
+        base.Perform();
+
         return true;
     }
 

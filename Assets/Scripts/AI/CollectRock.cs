@@ -4,9 +4,16 @@ using UnityEngine;
 
 public class CollectRock : GAction
 {
+    public override void Start()
+    {
+        base.Start();
+    }
+
     public override bool PrePerform()
     {
         Target = GWorld.Instance.GetQueue(GWorld.ROCK_PICKUP_POINTS).RemoveResource();
+
+        GAgent.StateMachine.AICombat.DestroyPrevHeldProjectile();
 
         if (Target == null) { return false; }
 
@@ -19,6 +26,8 @@ public class CollectRock : GAction
 
     public override bool Perform()
     {
+        base.Perform();
+
         return true;
     }
 

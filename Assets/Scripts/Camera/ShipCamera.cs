@@ -11,6 +11,8 @@ public class ShipCamera : BaseCamera
     #region Editor Fields
 
     [SerializeField] private Camera _perspectiveCamera;
+    [SerializeField] private float _zoomedInDistance = -18.95f;
+    [SerializeField] private float _zoomedOutDistance = -35f;
 
     #endregion
 
@@ -79,7 +81,7 @@ public class ShipCamera : BaseCamera
     private void UpdateCameraZoom()
     {
         float zoomSpeed = 5f;
-        transform.localPosition = Vector3.MoveTowards(transform.localPosition, new Vector3(0f, 0f, _targetOrthoZ), Time.deltaTime * zoomSpeed);
+        transform.localPosition = Vector3.MoveTowards(transform.localPosition, new Vector3(0f, 0f, _targetPerspectiveZ), Time.deltaTime * zoomSpeed);
         _perspectiveCamera.transform.localPosition = Vector3.MoveTowards(_perspectiveCamera.transform.localPosition, new Vector3(0f, 0f, _targetPerspectiveZ), Time.deltaTime * zoomSpeed);
     }
 
@@ -102,13 +104,13 @@ public class ShipCamera : BaseCamera
         if (isBossZoom)
         {
             _targetOrthoZ = -10.85f;
-            _targetPerspectiveZ = -40.65f;
+            _targetPerspectiveZ = _zoomedOutDistance;
             _orginalFOV = 30f;
         }
         else
         {
             _targetOrthoZ = -4f;
-            _targetPerspectiveZ = -18.95f;
+            _targetPerspectiveZ = _zoomedInDistance;
             _orginalFOV = 15f;
         }
     }

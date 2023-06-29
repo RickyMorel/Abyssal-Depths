@@ -15,12 +15,8 @@ public class PickaxeTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         CheckForMinable(other);
+        CheckForEnemy(other);
         
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        CheckForEnemy(collision.collider);
     }
 
     private void CheckForMinable(Collider other)
@@ -38,7 +34,7 @@ public class PickaxeTrigger : MonoBehaviour
 
     private void CheckForEnemy(Collider other)
     {
-        if (!other.TryGetComponent<Damageable>(out Damageable damageable)) { return; }
+        if (!other.TryGetComponent(out Damageable damageable)) { return; }
 
         float damage = _pickaxeInteractable.GetHitSpeed();
 

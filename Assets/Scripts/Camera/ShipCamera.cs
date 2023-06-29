@@ -11,6 +11,7 @@ public class ShipCamera : BaseCamera
     #region Editor Fields
 
     [SerializeField] private Camera _perspectiveCamera;
+    [SerializeField] private ZoomValues[] _zoomDistancesArray;
     [SerializeField] private float _zoomedInDistance = -18.95f;
     [SerializeField] private float _zoomedOutDistance = -35f;
 
@@ -26,7 +27,7 @@ public class ShipCamera : BaseCamera
     private float _currentFOV;
     private float _orginalFOV;
     private float _targetPerspectiveZ;
-    private float _targetOrthoZ;
+    private int _currentZoomDistanceIndex;
     #endregion
 
     #region Public Properties
@@ -61,8 +62,14 @@ public class ShipCamera : BaseCamera
 
         _orginalFOV = _virtualCamera.m_Lens.OrthographicSize;
         _currentFOV = _orginalFOV;
-        
-        ChangeToBossZoom(true);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            ChangeZoom();
+        }
     }
 
     private void LateUpdate()
@@ -99,19 +106,31 @@ public class ShipCamera : BaseCamera
         _isBoosting = isBoosting;
     }
 
-    public void ChangeToBossZoom(bool isBossZoom)
+    public void ChangeZoom()
     {
-        if (isBossZoom)
+        _currentZoomDistanceIndex++;
+
+        if(_currentZoomDistanceIndex > _zoomDistancesArray.Length - 1) { _currentZoomDistanceIndex = 0; }
+
+        _targetPerspectiveZ = _zoomDistancesArray[_currentZoomDistanceIndex].Distance;
+        _orginalFOV = _zoomDistancesArray[_currentZoomDistanceIndex].FOV;
+
+        //_targetPerspectiveZ = _zoomedOutDistance;
+        //_orginalFOV = 30f;
+
+        //_targetPerspectiveZ = _zoomedInDistance;
+        //_orginalFOV = 15f;
+    }
+
+    [System.Serializable]
+    public class ZoomValues
+    {
+        public float Distance;
+        public float FOV;
+        public ZoomValues(float distance, float fov)
         {
-            _targetOrthoZ = -10.85f;
-            _targetPerspectiveZ = _zoomedOutDistance;
-            _orginalFOV = 30f;
-        }
-        else
-        {
-            _targetOrthoZ = -4f;
-            _targetPerspectiveZ = _zoomedInDistance;
-            _orginalFOV = 15f;
+            this.Distance = distance;
+            this.FOV = fov;
         }
     }
 }

@@ -162,8 +162,7 @@ public class ShipData : MonoBehaviour
             Weapons[i].LoadChips(saveData.WeaponDatas[i], this, false);
         }
 
-        Vector3 spawnPos = new Vector3(saveData.ShipPos[0], saveData.ShipPos[1], saveData.ShipPos[2]);
-        transform.position = wantedSpawnPosition == default(Vector3) ? spawnPos : wantedSpawnPosition;
+        transform.position = GameObject.FindGameObjectWithTag(GameTagsManager.SPAWN_POINT).transform.position;
 
         SpawnPlayers();
     }

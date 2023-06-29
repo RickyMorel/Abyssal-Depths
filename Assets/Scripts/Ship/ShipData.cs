@@ -84,6 +84,10 @@ public class ShipData : MonoBehaviour
             TryLoadDeathLoot(saveData);
             GameManager.Instance.LevelData.LoadLevelData(saveData); 
         }
+        else
+        {
+            transform.position = GameObject.FindGameObjectWithTag(GameTagsManager.SPAWN_POINT).transform.position;
+        }
     }
 
     private void Update()

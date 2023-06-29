@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelData : MonoBehaviour
 {
-    #region Private Variables
+    #region Editor Fields
 
     [SerializeField] private SaveData.LevelData[] _levelDataArray;
 
@@ -56,13 +56,17 @@ public class LevelData : MonoBehaviour
     {
         SaveData.LevelData levelData = _levelDataArray[scene.buildIndex];
 
+        Item portalPieceItem = FindObjectOfType<GateCrystal>(true).LootList[0].Item;
+
+        MainInventory.Instance.RemoveItemsOfType(portalPieceItem);
+        ShipInventory.Instance.RemoveItemsOfType(portalPieceItem);
+
         if (levelData.IsCompleted)
         {
             GateCrystal[] gateCrystals = FindObjectsOfType<GateCrystal>();
 
             foreach (GateCrystal crystal in gateCrystals)
             {
-                Debug.Log($"{crystal.gameObject.name} is set false");
                 crystal.gameObject.SetActive(false);
             }
 
@@ -76,6 +80,8 @@ public class LevelData : MonoBehaviour
             BossZone bossZone = FindObjectOfType<BossZone>();
 
             bossZone.gameObject.SetActive(false);
+
+            MainInventory.Instance.AddItem(new ItemQuantity(portalPieceItem, 1));
         }
     }
 

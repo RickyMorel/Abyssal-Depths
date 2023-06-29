@@ -64,7 +64,6 @@ public class DeathManager : MonoBehaviour
         _isInSafeZone = false;
         _isLoadingScene = false;
         _timeSinceDeath = 0f;
-        //Will uncomment later
         Ship.Instance.GetComponent<ShipData>().ReloadLevel();
         _isReloadingScene = false;
         Ship.Instance.FireRespawnEvent();

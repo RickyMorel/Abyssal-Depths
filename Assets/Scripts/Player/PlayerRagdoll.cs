@@ -59,7 +59,7 @@ public class PlayerRagdoll : MonoBehaviour
         }
 
         LockZPos();
-        EnableDeadRagdoll(false);
+        EnableDeadRagdoll(false, true);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -147,13 +147,13 @@ public class PlayerRagdoll : MonoBehaviour
         return null;
     }
 
-    public void EnableDeadRagdoll(bool isEnabled)
+    public void EnableDeadRagdoll(bool isEnabled, bool isStart = false)
     {
         if (isEnabled) _bubbleParticles.Play(); else _bubbleParticles.Stop();
 
         if (_colliders.Count <= 1) { if (isEnabled) { PlayDeathAnimation(); } return; }
 
-        if (!isEnabled && _playerStateMachine != null) { _playerStateMachine.Teleport(_colliders[0].transform.position); }
+        if (!isEnabled && _playerStateMachine != null && !isStart) { _playerStateMachine.Teleport(_colliders[0].transform.position); }
 
         DisableMovement(isEnabled, true);
 

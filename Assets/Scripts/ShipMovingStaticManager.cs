@@ -72,7 +72,7 @@ public class ShipMovingStaticManager : MonoBehaviour
         if (!Ship.Instance.ShipData.LoadData) { return; }
 #endif
         //Always set ShipParent position to Original SpaceStation location, it prevents sceneloading bugs
-        //transform.position = new Vector3(151.6f, -328.8f, 0f);
+        transform.position = new Vector3(151.6f, -328.8f, 0f);
     }
 
     public void SetShipState(bool isInGarage)
@@ -97,8 +97,6 @@ public class ShipMovingStaticManager : MonoBehaviour
         }
 
         StartCoroutine(TeleportPlayersDelayed());
-
-        StartCoroutine(ToggleCameraDelayed(isInGarage));
 
         //Heal everything when enter garage
         if (isInGarage) { Ship.Instance.ShipHealth.Respawn(); }
@@ -129,13 +127,6 @@ public class ShipMovingStaticManager : MonoBehaviour
             player.Teleport(_shipStaticObj.transform.position);
             player.InteractionController.CheckExitInteraction();
         }
-    }
-
-    private IEnumerator ToggleCameraDelayed(bool isInGarage)
-    {
-        yield return new WaitForSeconds(1f);
-
-        //CameraManager.Instance.ToggleCamera(!isInGarage);
     }
 
     private IEnumerator EnableStaticShipCamDelayed()

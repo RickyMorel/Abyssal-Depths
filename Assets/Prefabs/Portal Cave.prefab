@@ -75,7 +75,7 @@ Transform:
   - {fileID: 3793467747675368378}
   - {fileID: 3793467747558983870}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3793467746433607882
 MonoBehaviour:
@@ -89,7 +89,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db8c20932baab1b4fba3341da8c27512, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _entranceAnimation: {fileID: 3793467746292092158}
+  _playableDirector: {fileID: 3793467746292092158}
+  _entranceTimeline: {fileID: 11400000, guid: 6f7702186c09f9a4bab84f81520fa208, type: 2}
+  _openTimeline: {fileID: 11400000, guid: fd6e79cac45796147944a13cd18c3cd8, type: 2}
   _portalParticle: {fileID: 3919672043789727727}
   _rockDustParticle: {fileID: 3920129051193830031}
   _transformForImmobileShip: {fileID: 3793467747018576112}
@@ -516,9 +518,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyWaveList:
   - {fileID: 2028690528299777052, guid: b3991de570f6479418e4e1572b99969b, type: 3}
+  - {fileID: 1401204668924913013, guid: ef739bd36fbce304e9d9d85afdec7251, type: 3}
+  - {fileID: 1401204668924913013, guid: ef739bd36fbce304e9d9d85afdec7251, type: 3}
   - {fileID: 2028690528299777052, guid: b3991de570f6479418e4e1572b99969b, type: 3}
-  - {fileID: 1401204668924913013, guid: ef739bd36fbce304e9d9d85afdec7251, type: 3}
-  - {fileID: 1401204668924913013, guid: ef739bd36fbce304e9d9d85afdec7251, type: 3}
+  - {fileID: 2028690528299777052, guid: b3991de570f6479418e4e1572b99969b, type: 3}
+  - {fileID: 2028690528299777052, guid: b3991de570f6479418e4e1572b99969b, type: 3}
+  - {fileID: 2028690528299777052, guid: b3991de570f6479418e4e1572b99969b, type: 3}
   _enemyFovZone: {fileID: 0}
   _enemySpawnZone: {fileID: 3793467747675368378}
 --- !u!1001 &3793467746292092132
@@ -635,6 +640,8 @@ PlayableDirector:
   m_InitialTime: 0
   m_SceneBindings:
   - key: {fileID: 4439790769583129105, guid: 6f7702186c09f9a4bab84f81520fa208, type: 2}
+    value: {fileID: 3793467746292092131}
+  - key: {fileID: 4439790769583129105, guid: fd6e79cac45796147944a13cd18c3cd8, type: 2}
     value: {fileID: 3793467746292092131}
   m_ExposedReferences:
     m_References: []

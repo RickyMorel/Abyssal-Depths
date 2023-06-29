@@ -4,14 +4,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
+using UnityEngine.Timeline;
 
 public class NextLevelTriggerZone : MonoBehaviour
 {
     #region Editor Fields
 
-    [SerializeField] private PlayableDirector _entranceAnimation;
+    [Header("Timeline")]
+    [SerializeField] private PlayableDirector _playableDirector;
+    [SerializeField] private TimelineAsset _entranceTimeline;
+    [SerializeField] private TimelineAsset _openTimeline;
+
+    [Header("Particles")]
     [SerializeField] private ParticleSystem _portalParticle;
     [SerializeField] private ParticleSystem _rockDustParticle;
+
+    [Header("Interaction")]
     [SerializeField] private Transform _transformForImmobileShip;
     [SerializeField] private float _immobileShipMoveSpeed = 10;
     [SerializeField] private Canvas _portalKeyInteractionCanvas;
@@ -116,7 +124,8 @@ public class NextLevelTriggerZone : MonoBehaviour
 
     private IEnumerator PortalPhase3()
     {
-        _entranceAnimation.Play();
+        _playableDirector.playableAsset = _entranceTimeline;
+        _playableDirector.Play();
 
         ShipCamera.Instance.ShakeCamera(2, 5, 30);
 
@@ -133,6 +142,9 @@ public class NextLevelTriggerZone : MonoBehaviour
 
     public void PortalPhase4()
     {
+        _playableDirector.playableAsset = _openTimeline;
+        _playableDirector.Play();
+
         _portalParticle.Play();
         _updateCheck = false;
 

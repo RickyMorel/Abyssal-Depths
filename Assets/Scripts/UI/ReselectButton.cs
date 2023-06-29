@@ -38,6 +38,20 @@ public class ReselectButton : MonoBehaviour
 
     private void OnEnable()
     {
+        StartCoroutine(LateEnable());
+    }
+
+    private void OnDisable()
+    {
+        StartCoroutine(LateDisable());
+    }
+
+    #endregion
+
+    private IEnumerator LateEnable()
+    {
+        yield return new WaitForEndOfFrame();
+
         _playerInput.OnUIHorizontal += ReselectButtonWhenNeeded;
         _playerInput.OnUIVertical += ReselectButtonWhenNeeded;
         _playerInput.OnShoulderLeft += ReselectButtonWhenNeeded;
@@ -46,8 +60,10 @@ public class ReselectButton : MonoBehaviour
         _playerInput.OnUICancel += ReselectButtonWhenNeeded;
     }
 
-    private void OnDisable()
+    private IEnumerator LateDisable()
     {
+        yield return new WaitForEndOfFrame();
+
         _playerInput.OnUIHorizontal -= ReselectButtonWhenNeeded;
         _playerInput.OnUIVertical -= ReselectButtonWhenNeeded;
         _playerInput.OnShoulderLeft -= ReselectButtonWhenNeeded;
@@ -55,8 +71,6 @@ public class ReselectButton : MonoBehaviour
         _playerInput.OnUISubmit -= ReselectButtonWhenNeeded;
         _playerInput.OnUICancel -= ReselectButtonWhenNeeded;
     }
-
-    #endregion
 
     private void ReselectButtonWhenNeeded()
     {

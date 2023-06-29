@@ -36,11 +36,11 @@ public class ShipInventory : Inventory
 
     #endregion
 
-    public override void AddItems(List<ItemQuantity> addedItems)
+    public override void AddItems(List<ItemQuantity> addedItems, bool displayAddedItems = true)
     {
         base.AddItems(addedItems);
-        
-        LootUI.Instance.DisplayLootedItems(addedItems);
+
+        if (displayAddedItems) { LootUI.Instance.DisplayLootedItems(addedItems); }
     }
 
     public void DropAllItems()

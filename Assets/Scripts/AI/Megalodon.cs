@@ -25,22 +25,8 @@ public class Megalodon : GAgent
     {
         base.Start();
 
-        Damageable.OnDie += HandleBossDied;
-
         GetComponent<NavMeshAgent>().updateRotation = false;
         GetComponent<NavMeshAgent>().avoidancePriority = 0;
-    }
-
-    private void OnDestroy()
-    {
-        Damageable.OnDie -= HandleBossDied;
-    }
-
-    private void HandleBossDied()
-    {
-        AIHealth aIHealth = Damageable as AIHealth;
-
-        aIHealth.InvokeBossDiedEvent();
     }
 
     private void Update()
@@ -99,6 +85,8 @@ public class Megalodon : GAgent
 
     private void UpdateRotation()
     {
+        if(CurrentAction == null || CurrentAction.Target == null) { return; }
+
         Vector3 difVector = CurrentAction ? transform.position - CurrentAction.Target.transform.position : Vector3.zero;
 
         float yRotationTarget = difVector.x > 0 ? 270f : 90f;

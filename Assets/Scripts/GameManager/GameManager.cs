@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(DeathManager))]
+[RequireComponent(typeof(LevelData))]
 public class GameManager : MonoBehaviour
 {
     #region Public Properties
@@ -12,6 +13,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get { return _instance; } }
 
     public DeathManager DeathManager => _deathManager;
+    public LevelData LevelData => _levelData;
 
     #endregion
 
@@ -20,6 +22,7 @@ public class GameManager : MonoBehaviour
     private static GameManager _instance;
 
     private DeathManager _deathManager;
+    private LevelData _levelData;
 
     #endregion
 
@@ -40,6 +43,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         _deathManager = GetComponent<DeathManager>();
+        _levelData = GetComponent<LevelData>();
     }
 
     private void Update()

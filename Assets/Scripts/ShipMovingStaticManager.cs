@@ -47,6 +47,8 @@ public class ShipMovingStaticManager : MonoBehaviour
 
     private void Start()
     {
+        SetShipParentToCorrectStartingPosition();
+
         SceneManager.sceneLoaded += HandlSceneChange;
 
         _rb = _shipMovingObj.GetComponent<Rigidbody>();
@@ -62,6 +64,15 @@ public class ShipMovingStaticManager : MonoBehaviour
     private void HandlSceneChange(Scene scene, LoadSceneMode arg1)
     {
         SetShipState(scene.name == "SpaceStations");
+    }
+
+    private void SetShipParentToCorrectStartingPosition()
+    {
+#if UNITY_EDITOR
+        if (!Ship.Instance.ShipData.LoadData) { return; }
+#endif
+        //Always set ShipParent position to Original SpaceStation location, it prevents sceneloading bugs
+        transform.position = new Vector3(151.6f, -328.8f, 0f);
     }
 
     public void SetShipState(bool isInGarage)
@@ -81,16 +92,28 @@ public class ShipMovingStaticManager : MonoBehaviour
         {
             _shipMovingObj.transform.parent = transform;
             _shipMovingObj.transform.localPosition = Vector3.zero;
+
+            StartCoroutine(DestroyAllFixParts());
         }
 
         StartCoroutine(TeleportPlayersDelayed());
-
-        StartCoroutine(ToggleCameraDelayed(isInGarage));
 
         //Heal everything when enter garage
         if (isInGarage) { Ship.Instance.ShipHealth.Respawn(); }
 
         _isInGarage = isInGarage;
+    }
+
+    private IEnumerator DestroyAllFixParts()
+    {
+        yield return new WaitForEndOfFrame();
+
+        PlayerUpgradesController[] players = FindObjectsOfType<PlayerUpgradesController>();
+
+        foreach (PlayerUpgradesController player in players)
+        {
+            player.DestroyHeldFixPart();
+        }
     }
 
     private IEnumerator TeleportPlayersDelayed()
@@ -104,13 +127,6 @@ public class ShipMovingStaticManager : MonoBehaviour
             player.Teleport(_shipStaticObj.transform.position);
             player.InteractionController.CheckExitInteraction();
         }
-    }
-
-    private IEnumerator ToggleCameraDelayed(bool isInGarage)
-    {
-        yield return new WaitForSeconds(1f);
-
-        CameraManager.Instance.ToggleCamera(!isInGarage);
     }
 
     private IEnumerator EnableStaticShipCamDelayed()

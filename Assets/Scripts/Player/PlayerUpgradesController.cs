@@ -48,7 +48,7 @@ public class PlayerUpgradesController : MonoBehaviour
         {
             HandleUpgrade();
         }
-        else if(_playerCarryController.CurrentSingleObjInstance.tag == "RemovalTool")
+        else if(_playerCarryController.CurrentSingleObjInstance.tag == GameTagsManager.UPGRADE_REMOVAL_TOOL)
         {
             HandleRemoveUpgrades();
         }
@@ -90,7 +90,7 @@ public class PlayerUpgradesController : MonoBehaviour
 
         if (_interactionController.IsInteracting()) { return false; }
 
-        if (_playerCarryController.CurrentSingleObjInstance.tag != "FixPart") { return false; }
+        if (_playerCarryController.CurrentSingleObjInstance.tag != GameTagsManager.FIX_PART) { return false; }
 
         _interactionController.IsFixing = true;
 
@@ -101,7 +101,9 @@ public class PlayerUpgradesController : MonoBehaviour
 
     public void DestroyHeldFixPart()
     {
-        if (_playerCarryController.CurrentSingleObjInstance.tag != "FixPart") { return; }
+        if(_playerCarryController.CurrentSingleObjInstance == null) { return; }
+
+        if (_playerCarryController.CurrentSingleObjInstance.tag != GameTagsManager.FIX_PART) { return; }
 
         Destroy(_playerCarryController.CurrentSingleObjInstance.gameObject);
     }

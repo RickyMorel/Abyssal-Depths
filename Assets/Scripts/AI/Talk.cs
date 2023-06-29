@@ -19,6 +19,8 @@ public class Talk : GAction
 
     public override bool Perform()
     {
+        base.Perform();
+
         return true;
     }
 

@@ -26,6 +26,7 @@ public class ItemPickup : MonoBehaviour
     private Rigidbody _rb;
     private PlayerCarryController _prevPlayerCarryController = null;
     private ParticleSystem _collisionParticles;
+    private float _maxDistanceFromStaticShip = 15f;
 
     #endregion
 
@@ -45,6 +46,12 @@ public class ItemPickup : MonoBehaviour
         if (SceneLoader.IsInGarageScene()) { return; }
 
         _rb.AddForce(-Ship.Instance.Rb.velocity, ForceMode.Force);
+
+        //Makes sure to teleport back items that clipped through the ship
+        if(Vector3.Distance(ShipMovingStaticManager.Instance.ShipStaticObj.transform.position, transform.position) > _maxDistanceFromStaticShip)
+        {
+            transform.position = ShipMovingStaticManager.Instance.ShipStaticObj.transform.position;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)

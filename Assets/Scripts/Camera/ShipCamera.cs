@@ -12,8 +12,6 @@ public class ShipCamera : BaseCamera
 
     [SerializeField] private Camera _perspectiveCamera;
     [SerializeField] private ZoomValues[] _zoomDistancesArray;
-    [SerializeField] private float _zoomedInDistance = -18.95f;
-    [SerializeField] private float _zoomedOutDistance = -35f;
 
     #endregion
 
@@ -27,7 +25,7 @@ public class ShipCamera : BaseCamera
     private float _currentFOV;
     private float _orginalFOV;
     private float _targetPerspectiveZ;
-    private int _currentZoomDistanceIndex;
+    private int _currentZoomDistanceIndex = 1;
     #endregion
 
     #region Public Properties
@@ -60,16 +58,22 @@ public class ShipCamera : BaseCamera
         _shipRigidbody = FindObjectOfType<ShipHealth>().GetComponent<Rigidbody>();
         _shipBooster = _shipRigidbody.transform.root.GetComponentInChildren<Booster>();
 
-        _orginalFOV = _virtualCamera.m_Lens.OrthographicSize;
+        PlayerInputHandler.OnChangeZoom += HandleChangeZoom;
+
+        _orginalFOV = _virtualCamera.m_Lens.FieldOfView;
         _currentFOV = _orginalFOV;
+
+        ChangeZoom();
     }
 
-    private void Update()
+    //Only player that is driving can change the zoom
+    private void HandleChangeZoom(PlayerInputHandler requestingPlayer)
     {
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            ChangeZoom();
-        }
+        if(_shipBooster.CurrentPlayer == null) { return; }
+
+        if(requestingPlayer != _shipBooster.CurrentPlayer.PlayerInput) { return; }
+
+        ChangeZoom();
     }
 
     private void LateUpdate()
@@ -81,6 +85,7 @@ public class ShipCamera : BaseCamera
     private void OnDestroy()
     {
         Booster.OnBoostUpdated -= HandleBoost;
+        PlayerInputHandler.OnChangeZoom -= HandleChangeZoom;
     }
 
     #endregion
@@ -98,7 +103,7 @@ public class ShipCamera : BaseCamera
         float wantedFOV = _isBoosting == true && _shipBooster.RecentlyChangedGear == false ? expandedBoostFOV : _orginalFOV;
 
         _currentFOV = Mathf.Lerp(_currentFOV, wantedFOV, Time.deltaTime);
-        _virtualCamera.m_Lens.OrthographicSize = _currentFOV;
+        _virtualCamera.m_Lens.FieldOfView = _currentFOV;
     }
 
     private void HandleBoost(bool isBoosting)
@@ -114,12 +119,6 @@ public class ShipCamera : BaseCamera
 
         _targetPerspectiveZ = _zoomDistancesArray[_currentZoomDistanceIndex].Distance;
         _orginalFOV = _zoomDistancesArray[_currentZoomDistanceIndex].FOV;
-
-        //_targetPerspectiveZ = _zoomedOutDistance;
-        //_orginalFOV = 30f;
-
-        //_targetPerspectiveZ = _zoomedInDistance;
-        //_orginalFOV = 15f;
     }
 
     [System.Serializable]

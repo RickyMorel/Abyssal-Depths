@@ -46,6 +46,7 @@ public class PlayerInputHandler : MonoBehaviour
     public event Action OnUICancel;
     public event Action OnShoulderLeft;
     public event Action OnShoulderRight;
+    public static event Action<PlayerInputHandler> OnChangeZoom;
     public event Action<PlayerInputHandler> OnTrySpawn;
    
     public Vector2 MoveDirection => _moveDirection;
@@ -100,6 +101,7 @@ public class PlayerInputHandler : MonoBehaviour
         UICancel();
         ShoulderLeft();
         ShoulderRight();
+        ChangeZoom();
     }
 
     private void DestroyDuplicatePlayers()
@@ -196,6 +198,15 @@ public class PlayerInputHandler : MonoBehaviour
         if (!_player.GetButtonDown("Cancel")) { return; }
 
         OnCancel?.Invoke();
+    }
+
+    public void ChangeZoom()
+    {
+        if (!IsPlayerActive) { return; }
+
+        if (!_player.GetButtonDown("ChangeZoom")) { return; }
+
+        OnChangeZoom?.Invoke(this);
     }
 
     public void SpecialAction()

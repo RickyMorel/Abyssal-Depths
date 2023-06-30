@@ -15,6 +15,8 @@ public class Projectile : MonoBehaviour
 
     [Header("FX")]
     [SerializeField] protected ParticleSystem[] _particles;
+    [SerializeField] private GameObject _muzzleFlash;
+    [SerializeField] private GameObject _impactPartilesPrefab;
     [SerializeField] protected bool _shouldUnparentParticle = false;
     [SerializeField] protected bool _shakeCameraOnHit = false;
 
@@ -29,6 +31,7 @@ public class Projectile : MonoBehaviour
     protected DamageData _damageData;
     protected float _dealDamageAfterSeconds;
     private Transform _ownersTransform;
+    private GameObject _mesh;
 
     #endregion
 
@@ -63,7 +66,13 @@ public class Projectile : MonoBehaviour
 
     public virtual void Start()
     {
+        _mesh = transform.Find("Mesh").gameObject;
+
         _damageData = DamageData.GetDamageData(_damageTypes, _weapon, _aiCombatID);
+
+        ApplySlightRandomRotation();
+        StartCoroutine(TryPlayMuzzleFlash());
+
         if (_destroyOnHit == true) 
         {
             Launch(transform.forward);
@@ -75,6 +84,24 @@ public class Projectile : MonoBehaviour
         if (_particles.Length < 1) { return; }
 
         GameAssetsManager.Instance.ChipDataSO.ChangeParticleColor(_particles[0], _damageTypes[0], _weapon.ChipLevel); 
+    }
+
+    private void ApplySlightRandomRotation()
+    {
+        transform.rotation = Quaternion.Euler(transform.eulerAngles.x + Random.Range(-15f, 15f), transform.eulerAngles.y, transform.eulerAngles.z);
+    }
+
+    private IEnumerator TryPlayMuzzleFlash()
+    {
+        if (_muzzleFlash == null) { yield break; }
+
+        _mesh.SetActive(false);
+        _muzzleFlash.SetActive(true);
+
+        yield return new WaitForSeconds(0.2f);
+
+        _muzzleFlash.SetActive(false);
+        _mesh.SetActive(true);
     }
 
     public void Launch(Vector3 direction, Vector3 lookDir = default(Vector3))

@@ -20,6 +20,8 @@ public class WeaponShoot : MonoBehaviour
     protected Weapon _weapon;
     protected float _timeSinceLastShot;
 
+    private ParticleSystem _shootBubbleParticles;
+
     #endregion
 
     #region Public Properties
@@ -32,7 +34,9 @@ public class WeaponShoot : MonoBehaviour
 
     public virtual void Start()
     {
-        //do nothing
+        _shootBubbleParticles = Instantiate(GameAssetsManager.Instance.ShootBubbleParticles, _weapon.ShootTransforms[0]).GetComponent<ParticleSystem>();
+        _shootBubbleParticles.transform.localPosition = Vector3.zero;
+        _shootBubbleParticles.transform.localRotation = Quaternion.identity;   
     }
 
     public virtual void Update()
@@ -85,10 +89,12 @@ public class WeaponShoot : MonoBehaviour
 
     private IEnumerator PlayShootFX()
     {
-        if(_muzzleFlash != null) { _muzzleFlash.SetActive(true); }
+        _shootBubbleParticles.Play();
 
-        yield return new WaitForSeconds(0.2f);
+        //if(_muzzleFlash != null) { _muzzleFlash.SetActive(true); }
 
-        if (_muzzleFlash != null) { _muzzleFlash.SetActive(false); }
+        yield return new WaitForSeconds(0.1f);
+
+        //if (_muzzleFlash != null) { _muzzleFlash.SetActive(false); }
     }
 }

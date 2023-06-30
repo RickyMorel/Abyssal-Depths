@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Rewired.Integration.UnityUI;
 
 public class ReselectButton : MonoBehaviour
 {
     #region Editor Fields
 
-    [SerializeField] private GameObject _reselectButton;
+    [SerializeField] private GameObject _firstButton;
     [Tooltip("Leave it as null for main menu and things like that")]
     [SerializeField] private Interactable _interactable = null;
 
@@ -15,8 +16,9 @@ public class ReselectButton : MonoBehaviour
 
     #region Private Variable
 
-    private EventSystem _eventSystem;
+    private RewiredEventSystem _eventSystem;
     private PlayerInputHandler _playerInput;
+    private GameObject _lastSelected;
 
     #endregion
 
@@ -24,7 +26,7 @@ public class ReselectButton : MonoBehaviour
 
     private void Start()
     {
-        _eventSystem = GameObject.FindGameObjectWithTag("EventSystem").GetComponent<EventSystem>();
+        _eventSystem = GameObject.FindGameObjectWithTag("EventSystem").GetComponent<RewiredEventSystem>();
 
         if (_interactable == null)
         {
@@ -43,7 +45,12 @@ public class ReselectButton : MonoBehaviour
 
     private void OnDisable()
     {
-        StartCoroutine(LateDisable());
+        _playerInput.OnUIHorizontal -= ReselectButtonWhenNeeded;
+        _playerInput.OnUIVertical -= ReselectButtonWhenNeeded;
+        _playerInput.OnShoulderLeft -= ReselectButtonWhenNeeded;
+        _playerInput.OnShoulderRight -= ReselectButtonWhenNeeded;
+        _playerInput.OnUISubmit -= ReselectButtonWhenNeeded;
+        _playerInput.OnUICancel -= ReselectButtonWhenNeeded;
     }
 
     #endregion
@@ -60,20 +67,19 @@ public class ReselectButton : MonoBehaviour
         _playerInput.OnUICancel += ReselectButtonWhenNeeded;
     }
 
-    private IEnumerator LateDisable()
-    {
-        yield return new WaitForEndOfFrame();
-
-        _playerInput.OnUIHorizontal -= ReselectButtonWhenNeeded;
-        _playerInput.OnUIVertical -= ReselectButtonWhenNeeded;
-        _playerInput.OnShoulderLeft -= ReselectButtonWhenNeeded;
-        _playerInput.OnShoulderRight -= ReselectButtonWhenNeeded;
-        _playerInput.OnUISubmit -= ReselectButtonWhenNeeded;
-        _playerInput.OnUICancel -= ReselectButtonWhenNeeded;
-    }
-
     private void ReselectButtonWhenNeeded()
     {
-        Debug.Log(_eventSystem.currentSelectedGameObject);
+        if (_eventSystem.currentSelectedGameObject != null && _eventSystem.currentSelectedGameObject.activeInHierarchy) 
+        {
+            _lastSelected = _eventSystem.currentSelectedGameObject;
+        }
+        else if (_lastSelected != null)
+        {
+            _eventSystem.RewiredCurrentSelectedGameObject = _lastSelected; 
+        }
+        else
+        {
+            _eventSystem.RewiredCurrentSelectedGameObject = _firstButton;
+        }
     }
 }

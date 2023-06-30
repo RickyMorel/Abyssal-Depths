@@ -14,7 +14,13 @@ namespace Rewired.Integration.UnityUI {
         [Tooltip("If enabled, the Event System will be updated every frame even if other Event Systems are enabled. Otherwise, only EventSystem.current will be updated.")]
         [SerializeField]
         private bool _alwaysUpdate;
-        
+
+        #region Getters and Setters
+
+        public GameObject RewiredCurrentSelectedGameObject { get { return m_CurrentSelected; } set { m_CurrentSelected = value; } }
+
+        #endregion
+
         ///<summary>
         ///If enabled, the Event System will be updated every frame even if other Event Systems are enabled. Otherwise, only EventSystem.current will be updated.
         ///</summary>

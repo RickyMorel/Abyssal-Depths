@@ -6,8 +6,12 @@ public class WeaponShoot : MonoBehaviour
 {
     #region Editor Fields
 
+    [Header("Stats")]
     [SerializeField] protected float _recoilForce = 2.5f;
     [SerializeField] protected float _timeBetweenShots = 0.2f;
+
+    [Header("FX")]
+    [SerializeField] private GameObject _muzzleFlash; 
 
     #endregion
 
@@ -59,6 +63,8 @@ public class WeaponShoot : MonoBehaviour
         InstantiateProjectile(_weapon.ShootTransforms[0]);
 
         Ship.Instance.AddForceToShip(-_weapon.TurretHead.transform.forward * _recoilForce, ForceMode.Impulse);
+
+        StartCoroutine(PlayShootFX());
     }
 
     public void ProjectileShootFromOtherBarrels(int shootNumber)
@@ -75,5 +81,14 @@ public class WeaponShoot : MonoBehaviour
     public void UpdateTime()
     {
         _timeSinceLastShot += Time.deltaTime;
+    }
+
+    private IEnumerator PlayShootFX()
+    {
+        if(_muzzleFlash != null) { _muzzleFlash.SetActive(true); }
+
+        yield return new WaitForSeconds(0.2f);
+
+        if (_muzzleFlash != null) { _muzzleFlash.SetActive(false); }
     }
 }

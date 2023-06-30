@@ -16,7 +16,6 @@ public class Projectile : MonoBehaviour
     [Header("FX")]
     [SerializeField] protected ParticleSystem[] _particles;
     [SerializeField] private GameObject _muzzleFlash;
-    [SerializeField] private GameObject _impactPartilesPrefab;
     [SerializeField] protected bool _shouldUnparentParticle = false;
     [SerializeField] protected bool _shakeCameraOnHit = false;
 
@@ -84,6 +83,13 @@ public class Projectile : MonoBehaviour
         if (_particles.Length < 1) { return; }
 
         GameAssetsManager.Instance.ChipDataSO.ChangeParticleColor(_particles[0], _damageTypes[0], _weapon.ChipLevel); 
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        PlayImpactParticles(collision.contacts[0].point);
+
+        if (_destroyOnHit) { Destroy(gameObject); }
     }
 
     private void ApplySlightRandomRotation()

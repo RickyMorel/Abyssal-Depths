@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DynamicMeshCutter;
 using UnityEngine.SceneManagement;
+using UnityEngine.AI;
 
 [RequireComponent(typeof(Rigidbody))]
 public class AIHealth : PlayerHealth
@@ -22,7 +23,7 @@ public class AIHealth : PlayerHealth
     private AIInteractionController _interactionController;
     private Rigidbody _rb;
     private MeshTarget _meshTarget;
-    
+
     #endregion
 
     #region Public Properties
@@ -56,6 +57,26 @@ public class AIHealth : PlayerHealth
     }
 
     #endregion
+
+    public override void Damage(int damage, bool isImpactDamage = false, bool isDamageChain = false, Collider instigatorCollider = null, int index = 0)
+    {
+        base.Damage(damage, isImpactDamage, isDamageChain, instigatorCollider, index);
+
+        StartCoroutine(PushWhenShot());
+    }
+
+    private IEnumerator PushWhenShot()
+    {
+        _gAgent.StateMachine.CanMove = false;
+        _rb.isKinematic = false;
+
+        _rb.AddForce(-transform.forward * 40, ForceMode.VelocityChange);
+
+        yield return new WaitForSeconds(1f);
+
+        _gAgent.StateMachine.CanMove = true;
+        _rb.isKinematic = true;
+    }
 
     public override void Die()
     {

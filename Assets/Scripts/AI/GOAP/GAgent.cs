@@ -155,7 +155,6 @@ public class GAgent : MonoBehaviour
     {
         if (!_aiStateMachine.CanMove) 
         {
-            _isMoving = false;
             _aiStateMachine.Agent.enabled = false;
         }
 

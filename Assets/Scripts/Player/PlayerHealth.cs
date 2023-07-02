@@ -94,7 +94,7 @@ public class PlayerHealth : Damageable
     {
         base.Die();
 
-        StartCoroutine(DissolveCoroutine());
+        //StartCoroutine(DissolveCoroutine());
     }
 
     private IEnumerator DissolveCoroutine()

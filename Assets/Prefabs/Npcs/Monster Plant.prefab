@@ -1829,13 +1829,14 @@ MonoBehaviour:
   _resistanceType: 
   _weaknessType: 
   _currentHealth: 0
-  _maxHealth: 400
+  _maxHealth: 4
   _damageParticles: {fileID: 4330216161463991999}
   _hurtTime: 5
   _meshes: []
   _particleParentTransform: {fileID: 0}
   _canKill: 1
   _stopsActionWhenHurt: 1
+  _isBoss: 0
 --- !u!114 &2028690528299777030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1850,6 +1851,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _colliders: []
   _stunParticlesTransform: {fileID: 1908735139544331565}
+  _canBeRagdolled: 1
+  _creaturePrefab: {fileID: 2028690528299777028}
 --- !u!114 &2028690528299777031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1895,7 +1898,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _goalDistance: 2
-  _isMoving: 0
+  _target: {fileID: 0}
   Actions: []
   CurrentAction: {fileID: 0}
 --- !u!114 &2028690528299777041

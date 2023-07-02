@@ -11,6 +11,7 @@ public class ShipCamera : BaseCamera
     #region Editor Fields
 
     [SerializeField] private Camera _perspectiveCamera;
+    [SerializeField] private Transform _cameraLookAtTransform;
     [SerializeField] private ZoomValues[] _zoomDistancesArray;
 
     #endregion
@@ -76,7 +77,7 @@ public class ShipCamera : BaseCamera
         ChangeZoom();
     }
 
-    private void LateUpdate()
+    private void FixedUpdate()
     {
         UpdateBoostFOVEffect();
         UpdateCameraZoom();
@@ -94,7 +95,7 @@ public class ShipCamera : BaseCamera
     {
         float zoomSpeed = 5f;
         transform.localPosition = Vector3.MoveTowards(transform.localPosition, new Vector3(0f, 0f, _targetPerspectiveZ), Time.deltaTime * zoomSpeed);
-        _perspectiveCamera.transform.localPosition = Vector3.MoveTowards(_perspectiveCamera.transform.localPosition, new Vector3(0f, 0f, _targetPerspectiveZ), Time.deltaTime * zoomSpeed);
+        _cameraLookAtTransform.localPosition = Vector3.MoveTowards(_cameraLookAtTransform.localPosition, new Vector3(0f, 0f, _targetPerspectiveZ), Time.deltaTime * zoomSpeed);
     }
 
     private void UpdateBoostFOVEffect()

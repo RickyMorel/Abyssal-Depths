@@ -91,7 +91,7 @@ public class AIHealth : PlayerHealth
 
         if (_isBoss) { InvokeBossDiedEvent(); }
 
-        Invoke(nameof(DisableSelf), 5f);
+        Invoke(nameof(DisableSelf), 0.5f);
     }
 
     private void CutMeshIfLightSaber()

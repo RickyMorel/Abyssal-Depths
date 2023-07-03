@@ -73,7 +73,7 @@ public class BaseInteractionController : MonoBehaviour
 
     }
 
-    public void HandleJump()
+    public void HandleCancel()
     {
         CheckExitInteraction();
     }
@@ -91,7 +91,7 @@ public class BaseInteractionController : MonoBehaviour
     public virtual void CheckExitInteraction()
     {
         //if is not doing interaction, return
-        if (!IsInteracting()) { return; }
+        if (!IsInteracting() || HasRecentlyInteracted()) { return; }
 
         SetInteraction(0, transform);
 
@@ -110,6 +110,8 @@ public class BaseInteractionController : MonoBehaviour
     //This calls when the player presses the interact button
     public void HandleInteraction(float customDuration = -1)
     {
+        if (IsInteracting()) { return; }
+
         //Don't interact when grabbing items
         if (_playerCarryController != null && _playerCarryController.HasRecentlyGrabbedItem()) { return; }
 
@@ -162,6 +164,7 @@ public class BaseInteractionController : MonoBehaviour
 #if INTERACTION_DEBUGS
         Debug.Log($"SetInteraction: {gameObject.name}, " + interactionType);
 #endif
+
         BaseInteractionController interactionController = interactionType == 0 ? null : this;
 
         if (_currentInteractable != null) { _currentInteractable.SetCurrentPlayer(interactionController); }

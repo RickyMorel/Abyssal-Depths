@@ -23,6 +23,7 @@ public class AIHealth : PlayerHealth
     private AIInteractionController _interactionController;
     private Rigidbody _rb;
     private MeshTarget _meshTarget;
+    private Coroutine _microPauseCoroutine;
 
     #endregion
 
@@ -63,6 +64,24 @@ public class AIHealth : PlayerHealth
         base.Damage(damage, isImpactDamage, isDamageChain, instigatorCollider, index);
 
         StartCoroutine(PushWhenShot());
+
+        if(_microPauseCoroutine == null) { _microPauseCoroutine = StartCoroutine(MicroPauseWhenHit()); }
+    }
+
+    private IEnumerator MicroPauseWhenHit()
+    {
+        Time.timeScale = 0f;
+
+        float pauseEndTime = Time.realtimeSinceStartup + 0.02f;
+
+        while (Time.realtimeSinceStartup < pauseEndTime)
+        {
+            yield return 0;
+        }
+
+        Time.timeScale = 1f;
+
+        _microPauseCoroutine = null;
     }
 
     private IEnumerator PushWhenShot()

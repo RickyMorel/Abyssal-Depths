@@ -4,6 +4,7 @@ using UnityEngine;
 using Cinemachine;
 using UnityEngine.Events;
 using System;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(CinemachineVirtualCamera))]
 public class ShipCamera : BaseCamera
@@ -47,6 +48,7 @@ public class ShipCamera : BaseCamera
     private void Awake()
     {
         Booster.OnBoostUpdated += HandleBoost;
+        SceneManager.sceneLoaded += HandleSceneLoaded;
 
         if (_instance != null && _instance != this)
         {
@@ -73,7 +75,7 @@ public class ShipCamera : BaseCamera
         _enemyLookObject = new GameObject("EnemyCameraLookTransform");
         _enemyFocusVCam.Follow = _enemyLookObject.transform;
 
-        //StartCoroutine(LateStart());
+        StartCoroutine(LateStart());
 
         ChangeZoom();
     }
@@ -106,9 +108,16 @@ public class ShipCamera : BaseCamera
     {
         Booster.OnBoostUpdated -= HandleBoost;
         PlayerInputHandler.OnChangeZoom -= HandleChangeZoom;
+        SceneManager.sceneLoaded -= HandleSceneLoaded;
     }
 
     #endregion
+
+    private void HandleSceneLoaded(Scene scene, LoadSceneMode loadMode)
+    {
+        _enemyLookObject = new GameObject("EnemyCameraLookTransform");
+        _enemyFocusVCam.Follow = _enemyLookObject.transform;
+    }
 
     private void LookAtEnemy()
     {

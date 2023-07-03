@@ -61,6 +61,7 @@ public class CameraManager : MonoBehaviour
 
         ShipCamera.Instance.PerspectiveCamera.gameObject.SetActive(boolean);
         ShipCamera.Instance.EnemyFocusVCam.enabled = boolean;
+        ShipCamera.Instance.EnemyFocusVCam.gameObject.SetActive(boolean);
         ShipCamera.Instance.gameObject.SetActive(boolean);
 
         for (int i = 0; i < _cameras.Length; i++)

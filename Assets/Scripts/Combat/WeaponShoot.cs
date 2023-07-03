@@ -11,6 +11,7 @@ public class WeaponShoot : MonoBehaviour
     [SerializeField] protected float _timeBetweenShots = 0.2f;
 
     [Header("FX")]
+    [SerializeField] private float _recoilVisual = 1.2f; 
     [SerializeField] private GameObject _muzzleFlash; 
 
     #endregion
@@ -22,7 +23,7 @@ public class WeaponShoot : MonoBehaviour
 
     private Transform _weaponHead;
     private ParticleSystem _shootBubbleParticles;
-    private float _originalWeaponHeadYPosition;
+    private Vector3 _originalWeaponHeadPosition;
 
     #endregion
 
@@ -36,8 +37,8 @@ public class WeaponShoot : MonoBehaviour
 
     public virtual void Start()
     {
-        _weaponHead = transform.Find("WeaponHead");
-        if(_weaponHead != null) { _originalWeaponHeadYPosition = _weaponHead.transform.localPosition.y; }
+        _weaponHead = Weapon.TurretHead;
+        if(_weaponHead != null) { _originalWeaponHeadPosition = _weaponHead.transform.localPosition; }
         _shootBubbleParticles = Instantiate(GameAssetsManager.Instance.ShootBubbleParticles, _weapon.ShootTransforms[0]).GetComponent<ParticleSystem>();
         _shootBubbleParticles.transform.localPosition = Vector3.zero;
         _shootBubbleParticles.transform.localRotation = Quaternion.identity;   
@@ -96,7 +97,9 @@ public class WeaponShoot : MonoBehaviour
     private IEnumerator PlayWeaponRecoilFX()
     {
         Debug.Log("PlayWeaponRecoilFX");
-        float desiredRecoilPosition = _weaponHead.transform.localPosition.y / 2;
+        Vector3 lookDir = (Weapon.ShootTransforms[0].position - transform.position).normalized;
+        Vector3 desiredRecoilPosition = _weaponHead.transform.position +  -(lookDir) * (_recoilVisual);
+
         float elapsedTime = 0;
         float waitTime = _timeBetweenShots / 2f;
 
@@ -104,11 +107,9 @@ public class WeaponShoot : MonoBehaviour
         //go backwards
         while (elapsedTime < waitTime)
         {
-            Debug.Log("Lerping...");
+            Vector3 desiredPos = Vector3.Lerp(_weaponHead.transform.position, desiredRecoilPosition, (elapsedTime / waitTime));
 
-            float desiredY = Mathf.Lerp(_weaponHead.transform.localPosition.y, desiredRecoilPosition, (elapsedTime / waitTime));
-
-            _weaponHead.transform.localPosition = new Vector3(_weaponHead.transform.localPosition.x, desiredY, _weaponHead.transform.localPosition.z);
+            _weaponHead.transform.position = desiredPos;
 
             elapsedTime += Time.deltaTime;
 
@@ -120,11 +121,9 @@ public class WeaponShoot : MonoBehaviour
         //go forwards
         while (elapsedTime < waitTime)
         {
-            Debug.Log("Lerping...");
+            Vector3 desiredPos = Vector3.Lerp(_weaponHead.transform.localPosition, _originalWeaponHeadPosition, (elapsedTime / waitTime));
 
-            float desiredY = Mathf.Lerp(_weaponHead.transform.localPosition.y, _originalWeaponHeadYPosition, (elapsedTime / waitTime));
-
-            _weaponHead.transform.localPosition = new Vector3(_weaponHead.transform.localPosition.x, desiredY, _weaponHead.transform.localPosition.z);
+            _weaponHead.transform.localPosition = desiredPos;
 
             elapsedTime += Time.deltaTime;
 

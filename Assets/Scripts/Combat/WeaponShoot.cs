@@ -12,7 +12,6 @@ public class WeaponShoot : MonoBehaviour
 
     [Header("FX")]
     [SerializeField] private float _recoilVisual = 1.2f; 
-    [SerializeField] private GameObject _muzzleFlash; 
 
     #endregion
 
@@ -73,9 +72,7 @@ public class WeaponShoot : MonoBehaviour
 
         Ship.Instance.AddForceToShip(-_weapon.TurretHead.transform.forward * _recoilForce, ForceMode.Impulse);
 
-        StartCoroutine(PlayShootFX());
-
-        if(_weaponHead != null) { StartCoroutine(PlayWeaponRecoilFX()); }
+        PlayShootFX();
     }
 
     public void ProjectileShootFromOtherBarrels(int shootNumber)
@@ -96,7 +93,6 @@ public class WeaponShoot : MonoBehaviour
 
     private IEnumerator PlayWeaponRecoilFX()
     {
-        Debug.Log("PlayWeaponRecoilFX");
         Vector3 lookDir = (Weapon.ShootTransforms[0].position - transform.position).normalized;
         Vector3 desiredRecoilPosition = _weaponHead.transform.position +  -(lookDir) * (_recoilVisual);
 
@@ -131,14 +127,10 @@ public class WeaponShoot : MonoBehaviour
         }
     }
 
-    private IEnumerator PlayShootFX()
+    public void PlayShootFX()
     {
         _shootBubbleParticles.Play();
 
-        //if(_muzzleFlash != null) { _muzzleFlash.SetActive(true); }
-
-        yield return new WaitForSeconds(0.1f);
-
-        //if (_muzzleFlash != null) { _muzzleFlash.SetActive(false); }
+        if (_weaponHead != null) { StartCoroutine(PlayWeaponRecoilFX()); }
     }
 }

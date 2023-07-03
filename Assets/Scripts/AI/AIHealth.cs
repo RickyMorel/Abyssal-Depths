@@ -63,7 +63,7 @@ public class AIHealth : PlayerHealth
     {
         base.Damage(damage, isImpactDamage, isDamageChain, instigatorCollider, index);
 
-        StartCoroutine(PushWhenShot());
+        if (!_isBoss) { StartCoroutine(PushWhenShot()); }
 
         if(_microPauseCoroutine == null) { _microPauseCoroutine = StartCoroutine(MicroPauseWhenHit()); }
     }

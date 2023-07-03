@@ -89,6 +89,8 @@ public class Projectile : MonoBehaviour
     {
         PlayImpactParticles(collision.contacts[0].point);
 
+        Debug.Log($"{gameObject.name} collided with {collision.gameObject.name}");
+
         if (_destroyOnHit) { Destroy(gameObject); }
     }
 

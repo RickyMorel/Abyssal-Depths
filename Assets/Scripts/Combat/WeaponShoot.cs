@@ -20,7 +20,9 @@ public class WeaponShoot : MonoBehaviour
     protected Weapon _weapon;
     protected float _timeSinceLastShot;
 
+    private Transform _weaponHead;
     private ParticleSystem _shootBubbleParticles;
+    private float _originalWeaponHeadYPosition;
 
     #endregion
 
@@ -34,6 +36,8 @@ public class WeaponShoot : MonoBehaviour
 
     public virtual void Start()
     {
+        _weaponHead = transform.Find("WeaponHead");
+        if(_weaponHead != null) { _originalWeaponHeadYPosition = _weaponHead.transform.localPosition.y; }
         _shootBubbleParticles = Instantiate(GameAssetsManager.Instance.ShootBubbleParticles, _weapon.ShootTransforms[0]).GetComponent<ParticleSystem>();
         _shootBubbleParticles.transform.localPosition = Vector3.zero;
         _shootBubbleParticles.transform.localRotation = Quaternion.identity;   
@@ -69,6 +73,8 @@ public class WeaponShoot : MonoBehaviour
         Ship.Instance.AddForceToShip(-_weapon.TurretHead.transform.forward * _recoilForce, ForceMode.Impulse);
 
         StartCoroutine(PlayShootFX());
+
+        if(_weaponHead != null) { StartCoroutine(PlayWeaponRecoilFX()); }
     }
 
     public void ProjectileShootFromOtherBarrels(int shootNumber)
@@ -85,6 +91,45 @@ public class WeaponShoot : MonoBehaviour
     public void UpdateTime()
     {
         _timeSinceLastShot += Time.deltaTime;
+    }
+
+    private IEnumerator PlayWeaponRecoilFX()
+    {
+        Debug.Log("PlayWeaponRecoilFX");
+        float desiredRecoilPosition = _weaponHead.transform.localPosition.y / 2;
+        float elapsedTime = 0;
+        float waitTime = _timeBetweenShots / 2f;
+
+
+        //go backwards
+        while (elapsedTime < waitTime)
+        {
+            Debug.Log("Lerping...");
+
+            float desiredY = Mathf.Lerp(_weaponHead.transform.localPosition.y, desiredRecoilPosition, (elapsedTime / waitTime));
+
+            _weaponHead.transform.localPosition = new Vector3(_weaponHead.transform.localPosition.x, desiredY, _weaponHead.transform.localPosition.z);
+
+            elapsedTime += Time.deltaTime;
+
+            yield return 0;
+        }
+
+        elapsedTime = 0;
+
+        //go forwards
+        while (elapsedTime < waitTime)
+        {
+            Debug.Log("Lerping...");
+
+            float desiredY = Mathf.Lerp(_weaponHead.transform.localPosition.y, _originalWeaponHeadYPosition, (elapsedTime / waitTime));
+
+            _weaponHead.transform.localPosition = new Vector3(_weaponHead.transform.localPosition.x, desiredY, _weaponHead.transform.localPosition.z);
+
+            elapsedTime += Time.deltaTime;
+
+            yield return 0;
+        }
     }
 
     private IEnumerator PlayShootFX()

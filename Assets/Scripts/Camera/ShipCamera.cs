@@ -72,9 +72,6 @@ public class ShipCamera : BaseCamera
         _orginalFOV = _virtualCamera.m_Lens.FieldOfView;
         _currentFOV = _orginalFOV;
 
-        _enemyLookObject = new GameObject("EnemyCameraLookTransform");
-        _enemyFocusVCam.Follow = _enemyLookObject.transform;
-
         StartCoroutine(LateStart());
 
         ChangeZoom();
@@ -116,6 +113,7 @@ public class ShipCamera : BaseCamera
     private void HandleSceneLoaded(Scene scene, LoadSceneMode loadMode)
     {
         _enemyLookObject = new GameObject("EnemyCameraLookTransform");
+        LookAtEnemy();
         _enemyFocusVCam.Follow = _enemyLookObject.transform;
     }
 
@@ -125,8 +123,9 @@ public class ShipCamera : BaseCamera
         {
             Vector3 halfPoint = (_currentEnemy.position + _cameraLookAtTransform.transform.position) / 2f;
             Vector3 quarterPoint = (halfPoint + _cameraLookAtTransform.transform.position) / 2f;
+            Vector3 EigthPoint = (quarterPoint + _cameraLookAtTransform.transform.position) / 2f;
 
-            _enemyLookObject.transform.position = quarterPoint;
+            _enemyLookObject.transform.position = EigthPoint;
             _enemyLookObject.transform.position = new Vector3(
                 _enemyLookObject.transform.position.x,
                 _enemyLookObject.transform.position.y,

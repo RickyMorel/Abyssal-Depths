@@ -11,6 +11,7 @@ public class WeaponShoot : MonoBehaviour
     [SerializeField] protected float _timeBetweenShots = 0.2f;
 
     [Header("FX")]
+    [SerializeField] private GameObject _projectileShellPrefab;
     [SerializeField] private float _recoilVisual = 1.2f; 
 
     #endregion
@@ -127,10 +128,27 @@ public class WeaponShoot : MonoBehaviour
         }
     }
 
+    private IEnumerator SpawnProjectileShell()
+    {
+        if(_projectileShellPrefab == null) { yield break; }
+
+        GameObject newShell = Instantiate(_projectileShellPrefab, Weapon.TurretHead.position, Quaternion.identity);
+
+        Rigidbody rb = newShell.GetComponent<Rigidbody>();
+
+        rb.AddForce(Weapon.TurretHead.up * 20f, ForceMode.Impulse);
+
+        yield return new WaitForSeconds(30f);
+
+        rb.isKinematic = true;
+    }
+
     public void PlayShootFX()
     {
         _shootBubbleParticles.Play();
 
         if (_weaponHead != null) { StartCoroutine(PlayWeaponRecoilFX()); }
+
+        StartCoroutine(SpawnProjectileShell());
     }
 }

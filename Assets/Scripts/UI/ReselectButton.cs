@@ -73,11 +73,11 @@ public class ReselectButton : MonoBehaviour
         }
         else if (_lastSelected != null)
         {
-            _eventSystem.RewiredCurrentSelectedGameObject = _lastSelected; 
+            _eventSystem.SetSelectedGameObject(_lastSelected);
         }
         else
         {
-            _eventSystem.RewiredCurrentSelectedGameObject = _firstButton;
+            _eventSystem.SetSelectedGameObject(_firstButton);
         }
     }
 

@@ -9,17 +9,11 @@ namespace Rewired.Integration.UnityUI {
     using UnityEngine.EventSystems;
     
     [AddComponentMenu("Rewired/Rewired Event System")]
-    public class RewiredEventSystem : EventSystem {
-        
+    public class RewiredEventSystem : EventSystem 
+    {
         [Tooltip("If enabled, the Event System will be updated every frame even if other Event Systems are enabled. Otherwise, only EventSystem.current will be updated.")]
         [SerializeField]
         private bool _alwaysUpdate;
-
-        #region Getters and Setters
-
-        public GameObject RewiredCurrentSelectedGameObject { get { return m_CurrentSelected; } set { m_CurrentSelected = value; } }
-
-        #endregion
 
         ///<summary>
         ///If enabled, the Event System will be updated every frame even if other Event Systems are enabled. Otherwise, only EventSystem.current will be updated.

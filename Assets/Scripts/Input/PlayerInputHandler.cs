@@ -255,7 +255,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (!IsPlayerActive) { return; }
 
-        if (!_player.GetButton("UIHorizontal")) { return; }
+        if (_player.GetAxis("UIHorizontal") == 0) { return; }
 
         OnUIHorizontal?.Invoke();
     }
@@ -264,7 +264,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (!IsPlayerActive) { return; }
 
-        if (!_player.GetButton("UIVertical")) { return; }
+        if (_player.GetAxis("UIVertical") == 0) { return; }
 
         OnUIVertical?.Invoke();
     }

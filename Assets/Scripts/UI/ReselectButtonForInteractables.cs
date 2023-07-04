@@ -24,12 +24,27 @@ public class ReselectButtonForInteractables : ReselectButton
 
     public override void Start()
     {
-        _eventSystem = GameObject.FindGameObjectWithTag("EventSystem").GetComponent<RewiredEventSystem>();
-
-        _playerInput = _interactable.CurrentPlayer.GetComponent<PlayerInputHandler>();
-
-        if (_firstButton == null) { _firstButton = GetComponentInChildren<Button>().gameObject; }
+        //do nothing
     }
 
     #endregion
+
+    public override IEnumerator LateEnable()
+    {
+        yield return new WaitForEndOfFrame();
+
+        if (_firstButton == null) { _firstButton = GetComponentInChildren<Button>().gameObject; }
+
+        _playerInput = _interactable.CurrentPlayer.GetComponent<PlayerInputHandler>();
+
+        _playerInput.OnUIHorizontal += ReselectButtonWhenNeeded;
+        _playerInput.OnUIVertical += ReselectButtonWhenNeeded;
+        _playerInput.OnShoulderLeft += ReselectButtonWhenNeeded;
+        _playerInput.OnShoulderRight += ReselectButtonWhenNeeded;
+        _playerInput.OnUISubmit += ReselectButtonWhenNeeded;
+
+        _playerInput.OnUICancel += GoBackToPreviousScreenOrExit;
+
+        _eventSystem = GameObject.FindGameObjectWithTag("EventSystem").GetComponent<RewiredEventSystem>();
+    }
 }

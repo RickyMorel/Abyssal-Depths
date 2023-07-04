@@ -52,7 +52,7 @@ public class ReselectButton : MonoBehaviour
 
     #endregion
 
-    private IEnumerator LateEnable()
+    public virtual IEnumerator LateEnable()
     {
         yield return new WaitForEndOfFrame();
 
@@ -65,7 +65,7 @@ public class ReselectButton : MonoBehaviour
         _playerInput.OnUICancel += GoBackToPreviousScreenOrExit;
     }
 
-    private void ReselectButtonWhenNeeded()
+    public void ReselectButtonWhenNeeded()
     {
         if (_eventSystem.currentSelectedGameObject != null && _eventSystem.currentSelectedGameObject.activeInHierarchy) 
         {
@@ -81,7 +81,7 @@ public class ReselectButton : MonoBehaviour
         }
     }
 
-    private void GoBackToPreviousScreenOrExit()
+    public void GoBackToPreviousScreenOrExit()
     {
         if (_previousScreen.Length == 0) { return; }
 

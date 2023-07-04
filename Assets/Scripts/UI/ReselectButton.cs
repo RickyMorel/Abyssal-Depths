@@ -3,41 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Rewired.Integration.UnityUI;
+using UnityEngine.UI;
 
 public class ReselectButton : MonoBehaviour
 {
     #region Editor Fields
 
-    [SerializeField] private GameObject _firstButton;
-    [Tooltip("Leave it as null for main menu and things like that")]
-    [SerializeField] private Interactable _interactable = null;
+    [SerializeField] protected GameObject _firstButton;
     [Tooltip("Leave it as null if it can't go back to a previous screen any longer")]
-    [SerializeField] private GameObject[] _previousScreen = null;
+    [SerializeField] protected GameObject[] _previousScreen = null;
 
     #endregion
 
     #region Private Variable
 
-    private RewiredEventSystem _eventSystem;
-    private PlayerInputHandler _playerInput;
-    private GameObject _lastSelected;
+    protected RewiredEventSystem _eventSystem;
+    protected PlayerInputHandler _playerInput;
+    protected GameObject _lastSelected;
 
     #endregion
 
     #region Unity Loops
 
-    private void Start()
+    public virtual void Start()
     {
         _eventSystem = GameObject.FindGameObjectWithTag("EventSystem").GetComponent<RewiredEventSystem>();
 
-        if (_interactable == null)
-        {
-            _playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInputHandler>();
-        }
-        else
-        {
-            _playerInput = _interactable.CurrentPlayer.GetComponent<PlayerInputHandler>();
-        }
+        _playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInputHandler>();
+
+        if (_firstButton == null) { _firstButton = GetComponentInChildren<Button>().gameObject; }
     }
 
     private void OnEnable()
@@ -53,7 +47,7 @@ public class ReselectButton : MonoBehaviour
         _playerInput.OnShoulderRight -= ReselectButtonWhenNeeded;
         _playerInput.OnUISubmit -= ReselectButtonWhenNeeded;
 
-        _playerInput.OnUICancel -= GoBackToPreviousScreen;
+        _playerInput.OnUICancel -= GoBackToPreviousScreenOrExit;
     }
 
     #endregion
@@ -68,7 +62,7 @@ public class ReselectButton : MonoBehaviour
         _playerInput.OnShoulderRight += ReselectButtonWhenNeeded;
         _playerInput.OnUISubmit += ReselectButtonWhenNeeded;
 
-        _playerInput.OnUICancel += GoBackToPreviousScreen;
+        _playerInput.OnUICancel += GoBackToPreviousScreenOrExit;
     }
 
     private void ReselectButtonWhenNeeded()
@@ -87,22 +81,14 @@ public class ReselectButton : MonoBehaviour
         }
     }
 
-    private void GoBackToPreviousScreen()
+    private void GoBackToPreviousScreenOrExit()
     {
-        if (_previousScreen.Length == 0 && _interactable == null) { return; }
+        if (_previousScreen.Length == 0) { return; }
 
-        if (_interactable == null)
+        for (int i = 0; i < _previousScreen.Length; i++)
         {
-            for (int i = 0; i < _previousScreen.Length; i++)
-            {
-                _previousScreen[i].SetActive(true);
-                gameObject.SetActive(false);
-            }
-        }
-
-        if (_interactable != null)
-        {
-            _interactable.CurrentPlayer.CheckExitInteraction();
+            _previousScreen[i].SetActive(true);
+            gameObject.SetActive(false);
         }
     }
 }

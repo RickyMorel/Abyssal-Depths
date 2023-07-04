@@ -31,9 +31,12 @@ public class ThrowRock : GAction
 
     public override bool PrePerform()
     {
+        Debug.Log("PrePerform Throw Rock");
         Target = GWorld.Instance.GetQueue(_attackItemTag.ToString()).RemoveResource();
 
         if (Target == null) { return false; }
+
+        Debug.Log("PrePerform Throw Rock Target Not Null");
 
         Inventory.AddItem(Target);
 

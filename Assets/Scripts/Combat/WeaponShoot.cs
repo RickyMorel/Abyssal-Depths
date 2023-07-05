@@ -95,7 +95,7 @@ public class WeaponShoot : MonoBehaviour
     private IEnumerator PlayWeaponRecoilFX()
     {
         Vector3 lookDir = (Weapon.ShootTransforms[0].position - transform.position).normalized;
-        Vector3 desiredRecoilPosition = _weaponHead.transform.position +  -(lookDir) * (_recoilVisual);
+        Vector3 desiredRecoilPosition = _weaponHead.transform.localPosition +  -(lookDir) * (_recoilVisual);
 
         float elapsedTime = 0;
         float waitTime = _timeBetweenShots / 2f;
@@ -104,9 +104,9 @@ public class WeaponShoot : MonoBehaviour
         //go backwards
         while (elapsedTime < waitTime)
         {
-            Vector3 desiredPos = Vector3.Lerp(_weaponHead.transform.position, desiredRecoilPosition, (elapsedTime / waitTime));
+            Vector3 desiredPos = Vector3.Lerp(_weaponHead.transform.localPosition, desiredRecoilPosition, (elapsedTime / waitTime));
 
-            _weaponHead.transform.position = desiredPos;
+            _weaponHead.transform.localPosition = desiredPos;
 
             elapsedTime += Time.deltaTime;
 

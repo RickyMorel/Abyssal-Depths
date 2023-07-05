@@ -212,14 +212,14 @@ public class GAgent : MonoBehaviour
 #if GOAL_DEBUGS
     private void UpdateActionQueueList()
     {
-        Debug.Log("UpdateActionQueueList");
+       // Debug.Log("UpdateActionQueueList");
         _actionsQueueList.Clear();
 
         if(_actionQueue == null) { return; }
 
         foreach (var item in _actionQueue)
         {
-            Debug.Log("UpdateActionQueueList Added Items");
+          //  Debug.Log("UpdateActionQueueList Added Items");
             _actionsQueueList.Add(item);
         }
     }
@@ -274,6 +274,7 @@ public class GAgent : MonoBehaviour
 
     public void CancelPreviousActions()
     {
+        Debug.Log("CancelPreviousActions: " + gameObject.name);
         CurrentAction?.PostPeform();
         CurrentAction = null;
         CancelInvoke(nameof(CompleteAction));

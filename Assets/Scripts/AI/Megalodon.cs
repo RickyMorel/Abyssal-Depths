@@ -47,47 +47,50 @@ public class Megalodon : GAgent
 
         Goals.Clear();
 
-        Debug.Log("TryGetNewAction");
+        //Debug.Log("TryGetNewAction");
 
-        SubGoal s3 = new SubGoal("throwRock", 1, true);
-        Goals.Add(s3, 5);
+        //SubGoal s3 = new SubGoal("throwRock", 1, true);
+        //Goals.Add(s3, 5);
 
-        ////Set of attacks up to 50% health
-        //if (_damageable.CurrentHealth > _damageable.MaxHealth * 0.5f)
-        //{
-        //    int randomAttack = Random.Range(0, 3);
+        //Set of attacks up to 50% health
+        if (_damageable.CurrentHealth > _damageable.MaxHealth * 0.5f)
+        {
+            //SubGoal s2 = new SubGoal("hasCharged", 1, true);
+            //Goals.Add(s2, 3);
 
-        //    switch (randomAttack)
-        //    {
-        //        case 0:
-        //            SubGoal s2 = new SubGoal("hasCharged", 1, true);
-        //            Goals.Add(s2, 3);
-        //            break;
-        //        case 1 or 2:
-        //            SubGoal s3 = new SubGoal("throwRock", 1, true);
-        //            Goals.Add(s3, 5);
-        //            break;
+            int randomAttack = Random.Range(0, 3);
 
-        //    }
-        //}
-        ////Set of attacks below 50% health
-        //else
-        //{
-        //    int randomAttack = Random.Range(0, 2);
+            switch (randomAttack)
+            {
+                case 0:
+                    SubGoal s2 = new SubGoal("hasCharged", 1, true);
+                    Goals.Add(s2, 3);
+                    break;
+                case 1 or 2:
+                    SubGoal s3 = new SubGoal("throwRock", 1, true);
+                    Goals.Add(s3, 5);
+                    break;
 
-        //    switch (randomAttack)
-        //    {
-        //        case 0:
-        //            SubGoal s6 = new SubGoal("ragdollShip", 1, true);
-        //            Goals.Add(s6, 3);
-        //            break;
-        //        case 1:
-        //            SubGoal s2 = new SubGoal("hasFlappedFins", 1, true);
-        //            Goals.Add(s2, 3);
-        //            break;
+            }
+        }
+        //Set of attacks below 50% health
+        else
+        {
+            int randomAttack = Random.Range(0, 2);
 
-        //    }
-        //}
+            switch (randomAttack)
+            {
+                case 0:
+                    SubGoal s6 = new SubGoal("ragdollShip", 1, true);
+                    Goals.Add(s6, 3);
+                    break;
+                case 1:
+                    SubGoal s2 = new SubGoal("hasFlappedFins", 1, true);
+                    Goals.Add(s2, 3);
+                    break;
+
+            }
+        }
     }
 
     private void UpdateRotation()

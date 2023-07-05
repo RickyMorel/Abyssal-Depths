@@ -57,6 +57,7 @@ public class Damageable : MonoBehaviour
 
     public event Action<int> OnUpdateHealth;
     public event Action<DamageTypes, int> OnDamaged;
+    public event Action<Vector3> OnDamagedWithPosition;
     public event Action OnDie;
     public event Action<bool> OnElectrocution;
 
@@ -103,6 +104,8 @@ public class Damageable : MonoBehaviour
 
         _damageData = new DamageData(projectile.DamageData);
         ChangeColorForDamageTypeParticles(DamageData.ChipLevel);
+
+        OnDamagedWithPosition?.Invoke(projectile.transform.position);
 
         //In some cases, we don't want the projectile to be destroyed on impact, like the constant laser for example
         if (projectile.DestroyOnHit)

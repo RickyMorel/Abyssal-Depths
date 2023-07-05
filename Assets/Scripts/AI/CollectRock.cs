@@ -11,7 +11,6 @@ public class CollectRock : GAction
 
     public override bool PrePerform()
     {
-        Debug.Log("PrePerform Collect Rock");
         Target = GWorld.Instance.GetQueue(GWorld.ROCK_PICKUP_POINTS).RemoveResource();
 
         GAgent.StateMachine.AICombat.DestroyPrevHeldProjectile();
@@ -34,7 +33,6 @@ public class CollectRock : GAction
 
     public override bool PostPeform()
     {
-        Debug.Log("PostPeform Collect Rock");
         GWorld.Instance.GetQueue(GWorld.ROCK_PICKUP_POINTS).AddResource(Target);
 
         Inventory.RemoveItem(Target);

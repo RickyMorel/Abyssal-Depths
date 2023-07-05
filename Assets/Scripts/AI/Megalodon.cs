@@ -47,17 +47,9 @@ public class Megalodon : GAgent
 
         Goals.Clear();
 
-        //Debug.Log("TryGetNewAction");
-
-        //SubGoal s3 = new SubGoal("throwRock", 1, true);
-        //Goals.Add(s3, 5);
-
         //Set of attacks up to 50% health
         if (_damageable.CurrentHealth > _damageable.MaxHealth * 0.5f)
         {
-            //SubGoal s2 = new SubGoal("hasCharged", 1, true);
-            //Goals.Add(s2, 3);
-
             int randomAttack = Random.Range(0, 3);
 
             switch (randomAttack)

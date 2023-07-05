@@ -42,7 +42,6 @@ public class ChargeAttack : GAction
 
     public override bool PrePerform()
     {
-        Debug.Log("PrePerform Charge");
         GAgent.StateMachine.SetMovementSpeed(2f);
         Agent.speed = _chargeSpeed;
         GAgent.SetGoalDistance(_chargeStopDistance);
@@ -84,13 +83,6 @@ public class ChargeAttack : GAction
         Invoke(nameof(FinishCharge), 2f);
     }
 
-    public void RotatedMessage()
-    {
-        //if(GAgent.CurrentAction is not ChargeAttack) { return; }
-
-        //FinishCharge();
-    }
-
     private void FinishCharge()
     {
         GAgent.CancelPreviousActions();
@@ -98,7 +90,6 @@ public class ChargeAttack : GAction
 
     public override bool PostPeform()
     {
-        Debug.Log("PostPeform Charge");
         GAgent.StateMachine.SetMovementSpeed(1f);
         Agent.speed = _defaultSpeed;
         Agent.obstacleAvoidanceType = _defaultObstacleAvoidance;

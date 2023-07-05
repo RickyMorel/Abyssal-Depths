@@ -1,5 +1,5 @@
 //#define DISTANCE_DEBUGS
-#define GOAL_DEBUGS
+//#define GOAL_DEBUGS
 
 using System.Collections.Generic;
 using UnityEngine;
@@ -274,7 +274,6 @@ public class GAgent : MonoBehaviour
 
     public void CancelPreviousActions()
     {
-        Debug.Log("CancelPreviousActions: " + gameObject.name);
         CurrentAction?.PostPeform();
         CurrentAction = null;
         CancelInvoke(nameof(CompleteAction));

@@ -93,7 +93,7 @@ public class PlayerHealth : Damageable
         }
     }
 
-    public void PlayBloodParticles(Vector3 hurtPosition)
+    private void PlayBloodParticles(Vector3 hurtPosition)
     {
         if(_bloodParticles == null) { return; }
 

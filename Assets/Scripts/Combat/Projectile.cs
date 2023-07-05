@@ -30,7 +30,7 @@ public class Projectile : MonoBehaviour
     protected DamageData _damageData;
     protected float _dealDamageAfterSeconds;
     private Transform _ownersTransform;
-    private GameObject _mesh;
+    private GameObject _projectileMesh;
 
     #endregion
 
@@ -65,7 +65,7 @@ public class Projectile : MonoBehaviour
 
     public virtual void Start()
     {
-        _mesh = transform.Find("Mesh").gameObject;
+        _projectileMesh = transform.Find("Mesh").gameObject;
 
         _damageData = DamageData.GetDamageData(_damageTypes, _weapon, _aiCombatID);
 
@@ -91,8 +91,6 @@ public class Projectile : MonoBehaviour
 
         PlayImpactParticles(collision.contacts[0].point);
 
-        Debug.Log($"{gameObject.name};{gameObject.tag} collided with {collision.gameObject.name};{collision.gameObject.tag}");
-
         if (_destroyOnHit) { Destroy(gameObject); }
     }
 
@@ -105,13 +103,13 @@ public class Projectile : MonoBehaviour
     {
         if (_muzzleFlash == null) { yield break; }
 
-        _mesh.SetActive(false);
+        _projectileMesh.SetActive(false);
         _muzzleFlash.SetActive(true);
 
         yield return new WaitForSeconds(0.2f);
 
         _muzzleFlash.SetActive(false);
-        _mesh.SetActive(true);
+        _projectileMesh.SetActive(true);
     }
 
     public void Launch(Vector3 direction, Vector3 lookDir = default(Vector3))

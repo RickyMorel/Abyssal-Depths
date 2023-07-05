@@ -212,14 +212,12 @@ public class GAgent : MonoBehaviour
 #if GOAL_DEBUGS
     private void UpdateActionQueueList()
     {
-       // Debug.Log("UpdateActionQueueList");
         _actionsQueueList.Clear();
 
         if(_actionQueue == null) { return; }
 
         foreach (var item in _actionQueue)
         {
-          //  Debug.Log("UpdateActionQueueList Added Items");
             _actionsQueueList.Add(item);
         }
     }

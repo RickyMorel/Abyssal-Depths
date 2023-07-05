@@ -95,7 +95,9 @@ public class Damageable : MonoBehaviour
         TryDamageWithProjectile(other);
     }
 
-    public void TryDamageWithProjectile(Collider other)
+    #endregion
+
+    private void TryDamageWithProjectile(Collider other)
     {
         if (!other.gameObject.TryGetComponent(out Projectile projectile)) { return; }
 
@@ -135,13 +137,11 @@ public class Damageable : MonoBehaviour
         }
     }
 
-    public void ChangeColorForDamageTypeParticles(int chipLevel)
+    private void ChangeColorForDamageTypeParticles(int chipLevel)
     {
         if (_fireParticles != null) { GameAssetsManager.Instance.ChipDataSO.ChangeParticleColor(_fireParticles, DamageTypes.Fire, chipLevel); }
         if (_electricParticles != null) { GameAssetsManager.Instance.ChipDataSO.ChangeParticleColor(_electricParticles, DamageTypes.Electric, chipLevel); }
     }
-
-    #endregion
 
     private void FindMeshes()
     {
@@ -456,20 +456,20 @@ public class Damageable : MonoBehaviour
 
     public class RendererAndColor
     {
-        public Renderer Renderer;
-        public Color OriginalColor;
+        private Renderer _renderer;
+        private Color _originalColor;
 
         private bool _hasEmissiveColor = false;
 
         public RendererAndColor(Renderer renderer)
         {
-            this.Renderer = renderer;
+            this._renderer = renderer;
 
-            OriginalColor = renderer.material.GetColor("_EmissionColor");
+            _originalColor = renderer.material.GetColor("_EmissionColor");
 
-            if(OriginalColor == null)
+            if(_originalColor == null)
             {
-                OriginalColor = renderer.material.GetColor("_BaseColor");
+                _originalColor = renderer.material.GetColor("_BaseColor");
             }
             else
             {
@@ -482,11 +482,11 @@ public class Damageable : MonoBehaviour
         {
             if(_hasEmissiveColor)
             {
-                Renderer.material.SetColor("_EmissionColor", Color.Lerp(OriginalColor, wantedColor, blendValue));
+                _renderer.material.SetColor("_EmissionColor", Color.Lerp(_originalColor, wantedColor, blendValue));
             }
             else
             {
-                Renderer.material.SetColor("_BaseColor", Color.Lerp(OriginalColor, wantedColor, blendValue));
+                _renderer.material.SetColor("_BaseColor", Color.Lerp(_originalColor, wantedColor, blendValue));
             }
         }
 
@@ -494,11 +494,11 @@ public class Damageable : MonoBehaviour
         {
             if (_hasEmissiveColor)
             {
-                Renderer.material.SetColor("_EmissionColor", OriginalColor);
+                _renderer.material.SetColor("_EmissionColor", _originalColor);
             }
             else
             {
-                Renderer.material.SetColor("_BaseColor", OriginalColor);
+                _renderer.material.SetColor("_BaseColor", _originalColor);
             }
         }
     }

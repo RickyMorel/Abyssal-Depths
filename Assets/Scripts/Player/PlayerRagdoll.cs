@@ -66,7 +66,9 @@ public class PlayerRagdoll : MonoBehaviour
     {
         if(_rb == null) { return; }
 
-        if(LayerMask.LayerToName(collision.gameObject.layer) == "ShieldLayer") { return; }
+        GameAudioManager.Instance.PlaySound(GameAudioManager.Instance.RagdollCollision, transform.position);
+
+        if (LayerMask.LayerToName(collision.gameObject.layer) == "ShieldLayer") { return; }
 
         _health.DamageWithoutDamageData((int)_health.CalculateCrashDamage(_rb, 1f));
     }

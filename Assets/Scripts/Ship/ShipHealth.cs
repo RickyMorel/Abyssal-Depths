@@ -131,7 +131,7 @@ public class ShipHealth : Damageable
 
 
         Vector3 hitPos = collision.contacts[0].point;
-        GameObject shipCrashParticles = Instantiate(Ship.Instance.ShipStatsSO.ShipCrashParticles.gameObject, hitPos, Quaternion.identity);
+        Instantiate(Ship.Instance.ShipStatsSO.ShipCrashParticles.gameObject, hitPos, Quaternion.identity);
 
         RagdollNearbyPlayers(collision.contacts[0].point);
     }

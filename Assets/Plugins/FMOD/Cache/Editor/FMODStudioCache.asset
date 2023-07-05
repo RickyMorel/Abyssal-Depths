@@ -27,6 +27,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 550
+--- !u!114 &-8044135411992863603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Monsters/Megalodon/Meg_Swim
+  m_EditorClassIdentifier: 
+  Path: event:/Monsters/Megalodon/Meg_Swim
+  Guid:
+    Data1: 846360505
+    Data2: 1105010544
+    Data3: -658458992
+    Data4: -1495011992
+  Banks:
+  - {fileID: -5462328057072149227}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-7968537461032815557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54,6 +81,114 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 550
+--- !u!114 &-7967972883913104114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Monsters/JellyFish/JF_Die
+  m_EditorClassIdentifier: 
+  Path: event:/Monsters/JellyFish/JF_Die
+  Guid:
+    Data1: 401812690
+    Data2: 1112200821
+    Data3: 1026185887
+    Data4: -1398575524
+  Banks:
+  - {fileID: -5462328057072149227}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-6730675679502467216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Interaction/Interactables/Interact_AttackMonitor
+  m_EditorClassIdentifier: 
+  Path: event:/Interaction/Interactables/Interact_AttackMonitor
+  Guid:
+    Data1: 1195150701
+    Data2: 1302517514
+    Data3: -1724948095
+    Data4: 1122324705
+  Banks:
+  - {fileID: -5462328057072149227}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-6252456551811437418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Monsters/MonsterPlant/MP_Die
+  m_EditorClassIdentifier: 
+  Path: event:/Monsters/MonsterPlant/MP_Die
+  Guid:
+    Data1: -388396667
+    Data2: 1333968310
+    Data3: 2077276308
+    Data4: -1923632175
+  Banks:
+  - {fileID: -5462328057072149227}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1500
+--- !u!114 &-5602544740485615290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Monsters/JellyFish/JF_Shock
+  m_EditorClassIdentifier: 
+  Path: event:/Monsters/JellyFish/JF_Shock
+  Guid:
+    Data1: -1377496035
+    Data2: 1245283665
+    Data3: -1564639304
+    Data4: 2131457106
+  Banks:
+  - {fileID: -5462328057072149227}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-5462328057072149227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,11 +204,92 @@ MonoBehaviour:
   Path: AbyssalDepthsFMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638241498896280133
+  lastModified: 638241646162306033
   FileSizes:
   - Name: Desktop
-    Value: 82592
+    Value: 153344
   Exists: 1
+--- !u!114 &-4335723584829390060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Monsters/Megalodon/Meg_RagdollBite
+  m_EditorClassIdentifier: 
+  Path: event:/Monsters/Megalodon/Meg_RagdollBite
+  Guid:
+    Data1: 416158985
+    Data2: 1085309612
+    Data3: 993529276
+    Data4: 463849125
+  Banks:
+  - {fileID: -5462328057072149227}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-4238159864299280795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Monsters/JellyFish/JF_Hurt
+  m_EditorClassIdentifier: 
+  Path: event:/Monsters/JellyFish/JF_Hurt
+  Guid:
+    Data1: -396635058
+    Data2: 1129443051
+    Data3: 1134888376
+    Data4: 2043537168
+  Banks:
+  - {fileID: -5462328057072149227}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-4086725601126253820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Monsters/Megalodon/Meg_Roar
+  m_EditorClassIdentifier: 
+  Path: event:/Monsters/Megalodon/Meg_Roar
+  Guid:
+    Data1: 1360971461
+    Data2: 1245302322
+    Data3: 1423552666
+    Data4: 1481439045
+  Banks:
+  - {fileID: -5462328057072149227}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-4026421213683360206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,6 +317,60 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 3729
+--- !u!114 &-2952187461415633140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Monsters/Megalodon/Meg_GrabRock
+  m_EditorClassIdentifier: 
+  Path: event:/Monsters/Megalodon/Meg_GrabRock
+  Guid:
+    Data1: -2106769840
+    Data2: 1126327385
+    Data3: -1505413703
+    Data4: 547037863
+  Banks:
+  - {fileID: -5462328057072149227}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-1868384216214759945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ship/ShipBoosterBoost
+  m_EditorClassIdentifier: 
+  Path: event:/Ship/ShipBoosterBoost
+  Guid:
+    Data1: -357646767
+    Data2: 1280758444
+    Data3: -748462961
+    Data4: -1371719845
+  Banks:
+  - {fileID: -5462328057072149227}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-1323933719894077592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,6 +389,60 @@ MonoBehaviour:
     Data2: 1251831443
     Data3: -124574305
     Data4: 817912042
+  Banks:
+  - {fileID: -5462328057072149227}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-1178380711930471473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Interaction/Items/ItemPickup
+  m_EditorClassIdentifier: 
+  Path: event:/Interaction/Items/ItemPickup
+  Guid:
+    Data1: -982038776
+    Data2: 1089254538
+    Data3: 290971577
+    Data4: -209055289
+  Banks:
+  - {fileID: -5462328057072149227}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-1091568696035726604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Monsters/Megalodon/Meg_ThrowRock
+  m_EditorClassIdentifier: 
+  Path: event:/Monsters/Megalodon/Meg_ThrowRock
+  Guid:
+    Data1: 584599158
+    Data2: 1120156934
+    Data3: 440975273
+    Data4: 1016087947
   Banks:
   - {fileID: -5462328057072149227}
   IsStream: 0
@@ -150,13 +474,89 @@ MonoBehaviour:
   - {fileID: -9008303504317039937}
   - {fileID: -7968537461032815557}
   - {fileID: 2748054839580527033}
+  - {fileID: -1868384216214759945}
+  - {fileID: 6910602455637272981}
+  - {fileID: -1178380711930471473}
+  - {fileID: -4335723584829390060}
+  - {fileID: 13010239233721421}
+  - {fileID: -5602544740485615290}
+  - {fileID: 7380208248375113095}
+  - {fileID: 8378709888084479061}
+  - {fileID: 8107149395020175416}
+  - {fileID: -4238159864299280795}
+  - {fileID: -2952187461415633140}
+  - {fileID: 2239828701416914182}
+  - {fileID: -6730675679502467216}
+  - {fileID: 2981177096998864294}
+  - {fileID: -1091568696035726604}
+  - {fileID: -6252456551811437418}
+  - {fileID: 8329708102087135847}
+  - {fileID: 7661507146769286878}
+  - {fileID: -8044135411992863603}
+  - {fileID: 9043955490827694438}
+  - {fileID: -4086725601126253820}
+  - {fileID: -7967972883913104114}
   EditorParameters: []
   MasterBanks:
   - {fileID: -5462328057072149227}
   StringsBanks:
   - {fileID: 3738394435625254074}
-  cacheTime: 638241498896300026
+  cacheTime: 638241646162355891
   cacheVersion: 131605
+--- !u!114 &13010239233721421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Monsters/MonsterPlant/MP_Shoot
+  m_EditorClassIdentifier: 
+  Path: event:/Monsters/MonsterPlant/MP_Shoot
+  Guid:
+    Data1: -1991737072
+    Data2: 1153351937
+    Data3: -994734208
+    Data4: 658797993
+  Banks:
+  - {fileID: -5462328057072149227}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 950
+--- !u!114 &2239828701416914182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Monsters/Megalodon/Meg_Die
+  m_EditorClassIdentifier: 
+  Path: event:/Monsters/Megalodon/Meg_Die
+  Guid:
+    Data1: 788027243
+    Data2: 1090656150
+    Data3: -728809596
+    Data4: 1104637682
+  Banks:
+  - {fileID: -5462328057072149227}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &2725640249212935651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,6 +611,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 550
+--- !u!114 &2981177096998864294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Monsters/Megalodon/Meg_Hurt
+  m_EditorClassIdentifier: 
+  Path: event:/Monsters/Megalodon/Meg_Hurt
+  Guid:
+    Data1: 1285876081
+    Data2: 1187939719
+    Data3: 1412505767
+    Data4: 1178122864
+  Banks:
+  - {fileID: -5462328057072149227}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &3738394435625254074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,8 +653,197 @@ MonoBehaviour:
   Path: AbyssalDepthsFMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638241498896300026
+  lastModified: 638241646162355891
   FileSizes:
   - Name: Desktop
-    Value: 1072
+    Value: 2120
   Exists: 1
+--- !u!114 &6910602455637272981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ship/ShipDamagedSiren
+  m_EditorClassIdentifier: 
+  Path: event:/Ship/ShipDamagedSiren
+  Guid:
+    Data1: 1546624517
+    Data2: 1126083856
+    Data3: -1067727698
+    Data4: -1084834536
+  Banks:
+  - {fileID: -5462328057072149227}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &7380208248375113095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Monsters/MonsterPlant/MP_Hurt
+  m_EditorClassIdentifier: 
+  Path: event:/Monsters/MonsterPlant/MP_Hurt
+  Guid:
+    Data1: -1939197657
+    Data2: 1227563031
+    Data3: -2018646858
+    Data4: -267460496
+  Banks:
+  - {fileID: -5462328057072149227}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &7661507146769286878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Monsters/Megalodon/Meg_GoToZPlane
+  m_EditorClassIdentifier: 
+  Path: event:/Monsters/Megalodon/Meg_GoToZPlane
+  Guid:
+    Data1: 141835179
+    Data2: 1152199098
+    Data3: -1586946165
+    Data4: 167361309
+  Banks:
+  - {fileID: -5462328057072149227}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &8107149395020175416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Monsters/MonsterPlant/MP_Heal
+  m_EditorClassIdentifier: 
+  Path: event:/Monsters/MonsterPlant/MP_Heal
+  Guid:
+    Data1: -1167100629
+    Data2: 1214670683
+    Data3: 1435871672
+    Data4: 264991862
+  Banks:
+  - {fileID: -5462328057072149227}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &8329708102087135847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Monsters/JellyFish/JF_Attach
+  m_EditorClassIdentifier: 
+  Path: event:/Monsters/JellyFish/JF_Attach
+  Guid:
+    Data1: 679570079
+    Data2: 1215485152
+    Data3: 1199122073
+    Data4: -1385982817
+  Banks:
+  - {fileID: -5462328057072149227}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &8378709888084479061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Monsters/Megalodon/Meg_FinAttack
+  m_EditorClassIdentifier: 
+  Path: event:/Monsters/Megalodon/Meg_FinAttack
+  Guid:
+    Data1: -31203030
+    Data2: 1306333186
+    Data3: 1054247336
+    Data4: -1916899936
+  Banks:
+  - {fileID: -5462328057072149227}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &9043955490827694438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ship/ShipCrash
+  m_EditorClassIdentifier: 
+  Path: event:/Ship/ShipCrash
+  Guid:
+    Data1: 741005501
+    Data2: 1213102314
+    Data3: 792224677
+    Data4: -1076708267
+  Banks:
+  - {fileID: -5462328057072149227}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0

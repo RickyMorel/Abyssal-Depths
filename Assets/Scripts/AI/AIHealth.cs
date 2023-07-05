@@ -20,6 +20,7 @@ public class AIHealth : PlayerHealth
 
     private GAgent _gAgent;
     private AIInteractionController _interactionController;
+    private AIStateMachine _stateMachine;
     private Rigidbody _rb;
     private MeshTarget _meshTarget;
     
@@ -43,6 +44,7 @@ public class AIHealth : PlayerHealth
         _gAgent = GetComponent<GAgent>();
         _interactionController = GetComponent<AIInteractionController>();
         _rb = GetComponent<Rigidbody>();
+        _stateMachine = GetComponent<AIStateMachine>();
 
         _meshTarget = GetComponentInChildren<MeshTarget>();
         if(_meshTarget != null) { _meshTarget.enabled = false; }
@@ -69,6 +71,8 @@ public class AIHealth : PlayerHealth
         _rb.useGravity = true;
 
         if (_isBoss) { InvokeBossDiedEvent(); }
+
+        _stateMachine.AIAudio.PlayDieSFX();
 
         Invoke(nameof(DisableSelf), 5f);
     }

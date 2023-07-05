@@ -17,6 +17,8 @@ public class GameAudioManager : MonoBehaviour
     [SerializeField] private EventReference _punchImpactSfx;
     [SerializeField] private EventReference _punchSwingSfx;
 
+    [Header("Special Monster Sounds")]
+
     #endregion
 
     #region Private Variables

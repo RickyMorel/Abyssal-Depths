@@ -60,6 +60,8 @@ public class CraftingManager : MonoBehaviour
     {
         if (_reselectButtonForInteractables == null) { return; }
 
+        if (_reselectButtonForInteractables.RewiredEventSystem == null) { return; }
+        
         if (_reselectButtonForInteractables.RewiredEventSystem.currentSelectedGameObject == null) { return; }
 
         DisplayItemInfo(_reselectButtonForInteractables.RewiredEventSystem.currentSelectedGameObject.GetComponent<CraftingItemUI>().CraftingRecipy);

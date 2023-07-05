@@ -47,6 +47,8 @@ public class ShipDoor : Interactable
 
     private void FixedUpdate()
     {
+        if (!SceneLoader.IsInGarageScene()) { IsWantedDoorOpen = false; }
+
         if (IsWantedDoorOpen == _isDoorOpen) { return; }
 
         float wantedZPosition = _isDoorOpen == true ? _closedZRotation : _openZRotation;

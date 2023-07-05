@@ -38,6 +38,8 @@ public class FireShotgun : WeaponShoot
         _timeSinceLastShot = 0f;
 
         ProjectileShootAngle();
+
+        PlayShootFX();
     }
 
     private void ProjectileShootAngle()

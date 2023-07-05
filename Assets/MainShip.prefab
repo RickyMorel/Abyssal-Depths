@@ -246,6 +246,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0.8
+  _projectileShellPrefab: {fileID: 0}
+  _recoilVisual: 1.2
   _shootSpreadSeparationAngle: 5
   _amountOfProjectiles: 5
 --- !u!1 &39571595443264321
@@ -1087,6 +1089,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0
+  _projectileShellPrefab: {fileID: 0}
+  _recoilVisual: 1.2
   _laserBallSize: 2
   _scaleDuration: 1
 --- !u!1 &274805312599561184
@@ -2047,7 +2051,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
-  _timeBetweenShots: 0.2
+  _timeBetweenShots: 0.1
+  _projectileShellPrefab: {fileID: 6567270739292821314, guid: b6540c7ed89f066489cef3c7971b9b10, type: 3}
+  _recoilVisual: 0.5
   _maxRotationSpeed: 500
 --- !u!1 &533473487028357236
 GameObject:
@@ -2762,9 +2768,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0.2
+  _projectileShellPrefab: {fileID: 0}
+  _recoilVisual: 1.2
   _attackHitBox: {fileID: 2412025073396739769}
   _parentTransform: {fileID: 5456928704188715407}
-  _movingShipRb: {fileID: 7222867460449099901}
   maxDistance: 10
   _moveForce: 110
   _maxMovementSpeed: 30
@@ -3314,6 +3321,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0.2
+  _projectileShellPrefab: {fileID: 6567270739292821314, guid: b6540c7ed89f066489cef3c7971b9b10, type: 3}
+  _recoilVisual: 1.2
 --- !u!1 &837910308800497954
 GameObject:
   m_ObjectHideFlags: 0
@@ -3409,7 +3418,7 @@ GameObject:
   - component: {fileID: 853013589101188720}
   - component: {fileID: 860306843163814600}
   m_Layer: 25
-  m_Name: SM_Prop_Turret_Gattling_Base_Double_01
+  m_Name: WeaponHead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3749,9 +3758,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0.2
+  _projectileShellPrefab: {fileID: 0}
+  _recoilVisual: 1.2
   _attackHitBox: {fileID: 4802484943770170289}
   _parentTransform: {fileID: 1282426313924053789}
-  _movingShipRb: {fileID: 7222867460449099901}
   maxDistance: 10
   _moveForce: 300
   _maxMovementSpeed: 20
@@ -4026,9 +4036,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0.2
+  _projectileShellPrefab: {fileID: 0}
+  _recoilVisual: 1.2
   _attackHitBox: {fileID: 2210093027061992813}
   _parentTransform: {fileID: 3597494986664825384}
-  _movingShipRb: {fileID: 0}
   maxDistance: 10
   _moveForce: 50
   _maxMovementSpeed: 20
@@ -9784,6 +9795,77 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!1 &1399607268657686234
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5671903013150547853}
+  - component: {fileID: 4317068367327968479}
+  m_Layer: 25
+  m_Name: 0-EnemyFocusVCam
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5671903013150547853
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1399607268657686234}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -35}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7434973336878068863}
+  m_Father: {fileID: 7767117775722093779}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4317068367327968479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1399607268657686234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ExcludedPropertiesInInspector:
+  - m_Script
+  m_LockStageInInspector: 
+  m_StreamingVersion: 20170927
+  m_Priority: 1
+  m_StandbyUpdate: 2
+  m_LookAt: {fileID: 0}
+  m_Follow: {fileID: 3128559519626813896}
+  m_Lens:
+    FieldOfView: 90
+    OrthographicSize: 30
+    NearClipPlane: 0.01
+    FarClipPlane: 400
+    Dutch: 0
+    ModeOverride: 0
+    LensShift: {x: 0, y: 0}
+    GateFit: 2
+    m_SensorSize: {x: 1.7777778, y: 1}
+  m_Transitions:
+    m_BlendHint: 0
+    m_InheritPosition: 0
+    m_OnCameraLive:
+      m_PersistentCalls:
+        m_Calls: []
+  m_LegacyBlendHint: 0
+  m_ComponentOwner: {fileID: 7434973336878068863}
 --- !u!1 &1405852860840233971
 GameObject:
   m_ObjectHideFlags: 0
@@ -9980,6 +10062,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0.8
+  _projectileShellPrefab: {fileID: 0}
+  _recoilVisual: 1.2
   _shootSpreadSeparationAngle: 5
   _amountOfProjectiles: 5
 --- !u!1 &1437357777627555606
@@ -10900,6 +10984,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 1.2
+  _projectileShellPrefab: {fileID: 0}
+  _recoilVisual: 1.2
 --- !u!1 &1737487844727473383
 GameObject:
   m_ObjectHideFlags: 0
@@ -11225,6 +11311,82 @@ MonoBehaviour:
   OnHitSomething:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &1922294191766853039
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7434973336878068863}
+  - component: {fileID: 7142775157664165839}
+  - component: {fileID: 8832586333232617624}
+  - component: {fileID: 8822392021252953753}
+  m_Layer: 25
+  m_Name: cm
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7434973336878068863
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1922294191766853039}
+  m_LocalRotation: {x: -0.25726566, y: -0.08826607, z: 0.023605721, w: 0.9620116}
+  m_LocalPosition: {x: -87.02456, y: 102.20849, z: -54.586357}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5671903013150547853}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7142775157664165839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1922294191766853039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8832586333232617624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1922294191766853039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 1
+  mNoiseOffsets: {x: -424.34872, y: 913.8362, z: -814.6138}
+--- !u!114 &8822392021252953753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1922294191766853039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36d1163fa822e8b418a0a603ec078d5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Damping: 0.6
 --- !u!1 &1926583897797214424
 GameObject:
   m_ObjectHideFlags: 0
@@ -11357,9 +11519,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0.2
+  _projectileShellPrefab: {fileID: 0}
+  _recoilVisual: 1.2
   _attackHitBox: {fileID: 3604902145457918702}
   _parentTransform: {fileID: 6396506605612494296}
-  _movingShipRb: {fileID: 7222867460449099901}
   maxDistance: 10
   _moveForce: 110
   _maxMovementSpeed: 30
@@ -11872,9 +12035,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0.2
+  _projectileShellPrefab: {fileID: 0}
+  _recoilVisual: 1.2
   _attackHitBox: {fileID: 7724389522533934313}
   _parentTransform: {fileID: 4082050189287727312}
-  _movingShipRb: {fileID: 0}
   maxDistance: 10
   _moveForce: 110
   _maxMovementSpeed: 20
@@ -12479,9 +12643,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0.2
+  _projectileShellPrefab: {fileID: 0}
+  _recoilVisual: 1.2
   _attackHitBox: {fileID: 4858936023995962368}
   _parentTransform: {fileID: 3125384650265849386}
-  _movingShipRb: {fileID: 7222867460449099901}
   maxDistance: 10
   _moveForce: 110
   _maxMovementSpeed: 30
@@ -18603,6 +18768,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0.8
+  _projectileShellPrefab: {fileID: 0}
+  _recoilVisual: 1.2
   _shootSpreadSeparationAngle: 5
   _amountOfProjectiles: 5
 --- !u!1 &2640795039595203696
@@ -19448,6 +19615,37 @@ MonoBehaviour:
   OnHitSomething:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &2903379747629207300
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2903379747629634340}
+  m_Layer: 0
+  m_Name: 'Toon Muzzleflash 3 (Missing Prefab with guid: b7d03fb0762c75449af69d624547e358)'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2903379747629634340
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2903379747629207300}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: 0.7071068, w: 0}
+  m_LocalPosition: {x: -0, y: 0.026, z: 4.02}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3431726954097211023}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
 --- !u!1 &2917840606898695812
 GameObject:
   m_ObjectHideFlags: 0
@@ -19742,9 +19940,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0.2
+  _projectileShellPrefab: {fileID: 0}
+  _recoilVisual: 1.2
   _attackHitBox: {fileID: 7388532316468709904}
   _parentTransform: {fileID: 3882273931805536956}
-  _movingShipRb: {fileID: 7222867460449099901}
   maxDistance: 10
   _moveForce: 300
   _maxMovementSpeed: 20
@@ -20078,9 +20277,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0.2
+  _projectileShellPrefab: {fileID: 0}
+  _recoilVisual: 1.2
   _attackHitBox: {fileID: 8375841617761571318}
   _parentTransform: {fileID: 2021280351400340444}
-  _movingShipRb: {fileID: 7222867460449099901}
   maxDistance: 10
   _moveForce: 110
   _maxMovementSpeed: 30
@@ -20683,9 +20883,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0.2
+  _projectileShellPrefab: {fileID: 0}
+  _recoilVisual: 1.2
   _attackHitBox: {fileID: 6656342628925055263}
   _parentTransform: {fileID: 1149759335186031910}
-  _movingShipRb: {fileID: 0}
   maxDistance: 10
   _moveForce: 110
   _maxMovementSpeed: 20
@@ -25993,6 +26194,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 1.2
+  _projectileShellPrefab: {fileID: 0}
+  _recoilVisual: 1.2
 --- !u!1 &3408755425577140497
 GameObject:
   m_ObjectHideFlags: 0
@@ -26088,7 +26291,7 @@ GameObject:
   - component: {fileID: 3457092382137036753}
   - component: {fileID: 3448878695095489385}
   m_Layer: 25
-  m_Name: SM_Prop_Turret_Gattling_Base_Double_01
+  m_Name: WeaponHead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26109,6 +26312,7 @@ Transform:
   - {fileID: 3431431993162300851}
   - {fileID: 3423102368441449183}
   - {fileID: 7463336121616690838}
+  - {fileID: 2903379747629634340}
   m_Father: {fileID: 3423076656530334367}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
@@ -26375,6 +26579,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0.2
+  _projectileShellPrefab: {fileID: 6567270739292821314, guid: b6540c7ed89f066489cef3c7971b9b10, type: 3}
+  _recoilVisual: 1.2
 --- !u!1 &3426208657350111363
 GameObject:
   m_ObjectHideFlags: 0
@@ -26572,8 +26778,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 824966775017959457}
-  m_Father: {fileID: 6940924926161758797}
-  m_RootOrder: 8
+  m_Father: {fileID: 7767117775722093779}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8869191839741840375
 MonoBehaviour:
@@ -26594,7 +26800,7 @@ MonoBehaviour:
   m_Priority: 10
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 0}
+  m_Follow: {fileID: 3128559519626813896}
   m_Lens:
     FieldOfView: 90
     OrthographicSize: 30
@@ -26628,6 +26834,8 @@ MonoBehaviour:
   _shakeAmplitude: 0.5
   _expandedFovToVelocityRatio: 0.15
   _perspectiveCamera: {fileID: 112276069440663383}
+  _enemyFocusVCam: {fileID: 4317068367327968479}
+  _cameraLookAtTransform: {fileID: 3128559519626813896}
   _zoomDistancesArray:
   - Distance: -18.95
     FOV: 80
@@ -26637,6 +26845,7 @@ MonoBehaviour:
     FOV: 90
   - Distance: -35
     FOV: 90
+  _maxEnemyFocusDistance: 40
 --- !u!1 &3627324517479560209
 GameObject:
   m_ObjectHideFlags: 0
@@ -26648,6 +26857,7 @@ GameObject:
   - component: {fileID: 824966775017959457}
   - component: {fileID: 7223005371637937990}
   - component: {fileID: 2083628258662288625}
+  - component: {fileID: 7106902646872533830}
   m_Layer: 25
   m_Name: cm
   m_TagString: Untagged
@@ -26699,6 +26909,19 @@ MonoBehaviour:
   m_AmplitudeGain: 0
   m_FrequencyGain: 1
   mNoiseOffsets: {x: -424.34872, y: 913.8362, z: -814.6138}
+--- !u!114 &7106902646872533830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3627324517479560209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36d1163fa822e8b418a0a603ec078d5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Damping: 0.6
 --- !u!1 &3655868231793855009
 GameObject:
   m_ObjectHideFlags: 0
@@ -28608,9 +28831,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0.2
+  _projectileShellPrefab: {fileID: 0}
+  _recoilVisual: 1.2
   _attackHitBox: {fileID: 5891767950867343308}
   _parentTransform: {fileID: 4660284982634816724}
-  _movingShipRb: {fileID: 7222867460449099901}
   maxDistance: 10
   _moveForce: 110
   _maxMovementSpeed: 30
@@ -29511,9 +29735,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0.2
+  _projectileShellPrefab: {fileID: 0}
+  _recoilVisual: 1.2
   _attackHitBox: {fileID: 7440761269091134881}
   _parentTransform: {fileID: 1113256234871707531}
-  _movingShipRb: {fileID: 7222867460449099901}
   maxDistance: 10
   _moveForce: 110
   _maxMovementSpeed: 30
@@ -29782,9 +30007,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0.2
+  _projectileShellPrefab: {fileID: 0}
+  _recoilVisual: 1.2
   _attackHitBox: {fileID: 8500339368364963399}
   _parentTransform: {fileID: 2782812196704538347}
-  _movingShipRb: {fileID: 7222867460449099901}
   maxDistance: 10
   _moveForce: 300
   _maxMovementSpeed: 20
@@ -30459,6 +30685,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 1.2
+  _projectileShellPrefab: {fileID: 0}
+  _recoilVisual: 1.2
 --- !u!1 &4374943546642940837
 GameObject:
   m_ObjectHideFlags: 0
@@ -30641,6 +30869,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0.2
+  _projectileShellPrefab: {fileID: 6567270739292821314, guid: b6540c7ed89f066489cef3c7971b9b10, type: 3}
+  _recoilVisual: 1.2
 --- !u!1 &4391649545819081940
 GameObject:
   m_ObjectHideFlags: 0
@@ -30819,7 +31049,7 @@ GameObject:
   - component: {fileID: 4360641486569165702}
   - component: {fileID: 4369322349542092606}
   m_Layer: 25
-  m_Name: SM_Prop_Turret_Gattling_Base_Double_01
+  m_Name: WeaponHead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31249,9 +31479,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0.2
+  _projectileShellPrefab: {fileID: 0}
+  _recoilVisual: 1.2
   _attackHitBox: {fileID: 1597549733228424015}
   _parentTransform: {fileID: 9000576605775549561}
-  _movingShipRb: {fileID: 7222867460449099901}
   maxDistance: 10
   _moveForce: 110
   _maxMovementSpeed: 30
@@ -31401,7 +31632,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &518084518930920636
 Transform:
   m_ObjectHideFlags: 0
@@ -31601,9 +31832,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0.2
+  _projectileShellPrefab: {fileID: 0}
+  _recoilVisual: 1.2
   _attackHitBox: {fileID: 5701002124581395784}
   _parentTransform: {fileID: 2056693015111932273}
-  _movingShipRb: {fileID: 0}
   maxDistance: 10
   _moveForce: 110
   _maxMovementSpeed: 20
@@ -31747,10 +31979,13 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 8031009060669213574}
+  - {fileID: 5630174634551786701}
+  - {fileID: 5671903013150547853}
   - {fileID: 6940924926161758797}
   - {fileID: 7222867460073603918}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &211462086
 MonoBehaviour:
@@ -32111,6 +32346,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0
+  _projectileShellPrefab: {fileID: 0}
+  _recoilVisual: 1.2
   _laserBallSize: 2
   _scaleDuration: 1
 --- !u!1 &4656858492172723896
@@ -32972,9 +33209,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0.2
+  _projectileShellPrefab: {fileID: 0}
+  _recoilVisual: 1.2
   _attackHitBox: {fileID: 2677892069667787855}
   _parentTransform: {fileID: 3766878021958621015}
-  _movingShipRb: {fileID: 7222867460449099901}
   maxDistance: 10
   _moveForce: 110
   _maxMovementSpeed: 30
@@ -34250,7 +34488,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
-  _timeBetweenShots: 0.2
+  _timeBetweenShots: 0.1
+  _projectileShellPrefab: {fileID: 6567270739292821314, guid: b6540c7ed89f066489cef3c7971b9b10, type: 3}
+  _recoilVisual: 0.5
   _maxRotationSpeed: 500
 --- !u!1 &5038209497002586825
 GameObject:
@@ -34869,6 +35109,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0.2
+  _projectileShellPrefab: {fileID: 6567270739292821314, guid: b6540c7ed89f066489cef3c7971b9b10, type: 3}
+  _recoilVisual: 1.2
 --- !u!1 &5194988911357968215
 GameObject:
   m_ObjectHideFlags: 0
@@ -34964,7 +35206,7 @@ GameObject:
   - component: {fileID: 5219134644004429829}
   - component: {fileID: 5208686320313523389}
   m_Layer: 25
-  m_Name: SM_Prop_Turret_Gattling_Base_Double_01
+  m_Name: WeaponHead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35810,9 +36052,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0.2
+  _projectileShellPrefab: {fileID: 0}
+  _recoilVisual: 1.2
   _attackHitBox: {fileID: 6706783428525538072}
   _parentTransform: {fileID: 8238291780240630877}
-  _movingShipRb: {fileID: 0}
   maxDistance: 10
   _moveForce: 50
   _maxMovementSpeed: 20
@@ -36410,9 +36653,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0.2
+  _projectileShellPrefab: {fileID: 0}
+  _recoilVisual: 1.2
   _attackHitBox: {fileID: 80306697686582724}
   _parentTransform: {fileID: 5941518843417083240}
-  _movingShipRb: {fileID: 7222867460449099901}
   maxDistance: 10
   _moveForce: 300
   _maxMovementSpeed: 20
@@ -36843,9 +37087,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0.2
+  _projectileShellPrefab: {fileID: 0}
+  _recoilVisual: 1.2
   _attackHitBox: {fileID: 3915840047564695576}
   _parentTransform: {fileID: 2826203357790874368}
-  _movingShipRb: {fileID: 7222867460449099901}
   maxDistance: 10
   _moveForce: 110
   _maxMovementSpeed: 30
@@ -38132,9 +38377,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0.2
+  _projectileShellPrefab: {fileID: 0}
+  _recoilVisual: 1.2
   _attackHitBox: {fileID: 2921181671686853276}
   _parentTransform: {fileID: 8871756037211494053}
-  _movingShipRb: {fileID: 0}
   maxDistance: 10
   _moveForce: 110
   _maxMovementSpeed: 20
@@ -38472,13 +38718,11 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4810957609511397802}
-  - {fileID: 8031009060669213574}
   - {fileID: 541184946399807206}
   - {fileID: 3868184424779955763}
   - {fileID: 3868184424948375013}
   - {fileID: 7222867460496918043}
   - {fileID: 7633915676362626572}
-  - {fileID: 5630174634551786701}
   - {fileID: 3868184424716574197}
   - {fileID: 7476888895666652294}
   - {fileID: 8260525542732622043}
@@ -38489,6 +38733,7 @@ Transform:
   - {fileID: 6896529639902746651}
   - {fileID: 7222867460087757691}
   - {fileID: 7222867460814323778}
+  - {fileID: 3128559519626813896}
   m_Father: {fileID: 7767117775722093779}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -38651,7 +38896,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d88ea4328d5df4f43924350c7219a6f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadData: 1
+  _loadData: 0
   _playerSpawnPositions:
   - {fileID: 8855015598858166844}
   - {fileID: 4634653287877585915}
@@ -38987,6 +39232,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 1.2
+  _projectileShellPrefab: {fileID: 0}
+  _recoilVisual: 1.2
 --- !u!1 &6603508393983275666
 GameObject:
   m_ObjectHideFlags: 0
@@ -49510,9 +49757,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0.2
+  _projectileShellPrefab: {fileID: 0}
+  _recoilVisual: 1.2
   _attackHitBox: {fileID: 60513312311632501}
   _parentTransform: {fileID: 7559024652784851039}
-  _movingShipRb: {fileID: 7222867460449099901}
   maxDistance: 10
   _moveForce: 110
   _maxMovementSpeed: 30
@@ -50553,7 +50801,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
-  _timeBetweenShots: 0.2
+  _timeBetweenShots: 0.1
+  _projectileShellPrefab: {fileID: 6567270739292821314, guid: b6540c7ed89f066489cef3c7971b9b10, type: 3}
+  _recoilVisual: 0.5
   _maxRotationSpeed: 500
 --- !u!1 &7047343840642370800
 GameObject:
@@ -54170,6 +54420,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0
+  _projectileShellPrefab: {fileID: 0}
+  _recoilVisual: 1.2
   _laserBallSize: 2
   _scaleDuration: 1
 --- !u!1 &7313557575822800902
@@ -54590,6 +54842,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0.8
+  _projectileShellPrefab: {fileID: 0}
+  _recoilVisual: 1.2
   _shootSpreadSeparationAngle: 5
   _amountOfProjectiles: 5
 --- !u!1 &7428844072275170453
@@ -55325,9 +55579,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0.2
+  _projectileShellPrefab: {fileID: 0}
+  _recoilVisual: 1.2
   _attackHitBox: {fileID: 8736925677237043897}
   _parentTransform: {fileID: 6230948731375246844}
-  _movingShipRb: {fileID: 0}
   maxDistance: 10
   _moveForce: 50
   _maxMovementSpeed: 20
@@ -56803,7 +57058,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
-  _timeBetweenShots: 0.2
+  _timeBetweenShots: 0.1
+  _projectileShellPrefab: {fileID: 6567270739292821314, guid: b6540c7ed89f066489cef3c7971b9b10, type: 3}
+  _recoilVisual: 0.5
   _maxRotationSpeed: 500
 --- !u!1 &8292803436914914180
 GameObject:
@@ -57499,9 +57756,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0.2
+  _projectileShellPrefab: {fileID: 0}
+  _recoilVisual: 1.2
   _attackHitBox: {fileID: 1331754480032420281}
   _parentTransform: {fileID: 221868907767370401}
-  _movingShipRb: {fileID: 7222867460449099901}
   maxDistance: 10
   _moveForce: 110
   _maxMovementSpeed: 30
@@ -58274,6 +58532,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0
+  _projectileShellPrefab: {fileID: 0}
+  _recoilVisual: 1.2
   _laserBallSize: 2
   _scaleDuration: 1
 --- !u!1 &8640541780061609045
@@ -58589,9 +58849,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0.2
+  _projectileShellPrefab: {fileID: 0}
+  _recoilVisual: 1.2
   _attackHitBox: {fileID: 7656639420287811310}
   _parentTransform: {fileID: 4973897838627856811}
-  _movingShipRb: {fileID: 0}
   maxDistance: 10
   _moveForce: 50
   _maxMovementSpeed: 20
@@ -58840,7 +59101,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6940924926161758797}
+  m_Father: {fileID: 7767117775722093779}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &112276069440663383
@@ -58954,7 +59215,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  m_CustomBlends: {fileID: 0}
+  m_CustomBlends: {fileID: 11400000, guid: 97c078acd01dea945b1a81294a82f997, type: 2}
   m_CameraCutEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -59321,9 +59582,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0.2
+  _projectileShellPrefab: {fileID: 0}
+  _recoilVisual: 1.2
   _attackHitBox: {fileID: 6166332908941155642}
   _parentTransform: {fileID: 4562406615484326412}
-  _movingShipRb: {fileID: 7222867460449099901}
   maxDistance: 10
   _moveForce: 110
   _maxMovementSpeed: 30
@@ -59694,6 +59956,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 454119989067352598}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &9082452852349509188
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3128559519626813896}
+  m_Layer: 21
+  m_Name: CameraLookAt
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3128559519626813896
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9082452852349509188}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -35}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6940924926161758797}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9122053671440860038
 GameObject:

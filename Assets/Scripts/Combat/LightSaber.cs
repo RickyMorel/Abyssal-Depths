@@ -99,6 +99,7 @@ public class LightSaber : MeleeWeapon
         _boomerangThrow = true;
         _weapon.ShouldRotate = false;
         StartCoroutine(CheckForEnemyTransforms());
+        PlayShootFX();
     }
 
     public override void CheckShootInput()

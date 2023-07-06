@@ -27,6 +27,8 @@ public class PlayerRagdoll : MonoBehaviour
     private bool _isKinematicInitialState;
     private bool _useGravityInitialState;
     private bool _agentEnabledInitialState;
+    private bool _spawnedDeadbodyMesh = false;
+    private GameObject _creatureMesh;
     #endregion
 
     #region Public Properties
@@ -50,6 +52,7 @@ public class PlayerRagdoll : MonoBehaviour
     private void Start()
     {
         _bubbleParticles = Instantiate(GameAssetsManager.Instance.RagdollBubbleParticles, transform).GetComponent<ParticleSystem>();
+        _creatureMesh = transform.Find("Mesh").gameObject;
 
         if(_rb != null)
         {
@@ -176,7 +179,28 @@ public class PlayerRagdoll : MonoBehaviour
 
     private void PlayDeathAnimation()
     {
-        _anim.SetBool("IsDead", true);
+        if (_spawnedDeadbodyMesh) { return; }
+
+        _creatureMesh.SetActive(false);
+
+        GameObject deadBodyMesh = Instantiate(_creatureMesh, transform.position, transform.rotation);
+        deadBodyMesh.transform.localScale = transform.localScale;
+
+        Animator deadBodyAnim = deadBodyMesh.AddComponent<Animator>();
+        deadBodyAnim.runtimeAnimatorController = _anim.runtimeAnimatorController;
+        deadBodyAnim.avatar = _anim.avatar;
+
+        BoxCollider boxCollider = deadBodyMesh.AddComponent<BoxCollider>();
+        Rigidbody rigidbody = deadBodyMesh.AddComponent<Rigidbody>();
+        rigidbody.constraints = _rb.constraints;
+        rigidbody.useGravity = true;
+
+        deadBodyMesh.SetActive(true);
+
+        deadBodyAnim.SetBool("IsDead", true);
+
+        _spawnedDeadbodyMesh = true;
+
         DisableMovement(true, false);
     }
 }

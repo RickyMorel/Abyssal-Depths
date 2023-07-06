@@ -10,6 +10,7 @@ public class PlayerHealth : Damageable
     [SerializeField] private float _hurtTime = 5f;
     [SerializeField] private Renderer[] _meshes;
     [SerializeField] protected Transform _particleParentTransform;
+    [SerializeField] private ParticleSystem _bloodParticles;
 
     #endregion
 
@@ -41,6 +42,7 @@ public class PlayerHealth : Damageable
         base.Start();
 
         OnDamaged += UpdateBloodFX;
+        OnDamagedWithPosition += PlayBloodParticles;
         OnUpdateHealth += HandleUpdateHealth;
     }
 
@@ -48,6 +50,7 @@ public class PlayerHealth : Damageable
     {
         OnDamaged -= UpdateBloodFX;
         OnUpdateHealth -= HandleUpdateHealth;
+        OnDamagedWithPosition -= PlayBloodParticles;
     }
 
     public virtual void Hurt(DamageTypes damageType, int damage)
@@ -93,11 +96,17 @@ public class PlayerHealth : Damageable
         }
     }
 
+    private void PlayBloodParticles(Vector3 hurtPosition)
+    {
+        if(_bloodParticles == null) { return; }
+
+        _bloodParticles.transform.position = hurtPosition;
+        _bloodParticles.Play();
+    }
+
     public override void Die()
     {
         base.Die();
-
-        StartCoroutine(DissolveCoroutine());
     }
 
     private IEnumerator DissolveCoroutine()

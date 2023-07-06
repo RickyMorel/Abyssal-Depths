@@ -374,8 +374,10 @@ MonoBehaviour:
   _hurtTime: 5
   _meshes: []
   _particleParentTransform: {fileID: 0}
+  _bloodParticles: {fileID: 0}
   _canKill: 1
   _stopsActionWhenHurt: 1
+  _isBoss: 0
 --- !u!114 &1401204668924913007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -389,6 +391,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _colliders: []
+  _stunParticlesTransform: {fileID: 0}
+  _canBeRagdolled: 1
 --- !u!114 &1401204668924913006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -434,7 +438,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _goalDistance: 6
-  _isMoving: 0
+  _actionsQueueList: []
+  _target: {fileID: 0}
   Actions: []
   CurrentAction: {fileID: 0}
 --- !u!114 &8086166351982876765
@@ -672,7 +677,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2470050609415809348}
   m_Layer: 13
-  m_Name: Jelly3
+  m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

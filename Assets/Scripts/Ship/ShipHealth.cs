@@ -202,6 +202,8 @@ public class ShipHealth : Damageable
 
     private IEnumerator FlickerRedLights()
     {
+        GameAudioManager.Instance.PlaySound(GameAudioManager.Instance.ShipSirenSlowSfx, transform.position);
+
         _redLights.SetActive(true);
 
         yield return new WaitForSeconds(0.5f);

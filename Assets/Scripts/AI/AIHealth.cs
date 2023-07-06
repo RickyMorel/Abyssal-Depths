@@ -123,6 +123,13 @@ public class AIHealth : PlayerHealth
         _interactionController.CheckExitInteraction();
     }
 
+    public override void PlayDamageFX()
+    {
+        base.PlayDamageFX();
+
+        _stateMachine.AIAudio.PlayBloodSFX();
+    }
+
     private void DisableSelf()
     {
         gameObject.SetActive(false);

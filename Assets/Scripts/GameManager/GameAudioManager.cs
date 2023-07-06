@@ -10,12 +10,17 @@ public class GameAudioManager : MonoBehaviour
 {
     #region Editor Fields
 
-    [Header("Interactable Sounds")]
-    [SerializeField] private EventReference _boosterBoost;
+    [Header("Ship Interactables Sounds")]
+    [SerializeField] private EventReference _boosterBoostSfx;
+    [SerializeField] private EventReference _attackMonitorBrokenSfx;
+    [SerializeField] private EventReference _interactableAttackMonitorSfx;
+    [SerializeField] private EventReference _shipDoorOpenCloseSfx;
+    [SerializeField] private EventReference _fixingInteractableSfx;
+    [SerializeField] private EventReference _fixedInteractableSfx;
 
     [Header("Combat Sounds")]
     [SerializeField] private EventReference _stunnedSfx;
-    [SerializeField] private EventReference _ragdollCollision;
+    [SerializeField] private EventReference _ragdollCollisionSfx;
     [SerializeField] private EventReference _punchImpactSfx;
     [SerializeField] private EventReference _punchSwingSfx;
 
@@ -39,6 +44,16 @@ public class GameAudioManager : MonoBehaviour
 
     [Header("Special Monster Sounds")]
 
+    [Header("Ship Sounds")]
+    [SerializeField] private EventReference _shipDamagedSirenSlowSfx;
+    [SerializeField] private EventReference _shipDamagedSirenFastSfx;
+    [SerializeField] private EventReference _shipCrashingSfx;
+
+    [Header("Interactables")]
+    [SerializeField] private EventReference _itemPickUpSfx;
+    [SerializeField] private EventReference _itemDropSfx;
+    [SerializeField] private EventReference _cryoPodOpen;
+
     #endregion
 
     #region Private Variables
@@ -56,9 +71,9 @@ public class GameAudioManager : MonoBehaviour
     public EventReference PortalGateOpening => _portalGateOpening;
     public EventReference PortalGateShaking => _portalGateShaking;
     public EventReference PortalGateInteraction => _portalGateInteraction;
-    public EventReference BoosterBoost => _boosterBoost;
+    public EventReference BoosterBoostSfx => _boosterBoostSfx;
     public EventReference StunnedSfx => _stunnedSfx;
-    public EventReference RagdollCollision => _ragdollCollision;
+    public EventReference RagdollCollisionSfx => _ragdollCollisionSfx;
     public EventReference PunchSwingSfx => _punchSwingSfx;
     public EventReference PunchImpactSfx => _punchImpactSfx;
     public EventReference ShipSirenSlowSfx => _shipSirenSlowSfx;
@@ -66,6 +81,17 @@ public class GameAudioManager : MonoBehaviour
     public EventReference CraftingTableCrafting => _craftingTableCrafting;
     public EventReference CraftingTableCrafted => _craftingTableCrafted;
     public EventReference CraftingTableInteract => _craftingTableInteract;
+    public EventReference AttackMonitorBrokenSfx => _attackMonitorBrokenSfx;
+    public EventReference ShipDoorOpenCloseSfx => _shipDoorOpenCloseSfx;
+    public EventReference ShipDamagedSirenSlowSfx => _shipDamagedSirenSlowSfx;
+    public EventReference ShipDamagedSirenFastSfx => _shipDamagedSirenFastSfx;
+    public EventReference ShipCrashingSfx => _shipCrashingSfx;
+    public EventReference ItemPickUpSfx => _itemPickUpSfx;
+    public EventReference ItemDropSfx => _itemDropSfx;
+    public EventReference InteractableAttackMonitorSfx => _interactableAttackMonitorSfx;
+    public EventReference FixingInteractableSfx => _fixingInteractableSfx;
+    public EventReference FixedInteractableSfx => _fixedInteractableSfx;
+    public EventReference CryoPodOpen => _cryoPodOpen;
 
     #endregion
 

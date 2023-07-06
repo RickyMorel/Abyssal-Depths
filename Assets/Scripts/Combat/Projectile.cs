@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +18,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] protected ParticleSystem[] _particles;
     [SerializeField] protected bool _shouldUnparentParticle = false;
     [SerializeField] protected bool _shakeCameraOnHit = false;
+    [SerializeField] private EventReference _impactSfx;
 
     #endregion
 
@@ -77,6 +79,13 @@ public class Projectile : MonoBehaviour
         GameAssetsManager.Instance.ChipDataSO.ChangeParticleColor(_particles[0], _damageTypes[0], _weapon.ChipLevel); 
     }
 
+    private void OnDestroy()
+    {
+        GameAudioManager.Instance.PlaySound(_impactSfx, transform.position);
+    }
+
+    #endregion
+
     public void Launch(Vector3 direction, Vector3 lookDir = default(Vector3))
     {
         //Forces projectile to always be in Z = 0f
@@ -130,5 +139,4 @@ public class Projectile : MonoBehaviour
         Destroy(gameObject);
     }
 
-    #endregion
 }

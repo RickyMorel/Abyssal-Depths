@@ -1691,6 +1691,7 @@ GameObject:
   - component: {fileID: 2028690528299777041}
   - component: {fileID: 2028690528299777040}
   - component: {fileID: 2028690528299777054}
+  - component: {fileID: 9054009217671395294}
   m_Layer: 16
   m_Name: Monster Plant
   m_TagString: Enemy
@@ -1720,7 +1721,7 @@ Transform:
   - {fileID: 1908735139544331565}
   - {fileID: 1695384819266939565}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!54 &2028690528299777053
 Rigidbody:
@@ -1899,7 +1900,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _goalDistance: 2
-  _actionsQueueList: []
   _target: {fileID: 0}
   Actions: []
   CurrentAction: {fileID: 0}
@@ -1970,6 +1970,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thisAgent: {fileID: 2028690528299777055}
+--- !u!114 &9054009217671395294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2028690528299777028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4222aa5f1b3e0134b9d0885d228d4d74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shootSfx:
+    Guid:
+      Data1: -1991737072
+      Data2: 1153351937
+      Data3: -994734208
+      Data4: 658797993
+    Path: event:/Monsters/MonsterPlant/MP_Shoot
+  _dieSfx:
+    Guid:
+      Data1: -388396667
+      Data2: 1333968310
+      Data3: 2077276308
+      Data4: -1923632175
+    Path: event:/Monsters/MonsterPlant/MP_Die
+  _bloodSplatSfx:
+    Guid:
+      Data1: 273219222
+      Data2: 1104413679
+      Data3: -1374389321
+      Data4: 786647119
+    Path: event:/Monsters/DefaultBloodSplat
 --- !u!1 &2028695502240877416
 GameObject:
   m_ObjectHideFlags: 0

@@ -66,7 +66,7 @@ public class PlayerRagdoll : MonoBehaviour
     {
         if(_rb == null) { return; }
 
-        GameAudioManager.Instance.PlaySound(GameAudioManager.Instance.RagdollCollision, transform.position);
+        GameAudioManager.Instance.PlaySound(GameAudioManager.Instance.RagdollCollisionSfx, transform.position);
 
         if (LayerMask.LayerToName(collision.gameObject.layer) == "ShieldLayer") { return; }
 

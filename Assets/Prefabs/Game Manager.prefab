@@ -15384,13 +15384,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6566bfe589d9c743ad6a52bf55af4ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _boosterBoost:
+  _boosterBoostSfx:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -357646767
+      Data2: 1280758444
+      Data3: -748462961
+      Data4: -1371719845
+    Path: event:/Ship/ShipBoosterBoost
+  _attackMonitorBrokenSfx:
+    Guid:
+      Data1: -368416852
+      Data2: 1124291980
+      Data3: -704502373
+      Data4: 1410733763
+    Path: event:/Ship/AttackMonitorBroken
+  _interactableAttackMonitorSfx:
+    Guid:
+      Data1: 1195150701
+      Data2: 1302517514
+      Data3: -1724948095
+      Data4: 1122324705
+    Path: event:/Interaction/Interactables/Interact_AttackMonitor
+  _shipDoorOpenCloseSfx:
+    Guid:
+      Data1: -1257802821
+      Data2: 1290343177
+      Data3: 1990834078
+      Data4: -848044112
+    Path: event:/Ship/ShipDoorOpenClose
+  _fixingInteractableSfx:
+    Guid:
+      Data1: 664031470
+      Data2: 1159934574
+      Data3: 1136935614
+      Data4: 588378130
+    Path: event:/Interaction/Interactables/Fixing
+  _fixedInteractableSfx:
+    Guid:
+      Data1: 1233941820
+      Data2: 1158543060
+      Data3: -507246170
+      Data4: -1192967172
+    Path: event:/Interaction/Interactables/Fixed_Interactable
   _stunnedSfx:
     Guid:
       Data1: -539998358
@@ -15398,7 +15433,7 @@ MonoBehaviour:
       Data3: 851975049
       Data4: -762543509
     Path: event:/Combat/Combat_Stunned
-  _ragdollCollision:
+  _ragdollCollisionSfx:
     Guid:
       Data1: -476024076
       Data2: 1231381394
@@ -15419,34 +15454,48 @@ MonoBehaviour:
       Data3: -1373973084
       Data4: 1432634284
     Path: event:/Combat/Combat_PunchSwing
-  _mpShoot:
+  _shipDamagedSirenSlowSfx:
     Guid:
-      Data1: -1991737072
-      Data2: 1153351937
-      Data3: -994734208
-      Data4: 658797993
-    Path: event:/Monsters/MonsterPlant/MP_Shoot
-  _mpDie:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  _shipDamagedSirenFastSfx:
     Guid:
-      Data1: -388396667
-      Data2: 1333968310
-      Data3: 2077276308
-      Data4: -1923632175
-    Path: event:/Monsters/MonsterPlant/MP_Die
-  _megRoar:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  _shipCrashingSfx:
     Guid:
-      Data1: 1360971461
-      Data2: 1245302322
-      Data3: 1423552666
-      Data4: 1481439045
-    Path: event:/Monsters/Megalodon/Meg_Roar
-  _megDie:
+      Data1: 741005501
+      Data2: 1213102314
+      Data3: 792224677
+      Data4: -1076708267
+    Path: event:/Ship/ShipCrash
+  _itemPickUpSfx:
     Guid:
-      Data1: 788027243
-      Data2: 1090656150
-      Data3: -728809596
-      Data4: 1104637682
-    Path: event:/Monsters/Megalodon/Meg_Die
+      Data1: -982038776
+      Data2: 1089254538
+      Data3: 290971577
+      Data4: -209055289
+    Path: event:/Interaction/Items/ItemPickup
+  _itemDropSfx:
+    Guid:
+      Data1: 944915384
+      Data2: 1244823621
+      Data3: -860012620
+      Data4: -992350539
+    Path: event:/Interaction/Items/ItemPickupCollide
+  _cryoPodOpen:
+    Guid:
+      Data1: -653851042
+      Data2: 1212725759
+      Data3: 1955128745
+      Data4: 989131763
+    Path: event:/Enivorment/CryopodOpen
 --- !u!1 &3852162812439959518
 GameObject:
   m_ObjectHideFlags: 0

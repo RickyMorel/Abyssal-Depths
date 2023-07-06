@@ -9,6 +9,7 @@ public class AIAudio : MonoBehaviour
 
     [SerializeField] private EventReference _shootSfx;
     [SerializeField] private EventReference _dieSfx;
+    [SerializeField] private EventReference _bloodSplatSfx;
 
     #endregion
 
@@ -20,5 +21,10 @@ public class AIAudio : MonoBehaviour
     public void PlayDieSFX()
     {
         GameAudioManager.Instance.PlaySound(_dieSfx, transform.position);
+    }
+
+    public void PlayBloodSFX()
+    {
+        GameAudioManager.Instance.PlaySound(_bloodSplatSfx, transform.position);
     }
 }

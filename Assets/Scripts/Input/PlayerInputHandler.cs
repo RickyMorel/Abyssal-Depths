@@ -273,7 +273,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (!IsPlayerActive) { return; }
 
-        if (!_player.GetButton("UISubmit")) { return; }
+        if (!_player.GetButtonDown("UISubmit")) { return; }
 
         OnUISubmit?.Invoke();
     }
@@ -282,7 +282,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (!IsPlayerActive) { return; }
 
-        if (!_player.GetButton("UICancel")) { return; }
+        if (!_player.GetButtonDown("UICancel")) { return; }
 
         OnUICancel?.Invoke();
     }
@@ -291,7 +291,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (!IsPlayerActive) { return; }
 
-        if (!_player.GetButton("ShoulderLeft")) { return; }
+        if (!_player.GetButtonDown("ShoulderLeft")) { return; }
 
         OnShoulderLeft?.Invoke();
     }
@@ -300,7 +300,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (!IsPlayerActive) { return; }
 
-        if (!_player.GetButton("ShoulderRight")) { return; }
+        if (!_player.GetButtonDown("ShoulderRight")) { return; }
 
         OnShoulderRight?.Invoke();
     }

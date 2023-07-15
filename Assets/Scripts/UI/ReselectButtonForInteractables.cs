@@ -1,3 +1,4 @@
+using Rewired;
 using Rewired.Integration.UnityUI;
 using System.Collections;
 using System.Collections.Generic;
@@ -26,6 +27,10 @@ public class ReselectButtonForInteractables : ReselectButton
     {
         //do nothing
     }
+    public override void OnDisable()
+    {
+        //do nothing
+    }
 
     #endregion
 
@@ -35,8 +40,10 @@ public class ReselectButtonForInteractables : ReselectButton
 
         if (_firstButton == null) { _firstButton = GetComponentInChildren<Button>().gameObject; }
 
-        _playerInput = _interactable.CurrentPlayer.GetComponent<PlayerInputHandler>();
+        Player rewiredPlayer = ReInput.players.GetPlayer(_interactable.CurrentPlayer.PlayerInput.PlayerId);
+        rewiredPlayer.controllers.maps.SetMapsEnabled(true, "UI");
 
+        _playerInput = _interactable.CurrentPlayer.PlayerInput;
         _playerInput.OnUIHorizontal += ReselectButtonWhenNeeded;
         _playerInput.OnUIVertical += ReselectButtonWhenNeeded;
         _playerInput.OnShoulderLeft += ReselectButtonWhenNeeded;
@@ -45,6 +52,21 @@ public class ReselectButtonForInteractables : ReselectButton
 
         _playerInput.OnUICancel += GoBackToPreviousScreenOrExit;
 
-        _eventSystem = GameObject.FindGameObjectWithTag("EventSystem").GetComponent<RewiredEventSystem>();
+        _interactable.Humble.OnUninteract += Unsuscribe;
+
+        _eventSystem = GameObject.FindGameObjectWithTag(GameTagsManager.EVENT_SYSTEM).GetComponent<RewiredEventSystem>();
+    }
+
+    private void Unsuscribe()
+    {
+        _playerInput.OnUIHorizontal -= ReselectButtonWhenNeeded;
+        _playerInput.OnUIVertical -= ReselectButtonWhenNeeded;
+        _playerInput.OnShoulderLeft -= ReselectButtonWhenNeeded;
+        _playerInput.OnShoulderRight -= ReselectButtonWhenNeeded;
+        _playerInput.OnUISubmit -= ReselectButtonWhenNeeded;
+
+        _playerInput.OnUICancel -= GoBackToPreviousScreenOrExit;
+
+        _interactable.Humble.OnUninteract -= Unsuscribe;
     }
 }

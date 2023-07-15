@@ -93,8 +93,13 @@ public class CraftingManager : MonoBehaviour
     public void EnableCanvas(bool isEnabled, PlayerInputHandler currentPlayer, CraftingStation craftingStation)
     {
         _craftingPanel.SetActive(isEnabled);
-        _reselectButtonForInteractables = _craftingPanel.GetComponent<ReselectButtonForInteractables>();
-        _reselectButtonForInteractables.Interactable = craftingStation;
+
+        if (isEnabled)
+        {
+            _reselectButtonForInteractables = _craftingPanel.GetComponent<ReselectButtonForInteractables>();
+            _reselectButtonForInteractables.Interactable = craftingStation;
+        }
+
         _currentPlayer = currentPlayer;
         _currentCraftingStation = craftingStation;
 

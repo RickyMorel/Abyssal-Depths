@@ -27,9 +27,9 @@ public class ReselectButton : MonoBehaviour
 
     public virtual void Start()
     {
-        _eventSystem = GameObject.FindGameObjectWithTag("EventSystem").GetComponent<RewiredEventSystem>();
+        _eventSystem = GameObject.FindGameObjectWithTag(GameTagsManager.EVENT_SYSTEM).GetComponent<RewiredEventSystem>();
 
-        _playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInputHandler>();
+        _playerInput = GameObject.FindGameObjectWithTag(GameTagsManager.PLAYER).GetComponent<PlayerInputHandler>();
 
         if (_firstButton == null) { _firstButton = GetComponentInChildren<Button>().gameObject; }
     }
@@ -39,7 +39,7 @@ public class ReselectButton : MonoBehaviour
         StartCoroutine(LateEnable());
     }
 
-    private void OnDisable()
+    public virtual void OnDisable()
     {
         _playerInput.OnUIHorizontal -= ReselectButtonWhenNeeded;
         _playerInput.OnUIVertical -= ReselectButtonWhenNeeded;

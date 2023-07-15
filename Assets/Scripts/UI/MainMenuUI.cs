@@ -15,6 +15,7 @@ namespace AbyssalDepths.UI
         [SerializeField] private GameObject _playPanel;
         [SerializeField] private GameObject _settingsPanel;
         [SerializeField] private GameObject _newGamePanel;
+        [SerializeField] private GameObject _onScreenKeyboard;
         [SerializeField] private GameObject _loadPanel;
         [SerializeField] private GameObject _gameplaySettingsPanel;
         [SerializeField] private GameObject _videoSettingsPanel;
@@ -56,7 +57,16 @@ namespace AbyssalDepths.UI
 
         public void EnableNewGamePanel(bool isEnabled)
         {
+            DisableAllPanels();
+
             _newGamePanel.SetActive(isEnabled);
+            
+            EnableOnScreenKeyboard(isEnabled);
+        }
+
+        public void EnableOnScreenKeyboard(bool isEnabled)
+        {
+            _onScreenKeyboard.SetActive(isEnabled);
         }
 
         public void LoadGame()
@@ -101,6 +111,8 @@ namespace AbyssalDepths.UI
             _gameplaySettingsPanel.SetActive(false);
             _videoSettingsPanel.SetActive(false);
             _audioSettingsPanel.SetActive(false);
+            _newGamePanel.SetActive(false);
+            _onScreenKeyboard.SetActive(false);
         }
 
         public void SelectPlayPanel()

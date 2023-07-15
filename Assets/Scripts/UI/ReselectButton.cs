@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Rewired.Integration.UnityUI;
 using UnityEngine.UI;
+using Rewired;
 
 public class ReselectButton : MonoBehaviour
 {
@@ -55,6 +56,9 @@ public class ReselectButton : MonoBehaviour
     public virtual IEnumerator LateEnable()
     {
         yield return new WaitForEndOfFrame();
+
+        Player rewiredPlayer = ReInput.players.GetPlayer(_playerInput.PlayerId);
+        rewiredPlayer.controllers.maps.SetMapsEnabled(true, "UI");
 
         _playerInput.OnUIHorizontal += ReselectButtonWhenNeeded;
         _playerInput.OnUIVertical += ReselectButtonWhenNeeded;

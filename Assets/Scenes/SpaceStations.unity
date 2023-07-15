@@ -9835,6 +9835,69 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 482322723}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &483949656
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 483949658}
+  - component: {fileID: 483949657}
+  m_Layer: 0
+  m_Name: SubmarineAmbienceSFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &483949657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483949656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1661177945
+      Data2: 1273844364
+      Data3: -1530844508
+      Data4: -4154779
+    Path: event:/Enivorment/SubmarineAmbience
+  Event: 
+  PlayEvent: 1
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!4 &483949658
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483949656}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 152.44781, y: -343.25513, z: 71.33869}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 24
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &484542078 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1972763598557674, guid: 3a4bd5bb74d857543abf7d823c47cb0b, type: 3}
@@ -18566,266 +18629,6 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _cryoPodOpen.Path
-      value: event:/Enivorment/CryopodOpen
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _itemDropSfx.Path
-      value: event:/Interaction/Items/ItemPickupCollide
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _itemPickUpSfx.Path
-      value: event:/Interaction/Items/ItemPickup
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _boosterBoostSfx.Path
-      value: event:/Ship/ShipBoosterBoost
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _shipCrashingSfx.Path
-      value: event:/Ship/ShipCrash
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _cryoPodOpen.Guid.Data1
-      value: -653851042
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _cryoPodOpen.Guid.Data2
-      value: 1212725759
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _cryoPodOpen.Guid.Data3
-      value: 1955128745
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _cryoPodOpen.Guid.Data4
-      value: 989131763
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _itemDropSfx.Guid.Data1
-      value: 944915384
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _itemDropSfx.Guid.Data2
-      value: 1244823621
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _itemDropSfx.Guid.Data3
-      value: -860012620
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _itemDropSfx.Guid.Data4
-      value: -992350539
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _itemPickUpSfx.Guid.Data1
-      value: -982038776
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _itemPickUpSfx.Guid.Data2
-      value: 1089254538
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _itemPickUpSfx.Guid.Data3
-      value: 290971577
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _itemPickUpSfx.Guid.Data4
-      value: -209055289
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _ragdollCollisionSfx.Path
-      value: event:/Combat/Combat_RagdollCollision
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _fixedInteractableSfx.Path
-      value: event:/Interaction/Interactables/Fixed_Interactable
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _shipDoorOpenCloseSfx.Path
-      value: event:/Ship/ShipDoorOpenClose
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _boosterBoostSfx.Guid.Data1
-      value: -357646767
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _boosterBoostSfx.Guid.Data2
-      value: 1280758444
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _boosterBoostSfx.Guid.Data3
-      value: -748462961
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _boosterBoostSfx.Guid.Data4
-      value: -1371719845
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _fixingInteractableSfx.Path
-      value: event:/Interaction/Interactables/Fixing
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _shipCrashingSfx.Guid.Data1
-      value: 741005501
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _shipCrashingSfx.Guid.Data2
-      value: 1213102314
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _shipCrashingSfx.Guid.Data3
-      value: 792224677
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _shipCrashingSfx.Guid.Data4
-      value: -1076708267
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _attackMonitorBrokenSfx.Path
-      value: event:/Ship/AttackMonitorBroken
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _shipDamagedSirenFastSfx.Path
-      value: event:/Ship/ShipDamagedSirenFast
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _shipDamagedSirenSlowSfx.Path
-      value: event:/Ship/ShipDamagedSiren
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _ragdollCollisionSfx.Guid.Data1
-      value: -476024076
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _ragdollCollisionSfx.Guid.Data2
-      value: 1231381394
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _ragdollCollisionSfx.Guid.Data3
-      value: -1469846874
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _ragdollCollisionSfx.Guid.Data4
-      value: 511683165
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _fixedInteractableSfx.Guid.Data1
-      value: 1233941820
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _fixedInteractableSfx.Guid.Data2
-      value: 1158543060
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _fixedInteractableSfx.Guid.Data3
-      value: -507246170
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _fixedInteractableSfx.Guid.Data4
-      value: -1192967172
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _shipDoorOpenCloseSfx.Guid.Data1
-      value: -1257802821
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _shipDoorOpenCloseSfx.Guid.Data2
-      value: 1290343177
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _shipDoorOpenCloseSfx.Guid.Data3
-      value: 1990834078
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _shipDoorOpenCloseSfx.Guid.Data4
-      value: -848044112
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _fixingInteractableSfx.Guid.Data1
-      value: 664031470
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _fixingInteractableSfx.Guid.Data2
-      value: 1159934574
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _fixingInteractableSfx.Guid.Data3
-      value: 1136935614
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _fixingInteractableSfx.Guid.Data4
-      value: 588378130
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _attackMonitorBrokenSfx.Guid.Data1
-      value: -368416852
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _attackMonitorBrokenSfx.Guid.Data2
-      value: 1124291980
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _attackMonitorBrokenSfx.Guid.Data3
-      value: -704502373
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _attackMonitorBrokenSfx.Guid.Data4
-      value: 1410733763
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _interactableAttackMonitorSfx.Path
-      value: event:/Interaction/Interactables/Interact_AttackMonitor
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _shipDamagedSirenFastSfx.Guid.Data1
-      value: -1094894041
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _shipDamagedSirenFastSfx.Guid.Data2
-      value: 1235465377
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _shipDamagedSirenFastSfx.Guid.Data3
-      value: 2013070012
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _shipDamagedSirenFastSfx.Guid.Data4
-      value: 1078321582
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _shipDamagedSirenSlowSfx.Guid.Data1
-      value: 1546624517
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _shipDamagedSirenSlowSfx.Guid.Data2
-      value: 1126083856
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _shipDamagedSirenSlowSfx.Guid.Data3
-      value: -1067727698
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _shipDamagedSirenSlowSfx.Guid.Data4
-      value: -1084834536
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _interactableAttackMonitorSfx.Guid.Data1
-      value: 1195150701
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _interactableAttackMonitorSfx.Guid.Data2
-      value: 1302517514
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _interactableAttackMonitorSfx.Guid.Data3
-      value: -1724948095
-      objectReference: {fileID: 0}
-    - target: {fileID: 726333283479824611, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
-      propertyPath: _interactableAttackMonitorSfx.Guid.Data4
-      value: 1122324705
-      objectReference: {fileID: 0}
     - target: {fileID: 3852162812249718933, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
       propertyPath: m_Name
       value: Game_Manager
@@ -35274,9 +35077,8 @@ MonoBehaviour:
   - {fileID: 1731407921}
   prefabStage: {fileID: 0}
   quickEditingComponent: {fileID: 957385697}
-  dataPath: D:/Unity project/Project-Ariel-Ricardo/Abyssal-Depths/Assets
-  workPath: D:/Unity project/Project-Ariel-Ricardo/Abyssal-Depths/Assets\Magic Light
-    Probes
+  dataPath: D:/UNITY PROJECTS/Project Ariel Ricardo/Assets
+  workPath: D:/UNITY PROJECTS/Project Ariel Ricardo/Assets\Magic Light Probes
   workPathFound: 1
   localFinishedPositions:
   - {x: 110.79568, y: -323.32114, z: 2.5772057}
@@ -37222,8 +37024,7 @@ MonoBehaviour:
   - {x: 94.79874, y: -324.12112, z: -2.9609451}
   - {x: 95.19874, y: -325.32114, z: 2.239055}
   - {x: 95.59874, y: -325.32114, z: -2.9609451}
-  assetEditorPath: D:/Unity project/Project-Ariel-Ricardo/Abyssal-Depths/Assets\Magic
-    Light Probes/Editor/
+  assetEditorPath: D:/UNITY PROJECTS/Project Ariel Ricardo/Assets\Magic Light Probes/Editor/
   parentVolume: {fileID: 0}
   localOperationalDataLost: 1
   recombinationNeeded: 0
@@ -38454,9 +38255,8 @@ MonoBehaviour:
   - {fileID: 1731407921}
   prefabStage: {fileID: 0}
   quickEditingComponent: {fileID: 1024317345}
-  dataPath: D:/Unity project/Project-Ariel-Ricardo/Abyssal-Depths/Assets
-  workPath: D:/Unity project/Project-Ariel-Ricardo/Abyssal-Depths/Assets\Magic Light
-    Probes
+  dataPath: D:/UNITY PROJECTS/Project Ariel Ricardo/Assets
+  workPath: D:/UNITY PROJECTS/Project Ariel Ricardo/Assets\Magic Light Probes
   workPathFound: 1
   localFinishedPositions:
   - {x: 197.60876, y: -336.0655, z: -3.2470148}
@@ -39437,8 +39237,7 @@ MonoBehaviour:
   - {x: 139.53958, y: -334.86548, z: 1.1529853}
   - {x: 140.33958, y: -336.0655, z: 2.7529852}
   - {x: 140.33958, y: -333.6655, z: 0.75298524}
-  assetEditorPath: D:/Unity project/Project-Ariel-Ricardo/Abyssal-Depths/Assets\Magic
-    Light Probes/Editor/
+  assetEditorPath: D:/UNITY PROJECTS/Project Ariel Ricardo/Assets\Magic Light Probes/Editor/
   parentVolume: {fileID: 0}
   localOperationalDataLost: 1
   recombinationNeeded: 0

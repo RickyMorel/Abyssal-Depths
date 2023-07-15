@@ -1,3 +1,4 @@
+using FMOD.Studio;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -30,6 +31,8 @@ public class Booster : RotationalInteractable
     private bool _recentlyChangedGear = false;
     private bool _isStuttering = false;
     private bool _canStutter = true;
+
+    private EventInstance _boostSx;
 
     #endregion
 
@@ -68,6 +71,8 @@ public class Booster : RotationalInteractable
         base.Start();
 
         _rb.drag = _shipDrag;
+
+        _boostSx = GameAudioManager.Instance.CreateSoundInstance(GameAudioManager.Instance.BoosterBoostSfx, Ship.Instance.transform);
 
         StartCoroutine(LateStart());
     }
@@ -108,6 +113,7 @@ public class Booster : RotationalInteractable
         BoostShip();
         CheckGears();
         StabilizeShip();
+        AdjustBoostSfx();
     }
 
     #endregion
@@ -143,6 +149,24 @@ public class Booster : RotationalInteractable
     }
 
     #endregion
+
+    private void AdjustBoostSfx()
+    {
+        _boostSx.getPlaybackState(out PLAYBACK_STATE playBackState);
+
+        if (_isBoosting && playBackState != PLAYBACK_STATE.PLAYING)
+        {
+            _boostSx.start();
+        }
+        else if(!_isBoosting)
+        {
+            _boostSx.stop(STOP_MODE.ALLOWFADEOUT);
+        }
+
+        float speedPercentage = Mathf.Clamp((_rb.velocity.magnitude * 1.5f ) / Ship.Instance.TopSpeed, 0f, 1f);
+
+        _boostSx.setParameterByName("BoostSpeed", speedPercentage);
+    }
 
     private void SetIsBoosting(bool isBoosting)
     {

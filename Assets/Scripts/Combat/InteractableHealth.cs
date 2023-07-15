@@ -162,6 +162,7 @@ public class InteractableHealth : Damageable
 
         _brokenSfx.stop(STOP_MODE.ALLOWFADEOUT);
         GameAudioManager.Instance.PlaySound(GameAudioManager.Instance.FixedInteractableSfx, transform.position);
+        GameAudioManager.Instance.PlaySound(GameAudioManager.Instance.InteractableOnlineSfx, transform.position);
         
         CreateRepairStatePopup(true);
 
@@ -218,6 +219,7 @@ public class InteractableHealth : Damageable
         _currentParticles.transform.parent = _particleSpawnTransform;
 
         _brokenSfx.start();
+        GameAudioManager.Instance.PlaySound(GameAudioManager.Instance.InteractableOfflinefx, transform.position);
 
         SpawnFixParts();
     }

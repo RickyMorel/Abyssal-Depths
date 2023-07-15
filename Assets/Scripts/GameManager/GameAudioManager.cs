@@ -17,6 +17,8 @@ public class GameAudioManager : MonoBehaviour
     [SerializeField] private EventReference _shipDoorOpenCloseSfx;
     [SerializeField] private EventReference _fixingInteractableSfx;
     [SerializeField] private EventReference _fixedInteractableSfx;
+    [SerializeField] private EventReference _interactableOnlineSfx;
+    [SerializeField] private EventReference _interactableOfflinefx;
 
     [Header("Combat Sounds")]
     [SerializeField] private EventReference _stunnedSfx;
@@ -43,6 +45,9 @@ public class GameAudioManager : MonoBehaviour
     [SerializeField] private EventReference _shipSirenFastSfx;
 
     [Header("Special Monster Sounds")]
+
+    [Header("Player Sounds")]
+    [SerializeField] private EventReference _metalFootsteps;
 
     [Header("Ship Sounds")]
     [SerializeField] private EventReference _shipDamagedSirenSlowSfx;
@@ -92,6 +97,9 @@ public class GameAudioManager : MonoBehaviour
     public EventReference FixingInteractableSfx => _fixingInteractableSfx;
     public EventReference FixedInteractableSfx => _fixedInteractableSfx;
     public EventReference CryoPodOpen => _cryoPodOpen;
+    public EventReference MetalFootSteps => _metalFootsteps;
+    public EventReference InteractableOnlineSfx => _interactableOnlineSfx;
+    public EventReference InteractableOfflinefx => _interactableOfflinefx;
 
     #endregion
 

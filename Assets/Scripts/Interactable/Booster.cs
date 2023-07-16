@@ -32,7 +32,8 @@ public class Booster : RotationalInteractable
     private bool _isStuttering = false;
     private bool _canStutter = true;
 
-    private EventInstance _boostSx;
+    private EventInstance _boostSfx;
+    private EventInstance _hoverSfx;
 
     #endregion
 
@@ -72,7 +73,8 @@ public class Booster : RotationalInteractable
 
         _rb.drag = _shipDrag;
 
-        _boostSx = GameAudioManager.Instance.CreateSoundInstance(GameAudioManager.Instance.BoosterBoostSfx, Ship.Instance.transform);
+        _boostSfx = GameAudioManager.Instance.CreateSoundInstance(GameAudioManager.Instance.BoosterBoostSfx, Ship.Instance.transform);
+        _hoverSfx = GameAudioManager.Instance.CreateSoundInstance(GameAudioManager.Instance.BoosterBoostSfx, Ship.Instance.transform);
 
         StartCoroutine(LateStart());
     }
@@ -152,20 +154,20 @@ public class Booster : RotationalInteractable
 
     private void AdjustBoostSfx()
     {
-        _boostSx.getPlaybackState(out PLAYBACK_STATE playBackState);
+        _boostSfx.getPlaybackState(out PLAYBACK_STATE playBackState);
 
         if (_isBoosting && playBackState != PLAYBACK_STATE.PLAYING)
         {
-            _boostSx.start();
+            _boostSfx.start();
         }
         else if(!_isBoosting)
         {
-            _boostSx.stop(STOP_MODE.ALLOWFADEOUT);
+            _boostSfx.stop(STOP_MODE.ALLOWFADEOUT);
         }
 
         float speedPercentage = Mathf.Clamp((_rb.velocity.magnitude * 1.5f ) / Ship.Instance.TopSpeed, 0f, 1f);
 
-        _boostSx.setParameterByName("BoostSpeed", speedPercentage);
+        GameAudioManager.Instance.AdjustAudioParameter(_boostSfx, "BoostSpeed", speedPercentage);
     }
 
     private void SetIsBoosting(bool isBoosting)
@@ -205,13 +207,17 @@ public class Booster : RotationalInteractable
             {
                 stabilizer.Particles.Play();
                 stabilizer.LightComponent.enabled = true;
+                _hoverSfx.start();
             }
             else 
             {
+                _hoverSfx.stop(STOP_MODE.ALLOWFADEOUT);
                 stabilizer.Particles.Stop();
                 stabilizer.LightComponent.enabled = false;
             }
         }
+
+        GameAudioManager.Instance.AdjustAudioParameter(_hoverSfx, "BoostSpeed", 1f);
     }
 
     private void StabilizeShip()

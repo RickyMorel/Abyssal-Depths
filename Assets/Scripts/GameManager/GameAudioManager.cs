@@ -12,6 +12,8 @@ public class GameAudioManager : MonoBehaviour
 
     [Header("Ship Interactables Sounds")]
     [SerializeField] private EventReference _boosterBoostSfx;
+    [SerializeField] private EventReference _pickaxeImpactSfx;
+    [SerializeField] private EventReference _pickaxeBoostSfx;
     [SerializeField] private EventReference _attackMonitorBrokenSfx;
     [SerializeField] private EventReference _interactableAttackMonitorSfx;
     [SerializeField] private EventReference _shipDoorOpenCloseSfx;
@@ -100,6 +102,8 @@ public class GameAudioManager : MonoBehaviour
     public EventReference MetalFootSteps => _metalFootsteps;
     public EventReference InteractableOnlineSfx => _interactableOnlineSfx;
     public EventReference InteractableOfflinefx => _interactableOfflinefx;
+    public EventReference PickaxeImpactSfx => _pickaxeImpactSfx;
+    public EventReference PickaxeBoostSfx => _pickaxeBoostSfx;
 
     #endregion
 
@@ -127,5 +131,10 @@ public class GameAudioManager : MonoBehaviour
         RuntimeManager.AttachInstanceToGameObject(eventInstance, objectTransform);
 
         return eventInstance;
+    }
+
+    public void AdjustAudioParameter(EventInstance audioInstance, string parameterName, float percentage)
+    {
+        audioInstance.setParameterByName(parameterName, percentage);
     }
 }

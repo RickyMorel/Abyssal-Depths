@@ -29188,7 +29188,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8267316476269031330}
-  - component: {fileID: 9200540606505864068}
   m_Layer: 25
   m_Name: BoosterPlaceHolder
   m_TagString: Untagged
@@ -29214,37 +29213,6 @@ Transform:
   m_Father: {fileID: 541184946399807206}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
---- !u!114 &9200540606505864068
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3936428307302896728}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: -357646767
-      Data2: 1280758444
-      Data3: -748462961
-      Data4: -1371719845
-    Path: event:/Ship/ShipBoosterBoost
-  Event: 
-  PlayEvent: 0
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  AllowNonRigidbodyDoppler: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!1 &3945041548650665353
 GameObject:
   m_ObjectHideFlags: 0
@@ -66798,10 +66766,6 @@ PrefabInstance:
       propertyPath: _boosterParticle
       value: 
       objectReference: {fileID: 7566936571137235470, guid: 7c2f4a2fd99211d439267619217db38a, type: 3}
-    - target: {fileID: 8939861088303502654, guid: 581c7f4916d4ee34ea8aad735c61ff19, type: 3}
-      propertyPath: _boosterSfxEmiiter
-      value: 
-      objectReference: {fileID: 9200540606505864068}
     - target: {fileID: 8939861088303502654, guid: 581c7f4916d4ee34ea8aad735c61ff19, type: 3}
       propertyPath: _boosterStabilizer.Particles
       value: 

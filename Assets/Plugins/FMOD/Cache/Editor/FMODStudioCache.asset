@@ -79,7 +79,7 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 550
+  MaxDistance: 100
   Length: 2500
 --- !u!114 &-8946295062056286049
 MonoBehaviour:
@@ -209,6 +209,34 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-8340332993249650794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ship/Pickaxe/PickaxeBoost
+  m_EditorClassIdentifier: 
+  Path: event:/Ship/Pickaxe/PickaxeBoost
+  Guid:
+    Data1: 411861459
+    Data2: 1240088141
+    Data3: 148643252
+    Data4: 776817204
+  Banks:
+  - {fileID: 4950403079479454847}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -6560758363782909894}
+  MinDistance: 1
+  MaxDistance: 800
+  Length: 16000
 --- !u!114 &-8280129464191400782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -632,8 +660,32 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 20
+  MaxDistance: 90
   Length: 1250
+--- !u!114 &-6560758363782909894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/PickaxeBoost/BoostSpeed
+  m_EditorClassIdentifier: 
+  Name: BoostSpeed
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2189337781
+    data2: 271279678
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-6550546133298948907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -850,6 +902,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-5725590426923689109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enivorment/Mining/Ore Impacts/RockOreImpact
+  m_EditorClassIdentifier: 
+  Path: event:/Enivorment/Mining/Ore Impacts/RockOreImpact
+  Guid:
+    Data1: 1357346167
+    Data2: 1303933602
+    Data3: -357707340
+    Data4: -818248450
+  Banks:
+  - {fileID: 4950403079479454847}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 95
+  Length: 1718
 --- !u!114 &-5507288971294700494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1687,33 +1766,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 550
---- !u!114 &-2221469810590742861
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Ship/PickaxeBoost
-  m_EditorClassIdentifier: 
-  Path: event:/Ship/PickaxeBoost
-  Guid:
-    Data1: 411861459
-    Data2: 1240088141
-    Data3: 148643252
-    Data4: 776817204
-  Banks:
-  - {fileID: 4950403079479454847}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
 --- !u!114 &-2218621691391398170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2364,14 +2416,12 @@ MonoBehaviour:
   - {fileID: 5202621487361737634}
   - {fileID: 4386314082146866333}
   - {fileID: 4688536827073208649}
-  - {fileID: 4469723104032876194}
   - {fileID: -5900537913042360966}
   - {fileID: -6602563187633905520}
   - {fileID: 3686781563693810600}
   - {fileID: -7052504463601580246}
   - {fileID: -3140000813065781333}
   - {fileID: -4120675909965823539}
-  - {fileID: -2221469810590742861}
   - {fileID: 1828724095368830069}
   - {fileID: -2097772231824718696}
   - {fileID: -4287985968562341261}
@@ -2379,12 +2429,17 @@ MonoBehaviour:
   - {fileID: -5438426213254867777}
   - {fileID: 6834823317964370323}
   - {fileID: -9009992015122256955}
+  - {fileID: 336316403134587212}
+  - {fileID: 3599922818203968932}
+  - {fileID: 240820611540142368}
+  - {fileID: -5725590426923689109}
+  - {fileID: -8340332993249650794}
   EditorParameters: []
   MasterBanks:
   - {fileID: 4950403079479454847}
   StringsBanks:
   - {fileID: 2157385001168295344}
-  cacheTime: 638250178530419596
+  cacheTime: 638251051146165190
   cacheVersion: 131605
 --- !u!114 &90084922733834907
 MonoBehaviour:
@@ -2460,6 +2515,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &240820611540142368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enivorment/Mining/Ore Impacts/CrystalImpact
+  m_EditorClassIdentifier: 
+  Path: event:/Enivorment/Mining/Ore Impacts/CrystalImpact
+  Guid:
+    Data1: -1723462885
+    Data2: 1188692220
+    Data3: -2112909155
+    Data4: -630138833
+  Banks:
+  - {fileID: 4950403079479454847}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 100
+  Length: 1718
 --- !u!114 &247814600216934124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2541,6 +2623,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 950
+--- !u!114 &336316403134587212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enivorment/Bubbles
+  m_EditorClassIdentifier: 
+  Path: event:/Enivorment/Bubbles
+  Guid:
+    Data1: -523321911
+    Data2: 1341691840
+    Data3: 168073650
+    Data4: -183799000
+  Banks:
+  - {fileID: 4950403079479454847}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 60
+  Length: 15293
 --- !u!114 &369084327807323858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2961,10 +3070,10 @@ MonoBehaviour:
   Path: AbyssalDepthsFMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638250178530419596
+  lastModified: 638251051146165190
   FileSizes:
   - Name: Desktop
-    Value: 3556
+    Value: 3720
   Exists: 1
 --- !u!114 &2171927999044865641
 MonoBehaviour:
@@ -3155,6 +3264,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &3599922818203968932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ship/Pickaxe/PickaxeHit
+  m_EditorClassIdentifier: 
+  Path: event:/Ship/Pickaxe/PickaxeHit
+  Guid:
+    Data1: -574370882
+    Data2: 1163326988
+    Data3: 129291182
+    Data4: -288697528
+  Banks:
+  - {fileID: 4950403079479454847}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 100
+  Length: 1500
 --- !u!114 &3610422422694899831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3533,33 +3669,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 4500
---- !u!114 &4469723104032876194
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Ship/PickaxeHit
-  m_EditorClassIdentifier: 
-  Path: event:/Ship/PickaxeHit
-  Guid:
-    Data1: -574370882
-    Data2: 1163326988
-    Data3: 129291182
-    Data4: -288697528
-  Banks:
-  - {fileID: 4950403079479454847}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 1500
 --- !u!114 &4510584509529942887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3710,10 +3819,10 @@ MonoBehaviour:
   Path: AbyssalDepthsFMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638250178530379707
+  lastModified: 638251051146125287
   FileSizes:
   - Name: Desktop
-    Value: 5438976
+    Value: 5980192
   Exists: 1
 --- !u!114 &5002094611560859596
 MonoBehaviour:
@@ -3892,7 +4001,7 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 20
+  MaxDistance: 100
   Length: 1250
 --- !u!114 &5885026039756806624
 MonoBehaviour:
@@ -4001,7 +4110,7 @@ MonoBehaviour:
   Parameters:
   - {fileID: 5390295821996714335}
   MinDistance: 1
-  MaxDistance: 20
+  MaxDistance: 10000
   Length: 8000
 --- !u!114 &6451265096631042350
 MonoBehaviour:
@@ -4109,7 +4218,7 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 550
+  MaxDistance: 100
   Length: 2500
 --- !u!114 &6860278359212568391
 MonoBehaviour:

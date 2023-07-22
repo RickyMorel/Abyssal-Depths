@@ -21,6 +21,7 @@ public class AIHealth : PlayerHealth
 
     private GAgent _gAgent;
     private AIInteractionController _interactionController;
+    private AIStateMachine _stateMachine;
     private Rigidbody _rb;
     private MeshTarget _meshTarget;
     private Coroutine _microPauseCoroutine;
@@ -45,6 +46,7 @@ public class AIHealth : PlayerHealth
         _gAgent = GetComponent<GAgent>();
         _interactionController = GetComponent<AIInteractionController>();
         _rb = GetComponent<Rigidbody>();
+        _stateMachine = GetComponent<AIStateMachine>();
 
         _meshTarget = GetComponentInChildren<MeshTarget>();
         if(_meshTarget != null) { _meshTarget.enabled = false; }
@@ -110,6 +112,8 @@ public class AIHealth : PlayerHealth
 
         if (_isBoss) { InvokeBossDiedEvent(); }
 
+        _stateMachine.AIAudio.PlayDieSFX();
+
         Invoke(nameof(DisableSelf), 0.5f);
     }
 
@@ -157,6 +161,13 @@ public class AIHealth : PlayerHealth
     {
         _gAgent.CancelPreviousActions();
         _interactionController.CheckExitInteraction();
+    }
+
+    public override void PlayDamageFX()
+    {
+        base.PlayDamageFX();
+
+        _stateMachine.AIAudio.PlayBloodSFX();
     }
 
     private void DisableSelf()

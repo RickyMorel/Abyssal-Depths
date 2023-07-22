@@ -1,3 +1,4 @@
+using FMODUnity;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -265,7 +266,7 @@ public class Damageable : MonoBehaviour
         _maxHealth = newMaxHealth;
     }
 
-    public void PlayDamageFX()
+    public virtual void PlayDamageFX()
     {
         if (_damageParticles != null) { _damageParticles.Play(); }
 

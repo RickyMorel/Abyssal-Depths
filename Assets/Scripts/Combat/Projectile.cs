@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +19,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] private GameObject _muzzleFlash;
     [SerializeField] protected bool _shouldUnparentParticle = false;
     [SerializeField] protected bool _shakeCameraOnHit = false;
+    [SerializeField] private EventReference _impactSfx;
 
     #endregion
 
@@ -85,6 +87,12 @@ public class Projectile : MonoBehaviour
         GameAssetsManager.Instance.ChipDataSO.ChangeParticleColor(_particles[0], _damageTypes[0], _weapon.ChipLevel); 
     }
 
+    private void OnDestroy()
+    {
+        GameAudioManager.Instance.PlaySound(_impactSfx, transform.position);
+    }
+
+    #endregion
     private void OnCollisionEnter(Collision collision)
     {
         if (Damageable.IsOwnDamage(collision.collider, gameObject)) { return; }
@@ -165,5 +173,4 @@ public class Projectile : MonoBehaviour
         Destroy(gameObject);
     }
 
-    #endregion
 }

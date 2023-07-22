@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 public class WeaponShoot : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class WeaponShoot : MonoBehaviour
     [Header("Stats")]
     [SerializeField] protected float _recoilForce = 2.5f;
     [SerializeField] protected float _timeBetweenShots = 0.2f;
+    
+    [Header("Sounds")]
+    [SerializeField] private EventReference _shootingSfx;
 
     [Header("FX")]
     [SerializeField] private GameObject _projectileShellPrefab;
@@ -69,6 +73,7 @@ public class WeaponShoot : MonoBehaviour
         if (_timeBetweenShots > _timeSinceLastShot) { return; }
 
         _timeSinceLastShot = 0f;
+        GameAudioManager.Instance.PlaySound(_shootingSfx, transform.position);
         InstantiateProjectile(_weapon.ShootTransforms[0]);
 
         Ship.Instance.AddForceToShip(-_weapon.TurretHead.transform.forward * _recoilForce, ForceMode.Impulse);

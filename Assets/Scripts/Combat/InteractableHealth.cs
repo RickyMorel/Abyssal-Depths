@@ -1,3 +1,4 @@
+using FMOD.Studio;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -38,6 +39,8 @@ public class InteractableHealth : Damageable
     private GameObject _currentRepairCanvas;
     private GameObject _currentRepairStatePopup;
     private int _partLeftToRepair = 0;
+    private EventInstance _brokenSfx;
+    private EventInstance _fixingSfx;
 
     #endregion
 
@@ -59,6 +62,9 @@ public class InteractableHealth : Damageable
         base.Start();
 
         _originalOutlineColor = _interactable.Outline.OutlineColor;
+
+        _brokenSfx = GameAudioManager.Instance.CreateSoundInstance(GameAudioManager.Instance.AttackMonitorBrokenSfx, transform);
+        _fixingSfx = GameAudioManager.Instance.CreateSoundInstance(GameAudioManager.Instance.FixingInteractableSfx, transform);
     }
 
     private void OnDestroy()
@@ -123,6 +129,8 @@ public class InteractableHealth : Damageable
         _currentRepairPopup = RepairPopup.Create(transform, _particleSpawnTransform.localPosition + new Vector3(0f, -0.8f, 0f), _timeToFix - _timeSpentFixing).gameObject;
 
         _interactable.CanUse = false;
+
+        _fixingSfx.start();
     }
 
     private void TryStopFix()
@@ -130,6 +138,8 @@ public class InteractableHealth : Damageable
         if (_currentRepairPopup != null) { Destroy(_currentRepairPopup); }
 
         if (_canUseWhenBroken) { _interactable.CanUse = true; }
+
+        _fixingSfx.stop(STOP_MODE.ALLOWFADEOUT);
     }
 
     public void FixInteractable(bool usedItems = true)
@@ -150,6 +160,10 @@ public class InteractableHealth : Damageable
 
         AddHealth((int)MaxHealth);
 
+        _brokenSfx.stop(STOP_MODE.ALLOWFADEOUT);
+        GameAudioManager.Instance.PlaySound(GameAudioManager.Instance.FixedInteractableSfx, transform.position);
+        GameAudioManager.Instance.PlaySound(GameAudioManager.Instance.InteractableOnlineSfx, transform.position);
+        
         CreateRepairStatePopup(true);
 
         _interactable.CanUse = true;
@@ -203,6 +217,9 @@ public class InteractableHealth : Damageable
             _particleSpawnTransform.localPosition.z);
 
         _currentParticles.transform.parent = _particleSpawnTransform;
+
+        _brokenSfx.start();
+        GameAudioManager.Instance.PlaySound(GameAudioManager.Instance.InteractableOfflinefx, transform.position);
 
         SpawnFixParts();
     }

@@ -58,6 +58,7 @@ public class ItemPickup : MonoBehaviour
     {
         _collisionParticles.transform.position = collision.contacts[0].point;
         _collisionParticles.Play();
+        GameAudioManager.Instance.PlaySound(GameAudioManager.Instance.ItemDropSfx, transform.position);
     }
 
     #endregion
@@ -76,11 +77,13 @@ public class ItemPickup : MonoBehaviour
     {
         _prevPlayerCarryController = playerCarryController;
         playerCarryController.CarryItem(this);
+        GameAudioManager.Instance.PlaySound(GameAudioManager.Instance.ItemPickUpSfx, transform.position);
     }
 
     public void PickUpSingle(PlayerCarryController playerCarryController)
     {
         _prevPlayerCarryController = playerCarryController;
         playerCarryController.CarrySingle(this);
+        GameAudioManager.Instance.PlaySound(GameAudioManager.Instance.ItemPickUpSfx, transform.position);
     }
 }

@@ -55,6 +55,8 @@ public class AICombat : PlayerCombat
         Projectile projectile = newProjectile.GetComponent<Projectile>();
         projectile.Initialize(tag, transform);
         projectile.AICombatID = _enemyDamageDataID;
+
+        _gAgent.StateMachine.AIAudio.PlayShootSFX();
     }
 
     public void EnablePushAttack()
@@ -92,5 +94,7 @@ public class AICombat : PlayerCombat
         if (_gAgent.Beliefs.HasState("aggro")) { return; }
 
         _gAgent.Beliefs.AddState("aggro", 1);
+
+        _gAgent.StateMachine.AIAudio.PlayShootSFX();
     }
 }

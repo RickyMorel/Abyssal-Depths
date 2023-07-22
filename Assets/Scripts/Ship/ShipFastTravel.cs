@@ -1,3 +1,4 @@
+using FMOD.Studio;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -31,6 +32,7 @@ public class ShipFastTravel : MonoBehaviour
     private Ship _mainShip;
 
     private CameraManager _cameraManager;
+    private EventInstance _fastTravelGoSfx;
 
     #endregion
 
@@ -56,6 +58,7 @@ public class ShipFastTravel : MonoBehaviour
         _cameraManager = FindObjectOfType<CameraManager>();
         TimelinesManager.Instance.BlackHoleParticle.gameObject.transform.SetParent(_mainShip.transform);
         TimelinesManager.Instance.BlackHoleParticle.gameObject.transform.localPosition = Vector3.zero;
+        _fastTravelGoSfx = GameAudioManager.Instance.CreateSoundInstance(GameAudioManager.Instance.FastTravelGo, transform);
 
         _mainShip.OnRespawn += HandleRespawn;
     }
@@ -117,7 +120,11 @@ public class ShipFastTravel : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
 
-        if (SceneManager.GetActiveScene().name != "SpaceStations") { _cameraManager.ToggleCamera(true); }
+        if (SceneManager.GetActiveScene().name != "SpaceStations") 
+        {
+            _cameraManager.ToggleCamera(true);
+            GameAudioManager.Instance.PlaySound(GameAudioManager.Instance.FastTravelArrive, transform.position);
+        }
         else { _cameraManager.ToggleCamera(false); }
     }
 
@@ -153,11 +160,14 @@ public class ShipFastTravel : MonoBehaviour
         yield return new WaitForSeconds(4);
         TimelinesManager.Instance.StartFastTravelTimeline.Play();
         TimelinesManager.Instance.BlackHoleParticle.Play();
+        _fastTravelGoSfx.start();
         //Stops the animation and takes the main ship out of its parent
         yield return new WaitForSeconds(2);
         TimelinesManager.Instance.StartFastTravelTimeline.Stop();
 
         SceneLoader.LoadSceneOperation(_fastTravelNPC.CurrentFastTravelLocation.SceneIndex);
+
+        _fastTravelGoSfx.stop(STOP_MODE.ALLOWFADEOUT);
 
         TimelinesManager.Instance.EndFastTravelTimeline.Play();
         _mainShip.gameObject.transform.SetParent(null);

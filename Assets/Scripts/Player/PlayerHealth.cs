@@ -69,6 +69,9 @@ public class PlayerHealth : Damageable
 
     private IEnumerator HurtCoroutine(float hurtTime)
     {
+        GameAudioManager.Instance.PlaySound(GameAudioManager.Instance.PunchImpactSfx, transform.position);
+        GameAudioManager.Instance.PlaySound(GameAudioManager.Instance.StunnedSfx, transform.position);
+
         _isHurt = true;
 
         yield return new WaitForSeconds(hurtTime);

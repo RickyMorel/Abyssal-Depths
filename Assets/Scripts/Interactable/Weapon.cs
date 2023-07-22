@@ -51,8 +51,6 @@ public class Weapon : RotationalInteractable
     public override void Start()
     {
         base.Start();
-
-        _rotationX = (_rotationLimits.x + _rotationLimits.y)/2;
     }
 
     public override void Update()

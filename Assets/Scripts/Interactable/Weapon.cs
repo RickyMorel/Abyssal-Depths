@@ -11,6 +11,7 @@ public class Weapon : RotationalInteractable
 
     [Header("Rotation Variables")]
     [SerializeField] private Vector2 _rotationLimits;
+    [SerializeField] private Transform _rotationChecker;
 
     #endregion
 
@@ -65,4 +66,23 @@ public class Weapon : RotationalInteractable
     }
 
     #endregion
+
+    public override void Rotate()
+    {
+        if (CurrentPlayer.MoveDirection.magnitude == 0) { return; }
+        
+        _currentAngle = _rotationSpeed * CurrentPlayer.MoveDirection.x * Time.deltaTime;
+        _rotationChecker.RotateAround(_pivotTransform.position, Vector3.forward, -_currentAngle);
+
+        if (_rotationChecker.localEulerAngles.x <= 0 || _rotationChecker.localEulerAngles.x >= 180) 
+        {
+            _rotationChecker.position = RotatorTransform.position;
+            _rotationChecker.rotation = RotatorTransform.rotation;
+            return; 
+        }
+        
+        RotatorTransform.RotateAround(_pivotTransform.position, Vector3.forward, -_currentAngle);
+        _rotationChecker.position = RotatorTransform.position;
+        _rotationChecker.rotation = RotatorTransform.rotation;
+    }
 }

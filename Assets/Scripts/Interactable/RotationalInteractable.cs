@@ -7,15 +7,15 @@ public class RotationalInteractable : Upgradable
     #region Editor Fields
 
     [Header("Rotator Parameters")]
-    [SerializeField] private float _rotationSpeed = 20f;
-    [SerializeField] private Transform _pivotTransform;
+    [SerializeField] protected float _rotationSpeed = 20f;
+    [SerializeField] protected Transform _pivotTransform;
 
     #endregion
 
     #region Private Variables
 
     private RotationalInteractableHumble _rotationalHumble;
-    private float _currentAngle;
+    protected float _currentAngle;
     private float _radius;
 
     #endregion

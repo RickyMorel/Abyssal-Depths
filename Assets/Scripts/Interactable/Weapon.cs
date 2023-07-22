@@ -3,14 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : Upgradable
+public class Weapon : RotationalInteractable
 {
     #region Editor Fields
 
     [SerializeField] private int _weaponId = -1;
 
     [Header("Rotation Variables")]
-    [SerializeField] private float _rotationSpeed = 10f;
     [SerializeField] private Vector2 _rotationLimits;
 
     #endregion
@@ -18,7 +17,6 @@ public class Weapon : Upgradable
     #region Private Variables
 
     private WeaponHumble _weaponHumble;
-    private float _rotationX;
     private bool _shouldRotate = true;
 
     #endregion
@@ -57,14 +55,10 @@ public class Weapon : Upgradable
         _rotationX = (_rotationLimits.x + _rotationLimits.y)/2;
     }
 
-    private void Update()
+    public override void Update()
     {
-        if (CurrentPlayer == null) { return; }
-        
-        if (CanUse == false) { return; }
-
+        base.Update();
         _weaponHumble?.WeaponShoot?.CheckShootInput();
-        CheckRotationInput();
     }
 
     private void OnDestroy()
@@ -73,29 +67,4 @@ public class Weapon : Upgradable
     }
 
     #endregion
-
-    private void CheckRotationInput()
-    {
-        if(!DoesRotate() || !_shouldRotate) { return; }
-
-        if (CurrentPlayer.MoveDirection.x == 0) { return; }
-
-        _weaponHumble.TurretHead.localEulerAngles = _weaponHumble.CalculateWeaponLocalRotation(ref _rotationX, CurrentPlayer.MoveDirection.x, _rotationSpeed, _rotationLimits);
-    }
-
-    private bool DoesRotate()
-    {
-        if(_selectedUpgrade == null) { return true; }
-
-        //if is harpoon gun or lightsaber
-        if (_selectedUpgrade.UpgradeSO.Socket_1 == ChipType.Base && _selectedUpgrade.UpgradeSO.Socket_2 == ChipType.Electric) { return true; }
-        if (_selectedUpgrade.UpgradeSO.Socket_1 == ChipType.Electric && _selectedUpgrade.UpgradeSO.Socket_2 == ChipType.Base) { return true; }
-        if (_selectedUpgrade.UpgradeSO.Socket_1 == ChipType.Base && _selectedUpgrade.UpgradeSO.Socket_2 == ChipType.Laser) { return true; }
-        if (_selectedUpgrade.UpgradeSO.Socket_1 == ChipType.Laser && _selectedUpgrade.UpgradeSO.Socket_2 == ChipType.Base) { return true; }
-
-        //if is any other base weapon
-        if (_selectedUpgrade.UpgradeSO.Socket_1 == ChipType.Base || _selectedUpgrade.UpgradeSO.Socket_2 == ChipType.Base) { return false; }
-
-        return true;
-    }
 }

@@ -27,7 +27,7 @@ public class ConstantLaser : WeaponShoot
     {
         base.Start();
 
-        _constantLaser = Instantiate(_weapon.ProjectilePrefab, _shootTransforms[0].position, _weapon.TurretHead.rotation);
+        _constantLaser = Instantiate(_weapon.ProjectilePrefab, _shootTransforms[0].position, _turretHead.rotation);
         _laserBeam = _constantLaser.transform.GetChild(0).gameObject;
         _laserBall = _constantLaser.transform.GetChild(1).gameObject;
         _laserBall.transform.GetChild(1).gameObject.SetActive(false);
@@ -62,8 +62,8 @@ public class ConstantLaser : WeaponShoot
 
     public override void CheckShootInput()
     {
-        _constantLaser.transform.rotation = _weapon.TurretHead.transform.rotation;
-        _constantLaser.transform.position = _weapon.TurretHead.transform.position;
+        _constantLaser.transform.rotation = _turretHead.transform.rotation;
+        _constantLaser.transform.position = _turretHead.transform.position;
 
         if (_weapon.CurrentPlayer.IsUsing && !_laserBeam.activeSelf && (_shootLaserState == ShootLaserState.CanShoot || _shootLaserState == ShootLaserState.ChargingUp)) { ShootLaserBeam(); }
         else if (!_weapon.CurrentPlayer.IsUsing && _laserBeam.activeSelf && (_shootLaserState == ShootLaserState.CanStop || _shootLaserState == ShootLaserState.ChargingDown)) { StopLaserBeam(); _laserBallScaleTime = 1; }

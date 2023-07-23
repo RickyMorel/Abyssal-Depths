@@ -24,7 +24,7 @@ public class LaserMinigun : WeaponShoot
     public override void Start()
     {
         base.Start();
-        _barrel = _weapon.TurretHead.GetChild(0);
+        _barrel = _turretHead.GetChild(0);
     }
 
     public override void Update()

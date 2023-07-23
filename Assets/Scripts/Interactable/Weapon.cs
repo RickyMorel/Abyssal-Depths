@@ -20,6 +20,7 @@ public class Weapon : RotationalInteractable
     #region Private Variables
 
     private WeaponHumble _weaponHumble;
+    private bool _canShoot = true;
     private bool _shouldRotate = true;
 
     #endregion
@@ -28,7 +29,6 @@ public class Weapon : RotationalInteractable
 
     public int WeaponId => _weaponId;
     public GameObject ProjectilePrefab => _weaponHumble.ProjectilePrefab;
-    public Transform TurretHead => _weaponHumble.TurretHead;
     public WeaponHeadID WeaponHeadIdObj => _weaponHead;
 
     #endregion
@@ -36,6 +36,7 @@ public class Weapon : RotationalInteractable
     #region Getters and Setters
 
     public bool ShouldRotate { get { return _shouldRotate; } set { _shouldRotate = value; } }
+    public bool CanShoot { get { return _canShoot; } set { _canShoot = value; } }
 
     #endregion
 
@@ -60,13 +61,15 @@ public class Weapon : RotationalInteractable
     {
         base.Update();
 
-        _weaponHumble?.WeaponShoot?.CheckShootInput();
+        if (!_canShoot) { return; }
 
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            Transform newWeapon = _weaponHead.SwapWeaponId().transform;
-            SetRotatorTransform(newWeapon);
-        }
+        _weaponHumble?.WeaponShoot?.CheckShootInput();
+    }
+
+    public void SwapWeapon()
+    {
+        Transform newWeapon = _weaponHead.SwapWeaponId().transform;
+        SetRotatorTransform(newWeapon);
     }
 
     private void OnDestroy()

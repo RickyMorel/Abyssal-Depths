@@ -28,9 +28,11 @@ public class WeaponHeadID : MonoBehaviour
 
     public WeaponHeadID SwapWeaponId()
     {
-        _weaponId = Mathf.Clamp(_weaponId + 1, 1, 3);
+        int lastWeaponIndex = Ship.Instance.ShipWeaponManager.Weapons.Length + 1;
 
-        if (_weaponId == 3) { _weaponId = 1; }
+        _weaponId = Mathf.Clamp(_weaponId + 1, 1, lastWeaponIndex);
+
+        if (_weaponId == lastWeaponIndex) { _weaponId = 1; }
 
         Weapon weapon = UpdateWeaponId();
 

@@ -9,6 +9,7 @@ public class WeaponShoot : MonoBehaviour
 
     [Header("Transforms")]
     [SerializeField] protected Transform[] _shootTransforms;
+    [SerializeField] protected Transform _turretHead;
 
     [Header("Stats")]
     [SerializeField] protected float _recoilForce = 2.5f;
@@ -44,7 +45,8 @@ public class WeaponShoot : MonoBehaviour
 
     public virtual void Start()
     {
-        _weaponHead = Weapon.TurretHead;
+        _turretHead = transform.GetChild(0);
+        _weaponHead = _turretHead;
         if(_weaponHead != null) { _originalWeaponHeadPosition = _weaponHead.transform.localPosition; }
         _shootBubbleParticles = Instantiate(GameAssetsManager.Instance.ShootBubbleParticles, _shootTransforms[0]).GetComponent<ParticleSystem>();
         _shootBubbleParticles.transform.localPosition = Vector3.zero;
@@ -81,7 +83,7 @@ public class WeaponShoot : MonoBehaviour
         GameAudioManager.Instance.PlaySound(_shootingSfx, transform.position);
         InstantiateProjectile(_shootTransforms[0]);
 
-        Ship.Instance.AddForceToShip(-_weapon.TurretHead.transform.forward * _recoilForce, ForceMode.Impulse);
+        Ship.Instance.AddForceToShip(-_turretHead.transform.forward * _recoilForce, ForceMode.Impulse);
 
         PlayShootFX();
     }
@@ -142,11 +144,11 @@ public class WeaponShoot : MonoBehaviour
     {
         if(_projectileShellPrefab == null) { yield break; }
 
-        GameObject newShell = Instantiate(_projectileShellPrefab, Weapon.TurretHead.position, Quaternion.identity);
+        GameObject newShell = Instantiate(_projectileShellPrefab, _turretHead.position, Quaternion.identity);
 
         Rigidbody rb = newShell.GetComponent<Rigidbody>();
 
-        rb.AddForce(Weapon.TurretHead.up * 20f, ForceMode.Impulse);
+        rb.AddForce(_turretHead.up * 20f, ForceMode.Impulse);
 
         yield return new WaitForSeconds(30f);
 

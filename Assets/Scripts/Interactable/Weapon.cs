@@ -57,6 +57,11 @@ public class Weapon : RotationalInteractable
     public override void Update()
     {
         base.Update();
+
+        if (CurrentPlayer == null) { return; }
+
+        if (!CanUse) { return; }
+
         _weaponHumble?.WeaponShoot?.CheckShootInput();
     }
 
@@ -74,7 +79,7 @@ public class Weapon : RotationalInteractable
         _currentAngle = _rotationSpeed * CurrentPlayer.MoveDirection.x * Time.deltaTime;
         _rotationChecker.RotateAround(_pivotTransform.position, Vector3.forward, -_currentAngle);
 
-        if (_rotationChecker.localEulerAngles.x <= 0 || _rotationChecker.localEulerAngles.x >= 180) 
+        if (_rotationChecker.localEulerAngles.x <= 10 || _rotationChecker.localEulerAngles.x >= 170) 
         {
             _rotationChecker.position = RotatorTransform.position;
             _rotationChecker.rotation = RotatorTransform.rotation;

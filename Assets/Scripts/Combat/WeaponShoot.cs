@@ -62,6 +62,9 @@ public class WeaponShoot : MonoBehaviour
 
     public virtual void CheckShootInput()
     {
+        Debug.Log(_weapon);
+        Debug.Log(_weapon.CurrentPlayer);
+        Debug.Log(_weapon.CurrentPlayer.IsUsing);
         if (_weapon.CurrentPlayer.IsUsing)
         {
             Shoot();

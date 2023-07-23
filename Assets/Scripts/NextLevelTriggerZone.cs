@@ -1,3 +1,4 @@
+using FMOD.Studio;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -34,6 +35,7 @@ public class NextLevelTriggerZone : MonoBehaviour
     private PlayerCarryController _playerCarryController;
     private bool _isInPhase2 = false;
     private bool _isInPhase3 = false;
+    private EventInstance _portalShakingSfx;
 
     #endregion
 
@@ -48,6 +50,7 @@ public class NextLevelTriggerZone : MonoBehaviour
 
     private void Start()
     {
+        _portalShakingSfx = GameAudioManager.Instance.CreateSoundInstance(GameAudioManager.Instance.PortalGateShaking, transform);
         _portalKeyInteractionCanvas.gameObject.SetActive(false);
     }
 
@@ -83,6 +86,8 @@ public class NextLevelTriggerZone : MonoBehaviour
         if (_isInteracting) { return; }
 
         _isInteracting = true;
+
+        GameAudioManager.Instance.PlaySound(GameAudioManager.Instance.PortalGateInteraction, transform.position);
 
         PortalPhase1();
     }
@@ -126,6 +131,7 @@ public class NextLevelTriggerZone : MonoBehaviour
     {
         _playableDirector.playableAsset = _entranceTimeline;
         _playableDirector.Play();
+        _portalShakingSfx.start();
 
         ShipCamera.Instance.ShakeCamera(2, 5, 30);
 
@@ -133,6 +139,8 @@ public class NextLevelTriggerZone : MonoBehaviour
         _rockDustParticle.Play();
 
         yield return new WaitForSeconds(30f);
+
+        _portalShakingSfx.stop(STOP_MODE.ALLOWFADEOUT);
 
         _rockDustParticle.Stop();
         _isInPhase3 = false;
@@ -144,6 +152,7 @@ public class NextLevelTriggerZone : MonoBehaviour
     {
         _playableDirector.playableAsset = _openTimeline;
         _playableDirector.Play();
+        GameAudioManager.Instance.PlaySound(GameAudioManager.Instance.PortalGateOpening, transform.position);
 
         _portalParticle.Play();
         _updateCheck = false;

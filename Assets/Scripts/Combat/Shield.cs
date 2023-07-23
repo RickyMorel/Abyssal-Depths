@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using UnityEngine;
 
@@ -5,9 +6,13 @@ public class Shield : MonoBehaviour
 {
     #region Editor Fields
 
+    [Header("Stats")]
     [SerializeField] private float _enemyPushForce = 20f;
     [SerializeField] private float _shipPushForce = 10f;
+
+    [Header("FX")]
     [SerializeField] private ParticleSystem _pushParticles;
+    [SerializeField] private EventReference _shieldBounceSfx;
 
     #endregion
 
@@ -46,6 +51,7 @@ public class Shield : MonoBehaviour
         projectile.ReflectFromShield(_shipHealth.tag);
 
         _pushParticles.Play();
+        GameAudioManager.Instance.PlaySound(_shieldBounceSfx, transform.position);
     }
 
     private void CheckForSceneCollision(Collision collision)
@@ -81,6 +87,7 @@ public class Shield : MonoBehaviour
         _shipHealth.Rb.AddForce(pushDir.normalized * _shipHealth.Rb.mass * _shipPushForce, ForceMode.Impulse);
 
         _pushParticles.Play();
+        GameAudioManager.Instance.PlaySound(_shieldBounceSfx, transform.position);
     }
 
     private void PushEnemy(AIStateMachine aIStateMachine, Collision collision)
@@ -95,6 +102,7 @@ public class Shield : MonoBehaviour
         _timeSincePushEnemy = 0f;
 
         _pushParticles.Play();
+        GameAudioManager.Instance.PlaySound(_shieldBounceSfx, transform.position);
 
         //Makes ship invunerable so ship doesn't recive damage when hitting enemies with the shield
         Ship.Instance.ShipHealth.SetInvunerableToCrash(1f);

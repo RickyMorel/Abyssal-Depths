@@ -30,6 +30,8 @@ public class PickaxeTrigger : MonoBehaviour
         minable.Damage(damage);
 
         _pickaxeInteractable.ApplyImpactForce();
+
+        GameAudioManager.Instance.PlaySound(GameAudioManager.Instance.PickaxeImpactSfx, transform.position);
     }
 
     private void CheckForEnemy(Collider other)

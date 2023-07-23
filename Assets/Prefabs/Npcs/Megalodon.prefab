@@ -28241,6 +28241,7 @@ GameObject:
   - component: {fileID: 7451160490255089617}
   - component: {fileID: 8177713152652336318}
   - component: {fileID: 2616697968569662506}
+  - component: {fileID: 9212256697611140783}
   m_Layer: 16
   m_Name: Megalodon
   m_TagString: Enemy
@@ -28452,7 +28453,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _goalDistance: 12
-  _actionsQueueList: []
   _target: {fileID: 0}
   Actions: []
   CurrentAction: {fileID: 0}
@@ -28700,6 +28700,39 @@ MonoBehaviour:
   - Item: {fileID: 11400000, guid: 3ad86382688a18148b29e7284765e83c, type: 2}
     Amount: 1
   _canLoot: 0
+--- !u!114 &9212256697611140783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8177713152652336292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4222aa5f1b3e0134b9d0885d228d4d74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shootSfx:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  _dieSfx:
+    Guid:
+      Data1: 788027243
+      Data2: 1090656150
+      Data3: -728809596
+      Data4: 1104637682
+    Path: event:/Monsters/Megalodon/Meg_Die
+  _bloodSplatSfx:
+    Guid:
+      Data1: 273219222
+      Data2: 1104413679
+      Data3: -1374389321
+      Data4: 786647119
+    Path: event:/Monsters/DefaultBloodSplat
 --- !u!1 &8205080243867600555
 GameObject:
   m_ObjectHideFlags: 0

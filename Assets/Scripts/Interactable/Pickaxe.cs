@@ -1,3 +1,4 @@
+using FMOD.Studio;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,10 +19,18 @@ public class Pickaxe : RotationalInteractable
 
     private float _topSpeed;
     private bool _isBoosting = false;
+    private EventInstance _boostSfx;
 
     #endregion
 
     #region Unity Loops
+
+    public override void Start()
+    {
+        base.Start();
+
+        _boostSfx = GameAudioManager.Instance.CreateSoundInstance(GameAudioManager.Instance.PickaxeBoostSfx, Ship.Instance.transform);
+    }
 
     public override void Update()
     {
@@ -41,10 +50,29 @@ public class Pickaxe : RotationalInteractable
     {
         BoostPickaxe();
         ApplyDrag();
-        if(CurrentAngle < 0) { SetIsBoosting(false); }
-    }   
+        AdjustBoostSfx();
+        if (CurrentAngle < 0) { SetIsBoosting(false); }
+    }
 
     #endregion
+
+    private void AdjustBoostSfx()
+    {
+        _boostSfx.getPlaybackState(out PLAYBACK_STATE playBackState);
+
+        if (CurrentAngle != 0f && playBackState != PLAYBACK_STATE.PLAYING)
+        {
+            _boostSfx.start();
+        }
+        else if (Mathf.Abs(CurrentAngle) < 0.5f)
+        {
+            _boostSfx.stop(STOP_MODE.ALLOWFADEOUT);
+        }
+
+        float speedPercentage = Mathf.Clamp(Mathf.Abs(CurrentAngle / _boostTopSpeed), 0f, 1f);
+
+        GameAudioManager.Instance.AdjustAudioParameter(_boostSfx, "BoostSpeed", speedPercentage);
+    }
 
     private void SetIsBoosting(bool isBoosting)
     {
@@ -55,9 +83,13 @@ public class Pickaxe : RotationalInteractable
         _isBoosting = CurrentAngle < 0 ? false : isBoosting;
 
         if (_isBoosting)
-            _pickaxeBoostParticles.Play();  
+        {
+            _pickaxeBoostParticles.Play();
+        }
         else
+        {
             _pickaxeBoostParticles.Stop();
+        }
     }
 
     private void ApplyDrag()

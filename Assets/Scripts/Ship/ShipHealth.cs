@@ -122,13 +122,13 @@ public class ShipHealth : Damageable
 
         _currentDamage = (int)CalculateCrashDamage(_rb, _crashDamageMultiplier);
         DamageWithoutDamageData((int)_currentDamage, collision.collider);
+        GameAudioManager.Instance.PlaySound(GameAudioManager.Instance.ShipCrashingSfx, transform.position);
         if (collision.gameObject.TryGetComponent(out AIHealth enemyHealth)) { enemyHealth.Damage((int)_currentDamage); }
 
         float currentSpeedPercentage = _prevVelocity / Ship.Instance.TopSpeed;
         float crashImpactPercentageRatio = 4 * currentSpeedPercentage;
         float impactAmplitude = 5f * crashImpactPercentageRatio;
         ShipCamera.Instance.ShakeCamera(impactAmplitude, 50f, 0.2f);
-
 
         Vector3 hitPos = collision.contacts[0].point;
         Instantiate(Ship.Instance.ShipStatsSO.ShipCrashParticles.gameObject, hitPos, Quaternion.identity);
@@ -202,6 +202,8 @@ public class ShipHealth : Damageable
 
     private IEnumerator FlickerRedLights()
     {
+        GameAudioManager.Instance.PlaySound(GameAudioManager.Instance.ShipSirenSlowSfx, transform.position);
+
         _redLights.SetActive(true);
 
         yield return new WaitForSeconds(0.5f);

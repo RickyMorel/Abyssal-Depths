@@ -38,7 +38,7 @@ Transform:
   - {fileID: 5223827938397189220}
   - {fileID: 7721388680221368963}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &6619427501007787638
 Rigidbody:
@@ -89,6 +89,14 @@ MonoBehaviour:
   _canLoot: 0
   _damageForce: 10
   _maxHealth: 12
+  _damageParticles: {fileID: 0}
+  _impactSfx:
+    Guid:
+      Data1: -1723462885
+      Data2: 1188692220
+      Data3: -2112909155
+      Data4: -630138833
+    Path: event:/Enivorment/Mining/Ore Impacts/CrystalImpact
 --- !u!1 &870161032068123915
 GameObject:
   m_ObjectHideFlags: 0

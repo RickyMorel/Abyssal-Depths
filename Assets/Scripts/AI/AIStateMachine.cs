@@ -6,6 +6,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(GAgent))]
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(AICombat))]
+[RequireComponent(typeof(AIAudio))]
 public class AIStateMachine : BaseStateMachine
 {
     #region Private Variables
@@ -13,6 +14,7 @@ public class AIStateMachine : BaseStateMachine
     private GAgent _gAgent;
     private NavMeshAgent _agent;
     private AICombat _aiCombat;
+    private AIAudio _aiAudio;
     private bool _isBouncingOffShield = false;
     private float _movementSpeed = 1f;
 
@@ -21,6 +23,7 @@ public class AIStateMachine : BaseStateMachine
     #region Public Properties
 
     public NavMeshAgent Agent => _agent;
+    public AIAudio AIAudio => _aiAudio;
     public AICombat AICombat => _aiCombat;
     public bool IsBouncingOffShield => _isBouncingOffShield;
 
@@ -33,6 +36,7 @@ public class AIStateMachine : BaseStateMachine
         _agent = GetComponent<NavMeshAgent>();
         _aiCombat = GetComponent<AICombat>();
         _gAgent = GetComponent<GAgent>();
+        _aiAudio = GetComponent<AIAudio>();
     }
 
     public override void Move()

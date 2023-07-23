@@ -66,7 +66,7 @@ public class LaserMinigun : WeaponShoot
 
         PlayShootFX();
 
-        if (_shootNumber < _weapon.ShootTransforms.Count - 1) 
+        if (_shootNumber < _shootTransforms.Length - 1) 
         { 
             _shootNumber++; 
             ProjectileShootFromOtherBarrels(_shootNumber);

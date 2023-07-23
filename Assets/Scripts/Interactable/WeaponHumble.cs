@@ -6,7 +6,6 @@ using UnityEngine;
 public class WeaponHumble : UpgradableHumble
 {
     public GameObject ProjectilePrefab { get; private set; }
-    public List<Transform> ShootTransforms { get; private set; } = new List<Transform>();
     public Transform TurretHead { get; private set; }
     public WeaponShoot WeaponShoot { get; private set; }
 
@@ -29,13 +28,6 @@ public class WeaponHumble : UpgradableHumble
         TurretHead = rotationChild;
 
         ProjectilePrefab = upgrade.UpgradeSO.ProjectilePrefab;
-
-        ShootTransforms.Clear();
-
-        for (int i = 0; i < upgrade.ShootTransform.Length; i++)
-        {
-            ShootTransforms.Add(upgrade.ShootTransform[i].transform);
-        }
 
         WeaponShoot = upgrade.UpgradeMesh.GetComponent<WeaponShoot>();
     }

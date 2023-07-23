@@ -93,4 +93,9 @@ public class RotationalInteractable : Upgradable
         _currentAngle = _rotationSpeed * CurrentPlayer.MoveDirection.x * Time.deltaTime;
         RotatorTransform.RotateAround(_pivotTransform.position, Vector3.forward, -_currentAngle);
     }
+
+    public void SetRotatorTransform(Transform newTransform)
+    {
+        RotatorTransform = newTransform;
+    }
 }

@@ -7,6 +7,9 @@ public class WeaponShoot : MonoBehaviour
 {
     #region Editor Fields
 
+    [Header("Transforms")]
+    [SerializeField] protected Transform[] _shootTransforms;
+
     [Header("Stats")]
     [SerializeField] protected float _recoilForce = 2.5f;
     [SerializeField] protected float _timeBetweenShots = 0.2f;
@@ -43,7 +46,7 @@ public class WeaponShoot : MonoBehaviour
     {
         _weaponHead = Weapon.TurretHead;
         if(_weaponHead != null) { _originalWeaponHeadPosition = _weaponHead.transform.localPosition; }
-        _shootBubbleParticles = Instantiate(GameAssetsManager.Instance.ShootBubbleParticles, _weapon.ShootTransforms[0]).GetComponent<ParticleSystem>();
+        _shootBubbleParticles = Instantiate(GameAssetsManager.Instance.ShootBubbleParticles, _shootTransforms[0]).GetComponent<ParticleSystem>();
         _shootBubbleParticles.transform.localPosition = Vector3.zero;
         _shootBubbleParticles.transform.localRotation = Quaternion.identity;   
     }
@@ -62,9 +65,8 @@ public class WeaponShoot : MonoBehaviour
 
     public virtual void CheckShootInput()
     {
-        Debug.Log(_weapon);
-        Debug.Log(_weapon.CurrentPlayer);
-        Debug.Log(_weapon.CurrentPlayer.IsUsing);
+        if(_weapon.CurrentPlayer == null) { return; }
+
         if (_weapon.CurrentPlayer.IsUsing)
         {
             Shoot();
@@ -77,7 +79,7 @@ public class WeaponShoot : MonoBehaviour
 
         _timeSinceLastShot = 0f;
         GameAudioManager.Instance.PlaySound(_shootingSfx, transform.position);
-        InstantiateProjectile(_weapon.ShootTransforms[0]);
+        InstantiateProjectile(_shootTransforms[0]);
 
         Ship.Instance.AddForceToShip(-_weapon.TurretHead.transform.forward * _recoilForce, ForceMode.Impulse);
 
@@ -86,12 +88,12 @@ public class WeaponShoot : MonoBehaviour
 
     public void ProjectileShootFromOtherBarrels(int shootNumber)
     {
-        InstantiateProjectile(_weapon.ShootTransforms[shootNumber]);
+        InstantiateProjectile(_shootTransforms[shootNumber]);
     }
 
     private void InstantiateProjectile(Transform transform)
     {
-        GameObject projectileInstance = Instantiate(_weapon.ProjectilePrefab, transform.position, _weapon.TurretHead.rotation);
+        GameObject projectileInstance = Instantiate(_weapon.ProjectilePrefab, transform.position, transform.rotation);
         projectileInstance.GetComponent<Projectile>().WeaponReference = _weapon;
     }
 
@@ -102,7 +104,7 @@ public class WeaponShoot : MonoBehaviour
 
     private IEnumerator PlayWeaponRecoilFX()
     {
-        Vector3 lookDir = (Weapon.ShootTransforms[0].position - transform.position).normalized;
+        Vector3 lookDir = (_shootTransforms[0].position - transform.position).normalized;
         Vector3 desiredRecoilPosition = _weaponHead.transform.localPosition +  -lookDir * _recoilVisual;
 
         float elapsedTime = 0;

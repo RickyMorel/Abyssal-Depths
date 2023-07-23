@@ -8,6 +8,7 @@ public class Weapon : RotationalInteractable
     #region Editor Fields
 
     [SerializeField] private int _weaponId = -1;
+    [SerializeField] private WeaponHeadID _weaponHead;
 
     [Header("Rotation Variables")]
     [SerializeField] private Vector2 _rotationLimits;
@@ -26,8 +27,8 @@ public class Weapon : RotationalInteractable
 
     public int WeaponId => _weaponId;
     public GameObject ProjectilePrefab => _weaponHumble.ProjectilePrefab;
-    public List<Transform> ShootTransforms => _weaponHumble.ShootTransforms;
     public Transform TurretHead => _weaponHumble.TurretHead;
+    public WeaponHeadID WeaponHeadIdObj => _weaponHead;
 
     #endregion
 
@@ -58,11 +59,13 @@ public class Weapon : RotationalInteractable
     {
         base.Update();
 
-        if (CurrentPlayer == null) { return; }
-
-        if (!CanUse) { return; }
-
         _weaponHumble?.WeaponShoot?.CheckShootInput();
+
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            Transform newWeapon = _weaponHead.SwapWeaponId().transform;
+            SetRotatorTransform(newWeapon);
+        }
     }
 
     private void OnDestroy()

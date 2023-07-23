@@ -27,7 +27,7 @@ public class ConstantLaser : WeaponShoot
     {
         base.Start();
 
-        _constantLaser = Instantiate(_weapon.ProjectilePrefab, _weapon.ShootTransforms[0].position, _weapon.TurretHead.rotation);
+        _constantLaser = Instantiate(_weapon.ProjectilePrefab, _shootTransforms[0].position, _weapon.TurretHead.rotation);
         _laserBeam = _constantLaser.transform.GetChild(0).gameObject;
         _laserBall = _constantLaser.transform.GetChild(1).gameObject;
         _laserBall.transform.GetChild(1).gameObject.SetActive(false);

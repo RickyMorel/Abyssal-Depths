@@ -13,6 +13,7 @@ public class Weapon : RotationalInteractable
     [Header("Rotation Variables")]
     [SerializeField] private Vector2 _rotationLimits;
     [SerializeField] private Transform _rotationChecker;
+    [SerializeField] private bool _canRotate360 = false;
 
     #endregion
 
@@ -82,7 +83,7 @@ public class Weapon : RotationalInteractable
         _currentAngle = _rotationSpeed * CurrentPlayer.MoveDirection.x * Time.deltaTime;
         _rotationChecker.RotateAround(_pivotTransform.position, Vector3.forward, -_currentAngle);
 
-        if (_rotationChecker.localEulerAngles.x <= 10 || _rotationChecker.localEulerAngles.x >= 170) 
+        if (!_canRotate360 & (_rotationChecker.localEulerAngles.x <= 10 || _rotationChecker.localEulerAngles.x >= 170)) 
         {
             _rotationChecker.position = RotatorTransform.position;
             _rotationChecker.rotation = RotatorTransform.rotation;

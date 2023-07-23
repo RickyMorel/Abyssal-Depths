@@ -100,7 +100,7 @@ public class Damageable : MonoBehaviour
         if (!other.gameObject.TryGetComponent(out Projectile projectile)) { return; }
 
         //We don't want the projectile to damage its user
-        if (IsOwnDamage(other)) { return; }
+        if (IsOwnDamage(other, gameObject)) { return; }
 
         _damageData = new DamageData(projectile.DamageData);
         ChangeColorForDamageTypeParticles(DamageData.ChipLevel);
@@ -152,7 +152,7 @@ public class Damageable : MonoBehaviour
         }
     }
 
-    public bool IsOwnDamage(Collider other)
+    public bool IsOwnDamage(Collider other, GameObject gameObject)
     {
         //Turrets can't harm their own ship
         if (other.gameObject.tag == "Untagged" && gameObject.tag == "MainShip") { return true; }

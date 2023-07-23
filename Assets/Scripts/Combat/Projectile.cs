@@ -93,6 +93,7 @@ public class Projectile : MonoBehaviour
     }
 
     #endregion
+
     private void OnCollisionEnter(Collision collision)
     {
         if (Damageable.IsOwnDamage(collision.collider, gameObject)) { return; }

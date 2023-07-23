@@ -124,6 +124,7 @@ public class PlayerJoinManager : MonoBehaviour
         _playerInputs[_playerJoinNPCIndex].IsPlayerActive = false;
         playerInput.CanPlayerSpawn = false;
         _playerJoinNPC[_playerJoinNPCIndex].PlayerJoinTimelines[indexAux].Play();
+        GameAudioManager.Instance.PlaySound(GameAudioManager.Instance.CryoPodOpen, _playerJoinNPC[_playerJoinNPCIndex].SpawnLocations[indexAux].transform.position);
 
         yield return new WaitForSeconds(0.5f);
 

@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,7 @@ public class Minable : Lootable
     [SerializeField] private float _damageForce;
     [SerializeField] private float _maxHealth;
     [SerializeField] private ParticleSystem _damageParticles;
+    [SerializeField] private EventReference _impactSfx;
 
     #endregion
 
@@ -59,6 +61,8 @@ public class Minable : Lootable
         DamagePopup.Create(transform.position, (int)damage, DamageTypes.None, true);
 
         _damageParticles.Play();
+
+        GameAudioManager.Instance.PlaySound(_impactSfx, transform.position);
 
         CheckIfBreak();
     }

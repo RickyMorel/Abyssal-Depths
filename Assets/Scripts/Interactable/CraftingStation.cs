@@ -69,6 +69,8 @@ public class CraftingStation : Interactable
 
     private void Craft(CraftingRecipy craftingRecipy, List<ItemQuantity> usedResources)
     {
+        GameAudioManager.Instance.PlaySound(GameAudioManager.Instance.CraftingTableCrafted, transform.position);
+
         MainInventory.Instance.RemoveItems(usedResources);
 
         GameObject spawnedItem = craftingRecipy.CraftedItem.Item.SpawnItemPickup(_itemSpawnTransform);
@@ -104,6 +106,7 @@ public class CraftingStation : Interactable
         if(CurrentPlayer == null) { HandleUnInteract(); return; }
 
         CraftingManager.Instance.EnableCanvas(true, CurrentPlayer.GetComponent<PlayerInputHandler>(), this);
+        GameAudioManager.Instance.PlaySound(GameAudioManager.Instance.CraftingTableInteract, transform.position);
     }
 
     private void HandleUnInteract()
@@ -115,7 +118,9 @@ public class CraftingStation : Interactable
     {
         _craftingTimeline.Play();
 
-        yield return new WaitForSeconds(1.2f);
+        GameAudioManager.Instance.PlaySound(GameAudioManager.Instance.CraftingTableCrafting, transform.position);
+
+        yield return new WaitForSeconds(4.2f);
 
         _craftingParticle.Play();
         Craft(craftingRecipy, usedResources);

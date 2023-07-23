@@ -63,5 +63,6 @@ public class ShipDoor : Interactable
         if (IsWantedDoorOpen != _isDoorOpen) { return; }
 
         IsWantedDoorOpen = !IsWantedDoorOpen;
+        GameAudioManager.Instance.PlaySound(GameAudioManager.Instance.ShipDoorOpenCloseSfx, transform.position);
     }
 }

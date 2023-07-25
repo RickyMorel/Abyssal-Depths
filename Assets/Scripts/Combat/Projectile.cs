@@ -96,7 +96,9 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (Damageable.IsOwnDamage(collision.collider, gameObject)) { return; }
+        var damageable = new Damageable();
+
+        if (damageable.IsOwnDamage(collision.collider, gameObject)) { return; }
 
         PlayImpactParticles(collision.contacts[0].point);
 

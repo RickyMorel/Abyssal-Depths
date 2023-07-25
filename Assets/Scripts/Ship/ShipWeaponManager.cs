@@ -65,6 +65,8 @@ public class ShipWeaponManager : MonoBehaviour
 
     private IEnumerator RotateCoroutine()
     {
+        GameAudioManager.Instance.PlaySound(GameAudioManager.Instance.WeaponWheelRotationSfx, transform.position);
+
         IncrementCurrentPosIndex();
 
         EnableWeapons(false);

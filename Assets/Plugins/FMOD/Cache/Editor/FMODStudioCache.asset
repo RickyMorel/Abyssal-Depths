@@ -1037,6 +1037,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 550
+--- !u!114 &-5170614955915564743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ship/ShipWeaponRotation
+  m_EditorClassIdentifier: 
+  Path: event:/Ship/ShipWeaponRotation
+  Guid:
+    Data1: -567465913
+    Data2: 1177219451
+    Data3: 512310444
+    Data4: -1815317529
+  Banks:
+  - {fileID: 4950403079479454847}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 500
+  Length: 2000
 --- !u!114 &-4940556249377562008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2434,12 +2461,13 @@ MonoBehaviour:
   - {fileID: 240820611540142368}
   - {fileID: -5725590426923689109}
   - {fileID: -8340332993249650794}
+  - {fileID: -5170614955915564743}
   EditorParameters: []
   MasterBanks:
   - {fileID: 4950403079479454847}
   StringsBanks:
   - {fileID: 2157385001168295344}
-  cacheTime: 638256155330550899
+  cacheTime: 638258264919093996
   cacheVersion: 131605
 --- !u!114 &90084922733834907
 MonoBehaviour:
@@ -3070,10 +3098,10 @@ MonoBehaviour:
   Path: AbyssalDepthsFMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638256155330550899
+  lastModified: 638258264919093996
   FileSizes:
   - Name: Desktop
-    Value: 3720
+    Value: 3766
   Exists: 1
 --- !u!114 &2171927999044865641
 MonoBehaviour:
@@ -3819,10 +3847,10 @@ MonoBehaviour:
   Path: AbyssalDepthsFMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638256155330311532
+  lastModified: 638258264919044128
   FileSizes:
   - Name: Desktop
-    Value: 5980192
+    Value: 6025376
   Exists: 1
 --- !u!114 &5002094611560859596
 MonoBehaviour:

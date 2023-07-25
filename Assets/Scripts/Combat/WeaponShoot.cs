@@ -8,8 +8,9 @@ public class WeaponShoot : MonoBehaviour
     #region Editor Fields
 
     [Header("Transforms")]
-    [SerializeField] protected Transform[] _shootTransforms;
+    [SerializeField] protected List<Transform> _shootTransforms = new List<Transform>();
     [SerializeField] protected Transform _turretHead;
+    [SerializeField] protected GameObject _projectilePrefab;
 
     [Header("Stats")]
     [SerializeField] protected float _recoilForce = 2.5f;
@@ -47,7 +48,10 @@ public class WeaponShoot : MonoBehaviour
     {
         _turretHead = transform.GetChild(0);
         _weaponHead = _turretHead;
-        if(_weaponHead != null) { _originalWeaponHeadPosition = _weaponHead.transform.localPosition; }
+
+        FindShootTransforms();
+
+        if (_weaponHead != null) { _originalWeaponHeadPosition = _weaponHead.transform.localPosition; }
         _shootBubbleParticles = Instantiate(GameAssetsManager.Instance.ShootBubbleParticles, _shootTransforms[0]).GetComponent<ParticleSystem>();
         _shootBubbleParticles.transform.localPosition = Vector3.zero;
         _shootBubbleParticles.transform.localRotation = Quaternion.identity;   
@@ -59,6 +63,19 @@ public class WeaponShoot : MonoBehaviour
     }
 
     #endregion
+
+    private void FindShootTransforms()
+    {
+        Transform[] childTransforms = GetComponentsInChildren<Transform>();
+
+        foreach (Transform child in childTransforms)
+        {
+            if (child.name.Contains("ShootTransform"))
+            {
+                _shootTransforms.Add(child);
+            }
+        }
+    }
 
     public void SetWeaponInteractable(Weapon weaponInteractable)
     {

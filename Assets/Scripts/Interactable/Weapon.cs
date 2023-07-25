@@ -63,6 +63,8 @@ public class Weapon : RotationalInteractable
 
         if (!_canShoot) { return; }
 
+        if (CurrentPlayer == null) { return; }
+
         _weaponHumble?.WeaponShoot?.CheckShootInput();
     }
 

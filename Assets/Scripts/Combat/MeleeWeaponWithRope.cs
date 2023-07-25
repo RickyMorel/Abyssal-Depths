@@ -17,7 +17,7 @@ public class MeleeWeaponWithRope : MeleeWeapon
     #region Private Variables
 
     private Transform _middlePointTransform;
-    private LineRenderer _lr;
+    [SerializeField] private LineRenderer _lr;
 
     protected ThrowState _throwState = ThrowState.Attached;
     protected float _timePassedReturning;
@@ -43,6 +43,8 @@ public class MeleeWeaponWithRope : MeleeWeapon
         base.Start();
 
         _lr = GetComponent<LineRenderer>();
+
+        Debug.Log($"{gameObject.name} start lr: " + _lr);
 
         _middlePointTransform = new GameObject("MiddlePointTransform").transform;
 
@@ -106,6 +108,8 @@ public class MeleeWeaponWithRope : MeleeWeapon
     public virtual void DrawRope()
     {
         if(_throwState == ThrowState.Attached) { _lr.enabled = false; return; }
+
+        Debug.Log($"{gameObject.name} lr: " + _lr);
 
         _lr.enabled = true;
         

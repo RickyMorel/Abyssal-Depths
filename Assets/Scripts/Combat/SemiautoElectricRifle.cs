@@ -12,6 +12,8 @@ public class SemiautoElectricRifle : WeaponShoot
 
     public override void CheckShootInput()
     {
+        if(_weapon.CurrentPlayer == null) { return; }
+
         if (_weapon.CurrentPlayer.IsUsing && !_hasAlreadyShot)
         {
             Shoot();

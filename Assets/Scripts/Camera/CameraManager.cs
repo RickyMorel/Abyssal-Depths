@@ -52,6 +52,22 @@ public class CameraManager : MonoBehaviour
 
         Array.Sort(_cameras, (a, b) => String.Compare(LayerMask.LayerToName(a.gameObject.layer), LayerMask.LayerToName(b.gameObject.layer)));
         Array.Sort(_vCams, (a, b) => String.Compare(LayerMask.LayerToName(a.gameObject.layer), LayerMask.LayerToName(b.gameObject.layer)));
+
+        for (int i = 0; i < _vCams.Length; i++)
+        {
+            if (_vCams[i].Name.Contains("0-"))
+            {
+                var swappedCamera = _vCams[i];
+                _vCams[i] = _vCams[_vCams.Length - 1];
+                _vCams[_vCams.Length - 1] = swappedCamera;
+            }
+            else if (_vCams[i].Name.Contains("Y-"))
+            {
+                var swappedCamera = _vCams[i];
+                _vCams[i] = _vCams[0];
+                _vCams[0] = swappedCamera;
+            }
+        }
     }
 
     public void ToggleCamera(bool boolean)

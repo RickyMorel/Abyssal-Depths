@@ -1,32 +1,48 @@
-﻿using System.Collections;
+﻿using Rewired.Integration.UnityUI;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class KeyboardScript : MonoBehaviour
 {
+    #region Private Variables
 
-    public TMP_InputField TextField;
-    public GameObject EngLayoutSml, EngLayoutBig, SymbLayout;
+    private RewiredEventSystem _eventSystem;
+
+    #endregion
+
+    #region EditorFields
+
+    [SerializeField] private TMP_InputField _textField;
+    [SerializeField] private GameObject _engLayoutSml, _engLayoutBig, _symbLayout;
+
+    #endregion
+
+    #region Unity Loops
+
+    private void Start()
+    {
+        _eventSystem = GameObject.FindGameObjectWithTag(GameTagsManager.EVENT_SYSTEM).GetComponent<RewiredEventSystem>();
+    }
+
+    #endregion
 
     public void alphabetFunction(string alphabet)
     {
-
-
-        TextField.text=TextField.text + alphabet;
-
+        _textField.text = _textField.text + alphabet;
     }
 
     public void BackSpace()
     {
-        if(TextField.text.Length>0) TextField.text= TextField.text.Remove(TextField.text.Length-1);
+        if(_textField.text.Length>0) _textField.text = _textField.text.Remove(_textField.text.Length-1);
     }
 
     public void CloseAllLayouts()
     {
-        EngLayoutSml.SetActive(false);
-        EngLayoutBig.SetActive(false);
-        SymbLayout.SetActive(false);
+        _engLayoutSml.SetActive(false);
+        _engLayoutBig.SetActive(false);
+        _symbLayout.SetActive(false);
     }
 
     public void ShowLayout(GameObject SetLayout)
@@ -35,4 +51,14 @@ public class KeyboardScript : MonoBehaviour
         SetLayout.SetActive(true);
     }
 
+    public void SetGameObjectAsSelected(GameObject gameObjectToBeSelected)
+    {
+        _eventSystem.SetSelectedGameObject(gameObjectToBeSelected);
+    }
+
+    public void Enter()
+    {
+        _eventSystem.SetSelectedGameObject(_textField.gameObject);
+        CloseAllLayouts();
+    }
 }

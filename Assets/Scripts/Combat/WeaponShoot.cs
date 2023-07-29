@@ -10,11 +10,11 @@ public class WeaponShoot : MonoBehaviour
     [Header("Transforms")]
     [SerializeField] protected List<Transform> _shootTransforms = new List<Transform>();
     [SerializeField] protected Transform _turretHead;
-    [SerializeField] protected GameObject _projectilePrefab;
 
     [Header("Stats")]
     [SerializeField] protected float _recoilForce = 2.5f;
     [SerializeField] protected float _timeBetweenShots = 0.2f;
+    [SerializeField] protected WeaponSO _weaponSO;
     
     [Header("Sounds")]
     [SerializeField] private EventReference _shootingSfx;
@@ -112,7 +112,7 @@ public class WeaponShoot : MonoBehaviour
 
     private void InstantiateProjectile(Transform transform)
     {
-        GameObject projectileInstance = Instantiate(_weapon.ProjectilePrefab, transform.position, transform.rotation);
+        GameObject projectileInstance = Instantiate(_weaponSO.ProjectilePrefab, transform.position, transform.rotation);
         projectileInstance.GetComponent<Projectile>().WeaponReference = _weapon;
     }
 

@@ -62,11 +62,16 @@ public class ConstantLaser : WeaponShoot
 
     public override void CheckShootInput()
     {
+        if(_weapon.CurrentPlayer == null) { StopLaserBeam(); return; }
+        else if(_weapon.CurrentPlayer != null 
+            && !_laserBeam.activeSelf
+            && _shootLaserState == ShootLaserState.ChargingDown) { Debug.Log("Set Can Shoot"); _shootLaserState = ShootLaserState.CanShoot; }
+
         _constantLaser.transform.rotation = _turretHead.transform.rotation;
         _constantLaser.transform.position = _turretHead.transform.position;
 
         if (_weapon.CurrentPlayer.IsUsing && !_laserBeam.activeSelf && (_shootLaserState == ShootLaserState.CanShoot || _shootLaserState == ShootLaserState.ChargingUp)) { ShootLaserBeam(); }
-        else if (!_weapon.CurrentPlayer.IsUsing && _laserBeam.activeSelf && (_shootLaserState == ShootLaserState.CanStop || _shootLaserState == ShootLaserState.ChargingDown)) { StopLaserBeam(); _laserBallScaleTime = 1; }
+        else if (!_weapon.CurrentPlayer.IsUsing && _laserBeam.activeSelf && (_shootLaserState == ShootLaserState.CanStop || _shootLaserState == ShootLaserState.ChargingDown)) { StopLaserBeam(); }
     }
 
     private void ShootLaserBeam()
@@ -82,6 +87,7 @@ public class ConstantLaser : WeaponShoot
 
     private void StopLaserBeam()
     {
+        Debug.Log("StopLaserBeam");
         _shootLaserState = ShootLaserState.ChargingDown;
         _laserBeam.SetActive(false);
     }

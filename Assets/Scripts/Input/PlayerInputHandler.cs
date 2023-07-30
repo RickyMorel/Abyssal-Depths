@@ -194,7 +194,7 @@ public class PlayerInputHandler : MonoBehaviour
     public void Cancel()
     {
         if (!IsPlayerActive) { return; }
-        Debug.Log(_player.GetButtonDown("Cancel"));
+
         if (!_player.GetButtonDown("Cancel")) { return; }
 
         OnCancel?.Invoke();

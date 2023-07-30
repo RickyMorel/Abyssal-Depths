@@ -12,7 +12,7 @@ public class Upgradable : Interactable
 
     [Header("Upgrades")]
     [SerializeField] private GameObject[] _upgradeSocketObjs;
-    [SerializeField] private Upgrade[] _upgrades;
+    [SerializeField] protected Upgrade[] _upgrades;
     [SerializeField] private Transform _chipDropTransform;
 
     #endregion

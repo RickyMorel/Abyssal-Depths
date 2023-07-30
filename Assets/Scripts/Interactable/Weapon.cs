@@ -12,7 +12,6 @@ public class Weapon : RotationalInteractable
 
     [Header("Rotation Variables")]
     [SerializeField] private Vector2 _rotationLimits;
-    [SerializeField] private Transform _rotationChecker;
     [SerializeField] private bool _canRotate360 = false;
 
     #endregion
@@ -48,6 +47,7 @@ public class Weapon : RotationalInteractable
 
         _humble = new WeaponHumble(IsAIOnlyInteractable);
         _weaponHumble = _humble as WeaponHumble;
+        _upgrades = _weaponHead.Upgrades;
 
         OnUpgradeMesh += _weaponHumble.HandleUpgrade;
     }
@@ -84,17 +84,17 @@ public class Weapon : RotationalInteractable
         if (CurrentPlayer.MoveDirection.magnitude == 0) { return; }
         
         _currentAngle = _rotationSpeed * CurrentPlayer.MoveDirection.x * Time.deltaTime;
-        _rotationChecker.RotateAround(_pivotTransform.position, Vector3.forward, -_currentAngle);
+        _weaponHead.RotationChecker.RotateAround(_pivotTransform.position, Vector3.forward, -_currentAngle);
 
-        if (!_canRotate360 & (_rotationChecker.localEulerAngles.x <= 10 || _rotationChecker.localEulerAngles.x >= 170)) 
+        if (!_canRotate360 & (_weaponHead.RotationChecker.localEulerAngles.x <= 10 || _weaponHead.RotationChecker.localEulerAngles.x >= 170)) 
         {
-            _rotationChecker.position = RotatorTransform.position;
-            _rotationChecker.rotation = RotatorTransform.rotation;
+            _weaponHead.RotationChecker.position = RotatorTransform.position;
+            _weaponHead.RotationChecker.rotation = RotatorTransform.rotation;
             return; 
         }
         
         RotatorTransform.RotateAround(_pivotTransform.position, Vector3.forward, -_currentAngle);
-        _rotationChecker.position = RotatorTransform.position;
-        _rotationChecker.rotation = RotatorTransform.rotation;
+        _weaponHead.RotationChecker.position = RotatorTransform.position;
+        _weaponHead.RotationChecker.rotation = RotatorTransform.rotation;
     }
 }

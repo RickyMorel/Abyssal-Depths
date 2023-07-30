@@ -38,6 +38,8 @@ public class LaserMinigun : WeaponShoot
 
     public override void CheckShootInput()
     {
+        if (_weapon.CurrentPlayer == null) { return; }
+
         if (_weapon.CurrentPlayer.IsUsing)
         {
             Shoot();

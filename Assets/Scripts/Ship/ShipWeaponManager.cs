@@ -18,6 +18,7 @@ public class ShipWeaponManager : MonoBehaviour
 
     private float _snapStopDistance = 1f;
     private int _currentPosIndex = 0;
+    private ShieldWheel _shieldWheel;
 
     #endregion
 
@@ -29,6 +30,10 @@ public class ShipWeaponManager : MonoBehaviour
 
     private void Start()
     {
+        PlayerInputHandler.OnSpecialAction += HandleRotateWeapons;
+
+        _shieldWheel = ShipMovingStaticManager.Instance.ShipStaticObj.GetComponentInChildren<ShieldWheel>();
+
         CreateSnapPoints();
     }
 
@@ -38,6 +43,27 @@ public class ShipWeaponManager : MonoBehaviour
         {
             RotateWeapons();
         }
+    }
+
+    private void OnDestroy()
+    {
+        PlayerInputHandler.OnSpecialAction -= HandleRotateWeapons;
+    }
+
+    //Only player that is using the shield can rotate the weapons
+    private void HandleRotateWeapons(PlayerInputHandler requestingPlayer)
+    {
+        Debug.Log("HandleRotateWeapons");
+
+        if (_shieldWheel.CurrentPlayer == null) { return; }
+
+        Debug.Log("HandleRotateWeapons current player is not null");
+
+        if (requestingPlayer != _shieldWheel.CurrentPlayer.PlayerInput) { return; }
+
+        Debug.Log("HandleRotateWeapons is correct player");
+
+        RotateWeapons();
     }
 
     private void CreateSnapPoints()

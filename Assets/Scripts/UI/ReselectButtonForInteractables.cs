@@ -46,7 +46,7 @@ public class ReselectButtonForInteractables : ReselectButton
         yield return new WaitForEndOfFrame();
 
         if (_firstButton == null) { _firstButton = GetComponentInChildren<Button>().gameObject; }
-
+        Debug.Log(gameObject.name);
         _rewiredPlayer = ReInput.players.GetPlayer(_interactable.CurrentPlayer.PlayerInput.PlayerId);
         _rewiredPlayer.controllers.maps.SetMapsEnabled(true, "UI");
         

@@ -11,6 +11,8 @@ public class FastTravelNPC : NPC
 
     [SerializeField] private GameObject _fastTravelOptions;
 
+    [SerializeField] private GameObject _fastTravelPanel;
+
     #endregion
 
     #region Public Properties
@@ -38,10 +40,12 @@ public class FastTravelNPC : NPC
     {
         if (CurrentPlayer == null)
         {
+            _fastTravelPanel.SetActive(false);
             _fastTravelOptions.SetActive(false);
         }
         else
         {
+            _fastTravelPanel.SetActive(true);
             _fastTravelOptions.SetActive(true);
         }
     }

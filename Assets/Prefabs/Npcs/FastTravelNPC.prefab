@@ -2016,6 +2016,7 @@ GameObject:
   - component: {fileID: 690493083869517228}
   - component: {fileID: 690493083869517234}
   - component: {fileID: 4041980373945713735}
+  - component: {fileID: 3370853347799899914}
   m_Layer: 16
   m_Name: FastTravelNPC
   m_TagString: Untagged
@@ -2134,7 +2135,6 @@ MonoBehaviour:
   _jumpHeight: 3
   _gravityIntensity: -15
   _isGrounded: 1
-  _currentStateName: 
   _canMove: 1
 --- !u!114 &7935086362498502750
 MonoBehaviour:
@@ -2408,6 +2408,39 @@ MonoBehaviour:
   _enemyDamageDataID: 0
   _attackRange: 10
   _hitParticle: {fileID: 0}
+--- !u!114 &3370853347799899914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 690493083869517232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4222aa5f1b3e0134b9d0885d228d4d74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shootSfx:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  _dieSfx:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  _bloodSplatSfx:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!1 &690493083889834447
 GameObject:
   m_ObjectHideFlags: 0

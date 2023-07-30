@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using Rewired;
 
 namespace AbyssalDepths.UI
 {
     public class MainMenuUI : MonoBehaviour
     {
+        #region Private Variables
+
+        private Player _rewiredPlayer;
+
+        #endregion
+
         #region Editor Fields
 
         [Header("Panels")]
@@ -40,6 +47,10 @@ namespace AbyssalDepths.UI
         public void NewGame()
         {
             if(_newGameNameText.text == string.Empty) { return; }
+
+            _rewiredPlayer = ReInput.players.GetPlayer(0);
+            _rewiredPlayer.controllers.maps.SetMapsEnabled(false, "UI");
+            _rewiredPlayer.controllers.maps.SetMapsEnabled(true, "Default");
 
             int saveIndex = SaveSystem.CreateNewSave(_newGameNameText.text);
             CreateLoadObj(saveIndex);

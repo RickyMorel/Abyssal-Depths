@@ -76,7 +76,7 @@ public class InputFieldGamepadFix : MonoBehaviour
 
     private void SelectOtherGameObject()
     {
-        if (_timerForSelectedGameObject < 0.5f) { return; }
+        if (_timerForSelectedGameObject < 0.3f) { return; }
         
         if (_playerInput.PlayerInputs.GetAxis("UIVertical") < 0)
         {

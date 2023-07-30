@@ -32,7 +32,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     public bool IsPlayerActive = false;
 
-    public static event Action<PlayerInputHandler, bool> OnSpecialAction;
+    public static event Action<PlayerInputHandler> OnSpecialAction;
     public static event Action<PlayerInputHandler> OnClick;
 
     public event Action OnJump;
@@ -203,8 +203,9 @@ public class PlayerInputHandler : MonoBehaviour
 
         if (!_player.GetButtonDown("SpecialAction")) { return; }
 
-        bool value = _player.GetButton("SpecialAction");
-        OnSpecialAction?.Invoke(this, value);
+        Debug.Log("SpecialAction");
+
+        OnSpecialAction?.Invoke(this);
     }
 
     public void Interact()

@@ -53,15 +53,9 @@ public class ShipWeaponManager : MonoBehaviour
     //Only player that is using the shield can rotate the weapons
     private void HandleRotateWeapons(PlayerInputHandler requestingPlayer)
     {
-        Debug.Log("HandleRotateWeapons");
-
         if (_shieldWheel.CurrentPlayer == null) { return; }
 
-        Debug.Log("HandleRotateWeapons current player is not null");
-
         if (requestingPlayer != _shieldWheel.CurrentPlayer.PlayerInput) { return; }
-
-        Debug.Log("HandleRotateWeapons is correct player");
 
         RotateWeapons();
     }

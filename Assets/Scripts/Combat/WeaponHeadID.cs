@@ -7,6 +7,8 @@ public class WeaponHeadID : MonoBehaviour
     #region Editor Fields
 
     [SerializeField] private int _weaponId = -1;
+    [SerializeField] private Upgrade[] _upgrades;
+    [SerializeField] private Transform _rotationChecker;
 
     #endregion
 
@@ -14,6 +16,13 @@ public class WeaponHeadID : MonoBehaviour
 
     private Weapon[] _weaponInteractables;
     private WeaponShoot[] _weaponHeads;
+
+    #endregion
+
+    #region Public Properties
+
+    public Upgrade[] Upgrades => _upgrades;
+    public Transform RotationChecker => _rotationChecker;
 
     #endregion
 

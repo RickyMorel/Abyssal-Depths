@@ -37202,6 +37202,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4321654086213015163, guid: 3b7a198581ed0134ea9da38b1d7bcf57, type: 3}
+      propertyPath: rewiredInputManager
+      value: 
+      objectReference: {fileID: 1932402781}
+    - target: {fileID: 4321654086213015163, guid: 3b7a198581ed0134ea9da38b1d7bcf57, type: 3}
+      propertyPath: useAllRewiredGamePlayers
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b7a198581ed0134ea9da38b1d7bcf57, type: 3}
@@ -47154,6 +47162,14 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6554027021052729670, guid: 05afadc075569b446b00644f3dc54635, type: 3}
+      propertyPath: _userData.players.Array.data[1]._defaultJoystickMaps.Array.data[0]._enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6554027021052729670, guid: 05afadc075569b446b00644f3dc54635, type: 3}
+      propertyPath: _userData.players.Array.data[1]._defaultJoystickMaps.Array.data[2]._enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6554027021052729670, guid: 05afadc075569b446b00644f3dc54635, type: 3}
       propertyPath: _userData.joystickMaps.Array.data[0].actionElementMaps.Array.data[4]._actionId
       value: 11
       objectReference: {fileID: 0}
@@ -47204,6 +47220,17 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 05afadc075569b446b00644f3dc54635, type: 3}
+--- !u!114 &1932402781 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6554027021052729670, guid: 05afadc075569b446b00644f3dc54635, type: 3}
+  m_PrefabInstance: {fileID: 1932402780}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 581b3e3c96df0ef42aef16b63b27b87f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1945885267
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,6 +13,12 @@ public class ReselectButtonForInteractables : ReselectButton
 
     #endregion
 
+    #region Private Variables
+
+    private Player _rewiredPlayer;
+
+    #endregion
+
     #region Public Properties
 
     public Interactable Interactable { get { return _interactable; } set { _interactable = value; } }
@@ -27,6 +33,7 @@ public class ReselectButtonForInteractables : ReselectButton
     {
         //do nothing
     }
+
     public override void OnDisable()
     {
         //do nothing
@@ -40,10 +47,11 @@ public class ReselectButtonForInteractables : ReselectButton
 
         if (_firstButton == null) { _firstButton = GetComponentInChildren<Button>().gameObject; }
 
-        Player rewiredPlayer = ReInput.players.GetPlayer(_interactable.CurrentPlayer.PlayerInput.PlayerId);
-        rewiredPlayer.controllers.maps.SetMapsEnabled(true, "UI");
-
+        _rewiredPlayer = ReInput.players.GetPlayer(_interactable.CurrentPlayer.PlayerInput.PlayerId);
+        _rewiredPlayer.controllers.maps.SetMapsEnabled(true, "UI");
+        
         _playerInput = _interactable.CurrentPlayer.PlayerInput;
+
         _playerInput.OnUIHorizontal += ReselectButtonWhenNeeded;
         _playerInput.OnUIVertical += ReselectButtonWhenNeeded;
         _playerInput.OnShoulderLeft += ReselectButtonWhenNeeded;
@@ -59,6 +67,8 @@ public class ReselectButtonForInteractables : ReselectButton
 
     private void Unsuscribe()
     {
+        _rewiredPlayer.controllers.maps.SetMapsEnabled(false, "UI");
+
         _playerInput.OnUIHorizontal -= ReselectButtonWhenNeeded;
         _playerInput.OnUIVertical -= ReselectButtonWhenNeeded;
         _playerInput.OnShoulderLeft -= ReselectButtonWhenNeeded;

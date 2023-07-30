@@ -63,7 +63,7 @@ public class ShipMovingStaticManager : MonoBehaviour
 
     private void HandlSceneChange(Scene scene, LoadSceneMode arg1)
     {
-        SetShipState(scene.name == "SpaceStations");
+        SetShipState(scene.name == "SpaceStations", true);
     }
 
     private void SetShipParentToCorrectStartingPosition()
@@ -75,7 +75,7 @@ public class ShipMovingStaticManager : MonoBehaviour
         transform.position = new Vector3(151.6f, -328.8f, 0f);
     }
 
-    public void SetShipState(bool isInGarage)
+    public void SetShipState(bool isInGarage, bool shouldTeleport)
     {
 
         _rb.isKinematic = isInGarage;
@@ -96,7 +96,7 @@ public class ShipMovingStaticManager : MonoBehaviour
             StartCoroutine(DestroyAllFixParts());
         }
 
-        StartCoroutine(TeleportPlayersDelayed());
+        StartCoroutine(TeleportPlayersDelayed(shouldTeleport));
 
         //Heal everything when enter garage
         if (isInGarage) { Ship.Instance.ShipHealth.Respawn(); }
@@ -116,8 +116,10 @@ public class ShipMovingStaticManager : MonoBehaviour
         }
     }
 
-    private IEnumerator TeleportPlayersDelayed()
+    private IEnumerator TeleportPlayersDelayed(bool shouldTeleport)
     {
+        if (!shouldTeleport) { yield break; }
+
         yield return new WaitForEndOfFrame();
 
         PlayerStateMachine[] players = FindObjectsOfType<PlayerStateMachine>();

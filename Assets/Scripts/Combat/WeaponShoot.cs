@@ -52,9 +52,12 @@ public class WeaponShoot : MonoBehaviour
         FindShootTransforms();
 
         if (_weaponHead != null) { _originalWeaponHeadPosition = _weaponHead.transform.localPosition; }
-        _shootBubbleParticles = Instantiate(GameAssetsManager.Instance.ShootBubbleParticles, _shootTransforms[0]).GetComponent<ParticleSystem>();
-        _shootBubbleParticles.transform.localPosition = Vector3.zero;
-        _shootBubbleParticles.transform.localRotation = Quaternion.identity;   
+        if (_shootTransforms.Count > 0) 
+        {
+            _shootBubbleParticles = Instantiate(GameAssetsManager.Instance.ShootBubbleParticles, _shootTransforms[0]).GetComponent<ParticleSystem>();
+            _shootBubbleParticles.transform.localPosition = Vector3.zero;
+            _shootBubbleParticles.transform.localRotation = Quaternion.identity;
+        } 
     }
 
     public virtual void Update()
@@ -174,7 +177,7 @@ public class WeaponShoot : MonoBehaviour
 
     public void PlayShootFX()
     {
-        _shootBubbleParticles.Play();
+        if (_shootBubbleParticles != null) { _shootBubbleParticles.Play(); }
 
         if (_weaponHead != null) { StartCoroutine(PlayWeaponRecoilFX()); }
 

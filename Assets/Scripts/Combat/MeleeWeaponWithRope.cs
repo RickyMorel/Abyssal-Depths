@@ -44,8 +44,6 @@ public class MeleeWeaponWithRope : MeleeWeapon
 
         _lr = GetComponent<LineRenderer>();
 
-        Debug.Log($"{gameObject.name} start lr: " + _lr);
-
         _middlePointTransform = new GameObject("MiddlePointTransform").transform;
 
         ReturnWeaponHead();
@@ -109,8 +107,6 @@ public class MeleeWeaponWithRope : MeleeWeapon
     {
         if(_throwState == ThrowState.Attached) { _lr.enabled = false; return; }
 
-        Debug.Log($"{gameObject.name} lr: " + _lr);
-
         _lr.enabled = true;
         
         if (_middlePointTransform == null) { _middlePointTransform = new GameObject("MiddlePointTransform").transform; }
@@ -150,13 +146,14 @@ public class MeleeWeaponWithRope : MeleeWeapon
 
     public void ThrowWeaponHead()
     {
-        if (_throwState == ThrowState.Arrived) { return; }
+        //if (_throwState == ThrowState.Arrived) { return; }
 
         Transform moveToCurrentPosition = _moveToTransform;
 
-        if (_throwState == ThrowState.Throwing)
+        if (_throwState == ThrowState.Throwing || _throwState == ThrowState.Arrived)
         {
-            Vector3 forceDir = _moveToTransform.position - _weaponHeadRb.transform.position;
+            Debug.Log("Throwing Mace");
+            Vector3 forceDir = _moveToTransform.position - _handleTransform.transform.position;
             _weaponHeadRb.AddForce(forceDir.normalized * _flyingSpeed * Time.deltaTime, ForceMode.Force);
         }
 

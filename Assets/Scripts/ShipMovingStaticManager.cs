@@ -21,7 +21,7 @@ public class ShipMovingStaticManager : MonoBehaviour
 
     private static ShipMovingStaticManager _instance;
     private Rigidbody _rb;
-    private bool _isInGarage;
+    private bool _shouldTeleport;
 
     #endregion
 
@@ -30,6 +30,12 @@ public class ShipMovingStaticManager : MonoBehaviour
     public static ShipMovingStaticManager Instance { get { return _instance; } }
     public GameObject ShipMovingObj => _shipMovingObj;
     public GameObject ShipStaticObj => _shipStaticObj;
+
+    #endregion
+
+    #region
+
+    public bool ShouldTeleport { get { return _shouldTeleport; } set { _shouldTeleport = value; } }
 
     #endregion
 
@@ -63,7 +69,8 @@ public class ShipMovingStaticManager : MonoBehaviour
 
     private void HandlSceneChange(Scene scene, LoadSceneMode arg1)
     {
-        SetShipState(scene.name == "SpaceStations", true);
+        SetShipState(scene.name == "SpaceStations");
+        _shouldTeleport = true;
     }
 
     private void SetShipParentToCorrectStartingPosition()
@@ -75,7 +82,7 @@ public class ShipMovingStaticManager : MonoBehaviour
         transform.position = new Vector3(151.6f, -328.8f, 0f);
     }
 
-    public void SetShipState(bool isInGarage, bool shouldTeleport)
+    public void SetShipState(bool isInGarage)
     {
 
         _rb.isKinematic = isInGarage;
@@ -96,12 +103,10 @@ public class ShipMovingStaticManager : MonoBehaviour
             StartCoroutine(DestroyAllFixParts());
         }
 
-        StartCoroutine(TeleportPlayersDelayed(shouldTeleport));
+        StartCoroutine(TeleportPlayersDelayed());
 
         //Heal everything when enter garage
         if (isInGarage) { Ship.Instance.ShipHealth.Respawn(); }
-
-        _isInGarage = isInGarage;
     }
 
     private IEnumerator DestroyAllFixParts()
@@ -116,11 +121,11 @@ public class ShipMovingStaticManager : MonoBehaviour
         }
     }
 
-    private IEnumerator TeleportPlayersDelayed(bool shouldTeleport)
+    private IEnumerator TeleportPlayersDelayed()
     {
-        if (!shouldTeleport) { yield break; }
+        yield return new WaitForSeconds(Time.deltaTime*3);
 
-        yield return new WaitForEndOfFrame();
+        if (!_shouldTeleport) { yield break; }
 
         PlayerStateMachine[] players = FindObjectsOfType<PlayerStateMachine>();
 

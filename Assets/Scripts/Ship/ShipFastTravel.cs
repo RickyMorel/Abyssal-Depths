@@ -85,7 +85,6 @@ public class ShipFastTravel : MonoBehaviour
 
     private void HandleNewPlayer()
     {
-        Debug.Log("What da hell????");
         _isPlayerActive = FindObjectsOfType<PlayerInputHandler>();
     }
 

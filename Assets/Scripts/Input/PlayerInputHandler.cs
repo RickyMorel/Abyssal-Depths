@@ -203,8 +203,6 @@ public class PlayerInputHandler : MonoBehaviour
 
         if (!_player.GetButtonDown("SpecialAction")) { return; }
 
-        Debug.Log("SpecialAction");
-
         OnSpecialAction?.Invoke(this);
     }
 

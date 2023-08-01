@@ -29,6 +29,7 @@ public class SwapShipPrefab : MonoBehaviour
     private void Start()
     {
         _playersActive = FindObjectsOfType<PlayerInputHandler>();
+        SwapShips(_playersActive.Length);
     }
 
     private void Awake()
@@ -52,23 +53,27 @@ public class SwapShipPrefab : MonoBehaviour
 
     private void SwapShips(int playerAmount)
     {
+        if (ShipMovingStaticManager.Instance != null) { Destroy(ShipMovingStaticManager.Instance.gameObject); }
         switch (playerAmount)
         {
-            case 2:
-                _currentShip = Instantiate(_2playersShipPrefab);
-                _currentShip.GetComponent<ShipMovingStaticManager>().SetShipState(true, false);
-                _currentShip.transform.position = _2playersShipTransform.position;
+            case 1 or 2:
+                StartCoroutine(InstantiateShip1FrameAfter(_2playersShipPrefab, _2playersShipTransform));
                 break;
             case 3:
-                Destroy(_currentShip);
-                _currentShip = Instantiate(_2playersShipPrefab);
-                _currentShip.transform.position = _2playersShipTransform.position;
+                StartCoroutine(InstantiateShip1FrameAfter(_3playersShipPrefab, _3playersShipTransform));
                 break;
             case 4:
-                Destroy(_currentShip);
-                _currentShip = Instantiate(_2playersShipPrefab);
-                _currentShip.transform.position = _2playersShipTransform.position;
+                StartCoroutine(InstantiateShip1FrameAfter(_4playersShipPrefab, _4playersShipTransform));
                 break;
         }
+        CameraManager.Instance.SplitScreen(_playersActive.Length-2);
+    }
+
+    private IEnumerator InstantiateShip1FrameAfter(GameObject shipPrefab, Transform spawnTransform)
+    {
+        yield return new WaitForEndOfFrame();
+        _currentShip = Instantiate(shipPrefab, spawnTransform.position, Quaternion.identity);
+        yield return new WaitForEndOfFrame();
+        _currentShip.GetComponent<ShipMovingStaticManager>().ShouldTeleport = false;
     }
 }

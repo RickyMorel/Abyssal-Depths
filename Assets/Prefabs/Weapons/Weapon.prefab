@@ -384,7 +384,7 @@ SpringJoint:
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 1.0336025, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.2067205, y: 0.19999991, z: 0}
+  m_ConnectedAnchor: {x: -0.2067205, y: 0.2, z: 0}
   serializedVersion: 2
   m_Spring: 10
   m_Damper: 0.2
@@ -496,6 +496,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0
+  _shootingSfx:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   _laserBallSize: 2
   _scaleDuration: 1
 --- !u!1 &286164223635417134
@@ -879,6 +886,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0.2
+  _shootingSfx:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   _maxRotationSpeed: 500
 --- !u!1 &458250032658626900
 GameObject:
@@ -1664,6 +1678,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0.2
+  _shootingSfx:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   _attackHitBox: {fileID: 2210373744117651719}
   _parentTransform: {fileID: 3597213311831459394}
   _movingShipRb: {fileID: 0}
@@ -2921,6 +2942,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0.2
+  _shootingSfx:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   _attackHitBox: {fileID: 5892049097406821286}
   _parentTransform: {fileID: 4660003316404302014}
   _movingShipRb: {fileID: 0}
@@ -4024,6 +4052,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0.2
+  _shootingSfx:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!1 &5196958495453686589
 GameObject:
   m_ObjectHideFlags: 0
@@ -4449,6 +4484,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0.2
+  _shootingSfx:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   _attackHitBox: {fileID: 79462081498386862}
   _parentTransform: {fileID: 5941236623131322626}
   _movingShipRb: {fileID: 0}
@@ -5071,6 +5113,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0.2
+  _shootingSfx:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   _attackHitBox: {fileID: 2922026450815305462}
   _parentTransform: {fileID: 8870349433133957839}
   _movingShipRb: {fileID: 0}
@@ -5371,6 +5420,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 1.2
+  _shootingSfx:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!1 &6670758329025972589
 GameObject:
   m_ObjectHideFlags: 0
@@ -5600,6 +5656,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0.2
+  _shootingSfx:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   _attackHitBox: {fileID: 59105737852778015}
   _parentTransform: {fileID: 7557053423725300789}
   _movingShipRb: {fileID: 0}
@@ -6271,6 +6334,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0.8
+  _shootingSfx:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   _shootSpreadSeparationAngle: 5
   _amountOfProjectiles: 5
 --- !u!1 &7430814596964335871
@@ -6584,7 +6654,7 @@ Transform:
   - {fileID: 2389941571288428507}
   - {fileID: 6567959656405035337}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!54 &7627081817445622294
 Rigidbody:
@@ -6826,18 +6896,18 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3478999079501111672}
   - {fileID: 5193264706460301601}
+  - {fileID: 3478999079501111672}
   - {fileID: 6604739293253934666}
   - {fileID: 7424556976892892671}
   - {fileID: 241945024543853549}
   - {fileID: 3498198392574577075}
   - {fileID: 7604218662156677272}
   - {fileID: 453665099025199642}
+  - {fileID: 6963554075171237634}
   - {fileID: 4068686218534063606}
   - {fileID: 250850403662324574}
   - {fileID: 4591726088875043099}
-  - {fileID: 6963554075171237634}
   m_Father: {fileID: 7627081817445622297}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: -359.999}
@@ -7583,6 +7653,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _recoilForce: 2.5
   _timeBetweenShots: 0.2
+  _shootingSfx:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   _attackHitBox: {fileID: 6166615154732534096}
   _parentTransform: {fileID: 4564376745032513126}
   _movingShipRb: {fileID: 0}

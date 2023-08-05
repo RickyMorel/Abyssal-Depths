@@ -191,8 +191,6 @@ MonoBehaviour:
       Data3: 0
       Data4: 0
     Path: 
-  _projectileShellPrefab: {fileID: 0}
-  _recoilVisual: 1.2
   _shootSpreadSeparationAngle: 5
   _amountOfProjectiles: 5
 --- !u!1 &39571595443264321
@@ -955,10 +953,9 @@ MonoBehaviour:
       Data3: 0
       Data4: 0
     Path: 
-  _projectileShellPrefab: {fileID: 0}
-  _recoilVisual: 1.2
   _attackHitBox: {fileID: 2412025073396739769}
   _parentTransform: {fileID: 5456928704188715407}
+  _movingShipRb: {fileID: 0}
   maxDistance: 10
   _moveForce: 110
   _maxMovementSpeed: 30
@@ -7201,8 +7198,6 @@ MonoBehaviour:
       Data3: 0
       Data4: 0
     Path: 
-  _projectileShellPrefab: {fileID: 0}
-  _recoilVisual: 1.2
   _shootSpreadSeparationAngle: 5
   _amountOfProjectiles: 5
 --- !u!1 &1437357777627555606
@@ -8090,10 +8085,9 @@ MonoBehaviour:
       Data3: 0
       Data4: 0
     Path: 
-  _projectileShellPrefab: {fileID: 0}
-  _recoilVisual: 1.2
   _attackHitBox: {fileID: 3604902145457918702}
   _parentTransform: {fileID: 6396506605612494296}
+  _movingShipRb: {fileID: 0}
   maxDistance: 10
   _moveForce: 110
   _maxMovementSpeed: 30
@@ -14552,10 +14546,9 @@ MonoBehaviour:
       Data3: 0
       Data4: 0
     Path: 
-  _projectileShellPrefab: {fileID: 0}
-  _recoilVisual: 1.2
   _attackHitBox: {fileID: 7388532316468709904}
   _parentTransform: {fileID: 3882273931805536956}
+  _movingShipRb: {fileID: 0}
   maxDistance: 10
   _moveForce: 300
   _maxMovementSpeed: 20
@@ -14754,10 +14747,9 @@ MonoBehaviour:
       Data3: 0
       Data4: 0
     Path: 
-  _projectileShellPrefab: {fileID: 0}
-  _recoilVisual: 1.2
   _attackHitBox: {fileID: 8375841617761571318}
   _parentTransform: {fileID: 2021280351400340444}
+  _movingShipRb: {fileID: 0}
   maxDistance: 10
   _moveForce: 110
   _maxMovementSpeed: 30
@@ -15270,10 +15262,9 @@ MonoBehaviour:
       Data3: 0
       Data4: 0
     Path: 
-  _projectileShellPrefab: {fileID: 0}
-  _recoilVisual: 1.2
   _attackHitBox: {fileID: 6656342628925055263}
   _parentTransform: {fileID: 1149759335186031910}
+  _movingShipRb: {fileID: 0}
   maxDistance: 10
   _moveForce: 110
   _maxMovementSpeed: 20
@@ -20379,8 +20370,6 @@ MonoBehaviour:
       Data3: 0
       Data4: 0
     Path: 
-  _projectileShellPrefab: {fileID: 0}
-  _recoilVisual: 1.2
 --- !u!1 &3408755425577140497
 GameObject:
   m_ObjectHideFlags: 0
@@ -20771,8 +20760,6 @@ MonoBehaviour:
       Data3: 1311282823
       Data4: 1445873891
     Path: event:/Weapons/Shoot/Shoot_TurretProjectile
-  _projectileShellPrefab: {fileID: 6567270739292821314, guid: b6540c7ed89f066489cef3c7971b9b10, type: 3}
-  _recoilVisual: 1.2
 --- !u!1 &3426208657350111363
 GameObject:
   m_ObjectHideFlags: 0
@@ -21026,8 +21013,6 @@ MonoBehaviour:
   _shakeAmplitude: 0.5
   _expandedFovToVelocityRatio: 0.15
   _perspectiveCamera: {fileID: 112276069440663383}
-  _enemyFocusVCam: {fileID: 4317068367327968479}
-  _cameraLookAtTransform: {fileID: 3128559519626813896}
   _zoomDistancesArray:
   - Distance: -18.95
     FOV: 80
@@ -21037,7 +21022,6 @@ MonoBehaviour:
     FOV: 90
   - Distance: -35
     FOV: 90
-  _maxEnemyFocusDistance: 40
 --- !u!1 &3627324517479560209
 GameObject:
   m_ObjectHideFlags: 0
@@ -23271,10 +23255,9 @@ MonoBehaviour:
       Data3: 0
       Data4: 0
     Path: 
-  _projectileShellPrefab: {fileID: 0}
-  _recoilVisual: 1.2
   _attackHitBox: {fileID: 7440761269091134881}
   _parentTransform: {fileID: 1113256234871707531}
+  _movingShipRb: {fileID: 0}
   maxDistance: 10
   _moveForce: 110
   _maxMovementSpeed: 30
@@ -23510,10 +23493,9 @@ MonoBehaviour:
       Data3: 0
       Data4: 0
     Path: 
-  _projectileShellPrefab: {fileID: 0}
-  _recoilVisual: 1.2
   _attackHitBox: {fileID: 8500339368364963399}
   _parentTransform: {fileID: 2782812196704538347}
+  _movingShipRb: {fileID: 0}
   maxDistance: 10
   _moveForce: 300
   _maxMovementSpeed: 20
@@ -24110,8 +24092,6 @@ MonoBehaviour:
       Data3: 0
       Data4: 0
     Path: 
-  _projectileShellPrefab: {fileID: 0}
-  _recoilVisual: 1.2
 --- !u!1 &4374943546642940837
 GameObject:
   m_ObjectHideFlags: 0
@@ -24301,8 +24281,6 @@ MonoBehaviour:
       Data3: 1311282823
       Data4: 1445873891
     Path: event:/Weapons/Shoot/Shoot_TurretProjectile
-  _projectileShellPrefab: {fileID: 6567270739292821314, guid: b6540c7ed89f066489cef3c7971b9b10, type: 3}
-  _recoilVisual: 1.2
 --- !u!1 &4391649545819081940
 GameObject:
   m_ObjectHideFlags: 0
@@ -24783,10 +24761,9 @@ MonoBehaviour:
       Data3: 0
       Data4: 0
     Path: 
-  _projectileShellPrefab: {fileID: 0}
-  _recoilVisual: 1.2
   _attackHitBox: {fileID: 5701002124581395784}
   _parentTransform: {fileID: 2056693015111932273}
+  _movingShipRb: {fileID: 0}
   maxDistance: 10
   _moveForce: 110
   _maxMovementSpeed: 20
@@ -24843,7 +24820,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4608590624474886517}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 963.6, y: -353.8, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -25204,10 +25181,9 @@ MonoBehaviour:
       Data3: 0
       Data4: 0
     Path: 
-  _projectileShellPrefab: {fileID: 0}
-  _recoilVisual: 1.2
   _attackHitBox: {fileID: 2677892069667787855}
   _parentTransform: {fileID: 3766878021958621015}
+  _movingShipRb: {fileID: 0}
   maxDistance: 10
   _moveForce: 110
   _maxMovementSpeed: 30
@@ -27168,10 +27144,9 @@ MonoBehaviour:
       Data3: 0
       Data4: 0
     Path: 
-  _projectileShellPrefab: {fileID: 0}
-  _recoilVisual: 1.2
   _attackHitBox: {fileID: 3915840047564695576}
   _parentTransform: {fileID: 2826203357790874368}
+  _movingShipRb: {fileID: 0}
   maxDistance: 10
   _moveForce: 110
   _maxMovementSpeed: 30
@@ -39282,8 +39257,6 @@ MonoBehaviour:
       Data3: 0
       Data4: 0
     Path: 
-  _projectileShellPrefab: {fileID: 6567270739292821314, guid: b6540c7ed89f066489cef3c7971b9b10, type: 3}
-  _recoilVisual: 0.5
   _maxRotationSpeed: 500
 --- !u!1 &7047343840642370800
 GameObject:
@@ -42481,8 +42454,6 @@ MonoBehaviour:
       Data3: 0
       Data4: 0
     Path: 
-  _projectileShellPrefab: {fileID: 0}
-  _recoilVisual: 1.2
   _laserBallSize: 2
   _scaleDuration: 1
 --- !u!1 &7313557575822800902
@@ -43210,10 +43181,9 @@ MonoBehaviour:
       Data3: 0
       Data4: 0
     Path: 
-  _projectileShellPrefab: {fileID: 0}
-  _recoilVisual: 1.2
   _attackHitBox: {fileID: 8736925677237043897}
   _parentTransform: {fileID: 6230948731375246844}
+  _movingShipRb: {fileID: 0}
   maxDistance: 10
   _moveForce: 50
   _maxMovementSpeed: 20
@@ -43908,8 +43878,6 @@ MonoBehaviour:
       Data3: 0
       Data4: 0
     Path: 
-  _projectileShellPrefab: {fileID: 6567270739292821314, guid: b6540c7ed89f066489cef3c7971b9b10, type: 3}
-  _recoilVisual: 0.5
   _maxRotationSpeed: 500
 --- !u!1 &8292803436914914180
 GameObject:
@@ -45079,8 +45047,6 @@ MonoBehaviour:
       Data3: 0
       Data4: 0
     Path: 
-  _projectileShellPrefab: {fileID: 0}
-  _recoilVisual: 1.2
   _laserBallSize: 2
   _scaleDuration: 1
 --- !u!1 &8640541780061609045
@@ -45318,10 +45284,9 @@ MonoBehaviour:
       Data3: 0
       Data4: 0
     Path: 
-  _projectileShellPrefab: {fileID: 0}
-  _recoilVisual: 1.2
   _attackHitBox: {fileID: 7656639420287811310}
   _parentTransform: {fileID: 4973897838627856811}
+  _movingShipRb: {fileID: 0}
   maxDistance: 10
   _moveForce: 50
   _maxMovementSpeed: 20
@@ -45495,7 +45460,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8866864146496575381}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -811.92, y: 26.559998, z: -35}
+  m_LocalPosition: {x: 151.68, y: 26.309998, z: -35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

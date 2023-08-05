@@ -9,7 +9,6 @@ public class DeathManager : MonoBehaviour
 {
     #region Private Variables
 
-    private ShipHealth _shipHealth;
     private float _timeSinceDeath;
     private bool _isInSafeZone = false;
     private bool _isLoadingScene = false;
@@ -35,14 +34,9 @@ public class DeathManager : MonoBehaviour
         SceneManager.activeSceneChanged -= OnSceneLoaded;
     }
 
-    private void Start()
-    {
-        _shipHealth = Ship.Instance.GetComponent<ShipHealth>();
-    }
-
     private void Update()
     {
-        if (!_shipHealth.IsDead() || IsInSafeZone) { UpdateDeathTime(-1f); return; }
+        if (!Ship.Instance.ShipHealth.IsDead() || IsInSafeZone) { UpdateDeathTime(-1f); return; }
 
         UpdateDeathTime(1f);
 

@@ -68,6 +68,7 @@ public class ShipCamera : BaseCamera
         _shipBooster = _shipRigidbody.transform.root.GetComponentInChildren<Booster>();
 
         PlayerInputHandler.OnChangeZoom += HandleChangeZoom;
+        SwapShipPrefab.OnSwapShip += GetNewEnemyLookObj;
 
         _orginalFOV = _virtualCamera.m_Lens.FieldOfView;
         _currentFOV = _orginalFOV;
@@ -106,12 +107,20 @@ public class ShipCamera : BaseCamera
         Booster.OnBoostUpdated -= HandleBoost;
         PlayerInputHandler.OnChangeZoom -= HandleChangeZoom;
         SceneManager.sceneLoaded -= HandleSceneLoaded;
+        SwapShipPrefab.OnSwapShip -= GetNewEnemyLookObj;
     }
 
     #endregion
 
     private void HandleSceneLoaded(Scene scene, LoadSceneMode loadMode)
     {
+        GetNewEnemyLookObj();
+    }
+
+    private void GetNewEnemyLookObj()
+    {
+        if (_enemyLookObject != null) { Destroy(_enemyLookObject); }
+
         _enemyLookObject = new GameObject("EnemyCameraLookTransform");
         LookAtEnemy();
         _enemyFocusVCam.Follow = _enemyLookObject.transform;

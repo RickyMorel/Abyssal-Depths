@@ -1,16 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SwapShipPrefab : MonoBehaviour
 {
-    #region Private Variables
-
-    private GameObject _currentShip;
-    private PlayerInputHandler[] _playersActive;
-
-    #endregion
-
     #region Editor Fields
 
     [Header("GameObjects")]
@@ -24,10 +19,25 @@ public class SwapShipPrefab : MonoBehaviour
 
     #endregion
 
+    #region Private Variables
+
+    private GameObject _currentShip;
+    private PlayerInputHandler[] _playersActive;
+
+    #endregion
+
+    #region Public Properties
+
+    public static event Action OnSwapShip;
+
+    #endregion
+
     #region Unity Loops
 
     private void Start()
     {
+        if (!SceneLoader.IsInGarageScene()) { return; }
+
         _playersActive = FindObjectsOfType<PlayerInputHandler>();
         SwapShips(_playersActive.Length);
     }
@@ -66,7 +76,8 @@ public class SwapShipPrefab : MonoBehaviour
                 StartCoroutine(InstantiateShip1FrameAfter(_4playersShipPrefab, _4playersShipTransform));
                 break;
         }
-        CameraManager.Instance.SplitScreen(_playersActive.Length-2);
+
+        OnSwapShip?.Invoke();
     }
 
     private IEnumerator InstantiateShip1FrameAfter(GameObject shipPrefab, Transform spawnTransform)
@@ -75,5 +86,7 @@ public class SwapShipPrefab : MonoBehaviour
         _currentShip = Instantiate(shipPrefab, spawnTransform.position, Quaternion.identity);
         yield return new WaitForEndOfFrame();
         _currentShip.GetComponent<ShipMovingStaticManager>().ShouldTeleport = false;
+
+        CameraManager.Instance.SplitScreen(_playersActive.Length - 2);
     }
 }

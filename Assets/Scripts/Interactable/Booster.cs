@@ -242,8 +242,6 @@ public class Booster : RotationalInteractable
 
         if (_isStuttering) { return; }
 
-        Debug.Log("BoostShip");
-
         Ship.Instance.Rb.AddForce(RotatorTransform.transform.up * _acceleration * Ship.Instance.Rb.mass);
 
         Ship.Instance.Rb.velocity = Vector3.ClampMagnitude(Ship.Instance.Rb.velocity, Ship.Instance.TopSpeed);

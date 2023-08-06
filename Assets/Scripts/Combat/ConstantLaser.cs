@@ -65,7 +65,7 @@ public class ConstantLaser : WeaponShoot
         if(_weapon.CurrentPlayer == null) { StopLaserBeam(); return; }
         else if(_weapon.CurrentPlayer != null 
             && !_laserBeam.activeSelf
-            && _shootLaserState == ShootLaserState.ChargingDown) { Debug.Log("Set Can Shoot"); _shootLaserState = ShootLaserState.CanShoot; }
+            && _shootLaserState == ShootLaserState.ChargingDown) { _shootLaserState = ShootLaserState.CanShoot; }
 
         _constantLaser.transform.rotation = _turretHead.transform.rotation;
         _constantLaser.transform.position = _turretHead.transform.position;
@@ -87,7 +87,6 @@ public class ConstantLaser : WeaponShoot
 
     private void StopLaserBeam()
     {
-        Debug.Log("StopLaserBeam");
         _shootLaserState = ShootLaserState.ChargingDown;
         _laserBeam.SetActive(false);
     }

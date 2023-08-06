@@ -17,7 +17,7 @@ public class MeleeWeaponWithRope : MeleeWeapon
     #region Private Variables
 
     private Transform _middlePointTransform;
-    [SerializeField] private LineRenderer _lr;
+    private LineRenderer _lr;
 
     protected ThrowState _throwState = ThrowState.Attached;
     protected float _timePassedReturning;
@@ -146,13 +146,10 @@ public class MeleeWeaponWithRope : MeleeWeapon
 
     public void ThrowWeaponHead()
     {
-        //if (_throwState == ThrowState.Arrived) { return; }
-
         Transform moveToCurrentPosition = _moveToTransform;
 
         if (_throwState == ThrowState.Throwing || _throwState == ThrowState.Arrived)
         {
-            Debug.Log("Throwing Mace");
             Vector3 forceDir = _moveToTransform.position - _handleTransform.transform.position;
             _weaponHeadRb.AddForce(forceDir.normalized * _flyingSpeed * Time.deltaTime, ForceMode.Force);
         }

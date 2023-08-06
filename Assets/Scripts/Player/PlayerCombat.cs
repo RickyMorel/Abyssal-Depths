@@ -31,4 +31,10 @@ public class PlayerCombat : MonoBehaviour
 
         _attackHitbox.enabled = false;
     }
+
+    //Animation Event
+    public void PlaySwingFX()
+    {
+        GameAudioManager.Instance.PlaySound(GameAudioManager.Instance.PunchSwingSfx, transform.position);
+    }
 }

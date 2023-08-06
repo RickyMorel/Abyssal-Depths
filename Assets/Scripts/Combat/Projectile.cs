@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +19,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] private GameObject _muzzleFlash;
     [SerializeField] protected bool _shouldUnparentParticle = false;
     [SerializeField] protected bool _shakeCameraOnHit = false;
+    [SerializeField] private EventReference _impactSfx;
 
     #endregion
 
@@ -31,6 +33,7 @@ public class Projectile : MonoBehaviour
     protected float _dealDamageAfterSeconds;
     private Transform _ownersTransform;
     private GameObject _projectileMesh;
+    private bool _isReflecting = false;
 
     #endregion
 
@@ -85,9 +88,17 @@ public class Projectile : MonoBehaviour
         GameAssetsManager.Instance.ChipDataSO.ChangeParticleColor(_particles[0], _damageTypes[0], _weapon.ChipLevel); 
     }
 
+    private void OnDestroy()
+    {
+        GameAudioManager.Instance.PlaySound(_impactSfx, transform.position);
+    }
+
+    #endregion
     private void OnCollisionEnter(Collision collision)
     {
         if (Damageable.IsOwnDamage(collision.collider, gameObject)) { return; }
+
+        if (_isReflecting) { return; }
 
         PlayImpactParticles(collision.contacts[0].point);
 
@@ -131,6 +142,8 @@ public class Projectile : MonoBehaviour
     {
         gameObject.tag = ownerTag;
 
+        _isReflecting = true;
+
         if(ownerTransform == null) { return; }
 
         _ownersTransform = ownerTransform;
@@ -138,6 +151,7 @@ public class Projectile : MonoBehaviour
 
     public void ReflectFromShield(string newOwnerTag)
     {
+        _isReflecting = true;
         Vector3 newDir = _ownersTransform.position - transform.position;
         Launch(newDir, newDir);
         Initialize(newOwnerTag);
@@ -165,5 +179,4 @@ public class Projectile : MonoBehaviour
         Destroy(gameObject);
     }
 
-    #endregion
 }

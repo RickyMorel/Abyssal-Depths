@@ -3697,6 +3697,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 65601
   _redLights: {fileID: 687801799}
+  _timerTexts: []
 --- !u!114 &5877842457033602641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3742,7 +3743,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 630c2e0d578a7204ab7373b37620a954, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cameraManager: {fileID: 0}
 --- !u!114 &9184728779062188578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13568,6 +13568,7 @@ GameObject:
   - component: {fileID: 5693602849108626881}
   - component: {fileID: 8886748608922985126}
   - component: {fileID: 5274105329018717624}
+  - component: {fileID: 6717157007890771525}
   m_Layer: 25
   m_Name: Y-Main Camera
   m_TagString: MainCamera
@@ -13708,6 +13709,19 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6717157007890771525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5044816371747086564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 0}
 --- !u!1 &5164745956091330074
 GameObject:
   m_ObjectHideFlags: 0
@@ -24998,9 +25012,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shakeAmplitude: 0.5
   _expandedFovToVelocityRatio: 0.15
-  _mainCamera: {fileID: 508254513682835084}
   _perspectiveCamera: {fileID: 7327961128584826560}
-  _bossCamera: {fileID: 1452053366740833372}
+  _zoomDistancesArray: []
 --- !u!1 &6226824351192044934
 GameObject:
   m_ObjectHideFlags: 0

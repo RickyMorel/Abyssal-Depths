@@ -30,6 +30,7 @@ public class PlayerInteractionController : BaseInteractionController
         base.Update();
 
         MoveDirection = _playerInput.InteractableMoveDirection;
+        MoveDirection2 = _playerInput.InteractableMoveDirection2;
         IsUsing = _playerInput.IsShooting;
         IsUsing_2 = _playerInput.IsShooting_2;
     }

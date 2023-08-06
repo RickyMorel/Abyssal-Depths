@@ -5292,6 +5292,7 @@ GameObject:
   - component: {fileID: 8683001855490978692}
   - component: {fileID: 3100667788472722230}
   - component: {fileID: 7936679602822478339}
+  - component: {fileID: 5364082425927426277}
   m_Layer: 12
   m_Name: Player
   m_TagString: Player
@@ -5467,6 +5468,7 @@ MonoBehaviour:
   - {fileID: 929478432587415811}
   - {fileID: 929902382683439203}
   _stunParticlesTransform: {fileID: 1818718942634597345}
+  _canBeRagdolled: 1
 --- !u!114 &8900917374660638782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5487,6 +5489,7 @@ MonoBehaviour:
   _hurtTime: 5
   _meshes: []
   _particleParentTransform: {fileID: 0}
+  _bloodParticles: {fileID: 0}
 --- !u!114 &8683001855490978692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5537,6 +5540,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _chipPickupPrefab: {fileID: 7517285669250702529, guid: 33c642c6393f4f04d87e7307bb977fc0, type: 3}
   _handTransform: {fileID: 377705278079410084}
+--- !u!114 &5364082425927426277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8235309464947500824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ba89891b5adfe946a23aafe78a8cce2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8935917602542925056
 GameObject:
   m_ObjectHideFlags: 0

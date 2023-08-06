@@ -97,6 +97,7 @@ public class Interactable : MonoBehaviour
     public void SetCurrentPlayer(BaseInteractionController interactionController)
     {
         _humble.SetCurrentPlayer(interactionController);
+        GameAudioManager.Instance.PlaySound(GameAudioManager.Instance.InteractableAttackMonitorSfx, transform.position);
 
         if(_onInteractParticles != null) { _onInteractParticles.Play(); }
     }

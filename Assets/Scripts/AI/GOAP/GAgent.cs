@@ -35,12 +35,12 @@ public class GAgent : MonoBehaviour
 #endif
     [SerializeField] private Transform _target;
 
-    #endregion
+#endregion
 
     #region Private Variables
 
     private GPlanner _planner;
-    protected Queue<GAction> _actionQueue;
+    private Queue<GAction> _actionQueue;
     private SubGoal _currentGoal;
 
     private Vector3 _destination = Vector3.zero;
@@ -83,7 +83,7 @@ public class GAgent : MonoBehaviour
 
         _initialGoalDistance = _goalDistance;
     }
-
+   
     public virtual void Start()
     {
         GAction[] acts = GetComponents<GAction>();
@@ -106,7 +106,7 @@ public class GAgent : MonoBehaviour
 
     public virtual void LateUpdate()
     {
-        if (GWorld.Instance.GetWorld() == null) { return; }
+        if(GWorld.Instance.GetWorld() == null) { return; }
 
         EnableMovement();
 
@@ -153,12 +153,13 @@ public class GAgent : MonoBehaviour
 
     private void EnableMovement()
     {
-        if (!_aiStateMachine.CanMove)
+        if (!_aiStateMachine.CanMove) 
         {
+            _isMoving = false;
             _aiStateMachine.Agent.enabled = false;
         }
 
-        else if (!_interactionController.IsInteracting())
+        else if (!_interactionController.IsInteracting()) 
         {
             if (!_aiStateMachine.IsBouncingOffShield) { _aiStateMachine.Agent.enabled = true; }
         }
@@ -198,7 +199,7 @@ public class GAgent : MonoBehaviour
                 Transform dest = CurrentAction.Target.transform.Find("Destination");
                 if (dest != null) { _destination = dest.position; }
 
-                CurrentAction.Agent.SetDestination(_destination);
+                CurrentAction.Agent.SetDestination(_destination);         
             }
         }
         else
@@ -237,7 +238,7 @@ public class GAgent : MonoBehaviour
 
     private void CalculateCurrentGoal()
     {
-        if (!NeedsNewGoal()) { return; }
+        if (_planner != null && _actionQueue != null) { return; }
 
         _planner = new GPlanner();
 
@@ -257,14 +258,7 @@ public class GAgent : MonoBehaviour
         }
     }
 
-    public bool NeedsNewGoal()
-    {
-        return _planner == null || _actionQueue == null;
-    }
-
     #endregion
-   
-    
     public bool IsMoving()
     {
         return (_aiStateMachine.CanMove && _isMoving);

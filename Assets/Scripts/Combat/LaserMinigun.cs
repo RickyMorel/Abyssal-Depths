@@ -64,8 +64,6 @@ public class LaserMinigun : WeaponShoot
 
         _isShooting = true;
 
-        PlayShootFX();
-
         if (_shootNumber < _weapon.ShootTransforms.Count - 1) 
         { 
             _shootNumber++; 

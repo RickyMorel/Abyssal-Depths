@@ -21,7 +21,6 @@ public class ShipMovingStaticManager : MonoBehaviour
 
     private static ShipMovingStaticManager _instance;
     private Rigidbody _rb;
-    private bool _isInGarage;
 
     #endregion
 
@@ -100,8 +99,6 @@ public class ShipMovingStaticManager : MonoBehaviour
 
         //Heal everything when enter garage
         if (isInGarage) { Ship.Instance.ShipHealth.Respawn(); }
-
-        _isInGarage = isInGarage;
     }
 
     private IEnumerator DestroyAllFixParts()

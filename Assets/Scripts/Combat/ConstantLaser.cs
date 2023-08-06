@@ -76,7 +76,6 @@ public class ConstantLaser : WeaponShoot
         {
             _laserBeam.SetActive(true);
             _shootLaserState = ShootLaserState.CanStop;
-            PlayShootFX();
         }
     }
 

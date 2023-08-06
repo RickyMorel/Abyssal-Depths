@@ -55,8 +55,6 @@ public class MegalodonFinAttack : GAction
 
     public override bool PrePerform()
     {
-        if (!IsInsideZone(Ship.Instance.transform.position)) { return false; }
-
         GAgent.StateMachine.SetMovementSpeed(1.5f);
         Agent.speed = _finChaseSpeed;
         GAgent.SetGoalDistance(_finAttackDistance);
@@ -73,18 +71,6 @@ public class MegalodonFinAttack : GAction
         if (Target == null) { return false; }
 
         return true;
-    }
-
-    private bool IsInsideZone(Vector3 desiredPos)
-    {
-        Collider[] hitColliders = Physics.OverlapSphere(desiredPos, 0f);
-
-        foreach (Collider collider in hitColliders)
-        {
-            if (collider.GetComponent<BossZone>()) { return true; }
-        }
-
-        return false;
     }
 
     public override bool Perform()

@@ -43,14 +43,12 @@ public class Megalodon : GAgent
 
     private void TryGetNewAction()
     {
-        if (!NeedsNewGoal()) { return; }
-
-        Goals.Clear();
+        if(Goals.Count > 0) { return; }
 
         //Set of attacks up to 50% health
         if (_damageable.CurrentHealth > _damageable.MaxHealth * 0.5f)
         {
-            int randomAttack = Random.Range(0, 3);
+            int randomAttack = Random.Range(0, 2);
 
             switch (randomAttack)
             {
@@ -58,7 +56,7 @@ public class Megalodon : GAgent
                     SubGoal s2 = new SubGoal("hasCharged", 1, true);
                     Goals.Add(s2, 3);
                     break;
-                case 1 or 2:
+                case 1:
                     SubGoal s3 = new SubGoal("throwRock", 1, true);
                     Goals.Add(s3, 5);
                     break;

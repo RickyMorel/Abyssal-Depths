@@ -1,3 +1,4 @@
+using Rewired;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,8 @@ public class FastTravelNPC : NPC
     [SerializeField] private FastTravelLocation[] _travelLocations;
 
     [SerializeField] private GameObject _fastTravelOptions;
+
+    [SerializeField] private GameObject _fastTravelPanel;
 
     #endregion
 
@@ -37,10 +40,12 @@ public class FastTravelNPC : NPC
     {
         if (CurrentPlayer == null)
         {
+            _fastTravelPanel.SetActive(false);
             _fastTravelOptions.SetActive(false);
         }
         else
         {
+            _fastTravelPanel.SetActive(true);
             _fastTravelOptions.SetActive(true);
         }
     }

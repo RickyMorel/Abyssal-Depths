@@ -16,6 +16,7 @@ public class ThrowRock : GAction
 
     private AIStateMachine _stateMachine;
     private GAgent _gAgent;
+    private AICombat _aiCombat;
 
     #endregion
 
@@ -25,6 +26,7 @@ public class ThrowRock : GAction
 
         _gAgent = Agent.GetComponent<GAgent>();
         _stateMachine = Agent.GetComponent<AIStateMachine>();
+        _aiCombat = Agent.GetComponent<AICombat>();
     }
 
     public override bool PrePerform()

@@ -17,7 +17,6 @@ public class ChargeAttack : GAction
     #region Private Variables
 
     private float _defaultSpeed;
-    private float _timeSinceDoAction;
     private ObstacleAvoidanceType _defaultObstacleAvoidance;
 
     #endregion
@@ -48,24 +47,11 @@ public class ChargeAttack : GAction
 
         GAgent.StateMachine.AICombat.DestroyPrevHeldProjectile();
 
-        _timeSinceDoAction = 0f;
-
         Target = Ship.Instance.gameObject;
 
         if (Target == null) { return false; }
 
         return true;
-    }
-
-    private void Update()
-    {
-        if (GAgent.CurrentAction != this) { return; }
-
-        _timeSinceDoAction += Time.deltaTime;
-
-        if (_timeSinceDoAction < 8f) { return; }
-
-        GAgent.CancelPreviousActions();
     }
 
     public override bool Perform()
@@ -81,6 +67,13 @@ public class ChargeAttack : GAction
         GAgent.StateMachine.Anim.SetTrigger("Attack");
 
         Invoke(nameof(FinishCharge), 2f);
+    }
+
+    public void RotatedMessage()
+    {
+        if(GAgent.CurrentAction is not ChargeAttack) { return; }
+
+        FinishCharge();
     }
 
     private void FinishCharge()

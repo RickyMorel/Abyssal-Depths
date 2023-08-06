@@ -29,6 +29,7 @@ public class CraftingManager : MonoBehaviour
     private static GameObject _itemUIPrefab;
     private PlayerInputHandler _currentPlayer;
     private CraftingStation _currentCraftingStation;
+    private ReselectButtonForInteractables _reselectButtonForInteractables;
     private static CraftingManager _instance;
 
     #endregion
@@ -53,6 +54,19 @@ public class CraftingManager : MonoBehaviour
         _itemUIPrefab = (GameObject)Resources.Load("ItemUIButton");
         //Will uncomment later
         //_craftingRecipyList = Resources.LoadAll<CraftingRecipy>("ScriptableObjs/CraftingRecipies").ToList();
+    }
+
+    private void Update()
+    {
+        if (_reselectButtonForInteractables == null) { return; }
+
+        if (_reselectButtonForInteractables.RewiredEventSystem == null) { return; }
+        
+        if (_reselectButtonForInteractables.RewiredEventSystem.currentSelectedGameObject == null) { return; }
+
+        if (!_craftingPanel.activeInHierarchy) { return; }
+
+        DisplayItemInfo(_reselectButtonForInteractables.RewiredEventSystem.currentSelectedGameObject.GetComponent<CraftingItemUI>().CraftingRecipy);
     }
 
     public static bool CanCraft(CraftingRecipy craftingRecipy)
@@ -81,6 +95,13 @@ public class CraftingManager : MonoBehaviour
     public void EnableCanvas(bool isEnabled, PlayerInputHandler currentPlayer, CraftingStation craftingStation)
     {
         _craftingPanel.SetActive(isEnabled);
+
+        if (isEnabled)
+        {
+            _reselectButtonForInteractables = _craftingPanel.GetComponent<ReselectButtonForInteractables>();
+            _reselectButtonForInteractables.Interactable = craftingStation;
+        }
+
         _currentPlayer = currentPlayer;
         _currentCraftingStation = craftingStation;
 
@@ -99,8 +120,6 @@ public class CraftingManager : MonoBehaviour
 
         foreach (ItemQuantity ingredient in craftingRecipy.CraftingIngredients)
         {
-            Debug.Log(_itemUIPrefab);
-            Debug.Log(contentTransform);
             GameObject itemUI = Instantiate(_itemUIPrefab, contentTransform);
             itemUI.GetComponent<ItemUI>().Initialize(ingredient);
         }

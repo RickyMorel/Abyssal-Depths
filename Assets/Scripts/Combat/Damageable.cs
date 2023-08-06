@@ -40,7 +40,7 @@ public class Damageable : MonoBehaviour
 
     private ParticleSystem _fireParticles;
     private ParticleSystem _electricParticles;
-    private List<RendererAndColor> _renderers = new List<RendererAndColor>();
+    private Renderer[] _renderers;
 
     #endregion
 
@@ -58,7 +58,6 @@ public class Damageable : MonoBehaviour
 
     public event Action<int> OnUpdateHealth;
     public event Action<DamageTypes, int> OnDamaged;
-    public event Action<Vector3> OnDamagedWithPosition;
     public event Action OnDie;
     public event Action<bool> OnElectrocution;
 
@@ -96,8 +95,6 @@ public class Damageable : MonoBehaviour
         TryDamageWithProjectile(other);
     }
 
-    #endregion
-
     private void TryDamageWithProjectile(Collider other)
     {
         if (!other.gameObject.TryGetComponent(out Projectile projectile)) { return; }
@@ -107,8 +104,6 @@ public class Damageable : MonoBehaviour
 
         _damageData = new DamageData(projectile.DamageData);
         ChangeColorForDamageTypeParticles(DamageData.ChipLevel);
-
-        OnDamagedWithPosition?.Invoke(projectile.transform.position);
 
         //In some cases, we don't want the projectile to be destroyed on impact, like the constant laser for example
         if (projectile.DestroyOnHit)
@@ -138,28 +133,31 @@ public class Damageable : MonoBehaviour
         }
     }
 
-    private void ChangeColorForDamageTypeParticles(int chipLevel)
+    public void ChangeColorForDamageTypeParticles(int chipLevel)
     {
         if (_fireParticles != null) { GameAssetsManager.Instance.ChipDataSO.ChangeParticleColor(_fireParticles, DamageTypes.Fire, chipLevel); }
         if (_electricParticles != null) { GameAssetsManager.Instance.ChipDataSO.ChangeParticleColor(_electricParticles, DamageTypes.Electric, chipLevel); }
     }
 
+    #endregion
+
     private void FindMeshes()
     {
-        Renderer[] renderers = GetComponentsInChildren<SkinnedMeshRenderer>();
+        _renderers = GetComponentsInChildren<SkinnedMeshRenderer>();
 
-        foreach (Renderer renderer in renderers)
+        foreach (Renderer renderer in _renderers)
         {
-            _renderers.Add(new RendererAndColor(renderer));
+            renderer.material.EnableKeyword("_EMISSION");
+            _originalColor = renderer.material.GetColor("_EmissionColor");
         }
     }
 
-    public static bool IsOwnDamage(Collider other, GameObject selfObj)
+    public bool IsOwnDamage(Collider other, GameObject gameObject)
     {
         //Turrets can't harm their own ship
-        if (other.gameObject.tag == "Untagged" && selfObj.tag == "MainShip") { return true; }
+        if (other.gameObject.tag == "Untagged" && gameObject.tag == "MainShip") { return true; }
 
-        if (other.gameObject.tag == selfObj.tag) { return true; }
+        if (other.gameObject.tag == gameObject.tag) { return true; }
 
         return false;
     }
@@ -229,9 +227,9 @@ public class Damageable : MonoBehaviour
 
         OnDamaged?.Invoke(_damageData.DamageTypes[index], (int)finalDamage);
 
-        PlayDamageFX();
+        if(finalDamage != 0) { DamagePopup.Create(transform.position, (int)finalDamage, _damageData.DamageTypes[index], isWeak); }
 
-        if (finalDamage != 0) { DamagePopup.Create(transform.position, (int)finalDamage, _damageData.DamageTypes[index], isWeak); }
+        if (_damageData.DamageTypes[index] != DamageTypes.None) { PlayDamageFX(); }
 
         if (_currentHealth == 0) { Die(); }
     }
@@ -269,33 +267,6 @@ public class Damageable : MonoBehaviour
     public virtual void PlayDamageFX()
     {
         if (_damageParticles != null) { _damageParticles.Play(); }
-
-        StartCoroutine(ColorChangeOnHit());
-    }
-
-    private IEnumerator ColorChangeOnHit()
-    {
-        if (_renderers.Count < 1) { yield break; }
-
-        foreach (RendererAndColor renderer in _renderers)
-        {
-            renderer.SetColor(Color.white, 1);
-        }
-
-        float currentTime = 0f;
-        float waitTime = 0.15f;
-        
-        while(currentTime < waitTime)
-        {
-            currentTime += Time.deltaTime;
-
-            foreach (RendererAndColor renderer in _renderers)
-            {
-                renderer.SetColor(Color.white, 1f - (currentTime / waitTime));
-            }
-
-            yield return new WaitForEndOfFrame();
-        }
     }
 
     public float CalculateCrashDamage(Rigidbody selfRb, float crashDamageMultiplier = 10f)
@@ -353,7 +324,7 @@ public class Damageable : MonoBehaviour
 
     private void ColorChangeForLaser()
     {
-        if (_renderers.Count < 1) { return; }
+        if (_renderers.Length < 1) { return; }
         
         if (_timeSinceLastLaserShot > _timeToResetLaserLevel)
         {
@@ -361,11 +332,9 @@ public class Damageable : MonoBehaviour
             _laserLevel = Mathf.Clamp(_laserLevel - laserReductionAmount, 0, 1);
         }
 
-        if(_laserLevel == 0) { return; }
-
-        foreach (RendererAndColor renderer in _renderers)
+        foreach (Renderer renderer in _renderers)
         {
-            renderer.SetColor(GameAssetsManager.Instance.LaserHeatColor, _laserLevel);
+            renderer.material.SetColor("_EmissionColor", Color.Lerp(_originalColor, GameAssetsManager.Instance.LaserHeatColor, _laserLevel));
         }
     }
 
@@ -449,59 +418,6 @@ public class Damageable : MonoBehaviour
         if (isWeak && !isResistant) { damageAux = damageAux * _damageData.Weakness[index]; }
 
         return (int)damageAux;
-    }
-
-    #endregion
-
-    #region Helper Classes
-
-    public class RendererAndColor
-    {
-        private Renderer _renderer;
-        private Color _originalColor;
-
-        private bool _hasEmissiveColor = false;
-
-        public RendererAndColor(Renderer renderer)
-        {
-            this._renderer = renderer;
-
-            _originalColor = renderer.material.GetColor("_EmissionColor");
-
-            if(_originalColor == null)
-            {
-                _originalColor = renderer.material.GetColor("_BaseColor");
-            }
-            else
-            {
-                renderer.material.EnableKeyword("_EMISSION");
-                _hasEmissiveColor = true;
-            }
-        }
-
-        public void SetColor(Color wantedColor, float blendValue = 1f)
-        {
-            if(_hasEmissiveColor)
-            {
-                _renderer.material.SetColor("_EmissionColor", Color.Lerp(_originalColor, wantedColor, blendValue));
-            }
-            else
-            {
-                _renderer.material.SetColor("_BaseColor", Color.Lerp(_originalColor, wantedColor, blendValue));
-            }
-        }
-
-        public void ResetColor()
-        {
-            if (_hasEmissiveColor)
-            {
-                _renderer.material.SetColor("_EmissionColor", _originalColor);
-            }
-            else
-            {
-                _renderer.material.SetColor("_BaseColor", _originalColor);
-            }
-        }
     }
 
     #endregion

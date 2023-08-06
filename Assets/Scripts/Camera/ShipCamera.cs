@@ -4,7 +4,6 @@ using UnityEngine;
 using Cinemachine;
 using UnityEngine.Events;
 using System;
-using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(CinemachineVirtualCamera))]
 public class ShipCamera : BaseCamera
@@ -12,10 +11,7 @@ public class ShipCamera : BaseCamera
     #region Editor Fields
 
     [SerializeField] private Camera _perspectiveCamera;
-    [SerializeField] private CinemachineVirtualCamera _enemyFocusVCam;
-    [SerializeField] private Transform _cameraLookAtTransform;
     [SerializeField] private ZoomValues[] _zoomDistancesArray;
-    [SerializeField] private float _maxEnemyFocusDistance = 30f;
 
     #endregion
 
@@ -30,16 +26,12 @@ public class ShipCamera : BaseCamera
     private float _orginalFOV;
     private float _targetPerspectiveZ;
     private int _currentZoomDistanceIndex = 1;
-
-    private GameObject _enemyLookObject;
-    private Transform _currentEnemy;
     #endregion
 
     #region Public Properties
 
     public static ShipCamera Instance { get { return _instance; } }
     public Camera PerspectiveCamera => _perspectiveCamera;
-    public CinemachineVirtualCamera EnemyFocusVCam => _enemyFocusVCam;
 
     #endregion
 
@@ -48,7 +40,6 @@ public class ShipCamera : BaseCamera
     private void Awake()
     {
         Booster.OnBoostUpdated += HandleBoost;
-        SceneManager.sceneLoaded += HandleSceneLoaded;
 
         if (_instance != null && _instance != this)
         {
@@ -72,16 +63,7 @@ public class ShipCamera : BaseCamera
         _orginalFOV = _virtualCamera.m_Lens.FieldOfView;
         _currentFOV = _orginalFOV;
 
-        StartCoroutine(LateStart());
-
         ChangeZoom();
-    }
-
-    private IEnumerator LateStart()
-    {
-        yield return new WaitForEndOfFrame();
-
-        _enemyFocusVCam.gameObject.SetActive(true);
     }
 
     //Only player that is driving can change the zoom
@@ -94,72 +76,25 @@ public class ShipCamera : BaseCamera
         ChangeZoom();
     }
 
-    private void FixedUpdate()
+    private void LateUpdate()
     {
         UpdateBoostFOVEffect();
         UpdateCameraZoom();
-        LookAtEnemy();
     }
 
     private void OnDestroy()
     {
         Booster.OnBoostUpdated -= HandleBoost;
         PlayerInputHandler.OnChangeZoom -= HandleChangeZoom;
-        SceneManager.sceneLoaded -= HandleSceneLoaded;
     }
 
     #endregion
-
-    private void HandleSceneLoaded(Scene scene, LoadSceneMode loadMode)
-    {
-        _enemyLookObject = new GameObject("EnemyCameraLookTransform");
-        LookAtEnemy();
-        _enemyFocusVCam.Follow = _enemyLookObject.transform;
-    }
-
-    private void LookAtEnemy()
-    {
-        if (_currentEnemy != null && Vector3.Distance(_currentEnemy.position, Ship.Instance.transform.position) < _maxEnemyFocusDistance)
-        {
-            Vector3 halfPoint = (_currentEnemy.position + _cameraLookAtTransform.transform.position) / 2f;
-            Vector3 quarterPoint = (halfPoint + _cameraLookAtTransform.transform.position) / 2f;
-            Vector3 EigthPoint = (quarterPoint + _cameraLookAtTransform.transform.position) / 2f;
-
-            _enemyLookObject.transform.position = EigthPoint;
-            _enemyLookObject.transform.position = new Vector3(
-                _enemyLookObject.transform.position.x,
-                _enemyLookObject.transform.position.y,
-                _cameraLookAtTransform.position.z
-                );
-            return;
-        }
-
-        _currentEnemy = FindClosestEnemy();
-
-        if(_currentEnemy == null) { _enemyFocusVCam.Priority = 0; return; }
-
-        _enemyFocusVCam.Priority = _virtualCamera.Priority + 1;
-    }
-
-    private Transform FindClosestEnemy()
-    {
-        AIHealth[] enemies = FindObjectsOfType<AIHealth>();
-
-        foreach (AIHealth enemy in enemies)
-        {
-            if(Vector3.Distance(enemy.transform.position, Ship.Instance.transform.position) > _maxEnemyFocusDistance) { continue; }
-
-            return enemy.transform;
-        }
-
-        return null;
-    }
 
     private void UpdateCameraZoom()
     {
         float zoomSpeed = 5f;
         transform.localPosition = Vector3.MoveTowards(transform.localPosition, new Vector3(0f, 0f, _targetPerspectiveZ), Time.deltaTime * zoomSpeed);
-        _cameraLookAtTransform.localPosition = Vector3.MoveTowards(_cameraLookAtTransform.localPosition, new Vector3(0f, 0f, _targetPerspectiveZ), Time.deltaTime * zoomSpeed);
+        _perspectiveCamera.transform.localPosition = Vector3.MoveTowards(_perspectiveCamera.transform.localPosition, new Vector3(0f, 0f, _targetPerspectiveZ), Time.deltaTime * zoomSpeed);
     }
 
     private void UpdateBoostFOVEffect()

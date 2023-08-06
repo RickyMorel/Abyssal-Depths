@@ -20,7 +20,7 @@ public class PlayerInteractionController : BaseInteractionController
         _playerStateMachine = GetComponent<PlayerStateMachine>();
 
         _playerInput.OnInteract += PlayerHandleInteraction;
-        _playerInput.OnJump += HandleJump;
+        _playerInput.OnInteract += HandleCancel;
         _playerHealth.OnHurt += HandleHurt;
         OnExitInteraction += HandleExitInteraction;
     }
@@ -37,7 +37,7 @@ public class PlayerInteractionController : BaseInteractionController
     private void OnDestroy()
     {
         _playerInput.OnInteract -= PlayerHandleInteraction;
-        _playerInput.OnJump -= HandleJump;
+        _playerInput.OnInteract -= HandleCancel;
         _playerHealth.OnHurt -= HandleHurt;
         OnExitInteraction -= HandleExitInteraction;
     }

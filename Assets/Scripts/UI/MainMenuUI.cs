@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using Rewired;
 
 namespace AbyssalDepths.UI
 {
     public class MainMenuUI : MonoBehaviour
     {
+        #region Private Variables
+
+        private Player _rewiredPlayer;
+
+        #endregion
+
         #region Editor Fields
 
         [Header("Panels")]
@@ -15,6 +22,7 @@ namespace AbyssalDepths.UI
         [SerializeField] private GameObject _playPanel;
         [SerializeField] private GameObject _settingsPanel;
         [SerializeField] private GameObject _newGamePanel;
+        [SerializeField] private GameObject _onScreenKeyboard;
         [SerializeField] private GameObject _loadPanel;
         [SerializeField] private GameObject _gameplaySettingsPanel;
         [SerializeField] private GameObject _videoSettingsPanel;
@@ -40,6 +48,10 @@ namespace AbyssalDepths.UI
         {
             if(_newGameNameText.text == string.Empty) { return; }
 
+            _rewiredPlayer = ReInput.players.GetPlayer(0);
+            _rewiredPlayer.controllers.maps.SetMapsEnabled(false, "UI");
+            _rewiredPlayer.controllers.maps.SetMapsEnabled(true, "Default");
+
             int saveIndex = SaveSystem.CreateNewSave(_newGameNameText.text);
             CreateLoadObj(saveIndex);
 
@@ -56,7 +68,16 @@ namespace AbyssalDepths.UI
 
         public void EnableNewGamePanel(bool isEnabled)
         {
+            DisableAllPanels();
+
             _newGamePanel.SetActive(isEnabled);
+            
+            EnableOnScreenKeyboard(isEnabled);
+        }
+
+        public void EnableOnScreenKeyboard(bool isEnabled)
+        {
+            _onScreenKeyboard.SetActive(isEnabled);
         }
 
         public void LoadGame()
@@ -101,6 +122,8 @@ namespace AbyssalDepths.UI
             _gameplaySettingsPanel.SetActive(false);
             _videoSettingsPanel.SetActive(false);
             _audioSettingsPanel.SetActive(false);
+            _newGamePanel.SetActive(false);
+            _onScreenKeyboard.SetActive(false);
         }
 
         public void SelectPlayPanel()

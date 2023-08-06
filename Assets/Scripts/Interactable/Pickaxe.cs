@@ -108,8 +108,6 @@ public class Pickaxe : RotationalInteractable
 
     public void ApplyImpactForce()
     {
-        if(CurrentPlayer == null) { return; }
-
         bool applyForwardForce = CurrentAngle >= 0;
         float force = applyForwardForce ? -RotationSpeed : RotationSpeed;
 

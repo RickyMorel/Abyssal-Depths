@@ -217,6 +217,7 @@ GameObject:
   - component: {fileID: 6923910720757635520}
   - component: {fileID: 6923910720757635522}
   - component: {fileID: 6923910720757635523}
+  - component: {fileID: 7069283757226580715}
   m_Layer: 5
   m_Name: PlayPanel
   m_TagString: Untagged
@@ -284,6 +285,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7069283757226580715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6923910720757635521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ec5890aa4c43e64a8cb7d6ba26ce451, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _reselectButton: {fileID: 3575258087122255120}
+  _interactable: {fileID: 0}
 --- !u!1001 &3575258087828868971
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -599,6 +614,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 5dfc19ffde1617c4c89873615345922e, type: 3}
+--- !u!1 &3575258087122255120 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5875915844207539826, guid: 5dfc19ffde1617c4c89873615345922e, type: 3}
+  m_PrefabInstance: {fileID: 6923910720758729570}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &3575258087122255121 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5875915844207539827, guid: 5dfc19ffde1617c4c89873615345922e, type: 3}

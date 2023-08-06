@@ -270,7 +270,6 @@ public class Booster : RotationalInteractable
 
         if (CurrentPlayer != null) { CurrentPlayer.CheckExitInteraction(); }
     }
-
 }
 
 #region Helper Classes

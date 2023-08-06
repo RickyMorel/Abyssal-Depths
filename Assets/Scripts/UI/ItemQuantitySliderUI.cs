@@ -55,7 +55,7 @@ public class ItemQuantitySliderUI : MonoBehaviour
 
         if(_currentPlayer == null) { return; }
 
-        _currentPlayer.OnConfirm -= OnConfirm;
+        _currentPlayer.OnUISubmit -= OnUISubmit;
     }
 
     public void Initialize(ItemQuantity itemQuantity, Chest chest, PlayerInputHandler currentPlayer, Vector3 cellPosition)
@@ -70,7 +70,7 @@ public class ItemQuantitySliderUI : MonoBehaviour
         _currentAmountText.text = _slider.value.ToString();
         _totalAmountText.text = itemQuantity.Amount.ToString();
 
-        _currentPlayer.OnConfirm += OnConfirm;
+        _currentPlayer.OnUISubmit += OnUISubmit;
 
         EnableSlider(true);
     }
@@ -84,7 +84,7 @@ public class ItemQuantitySliderUI : MonoBehaviour
         _finalItemQuantity.Amount = _currentAmount;
     }
 
-    private void OnConfirm()
+    private void OnUISubmit()
     {
         if(_itemQuantitySliderPanel.activeSelf == false) { return; }
 

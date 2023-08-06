@@ -11,9 +11,6 @@ public class RunAway : GAction
     [SerializeField] private float _minDistance = 30f;
     [SerializeField] private float _maxDistance = 60f;
 
-    [Header("Optional Variables")]
-    [SerializeField] private Transform[] _runAwayPositions;
-
     #endregion
 
     #region Private Variables
@@ -34,10 +31,11 @@ public class RunAway : GAction
 
     public override bool PrePerform()
     {
+        Vector3 destination = RandomNavmeshLocation(_maxDistance);
         _navMeshMask = Agent.areaMask;
 
         GameObject newTargetObj = new GameObject();
-        newTargetObj.transform.position = GetPosition();
+        newTargetObj.transform.position = destination;
         newTargetObj.name = "RunAwayTargetObj";
 
         _currentRunAwayObj = newTargetObj;
@@ -51,24 +49,6 @@ public class RunAway : GAction
         if (Target == null) { return false; }
 
         return true;
-    }
-
-    private Vector3 GetPosition()
-    {
-        if(_runAwayPositions.Length < 1) { return RandomNavmeshLocation(_maxDistance); }
-
-        Transform farthestTransform = _runAwayPositions[0];
-
-        foreach (var positionTransform in _runAwayPositions)
-        {
-            if(Vector3.Distance(Ship.Instance.transform.position, positionTransform.transform.position) >
-                Vector3.Distance(Ship.Instance.transform.position, farthestTransform.transform.position))
-            {
-                farthestTransform = positionTransform;
-            }
-        }
-
-        return farthestTransform.position;
     }
 
     private void Update()

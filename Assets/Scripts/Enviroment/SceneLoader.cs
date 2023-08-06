@@ -39,8 +39,6 @@ public class SceneLoader : MonoBehaviour
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneToLoad);
 
         LoadScreenUI.Instance.LoadScene(operation);
-
-        Ship.Instance.transform.position = GameObject.FindGameObjectWithTag(GameTagsManager.SPAWN_POINT).transform.position;
     }
 
     public static bool IsInGarageScene()

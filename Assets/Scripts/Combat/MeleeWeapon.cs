@@ -9,6 +9,7 @@ public abstract class MeleeWeapon : WeaponShoot
 
     [SerializeField] protected AttackHitBox _attackHitBox;
     [SerializeField] protected Transform _parentTransform;
+    [SerializeField] protected Rigidbody _movingShipRb;
     [SerializeField] protected float maxDistance = 10f;
     [SerializeField] protected float _moveForce = 50f;
     [SerializeField] protected float _maxMovementSpeed = 20f;
@@ -59,8 +60,8 @@ public abstract class MeleeWeapon : WeaponShoot
         if (_weapon.CanUse == false) { return; }
 
         _rb.AddForce(_weapon.CurrentPlayer.MoveDirection * _moveForce);
-        _rb.AddForce(Ship.Instance.Rb.velocity);
-        _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, _maxMovementSpeed + Ship.Instance.Rb.velocity.magnitude);
+        _rb.AddForce(_movingShipRb.velocity);
+        _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, _maxMovementSpeed + _movingShipRb.velocity.magnitude);
     }
 
     #endregion

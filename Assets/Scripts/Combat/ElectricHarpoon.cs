@@ -94,7 +94,6 @@ public class ElectricHarpoon : MeleeWeaponWithRope
             Vector3 grappleDirection = _weaponHeadRb.transform.position - Ship.Instance.transform.position;
             Vector3 finalForce = grappleDirection.normalized * _grappleSpeed * Time.deltaTime;
             Ship.Instance.AddForceToShip(finalForce, ForceMode.Force);
-            PlayShootFX();
             return;
         }
 
@@ -160,7 +159,6 @@ public class ElectricHarpoon : MeleeWeaponWithRope
         }
 
         SetupElectricWire();
-        PlayShootFX();
     }
 
     private void DestroyBeacons()

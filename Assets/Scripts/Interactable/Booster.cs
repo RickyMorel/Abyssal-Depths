@@ -16,7 +16,6 @@ public class Booster : RotationalInteractable
     [SerializeField] private float _shipDrag = 0.1f;
     [SerializeField] private List<Gear> _gears = new List<Gear>();
     [SerializeField] private float _speedReductionTolerance = 8f;
-    [SerializeField] private Rigidbody _rb;
     [SerializeField] private BoosterStabilizer _boosterStabilizer;
     [SerializeField] private BoosterStabilizer[] _boosterStabilizers;
 
@@ -46,8 +45,6 @@ public class Booster : RotationalInteractable
 
     public float Acceleration => _acceleration;
 
-    public Rigidbody RB => _rb;
-
     public bool IsBoosting => _isBoosting;
 
     #endregion
@@ -71,7 +68,7 @@ public class Booster : RotationalInteractable
     {
         base.Start();
 
-        _rb.drag = _shipDrag;
+        Ship.Instance.Rb.drag = _shipDrag;
 
         _boostSfx = GameAudioManager.Instance.CreateSoundInstance(GameAudioManager.Instance.BoosterBoostSfx, Ship.Instance.transform);
         _hoverSfx = GameAudioManager.Instance.CreateSoundInstance(GameAudioManager.Instance.BoosterBoostSfx, Ship.Instance.transform);
@@ -138,12 +135,12 @@ public class Booster : RotationalInteractable
 
     private void CheckGears()
     {
-        if (_currentGear < (_gears.Count - 1) && _rb.velocity.magnitude > _gears[_currentGear].MaxSpeed)
+        if (_currentGear < (_gears.Count - 1) && Ship.Instance.Rb.velocity.magnitude > _gears[_currentGear].MaxSpeed)
         {
             _currentGear = Mathf.Clamp(_currentGear + 1, 0, _gears.Count - 1);
             OnGearChanged?.Invoke(_currentGear);
         }
-        else if (_currentGear != 0 && _rb.velocity.magnitude + _speedReductionTolerance < _gears[_currentGear - 1].MaxSpeed)
+        else if (_currentGear != 0 && Ship.Instance.Rb.velocity.magnitude + _speedReductionTolerance < _gears[_currentGear - 1].MaxSpeed)
         {
             _currentGear = Mathf.Clamp(_currentGear - 1, 0, _gears.Count - 1);
             OnGearChanged?.Invoke(_currentGear);
@@ -165,7 +162,7 @@ public class Booster : RotationalInteractable
             _boostSfx.stop(STOP_MODE.ALLOWFADEOUT);
         }
 
-        float speedPercentage = Mathf.Clamp((_rb.velocity.magnitude * 1.5f ) / Ship.Instance.TopSpeed, 0f, 1f);
+        float speedPercentage = Mathf.Clamp((Ship.Instance.Rb.velocity.magnitude * 1.5f ) / Ship.Instance.TopSpeed, 0f, 1f);
 
         GameAudioManager.Instance.AdjustAudioParameter(_boostSfx, "BoostSpeed", speedPercentage);
     }
@@ -224,14 +221,14 @@ public class Booster : RotationalInteractable
     {
         if (!_isHovering) { return; }
 
-        if (_rb.velocity == Vector3.zero) { return; }
+        if (Ship.Instance.Rb.velocity == Vector3.zero) { return; }
 
-        _rb.AddForce(-_rb.velocity.normalized * _rb.mass * _hoverAcceleration);
+        Ship.Instance.Rb.AddForce(-Ship.Instance.Rb.velocity.normalized * Ship.Instance.Rb.mass * _hoverAcceleration);
     }
 
     private void BoostImpulse()
     {
-        _rb.AddForce((RotatorTransform.transform.up * _boostImpulseForce * _rb.mass), ForceMode.Impulse);
+        Ship.Instance.Rb.AddForce((RotatorTransform.transform.up * _boostImpulseForce * Ship.Instance.Rb.mass), ForceMode.Impulse);
     }
 
     private void BoostShip()
@@ -245,9 +242,9 @@ public class Booster : RotationalInteractable
 
         if (_isStuttering) { return; }
 
-        _rb.AddForce(RotatorTransform.transform.up * _acceleration * _rb.mass);
+        Ship.Instance.Rb.AddForce(RotatorTransform.transform.up * _acceleration * Ship.Instance.Rb.mass);
 
-        _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, Ship.Instance.TopSpeed);
+        Ship.Instance.Rb.velocity = Vector3.ClampMagnitude(Ship.Instance.Rb.velocity, Ship.Instance.TopSpeed);
     }
 
     private IEnumerator SetStutter()

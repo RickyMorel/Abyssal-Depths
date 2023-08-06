@@ -15173,6 +15173,7 @@ GameObject:
   - component: {fileID: 9185013131034128382}
   - component: {fileID: 4457010145318394314}
   - component: {fileID: 726333283479824611}
+  - component: {fileID: 4369487710667774916}
   m_Layer: 0
   m_Name: Game_Manager
   m_TagString: Untagged
@@ -15295,7 +15296,7 @@ MonoBehaviour:
   _itemPickupCollisionParticles: {fileID: 3047848899332420928, guid: 7e87e1cf1ca7eb24b98ca35a7d084f9a, type: 3}
   _ragdollBubbleParticles: {fileID: 8692640581620935335, guid: 552047dd452386643809270871634a6e, type: 3}
   _minableHitDefault: {fileID: 3472975365800045955, guid: b10f8e3708f091e45b47abccd1ffe9dd, type: 3}
-  _shootBubbleParticles: {fileID: 0}
+  _shootBubbleParticles: {fileID: 1252994616598373797, guid: 8769312ac2eef20409975b7219f4039e, type: 3}
   _stunnedParticles:
   - {fileID: 1334071670866236, guid: edf12e91890b8434eb8ea701f9bc40a2, type: 3}
   - {fileID: 1380238739168988, guid: e35f4911d07c78949bd6fcee2e707765, type: 3}
@@ -15455,6 +15456,13 @@ MonoBehaviour:
       Data3: -2071571039
       Data4: -1259339165
     Path: event:/Ship/ShipInteractableOffline
+  _weaponWheelRotationSfx:
+    Guid:
+      Data1: -567465913
+      Data2: 1177219451
+      Data3: 512310444
+      Data4: -1815317529
+    Path: event:/Ship/ShipWeaponRotation
   _stunnedSfx:
     Guid:
       Data1: -539998358
@@ -15602,6 +15610,21 @@ MonoBehaviour:
       Data3: 1955128745
       Data4: 989131763
     Path: event:/Enivorment/CryopodOpen
+--- !u!114 &4369487710667774916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3852162812249718933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c33d8a590b299e49857add16a9a0b14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _4playersShipPrefab: {fileID: 4608590624474886517, guid: 2a1c639440cd69640835c75e7833c7d7, type: 3}
+  _3playersShipPrefab: {fileID: 4608590624474886517, guid: 7168613465ccdb84db14cde73b1a5b32, type: 3}
+  _2playersShipPrefab: {fileID: 4608590624474886517, guid: 013f4372d642b034c9f96dcfafb042dc, type: 3}
 --- !u!1 &3852162812439959518
 GameObject:
   m_ObjectHideFlags: 0

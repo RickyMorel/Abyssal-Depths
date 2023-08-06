@@ -10,8 +10,8 @@ public class CameraManager : MonoBehaviour
 {
     #region Editor Fields
 
-    [SerializeField] private CinemachineBrain[] _cameras;
-    [SerializeField] private CinemachineVirtualCamera[] _vCams;
+    [SerializeField] private List<CinemachineBrain> _cameras = new List<CinemachineBrain>();
+    [SerializeField] private List<CinemachineVirtualCamera> _vCams = new List<CinemachineVirtualCamera>();
 
     #endregion
 
@@ -47,19 +47,22 @@ public class CameraManager : MonoBehaviour
 
     private void GetAllCameras()
     {
-        _cameras = FindObjectsOfType<CinemachineBrain>(true);
-        _vCams = FindObjectsOfType<CinemachineVirtualCamera>(true);
+        _cameras.Clear();
+        _vCams.Clear();
 
-        Array.Sort(_cameras, (a, b) => String.Compare(LayerMask.LayerToName(a.gameObject.layer), LayerMask.LayerToName(b.gameObject.layer)));
-        Array.Sort(_vCams, (a, b) => String.Compare(LayerMask.LayerToName(a.gameObject.layer), LayerMask.LayerToName(b.gameObject.layer)));
+        _cameras = FindObjectsOfType<CinemachineBrain>(true).ToList();
+        _vCams = FindObjectsOfType<CinemachineVirtualCamera>(true).ToList();
 
-        for (int i = 0; i < _vCams.Length; i++)
+        _cameras.Sort((a, b) => String.Compare(LayerMask.LayerToName(a.gameObject.layer), LayerMask.LayerToName(b.gameObject.layer)));
+        _vCams.Sort((a, b) => String.Compare(LayerMask.LayerToName(a.gameObject.layer), LayerMask.LayerToName(b.gameObject.layer)));
+
+        for (int i = 0; i < _vCams.Count; i++)
         {
             if (_vCams[i].Name.Contains("0-"))
             {
                 var swappedCamera = _vCams[i];
-                _vCams[i] = _vCams[_vCams.Length - 1];
-                _vCams[_vCams.Length - 1] = swappedCamera;
+                _vCams[i] = _vCams[_vCams.Count - 1];
+                _vCams[_vCams.Count - 1] = swappedCamera;
             }
             else if (_vCams[i].Name.Contains("Y-"))
             {
@@ -80,7 +83,7 @@ public class CameraManager : MonoBehaviour
         ShipCamera.Instance.EnemyFocusVCam.gameObject.SetActive(boolean);
         ShipCamera.Instance.gameObject.SetActive(boolean);
 
-        for (int i = 0; i < _cameras.Length; i++)
+        for (int i = 0; i < _cameras.Count; i++)
         {
             if (_vCams[i].gameObject != ShipCamera.Instance.gameObject) { _vCams[i].gameObject.SetActive(!boolean); }
             if (_cameras[i].tag != "MainCamera") {  _cameras[i].gameObject.SetActive(!boolean); }

@@ -27,6 +27,7 @@ public class BaseInteractionController : MonoBehaviour
     protected bool _isUsing_2 = false;
     protected bool _isFixing = false;
     protected Vector3 _moveDirection;
+    protected Vector3 _moveDirection2;
     protected float _timeSinceLastInteraction;
 
     #endregion
@@ -47,6 +48,7 @@ public class BaseInteractionController : MonoBehaviour
     public bool IsUsing_2 { get { return _isUsing_2; } set { _isUsing_2 = value; } }
     public bool IsFixing { get { return _isFixing; } set { _isFixing = value; } }
     public Vector3 MoveDirection { get { return _moveDirection; } set { _moveDirection = value; } }
+    public Vector3 MoveDirection2 { get { return _moveDirection2; } set { _moveDirection2 = value; } }
 
     #endregion
 

@@ -20,6 +20,8 @@ public class FireShotgun : WeaponShoot
 
     public override void CheckShootInput()
     {
+        if(_weapon.CurrentPlayer == null) { return; }
+
         if (_weapon.CurrentPlayer.IsUsing && !_hasAlreadyShot)
         {
             Shoot();
@@ -47,7 +49,7 @@ public class FireShotgun : WeaponShoot
         //We first check if the amount of projectiles is odd or even, if it is odd, we'll instantiate a projectile in the middle of the cone
         if (_amountOfProjectiles % 2 == 1)
         {
-            _projectileInstance = Instantiate(_weapon.ProjectilePrefab, _weapon.ShootTransforms[0].position, _weapon.TurretHead.rotation);
+            _projectileInstance = Instantiate(_weaponSO.ProjectilePrefab, _shootTransforms[0].position, _turretHead.rotation);
             _projectileInstance.GetComponent<Projectile>().WeaponReference = _weapon;
             ProjectileInstantiation(0);
         }
@@ -56,9 +58,9 @@ public class FireShotgun : WeaponShoot
             //If it is even you need to instantiate 2 projectiles with the angle halved, since the separation angle only accounts for shots with the same separation angle
             //This means that the first two shots are going to have separation angle that is double, since the separation starts at the center of the barrel
             //This is not an issue with the odd, since the projectile of the middle makes it so that the angle of separation is correct
-            _projectileInstance = Instantiate(_weapon.ProjectilePrefab, _weapon.ShootTransforms[0].position, _weapon.TurretHead.rotation * Quaternion.Euler(_shootSpreadSeparationAngle / 2, 0, 0));
+            _projectileInstance = Instantiate(_weaponSO.ProjectilePrefab, _shootTransforms[0].position, _turretHead.rotation * Quaternion.Euler(_shootSpreadSeparationAngle / 2, 0, 0));
             _projectileInstance.GetComponent<Projectile>().WeaponReference = _weapon;
-            _projectileInstance = Instantiate(_weapon.ProjectilePrefab, _weapon.ShootTransforms[0].position, _weapon.TurretHead.rotation * Quaternion.Euler(-_shootSpreadSeparationAngle / 2, 0, 0));
+            _projectileInstance = Instantiate(_weaponSO.ProjectilePrefab, _shootTransforms[0].position, _turretHead.rotation * Quaternion.Euler(-_shootSpreadSeparationAngle / 2, 0, 0));
             _projectileInstance.GetComponent<Projectile>().WeaponReference = _weapon;
             ProjectileInstantiation(1);
         }
@@ -70,9 +72,9 @@ public class FireShotgun : WeaponShoot
         //It needs to be 1 or else, it will spawn unnecesary projectiles with an incorrect angle
         for (float i = (1 + isOddOrEven); i < _amountOfProjectiles; i += 2)
         {
-            _projectileInstance = Instantiate(_weapon.ProjectilePrefab, _weapon.ShootTransforms[0].position, _weapon.TurretHead.rotation * Quaternion.Euler(_shootSpreadSeparationAngle * (i / 2 + 0.5f), 0, 0));
+            _projectileInstance = Instantiate(_weaponSO.ProjectilePrefab, _shootTransforms[0].position, _turretHead.rotation * Quaternion.Euler(_shootSpreadSeparationAngle * (i / 2 + 0.5f), 0, 0));
             _projectileInstance.GetComponent<Projectile>().WeaponReference = _weapon;
-            _projectileInstance = Instantiate(_weapon.ProjectilePrefab, _weapon.ShootTransforms[0].position, _weapon.TurretHead.rotation * Quaternion.Euler(-_shootSpreadSeparationAngle * (i / 2 + 0.5f), 0, 0));
+            _projectileInstance = Instantiate(_weaponSO.ProjectilePrefab, _shootTransforms[0].position, _turretHead.rotation * Quaternion.Euler(-_shootSpreadSeparationAngle * (i / 2 + 0.5f), 0, 0));
             _projectileInstance.GetComponent<Projectile>().WeaponReference = _weapon;
         }
     }

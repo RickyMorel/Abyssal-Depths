@@ -123,9 +123,11 @@ public class Pickaxe : RotationalInteractable
         return CurrentAngle * _damageMultiplier;
     }
 
-    public override void Rotate()
+    public override void Rotate(int movementDir = 1)
     {
-        float acceleration = RotationSpeed * CurrentPlayer.MoveDirection.x * Time.deltaTime;
+        Vector3 moveDir = movementDir == 1 ? CurrentPlayer.MoveDirection : CurrentPlayer.MoveDirection2;
+
+        float acceleration = RotationSpeed * moveDir.x * Time.deltaTime;
 
         CurrentAngle = CurrentAngle + acceleration;
 

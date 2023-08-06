@@ -18,6 +18,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     private Vector2 _moveDirection;
     private Vector2 _interactableMoveDirection;
+    private Vector2 _interactableMoveDirection2;
     private bool _isShooting;
     private bool _isShooting_2;
     private bool _canPlayerSpawn = false;
@@ -45,6 +46,7 @@ public class PlayerInputHandler : MonoBehaviour
    
     public Vector2 MoveDirection => _moveDirection;
     public Vector2 InteractableMoveDirection => _interactableMoveDirection;
+    public Vector2 InteractableMoveDirection2 => _interactableMoveDirection2;
    
     public bool IsShooting => _isShooting;
     public bool IsShooting_2 => _isShooting_2;
@@ -146,12 +148,15 @@ public class PlayerInputHandler : MonoBehaviour
 
         float moveHorizontal = _player.GetAxisRaw("Horizontal");
         float moveVertical = _player.GetAxisRaw("Vertical");
+        float moveHorizontal2 = _player.GetAxisRaw("Horizontal2");
+        float moveVertical2 = _player.GetAxisRaw("Vertical2");
 
         //If is inside ship, don't allow z movement
         float y = CameraManager.Instance.IsInOrthoMode ? 0f : moveVertical;
 
         _moveDirection = new Vector2(moveHorizontal, y).normalized;
         _interactableMoveDirection = new Vector2(moveHorizontal, moveVertical).normalized;
+        _interactableMoveDirection2 = new Vector2(moveHorizontal2, moveVertical2).normalized;
     }
 
     public void Jump()

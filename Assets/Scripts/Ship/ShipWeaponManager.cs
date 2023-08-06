@@ -37,14 +37,6 @@ public class ShipWeaponManager : MonoBehaviour
         CreateSnapPoints();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            RotateWeapons();
-        }
-    }
-
     private void OnDestroy()
     {
         PlayerInputHandler.OnSpecialAction -= HandleRotateWeapons;

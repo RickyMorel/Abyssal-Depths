@@ -79,11 +79,13 @@ public class Weapon : RotationalInteractable
 
     #endregion
 
-    public override void Rotate()
+    public override void Rotate(int movementDir = 1)
     {
-        if (CurrentPlayer.MoveDirection.magnitude == 0) { return; }
+        Vector3 moveDir = movementDir == 1 ? CurrentPlayer.MoveDirection : CurrentPlayer.MoveDirection2;
+
+        if (moveDir.magnitude == 0) { return; }
         
-        _currentAngle = _rotationSpeed * CurrentPlayer.MoveDirection.x * Time.deltaTime;
+        _currentAngle = _rotationSpeed * moveDir.x * Time.deltaTime;
         _weaponHead.RotationChecker.RotateAround(_pivotTransform.position, Vector3.forward, -_currentAngle);
 
         if (!_canRotate360 & (_weaponHead.RotationChecker.localEulerAngles.x <= 10 || _weaponHead.RotationChecker.localEulerAngles.x >= 170)) 

@@ -13,8 +13,7 @@ public class EnemyWaveSystem : MonoBehaviour
 
     #region Private Variables
 
-    private List<EnemyTransformBehavior> _enemySpawnTransforms = new List<EnemyTransformBehavior>();
-    private bool _isNightTime = false;
+    private bool _isNightTime = true;
     private static EnemyWaveSystem _instance;
 
     #endregion
@@ -32,7 +31,7 @@ public class EnemyWaveSystem : MonoBehaviour
     {
         if (_instance != null && _instance != this)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
         else
         {
@@ -40,31 +39,5 @@ public class EnemyWaveSystem : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        GetAllTransforms();
-    }
-
-    private void OnDestroy()
-    {
-        for (int i = 0; i < _enemySpawnTransforms.Count; i++)
-        {
-            _enemySpawnTransforms[i].OnCheckForTransforms -= GetAllTransforms;
-        }
-    }
-
     #endregion
-
-    private void GetAllTransforms()
-    {
-        _enemySpawnTransforms.Clear();
-
-        EnemyTransformBehavior[] enemyTransforms = GetComponentsInChildren<EnemyTransformBehavior>();
-
-        for (int i = 0; i < enemyTransforms.Length; i++)
-        {
-            _enemySpawnTransforms.Add(enemyTransforms[i]);
-            _enemySpawnTransforms[i].OnCheckForTransforms += GetAllTransforms;
-        }
-    }
 }

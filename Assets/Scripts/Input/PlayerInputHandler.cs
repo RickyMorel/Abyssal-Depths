@@ -40,6 +40,10 @@ public class PlayerInputHandler : MonoBehaviour
     public event Action OnConfirm;
     public event Action OnCancel;
     public event Action OnUpgrade;
+    public event Action OnUIHorizontal;
+    public event Action OnUIVertical;
+    public event Action OnUISubmit;
+    public event Action OnUICancel;
     public static event Action<PlayerInputHandler> OnChangeZoom;
     public event Action<PlayerInputHandler> OnTrySpawn;
    
@@ -89,6 +93,10 @@ public class PlayerInputHandler : MonoBehaviour
         Upgrade();
         Shoot();
         Shoot2();
+        UIHorizontal();
+        UIVertical();
+        UISubmit();
+        UICancel();
         ChangeZoom();
     }
 
@@ -237,5 +245,41 @@ public class PlayerInputHandler : MonoBehaviour
         if (!IsPlayerActive) { return; }
 
         _isShooting_2 = _player.GetButton("Shoot2");
+    }
+
+    public void UIHorizontal()
+    {
+        if (!IsPlayerActive) { return; }
+
+        if (_player.GetAxis("UIHorizontal") == 0) { return; }
+
+        OnUIHorizontal?.Invoke();
+    }
+
+    public void UIVertical()
+    {
+        if (!IsPlayerActive) { return; }
+
+        if (_player.GetAxis("UIVertical") == 0) { return; }
+
+        OnUIVertical?.Invoke();
+    }
+
+    public void UISubmit()
+    {
+        if (!IsPlayerActive) { return; }
+
+        if (!_player.GetButtonDown("UISubmit")) { return; }
+
+        OnUISubmit?.Invoke();
+    }
+
+    public void UICancel()
+    {
+        if (!IsPlayerActive) { return; }
+
+        if (!_player.GetButtonDown("UICancel")) { return; }
+
+        OnUICancel?.Invoke();
     }
 }

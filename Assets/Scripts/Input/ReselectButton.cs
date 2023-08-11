@@ -44,8 +44,6 @@ public class ReselectButton : MonoBehaviour
     {
         _playerInput.OnUIHorizontal -= ReselectButtonWhenNeeded;
         _playerInput.OnUIVertical -= ReselectButtonWhenNeeded;
-        _playerInput.OnShoulderLeft -= ReselectButtonWhenNeeded;
-        _playerInput.OnShoulderRight -= ReselectButtonWhenNeeded;
         _playerInput.OnUISubmit -= ReselectButtonWhenNeeded;
 
         _playerInput.OnUICancel -= GoBackToPreviousScreenOrExit;
@@ -62,8 +60,6 @@ public class ReselectButton : MonoBehaviour
 
         _playerInput.OnUIHorizontal += ReselectButtonWhenNeeded;
         _playerInput.OnUIVertical += ReselectButtonWhenNeeded;
-        _playerInput.OnShoulderLeft += ReselectButtonWhenNeeded;
-        _playerInput.OnShoulderRight += ReselectButtonWhenNeeded;
         _playerInput.OnUISubmit += ReselectButtonWhenNeeded;
 
         _playerInput.OnUICancel += GoBackToPreviousScreenOrExit;

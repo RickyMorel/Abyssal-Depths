@@ -37,11 +37,15 @@ public class DeathManager : MonoBehaviour
 
     private void Start()
     {
+        if (!Ship.Instance) { return; }
+
         _shipHealth = Ship.Instance.GetComponent<ShipHealth>();
     }
 
     private void Update()
     {
+        if (!Ship.Instance) { return; }
+
         if (!_shipHealth.IsDead() || IsInSafeZone) { UpdateDeathTime(-1f); return; }
 
         UpdateDeathTime(1f);

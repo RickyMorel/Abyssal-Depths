@@ -6,6 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(ShipFastTravel))]
 [RequireComponent(typeof(ShipData))]
 [RequireComponent(typeof(ShipWeaponManager))]
+[RequireComponent(typeof(ShipInteractionController))]
 [RequireComponent(typeof(Rigidbody))]
 public class Ship : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class Ship : MonoBehaviour
     private ShipLandingController _shipLandingController;
     private ShipFastTravel _shipFastTravel;
     private ShipWeaponManager _shipWeaponManager;
+    private ShipInteractionController _interactionController;
     private Rigidbody _rb;
 
     private float _topSpeed;
@@ -39,6 +41,7 @@ public class Ship : MonoBehaviour
     public ShipData ShipData => _shipData;
     public ShipLandingController ShipLandingController => _shipLandingController;
     public ShipWeaponManager ShipWeaponManager => _shipWeaponManager;
+    public ShipInteractionController InteractionController => _interactionController;
     public Rigidbody Rb => _rb;
     public float TopSpeed => _topSpeed;
     public float BoostTimeAfterGearChange => _boostTimeAfterGearChange;
@@ -64,6 +67,7 @@ public class Ship : MonoBehaviour
         _shipLandingController = GetComponent<ShipLandingController>();
         _shipFastTravel = GetComponent<ShipFastTravel>();
         _shipWeaponManager = GetComponent<ShipWeaponManager>();
+        _interactionController = GetComponent<ShipInteractionController>();
         _rb = GetComponent<Rigidbody>();
     }
 

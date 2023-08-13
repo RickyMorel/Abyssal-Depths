@@ -17,6 +17,7 @@ public class EnemyTransformBehavior : MonoBehaviour
 
     public List<Transform> EnemySpawnTransforms => _enemySpawnTransforms;
     public static EnemyTransformBehavior Instance { get { return _instance; } }
+    public event Action OnTransformCheck;
 
     #endregion
 
@@ -60,10 +61,12 @@ public class EnemyTransformBehavior : MonoBehaviour
             if ((Vector2.Distance(new Vector2(enemySpawnTransform.position.x, enemySpawnTransform.position.y), new Vector2(_shipMoving.transform.position.x, _shipMoving.transform.position.y)) < 80) && enemySpawnTransform.gameObject.activeInHierarchy)
             {
                 enemySpawnTransform.gameObject.SetActive(false);
+                OnTransformCheck?.Invoke();
             }
             else if ((Vector2.Distance(new Vector2(enemySpawnTransform.position.x, enemySpawnTransform.position.y), new Vector2(_shipMoving.transform.position.x, _shipMoving.transform.position.y)) > 80) && !enemySpawnTransform.gameObject.activeInHierarchy)
             {
                 enemySpawnTransform.gameObject.SetActive(true);
+                OnTransformCheck?.Invoke();
             }
         }
     }

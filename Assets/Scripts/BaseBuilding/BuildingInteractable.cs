@@ -56,11 +56,15 @@ public class BuildingInteractable : MonoBehaviour
     {
         Debug.Log("Ship Interacted!");
 
+        BuildingUpgradeUI.Instance.EnableUpgradesPanel(true);
+
         OnInteract?.Invoke();
     }
 
     public void Uninteract()
     {
+        BuildingUpgradeUI.Instance.EnableUpgradesPanel(false);
+
         Ship.Instance.InteractionController.SetCurrentInteractable(null);
     }
 }

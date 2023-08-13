@@ -89,8 +89,9 @@ public class CraftingManager : MonoBehaviour
         if (isEnabled)
         {
             LoadItems();
-            LoadInventory();
         }
+
+        InventoryUI.Instance.EnableInventory(isEnabled);
     }
 
     public static void LoadIngredients(CraftingRecipy craftingRecipy, Transform contentTransform)
@@ -99,21 +100,8 @@ public class CraftingManager : MonoBehaviour
 
         foreach (ItemQuantity ingredient in craftingRecipy.CraftingIngredients)
         {
-            Debug.Log(_itemUIPrefab);
-            Debug.Log(contentTransform);
             GameObject itemUI = Instantiate(_itemUIPrefab, contentTransform);
             itemUI.GetComponent<ItemUI>().Initialize(ingredient);
-        }
-    }
-
-    public void LoadInventory()
-    {
-        DestroyItemsUI(_inventoryContentTransform);
-
-        foreach (ItemQuantity material in MainInventory.Instance.InventoryDictionary.Values)
-        {
-            GameObject itemUI = Instantiate(_itemUIPrefab, _inventoryContentTransform);
-            itemUI.GetComponent<ItemUI>().Initialize(material, null);
         }
     }
 

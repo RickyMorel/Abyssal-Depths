@@ -5,10 +5,15 @@ using UnityEngine;
 
 public class EnemyTransformBehavior : MonoBehaviour
 {
+    #region Editor Fields
+
+    [SerializeField] private List<Transform> _enemySpawnTransforms = new List<Transform>();
+
+    #endregion
+
     #region Private Variables
 
     private GameObject _shipMoving;
-    private List<Transform> _enemySpawnTransforms = new List<Transform>();
     private static EnemyTransformBehavior _instance;
 
     #endregion
@@ -38,11 +43,7 @@ public class EnemyTransformBehavior : MonoBehaviour
     private void Start()
     {
         _shipMoving = GameObject.FindGameObjectWithTag("MainShip");
-        
-        for (int i = 0; i < gameObject.transform.childCount; i++)
-        {
-            _enemySpawnTransforms.Add(gameObject.transform.GetChild(i));
-        }
+        OnTransformCheck?.Invoke();
     }
 
     private void Update()

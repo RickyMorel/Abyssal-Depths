@@ -6,17 +6,17 @@ public class EnemyWaveSystem : MonoBehaviour
 {
     #region
 
-    [SerializeField] private List<AICombat> _enemyWaveList = new List<AICombat>();
+    [SerializeField] private List<AICombat> _enemyPrefabs = new List<AICombat>();
 
     #endregion
 
     #region Private Variables
 
+    private float _timer = 0;
+    private int _howManyEnemiesShouldSpawn = 5;
     private bool _isNightTime = true;
-    private bool _shouldSpawnEnemies = false;
-    private bool _canEnemiesSpawn = false;
+    private bool _shouldSpawnEnemies = true;
     private static EnemyWaveSystem _instance;
-    private List<GameObject> _spawnedEnemies = new List<GameObject>();
     private List<Transform> _enemySpawnTranforms = new List<Transform>();
 
     #endregion
@@ -40,11 +40,13 @@ public class EnemyWaveSystem : MonoBehaviour
         {
             _instance = this;
         }
+
+        EnemyTransformBehavior.Instance.OnTransformCheck += GetEnemySpawnTransforms;
     }
 
-    private void Start()
+    private void Update()
     {
-        EnemyTransformBehavior.Instance.OnTransformCheck += GetEnemySpawnTransforms;
+        CheckIfEnemiesShouldSpawn();
     }
 
     #endregion
@@ -54,45 +56,30 @@ public class EnemyWaveSystem : MonoBehaviour
         _enemySpawnTranforms = EnemyTransformBehavior.Instance.EnemySpawnTransforms;
     }
 
-    private void EnemyWaveSpawnsEnemies()
-    {
-        if (!_isNightTime) { return; }
-
-        if (!_shouldSpawnEnemies) { return; }
-
-        
-    }
-
-    private void EnemySpawnerFunction(List<Transform> transformsList)
+    private void EnemySpawnerFunction()
     {
         if (!_shouldSpawnEnemies) { return; }
 
         _shouldSpawnEnemies = false;
 
-        foreach (AICombat enemy in _enemyWaveList)
+        for (int i = 0; i < _howManyEnemiesShouldSpawn; i++)
         {
-            GameObject newEnemy = Instantiate(enemy, ).gameObject;
-
-            _spawnedEnemies.Add(newEnemy);
+            
+            GameObject newEnemy = Instantiate(_enemyPrefabs[Random.Range(0, _enemyPrefabs.Count)], _enemySpawnTranforms[Random.Range(0, _enemySpawnTranforms.Count)]).gameObject;
+            newEnemy.transform.SetParent(null);
         }
     }
 
-    private void CheckIfAllEnemiesAreDefeated()
+    private void CheckIfEnemiesShouldSpawn()
     {
-        int count = 0;
-        foreach (GameObject enemy in _spawnedEnemies)
-        {
-            if (enemy == null || !enemy.activeSelf)
-            {
-                count++;
-            }
-        }
+        if (!_isNightTime) { return; }
 
-        if (count == _spawnedEnemies.Count)
-        {
-            _shouldSpawnEnemies = true;
-            _spawnedEnemies.Clear();
-            EnemySpawnerFunction(_enemySpawnZone);
-        }
+        _timer += Time.deltaTime;
+
+        if (_timer < 5) { return; }
+
+        _timer = 0;
+        
+        EnemySpawnerFunction();
     }
 }

@@ -25,7 +25,7 @@ public class BuildingInteractable : MonoBehaviour
 
     #region Unity Loops
 
-    private void Start()
+    public virtual void Start()
     {
         _outline = GetComponent<Outline>();
 
@@ -52,19 +52,15 @@ public class BuildingInteractable : MonoBehaviour
 
     #endregion
 
-    public void Interact()
+    public virtual void Interact()
     {
         Debug.Log("Ship Interacted!");
-
-        BuildingUpgradeUI.Instance.EnableUpgradesPanel(true);
 
         OnInteract?.Invoke();
     }
 
-    public void Uninteract()
+    public virtual void Uninteract()
     {
-        BuildingUpgradeUI.Instance.EnableUpgradesPanel(false);
-
         Ship.Instance.InteractionController.SetCurrentInteractable(null);
     }
 }

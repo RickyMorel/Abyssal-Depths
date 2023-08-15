@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -33,14 +34,26 @@ public class ShipInteractionController : MonoBehaviour
         _isInteracting = true;
 
         _currentInteractable.Interact();
+
+        CurrentDriver.OnUpgrade += HandleTryUpgrade;
+    }
+
+    private void HandleTryUpgrade()
+    {
+        Debug.Log("HandleTryUpgrade");
+        if ((_currentInteractable is BuildingUpgradable) == false) { return; }
+
+        BuildingUpgradable upgradable = _currentInteractable as BuildingUpgradable;
+
+        upgradable.TryUpgrade();
     }
 
     #endregion
 
     public void SetCurrentInteractable(BuildingInteractable building)
     {
-        _currentInteractable = building;
+        if (building == null) { _isInteracting = false; CurrentDriver.OnUpgrade -= HandleTryUpgrade; }
 
-        if(building == null) { _isInteracting = false; }
+        _currentInteractable = building;
     }
 }

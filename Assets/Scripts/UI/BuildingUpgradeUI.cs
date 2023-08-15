@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -7,15 +8,21 @@ public class BuildingUpgradeUI : MonoBehaviour
 {
     #region Editor Fields
 
-    [SerializeField] private GameObject _buildingUpgradeRequirementsPanel;
+    [Header("Texts")]
+    [SerializeField] private TextMeshProUGUI _itemNameText;
+    [SerializeField] private TextMeshProUGUI _itemDescriptionText;
 
+    [Header("Panels & Transforms")]
+    [SerializeField] private GameObject _buildingUpgradeRequirementsPanel;
     [SerializeField] private Transform _requirementsContentTransform;
+    [SerializeField] private BuildingUpgradeIngredientUI _buildingUpgradeItemUIPrefab;
 
     #endregion
 
     #region Private Variables
 
     private static BuildingUpgradeUI _instance;
+    private List<BuildingUpgradeIngredientUI> _ingredientUIs = new List<BuildingUpgradeIngredientUI>();
 
     #endregion
 
@@ -41,6 +48,26 @@ public class BuildingUpgradeUI : MonoBehaviour
 
     #endregion
 
+    public void Initialize(CraftingRecipy craftingRecipy)
+    {
+        _itemNameText.text = craftingRecipy.CraftedItem.Item.DisplayName;
+        _itemDescriptionText.text = craftingRecipy.CraftedItem.Item.Description;
+
+        DestroyPrevListedItems();
+
+        foreach (ItemQuantity ingredient in craftingRecipy.CraftingIngredients)
+        {
+            GameObject newIngredientUI = Instantiate(_buildingUpgradeItemUIPrefab.gameObject, _requirementsContentTransform);
+            BuildingUpgradeIngredientUI newIngredientScript = newIngredientUI.GetComponent<BuildingUpgradeIngredientUI>();
+
+            newIngredientScript.Initialize(ingredient, 2);
+
+            _ingredientUIs.Add(newIngredientScript);
+        }
+
+        EnableUpgradesPanel(true);
+    }
+
     public void EnableUpgradesPanel(bool isEnabled)
     {
         InventoryUI.Instance.EnableInventory(isEnabled);
@@ -49,6 +76,8 @@ public class BuildingUpgradeUI : MonoBehaviour
 
     private void DestroyPrevListedItems()
     {
+        _ingredientUIs.Clear();
+
         foreach (Transform child in _requirementsContentTransform)
         {
             if(child == _requirementsContentTransform) { continue; }

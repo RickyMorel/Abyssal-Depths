@@ -209,6 +209,13 @@ public abstract class Inventory : MonoBehaviour
         LoadItems();
     }
 
+    public int GetItemAmount(Item item)
+    {
+        if(_inventory.TryGetValue(item, out ItemQuantity itemQuantity)) { return itemQuantity.Amount; }
+
+        return 0;
+    }
+
     private void HandleUpdateInventory()
     {
         _dictionaryItemsList.Clear();

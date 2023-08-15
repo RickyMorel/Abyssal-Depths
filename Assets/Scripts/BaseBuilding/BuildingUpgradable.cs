@@ -49,9 +49,9 @@ public class BuildingUpgradable : BuildingInteractable
 
     public void TryUpgrade()
     {
-        Debug.Log("TryUpgrade");
-
         CraftingRecipy wantedRecipe = _upgrades[_currentUpgradeIndex].CraftingRecipy;
+
+        BuildingUpgradeUI.Instance.LoadInventoryIngredients();
 
         if (!CraftingManager.CanCraft(wantedRecipe)) { return; }
 
@@ -62,6 +62,8 @@ public class BuildingUpgradable : BuildingInteractable
         _currentUpgradeIndex++;
 
         _upgrades[_currentUpgradeIndex].Mesh.SetActive(true);
+
+        BuildingUpgradeUI.Instance.EnableUpgradesPanel(false);
     }
 
     [System.Serializable]

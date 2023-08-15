@@ -68,6 +68,16 @@ public class BuildingUpgradeUI : MonoBehaviour
         EnableUpgradesPanel(true);
     }
 
+    public void LoadInventoryIngredients()
+    {
+        foreach (BuildingUpgradeIngredientUI ingredientUI in _ingredientUIs)
+        {
+            int inventoryAmount = MainInventory.Instance.GetItemAmount(ingredientUI.ItemQuantity.Item);
+
+            ingredientUI.UpdateSpentAmount(inventoryAmount);
+        }
+    }
+
     public void EnableUpgradesPanel(bool isEnabled)
     {
         InventoryUI.Instance.EnableInventory(isEnabled);

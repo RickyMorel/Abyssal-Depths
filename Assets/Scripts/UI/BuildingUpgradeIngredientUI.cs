@@ -15,12 +15,31 @@ public class BuildingUpgradeIngredientUI : MonoBehaviour
 
     #endregion
 
+    #region Private Variables
+
+    private ItemQuantity _itemQuantity;
+
+    #endregion
+
+    #region Public Properties
+
+    public ItemQuantity ItemQuantity => _itemQuantity;
+
+    #endregion
+
     public void Initialize(ItemQuantity itemQuantity, int spentAmount)
     {
-        _icon.sprite = itemQuantity.Item.Icon;
-        _progressFillImage.fillAmount = (float)spentAmount/(float)itemQuantity.Amount;
+        _itemQuantity = itemQuantity;
 
+        _icon.sprite = itemQuantity.Item.Icon;
         _itemNameText.text = itemQuantity.Item.DisplayName;
-        _amountText.text = $"{spentAmount}/{itemQuantity.Amount}";
+
+        UpdateSpentAmount(spentAmount);
+    }
+
+    public void UpdateSpentAmount(int spentAmount)
+    {
+        _progressFillImage.fillAmount = (float)spentAmount / (float)_itemQuantity.Amount;
+        _amountText.text = $"{spentAmount}/{_itemQuantity.Amount}";
     }
 }

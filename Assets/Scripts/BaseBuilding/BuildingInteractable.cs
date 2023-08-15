@@ -54,8 +54,6 @@ public class BuildingInteractable : MonoBehaviour
 
     public virtual void Interact()
     {
-        Debug.Log("Ship Interacted!");
-
         OnInteract?.Invoke();
     }
 

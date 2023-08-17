@@ -46,32 +46,13 @@ public class GameManager : MonoBehaviour
         _levelData = GetComponent<LevelData>();
     }
 
-    private void Update()
+    public void GameOver()
     {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            Destroy(Ship.Instance.gameObject);
+        StartCoroutine(GameOverCoroutine());
+    }
 
-            PlayerInputHandler[] players = FindObjectsOfType<PlayerInputHandler>(true);
-            PlayerCamera[] playerCameras = FindObjectsOfType<PlayerCamera>(true);
-            AttackHitBox[] attackHitboxes = FindObjectsOfType<AttackHitBox>();
-
-            foreach (var player in players)
-            {
-                Destroy(player.transform.root.gameObject);
-            }
-
-            foreach (var playerCamera in playerCameras)
-            {
-                Destroy(playerCamera.transform.root.gameObject);
-            }
-
-            foreach (var hitbox in attackHitboxes)
-            {
-                Destroy(hitbox.transform.root.gameObject);
-            }
-
-            SceneManager.LoadScene(0);
-        }
+    private IEnumerator GameOverCoroutine()
+    {
+        yield return new WaitForSeconds(1f);
     }
 }

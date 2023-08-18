@@ -16,6 +16,7 @@ public class InputFieldGamepadFix : MonoBehaviour
 
     #region Editor Fields
 
+    [Tooltip("Must have 6 gameobjects, 0 is on down, 1 on up, 2 on left, 3 on right, 4 on submit, 5 is osk")]
     [SerializeField] private List<GameObject> _gameObjects;
 
     #endregion

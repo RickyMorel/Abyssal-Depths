@@ -55,7 +55,6 @@ namespace AbyssalDepths.UI
             int saveIndex = SaveSystem.CreateNewSave(_newGameNameText.text);
             CreateLoadObj(saveIndex);
 
-            EnableNewGamePanel(false);
             SceneManager.LoadScene(1);
         }
 
@@ -66,18 +65,24 @@ namespace AbyssalDepths.UI
             DontDestroyOnLoad(saveDataObj);
         }
 
-        public void EnableNewGamePanel(bool isEnabled)
+        public void EnableNewGamePanel()
         {
             DisableAllPanels();
 
-            _newGamePanel.SetActive(isEnabled);
-
-            EnableOnScreenKeyboard(isEnabled);
+            _newGamePanel.SetActive(true);
         }
 
         public void EnableOnScreenKeyboard(bool isEnabled)
         {
             _onScreenKeyboard.SetActive(isEnabled);
+        }
+
+        public void EnablePlayPanel()
+        {
+            DisableAllPanels();
+
+            _playPanel.SetActive(true);
+            _headerPanel.SetActive(true);
         }
 
         public void LoadGame()

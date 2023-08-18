@@ -55,6 +55,7 @@ public sealed class GWorld : MonoBehaviour
     private ResourceQueue _restLocations;
     private ResourceQueue _shipAttackPoints;
     private ResourceQueue _shipTurretAttackPoints;
+    private ResourceQueue _buildingAttackPoints;
     private ResourceQueue _healPoints;
     private ResourceQueue _rockPickupPoints;
     private ResourceQueue _megalodonRagdollPoints;
@@ -85,6 +86,7 @@ public sealed class GWorld : MonoBehaviour
         shipAttackPoints = 1,
         shipTurretAttackPoints = 2,
         megalodonRagdollPoints = 3,
+        buildingAttackPoints = 4
     }
 
     public enum AttackFreeTags
@@ -92,6 +94,7 @@ public sealed class GWorld : MonoBehaviour
         FreeShipAttackPoint = 1,
         FreeShipTurretAttackPoint = 2,
         FreeMegalodonRagdollPoint = 3,
+        FreeBuildingAttackPoint = 4,
     }
 
     #endregion
@@ -132,6 +135,7 @@ public sealed class GWorld : MonoBehaviour
         _restLocations = new ResourceQueue("RestLocation", FREE_REST_LOCATIONS, _world);
         _shipAttackPoints = new ResourceQueue("ShipAttackPoint", AttackFreeTags.FreeShipAttackPoint.ToString(), _world);
         _shipTurretAttackPoints = new ResourceQueue("ShipTurretAttackPoint", AttackFreeTags.FreeShipTurretAttackPoint.ToString(), _world);
+        _buildingAttackPoints = new ResourceQueue("BuildingAttackPoint", AttackFreeTags.FreeBuildingAttackPoint.ToString(), _world);
         _healPoints = new ResourceQueue("HealPoint", FREE_HEAL_POINTS, _world);
         _rockPickupPoints = new ResourceQueue("RockPickupPoint", FREE_ROCK_PICKUP_POINTS, _world);
         _megalodonRagdollPoints = new ResourceQueue("MegalodonRagdollPoint", AttackFreeTags.FreeMegalodonRagdollPoint.ToString(), _world);
@@ -142,6 +146,7 @@ public sealed class GWorld : MonoBehaviour
         _resources.Add(REST_LOCATIONS, _restLocations);
         _resources.Add(AttackTags.shipAttackPoints.ToString(), _shipAttackPoints);
         _resources.Add(AttackTags.shipTurretAttackPoints.ToString(), _shipTurretAttackPoints);
+        _resources.Add(AttackTags.buildingAttackPoints.ToString(), _buildingAttackPoints);
         _resources.Add(HEAL_POINTS, _healPoints);
         _resources.Add(ROCK_PICKUP_POINTS, _rockPickupPoints);
         _resources.Add(AttackTags.megalodonRagdollPoints.ToString(), _megalodonRagdollPoints);

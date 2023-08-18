@@ -19,7 +19,7 @@ public class AttackShip : GAction
 
     #endregion
 
-    private void Start()
+    public override void Start()
     {
         _gAgent = Agent.GetComponent<GAgent>();
         _stateMachine = Agent.GetComponent<AIStateMachine>();

@@ -26,6 +26,8 @@ public class BaseCore : BuildingInteractable
         base.Interact();
 
         _health.AddHealth(200);
+
+        GameStatsPanelUI.Instance.UpdateBaseHealth(_health.CurrentHealth, _health.MaxHealth);
     }
 
     private void HandleDie()

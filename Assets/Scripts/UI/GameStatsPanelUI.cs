@@ -52,7 +52,7 @@ public class GameStatsPanelUI : MonoBehaviour
         _soulsText.text = $"{newSouls}";
     }
 
-    public void UpdateBaseHealth(int currentHealth, int maxHealth)
+    public void UpdateBaseHealth(float currentHealth, float maxHealth)
     {
         _baseHealthBar.fillAmount = currentHealth / maxHealth;
     }

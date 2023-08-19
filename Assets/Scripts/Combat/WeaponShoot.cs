@@ -54,9 +54,7 @@ public class WeaponShoot : MonoBehaviour
         if (_weaponHead != null) { _originalWeaponHeadPosition = _weaponHead.transform.localPosition; }
         if (_shootTransforms.Count > 0) 
         {
-            _shootBubbleParticles = Instantiate(GameAssetsManager.Instance.ShootBubbleParticles, _shootTransforms[0]).GetComponent<ParticleSystem>();
-            _shootBubbleParticles.transform.localPosition = Vector3.zero;
-            _shootBubbleParticles.transform.localRotation = Quaternion.identity;
+            _shootBubbleParticles = WeaponFX.InstantiateBubbleParticles(_shootTransforms[0]);
         } 
     }
 
@@ -100,7 +98,6 @@ public class WeaponShoot : MonoBehaviour
         if (_timeBetweenShots > _timeSinceLastShot) { return; }
 
         _timeSinceLastShot = 0f;
-        GameAudioManager.Instance.PlaySound(_shootingSfx, transform.position);
         InstantiateProjectile(_shootTransforms[0]);
 
         Ship.Instance.AddForceToShip(-_turretHead.transform.forward * _recoilForce, ForceMode.Impulse);
@@ -124,63 +121,14 @@ public class WeaponShoot : MonoBehaviour
         _timeSinceLastShot += Time.deltaTime;
     }
 
-    private IEnumerator PlayWeaponRecoilFX()
-    {
-        Vector3 lookDir = (_shootTransforms[0].position - transform.position).normalized;
-        Vector3 desiredRecoilPosition = _weaponHead.transform.localPosition +  -lookDir * _recoilVisual;
-
-        float elapsedTime = 0;
-        float waitTime = _timeBetweenShots / 2f;
-
-
-        //go backwards
-        while (elapsedTime < waitTime)
-        {
-            Vector3 desiredPos = Vector3.Lerp(_weaponHead.transform.localPosition, desiredRecoilPosition, (elapsedTime / waitTime));
-
-            _weaponHead.transform.localPosition = desiredPos;
-
-            elapsedTime += Time.deltaTime;
-
-            yield return 0;
-        }
-
-        elapsedTime = 0;
-
-        //go forwards
-        while (elapsedTime < waitTime)
-        {
-            Vector3 desiredPos = Vector3.Lerp(_weaponHead.transform.localPosition, _originalWeaponHeadPosition, (elapsedTime / waitTime));
-
-            _weaponHead.transform.localPosition = desiredPos;
-
-            elapsedTime += Time.deltaTime;
-
-            yield return 0;
-        }
-    }
-
-    private IEnumerator SpawnProjectileShell()
-    {
-        if(_projectileShellPrefab == null) { yield break; }
-
-        GameObject newShell = Instantiate(_projectileShellPrefab, _turretHead.position, Quaternion.identity);
-
-        Rigidbody rb = newShell.GetComponent<Rigidbody>();
-
-        rb.AddForce(_turretHead.up * 20f, ForceMode.Impulse);
-
-        yield return new WaitForSeconds(30f);
-
-        rb.isKinematic = true;
-    }
-
     public void PlayShootFX()
     {
-        if (_shootBubbleParticles != null) { _shootBubbleParticles.Play(); }
+        WeaponFX.PlayShootFX(this, _shootTransforms[0], _turretHead, _timeBetweenShots, _originalWeaponHeadPosition, _projectileShellPrefab, _shootingSfx, _shootBubbleParticles);
 
-        if (_weaponHead != null) { StartCoroutine(PlayWeaponRecoilFX()); }
+        //if (_shootBubbleParticles != null) { _shootBubbleParticles.Play(); }
 
-        StartCoroutine(SpawnProjectileShell());
+        //if (_weaponHead != null) { StartCoroutine(PlayWeaponRecoilFX()); }
+
+        //StartCoroutine(SpawnProjectileShell());
     }
 }

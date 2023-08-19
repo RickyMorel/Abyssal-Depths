@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,12 +8,21 @@ public class TurretBuilding : BuildingUpgradable
 {
     #region Editor Fields
 
+    [Header("Prefabs")]
     [SerializeField] private Projectile _projectilePrefab;
+    [SerializeField] private GameObject _projectileShellPrefab;
+
+    [Header("Gameobject Vars")]
     [SerializeField] private Transform _shootTransform;
     [SerializeField] private Transform _turretHeadTransform;
+
+    [Header("Stats")]
     [Range(100, 199)]
     [SerializeField] private int _combatId = 100;
     [SerializeField] private float _timeBetweenShots;
+
+    [Header("Sounds")]
+    [SerializeField] private EventReference _shootingSfx;
 
     #endregion
 
@@ -20,13 +30,23 @@ public class TurretBuilding : BuildingUpgradable
 
     private AIHealth _currentTarget;
     private Queue<AIHealth> _potentialTargets = new Queue<AIHealth>();
+    private ParticleSystem _shootBubbleParticles;
     private float _timeSinceLastShot = 999f;
     private float _timeSinceLastTarget = 999f;
     private float _timeUntilTargetLock = 0.6f;
+    private Vector3 _originalWeaponHeadPosition;
 
     #endregion
 
     #region Unity Loops
+
+    public override void Start()
+    {
+        base.Start();
+
+        _originalWeaponHeadPosition = _turretHeadTransform.transform.localPosition;
+        _shootBubbleParticles = WeaponFX.InstantiateBubbleParticles(_shootTransform);
+    }
 
     private void Update()
     {
@@ -94,12 +114,10 @@ public class TurretBuilding : BuildingUpgradable
 
         _timeSinceLastShot = 0f;
 
-        //_anim.SetTrigger("Shoot");
-
-        Debug.Log("Turret Shoot!");
-
         Projectile newProjectile = Instantiate(_projectilePrefab.gameObject, _shootTransform.position, _shootTransform.rotation).GetComponent<Projectile>();
         newProjectile.Initialize(tag, transform);
         newProjectile.AICombatID = _combatId;
+
+        WeaponFX.PlayShootFX(this, _shootTransform, _turretHeadTransform, _timeBetweenShots, _originalWeaponHeadPosition, _projectileShellPrefab, _shootingSfx, _shootBubbleParticles);
     }
 }

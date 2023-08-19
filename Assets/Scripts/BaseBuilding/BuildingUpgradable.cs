@@ -27,7 +27,7 @@ public class BuildingUpgradable : BuildingInteractable
     {
         base.Interact();
 
-        BuildingUpgradeUI.Instance.Initialize(_upgrades[_currentUpgradeIndex].CraftingRecipy);
+        BuildingUpgradeUI.Instance.Initialize(GetCurrentUpgrade().CraftingRecipy);
     }
 
     public override void Uninteract()
@@ -64,6 +64,11 @@ public class BuildingUpgradable : BuildingInteractable
         _upgrades[_currentUpgradeIndex].Mesh.SetActive(true);
 
         BuildingUpgradeUI.Instance.EnableUpgradesPanel(false);
+    }
+
+    public Upgrade GetCurrentUpgrade()
+    {
+        return _upgrades[_currentUpgradeIndex];
     }
 
     [System.Serializable]

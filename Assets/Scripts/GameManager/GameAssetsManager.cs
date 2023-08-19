@@ -31,6 +31,7 @@ public class GameAssetsManager : MonoBehaviour
     [Header("Scriptable Objects")]
     [SerializeField] private ChipDataSO _chipDataSO;
     [SerializeField] private EnemyDamageDataSO _enemyDamageDataSOPrefab;
+    [SerializeField] private EnemyDamageDataSO _buildingDamageDataSOPrefab;
     [SerializeField] private DamageTypeSO _damageType;
 
     #endregion
@@ -39,6 +40,7 @@ public class GameAssetsManager : MonoBehaviour
 
     private static GameAssetsManager _instance;
     private EnemyDamageDataSO _enemyDamageDataSOInstance;
+    private EnemyDamageDataSO _buildingDamageDataSOInstance;
 
     #endregion
 
@@ -62,6 +64,7 @@ public class GameAssetsManager : MonoBehaviour
     public Color LaserHeatColor => _laserHeatColor;
     public ChipDataSO ChipDataSO => _chipDataSO;
     public EnemyDamageDataSO EnemyDamageDataSO => _enemyDamageDataSOInstance;
+    public EnemyDamageDataSO BuildingDamageDataSO => _buildingDamageDataSOInstance;
     public DamageTypeSO DamageType => _damageType;
 
     public static GameAssetsManager Instance { get { return _instance; } }
@@ -80,5 +83,6 @@ public class GameAssetsManager : MonoBehaviour
         }
 
         _enemyDamageDataSOInstance = new EnemyDamageDataSO(_enemyDamageDataSOPrefab);
+        _buildingDamageDataSOInstance = new EnemyDamageDataSO(_buildingDamageDataSOPrefab);
     }
 }

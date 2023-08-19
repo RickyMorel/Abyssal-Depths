@@ -32,7 +32,7 @@ public class BuildingInteractable : MonoBehaviour
         _outline.enabled = false;
     }
 
-    private void OnTriggerEnter(Collider other)
+    public virtual void OnTriggerEnter(Collider other)
     {
         if(other.gameObject != Ship.Instance.gameObject) { return; }
 
@@ -41,7 +41,7 @@ public class BuildingInteractable : MonoBehaviour
         Ship.Instance.InteractionController.SetCurrentInteractable(this);
     }
 
-    private void OnTriggerExit(Collider other)
+    public virtual void OnTriggerExit(Collider other)
     {
         if(other.gameObject != Ship.Instance.gameObject) { return; }
 

@@ -56,6 +56,8 @@ public class TurretBuilding : BuildingUpgradable
 
     private void FixedUpdate()
     {
+        if (!IsUsable()) { return; }
+
         if (_currentTarget == null || _currentTarget.IsDead()) { TargetEnemy(); return; }
 
         LookAtTarget();
@@ -65,11 +67,7 @@ public class TurretBuilding : BuildingUpgradable
 
     public void OnEnemyZoneEnter(Collider other)
     {
-        Debug.Log("OnEnemyZoneEnter: " + other.gameObject.name);
-
         if(!other.gameObject.TryGetComponent(out AIHealth aIHealth)) { return; }
-
-        Debug.Log("OnEnemyZoneEnter got enemy!");
 
         _potentialTargets.Enqueue(aIHealth);
     }
@@ -101,7 +99,6 @@ public class TurretBuilding : BuildingUpgradable
     private void LookAtTarget()
     {
         var lookPos = _currentTarget.transform.position - _turretHeadTransform.position;
-        //lookPos.y = 0;
         var rotation = Quaternion.LookRotation(lookPos);
         _turretHeadTransform.rotation = Quaternion.Slerp(_turretHeadTransform.rotation, rotation, Time.deltaTime * 20f);
     }

@@ -48,7 +48,7 @@ public class BuildingUpgradeUI : MonoBehaviour
 
     #endregion
 
-    public void Initialize(CraftingRecipy craftingRecipy)
+    public void Initialize(CraftingRecipy craftingRecipy, List<ItemQuantity> spentMaterials)
     {
         _itemNameText.text = craftingRecipy.CraftedItem.Item.DisplayName;
         _itemDescriptionText.text = craftingRecipy.CraftedItem.Item.Description;
@@ -60,7 +60,10 @@ public class BuildingUpgradeUI : MonoBehaviour
             GameObject newIngredientUI = Instantiate(_buildingUpgradeItemUIPrefab.gameObject, _requirementsContentTransform);
             BuildingUpgradeIngredientUI newIngredientScript = newIngredientUI.GetComponent<BuildingUpgradeIngredientUI>();
 
-            newIngredientScript.Initialize(ingredient, 2);
+            ItemQuantity spentItem = spentMaterials.Find(x => x.Item == ingredient.Item);
+            int spentAmount = spentItem != null ? spentItem.Amount : 0;
+
+            newIngredientScript.Initialize(ingredient, spentAmount);
 
             _ingredientUIs.Add(newIngredientScript);
         }

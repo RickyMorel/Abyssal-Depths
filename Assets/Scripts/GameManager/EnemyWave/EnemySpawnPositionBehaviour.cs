@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyTransformBehavior : MonoBehaviour
+public class EnemySpawnPositionBehaviour : MonoBehaviour
 {
     #region Editor Fields
 
@@ -14,14 +14,14 @@ public class EnemyTransformBehavior : MonoBehaviour
     #region Private Variables
 
     private GameObject _shipMoving;
-    private static EnemyTransformBehavior _instance;
+    private static EnemySpawnPositionBehaviour _instance;
 
     #endregion
 
     #region Public Properties
 
     public List<Transform> EnemySpawnTransforms => _enemySpawnTransforms;
-    public static EnemyTransformBehavior Instance { get { return _instance; } }
+    public static EnemySpawnPositionBehaviour Instance { get { return _instance; } }
     public event Action OnTransformCheck;
 
     #endregion

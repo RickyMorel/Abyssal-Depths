@@ -7,6 +7,7 @@ public class EnemyWaveSystem : MonoBehaviour
     #region
 
     [SerializeField] private List<AICombat> _enemyPrefabs = new List<AICombat>();
+    [SerializeField] private int _howManyEnemiesShouldSpawnAtOnce = 5;
 
     #endregion
 
@@ -14,7 +15,6 @@ public class EnemyWaveSystem : MonoBehaviour
 
     private static EnemyWaveSystem _instance;
     private List<Transform> _enemySpawnTranforms = new List<Transform>();
-    private int _howManyEnemiesShouldSpawnAtOnce = 5;
     private float _timer = 0;
     private bool _shouldSpawnEnemies = true;
 
@@ -39,7 +39,7 @@ public class EnemyWaveSystem : MonoBehaviour
             _instance = this;
         }
 
-        EnemyTransformBehavior.Instance.OnTransformCheck += GetEnemySpawnTransforms;
+        EnemySpawnPositionBehaviour.Instance.OnTransformCheck += GetEnemySpawnTransforms;
     }
 
     private void Update()
@@ -51,7 +51,7 @@ public class EnemyWaveSystem : MonoBehaviour
 
     private void GetEnemySpawnTransforms()
     {
-        _enemySpawnTranforms = EnemyTransformBehavior.Instance.EnemySpawnTransforms;
+        _enemySpawnTranforms = EnemySpawnPositionBehaviour.Instance.EnemySpawnTransforms;
     }
 
     private void EnemySpawnerFunction()

@@ -18,8 +18,10 @@ public class FogTimeline : TimelineTrigger
         //Do nothing
     }
 
-    private void OnEnable()
+    public override void Start()
     {
+        base.Start();
+
         EnemyWaveSystem.Instance.OnCycleChange += TheFogIsComing;
     }
 
@@ -39,7 +41,7 @@ public class FogTimeline : TimelineTrigger
         }
         else
         {
-            _fogText.text = "You survived The Fog!";
+            _fogText.text = "Day " + EnemyWaveSystem.Instance.DayCount.ToString();
             _playableDirector.Play();
         }
     }

@@ -8,28 +8,35 @@ public class EnemyWaveSystem : MonoBehaviour
     #region
 
     [SerializeField] private List<AICombat> _enemyPrefabs = new List<AICombat>();
-    [Header("This is measured in seconds")]
-    [SerializeField] private int _howLongTheDayLast = 18;
+    [Tooltip("This is measured in seconds")]
+    [SerializeField] private int _howLongTheDayLast = 6;
     [SerializeField] private int _howLongTheNightLast = 6;
+    [SerializeField] private float _lowFogDensity = 0.01f;
+    [SerializeField] private float _highFogDensity = 0.03f;
 
     #endregion
 
     #region Private Variables
 
+    private static EnemyWaveSystem _instance;
+    private List<Transform> _enemySpawnTranforms = new List<Transform>();
+    [Header("Integers")]
+    private int _howManyEnemiesShouldSpawnAtOnce = 5;
+    private int _dayCount = 2;
+    [Header("Floats")]
     private float _timer = 0;
     private float _dayTimer = 0;
     private float _nightTimer = 0;
-    private int _howManyEnemiesShouldSpawnAtOnce = 5;
-    private bool _isNightTime = true;
+    [Header("Bools")]
+    private bool _isNightTime = false;
     private bool _shouldSpawnEnemies = true;
-    private static EnemyWaveSystem _instance;
-    private List<Transform> _enemySpawnTranforms = new List<Transform>();
 
     #endregion
 
     #region Public Properties
 
     public bool IsNightTime => _isNightTime;
+    public int DayCount => _dayCount;
     public static EnemyWaveSystem Instance { get { return _instance; } }
     public event Action OnCycleChange;
 
@@ -94,17 +101,31 @@ public class EnemyWaveSystem : MonoBehaviour
     {
         if (!_isNightTime)
         {
-            RenderSettings.fogDensity = 0.01f;
             _dayTimer += Time.deltaTime;
-            
-            if (_dayTimer >= _howLongTheDayLast) { _isNightTime = true; _dayTimer = 0; }
+
+            RenderSettings.fogDensity = Mathf.Lerp(_highFogDensity, _lowFogDensity, _dayTimer);
+
+            if (_dayTimer >= _howLongTheDayLast) 
+            {
+                _isNightTime = true;
+                OnCycleChange?.Invoke();
+                _timer = 0;
+                _dayTimer = 0;
+            }
         }
         if (_isNightTime)
         {
-            RenderSettings.fogDensity = 0.03f;
             _nightTimer += Time.deltaTime;
 
-            if (_nightTimer >= _howLongTheNightLast) { _isNightTime = false; _nightTimer = 0; }
+            RenderSettings.fogDensity = Mathf.Lerp(_lowFogDensity, _highFogDensity, _nightTimer);
+
+            if (_nightTimer >= _howLongTheNightLast) 
+            {
+                _isNightTime = false;
+                OnCycleChange?.Invoke();
+                _nightTimer = 0;
+                _dayCount += _dayCount;
+            }
         }
     }
 }

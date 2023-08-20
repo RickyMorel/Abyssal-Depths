@@ -124,7 +124,7 @@ public class EnemyWaveSystem : MonoBehaviour
                 _isNightTime = false;
                 OnCycleChange?.Invoke();
                 _nightTimer = 0;
-                _dayCount += _dayCount;
+                _dayCount += 1;
             }
         }
     }

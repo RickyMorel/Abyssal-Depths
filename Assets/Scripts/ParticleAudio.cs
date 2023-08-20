@@ -24,12 +24,10 @@ public class ParticleAudio : MonoBehaviour
     {
         if (_particleSystem.isPlaying && !_particlePlaySfx.IsPlaying())
         {
-            Debug.Log("Play Bubbles!!!!");
             _particlePlaySfx.Play();
         }
         else if( _particleSystem.isStopped && _particlePlaySfx.IsPlaying())
         {
-            Debug.Log("Stop Bubbles!!!!");
             _particlePlaySfx.Stop();
         }
     }

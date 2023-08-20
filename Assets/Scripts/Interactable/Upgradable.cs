@@ -12,7 +12,7 @@ public class Upgradable : Interactable
 
     [Header("Upgrades")]
     [SerializeField] private GameObject[] _upgradeSocketObjs;
-    [SerializeField] private Upgrade[] _upgrades;
+    [SerializeField] protected Upgrade[] _upgrades;
     [SerializeField] private Transform _chipDropTransform;
 
     #endregion
@@ -119,7 +119,6 @@ public class Upgradable : Interactable
         _selectedUpgrade = _upgrades[upgradeMeshIndex];
         GameObject newMesh = _upgrades[upgradeMeshIndex].UpgradeMesh;
         GameObject newProjectile = _upgrades[upgradeMeshIndex].UpgradeSO.ProjectilePrefab;
-        GameObject[] newShootTransform = _upgrades[upgradeMeshIndex].ShootTransform;
 
         newMesh.SetActive(true);
 
@@ -166,7 +165,6 @@ public class Upgradable : Interactable
 public class Upgrade
 {
     public GameObject UpgradeMesh;
-    public GameObject[] ShootTransform;
     public WeaponSO UpgradeSO;
 
     public Upgrade()
@@ -177,7 +175,6 @@ public class Upgrade
     public Upgrade(GameObject newUpgradeMesh, GameObject[] newShootTransforms, WeaponSO newUpgradeSO)
     {
         UpgradeMesh = newUpgradeMesh;
-        ShootTransform = newShootTransforms;
         UpgradeSO = newUpgradeSO;
     }
 }

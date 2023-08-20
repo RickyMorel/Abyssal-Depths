@@ -79,7 +79,7 @@ public class ShipLandingController : MonoBehaviour
 
     #endregion
 
-    private void HandleSpecialAction(PlayerInputHandler player, bool isPressed)
+    private void HandleSpecialAction(PlayerInputHandler player)
     {
         PlayerInteractionController playerInteractionController = _booster.CurrentPlayer as PlayerInteractionController;
 

@@ -55,7 +55,7 @@ public class EnemyTransformBehavior : MonoBehaviour
 
     private void CheckForShipDistance()
     {
-        if (!EnemyWaveSystem.Instance.IsNightTime) { return; }
+        if (!DayNightManager.Instance.IsNightTime) { return; }
 
         foreach (Transform enemySpawnTransform in _enemySpawnTransforms)
         {

@@ -21,6 +21,7 @@ public class GameAudioManager : MonoBehaviour
     [SerializeField] private EventReference _fixedInteractableSfx;
     [SerializeField] private EventReference _interactableOnlineSfx;
     [SerializeField] private EventReference _interactableOfflinefx;
+    [SerializeField] private EventReference _weaponWheelRotationSfx;
 
     [Header("Combat Sounds")]
     [SerializeField] private EventReference _stunnedSfx;
@@ -74,6 +75,7 @@ public class GameAudioManager : MonoBehaviour
     public static GameAudioManager Instance { get { return _instance; } }
 
     public EventReference FastTravelGo => _fastTravelGo;
+    public EventReference WeaponWheelRotationSfx => _weaponWheelRotationSfx;
     public EventReference FastTravelArrive => _fastTravelArrive;
     public EventReference PortalGateOpening => _portalGateOpening;
     public EventReference PortalGateShaking => _portalGateShaking;

@@ -146,13 +146,11 @@ public class MeleeWeaponWithRope : MeleeWeapon
 
     public void ThrowWeaponHead()
     {
-        if (_throwState == ThrowState.Arrived) { return; }
-
         Transform moveToCurrentPosition = _moveToTransform;
 
-        if (_throwState == ThrowState.Throwing)
+        if (_throwState == ThrowState.Throwing || _throwState == ThrowState.Arrived)
         {
-            Vector3 forceDir = _moveToTransform.position - _weaponHeadRb.transform.position;
+            Vector3 forceDir = _moveToTransform.position - _handleTransform.transform.position;
             _weaponHeadRb.AddForce(forceDir.normalized * _flyingSpeed * Time.deltaTime, ForceMode.Force);
         }
 

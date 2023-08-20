@@ -22,26 +22,26 @@ public class FogTimeline : TimelineTrigger
     {
         base.Start();
 
-        EnemyWaveSystem.Instance.OnCycleChange += TheFogIsComing;
+        DayNightManager.Instance.OnCycleChange += TheFogIsComing;
     }
 
     private void OnDisable()
     {
-        EnemyWaveSystem.Instance.OnCycleChange -= TheFogIsComing;
+        DayNightManager.Instance.OnCycleChange -= TheFogIsComing;
     }
 
     #endregion
 
     private void TheFogIsComing()
     {
-        if (EnemyWaveSystem.Instance.IsNightTime)
+        if (DayNightManager.Instance.IsNightTime)
         {
             _fogText.text = "The Fog Is Coming";
             _playableDirector.Play();
         }
         else
         {
-            _fogText.text = "Day " + EnemyWaveSystem.Instance.DayCount.ToString();
+            _fogText.text = "Day " + DayNightManager.Instance.DayCount.ToString();
             _playableDirector.Play();
         }
     }

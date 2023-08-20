@@ -33,6 +33,7 @@ public class Projectile : MonoBehaviour
     protected float _dealDamageAfterSeconds;
     private Transform _ownersTransform;
     private GameObject _projectileMesh;
+    private bool _isReflecting = false;
 
     #endregion
 
@@ -97,6 +98,8 @@ public class Projectile : MonoBehaviour
     {
         if (Damageable.IsOwnDamage(collision.collider, gameObject)) { return; }
 
+        if (_isReflecting) { return; }
+
         PlayImpactParticles(collision.contacts[0].point);
 
         if (_destroyOnHit) { Destroy(gameObject); }
@@ -139,6 +142,8 @@ public class Projectile : MonoBehaviour
     {
         gameObject.tag = ownerTag;
 
+        _isReflecting = true;
+
         if(ownerTransform == null) { return; }
 
         _ownersTransform = ownerTransform;
@@ -146,6 +151,7 @@ public class Projectile : MonoBehaviour
 
     public void ReflectFromShield(string newOwnerTag)
     {
+        _isReflecting = true;
         Vector3 newDir = _ownersTransform.position - transform.position;
         Launch(newDir, newDir);
         Initialize(newOwnerTag);

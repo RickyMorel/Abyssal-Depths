@@ -141,8 +141,8 @@ public class PlayerJoinManager : MonoBehaviour
         _playerJoinNPC[_playerJoinNPCIndex].SteamParticles[indexAux].Stop();
         playerInput.IsPlayerActive = true;
         _playerInputs[_playerJoinNPCIndex].IsPlayerActive = true;
-        CameraManager.Instance.SplitScreen(index);
         OnPlayerJoin?.Invoke();
+        CameraManager.Instance.SplitScreen(index);
     }
 
     private void HandleJump()

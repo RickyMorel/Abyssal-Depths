@@ -48,22 +48,19 @@ public class BuildingFarmUI : MonoBehaviour
 
     #endregion
 
-    public void Initialize(CraftingRecipy craftingRecipy, List<ItemQuantity> spentMaterials)
+    public void Initialize(BuildingFarmSO buildingFarmSO)
     {
-        _itemNameText.text = craftingRecipy.CraftedItem.Item.DisplayName;
-        _itemDescriptionText.text = craftingRecipy.CraftedItem.Item.Description;
+        _itemNameText.text = buildingFarmSO.DisplayName;
+        _itemDescriptionText.text = buildingFarmSO.Description;
 
         DestroyPrevListedItems();
 
-        foreach (ItemQuantity ingredient in craftingRecipy.CraftingIngredients)
+        foreach (ItemQuantity resource in buildingFarmSO.ResourcesGenerated)
         {
-            GameObject newIngredientUI = Instantiate(_buildingFarmResourceUIPrefab.gameObject, _resourcesContentTransform);
-            FarmResourceItemUI newResourceScript = newIngredientUI.GetComponent<FarmResourceItemUI>();
+            GameObject newResourceUI = Instantiate(_buildingFarmResourceUIPrefab.gameObject, _resourcesContentTransform);
+            FarmResourceItemUI newResourceScript = newResourceUI.GetComponent<FarmResourceItemUI>();
 
-            ItemQuantity spentItem = spentMaterials.Find(x => x.Item == ingredient.Item);
-            int spentAmount = spentItem != null ? spentItem.Amount : 0;
-
-            newResourceScript.Initialize(ingredient);
+            newResourceScript.Initialize(resource);
 
             _resourceUIs.Add(newResourceScript);
         }

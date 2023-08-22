@@ -9,6 +9,7 @@ public class EnemyWaveSystem : MonoBehaviour
 
     [SerializeField] private List<AICombat> _enemyPrefabs = new List<AICombat>();
     [SerializeField] private int _howManyEnemiesShouldSpawnAtOnce = 5;
+    [SerializeField] private float _timeBetweenEnemySpawns = 5;
 
     #endregion
 
@@ -17,7 +18,7 @@ public class EnemyWaveSystem : MonoBehaviour
     private static EnemyWaveSystem _instance;
     private List<Transform> _enemySpawnTranforms = new List<Transform>();
     private float _timer = 0;
-    private bool _shouldSpawnEnemies = true;
+    private List<AIHealth> _currentNightEnemies = new List<AIHealth>();
 
     #endregion
 
@@ -42,11 +43,20 @@ public class EnemyWaveSystem : MonoBehaviour
         }
 
         EnemySpawnPositionBehaviour.Instance.OnTransformCheck += GetEnemySpawnTransforms;
+        DayNightManager.Instance.OnCycleChange += KillCurrentNightEnemiesIfDayTime;
+        DayNightManager.Instance.OnCycleChange += CheckIfEnemiesShouldSpawn;
+    }
+
+    private void OnDisable()
+    {
+        EnemySpawnPositionBehaviour.Instance.OnTransformCheck -= GetEnemySpawnTransforms;
+        DayNightManager.Instance.OnCycleChange -= KillCurrentNightEnemiesIfDayTime;
+        DayNightManager.Instance.OnCycleChange -= CheckIfEnemiesShouldSpawn;
     }
 
     private void Update()
     {
-        CheckIfEnemiesShouldSpawn();
+        if (DayNightManager.Instance.IsNightTime) { CheckIfEnemiesShouldSpawn(); }
     }
 
     #endregion
@@ -55,32 +65,37 @@ public class EnemyWaveSystem : MonoBehaviour
     {
         _enemySpawnTranforms = EnemySpawnPositionBehaviour.Instance.EnemySpawnTransforms;
     }
+    private void CheckIfEnemiesShouldSpawn()
+    {
+        _timer += Time.deltaTime;
+
+        if (_timer < _timeBetweenEnemySpawns) { return; }
+
+        _timer = 0;
+        Debug.Log("Haupei");
+        EnemySpawnerFunction();
+    }
 
     private void EnemySpawnerFunction()
     {
-        if (!_shouldSpawnEnemies) { return; }
-
         OnEnemyAboutToSpawn?.Invoke();
-
-        _shouldSpawnEnemies = false;
-
+        Debug.Log("Ayo bro, it came here");
         for (int i = 0; i < _howManyEnemiesShouldSpawnAtOnce; i++)
         {
+            
             GameObject newEnemy = Instantiate(_enemyPrefabs[UnityEngine.Random.Range(0, _enemyPrefabs.Count)], _enemySpawnTranforms[UnityEngine.Random.Range(0, _enemySpawnTranforms.Count)]).gameObject;
             newEnemy.transform.SetParent(null);
+            _currentNightEnemies.Add(newEnemy.GetComponent<AIHealth>());
         }
     }
-    
-    private void CheckIfEnemiesShouldSpawn()
+
+    private void KillCurrentNightEnemiesIfDayTime()
     {
-        if (DayNightManager.Instance.IsNightTime) { return; }
+        if (!DayNightManager.Instance.IsNightTime) { return; }
 
-        _timer += Time.deltaTime;
-
-        if (_timer < 5) { return; }
-
-        _timer = 0;
-        
-        EnemySpawnerFunction();
+        foreach (AIHealth enemy in _currentNightEnemies)
+        {
+            enemy.DamageWithoutDamageData(99999999);
+        }
     }
 }

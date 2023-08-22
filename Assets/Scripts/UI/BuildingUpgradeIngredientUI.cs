@@ -4,11 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class FarmResourceItemUI : MonoBehaviour
+public class BuildingUpgradeIngredientUI : MonoBehaviour
 {
     #region Editor Fields
 
     [SerializeField] protected Image _icon;
+    [SerializeField] private Image _progressFillImage;
     [SerializeField] protected TextMeshProUGUI _itemNameText;
     [SerializeField] protected TextMeshProUGUI _amountText;
 
@@ -32,6 +33,13 @@ public class FarmResourceItemUI : MonoBehaviour
 
         _icon.sprite = itemQuantity.Item.Icon;
         _itemNameText.text = itemQuantity.Item.DisplayName;
+
+        UpdateSpentAmount(spentAmount);
     }
 
+    public void UpdateSpentAmount(int spentAmount)
+    {
+        _progressFillImage.fillAmount = (float)spentAmount / (float)_itemQuantity.Amount;
+        _amountText.text = $"{spentAmount}/{_itemQuantity.Amount}";
+    }
 }

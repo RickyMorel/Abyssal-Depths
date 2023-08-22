@@ -28,7 +28,7 @@ public class DayNightManager : MonoBehaviour
     private GameObject[] _fogDependantObjects;
     private List<Light> _lights = new List<Light>();
     private List<float> _lightsOriginalIntensity = new List<float>();
-    private List<ParticleSystem> _godRays = new List<ParticleSystem>();
+    private List<ParticleSystem> _gameObjectsToDeactivateAtNight = new List<ParticleSystem>();
 
     #endregion
 
@@ -62,7 +62,7 @@ public class DayNightManager : MonoBehaviour
         for (int i = 0; i < _fogDependantObjects.Length; i++)
         {
             if (_fogDependantObjects[i].GetComponent<Light>()) { _lights.Add(_fogDependantObjects[i].GetComponent<Light>()); }
-            if (_fogDependantObjects[i].GetComponent<ParticleSystem>()) { _godRays.Add(_fogDependantObjects[i].GetComponent<ParticleSystem>()); }
+            if (_fogDependantObjects[i].GetComponent<ParticleSystem>()) { _gameObjectsToDeactivateAtNight.Add(_fogDependantObjects[i].GetComponent<ParticleSystem>()); }
         }
 
         foreach (Light light in _lights)
@@ -82,22 +82,22 @@ public class DayNightManager : MonoBehaviour
     {
         if (!_isNightTime)
         {
-            DayFunction();
+            DayEffectsTransition();
         }
 
         if (_isNightTime)
         {
-            NightFunction();
+            NightEffectsTransition();
         }
     }
 
-    private void DayFunction()
+    private void DayEffectsTransition()
     {
         _dayTimer += Time.deltaTime;
 
         RenderSettings.fogDensity = Mathf.Lerp(_highFogDensity, _lowFogDensity, _dayTimer * _fogTransitionSpeed);
 
-        FogDependantObjectChange();
+        EnableFogEffect();
 
         if (_dayTimer >= _howLongTheDayLast)
         {
@@ -107,13 +107,13 @@ public class DayNightManager : MonoBehaviour
         }
     }
 
-    private void NightFunction()
+    private void NightEffectsTransition()
     {
         _nightTimer += Time.deltaTime;
 
         RenderSettings.fogDensity = Mathf.Lerp(_lowFogDensity, _highFogDensity, _nightTimer * _fogTransitionSpeed);
 
-        FogDependantObjectChange();
+        EnableFogEffect();
 
         if (_nightTimer >= _howLongTheNightLast)
         {
@@ -124,7 +124,7 @@ public class DayNightManager : MonoBehaviour
         }
     }
 
-    private void FogDependantObjectChange()
+    private void EnableFogEffect()
     {
         if (!_isNightTime)
         {
@@ -132,7 +132,7 @@ public class DayNightManager : MonoBehaviour
             {
                 _lights[i].intensity = Mathf.Lerp(0, _lightsOriginalIntensity[i], _dayTimer * _fogTransitionSpeed);
             }
-            foreach (ParticleSystem godRay in _godRays)
+            foreach (ParticleSystem godRay in _gameObjectsToDeactivateAtNight)
             {
                 godRay.gameObject.SetActive(true);
             }
@@ -143,7 +143,7 @@ public class DayNightManager : MonoBehaviour
             {
                 _lights[i].intensity = Mathf.Lerp(_lightsOriginalIntensity[i], 0, _nightTimer * _fogTransitionSpeed);
             }
-            foreach (ParticleSystem godRay in _godRays)
+            foreach (ParticleSystem godRay in _gameObjectsToDeactivateAtNight)
             {
                 godRay.gameObject.SetActive(false);
             }

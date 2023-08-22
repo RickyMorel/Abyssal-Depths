@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,6 +24,7 @@ public class EnemyWaveSystem : MonoBehaviour
     #region Public Properties
 
     public static EnemyWaveSystem Instance { get { return _instance; } }
+    public event Action OnEnemyAboutToSpawn;
 
     #endregion
 
@@ -58,11 +60,13 @@ public class EnemyWaveSystem : MonoBehaviour
     {
         if (!_shouldSpawnEnemies) { return; }
 
+        OnEnemyAboutToSpawn?.Invoke();
+
         _shouldSpawnEnemies = false;
 
         for (int i = 0; i < _howManyEnemiesShouldSpawnAtOnce; i++)
         {
-            GameObject newEnemy = Instantiate(_enemyPrefabs[Random.Range(0, _enemyPrefabs.Count)], _enemySpawnTranforms[Random.Range(0, _enemySpawnTranforms.Count)]).gameObject;
+            GameObject newEnemy = Instantiate(_enemyPrefabs[UnityEngine.Random.Range(0, _enemyPrefabs.Count)], _enemySpawnTranforms[UnityEngine.Random.Range(0, _enemySpawnTranforms.Count)]).gameObject;
             newEnemy.transform.SetParent(null);
         }
     }

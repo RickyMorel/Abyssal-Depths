@@ -3,6 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// If the ship is near a spawn position, this script will deactivate said spawn position, that way enemies don't spawn in the player's face 
+/// </summary>
+
 public class EnemySpawnPositionBehaviour : MonoBehaviour
 {
     #region Editor Fields
@@ -44,11 +49,13 @@ public class EnemySpawnPositionBehaviour : MonoBehaviour
     {
         _shipMoving = GameObject.FindGameObjectWithTag("MainShip");
         OnTransformCheck?.Invoke();
+
+        EnemyWaveSystem.Instance.OnEnemyAboutToSpawn += CheckForShipDistance;
     }
 
-    private void Update()
+    private void OnDisable()
     {
-        CheckForShipDistance();
+        EnemyWaveSystem.Instance.OnEnemyAboutToSpawn -= CheckForShipDistance;
     }
 
     #endregion

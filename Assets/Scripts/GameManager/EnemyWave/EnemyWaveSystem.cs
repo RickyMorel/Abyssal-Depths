@@ -72,14 +72,13 @@ public class EnemyWaveSystem : MonoBehaviour
         if (_timer < _timeBetweenEnemySpawns) { return; }
 
         _timer = 0;
-        Debug.Log("Haupei");
         EnemySpawnerFunction();
     }
 
     private void EnemySpawnerFunction()
     {
         OnEnemyAboutToSpawn?.Invoke();
-        Debug.Log("Ayo bro, it came here");
+
         for (int i = 0; i < _howManyEnemiesShouldSpawnAtOnce; i++)
         {
             
@@ -91,7 +90,7 @@ public class EnemyWaveSystem : MonoBehaviour
 
     private void KillCurrentNightEnemiesIfDayTime()
     {
-        if (!DayNightManager.Instance.IsNightTime) { return; }
+        if (DayNightManager.Instance.IsNightTime) { return; }
 
         foreach (AIHealth enemy in _currentNightEnemies)
         {

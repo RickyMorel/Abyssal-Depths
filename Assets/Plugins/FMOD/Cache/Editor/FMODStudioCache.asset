@@ -108,6 +108,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-8274253440812647375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Day_Transition
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Day_Transition
+  Guid:
+    Data1: -1814215199
+    Data2: 1151723052
+    Data3: -66007911
+    Data4: -2010966557
+  Banks:
+  - {fileID: 1153421836587018489}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2822
 --- !u!114 &-7736651877010337078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -426,6 +453,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1484
+--- !u!114 &-2981286050374695080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/FogIsComing
+  m_EditorClassIdentifier: 
+  Path: event:/UI/FogIsComing
+  Guid:
+    Data1: -464491137
+    Data2: 1190482507
+    Data3: -392022859
+    Data4: 933391630
+  Banks:
+  - {fileID: 1153421836587018489}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2032
 --- !u!114 &-2835951590872800380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -989,12 +1043,14 @@ MonoBehaviour:
   - {fileID: 6233326240634203737}
   - {fileID: 8166967771673091572}
   - {fileID: -8710252001333378360}
+  - {fileID: -8274253440812647375}
+  - {fileID: -2981286050374695080}
   EditorParameters: []
   MasterBanks:
   - {fileID: 1153421836587018489}
   StringsBanks:
   - {fileID: 7358886339440077305}
-  cacheTime: 638281209905894897
+  cacheTime: 638285068017020365
   cacheVersion: 131605
 --- !u!114 &178084702203512825
 MonoBehaviour:
@@ -1092,10 +1148,10 @@ MonoBehaviour:
   Path: AbyssalDepthsFMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638281209905884928
+  lastModified: 638285068016980472
   FileSizes:
   - Name: Desktop
-    Value: 6025376
+    Value: 6027104
   Exists: 1
 --- !u!114 &1321281900555705600
 MonoBehaviour:
@@ -1490,10 +1546,10 @@ MonoBehaviour:
   Path: AbyssalDepthsFMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638281209905894897
+  lastModified: 638285068017020365
   FileSizes:
   - Name: Desktop
-    Value: 3766
+    Value: 3868
   Exists: 1
 --- !u!114 &7410751422150772444
 MonoBehaviour:

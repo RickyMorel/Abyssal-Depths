@@ -38,11 +38,13 @@ public class FogTimeline : TimelineTrigger
         {
             _fogText.text = "The Fog Is Coming";
             _playableDirector.Play();
+            GameAudioManager.Instance.PlaySound(GameAudioManager.Instance.FogIsComing, Vector3.zero);
         }
         else
         {
             _fogText.text = "Day " + DayNightManager.Instance.DayCount.ToString();
             _playableDirector.Play();
+            GameAudioManager.Instance.PlaySound(GameAudioManager.Instance.DayTransition, Vector3.zero);
         }
     }
 }

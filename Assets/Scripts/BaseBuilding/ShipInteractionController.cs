@@ -34,8 +34,6 @@ public class ShipInteractionController : MonoBehaviour
         _isInteracting = true;
 
         _currentInteractable.Interact();
-
-        CurrentDriver.OnUpgrade += HandleTryUpgrade;
     }
 
     private void HandleTryUpgrade()
@@ -51,8 +49,9 @@ public class ShipInteractionController : MonoBehaviour
 
     public void SetCurrentInteractable(BuildingInteractable building)
     {
-        if (building == null) { _isInteracting = false; CurrentDriver.OnUpgrade -= HandleTryUpgrade; }
-
         _currentInteractable = building;
+
+        if (building == null) { _isInteracting = false; CurrentDriver.OnUpgrade -= HandleTryUpgrade; }
+        else { CurrentDriver.OnUpgrade += HandleTryUpgrade; }
     }
 }

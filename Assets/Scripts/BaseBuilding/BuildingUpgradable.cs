@@ -6,7 +6,8 @@ public class BuildingUpgradable : BuildingInteractable
 {
     #region Editor Fields
 
-    [SerializeField] private Upgrade[] _upgrades;
+    [SerializeField] protected Upgrade[] _upgrades;
+    [SerializeField] protected bool _canUseWithNoUpgrades = false;
 
     #endregion
 
@@ -25,9 +26,9 @@ public class BuildingUpgradable : BuildingInteractable
 
     public override void Interact()
     {
-        base.Interact();
+        if (!CanUse()) { return; }
 
-        BuildingUpgradeUI.Instance.Initialize(GetCurrentUpgrade().CraftingRecipy, GetCurrentUpgrade().SpentMaterials);
+        base.Interact();
     }
 
     public override void Uninteract()
@@ -69,6 +70,11 @@ public class BuildingUpgradable : BuildingInteractable
 
     public void TryUpgrade()
     {
+        //Dont try to upgrade when there are none left
+        if (_upgrades.Length - 1 == _currentUpgradeIndex) { return; }
+
+        if (!BuildingUpgradeUI.Instance.IsEnabled()) { BuildingUpgradeUI.Instance.Initialize(GetCurrentUpgrade().CraftingRecipy, GetCurrentUpgrade().SpentMaterials); return; }
+
         CraftingRecipy wantedRecipe = _upgrades[_currentUpgradeIndex].CraftingRecipy;
 
         AddToSpentMaterials();
@@ -88,9 +94,16 @@ public class BuildingUpgradable : BuildingInteractable
         BuildingUpgradeUI.Instance.EnableUpgradesPanel(false);
     }
 
-    public bool IsUsable()
+    public override bool CanUse()
     {
-        return _currentUpgradeIndex > 0;
+        if (_canUseWithNoUpgrades)
+        {
+            return true;
+        }
+        else
+        {
+            return _currentUpgradeIndex > 0;
+        }
     }
 
     public Upgrade GetCurrentUpgrade()

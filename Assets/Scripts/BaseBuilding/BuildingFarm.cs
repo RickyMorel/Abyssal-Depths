@@ -10,9 +10,29 @@ public class BuildingFarm : BuildingUpgradable
 
     #endregion
 
+    #region Private Varaibles
+
+    private float _timeTillNextBatch;
+
+    #endregion
+
+    #region Unity Loops
+
+    private void Update()
+    {
+        _timeTillNextBatch += Time.deltaTime;
+    }
+
+    private void FixedUpdate()
+    {
+        
+    }
+
+    #endregion
+
     public override void Interact()
     {
-        Debug.Log("Interact: " + gameObject.name);
+        if (!CanUse()) { return; }
 
         base.Interact();
 

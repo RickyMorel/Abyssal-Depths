@@ -87,6 +87,11 @@ public class BuildingUpgradeUI : MonoBehaviour
         _buildingUpgradeRequirementsPanel.SetActive(isEnabled);
     }
 
+    public bool IsEnabled()
+    {
+        return _buildingUpgradeRequirementsPanel.activeSelf;
+    }
+
     private void DestroyPrevListedItems()
     {
         _ingredientUIs.Clear();

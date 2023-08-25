@@ -52,6 +52,11 @@ public class BuildingInteractable : MonoBehaviour
 
     #endregion
 
+    public virtual bool CanUse()
+    {
+        return true;
+    }
+
     public virtual void Interact()
     {
         OnInteract?.Invoke();

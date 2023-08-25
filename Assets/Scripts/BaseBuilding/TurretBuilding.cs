@@ -56,7 +56,7 @@ public class TurretBuilding : BuildingUpgradable
 
     private void FixedUpdate()
     {
-        if (!IsUsable()) { return; }
+        if (!CanUse()) { return; }
 
         if (_currentTarget == null || _currentTarget.IsDead()) { TargetEnemy(); return; }
 

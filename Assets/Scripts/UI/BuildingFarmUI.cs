@@ -48,7 +48,7 @@ public class BuildingFarmUI : MonoBehaviour
 
     #endregion
 
-    public void Initialize(BuildingFarmSO buildingFarmSO)
+    public void Initialize(BuildingFarmSO buildingFarmSO, float timeTillNextBatch = -1)
     {
         _itemNameText.text = buildingFarmSO.DisplayName;
         _itemDescriptionText.text = buildingFarmSO.Description;

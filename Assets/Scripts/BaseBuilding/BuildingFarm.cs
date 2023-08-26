@@ -54,7 +54,6 @@ public class BuildingFarm : BuildingUpgradable
 
     public override bool Interact()
     {
-        Debug.Log("Interact: " + CanUse());
         if (!CanUse()) { return false; }
 
         base.Interact();

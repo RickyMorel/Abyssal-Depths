@@ -11,6 +11,7 @@ public class BuildingInteractable : MonoBehaviour
     #region Private Varaibles
 
     private Outline _outline;
+    protected BuildingHealth _buildingHealth;
 
     #endregion
 
@@ -28,6 +29,7 @@ public class BuildingInteractable : MonoBehaviour
     public virtual void Start()
     {
         _outline = GetComponent<Outline>();
+        _buildingHealth = GetComponent<BuildingHealth>();
 
         _outline.enabled = false;
     }

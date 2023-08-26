@@ -111,8 +111,6 @@ public static class SaveSystem
     {
         string path = Application.persistentDataPath + "/abyssalDepths.options";
 
-        Debug.Log(Application.persistentDataPath);
-
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();

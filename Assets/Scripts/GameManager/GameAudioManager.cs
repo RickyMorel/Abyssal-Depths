@@ -62,6 +62,10 @@ public class GameAudioManager : MonoBehaviour
     [SerializeField] private EventReference _itemDropSfx;
     [SerializeField] private EventReference _cryoPodOpen;
 
+    [Header("UI")]
+    [SerializeField] private EventReference _fogIsComingSfx;
+    [SerializeField] private EventReference _dayTransitionSfx;
+
     #endregion
 
     #region Private Variables
@@ -106,6 +110,8 @@ public class GameAudioManager : MonoBehaviour
     public EventReference InteractableOfflinefx => _interactableOfflinefx;
     public EventReference PickaxeImpactSfx => _pickaxeImpactSfx;
     public EventReference PickaxeBoostSfx => _pickaxeBoostSfx;
+    public EventReference FogIsComing => _fogIsComingSfx;
+    public EventReference DayTransition => _dayTransitionSfx;
 
     #endregion
 

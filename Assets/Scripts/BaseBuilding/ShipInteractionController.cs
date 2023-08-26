@@ -7,7 +7,7 @@ public class ShipInteractionController : MonoBehaviour
 {
     #region Private Variables
 
-    private bool _isInteracting;
+    [SerializeField] private bool _isInteracting;
     private BuildingInteractable _currentInteractable;
 
     #endregion
@@ -29,7 +29,11 @@ public class ShipInteractionController : MonoBehaviour
 
         if (!CurrentDriver.IsShooting_2) { return; }
 
+        Debug.Log("Driver is pressing button!");
+
         if (_isInteracting) { return; }
+
+        Debug.Log("Driver is pressing intercting!");
 
         _isInteracting = _currentInteractable.Interact();
     }

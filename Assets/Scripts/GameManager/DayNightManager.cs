@@ -22,9 +22,9 @@ public class DayNightManager : MonoBehaviour
 
     private static DayNightManager _instance;
     private bool _isNightTime = false;
+    private bool _activateTimer = false;
     private int _dayCount = 2;
-    private float _dayTimer = 0;
-    private float _nightTimer = 0;
+    private float _universalTimer = 0;
     private GameObject[] _fogDependantObjects;
     private List<Light> _lights = new List<Light>();
     private List<float> _lightsOriginalIntensity = new List<float>();
@@ -57,6 +57,30 @@ public class DayNightManager : MonoBehaviour
 
     private void Start()
     {
+        GetAllNecessaryObjectsAndComponents();
+
+        Invoke(nameof(NightEffectsTransition), _howLongTheDayLast);
+    }
+
+    private void OnEnable()
+    {
+        OnCycleChange += DayNightCycle;
+    }
+
+    private void OnDisable()
+    {
+        OnCycleChange -= DayNightCycle;
+    }
+
+    private void Update()
+    {
+        if (_activateTimer) { Lerps(); }
+    }
+
+    #endregion
+
+    private void GetAllNecessaryObjectsAndComponents()
+    {
         _fogDependantObjects = GameObject.FindGameObjectsWithTag("FogDependant");
 
         for (int i = 0; i < _fogDependantObjects.Length; i++)
@@ -71,67 +95,39 @@ public class DayNightManager : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        DayNightCycle();
-    }
-
-    #endregion
-
     private void DayNightCycle()
     {
-        if (!_isNightTime)
-        {
-            DayEffectsTransition();
-        }
-
         if (_isNightTime)
         {
-            NightEffectsTransition();
+            Invoke(nameof(DayEffectsTransition), _howLongTheNightLast);
+        }
+        if (!_isNightTime)
+        {
+            Invoke(nameof(NightEffectsTransition), _howLongTheDayLast);
         }
     }
 
     private void DayEffectsTransition()
     {
-        _dayTimer += Time.deltaTime;
-
-        RenderSettings.fogDensity = Mathf.Lerp(_highFogDensity, _lowFogDensity, _dayTimer * _fogTransitionSpeed);
-
+        _isNightTime = false;
+        OnCycleChange?.Invoke();
         EnableFogEffect();
-
-        if (_dayTimer >= _howLongTheDayLast)
-        {
-            _isNightTime = true;
-            OnCycleChange?.Invoke();
-            _dayTimer = 0;
-        }
     }
 
     private void NightEffectsTransition()
     {
-        _nightTimer += Time.deltaTime;
-
-        RenderSettings.fogDensity = Mathf.Lerp(_lowFogDensity, _highFogDensity, _nightTimer * _fogTransitionSpeed);
-
+        _isNightTime = true;
+        OnCycleChange?.Invoke();
+        _dayCount += 1;
         EnableFogEffect();
-
-        if (_nightTimer >= _howLongTheNightLast)
-        {
-            _isNightTime = false;
-            OnCycleChange?.Invoke();
-            _nightTimer = 0;
-            _dayCount += 1;
-        }
     }
 
     private void EnableFogEffect()
     {
+        _activateTimer = true;
+
         if (!_isNightTime)
         {
-            for (int i = 0; i < _lights.Count; i++)
-            {
-                _lights[i].intensity = Mathf.Lerp(0, _lightsOriginalIntensity[i], _dayTimer * _fogTransitionSpeed);
-            }
             foreach (ParticleSystem godRay in _gameObjectsToDeactivateAtNight)
             {
                 godRay.gameObject.SetActive(true);
@@ -139,14 +135,35 @@ public class DayNightManager : MonoBehaviour
         }
         if (_isNightTime)
         {
-            for (int i = 0; i < _lights.Count; i++)
-            {
-                _lights[i].intensity = Mathf.Lerp(_lightsOriginalIntensity[i], 0, _nightTimer * _fogTransitionSpeed);
-            }
             foreach (ParticleSystem godRay in _gameObjectsToDeactivateAtNight)
             {
                 godRay.gameObject.SetActive(false);
             }
         }
+    }
+
+    private void Lerps()
+    {
+        _universalTimer += Time.deltaTime * _fogTransitionSpeed;
+
+        if (_isNightTime)
+        {
+            RenderSettings.fogDensity = Mathf.Lerp(_lowFogDensity, _highFogDensity, _universalTimer);
+            for (int i = 0; i < _lights.Count; i++)
+            {
+                _lights[i].intensity = Mathf.Lerp(_lightsOriginalIntensity[i], 0, _universalTimer);
+            }
+            
+        }
+        else
+        {
+            RenderSettings.fogDensity = Mathf.Lerp(_highFogDensity, _lowFogDensity, _universalTimer);
+            for (int i = 0; i < _lights.Count; i++)
+            {
+                _lights[i].intensity = Mathf.Lerp(0, _lightsOriginalIntensity[i], _universalTimer);
+            }
+        }
+
+        if (_universalTimer > 1) { _activateTimer = false; _universalTimer = 0; }
     }
 }

@@ -258,10 +258,10 @@ MonoBehaviour:
   Path: AbyssalDepthsFMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638286378349242997
+  lastModified: 638286439737130938
   FileSizes:
   - Name: Desktop
-    Value: 3766
+    Value: 3868
   Exists: 1
 --- !u!114 &-6944880643914088191
 MonoBehaviour:
@@ -719,6 +719,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 950
+--- !u!114 &-2532329479888918013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Day_Transition
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Day_Transition
+  Guid:
+    Data1: -1814215199
+    Data2: 1151723052
+    Data3: -66007911
+    Data4: -2010966557
+  Banks:
+  - {fileID: 227817409510291622}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2822
 --- !u!114 &-2494590482294795310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -929,12 +956,14 @@ MonoBehaviour:
   - {fileID: 4672339022891065986}
   - {fileID: -3806551562237167395}
   - {fileID: -1377021197369743008}
+  - {fileID: 6402359204253444038}
+  - {fileID: -2532329479888918013}
   EditorParameters: []
   MasterBanks:
   - {fileID: 227817409510291622}
   StringsBanks:
   - {fileID: -7033191760175263605}
-  cacheTime: 638286378349242997
+  cacheTime: 638286439737130938
   cacheVersion: 131605
 --- !u!114 &208130985407097687
 MonoBehaviour:
@@ -978,10 +1007,10 @@ MonoBehaviour:
   Path: AbyssalDepthsFMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638286378349242997
+  lastModified: 638286439737120975
   FileSizes:
   - Name: Desktop
-    Value: 6025376
+    Value: 6027104
   Exists: 1
 --- !u!114 &339353517194866453
 MonoBehaviour:
@@ -1606,6 +1635,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 950
   Length: 9500
+--- !u!114 &6402359204253444038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/FogIsComing
+  m_EditorClassIdentifier: 
+  Path: event:/UI/FogIsComing
+  Guid:
+    Data1: -464491137
+    Data2: 1190482507
+    Data3: -392022859
+    Data4: 933391630
+  Banks:
+  - {fileID: 227817409510291622}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2032
 --- !u!114 &7907275262982023863
 MonoBehaviour:
   m_ObjectHideFlags: 0

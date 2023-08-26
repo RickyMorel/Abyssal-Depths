@@ -83,6 +83,7 @@ public class BuildingUpgradeUI : MonoBehaviour
 
     public void EnableUpgradesPanel(bool isEnabled)
     {
+        Debug.Log("EnableUpgradesPanel: " + isEnabled);
         InventoryUI.Instance.EnableInventory(isEnabled);
         _buildingUpgradeRequirementsPanel.SetActive(isEnabled);
     }

@@ -91,14 +91,14 @@ public class Damageable : MonoBehaviour
         TryDamageWithProjectile(collision.collider);
     }
 
-    public void OnTriggerStay(Collider other)
+    public virtual void OnTriggerStay(Collider other)
     {
         TryDamageWithProjectile(other);
     }
 
     #endregion
 
-    private void TryDamageWithProjectile(Collider other)
+    public void TryDamageWithProjectile(Collider other)
     {
         if (!other.gameObject.TryGetComponent(out Projectile projectile)) { return; }
 

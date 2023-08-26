@@ -40,6 +40,18 @@ public class ShipInteractionController : MonoBehaviour
 
     private void HandleTryUpgrade()
     {
+        if (_currentInteractable.BuildingHealth != null && _currentInteractable.BuildingHealth.IsDead()) { TryFix(); return; }
+
+        TryUpgrade();
+    }
+
+    private void TryFix()
+    {
+        _currentInteractable.BuildingHealth.TryFix();
+    }
+
+    private void TryUpgrade()
+    {
         if ((_currentInteractable is BuildingUpgradable) == false) { return; }
 
         BuildingUpgradable upgradable = _currentInteractable as BuildingUpgradable;

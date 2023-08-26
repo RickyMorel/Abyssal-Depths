@@ -18,6 +18,7 @@ public class BuildingInteractable : MonoBehaviour
     #region Public Properties
 
     public bool IsNear => _outline.enabled;
+    public BuildingHealth BuildingHealth => _buildingHealth;
 
     public event Action OnInteract;
     public event Action OnUninteract;

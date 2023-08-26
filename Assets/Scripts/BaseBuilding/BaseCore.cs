@@ -18,6 +18,8 @@ public class BaseCore : BuildingInteractable
 
         _health = GetComponent<BuildingHealth>();
 
+        _health.OnDamaged += HandleDamaged;
+        _health.OnUpdateHealth += HandleUpdateHealth;
         _health.OnDie += HandleDie;
     }
 
@@ -30,6 +32,16 @@ public class BaseCore : BuildingInteractable
         GameStatsPanelUI.Instance.UpdateBaseHealth(_health.CurrentHealth, _health.MaxHealth);
 
         return true;
+    }
+
+    private void HandleDamaged(DamageTypes damageType, int damage)
+    {
+        GameStatsPanelUI.Instance.UpdateBaseHealth(_health.CurrentHealth, _health.MaxHealth);
+    }
+
+    private void HandleUpdateHealth(int newHealth)
+    {
+        GameStatsPanelUI.Instance.UpdateBaseHealth(_health.CurrentHealth, _health.MaxHealth);
     }
 
     private void HandleDie()

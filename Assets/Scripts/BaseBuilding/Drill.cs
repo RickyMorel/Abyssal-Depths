@@ -22,12 +22,10 @@ public class Drill : MonoBehaviour
     #region Unity Loops
 
     private void Update()
-    {
+    {        
+        if (!DayNightManager.Instance.IsNightTime && _rotationSpeed != 0) { _rotationSpeed = 0; }
+
         if (!DayNightManager.Instance.IsNightTime) { return; }
-        else
-        {
-            if (_rotationSpeed != 0) { _rotationSpeed = 0; }
-        }
 
         DrillRotation();
 

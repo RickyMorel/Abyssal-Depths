@@ -2126,7 +2126,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2031407777677293454, guid: b3991de570f6479418e4e1572b99969b, type: 3}
       propertyPath: m_RootOrder
-      value: 25
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 2031407777677293454, guid: b3991de570f6479418e4e1572b99969b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -16527,103 +16527,6 @@ Transform:
   m_Father: {fileID: 487039015}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &650123642
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 650123646}
-  - component: {fileID: 650123645}
-  - component: {fileID: 650123644}
-  - component: {fileID: 650123643}
-  m_Layer: 6
-  m_Name: Terrain (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
---- !u!114 &650123643
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 650123642}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf174cc73e4d7a645a1cca7654887aba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Terrain: {fileID: 650123644}
-  TerrainMaterialOverridden: 0
-  DisableTerrainTreesAndDetails: 1
-  AutoAddToVegegetationSystem: 0
-  TerrainSourceID: 0
-  TerrainPosition: {x: -82, y: -683.9, z: -50}
---- !u!218 &650123644
-Terrain:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 650123642}
-  m_Enabled: 1
-  serializedVersion: 6
-  m_TerrainData: {fileID: 15600000, guid: ca909fb328450b0449f5ef2a24cfdec2, type: 2}
-  m_TreeDistance: 5000
-  m_TreeBillboardDistance: 50
-  m_TreeCrossFadeLength: 5
-  m_TreeMaximumFullLODCount: 50
-  m_DetailObjectDistance: 80
-  m_DetailObjectDensity: 1
-  m_HeightmapPixelError: 5
-  m_SplatMapDistance: 1000
-  m_HeightmapMaximumLOD: 0
-  m_ShadowCastingMode: 2
-  m_DrawHeightmap: 1
-  m_DrawInstanced: 0
-  m_DrawTreesAndFoliage: 0
-  m_StaticShadowCaster: 0
-  m_ReflectionProbeUsage: 1
-  m_MaterialTemplate: {fileID: 2100000, guid: 594ea882c5a793440b60ff72d896021e, type: 2}
-  m_BakeLightProbesForTrees: 1
-  m_PreserveTreePrototypeLayers: 0
-  m_DeringLightProbesForTrees: 1
-  m_ScaleInLightmap: 1
-  m_LightmapParameters: {fileID: 15203, guid: 0000000000000000f000000000000000, type: 0}
-  m_GroupingID: 0
-  m_RenderingLayerMask: 1
-  m_AllowAutoConnect: 0
---- !u!154 &650123645
-TerrainCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 650123642}
-  m_Material: {fileID: 0}
-  m_Enabled: 1
-  m_TerrainData: {fileID: 15600000, guid: aabe219cfe7ee7c4ab24f85708bb0d3a, type: 2}
-  m_EnableTreeColliders: 1
---- !u!4 &650123646
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 650123642}
-  m_LocalRotation: {x: 0.000000014901161, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -82, y: -683.9, z: -50}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 22
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &650542258
 GameObject:
   m_ObjectHideFlags: 0
@@ -23701,13 +23604,25 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 433139033}
     m_Modifications:
+    - target: {fileID: 5545057008981022137, guid: 43cb5a76b7f58304ba858398bd16a646, type: 3}
+      propertyPath: _drillHead
+      value: 
+      objectReference: {fileID: 874878493}
+    - target: {fileID: 5545057008981022137, guid: 43cb5a76b7f58304ba858398bd16a646, type: 3}
+      propertyPath: _rotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5545057008981022137, guid: 43cb5a76b7f58304ba858398bd16a646, type: 3}
+      propertyPath: _rotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5545057008981022137, guid: 43cb5a76b7f58304ba858398bd16a646, type: 3}
+      propertyPath: _drillRotationSpeed
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 8741685478352522378, guid: 43cb5a76b7f58304ba858398bd16a646, type: 3}
       propertyPath: m_Name
       value: BaseCore
-      objectReference: {fileID: 0}
-    - target: {fileID: 8741685478352522378, guid: 43cb5a76b7f58304ba858398bd16a646, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8741685478352522385, guid: 43cb5a76b7f58304ba858398bd16a646, type: 3}
       propertyPath: m_RootOrder
@@ -23753,16 +23668,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8741685479561001161, guid: 43cb5a76b7f58304ba858398bd16a646, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -23.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 43cb5a76b7f58304ba858398bd16a646, type: 3}
 --- !u!4 &874878492 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8741685478352522385, guid: 43cb5a76b7f58304ba858398bd16a646, type: 3}
+  m_PrefabInstance: {fileID: 874878491}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &874878493 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 858803424556031333, guid: 43cb5a76b7f58304ba858398bd16a646, type: 3}
   m_PrefabInstance: {fileID: 874878491}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &875696275 stripped
@@ -29678,7 +29594,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2031407777677293454, guid: b3991de570f6479418e4e1572b99969b, type: 3}
       propertyPath: m_RootOrder
-      value: 26
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 2031407777677293454, guid: b3991de570f6479418e4e1572b99969b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -29761,7 +29677,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2031407777677293454, guid: b3991de570f6479418e4e1572b99969b, type: 3}
       propertyPath: m_RootOrder
-      value: 24
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 2031407777677293454, guid: b3991de570f6479418e4e1572b99969b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -46871,8 +46787,9 @@ MonoBehaviour:
   - {fileID: 1732591221}
   prefabStage: {fileID: 0}
   quickEditingComponent: {fileID: 1300278400}
-  dataPath: D:/UNITY PROJECTS/Project Ariel Ricardo/Assets
-  workPath: D:/UNITY PROJECTS/Project Ariel Ricardo/Assets\Magic Light Probes
+  dataPath: D:/Unity project/Project-Ariel-Ricardo/Abyssal-Depths/Assets
+  workPath: D:/Unity project/Project-Ariel-Ricardo/Abyssal-Depths/Assets\Magic Light
+    Probes
   workPathFound: 1
   localFinishedPositions:
   - {x: 315.16592, y: -331.07098, z: 63.548267}
@@ -52388,7 +52305,8 @@ MonoBehaviour:
   - {x: 236.31763, y: -353.8732, z: -52.65119}
   - {x: 235.65544, y: -356.73352, z: -61.445972}
   - {x: 235.68884, y: -356.70364, z: -59.30397}
-  assetEditorPath: D:/UNITY PROJECTS/Project Ariel Ricardo/Assets\Magic Light Probes/Editor/
+  assetEditorPath: D:/Unity project/Project-Ariel-Ricardo/Abyssal-Depths/Assets\Magic
+    Light Probes/Editor/
   parentVolume: {fileID: 0}
   localOperationalDataLost: 1
   recombinationNeeded: 0
@@ -58666,7 +58584,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2031407777677293454, guid: b3991de570f6479418e4e1572b99969b, type: 3}
       propertyPath: m_RootOrder
-      value: 23
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 2031407777677293454, guid: b3991de570f6479418e4e1572b99969b, type: 3}
       propertyPath: m_LocalPosition.x

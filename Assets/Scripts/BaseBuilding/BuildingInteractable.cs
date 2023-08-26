@@ -57,9 +57,11 @@ public class BuildingInteractable : MonoBehaviour
         return true;
     }
 
-    public virtual void Interact()
+    public virtual bool Interact()
     {
         OnInteract?.Invoke();
+
+        return true;
     }
 
     public virtual void Uninteract()

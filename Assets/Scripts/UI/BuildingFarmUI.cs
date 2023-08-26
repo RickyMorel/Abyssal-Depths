@@ -11,6 +11,7 @@ public class BuildingFarmUI : MonoBehaviour
     [Header("Texts")]
     [SerializeField] private TextMeshProUGUI _itemNameText;
     [SerializeField] private TextMeshProUGUI _itemDescriptionText;
+    [SerializeField] private TextMeshProUGUI _timerText;
 
     [Header("Panels & Transforms")]
     [SerializeField] private GameObject _buildingFarmPanel;
@@ -48,7 +49,7 @@ public class BuildingFarmUI : MonoBehaviour
 
     #endregion
 
-    public void Initialize(BuildingFarmSO buildingFarmSO, float timeTillNextBatch = -1)
+    public void Initialize(BuildingFarmSO buildingFarmSO)
     {
         _itemNameText.text = buildingFarmSO.DisplayName;
         _itemDescriptionText.text = buildingFarmSO.Description;
@@ -66,6 +67,19 @@ public class BuildingFarmUI : MonoBehaviour
         }
 
         EnablePanel(true);
+    }
+
+    public void UpdateTimer(float remainingTime)
+    {
+        int minutes = Mathf.FloorToInt(remainingTime / 60f);
+        int seconds = (int)remainingTime - (minutes * 60);
+
+        _timerText.text = $"Next shipment in: {minutes}m{seconds}s";
+    }
+
+    public bool IsEnabled()
+    {
+        return _buildingFarmPanel.activeSelf;
     }
 
     public void EnablePanel(bool isEnabled)

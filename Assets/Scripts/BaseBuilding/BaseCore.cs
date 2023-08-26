@@ -21,13 +21,15 @@ public class BaseCore : BuildingInteractable
         _health.OnDie += HandleDie;
     }
 
-    public override void Interact()
+    public override bool Interact()
     {
         base.Interact();
 
         _health.AddHealth(200);
 
         GameStatsPanelUI.Instance.UpdateBaseHealth(_health.CurrentHealth, _health.MaxHealth);
+
+        return true;
     }
 
     private void HandleDie()

@@ -24,11 +24,13 @@ public class BuildingUpgradable : BuildingInteractable
         SetToCurrentUpgrade();
     }
 
-    public override void Interact()
+    public override bool Interact()
     {
-        if (!CanUse()) { return; }
+        if (!CanUse()) { return false; }
 
         base.Interact();
+
+        return true;
     }
 
     public override void Uninteract()

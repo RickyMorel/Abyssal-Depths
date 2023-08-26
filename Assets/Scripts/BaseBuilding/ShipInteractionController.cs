@@ -31,9 +31,7 @@ public class ShipInteractionController : MonoBehaviour
 
         if (_isInteracting) { return; }
 
-        _isInteracting = true;
-
-        _currentInteractable.Interact();
+        _isInteracting = _currentInteractable.Interact();
     }
 
     private void HandleTryUpgrade()

@@ -23,20 +23,45 @@ public class BuildingFarm : BuildingUpgradable
         _timeTillNextBatch += Time.deltaTime;
     }
 
+    /// <summary>
+    /// Generates resources and adds to inventory every x amount of time after being repaired
+    /// </summary>
     private void FixedUpdate()
     {
-        
+        if (!CanUse()) { return; }
+
+        _timeTillNextBatch += Time.deltaTime;
+
+        UpdateTimerUI();
+
+        if (_timeTillNextBatch < _buildingFarmSO.GenerationMinutes * 60f) { return; }
+
+        _timeTillNextBatch = 0f;
+
+        MainInventory.Instance.AddItems(_buildingFarmSO.ResourcesGenerated, false);
     }
 
     #endregion
 
-    public override void Interact()
+    private void UpdateTimerUI()
     {
-        if (!CanUse()) { return; }
+        if (!BuildingFarmUI.Instance.IsEnabled()) { return; }
+
+        float remainingTime = (_buildingFarmSO.GenerationMinutes * 60f) - _timeTillNextBatch;
+
+        BuildingFarmUI.Instance.UpdateTimer(remainingTime);
+    }
+
+    public override bool Interact()
+    {
+        Debug.Log("Interact: " + CanUse());
+        if (!CanUse()) { return false; }
 
         base.Interact();
 
         BuildingFarmUI.Instance.Initialize(_buildingFarmSO);
+
+        return true;
     }
 
     public override void Uninteract()

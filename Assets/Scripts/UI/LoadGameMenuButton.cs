@@ -78,6 +78,8 @@ public class LoadGameMenuButton : MonoBehaviour
 
     private static WeaponSO GetUpgradableSO(SaveData.UpgradableData upgradeData, UpgradableType upgradableType)
     {
+        if (upgradeData == null) { return null; }
+
         UpgradeChip chip_1 = SaveUtils.GetChipById(upgradeData.Socket1ChipId);
         UpgradeChip chip_2 = SaveUtils.GetChipById(upgradeData.Socket2ChipId);
         ChipType chip_1_type = chip_1 != null ? chip_1.ChipType : ChipType.None;

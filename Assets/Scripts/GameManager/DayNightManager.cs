@@ -1,12 +1,18 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using RenderSettings = UnityEngine.RenderSettings;
 
 public class DayNightManager : MonoBehaviour
 {
     #region Editor Fields
 
+    [Header("Lights")]
+    [SerializeField] private List<Light> _directionalLights = new List<Light>();
+
+    [Header("Transition Variables")]
     [Tooltip("This is measured in seconds")]
     [SerializeField] private int _howLongTheDayLast = 6;
     [Tooltip("This is measured in seconds")]
@@ -15,6 +21,7 @@ public class DayNightManager : MonoBehaviour
     [SerializeField] private float _highFogDensity = 0.03f;
     [Tooltip("Lower this value to increase transition time")]
     [SerializeField] private float _fogTransitionSpeed = 1;
+    [SerializeField] private DayNightSO _dayNightSO;
 
     #endregion
 
@@ -93,6 +100,17 @@ public class DayNightManager : MonoBehaviour
         {
             _lightsOriginalIntensity.Add(light.intensity);
         }
+
+        Light[] allLights = FindObjectsOfType<Light>();
+
+        foreach (Light light in allLights)
+        {
+            if(light.type != LightType.Directional) { continue; }
+
+            _directionalLights.Add(light);  
+        }
+
+        _directionalLights = _directionalLights.OrderBy(light => light.gameObject.name).ToList();
     }
 
     private void DayNightCycle()
@@ -142,9 +160,22 @@ public class DayNightManager : MonoBehaviour
         }
     }
 
+    private void SetLightColors()
+    {
+        List<Color> color_1 = _isNightTime ? new List<Color>(_dayNightSO.DayLightColors) : new List<Color>(_dayNightSO.NightLightColors);
+        List<Color> color_2 = _isNightTime ? new List<Color>(_dayNightSO.NightLightColors) : new List<Color>(_dayNightSO.DayLightColors);
+
+        _directionalLights[0].color = Color.Lerp(color_1[0], color_2[0], _universalTimer);
+        _directionalLights[1].color = Color.Lerp(color_1[1], color_2[1], _universalTimer);
+        _directionalLights[2].color = Color.Lerp(color_1[2], color_2[2], _universalTimer);
+        RenderSettings.fogColor = Color.Lerp(color_1[3], color_2[3], _universalTimer);
+    }
+
     private void Lerps()
     {
         _universalTimer += Time.deltaTime * _fogTransitionSpeed;
+
+        SetLightColors();
 
         if (_isNightTime)
         {

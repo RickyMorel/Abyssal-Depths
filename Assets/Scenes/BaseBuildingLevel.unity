@@ -12964,7 +12964,7 @@ GameObject:
   - component: {fileID: 548766487}
   - component: {fileID: 548766486}
   m_Layer: 0
-  m_Name: Directional Light (2)
+  m_Name: 2_Directional_Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24382,7 +24382,7 @@ GameObject:
   - component: {fileID: 947925310}
   - component: {fileID: 947925309}
   m_Layer: 0
-  m_Name: Directional Light (2)
+  m_Name: 3_Directional_Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31575,6 +31575,233 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1197745160}
   m_Mesh: {fileID: 4300026, guid: 18aba36922f6bb241b40a57338e1b63d, type: 3}
+--- !u!114 &1198883903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61587e20dbbff7b4f8b950ee8040aea4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ProfileVersion: 2.2.5
+  m_reimportHDRPShader: 0
+  m_savedFromScene: 
+  m_gaiaTimeOfDay:
+    m_todStartingType: 0
+    m_todEnabled: 0
+    m_todDayTimeScale: 0
+    m_todHour: 0
+    m_todMinutes: 0
+  m_gaiaWeather:
+    m_season: 0
+    m_windDirection: 0
+  m_lodBias: 2
+  m_kelvinTexture: {fileID: 0}
+  m_lightSystemMode: 0
+  m_thirdPartyLightObject: {fileID: 0}
+  DefaultLightingSet: 0
+  m_lightingMultiSceneLightingSupport: 1
+  m_lightingUpdateInRealtime: 0
+  m_selectedLightingProfileValuesIndex: 1
+  m_profileType: 1
+  m_renamingProfile: 0
+  m_lightingEditSettings: 0
+  m_lightingBakeMode: 1
+  m_lightmappingMode: 2
+  m_masterSkyboxMaterial: {fileID: 0}
+  m_lightingProfiles: []
+  m_parentObjects: 1
+  m_hideProcessVolume: 1
+  m_enablePostProcessing: 1
+  m_enableAmbientAudio: 1
+  m_enableFog: 1
+  m_antiAliasingMode: 4
+  m_AAJitterSpread: 0.55
+  m_AAStationaryBlending: 0.95
+  m_AAMotionBlending: 0.9
+  m_AASharpness: 0.25
+  m_antiAliasingTAAStrength: 0.7
+  m_cameraDithering: 1
+  m_cameraAperture: 16
+  m_usePhysicalCamera: 0
+  m_cameraSensorSize: {x: 70.41, y: 52.63}
+  m_cameraFocalLength: 50
+  m_globalReflectionProbe: 1
+  m_isUserProfileSet: 0
+  m_enableAutoDOF: 1
+  m_dofLayerDetection:
+    serializedVersion: 2
+    m_Bits: 1
+  m_depthOfFieldFocusDistance: 50
+  m_reflectionProbeData:
+    reflectionProbeMode: 1
+    reflectionProbeRefresh: 0
+    reflectionCubemapCompression: 2
+    reflectionProbeTimeSlicingMode: 1
+    reflectionProbesPerRow: 5
+    reflectionProbeOffset: 1.8
+    reflectionProbeClipPlaneDistance: 1000
+    reflectionProbeBlendDistance: 5
+    reflectionprobeCullingMask:
+      serializedVersion: 2
+      m_Bits: 1
+    reflectionProbeShadowDistance: 100
+    reflectionProbeResolution: 2
+    lightProbesPerRow: 50
+    lightProbeSpawnRadius: 25
+    seaLevel: 50
+    filterMode: 1
+  m_universalPostFXProfile: {fileID: 0}
+  m_waterSystemMode: 0
+  m_thirdPartyWaterObject: {fileID: 0}
+  DefaultWaterSet: 0
+  m_waterMultiSceneLightingSupport: 1
+  m_waterRenamingProfile: 0
+  m_waterUpdateInRealtime: 0
+  m_allowMSAA: 0
+  m_useHDR: 0
+  m_enableDisabeHeightFeature: 1
+  m_disableHeight: 100
+  m_selectedProfile: Deep Blue Ocean
+  m_interval: 0.25
+  m_useCustomRenderDistance: 0
+  m_enableLayerDistances: 0
+  m_customRenderDistance: 500
+  m_customRenderDistances:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  m_reflectionSettingsData:
+    m_disableSkyboxReflections: 0
+    m_enableReflections: 1
+    m_ResolutionMultiplier: 1
+    m_ClipPlaneOffset: 0
+    m_ReflectLayers:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    m_Shadows: 0
+    m_enableRenderDistance: 0
+    m_enableRenderDistances: 0
+    m_customRenderDistance: 500
+    m_customRenderDistances:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    m_textureResolution: 512
+  m_waterEditSettings: 0
+  m_selectedWaterProfileValuesIndex: 1
+  m_autoRefresh: 1
+  m_ignoreSceneConditions: 1
+  m_refreshRate: 0.5
+  m_autoUpdateMode: 0
+  m_useCastics: 1
+  m_mainCausticLight: {fileID: 0}
+  m_causticFramePerSecond: 24
+  m_causticSize: 15
+  InfiniteMode: 1
+  m_waterPrefab: {fileID: 0}
+  m_underwaterParticles: {fileID: 0}
+  m_underwaterHorizonPrefab: {fileID: 0}
+  m_hdPlanarReflections: {fileID: 0}
+  m_transitionFXPrefab: {fileID: 0}
+  m_waterProfiles: []
+  m_activeWaterMaterial: {fileID: 0}
+  m_enableWaterMeshQuality: 0
+  m_waterMeshQuality: 2
+  m_meshType: 0
+  m_zSize: 1000
+  m_xSize: 1000
+  m_customMeshQuality: 100
+  m_enableReflections: 1
+  m_disaleSkyboxReflection: 0
+  m_disablePixelLights: 1
+  m_reflectionResolution: 6
+  m_verifiedHDRPReflections: 0
+  m_textureResolution: 512
+  m_clipPlaneOffset: 40
+  m_reflectedLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  m_hdrpReflectionIntensity: 1
+  m_enableOceanFoam: 1
+  m_enableBeachFoam: 1
+  m_enableGPUInstancing: 1
+  m_autoWindControlOnWater: 1
+  m_supportUnderwaterEffects: 1
+  m_supportUnderwaterPostProcessing: 1
+  m_supportUnderwaterFog: 1
+  m_supportUnderwaterParticles: 1
+  m_controllerType: 1
+  m_setupPostFX: 1
+  m_spawnPlayerAtCurrentLocation: 1
+  m_customPlayer: {fileID: 0}
+  m_customCamera: {fileID: 0}
+  m_enableLayerCulling: 1
+  m_cullingProfile: {fileID: 0}
+  m_sunLight: {fileID: 0}
+  m_terrainCullingEnabled: 1
 --- !u!1 &1205163104
 GameObject:
   m_ObjectHideFlags: 0
@@ -31821,7 +32048,7 @@ GameObject:
   - component: {fileID: 1216723634}
   - component: {fileID: 1216723633}
   m_Layer: 0
-  m_Name: Directional Light
+  m_Name: 1_Directional_Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36958,7 +37185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 223176b09fd283c4da4828330e326a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_sceneProfile: {fileID: 0}
+  m_sceneProfile: {fileID: 1198883903}
   m_mainCamera: {fileID: 668480500}
   WaterMaterial: {fileID: 0}
   m_currentIsUserProfile: 0
@@ -56319,6 +56546,18 @@ PrefabInstance:
     - target: {fileID: 3852162812249718934, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5518618001817704406, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
+      propertyPath: _howLongTheDayLast
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5518618001817704406, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
+      propertyPath: _fogTransitionSpeed
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5518618001817704406, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
+      propertyPath: _howLongTheNightLast
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7501770022225182219, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
       propertyPath: _basePartLocations.Array.size

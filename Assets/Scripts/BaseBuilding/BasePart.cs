@@ -3,49 +3,64 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using static Codice.Client.Common.WebApi.WebApiEndpoints;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class BasePart : MonoBehaviour
 {
-    #region Editor Fields
-
-    [SerializeField] private Transform[] _stopLocations;
-
-    #endregion
-
     #region Private Variables
 
     private NavMeshAgent _agent;
-    private int _currentLocationIndex;
+    private Transform _currentLocationTransform;
+    private GameObject _baseObj;
+    private BasePartType _partType;
 
     #endregion
 
     #region Unity Loops
 
-    private void Start()
+    private void Update()
     {
-        DayNightManager.Instance.OnCycleChange += HandleCycleChange;
+        if (_agent.pathPending) { return; }
 
-        _agent = GetComponent<NavMeshAgent>();
+        Debug.Log($"{Vector3.Distance(transform.position, _currentLocationTransform.position)} > {_agent.stoppingDistance}");
+
+        if (Vector3.Distance(transform.position, _currentLocationTransform.position) > _agent.stoppingDistance) { return; }
+
+        if (_agent.hasPath || _agent.velocity.sqrMagnitude != 0f) { return; }
+
+        Debug.Log("Reached Destination!");
+
+        _baseObj.transform.position = _currentLocationTransform.transform.position;
+        _baseObj.transform.rotation = _currentLocationTransform.transform.rotation;
+        _baseObj.gameObject.SetActive(true);
+
+        Destroy(gameObject); 
     }
 
     #endregion
 
-    private void HandleCycleChange()
+    public void Initialize(GameObject baseObj, BasePartType basePartType)
     {
-        Debug.Log("HandleCycleChange: ");
+        _agent = GetComponent<NavMeshAgent>();
 
-        if (!DayNightManager.Instance.IsNightTime) { return; }
+        gameObject.SetActive(true);
+        baseObj.SetActive(false);
+        _baseObj = baseObj;
+        _partType = basePartType;
+
+        transform.position = baseObj.transform.position;
+        transform.position = Utils.RandomNavmeshLocation(_agent, 20f, 10f, 20f, NavMesh.AllAreas);
 
         GoToNextLocation();
     }
 
     private void GoToNextLocation()
     {
-        Debug.Log("GoToNextLocation: ");
+        _currentLocationTransform = BasePartsManager.Instance.GetLocation(_partType);
 
-        _agent.SetDestination(_stopLocations[_currentLocationIndex].transform.position);
+        Debug.Log("_currentLocationTransform: " + _currentLocationTransform.gameObject.name);
 
-        _currentLocationIndex++;
+        _agent.SetDestination(_currentLocationTransform.position);
     }
 }

@@ -8,6 +8,10 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider))]
 public class BuildingInteractable : MonoBehaviour
 {
+    #region Editor Fields
+
+    #endregion
+
     #region Private Varaibles
 
     private Outline _outline;

@@ -29,9 +29,18 @@ public class BuildingMovement : MonoBehaviour
     {
         if (!DayNightManager.Instance.IsNightTime) { return; }
 
-        Vector3 spawnPos = transform.position + Vector3.up * 3f;
+        if (!BasePartsManager.Instance.HasNextLocation()) { return; }
 
-        BasePart basePart = Instantiate(GameAssetsManager.Instance.BasePart, spawnPos, Quaternion.identity).GetComponent<BasePart>();
+        StartCoroutine(TransformToBasePart());
+    }
+
+    private IEnumerator TransformToBasePart()
+    {
+        GameAudioManager.Instance.PlaySound(GameAudioManager.Instance.TransformToBasePart, transform.position);
+
+        yield return new WaitForSeconds(1f);
+
+        BasePart basePart = Instantiate(GameAssetsManager.Instance.BasePart).GetComponent<BasePart>();
         basePart.Initialize(gameObject, _basePartType);
     }
 }

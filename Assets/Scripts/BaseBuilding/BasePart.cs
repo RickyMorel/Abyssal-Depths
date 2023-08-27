@@ -1,3 +1,4 @@
+using FMOD.Studio;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,22 +15,28 @@ public class BasePart : MonoBehaviour
     private Transform _currentLocationTransform;
     private GameObject _baseObj;
     private BasePartType _partType;
+    private EventInstance _boostSfx;
 
     #endregion
 
     #region Unity Loops
 
+    private void Start()
+    {
+        _boostSfx = GameAudioManager.Instance.CreateSoundInstance(GameAudioManager.Instance.BoosterBoostSfx, Ship.Instance.transform);
+
+        _boostSfx.start();
+    }
+
     private void Update()
     {
-        if (_agent.pathPending) { return; }
+        UpdateBoostSfx();
 
-        Debug.Log($"{Vector3.Distance(transform.position, _currentLocationTransform.position)} > {_agent.stoppingDistance}");
+        if (_agent.pathPending) { return; }
 
         if (Vector3.Distance(transform.position, _currentLocationTransform.position) > _agent.stoppingDistance) { return; }
 
         if (_agent.hasPath || _agent.velocity.sqrMagnitude != 0f) { return; }
-
-        Debug.Log("Reached Destination!");
 
         _baseObj.transform.position = _currentLocationTransform.transform.position;
         _baseObj.transform.rotation = _currentLocationTransform.transform.rotation;
@@ -38,14 +45,23 @@ public class BasePart : MonoBehaviour
         Destroy(gameObject); 
     }
 
+    private void OnDestroy()
+    {
+        _boostSfx.stop(STOP_MODE.ALLOWFADEOUT);
+    }
+
     #endregion
+
+    private void UpdateBoostSfx()
+    {
+        float speedPercentage = Mathf.Clamp((_agent.velocity.magnitude * 1.5f) / _agent.desiredVelocity.magnitude, 0f, 1f);
+
+        GameAudioManager.Instance.AdjustAudioParameter(_boostSfx, "BoostSpeed", speedPercentage);
+    }
 
     public void Initialize(GameObject baseObj, BasePartType basePartType)
     {
         _agent = GetComponent<NavMeshAgent>();
-
-        gameObject.SetActive(true);
-        baseObj.SetActive(false);
         _baseObj = baseObj;
         _partType = basePartType;
 
@@ -57,9 +73,10 @@ public class BasePart : MonoBehaviour
 
     private void GoToNextLocation()
     {
-        _currentLocationTransform = BasePartsManager.Instance.GetLocation(_partType);
+        gameObject.SetActive(true);
+        _baseObj.SetActive(false);
 
-        Debug.Log("_currentLocationTransform: " + _currentLocationTransform.gameObject.name);
+        _currentLocationTransform = BasePartsManager.Instance.GetLocation(_partType);
 
         _agent.SetDestination(_currentLocationTransform.position);
     }

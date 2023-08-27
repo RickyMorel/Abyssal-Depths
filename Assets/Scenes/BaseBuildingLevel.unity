@@ -30701,7 +30701,7 @@ GameObject:
   - component: {fileID: 1169171849}
   m_Layer: 0
   m_Name: NextLocation (1)
-  m_TagString: TurretLocation
+  m_TagString: Untagged
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30714,7 +30714,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1169171848}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 625.8, y: -588.78, z: -17.5}
+  m_LocalPosition: {x: 625.8, y: -588.78, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -34815,7 +34815,7 @@ GameObject:
   - component: {fileID: 1243250959}
   m_Layer: 0
   m_Name: NextLocation
-  m_TagString: TurretLocation
+  m_TagString: Untagged
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -56321,6 +56321,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7501770022225182219, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
+      propertyPath: _basePartLocations.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7501770022225182219, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
       propertyPath: _basePartLocation.TurretLocations.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -56330,6 +56334,22 @@ PrefabInstance:
       objectReference: {fileID: 1243250959}
     - target: {fileID: 7501770022225182219, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
       propertyPath: _basePartLocation.TurretLocations.Array.data[1]
+      value: 
+      objectReference: {fileID: 1169171849}
+    - target: {fileID: 7501770022225182219, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
+      propertyPath: _basePartLocations.Array.data[0].TurretLocations.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7501770022225182219, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
+      propertyPath: _basePartLocations.Array.data[1].TurretLocations.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7501770022225182219, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
+      propertyPath: _basePartLocations.Array.data[0].TurretLocations.Array.data[0]
+      value: 
+      objectReference: {fileID: 1243250959}
+    - target: {fileID: 7501770022225182219, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
+      propertyPath: _basePartLocations.Array.data[1].TurretLocations.Array.data[0]
       value: 
       objectReference: {fileID: 1169171849}
     - target: {fileID: 8974122626102876249, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}

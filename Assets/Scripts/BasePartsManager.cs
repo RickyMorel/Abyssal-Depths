@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Analytics;
+using System;
 
 public class BasePartsManager : MonoBehaviour
 {
     #region Editor Fields
 
-    [SerializeField] private BasePartBaseLocation _basePartLocation;
+    [SerializeField] private List<BasePartBaseLocation> _basePartLocations = new List<BasePartBaseLocation>();
 
     #endregion
 
     #region Private Variables
 
     private static BasePartsManager _instance;
-    private int _currentLocationIndex;
+    private int _currentLocationIndex = 0;
 
     #endregion
 
@@ -24,6 +25,8 @@ public class BasePartsManager : MonoBehaviour
     public static BasePartsManager Instance { get { return _instance; } }
 
     #endregion
+
+    #region Unity Loops
 
     private void Awake()
     {
@@ -36,13 +39,50 @@ public class BasePartsManager : MonoBehaviour
             _instance = this;
         }
 
-        _basePartLocation.LoadQueues();
+        LoadLocationQueues();
+    }
+
+    private void Start()
+    {
+        DayNightManager.Instance.OnCycleChange += HandleCycleChange;
+    }
+
+    private void OnDestroy()
+    {
+        DayNightManager.Instance.OnCycleChange -= HandleCycleChange;
+    }
+
+    #endregion
+
+    public bool HasNextLocation()
+    {
+        return _currentLocationIndex < _basePartLocations.Count - 1;
+    }
+
+    private void HandleCycleChange()
+    {
+        if(!HasNextLocation()) { return; }
+
+        _currentLocationIndex++;
+    }
+
+    private void LoadLocationQueues()
+    {
+        foreach (BasePartBaseLocation _basePartLocation in _basePartLocations)
+        {
+            _basePartLocation.LoadQueues();
+        }
     }
 
     public Transform GetLocation(BasePartType partType)
     {
-        return _basePartLocation.GetLocation(partType);
+        BuildingUpgradeUI.Instance.EnableUpgradesPanel(false);
+        BuildingFarmUI.Instance.EnablePanel(false);
+
+        return _basePartLocations[_currentLocationIndex].GetLocation(partType);
     }
+
+    #region Helper Classes
 
     [System.Serializable]
     public class BasePartBaseLocation
@@ -54,16 +94,6 @@ public class BasePartsManager : MonoBehaviour
         private Queue<Transform> TurretLocationsQueue = new Queue<Transform>();
         private Queue<Transform> ForgeLocationsQueue = new Queue<Transform>();
         private Queue<Transform> GateLocationsQueue = new Queue<Transform>();
-
-        //public BasePartBaseLocation()
-        //{
-        //    GameObject[] turretLocations = GameObject.FindGameObjectsWithTag("TurretLocation");
-
-        //    foreach (GameObject location in turretLocations)
-        //    {
-        //        TurretLocationsQueue.Enqueue(location.transform);
-        //    }
-        //}
 
         public void LoadQueues()
         {
@@ -88,6 +118,8 @@ public class BasePartsManager : MonoBehaviour
             return null;
         }
     }
+
+    #endregion
 }
 
 public enum BasePartType

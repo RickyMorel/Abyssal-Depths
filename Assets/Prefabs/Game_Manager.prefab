@@ -15287,6 +15287,7 @@ GameObject:
   - component: {fileID: 4369487710667774916}
   - component: {fileID: 1851479346}
   - component: {fileID: 5518618001817704406}
+  - component: {fileID: 7501770022225182219}
   m_Layer: 0
   m_Name: Game_Manager
   m_TagString: Untagged
@@ -15314,7 +15315,7 @@ Transform:
   - {fileID: 1957963999228688441}
   - {fileID: 409205976}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1470298975805987252
 MonoBehaviour:
@@ -15402,6 +15403,7 @@ MonoBehaviour:
   _repairCostsCanvas: {fileID: 4382223683147480139, guid: 184bf38efa9c6e644abab1c0111d8640, type: 3}
   _chipPickup: {fileID: 7517285669250702529, guid: 33c642c6393f4f04d87e7307bb977fc0, type: 3}
   _deathLootPickup: {fileID: 5645008805979763042, guid: 2bcf2c958c9df79488790a6fedd63956, type: 3}
+  _basePart: {fileID: 8203393321781773233, guid: 76cfbc88a755c974ebc95c6ecd1a7a95, type: 3}
   _upgradeParticles: {fileID: 1553723013007991630, guid: a0664a9d90846d74b84fedda2006069a, type: 3}
   _electricParticles: {fileID: 8425386454949839465, guid: d34cc465d74c3884c906d75bd9181071, type: 3}
   _fireParticles: {fileID: 8765800227001637491, guid: 6992756f0fe5ec94eb3c36a2a0058a91, type: 3}
@@ -15417,6 +15419,7 @@ MonoBehaviour:
   _laserHeatColor: {r: 3.8580287, g: 0.05095489, b: 0.05095489, a: 0}
   _chipDataSO: {fileID: 11400000, guid: 96b9c6d13f586074a82a619b98aae03e, type: 2}
   _enemyDamageDataSOPrefab: {fileID: 11400000, guid: cfa562578269423438edac810d636dc0, type: 2}
+  _buildingDamageDataSOPrefab: {fileID: 0}
   _damageType: {fileID: 11400000, guid: 10f678d6cd0b642488241d5f76d2b3eb, type: 2}
 --- !u!114 &607561777
 MonoBehaviour:
@@ -15640,6 +15643,13 @@ MonoBehaviour:
       Data3: 168606851
       Data4: 1683749584
     Path: event:/Enivorment/PortalGateKeyInteration
+  _transformToBasePart:
+    Guid:
+      Data1: 636118034
+      Data2: 1085760893
+      Data3: -1606051168
+      Data4: 1532152997
+    Path: event:/Buildings/TransformToBasePart
   _craftingTableCrafting:
     Guid:
       Data1: 116640704
@@ -15724,6 +15734,20 @@ MonoBehaviour:
       Data3: 1955128745
       Data4: 989131763
     Path: event:/Enivorment/CryopodOpen
+  _fogIsComingSfx:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  _dayTransitionSfx:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!114 &4369487710667774916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15757,6 +15781,8 @@ MonoBehaviour:
   _enemyPrefabs:
   - {fileID: 2028690528299777052, guid: b3991de570f6479418e4e1572b99969b, type: 3}
   - {fileID: 1401204668924913013, guid: ef739bd36fbce304e9d9d85afdec7251, type: 3}
+  _howManyEnemiesShouldSpawnAtOnce: 5
+  _timeBetweenEnemySpawns: 5
 --- !u!114 &5518618001817704406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15774,6 +15800,19 @@ MonoBehaviour:
   _lowFogDensity: 0.01
   _highFogDensity: 0.03
   _fogTransitionSpeed: 0.5
+--- !u!114 &7501770022225182219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3852162812249718933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39206abfd144dcf4b9f4aaff69a78273, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _basePartLocations: []
 --- !u!1 &3852162812439959518
 GameObject:
   m_ObjectHideFlags: 0

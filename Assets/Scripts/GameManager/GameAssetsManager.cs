@@ -15,6 +15,9 @@ public class GameAssetsManager : MonoBehaviour
     [SerializeField] private GameObject _chipPickup;
     [SerializeField] private GameObject _deathLootPickup;
 
+    [Header("Building Prefabs")]
+    [SerializeField] private GameObject _basePart;
+
     [Header("Particles")]
     [SerializeField] private GameObject _upgradeParticles;
     [SerializeField] private GameObject _electricParticles;
@@ -51,6 +54,7 @@ public class GameAssetsManager : MonoBehaviour
     public GameObject RepairCostsCanvas => _repairCostsCanvas;
     public GameObject ChipPickup => _chipPickup;
     public GameObject DeathLootPickup => _deathLootPickup;
+    public GameObject BasePart => _basePart;
     public GameObject UpgradeParticles => _upgradeParticles;
     public GameObject ElectricParticles => _electricParticles;
     public GameObject FireParticles => _fireParticles;

@@ -42,6 +42,7 @@ public class DayNightManager : MonoBehaviour
     #region Public Properties
 
     public static DayNightManager Instance { get { return _instance; } }
+    public int HowLongTheNightLast => _howLongTheNightLast;
     public bool IsNightTime => _isNightTime;
     public int DayCount => _dayCount;
     public event Action OnCycleChange;

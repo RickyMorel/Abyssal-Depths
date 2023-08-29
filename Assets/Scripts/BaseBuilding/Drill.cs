@@ -9,7 +9,6 @@ public class Drill : MonoBehaviour
     [SerializeField] private GameObject _drillGameObject;
     [SerializeField] private GameObject _drillHead;
     [SerializeField] private float _drillRotationSpeed;
-    [SerializeField] private float _movementMaxSpeed;
     [SerializeField] private Vector3 _rotation;
     [SerializeField] private float _timeToReachRotationMaxSpeedMultiplier = 1;
     [SerializeField] private float _timeToReachMovementMaxSpeedMultiplier = 1;
@@ -20,15 +19,23 @@ public class Drill : MonoBehaviour
     #region Private Variables
 
     private float _rotationSpeed;
-    private float _movementSpeed;
+    private float _timer = 0;
+    private Transform _drillPositionBeforeMoving;
 
     #endregion
 
     #region Unity Loops
 
+    private void Start()
+    {
+        _drillPositionBeforeMoving.position = _drillGameObject.transform.position;
+    }
+
     private void Update()
     {
         DrillingNightActivity();
+
+        if (DayNightManager.Instance.IsNightTime) { _timer += Time.deltaTime; }
     }
 
     #endregion
@@ -63,19 +70,11 @@ public class Drill : MonoBehaviour
     {
         if (!DayNightManager.Instance.IsNightTime)
         {
-            if (_movementSpeed <= 0) { return; }
 
-            _movementSpeed -= Time.deltaTime * _timeToReachMovementMaxSpeedMultiplier;
-
-            _drillGameObject.transform.position = Vector3.MoveTowards(_drillGameObject.transform.position, _drillStopsTransforms[0].position, _movementSpeed * _movementMaxSpeed);
         }
         else
         {
-            _drillGameObject.transform.position = Vector3.MoveTowards(_drillGameObject.transform.position, _drillStopsTransforms[0].position, _movementSpeed * _movementMaxSpeed);
-
-            if (_movementSpeed >= 1) { return; }
-
-            _movementSpeed += Time.deltaTime * _timeToReachMovementMaxSpeedMultiplier;
+            _drillGameObject.transform.position = Vector3.Lerp(_drillPositionBeforeMoving.position, _drillStopsTransforms[0].position, (_timer / DayNightManager.Instance.HowLongTheNightLast));
         }
     }
 }

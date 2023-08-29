@@ -666,6 +666,12 @@ MonoBehaviour:
   _currentHealth: 0
   _maxHealth: 1000
   _damageParticles: {fileID: 0}
+  _fixCost:
+    Mesh: {fileID: 0}
+    CraftingRecipy: {fileID: 0}
+    SpentMaterials: []
+  _objectsToDeactivateWhenDamaged: []
+  _objectsToActivateWhenDamaged: []
 --- !u!114 &8741685478352522384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -690,6 +696,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32836af117d27ba4394ea89276938f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _drillGameObject: {fileID: 8741685478352522378}
+  _drillHead: {fileID: 858803424556031333}
+  _drillRotationSpeed: 1000
+  _movementMaxSpeed: 0.01
+  _rotation: {x: 0, y: 1, z: 0}
+  _timeToReachRotationMaxSpeedMultiplier: 0.5
+  _timeToReachMovementMaxSpeedMultiplier: 0.5
+  _drillStopsTransforms:
+  - {fileID: 0}
 --- !u!1 &8741685478416254271
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,7 +6,6 @@ public class BuildingMovement : MonoBehaviour
 {
     #region Editor Fields
 
-    [SerializeField] private Transform _basePartSpawnPos;
     [SerializeField] private BasePartType _basePartType;
 
     #endregion
@@ -29,13 +28,19 @@ public class BuildingMovement : MonoBehaviour
     {
         if (!DayNightManager.Instance.IsNightTime) { return; }
 
+        Debug.Log("HandleCycleChange");
+
         if (!BasePartsManager.Instance.HasNextLocation()) { return; }
+
+        Debug.Log("BasePartsManager has next location");
 
         StartCoroutine(TransformToBasePart());
     }
 
     private IEnumerator TransformToBasePart()
     {
+        Debug.Log("TransformToBasePart");
+
         GameAudioManager.Instance.PlaySound(GameAudioManager.Instance.TransformToBasePart, transform.position);
 
         yield return new WaitForSeconds(1f);

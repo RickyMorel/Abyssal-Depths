@@ -16,7 +16,7 @@ public class BasePartsManager : MonoBehaviour
     #region Private Variables
 
     private static BasePartsManager _instance;
-    private int _currentLocationIndex = 0;
+    private int _currentLocationIndex = -1;
 
     #endregion
 
@@ -56,11 +56,14 @@ public class BasePartsManager : MonoBehaviour
 
     public bool HasNextLocation()
     {
-        return _currentLocationIndex < _basePartLocations.Count - 1;
+        Debug.Log($"HasNextLocation: {_currentLocationIndex} < {_basePartLocations.Count-1}" + (_currentLocationIndex < _basePartLocations.Count - 1));
+        return _currentLocationIndex <= _basePartLocations.Count - 1;
     }
 
     private void HandleCycleChange()
     {
+        if (!DayNightManager.Instance.IsNightTime) { return; }
+
         if(!HasNextLocation()) { return; }
 
         _currentLocationIndex++;
@@ -100,6 +103,14 @@ public class BasePartsManager : MonoBehaviour
             foreach (Transform location in TurretLocations)
             {
                 TurretLocationsQueue.Enqueue(location);
+            }
+            foreach (Transform location in ForgeLocations)
+            {
+                ForgeLocationsQueue.Enqueue(location);
+            }
+            foreach (Transform location in GateLocations)
+            {
+                GateLocationsQueue.Enqueue(location);
             }
         }
 

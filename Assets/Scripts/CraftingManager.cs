@@ -78,7 +78,7 @@ public class CraftingManager : MonoBehaviour
         LoadIngredients(craftingRecipy, _ingredientsContentTransform);
     }
 
-    public void EnableCanvas(bool isEnabled, PlayerInputHandler currentPlayer, CraftingStation craftingStation)
+    public void EnableCanvas(bool isEnabled, PlayerInputHandler currentPlayer, CraftingStation craftingStation = null)
     {
         _craftingPanel.SetActive(isEnabled);
         _currentPlayer = currentPlayer;

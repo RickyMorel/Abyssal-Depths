@@ -20,7 +20,7 @@ public class Drill : MonoBehaviour
 
     private float _rotationSpeed;
     private float _timer = 0;
-    private Transform _drillPositionBeforeMoving;
+    private Vector3 _drillPositionBeforeMoving;
 
     #endregion
 
@@ -28,7 +28,7 @@ public class Drill : MonoBehaviour
 
     private void Start()
     {
-        _drillPositionBeforeMoving.position = _drillGameObject.transform.position;
+        _drillPositionBeforeMoving = _drillGameObject.transform.position;
     }
 
     private void Update()
@@ -68,13 +68,9 @@ public class Drill : MonoBehaviour
 
     private void Movement()
     {
-        if (!DayNightManager.Instance.IsNightTime)
+        if (DayNightManager.Instance.IsNightTime)
         {
-
-        }
-        else
-        {
-            _drillGameObject.transform.position = Vector3.Lerp(_drillPositionBeforeMoving.position, _drillStopsTransforms[0].position, (_timer / DayNightManager.Instance.HowLongTheNightLast));
+            _drillGameObject.transform.position = Vector3.Lerp(_drillPositionBeforeMoving, _drillStopsTransforms[0].position, (_timer / DayNightManager.Instance.HowLongTheNightLast));
         }
     }
 }

@@ -223,8 +223,7 @@ GameObject:
   - component: {fileID: 2806876966363670717}
   - component: {fileID: 2806876966363670718}
   - component: {fileID: 777385072240497364}
-  - component: {fileID: 3521046752358703518}
-  - component: {fileID: 3814469514982823048}
+  - component: {fileID: 5490678069774775838}
   m_Layer: 5
   m_Name: CraftingUIItem
   m_TagString: Untagged
@@ -272,13 +271,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2806876966363670592}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8490566, g: 0.4517622, b: 0.4517622, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -316,8 +315,8 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_NormalColor: {r: 0.6039216, g: 0.6039216, b: 0.6039216, a: 0}
+    m_HighlightedColor: {r: 0.6039216, g: 0.6039216, b: 0.6039216, a: 0.19607843}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -339,8 +338,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: InventoryItemUI, Assembly-CSharp
+      - m_Target: {fileID: 5490678069774775838}
+        m_TargetAssemblyTypeName: CraftingItemUI, Scripts
         m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
@@ -351,7 +350,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &3521046752358703518
+--- !u!114 &5490678069774775838
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -360,28 +359,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2806876966363670592}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7df6e160d4a988a4fa6fffa05200f3eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _icon: {fileID: 5776057988731475406}
-  _progressFillImage: {fileID: 0}
-  _itemNameText: {fileID: 3874761187870276245}
-  _amountText: {fileID: 34279308824784491}
---- !u!114 &3814469514982823048
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2806876966363670592}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b45609a5465c370428f5823b9da4ece1, type: 3}
+  m_Script: {fileID: 11500000, guid: 4aa486b991985f443b0dc902798c5712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _icon: {fileID: 5776057988731475406}
   _itemNameText: {fileID: 3874761187870276245}
   _amountText: {fileID: 34279308824784491}
+  _damageText: {fileID: 2790068496325646997}
+  _damageIcon: {fileID: 6218874387583991812}
 --- !u!1 &2964781343689076037
 GameObject:
   m_ObjectHideFlags: 0

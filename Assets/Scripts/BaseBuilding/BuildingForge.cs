@@ -30,7 +30,7 @@ public class BuildingForge : BuildingUpgradable
 
         base.Interact();
 
-        CraftingManager.Instance.EnableCanvas(true, Ship.Instance.ShipLandingController.Booster.CurrentPlayer.PlayerInput);
+        CraftingUI.Instance.Initialize(Ship.Instance.ShipLandingController.Booster.CurrentPlayer.PlayerInput);
         GameAudioManager.Instance.PlaySound(GameAudioManager.Instance.CraftingTableInteract, transform.position);
 
         return true;
@@ -40,6 +40,6 @@ public class BuildingForge : BuildingUpgradable
     {
         base.Uninteract();
 
-        CraftingManager.Instance.EnableCanvas(false, null);
+        CraftingUI.Instance.EnablePanel(false);
     }
 }

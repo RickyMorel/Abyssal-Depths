@@ -21,7 +21,7 @@ public class Drill : MonoBehaviour
     private float _rotationSpeed;
     private float _timer = 0;
     private Vector3 _drillPositionBeforeMoving;
-    private int _currentPositionToGoToIndex = 0;
+    [SerializeField] private int _currentPositionToGoToIndex = 0;
 
     #endregion
 
@@ -36,7 +36,7 @@ public class Drill : MonoBehaviour
     {
         DrillingNightActivity();
 
-        if (DayNightManager.Instance.IsNightTime) { _timer += Time.deltaTime; }
+        if (CanDrill()) { _timer += Time.deltaTime; }
     }
 
     private void OnEnable()
@@ -59,7 +59,7 @@ public class Drill : MonoBehaviour
 
     private void Rotation()
     {
-        if (!DayNightManager.Instance.IsNightTime)
+        if (!CanDrill())
         {
             if (_rotationSpeed <= 0) { return; }
 
@@ -79,7 +79,7 @@ public class Drill : MonoBehaviour
 
     private void Movement()
     {
-        if (DayNightManager.Instance.IsNightTime)
+        if (CanDrill())
         {
             _drillGameObject.transform.position = Vector3.Lerp(_drillPositionBeforeMoving, _drillStopsTransforms[_currentPositionToGoToIndex].position, (_timer / DayNightManager.Instance.HowLongTheNightLast));
 
@@ -90,5 +90,14 @@ public class Drill : MonoBehaviour
     private void DrillingSfx()
     {
         GameAudioManager.Instance.PlaySound(GameAudioManager.Instance.DrillingSfx, transform.position);
+    }
+
+    private bool CanDrill()
+    {
+        if (DayNightManager.Instance.DayCount < 2) { return false; }
+
+        if (DayNightManager.Instance.IsNightTime) { return false; }
+
+        return true;
     }
 }

@@ -30,7 +30,7 @@ public class DayNightManager : MonoBehaviour
     private static DayNightManager _instance;
     private bool _isNightTime = false;
     private bool _activateTimer = false;
-    private int _dayCount = 2;
+    private int _dayCount = 1;
     private float _universalTimer = 0;
     private GameObject[] _fogDependantObjects;
     private List<Light> _lights = new List<Light>();

@@ -35,7 +35,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8741685480217770795}
-  - {fileID: 8741685480249327597}
   - {fileID: 8741685479561001161}
   - {fileID: 2687422023225294392}
   m_Father: {fileID: 0}
@@ -699,7 +698,6 @@ MonoBehaviour:
   _drillGameObject: {fileID: 8741685478352522378}
   _drillHead: {fileID: 858803424556031333}
   _drillRotationSpeed: 1000
-  _movementMaxSpeed: 0.01
   _rotation: {x: 0, y: 1, z: 0}
   _timeToReachRotationMaxSpeedMultiplier: 0.5
   _timeToReachMovementMaxSpeedMultiplier: 0.5
@@ -866,51 +864,6 @@ Transform:
   m_Father: {fileID: 8741685478352522385}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8741685480249327594
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8741685480249327597}
-  - component: {fileID: 8741685480249327596}
-  m_Layer: 21
-  m_Name: Collider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8741685480249327597
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8741685480249327594}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8741685478352522385}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &8741685480249327596
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8741685480249327594}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 10.1, y: 16.174702, z: 10.77}
-  m_Center: {x: 0, y: 0.2323513, z: 0}
 --- !u!1001 &859079374089891395
 PrefabInstance:
   m_ObjectHideFlags: 0

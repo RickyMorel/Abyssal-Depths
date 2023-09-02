@@ -39,6 +39,16 @@ public class Drill : MonoBehaviour
         if (DayNightManager.Instance.IsNightTime) { _timer += Time.deltaTime; }
     }
 
+    private void OnEnable()
+    {
+        DayNightManager.Instance.OnCycleChange += DrillingSfx;
+    }
+
+    private void OnDisable()
+    {
+        DayNightManager.Instance.OnCycleChange -= DrillingSfx;
+    }
+
     #endregion
 
     private void DrillingNightActivity()
@@ -75,5 +85,10 @@ public class Drill : MonoBehaviour
 
             if (_drillGameObject.transform.position == _drillStopsTransforms[_currentPositionToGoToIndex].position && _drillStopsTransforms.Length -1 != _currentPositionToGoToIndex) { _currentPositionToGoToIndex += 1; _timer = 0; }
         }
+    }
+
+    private void DrillingSfx()
+    {
+        GameAudioManager.Instance.PlaySound(GameAudioManager.Instance.DrillingSfx, transform.position);
     }
 }

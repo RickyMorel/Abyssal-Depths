@@ -69,6 +69,9 @@ public class GameAudioManager : MonoBehaviour
     [SerializeField] private EventReference _fogIsComingSfx;
     [SerializeField] private EventReference _dayTransitionSfx;
 
+    [Header("Base Sounds")]
+    [SerializeField] private EventReference _drillingSfx;
+
     #endregion
 
     #region Private Variables
@@ -116,6 +119,7 @@ public class GameAudioManager : MonoBehaviour
     public EventReference PickaxeBoostSfx => _pickaxeBoostSfx;
     public EventReference FogIsComing => _fogIsComingSfx;
     public EventReference DayTransition => _dayTransitionSfx;
+    public EventReference DrillingSfx => _drillingSfx;
 
     #endregion
 

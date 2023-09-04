@@ -75,6 +75,7 @@ GameObject:
   - component: {fileID: 2454824696105613406}
   - component: {fileID: 2454824696105613405}
   - component: {fileID: 2360969357554487686}
+  - component: {fileID: 3671771909796031297}
   m_Layer: 21
   m_Name: BuildLocation
   m_TagString: Untagged
@@ -726,8 +727,11 @@ MonoBehaviour:
   _upgrades:
   - Mesh: {fileID: 2454824696041877998}
     CraftingRecipy: {fileID: 11400000, guid: 7b553768de024614c91318ee22c1563a, type: 2}
+    SpentMaterials: []
   - Mesh: {fileID: 2454824696815898820}
     CraftingRecipy: {fileID: 11400000, guid: 7b553768de024614c91318ee22c1563a, type: 2}
+    SpentMaterials: []
+  _canUseWithNoUpgrades: 0
   _projectilePrefab: {fileID: 6421736673352849636, guid: ae5425c51ae307f4bb82602a757b6b25, type: 3}
   _projectileShellPrefab: {fileID: 6567270739292821314, guid: b6540c7ed89f066489cef3c7971b9b10, type: 3}
   _shootTransform: {fileID: 5577685762809831606}
@@ -741,6 +745,19 @@ MonoBehaviour:
       Data3: 1311282823
       Data4: 1445873891
     Path: event:/Weapons/Shoot/Shoot_TurretProjectile
+--- !u!114 &3671771909796031297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2454824696105613403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a187b42ae369c634abe99d89e72cf814, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _basePartType: 1
 --- !u!1 &2454824696815898820
 GameObject:
   m_ObjectHideFlags: 0

@@ -81,7 +81,8 @@ public class Drill : MonoBehaviour
     {
         if (CanDrill())
         {
-            _drillGameObject.transform.position = Vector3.Lerp(_drillPositionBeforeMoving, _drillStopsTransforms[_currentPositionToGoToIndex].position, (_timer / DayNightManager.Instance.HowLongTheNightLast));
+            float drillingTime = DayNightManager.Instance.HowLongTheDayLasts - DayNightManager.Instance.NightWarningTime;
+            _drillGameObject.transform.position = Vector3.Lerp(_drillPositionBeforeMoving, _drillStopsTransforms[_currentPositionToGoToIndex].position, (_timer / drillingTime));
 
             if (_drillGameObject.transform.position == _drillStopsTransforms[_currentPositionToGoToIndex].position && _drillStopsTransforms.Length -1 != _currentPositionToGoToIndex) { _currentPositionToGoToIndex += 1; _timer = 0; }
         }
@@ -92,7 +93,7 @@ public class Drill : MonoBehaviour
         GameAudioManager.Instance.PlaySound(GameAudioManager.Instance.DrillingSfx, transform.position);
     }
 
-    private bool CanDrill()
+    public static bool CanDrill()
     {
         if (DayNightManager.Instance.DayCount < 2) { return false; }
 

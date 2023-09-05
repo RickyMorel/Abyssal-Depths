@@ -15,8 +15,10 @@ public class DayNightManager : MonoBehaviour
     [Header("Transition Variables")]
     [Tooltip("This is measured in seconds")]
     [SerializeField] private int _howLongTheDayLast = 6;
+    [SerializeField] private int _nightWarningTime = 20;
     [Tooltip("This is measured in seconds")]
     [SerializeField] private int _howLongTheNightLast = 6;
+    [SerializeField] private int _night = 6;
     [SerializeField] private float _lowFogDensity = 0.01f;
     [SerializeField] private float _highFogDensity = 0.03f;
     [Tooltip("Lower this value to increase transition time")]
@@ -42,10 +44,13 @@ public class DayNightManager : MonoBehaviour
     #region Public Properties
 
     public static DayNightManager Instance { get { return _instance; } }
+    public int HowLongTheDayLasts => _howLongTheDayLast;
     public int HowLongTheNightLast => _howLongTheNightLast;
+    public int NightWarningTime => _nightWarningTime;
     public bool IsNightTime => _isNightTime;
     public int DayCount => _dayCount;
     public event Action OnCycleChange;
+    public event Action OnNightComingWarning;
 
     #endregion
 
@@ -83,6 +88,9 @@ public class DayNightManager : MonoBehaviour
     private void Update()
     {
         if (_activateTimer) { Lerps(); }
+
+        if (Input.GetKeyDown(KeyCode.L)) { Time.timeScale = 8f; }
+        if (Input.GetKeyDown(KeyCode.J)) { Time.timeScale = 1f; }
     }
 
     #endregion
@@ -123,7 +131,13 @@ public class DayNightManager : MonoBehaviour
         if (!_isNightTime)
         {
             Invoke(nameof(NightEffectsTransition), _howLongTheDayLast);
+            Invoke(nameof(NightComingWarning), _howLongTheDayLast - _nightWarningTime);
         }
+    }
+
+    private void NightComingWarning()
+    {
+        OnNightComingWarning?.Invoke();
     }
 
     private void DayEffectsTransition()

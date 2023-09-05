@@ -14,22 +14,18 @@ public class BuildingMovement : MonoBehaviour
 
     private void Start()
     {
-        DayNightManager.Instance.OnCycleChange += HandleCycleChange;
+        BasePartsManager.Instance.OnLocationChanged += HandleLocationChange;
     }
 
     private void OnDestroy()
     {
-        DayNightManager.Instance.OnCycleChange -= HandleCycleChange;
+        BasePartsManager.Instance.OnLocationChanged -= HandleLocationChange;
     }
 
     #endregion
 
-    private void HandleCycleChange()
+    private void HandleLocationChange()
     {
-        if (!DayNightManager.Instance.IsNightTime) { return; }
-
-        Debug.Log("HandleCycleChange");
-
         if (!BasePartsManager.Instance.HasNextLocation()) { return; }
 
         Debug.Log("BasePartsManager has next location");

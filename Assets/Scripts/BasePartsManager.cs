@@ -24,6 +24,8 @@ public class BasePartsManager : MonoBehaviour
 
     public static BasePartsManager Instance { get { return _instance; } }
 
+    public event Action OnLocationChanged;
+
     #endregion
 
     #region Unity Loops
@@ -44,12 +46,12 @@ public class BasePartsManager : MonoBehaviour
 
     private void Start()
     {
-        DayNightManager.Instance.OnCycleChange += HandleCycleChange;
+        DayNightManager.Instance.OnNightComingWarning += HandleCycleChange;
     }
 
     private void OnDestroy()
     {
-        DayNightManager.Instance.OnCycleChange -= HandleCycleChange;
+        DayNightManager.Instance.OnNightComingWarning -= HandleCycleChange;
     }
 
     #endregion
@@ -62,11 +64,11 @@ public class BasePartsManager : MonoBehaviour
 
     private void HandleCycleChange()
     {
-        if (!DayNightManager.Instance.IsNightTime) { return; }
-
         if(!HasNextLocation()) { return; }
 
         _currentLocationIndex++;
+
+        OnLocationChanged?.Invoke();
     }
 
     private void LoadLocationQueues()

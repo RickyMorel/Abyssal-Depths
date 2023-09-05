@@ -23,6 +23,8 @@ public class BasePart : MonoBehaviour
 
     private void Start()
     {
+        BasePartsManager.Instance.OnLocationChanged += GoToNextLocation;
+
         _boostSfx = GameAudioManager.Instance.CreateSoundInstance(GameAudioManager.Instance.BoosterBoostSfx, Ship.Instance.transform);
 
         _boostSfx.start();
@@ -31,6 +33,8 @@ public class BasePart : MonoBehaviour
     private void Update()
     {
         UpdateBoostSfx();
+
+        if(_currentLocationTransform != null) { _agent.SetDestination(_currentLocationTransform.position); }
 
         if (_agent.pathPending) { return; }
 
@@ -47,6 +51,8 @@ public class BasePart : MonoBehaviour
 
     private void OnDestroy()
     {
+        BasePartsManager.Instance.OnLocationChanged -= GoToNextLocation;
+
         _boostSfx.stop(STOP_MODE.ALLOWFADEOUT);
     }
 

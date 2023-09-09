@@ -66,7 +66,7 @@ public class Drill : MonoBehaviour
 
     private void Rotation()
     {
-        if (!CanDrill() && _timer - DayNightManager.Instance.NightWarningTime >= 0)
+        if (!CanDrill())
         {
             if (_rotationSpeed <= 0) { return; }
 
@@ -88,20 +88,18 @@ public class Drill : MonoBehaviour
     {
         if (CanDrill())
         {
-            if (_timer - DayNightManager.Instance.NightWarningTime - Time.deltaTime > 0) { return; }
-
             float drillingTime = DayNightManager.Instance.HowLongTheDayLasts - DayNightManager.Instance.NightWarningTime;
-            _drillGameObject.transform.position = Vector3.Lerp(_drillPositionBeforeMoving, _drillStopsTransforms[_currentPositionToGoToIndex].position, (_timer / drillingTime));
-            Debug.Log(_drillGameObject.transform.position);
-            Debug.Log(_drillStopsTransforms[_currentPositionToGoToIndex].position);
-            if (_drillGameObject.transform.position == _drillStopsTransforms[_currentPositionToGoToIndex].position && _drillStopsTransforms.Length -1 != _currentPositionToGoToIndex) 
-            { 
-                _currentPositionToGoToIndex += 1; 
-                _timer = 0;
-                _drillPositionBeforeMoving = _drillGameObject.transform.position;
-                Debug.Log("It's invokin' time");
-                OnDestroyCurrentRock?.Invoke();
-            }
+            _drillGameObject.transform.position = Vector3.Lerp(_drillPositionBeforeMoving, _drillStopsTransforms[_currentPositionToGoToIndex].position, _timer / drillingTime);
+        }
+        else if (!CanDrill() && DayNightManager.Instance.CurrentTime == DayNightManager.DayNightTime.AboutToBeNight)
+        {
+            if (_drillGameObject.transform.position == _drillStopsTransforms[_currentPositionToGoToIndex].position || _drillStopsTransforms.Length - 1 == _currentPositionToGoToIndex) { return; }
+
+            _drillGameObject.transform.position = _drillStopsTransforms[_currentPositionToGoToIndex].position;
+            _currentPositionToGoToIndex += 1;
+            _timer = 0;
+            _drillPositionBeforeMoving = _drillGameObject.transform.position;
+            OnDestroyCurrentRock?.Invoke();
         }
     }
 
@@ -114,8 +112,8 @@ public class Drill : MonoBehaviour
     {
         if (DayNightManager.Instance.DayCount < 2) { return false; }
 
-        if (DayNightManager.Instance.IsNightTime) { return false; }
-
+        if (DayNightManager.Instance.CurrentTime == DayNightManager.DayNightTime.AboutToBeNight || DayNightManager.Instance.CurrentTime == DayNightManager.DayNightTime.NightTime) { return false; }
+        
         return true;
     }
 }

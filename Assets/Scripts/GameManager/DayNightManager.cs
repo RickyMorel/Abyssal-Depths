@@ -38,6 +38,7 @@ public class DayNightManager : MonoBehaviour
     private List<Light> _lights = new List<Light>();
     private List<float> _lightsOriginalIntensity = new List<float>();
     private List<ParticleSystem> _gameObjectsToDeactivateAtNight = new List<ParticleSystem>();
+    private DayNightTime _currentTime;
 
     #endregion
 
@@ -49,6 +50,7 @@ public class DayNightManager : MonoBehaviour
     public int NightWarningTime => _nightWarningTime;
     public bool IsNightTime => _isNightTime;
     public int DayCount => _dayCount;
+    public DayNightTime CurrentTime => _currentTime;
     public event Action OnCycleChange;
     public event Action OnNightComingWarning;
 
@@ -137,12 +139,14 @@ public class DayNightManager : MonoBehaviour
 
     private void NightComingWarning()
     {
+        _currentTime = DayNightTime.AboutToBeNight;
         OnNightComingWarning?.Invoke();
     }
 
     private void DayEffectsTransition()
     {
         _isNightTime = false;
+        _currentTime = DayNightTime.DayTime;
         OnCycleChange?.Invoke();
         EnableFogEffect();
     }
@@ -150,6 +154,7 @@ public class DayNightManager : MonoBehaviour
     private void NightEffectsTransition()
     {
         _isNightTime = true;
+        _currentTime = DayNightTime.NightTime;
         OnCycleChange?.Invoke();
         _dayCount += 1;
         EnableFogEffect();
@@ -212,4 +217,6 @@ public class DayNightManager : MonoBehaviour
 
         if (_universalTimer > 1) { _activateTimer = false; _universalTimer = 0; }
     }
+
+    public enum DayNightTime { DayTime, AboutToBeNight, NightTime }
 }

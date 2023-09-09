@@ -28430,6 +28430,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe839fab41dc717449542ec3b6e8c48a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _rockExplosionFxPrefab: {fileID: 0}
 --- !u!65 &1066582189
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -46296,8 +46297,9 @@ MonoBehaviour:
   - {fileID: 1732591221}
   prefabStage: {fileID: 0}
   quickEditingComponent: {fileID: 1300278400}
-  dataPath: D:/UNITY PROJECTS/Project Ariel Ricardo/Assets
-  workPath: D:/UNITY PROJECTS/Project Ariel Ricardo/Assets\Magic Light Probes
+  dataPath: D:/Unity project/Project-Ariel-Ricardo/Abyssal-Depths/Assets
+  workPath: D:/Unity project/Project-Ariel-Ricardo/Abyssal-Depths/Assets\Magic Light
+    Probes
   workPathFound: 1
   localFinishedPositions:
   - {x: 315.16592, y: -331.07098, z: 63.548267}
@@ -51813,7 +51815,8 @@ MonoBehaviour:
   - {x: 236.31763, y: -353.8732, z: -52.65119}
   - {x: 235.65544, y: -356.73352, z: -61.445972}
   - {x: 235.68884, y: -356.70364, z: -59.30397}
-  assetEditorPath: D:/UNITY PROJECTS/Project Ariel Ricardo/Assets\Magic Light Probes/Editor/
+  assetEditorPath: D:/Unity project/Project-Ariel-Ricardo/Abyssal-Depths/Assets\Magic
+    Light Probes/Editor/
   parentVolume: {fileID: 0}
   localOperationalDataLost: 1
   recombinationNeeded: 0
@@ -52956,6 +52959,26 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!95 &1758716589
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1149962317}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1764759050
 GameObject:
   m_ObjectHideFlags: 0
@@ -56326,7 +56349,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5518618001817704406, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
       propertyPath: _howLongTheDayLast
-      value: 200
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5518618001817704406, guid: fde670e2fcc8f0b459649714aaff0e3b, type: 3}
       propertyPath: _fogTransitionSpeed
@@ -64958,6 +64981,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe839fab41dc717449542ec3b6e8c48a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _rockExplosionFxPrefab: {fileID: 1879769179923522, guid: 65932b7368590234d8163da03c2055d8, type: 3}
 --- !u!54 &2144842958
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -65179,6 +65203,8 @@ GameObject:
   - component: {fileID: 2144842958}
   - component: {fileID: 2144842955}
   - component: {fileID: 2144842956}
+  - component: {fileID: 3819826200200892672}
+  - component: {fileID: 3819826200200892671}
   m_Layer: 6
   m_Name: MovableRock
   m_TagString: Untagged
@@ -65195,13 +65221,52 @@ Transform:
   m_GameObject: {fileID: 3819826200200858846}
   m_LocalRotation: {x: -0.000000026692584, y: 0.70710576, z: 0.0000000266925, w: 0.70710784}
   m_LocalPosition: {x: 571.1197, y: -383.44, z: -43.1}
-  m_LocalScale: {x: 3.2634194, y: 3.835256, z: 4.445536}
+  m_LocalScale: {x: 3.263419, y: 3.835256, z: 4.445536}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1149962318}
   m_Father: {fileID: 413859917}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!95 &3819826200200892671
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3819826200200858846}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!320 &3819826200200892672
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3819826200200858846}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: cd360665aadc4cb4bb05c1b6614a69e2, type: 2}
+  m_InitialState: 1
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: -5311681792056430091, guid: cd360665aadc4cb4bb05c1b6614a69e2, type: 2}
+    value: {fileID: 3819826200200892671}
+  m_ExposedReferences:
+    m_References: []
 --- !u!114 &5206465417094655960
 MonoBehaviour:
   m_ObjectHideFlags: 0

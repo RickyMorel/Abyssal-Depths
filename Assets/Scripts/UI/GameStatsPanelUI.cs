@@ -11,6 +11,7 @@ public class GameStatsPanelUI : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI _daysText;
     [SerializeField] private TextMeshProUGUI _soulsText;
+    [SerializeField] private TextMeshProUGUI _depthText;
     [SerializeField] private Image _baseHealthBar;
 
     #endregion
@@ -45,6 +46,11 @@ public class GameStatsPanelUI : MonoBehaviour
     public void UpdateDays(int newDays)
     {
         _daysText.text = $"Day {newDays}";
+    }
+
+    public void UpdateDepth(int newDepth)
+    {
+        _depthText.text = $"{newDepth}m";
     }
 
     public void UpdateSouls(int newSouls)

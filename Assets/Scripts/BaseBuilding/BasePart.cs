@@ -34,7 +34,7 @@ public class BasePart : MonoBehaviour
     {
         UpdateBoostSfx();
 
-        if(_currentLocationTransform != null) { _agent.SetDestination(_currentLocationTransform.position); }
+        //if(_currentLocationTransform != null) { _agent.SetDestination(_currentLocationTransform.position); }
 
         if (_agent.pathPending) { return; }
 

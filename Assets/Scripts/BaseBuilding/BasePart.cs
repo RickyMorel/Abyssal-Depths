@@ -72,7 +72,7 @@ public class BasePart : MonoBehaviour
         _partType = basePartType;
 
         transform.position = baseObj.transform.position;
-        transform.position = Utils.RandomNavmeshLocation(_agent, 20f, 10f, 20f, NavMesh.AllAreas);
+        transform.position = Utils.RandomNavmeshLocation(_agent, 50f, 20f, 50f, NavMesh.AllAreas);
 
         GoToNextLocation();
     }

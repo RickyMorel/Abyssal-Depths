@@ -73,6 +73,8 @@ public class DayNightManager : MonoBehaviour
         GetAllNecessaryObjectsAndComponents();
 
         Invoke(nameof(NightEffectsTransition), _howLongTheDayLast);
+
+        GameStatsPanelUI.Instance.UpdateDays(_dayCount);
     }
 
     private void OnEnable()
@@ -152,6 +154,7 @@ public class DayNightManager : MonoBehaviour
         _isNightTime = true;
         OnCycleChange?.Invoke();
         _dayCount += 1;
+        GameStatsPanelUI.Instance.UpdateDays(_dayCount);
         EnableFogEffect();
     }
 

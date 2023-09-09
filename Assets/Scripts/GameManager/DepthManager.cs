@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using RenderSettings = UnityEngine.RenderSettings;
 
@@ -9,6 +10,7 @@ public class DepthManager : MonoBehaviour
 {
     #region Editor Fields
 
+    [Header("Varaibles")]
     [SerializeField] private float _surfaceLevelDepth = -350f;
     [SerializeField] private float _seaAbyssDepth = -1000f;
 
@@ -39,6 +41,14 @@ public class DepthManager : MonoBehaviour
         {
             _instance = this;
         }
+    }
+
+    private void OnGUI()
+    {
+        int seaLevel = 200;
+        int depth = (int)Mathf.Abs(Ship.Instance.transform.position.y) - seaLevel;
+
+        GameStatsPanelUI.Instance.UpdateDepth(depth);
     }
 
     #endregion

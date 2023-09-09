@@ -88,16 +88,18 @@ public class Drill : MonoBehaviour
     {
         if (CanDrill())
         {
-            if (_timer - DayNightManager.Instance.NightWarningTime >= 0) { return; }
+            if (_timer - DayNightManager.Instance.NightWarningTime - Time.deltaTime > 0) { return; }
 
             float drillingTime = DayNightManager.Instance.HowLongTheDayLasts - DayNightManager.Instance.NightWarningTime;
             _drillGameObject.transform.position = Vector3.Lerp(_drillPositionBeforeMoving, _drillStopsTransforms[_currentPositionToGoToIndex].position, (_timer / drillingTime));
-
+            Debug.Log(_drillGameObject.transform.position);
+            Debug.Log(_drillStopsTransforms[_currentPositionToGoToIndex].position);
             if (_drillGameObject.transform.position == _drillStopsTransforms[_currentPositionToGoToIndex].position && _drillStopsTransforms.Length -1 != _currentPositionToGoToIndex) 
             { 
                 _currentPositionToGoToIndex += 1; 
                 _timer = 0;
                 _drillPositionBeforeMoving = _drillGameObject.transform.position;
+                Debug.Log("It's invokin' time");
                 OnDestroyCurrentRock?.Invoke();
             }
         }

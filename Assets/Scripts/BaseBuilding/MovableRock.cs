@@ -15,22 +15,5 @@ public class MovableRock : MonoBehaviour
         transform.SetParent(other.transform);
     }
 
-    private void Start()
-    {
-        DayNightManager.Instance.OnCycleChange += DestroyRock;
-    }
-
-    private void OnDisable()
-    {
-        DayNightManager.Instance.OnCycleChange -= DestroyRock;
-    }
-
     #endregion
-
-    private void DestroyRock()
-    {
-        if (!transform.parent.GetComponent<Drill>()) { return; }
-
-        Destroy(this);
-    }
 }

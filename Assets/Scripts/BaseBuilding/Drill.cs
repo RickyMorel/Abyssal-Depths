@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,7 +22,13 @@ public class Drill : MonoBehaviour
     private float _rotationSpeed;
     private float _timer = 0;
     private Vector3 _drillPositionBeforeMoving;
-    [SerializeField] private int _currentPositionToGoToIndex = 0;
+    private int _currentPositionToGoToIndex = 0;
+
+    #endregion
+
+    #region Public Properties
+
+    public event Action OnDestroyCurrentRock;
 
     #endregion
 
@@ -59,7 +66,7 @@ public class Drill : MonoBehaviour
 
     private void Rotation()
     {
-        if (!CanDrill())
+        if (!CanDrill() && _timer - DayNightManager.Instance.NightWarningTime >= 0)
         {
             if (_rotationSpeed <= 0) { return; }
 
@@ -81,10 +88,18 @@ public class Drill : MonoBehaviour
     {
         if (CanDrill())
         {
+            if (_timer - DayNightManager.Instance.NightWarningTime >= 0) { return; }
+
             float drillingTime = DayNightManager.Instance.HowLongTheDayLasts - DayNightManager.Instance.NightWarningTime;
             _drillGameObject.transform.position = Vector3.Lerp(_drillPositionBeforeMoving, _drillStopsTransforms[_currentPositionToGoToIndex].position, (_timer / drillingTime));
 
-            if (_drillGameObject.transform.position == _drillStopsTransforms[_currentPositionToGoToIndex].position && _drillStopsTransforms.Length -1 != _currentPositionToGoToIndex) { _currentPositionToGoToIndex += 1; _timer = 0; }
+            if (_drillGameObject.transform.position == _drillStopsTransforms[_currentPositionToGoToIndex].position && _drillStopsTransforms.Length -1 != _currentPositionToGoToIndex) 
+            { 
+                _currentPositionToGoToIndex += 1; 
+                _timer = 0;
+                _drillPositionBeforeMoving = _drillGameObject.transform.position;
+                OnDestroyCurrentRock?.Invoke();
+            }
         }
     }
 

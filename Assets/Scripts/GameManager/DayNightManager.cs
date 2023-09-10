@@ -74,7 +74,7 @@ public class DayNightManager : MonoBehaviour
     {
         GetAllNecessaryObjectsAndComponents();
 
-        Invoke(nameof(NightEffectsTransition), _howLongTheDayLast);
+        //Invoke(nameof(NightEffectsTransition), _howLongTheDayLast);
 
         GameStatsPanelUI.Instance.UpdateDays(_dayCount);
     }
@@ -91,7 +91,7 @@ public class DayNightManager : MonoBehaviour
 
     private void Update()
     {
-        if (_activateTimer) { Lerps(); }
+        //if (_activateTimer) { BrightnessLerps(); }
 
         if (Input.GetKeyDown(KeyCode.L)) { Time.timeScale = 8f; }
         if (Input.GetKeyDown(KeyCode.J)) { Time.timeScale = 1f; }
@@ -183,18 +183,27 @@ public class DayNightManager : MonoBehaviour
         }
     }
 
-    private void SetLightColors()
+    private void SetLightColors(float depthRatio = 0f)
     {
+        float ratio = _universalTimer;
         List<Color> color_1 = _isNightTime ? new List<Color>(_dayNightSO.DayLightColors) : new List<Color>(_dayNightSO.NightLightColors);
         List<Color> color_2 = _isNightTime ? new List<Color>(_dayNightSO.NightLightColors) : new List<Color>(_dayNightSO.DayLightColors);
 
-        _directionalLights[0].color = Color.Lerp(color_1[0], color_2[0], _universalTimer);
-        _directionalLights[1].color = Color.Lerp(color_1[1], color_2[1], _universalTimer);
-        _directionalLights[2].color = Color.Lerp(color_1[2], color_2[2], _universalTimer);
-        RenderSettings.fogColor = Color.Lerp(color_1[3], color_2[3], _universalTimer);
+        if (depthRatio != 0f)
+        {
+            color_1 = new List<Color>(_dayNightSO.DayLightColors);
+            color_2 = new List<Color>(_dayNightSO.NightLightColors);
+            ratio = depthRatio;
+        }
+
+
+        _directionalLights[0].color = Color.Lerp(color_1[0], color_2[0], ratio);
+        _directionalLights[1].color = Color.Lerp(color_1[1], color_2[1], ratio);
+        _directionalLights[2].color = Color.Lerp(color_1[2], color_2[2], ratio);
+        RenderSettings.fogColor = Color.Lerp(color_1[3], color_2[3], ratio);
     }
 
-    private void Lerps()
+    private void BrightnessLerps()
     {
         _universalTimer += Time.deltaTime * _fogTransitionSpeed;
 
@@ -219,6 +228,22 @@ public class DayNightManager : MonoBehaviour
         }
 
         if (_universalTimer > 1) { _activateTimer = false; _universalTimer = 0; }
+    }
+
+    public void BrightnessLerpByShipDepth(float currentDepth, float maxDepth)
+    {
+        float depthRatio = currentDepth / maxDepth;
+
+        RenderSettings.fogDensity = Mathf.Lerp(_lowFogDensity, _highFogDensity, depthRatio);
+
+        Debug.Log($"BrightnessLerpByShipDepth: {currentDepth} ; {maxDepth} ; fogDensity: {RenderSettings.fogDensity}");
+
+        for (int i = 0; i < _lights.Count; i++)
+        {
+            _lights[i].intensity = Mathf.Lerp(_lightsOriginalIntensity[i], 0, depthRatio);
+        }
+
+        SetLightColors(depthRatio);
     }
 
     public enum DayNightTime { DayTime, AboutToBeNight, NightTime }

@@ -74,7 +74,7 @@ public class DayNightManager : MonoBehaviour
     {
         GetAllNecessaryObjectsAndComponents();
 
-        //Invoke(nameof(NightEffectsTransition), _howLongTheDayLast);
+        Invoke(nameof(NightEffectsTransition), _howLongTheDayLast);
 
         GameStatsPanelUI.Instance.UpdateDays(_dayCount);
     }
@@ -91,7 +91,7 @@ public class DayNightManager : MonoBehaviour
 
     private void Update()
     {
-        //if (_activateTimer) { BrightnessLerps(); }
+        if (_activateTimer) { BrightnessLerps(); }
 
         if (Input.GetKeyDown(KeyCode.L)) { Time.timeScale = 8f; }
         if (Input.GetKeyDown(KeyCode.J)) { Time.timeScale = 1f; }

@@ -93,8 +93,8 @@ public class Drill : MonoBehaviour
         }
         else if (!CanDrill() && DayNightManager.Instance.CurrentTime == DayNightManager.DayNightTime.AboutToBeNight)
         {
-            if (_drillGameObject.transform.position == _drillStopsTransforms[_currentPositionToGoToIndex].position || _drillStopsTransforms.Length - 1 == _currentPositionToGoToIndex) { return; }
-
+            if (_drillStopsTransforms.Length - 1 == _currentPositionToGoToIndex) { return; }
+            
             _drillGameObject.transform.position = _drillStopsTransforms[_currentPositionToGoToIndex].position;
             _currentPositionToGoToIndex += 1;
             _timer = 0;

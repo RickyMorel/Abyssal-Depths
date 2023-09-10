@@ -10,6 +10,7 @@ public class MovableRock : MonoBehaviour
     #region EditorFields
 
     [SerializeField] private GameObject _rockExplosionFxPrefab;
+    [SerializeField] private GameObject _rockMesh;
 
     #endregion
 
@@ -18,16 +19,10 @@ public class MovableRock : MonoBehaviour
     private Drill _drill;
     private bool _wantToDestroyRock = false;
     private float _timer;
-    private Vector3 _originalScale;
 
     #endregion
 
     #region Unity Loops
-
-    private void Start()
-    {
-        _originalScale = gameObject.transform.localScale;
-    }
 
     private void Update()
     {
@@ -41,7 +36,7 @@ public class MovableRock : MonoBehaviour
         _drill = other.gameObject.GetComponent<Drill>();
 
         transform.SetParent(_drill.transform);
-
+        Debug.Log("Suscribir");
         _drill.OnDestroyCurrentRock += DestroyThisRock;
     }
 
@@ -49,6 +44,7 @@ public class MovableRock : MonoBehaviour
 
     private void DestroyThisRock()
     {
+        Debug.Log("LLamado");
         _rockExplosionFxPrefab = Instantiate(_rockExplosionFxPrefab, _drill.transform.position, _drill.transform.rotation);
 
         _rockExplosionFxPrefab.transform.SetParent(null);
@@ -60,7 +56,7 @@ public class MovableRock : MonoBehaviour
 
     private void DestroyFx()
     {
-        gameObject.GetComponent<PlayableDirector>().Play();
+        _rockMesh.GetComponent<PlayableDirector>().Play();
 
         if (_timer >= 1) { _rockExplosionFxPrefab.GetComponent<ParticleSystem>().Play(); Destroy(gameObject); }
     }

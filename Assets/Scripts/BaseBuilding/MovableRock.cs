@@ -36,7 +36,6 @@ public class MovableRock : MonoBehaviour
         _drill = other.gameObject.GetComponent<Drill>();
 
         transform.SetParent(_drill.transform);
-        Debug.Log("Suscribir");
         _drill.OnDestroyCurrentRock += DestroyThisRock;
     }
 
@@ -44,7 +43,6 @@ public class MovableRock : MonoBehaviour
 
     private void DestroyThisRock()
     {
-        Debug.Log("LLamado");
         _rockExplosionFxPrefab = Instantiate(_rockExplosionFxPrefab, _drill.transform.position, _drill.transform.rotation);
 
         _rockExplosionFxPrefab.transform.SetParent(null);

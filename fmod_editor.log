@@ -7,7 +7,7 @@
 [LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
 [LOG] Thread::initThread                       : Init FMOD stream thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFB, Stack Size: 98304, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x4000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 0000019586013C88 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 000002551A5E1F38 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
@@ -18,6 +18,1643 @@
 [LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
 [LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
 [LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000D8B214F5F8
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA5D8C3CA0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA5D8C3C60
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA5D8C3D80
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA5D8C3E40
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 00000256269A5C28
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='TIME_WARP_Stop_07_stereo', format=5, channels=2, frequency=48000, lengthbytes=48608, lengthpcm=177662, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.967041.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000D8B214F5F8
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA5D8C3CA0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA5D8C3C60
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA5D8C3D80
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA5D8C3E40
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 00000256269A5C28
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='SPACE_WARP_Type_03_Warp_C_stereo', format=5, channels=2, frequency=48000, lengthbytes=12704, lengthpcm=54662, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.799225.
+[WRN] EventInstance::update                    : Event {c3af66cf-7498-432f-a046-98d1ebd9bcb7} waited 80 milliseconds for sample data to load.  Preload sample data to avoid this delay.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000D8B214F5F8
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA5D8C3CA0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA5D8C3C60
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA5D8C3D80
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA5D8C3E40
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 00000256269A7D28
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='EXPLOSION_Medium_Smooth_with_Crackle_stereo', format=5, channels=2, frequency=48000, lengthbytes=17824, lengthpcm=67988, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000D8B214F5F8
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA5D8C3CA0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA5D8C3C60
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA5D8C3D80
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA5D8C3E40
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 00000256269A7D28
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='EXPLOSION_Medium_Smooth_with_Faint_Echo_Rumble_stereo', format=5, channels=2, frequency=48000, lengthbytes=27712, lengthpcm=114242, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
+[WRN] EventInstance::update                    : Event {2c2ad8bd-78ea-484e-a563-382f55bcd2bf} waited 60 milliseconds for sample data to load.  Preload sample data to avoid this delay.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000D8B214F5F8
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA5D8C3CA0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA5D8C3C60
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA5D8C3D80
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA5D8C3E40
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000025469844138
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Projectile_Impact_05', format=5, channels=2, frequency=48000, lengthbytes=25568, lengthpcm=97576, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.316223.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000D8B214F5F8
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA5D8C3CA0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA5D8C3C60
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA5D8C3D80
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA5D8C3E40
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000025469842038
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Bloody stabs 1', format=5, channels=2, frequency=48000, lengthbytes=8544, lengthpcm=36096, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.512512.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000D8B214F5F8
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA5D8C3CA0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA5D8C3C60
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA5D8C3D80
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA5D8C3E40
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000025469842038
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Bloody stabs 7', format=5, channels=2, frequency=48000, lengthbytes=7616, lengthpcm=29184, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.484100.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000D8B214F5F8
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA5D8C3CA0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA5D8C3C60
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA5D8C3D80
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA5D8C3E40
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000025469842038
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Bloody stabs 3', format=5, channels=2, frequency=48000, lengthbytes=7040, lengthpcm=27648, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.427338.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000D8B214F5F8
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA5D8C3CA0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA5D8C3C60
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA5D8C3D80
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA5D8C3E40
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000025469842038
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Bloody stabs 9', format=5, channels=2, frequency=48000, lengthbytes=6304, lengthpcm=27552, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.491943.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000D8B214F5F8
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA5D8C3CA0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA5D8C3C60
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA5D8C3D80
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA5D8C3E40
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000025469842038
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Healing 17', format=5, channels=2, frequency=48000, lengthbytes=37728, lengthpcm=135476, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.579651.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000D8B214F5F8
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA5D8C3CA0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA5D8C3C60
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA5D8C3D80
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA5D8C3E40
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000025469842038
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Bloody stabs 4', format=5, channels=2, frequency=48000, lengthbytes=3776, lengthpcm=16192, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.535217.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000D8B214F5F8
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA5D8C3CA0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA5D8C3C60
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA5D8C3D80
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA5D8C3E40
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000025469842038
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Bloody stabs 10', format=5, channels=2, frequency=48000, lengthbytes=5504, lengthpcm=22528, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.407043.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000D8B214F5F8
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA5D8C3CA0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA5D8C3C60
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA5D8C3D80
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA5D8C3E40
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000025469842038
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Bloody stabs 6', format=5, channels=2, frequency=48000, lengthbytes=7968, lengthpcm=36096, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.474213.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000D8B214F5F8
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA5D8C3CA0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA5D8C3C60
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA5D8C3D80
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA5D8C3E40
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000025469842038
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Bloody stabs 5', format=5, channels=2, frequency=48000, lengthbytes=8448, lengthpcm=31616, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.430603.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000D8B214F5F8
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA5D8C3CA0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA5D8C3C60
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA5D8C3D80
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA5D8C3E40
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000025469842038
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Bloody stabs 2', format=5, channels=2, frequency=48000, lengthbytes=6816, lengthpcm=28032, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.495056.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000D8B214F5F8
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA5D8C3CA0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA5D8C3C60
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA5D8C3D80
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA5D8C3E40
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000025469842038
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Bloody stabs 8', format=5, channels=2, frequency=48000, lengthbytes=5760, lengthpcm=24448, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.401550.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000D8B214F5F8
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA5D8C3CA0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA5D8C3C60
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA5D8C3D80
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA5D8C3E40
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000025469842038
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Lizard Monster_Raw 1', format=5, channels=2, frequency=48000, lengthbytes=16864, lengthpcm=65621, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=1.000000.
+[LOG] SystemI::createSound                     : filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] Thread::initThread                       : Init FMOD nonblocking thread (0). Affinity: 0x4000000000000003, Priority: 0xFFFF7FFC, Stack Size: 114688, Semaphore: Yes, Sleep Time: 0, Looping: Yes.
+[LOG] AsyncThread::add                         : add sound to async queue : soundi = 000002546D20AF58, queue head = 000002568E766C38, queue count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002546D20AF58
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 00000254032712D0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 000002546D20A388, queue head = 000002568E766C38, queue count = 0
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 000002546D20ABF8, queue head = 000002568E766C38, queue count = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 000002546D20A6E8, queue head = 000002568E766C38, queue count = 2
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 00000254CCEF6608, queue head = 000002568E766C38, queue count = 3
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 00000254CCEF62A8, queue head = 000002568E766C38, queue count = 4
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 00000254CCEF6968, queue head = 000002568E766C38, queue count = 5
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 00000254CCEF6B18, queue head = 000002568E766C38, queue count = 6
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 00000254CCEF6E78, queue head = 000002568E766C38, queue count = 7
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 00000255157546C8, queue head = 000002568E766C38, queue count = 8
+[LOG] Thread::initThread                       :     Init FMOD file thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFC, Stack Size: 65536, Semaphore: No, Sleep Time: 10, Looping: Yes.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002546D20AF58
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002546D20A388
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 00000254032717D0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002546D20A388
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002546D20ABF8
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000025403271190
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002546D20ABF8
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002546D20A6E8
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000025403271550
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002546D20A6E8
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000254CCEF6608
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000025403271410
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000254CCEF6608
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000254CCEF62A8
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000025626C774C0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000254CCEF62A8
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000254CCEF6968
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000025626C779C0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000254CCEF6968
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000254CCEF6B18
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000025626C77B00
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000254CCEF6B18
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000254CCEF6E78
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000025626C76FC0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000254CCEF6E78
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000255157546C8
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000025626C77C40
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000255157546C8
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000D8B214F5F8
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA5D8C3CA0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA5D8C3C60
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA5D8C3D80
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA5D8C3E40
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 00000256269A8DA8
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Door 1_6', format=5, channels=2, frequency=48000, lengthbytes=30752, lengthpcm=120000, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.302185.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000D8B214F5F8
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA5D8C3CA0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA5D8C3C60
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA5D8C3D80
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA5D8C3E40
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 00000256269A8DA8
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Door 4_3', format=5, channels=2, frequency=48000, lengthbytes=39776, lengthpcm=156000, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.377655.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000D8B214F5F8
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA5D8C3CA0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA5D8C3C60
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA5D8C3D80
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA5D8C3E40
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 00000256269A8DA8
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Door 5_1', format=5, channels=2, frequency=48000, lengthbytes=51552, lengthpcm=192000, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.373962.
+[LOG] SystemI::createSound                     : filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         : add sound to async queue : soundi = 000002540499BAA8, queue head = 000002568E766C38, queue count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002540499BAA8
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002535CA649E0
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 000002540499C9D8, queue head = 000002568E766C38, queue count = 0
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 000002551678C298, queue head = 000002568E766C38, queue count = 1
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 0000025516788C98, queue head = 000002568E766C38, queue count = 2
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 000002551678CCB8, queue head = 000002568E766C38, queue count = 3
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 0000025516787858, queue head = 000002568E766C38, queue count = 4
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 00000255167885D8, queue head = 000002568E766C38, queue count = 5
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 000002551678D378, queue head = 000002568E766C38, queue count = 6
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 000002551678D6D8, queue head = 000002568E766C38, queue count = 7
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 0000025516788FF8, queue head = 000002568E766C38, queue count = 8
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002540499BAA8
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002540499C9D8
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002535CA644E0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 0000025516787A08, queue head = 000002568E766C38, queue count = 8
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 000002551678A288, queue head = 000002568E766C38, queue count = 9
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 0000025516786FE8, queue head = 000002568E766C38, queue count = 10
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 000002551678E2A8, queue head = 000002568E766C38, queue count = 11
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 000002551678DBE8, queue head = 000002568E766C38, queue count = 12
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002540499C9D8
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002551678C298
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000025516581C90
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002551678C298
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000025516788C98
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000025516581790
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000025516788C98
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002551678CCB8
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000025516582050
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002551678CCB8
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000025516787858
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 00000254CCDC7AB0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000025516787858
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000255167885D8
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 00000254CCDC7FB0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000255167885D8
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002551678D378
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 00000254CCDC7BF0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002551678D378
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002551678D6D8
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 00000254CCDC7470
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002551678D6D8
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000025516788FF8
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 00000254CCDC75B0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000025516788FF8
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000025516787A08
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 00000254CCDC76F0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000025516787A08
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002551678A288
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 00000254CCDC7E70
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002551678A288
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000025516786FE8
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 00000254CCDC7970
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000025516786FE8
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002551678E2A8
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 00000254CCDC7330
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002551678E2A8
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002551678DBE8
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 00000254CCDC7D30
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002551678DBE8
+[LOG] SoundI::release                          :  (000002567F1CDA88)
+[LOG] SoundI::release                          :     EXPLOSION_Medium_Smooth_with_Crackle_stereo (0000025626477698)
+[LOG] SoundI::release                          :  (000002567F1D0CD8)
+[LOG] SoundI::release                          :     EXPLOSION_Medium_Smooth_with_Faint_Echo_Rumble_stereo (00000256264798B8)
+[LOG] SoundI::release                          :  (000002567F1CFA28)
+[LOG] SoundI::release                          :     TIME_WARP_Stop_07_stereo (0000025626478BB8)
+[LOG] SoundI::release                          :  (000002567F1CFE78)
+[LOG] SoundI::release                          :     SPACE_WARP_Type_03_Warp_C_stereo (0000025626476658)
+[LOG] SoundI::release                          :  (0000025626D1FAD8)
+[LOG] SoundI::release                          :     Projectile_Impact_05 (00000254690466C8)
+[LOG] SystemI::createSound                     : filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         : add sound to async queue : soundi = 000002568E76CA58, queue head = 000002568E766C38, queue count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002568E76CA58
+[LOG] SystemI::createSound                     : filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 000002568E76D478, queue head = 000002568E766C38, queue count = 0
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002567F311110
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 000002568E76D118, queue head = 000002568E766C38, queue count = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 000002551A28A598, queue head = 000002568E766C38, queue count = 2
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 000002551A28A748, queue head = 000002568E766C38, queue count = 3
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 000002551A28A8F8, queue head = 000002568E766C38, queue count = 4
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 000002551A28AE08, queue head = 000002568E766C38, queue count = 5
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 000002551A28A238, queue head = 000002568E766C38, queue count = 6
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 000002561D48EA98, queue head = 000002568E766C38, queue count = 7
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 000002561D48E588, queue head = 000002568E766C38, queue count = 8
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002568E76CA58
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002568E76D478
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002567F310AD0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002568E76D478
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002568E76D118
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002567F310C10
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002568E76D118
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002551A28A598
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002567F310710
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002551A28A598
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002551A28A748
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002567F311250
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002551A28A748
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002551A28A8F8
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002567F311390
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002551A28A8F8
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002551A28AE08
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002567F3105D0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002551A28AE08
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002551A28A238
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002567D656D80
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002551A28A238
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002561D48EA98
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002567D656EC0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002561D48EA98
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002561D48E588
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002567D657000
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002561D48E588
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000D8B214F5F8
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFA5D8C3CA0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFA5D8C3C60
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFA5D8C3D80
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFA5D8C3E40
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000002546983EEB8
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Projectile_Impact_05', format=5, channels=2, frequency=48000, lengthbytes=25568, lengthpcm=97576, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.316223.
+[LOG] SoundI::release                          : BubbleSfx (00000255157546C8)
+[LOG] SoundI::release                          :     BubbleSfx (0000025404E3E5E8)
+[LOG] SoundI::release                          :     BubbleSfx (0000025513112D78)
+[LOG] SoundI::release                          : BubbleSfx (00000254CCEF6E78)
+[LOG] SoundI::release                          :     BubbleSfx (0000025404E3E448)
+[LOG] SoundI::release                          :     BubbleSfx (0000025513112BC8)
+[LOG] SoundI::release                          : BubbleSfx (00000254CCEF6B18)
+[LOG] SoundI::release                          :     BubbleSfx (0000025404E3DF68)
+[LOG] SoundI::release                          :     BubbleSfx (0000025513112A18)
+[LOG] SoundI::release                          : BubbleSfx (00000254CCEF6968)
+[LOG] SoundI::release                          :     BubbleSfx (000002567F2315C8)
+[LOG] SoundI::release                          :     BubbleSfx (000002567EB43D18)
+[LOG] SoundI::release                          : BubbleSfx (00000254CCEF62A8)
+[LOG] SoundI::release                          :     BubbleSfx (000002567F230F48)
+[LOG] SoundI::release                          :     BubbleSfx (000002546FDCBAA8)
+[LOG] SoundI::release                          : BubbleSfx (00000254CCEF6608)
+[LOG] SoundI::release                          :     BubbleSfx (0000025514099068)
+[LOG] SoundI::release                          :     BubbleSfx (000002546FDCBFB8)
+[LOG] SoundI::release                          : BubbleSfx (000002546D20A6E8)
+[LOG] SoundI::release                          :     BubbleSfx (0000025514099A28)
+[LOG] SoundI::release                          :     BubbleSfx (000002546BABF518)
+[LOG] SoundI::release                          : BubbleSfx (000002546D20ABF8)
+[LOG] SoundI::release                          :     BubbleSfx (0000025514099D68)
+[LOG] SoundI::release                          :     BubbleSfx (000002546BABFF38)
+[LOG] SoundI::release                          : BubbleSfx (000002546D20A388)
+[LOG] SoundI::release                          :     BubbleSfx (000002540393E8A8)
+[LOG] SoundI::release                          :     BubbleSfx (000002546BABF368)
+[LOG] SoundI::release                          : BubbleSfx (000002546D20AF58)
+[LOG] SoundI::release                          :     BubbleSfx (000002540393EBE8)
+[LOG] SoundI::release                          :     BubbleSfx (000002546BABF008)
+[LOG] SystemI::createSound                     : filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         : add sound to async queue : soundi = 000002546FA0B4B8, queue head = 000002568E766C38, queue count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002546FA0B4B8
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002535CA64B20
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 000002546FA0AFA8, queue head = 000002568E766C38, queue count = 0
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 000002546FA0A588, queue head = 000002568E766C38, queue count = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 000002546FA0B9C8, queue head = 000002568E766C38, queue count = 2
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 000002546FA0A078, queue head = 000002568E766C38, queue count = 3
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 000002546FA09658, queue head = 000002568E766C38, queue count = 4
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 000002546FA09808, queue head = 000002568E766C38, queue count = 5
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 000002540499BE08, queue head = 000002568E766C38, queue count = 6
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 000002540499B8F8, queue head = 000002568E766C38, queue count = 7
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 000002540499B088, queue head = 000002568E766C38, queue count = 8
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 000002540499D5A8, queue head = 000002568E766C38, queue count = 9
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002546FA0B4B8
+[LOG] SystemI::createSound                     : filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002546FA0AFA8
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 000002540499C678, queue head = 000002568E766C38, queue count = 9
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002535CA658E0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 000002540499CD38, queue head = 000002568E766C38, queue count = 10
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 00000251D4D182D8, queue head = 000002568E766C38, queue count = 11
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 00000251D4D17DC8, queue head = 000002568E766C38, queue count = 12
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002546FA0AFA8
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002546FA0A588
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002535CA63D60
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002546FA0A588
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002546FA0B9C8
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002535CA64DA0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002546FA0B9C8
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002546FA0A078
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002535CA64120
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002546FA0A078
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002546FA09658
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002561DE78230
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002546FA09658
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002546FA09808
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002561DE77D30
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002546FA09808
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002540499BE08
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002561DE780F0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002540499BE08
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002540499B8F8
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002561DE78370
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002540499B8F8
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002540499B088
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002561DE78730
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002540499B088
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002540499D5A8
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002561DE784B0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002540499D5A8
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002540499C678
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002561DE785F0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002540499C678
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002540499CD38
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002561DE78870
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002540499CD38
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000251D4D182D8
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002561DE789B0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000251D4D182D8
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000251D4D17DC8
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002561DE77E70
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000251D4D17DC8
+[LOG] SoundI::release                          : BubbleSfx (00000251D4D17DC8)
+[LOG] SoundI::release                          :     BubbleSfx (000002561DFD4F38)
+[LOG] SoundI::release                          :     BubbleSfx (0000025515DA7728)
+[LOG] SoundI::release                          : BubbleSfx (00000251D4D182D8)
+[LOG] SoundI::release                          :     BubbleSfx (000002561DFD5278)
+[LOG] SoundI::release                          :     BubbleSfx (0000025515DA7068)
+[LOG] SoundI::release                          : BubbleSfx (000002540499CD38)
+[LOG] SoundI::release                          :     BubbleSfx (000002561DFD50D8)
+[LOG] SoundI::release                          :     BubbleSfx (0000025515DA73C8)
+[LOG] SoundI::release                          : BubbleSfx (000002540499C678)
+[LOG] SoundI::release                          :     BubbleSfx (000002561DFC45C8)
+[LOG] SoundI::release                          :     BubbleSfx (0000025515DA7218)
+[LOG] SoundI::release                          : BubbleSfx (000002540499D5A8)
+[LOG] SoundI::release                          :     BubbleSfx (000002561DFC4428)
+[LOG] SoundI::release                          :     BubbleSfx (00000254062C98E8)
+[LOG] SoundI::release                          : BubbleSfx (000002540499B088)
+[LOG] SoundI::release                          :     BubbleSfx (000002561DFC4908)
+[LOG] SoundI::release                          :     BubbleSfx (0000025514F46B88)
+[LOG] SoundI::release                          : BubbleSfx (000002540499B8F8)
+[LOG] SoundI::release                          :     BubbleSfx (000002561DFC4F88)
+[LOG] SoundI::release                          :     BubbleSfx (0000025514F46D38)
+[LOG] SoundI::release                          : BubbleSfx (000002540499BE08)
+[LOG] SoundI::release                          :     BubbleSfx (000002568E7C6B18)
+[LOG] SoundI::release                          :     BubbleSfx (0000025514F47908)
+[LOG] SoundI::release                          : BubbleSfx (000002546FA09808)
+[LOG] SoundI::release                          :     BubbleSfx (000002568E7C6978)
+[LOG] SoundI::release                          :     BubbleSfx (0000025514F473F8)
+[LOG] SoundI::release                          : BubbleSfx (000002546FA09658)
+[LOG] SoundI::release                          :     BubbleSfx (000002568E7C67D8)
+[LOG] SoundI::release                          :     BubbleSfx (0000025514F47758)
+[LOG] SoundI::release                          : BubbleSfx (000002546FA0A078)
+[LOG] SoundI::release                          :     BubbleSfx (000002568E7C7198)
+[LOG] SoundI::release                          :     BubbleSfx (0000025514F46EE8)
+[LOG] SoundI::release                          : BubbleSfx (000002546FA0B9C8)
+[LOG] SoundI::release                          :     BubbleSfx (000002568E7C74D8)
+[LOG] SoundI::release                          :     BubbleSfx (0000025514F47098)
+[LOG] SoundI::release                          : BubbleSfx (000002546FA0A588)
+[LOG] SoundI::release                          :     BubbleSfx (0000025405301858)
+[LOG] SoundI::release                          :     BubbleSfx (0000025629312098)
+[LOG] SoundI::release                          : BubbleSfx (000002546FA0AFA8)
+[LOG] SoundI::release                          :     BubbleSfx (0000025405302218)
+[LOG] SoundI::release                          :     BubbleSfx (0000025629311D38)
+[LOG] SoundI::release                          : BubbleSfx (000002546FA0B4B8)
+[LOG] SoundI::release                          :     BubbleSfx (00000254053016B8)
+[LOG] SoundI::release                          :     BubbleSfx (00000256293119D8)
+[LOG] SystemI::createSound                     : filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         : add sound to async queue : soundi = 0000025513112D78, queue head = 000002568E766C38, queue count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000025513112D78
+[LOG] SystemI::createSound                     : filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 0000025513113288, queue head = 000002568E766C38, queue count = 0
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002546FED4B60
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 00000255131135E8, queue head = 000002568E766C38, queue count = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 0000025513112BC8, queue head = 000002568E766C38, queue count = 2
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 000002546ED41768, queue head = 000002568E766C38, queue count = 3
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 000002546ED41AC8, queue head = 000002568E766C38, queue count = 4
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 000002561DD7A8D8, queue head = 000002568E766C38, queue count = 5
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 000002561DD79EB8, queue head = 000002568E766C38, queue count = 6
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 000002561DD7A218, queue head = 000002568E766C38, queue count = 7
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 000002561DD7A578, queue head = 000002568E766C38, queue count = 8
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 000002551A31F1F8, queue head = 000002568E766C38, queue count = 9
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 000002551A31F8B8, queue head = 000002568E766C38, queue count = 10
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 000002551A31ECE8, queue head = 000002568E766C38, queue count = 11
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 000002551A31F708, queue head = 000002568E766C38, queue count = 12
+[LOG] SystemI::createSound                     :     filename = AbyssalDepthsFMOD/Build/Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         :     add sound to async queue : soundi = 000002551A31EB38, queue head = 000002568E766C38, queue count = 13
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000025513112D78
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000025513113288
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002546FED47A0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000025513113288
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000255131135E8
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002551F77FBE0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000255131135E8
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000025513112BC8
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002568E4C91F0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000025513112BC8
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002546ED41768
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002568E4C8930
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002546ED41768
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002546ED41AC8
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002568E4C8A70
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002546ED41AC8
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002561DD7A8D8
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002568E4C9470
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002561DD7A8D8
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002561DD79EB8
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002568E4C8BB0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002561DD79EB8
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002561DD7A218
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002568E4C8F70
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002561DD7A218
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002561DD7A578
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002568E4C90B0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002561DD7A578
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002551A31F1F8
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002568E4C8CF0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002551A31F1F8
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002551A31F8B8
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002568E4C87F0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002551A31F8B8
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002551A31ECE8
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002568E4C9330
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002551A31ECE8
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002551A31F708
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002568E4C86B0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002551A31F708
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002551A31EB38
+[LOG] SystemI::createSoundInternal             :     Create name='AbyssalDepthsFMOD/Build/Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 6055232
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 96224
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002568E4C8E30
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4700
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='BubbleSfx', format=5, channels=2, frequency=48000, lengthbytes=285984, lengthpcm=959688, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.519470.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002551A31EB38
+[LOG] SoundI::release                          : BubbleSfx (000002551678DBE8)
+[LOG] SoundI::release                          :     BubbleSfx (00000254064EAE78)
+[LOG] SoundI::release                          :     BubbleSfx (0000025515FC43E8)
+[LOG] SoundI::release                          : BubbleSfx (000002551678E2A8)
+[LOG] SoundI::release                          :     BubbleSfx (00000254064E9C98)
+[LOG] SoundI::release                          :     BubbleSfx (0000025515FC5168)
+[LOG] SoundI::release                          : BubbleSfx (0000025516786FE8)
+[LOG] SoundI::release                          :     BubbleSfx (00000254064EC538)
+[LOG] SoundI::release                          :     BubbleSfx (0000025515FC7D48)
+[LOG] SoundI::release                          : BubbleSfx (000002551678A288)
+[LOG] SoundI::release                          :     BubbleSfx (00000254064ECBB8)
+[LOG] SoundI::release                          :     BubbleSfx (0000025515FC7B98)
+[LOG] SoundI::release                          : BubbleSfx (0000025516787A08)
+[LOG] SoundI::release                          :     BubbleSfx (00000254064EA998)
+[LOG] SoundI::release                          :     BubbleSfx (0000025515FC7838)
+[LOG] SoundI::release                          : BubbleSfx (0000025516788FF8)
+[LOG] SoundI::release                          :     BubbleSfx (00000254064EC1F8)
+[LOG] SoundI::release                          :     BubbleSfx (0000025515FC4AA8)
+[LOG] SoundI::release                          : BubbleSfx (000002551678D6D8)
+[LOG] SoundI::release                          :     BubbleSfx (00000254064EB698)
+[LOG] SoundI::release                          :     BubbleSfx (0000025515FC6248)
+[LOG] SoundI::release                          : BubbleSfx (000002551678D378)
+[LOG] SoundI::release                          :     BubbleSfx (00000254064EB4F8)
+[LOG] SoundI::release                          :     BubbleSfx (0000025515FC7178)
+[LOG] SoundI::release                          : BubbleSfx (00000255167885D8)
+[LOG] SoundI::release                          :     BubbleSfx (000002546904C508)
+[LOG] SoundI::release                          :     BubbleSfx (0000025515FC4FB8)
+[LOG] SoundI::release                          : BubbleSfx (0000025516787858)
+[LOG] SoundI::release                          :     BubbleSfx (0000025469048408)
+[LOG] SoundI::release                          :     BubbleSfx (000002540499D3F8)
+[LOG] SoundI::release                          : BubbleSfx (000002551678CCB8)
+[LOG] SoundI::release                          :     BubbleSfx (00000254690480C8)
+[LOG] SoundI::release                          :     BubbleSfx (000002540499D248)
+[LOG] SoundI::release                          : BubbleSfx (0000025516788C98)
+[LOG] SoundI::release                          :     BubbleSfx (0000025469047A48)
+[LOG] SoundI::release                          :     BubbleSfx (000002540499E4D8)
+[LOG] SoundI::release                          : BubbleSfx (000002551678C298)
+[LOG] SoundI::release                          :     BubbleSfx (000002546904BCE8)
+[LOG] SoundI::release                          :     BubbleSfx (000002540499CEE8)
+[LOG] SoundI::release                          : BubbleSfx (000002540499C9D8)
+[LOG] SoundI::release                          :     BubbleSfx (000002546904A968)
+[LOG] SoundI::release                          :     BubbleSfx (000002540499B598)
+[LOG] SoundI::release                          : BubbleSfx (000002540499BAA8)
+[LOG] SoundI::release                          :     BubbleSfx (0000025469047708)
+[LOG] SoundI::release                          :     BubbleSfx (000002540499AED8)
+[LOG] SoundI::release                          :  (000002567F1CF2F8)
+[LOG] SoundI::release                          :     Door 5_1 (000002568E455168)
+[LOG] SoundI::release                          :  (0000025626D24708)
+[LOG] SoundI::release                          :     PEACEFUL_UNDERWATER_Sounds_for_DEEP_SLEEP_Deep_OCEAN_ASMR_Ambience_from0s_to105.889004s (00000254690461E8)
+[LOG] SoundI::release                          :  (0000025626D21A78)
+[LOG] SoundI::release                          :     168910__couchhero__portal_idle (0000025469046868)
+[LOG] SoundI::release                          :  (000002567F1D02C8)
+[LOG] SoundI::release                          :     Door 4_3 (0000025626477018)
+[LOG] SoundI::release                          :  (000002567F1CE778)
+[LOG] SoundI::release                          :     Door 1_6 (0000025626476B38)
+[LOG] SoundI::release                          :  (000002546B475098)
+[LOG] SoundI::release                          :     Projectile_Impact_05 (00000254064EC878)
+[LOG] SoundI::release                          :  (000002546B4702F8)
+[LOG] SoundI::release                          :     Lizard Monster_Raw 1 (000002546904A628)
+[LOG] SoundI::release                          :  (000002546B46F328)
+[LOG] SoundI::release                          :     Bloody stabs 1 (000002546904AE48)
+[LOG] SoundI::release                          :  (000002546B4705D8)
+[LOG] SoundI::release                          :     Bloody stabs 10 (000002546904A488)
+[LOG] SoundI::release                          :  (000002546B46E358)
+[LOG] SoundI::release                          :     Bloody stabs 2 (000002546904AB08)
+[LOG] SoundI::release                          :  (000002546B46E918)
+[LOG] SoundI::release                          :     Bloody stabs 3 (000002546904B4C8)
+[LOG] SoundI::release                          :  (000002546B46FBC8)
+[LOG] SoundI::release                          :     Bloody stabs 4 (0000025469046D48)
+[LOG] SoundI::release                          : BubbleSfx (000002561D48E588)
+[LOG] SoundI::release                          :     BubbleSfx (00000254053023B8)
+[LOG] SoundI::release                          :     BubbleSfx (0000025629311B88)
+[LOG] SoundI::release                          : BubbleSfx (000002551A31EB38)
+[LOG] SoundI::release                          :     BubbleSfx (000002568E7C74D8)
+[LOG] SoundI::release                          :     BubbleSfx (000002567EB45308)
+[LOG] SoundI::release                          : BubbleSfx (000002561D48EA98)
+[LOG] SoundI::release                          :     BubbleSfx (000002561DE8B708)
+[LOG] SoundI::release                          :     BubbleSfx (0000025629311678)
+[LOG] SoundI::release                          : BubbleSfx (000002551A31F708)
+[LOG] SoundI::release                          :     BubbleSfx (000002561DFB5CA8)
+[LOG] SoundI::release                          :     BubbleSfx (000002567EB45158)
+[LOG] SoundI::release                          : BubbleSfx (000002551A28A238)
+[LOG] SoundI::release                          :     BubbleSfx (000002561DE8BD88)
+[LOG] SoundI::release                          :     BubbleSfx (00000256293114C8)
+[LOG] SoundI::release                          : BubbleSfx (000002551A31ECE8)
+[LOG] SoundI::release                          :     BubbleSfx (000002561DFB57C8)
+[LOG] SoundI::release                          :     BubbleSfx (000002567EB44C48)
+[LOG] SoundI::release                          : BubbleSfx (000002551A28AE08)
+[LOG] SoundI::release                          :     BubbleSfx (000002561DE8B568)
+[LOG] SoundI::release                          :     BubbleSfx (000002568E3EE6C8)
+[LOG] SoundI::release                          : BubbleSfx (000002551A31F8B8)
+[LOG] SoundI::release                          :     BubbleSfx (000002561DFB52E8)
+[LOG] SoundI::release                          :     BubbleSfx (000002567EB44FA8)
+[LOG] SoundI::release                          : BubbleSfx (000002551A28A8F8)
+[LOG] SoundI::release                          :     BubbleSfx (000002561DE8BBE8)
+[LOG] SoundI::release                          :     BubbleSfx (000002568E3EE518)
+[LOG] SoundI::release                          : BubbleSfx (000002551A31F1F8)
+[LOG] SoundI::release                          :     BubbleSfx (000002561DFB5968)
+[LOG] SoundI::release                          :     BubbleSfx (000002567EB43EC8)
+[LOG] SoundI::release                          : BubbleSfx (000002551A28A748)
+[LOG] SoundI::release                          :     BubbleSfx (000002567EB2FEE8)
+[LOG] SoundI::release                          :     BubbleSfx (000002568E3EE1B8)
+[LOG] SoundI::release                          : BubbleSfx (000002561DD7A578)
+[LOG] SoundI::release                          :     BubbleSfx (000002561DFB5FE8)
+[LOG] SoundI::release                          :     BubbleSfx (000002567EB44078)
+[LOG] SoundI::release                          : BubbleSfx (000002551A28A598)
+[LOG] SoundI::release                          :     BubbleSfx (000002567EB2FBA8)
+[LOG] SoundI::release                          :     BubbleSfx (000002568E3EE008)
+[LOG] SoundI::release                          : BubbleSfx (000002561DD7A218)
+[LOG] SoundI::release                          :     BubbleSfx (00000255157549A8)
+[LOG] SoundI::release                          :     BubbleSfx (000002567EB439B8)
+[LOG] SoundI::release                          : BubbleSfx (000002568E76D118)
+[LOG] SoundI::release                          :     BubbleSfx (000002567EB2F528)
+[LOG] SoundI::release                          :     BubbleSfx (000002568E3EDE58)
+[LOG] SoundI::release                          : BubbleSfx (000002561DD79EB8)
+[LOG] SoundI::release                          :     BubbleSfx (0000025515754808)
+[LOG] SoundI::release                          :     BubbleSfx (000002567EB44738)
+[LOG] SoundI::release                          : BubbleSfx (000002568E76D478)
+[LOG] SoundI::release                          :     BubbleSfx (000002567EB2F868)
+[LOG] SoundI::release                          :     BubbleSfx (000002568E3EDCA8)
+[LOG] SoundI::release                          : BubbleSfx (000002561DD7A8D8)
+[LOG] SoundI::release                          :     BubbleSfx (0000025515754188)
+[LOG] SoundI::release                          :     BubbleSfx (000002567EB443D8)
+[LOG] SoundI::release                          : BubbleSfx (000002568E76CA58)
+[LOG] SoundI::release                          :     BubbleSfx (000002567EB30088)
+[LOG] SoundI::release                          :     BubbleSfx (000002568E3EE878)
+[LOG] SoundI::release                          : BubbleSfx (000002546ED41AC8)
+[LOG] SoundI::release                          :     BubbleSfx (0000025515754668)
+[LOG] SoundI::release                          :     BubbleSfx (000002546FDCBFB8)
+[LOG] SoundI::release                          : BubbleSfx (000002546ED41768)
+[LOG] SoundI::release                          :     BubbleSfx (000002540393ED88)
+[LOG] SoundI::release                          :     BubbleSfx (000002546FDCBAA8)
+[LOG] SoundI::release                          : BubbleSfx (0000025513112BC8)
+[LOG] SoundI::release                          :     BubbleSfx (000002540393E228)
+[LOG] SoundI::release                          :     BubbleSfx (000002546BABF518)
+[LOG] SoundI::release                          : BubbleSfx (00000255131135E8)
+[LOG] SoundI::release                          :     BubbleSfx (000002540393E8A8)
+[LOG] SoundI::release                          :     BubbleSfx (000002546BABFF38)
+[LOG] SoundI::release                          : BubbleSfx (0000025513113288)
+[LOG] SoundI::release                          :     BubbleSfx (0000025514099BC8)
+[LOG] SoundI::release                          :     BubbleSfx (000002546BABF368)
+[LOG] SoundI::release                          : BubbleSfx (0000025513112D78)
+[LOG] SoundI::release                          :     BubbleSfx (00000255140996E8)
+[LOG] SoundI::release                          :     BubbleSfx (000002546BABF008)
+[LOG] SoundI::release                          :  (000002546B473828)
+[LOG] SoundI::release                          :     Bloody stabs 5 (0000025469049FA8)
+[LOG] SoundI::release                          :  (000002546B472E18)
+[LOG] SoundI::release                          :     Bloody stabs 6 (0000025469046EE8)
+[LOG] SoundI::release                          :  (000002546B4730F8)
+[LOG] SoundI::release                          :     Bloody stabs 7 (000002546904AFE8)
+[LOG] SoundI::release                          :  (000002546B46F048)
+[LOG] SoundI::release                          :     Bloody stabs 8 (000002546904A2E8)
+[LOG] SoundI::release                          :  (000002546B4719F8)
+[LOG] SoundI::release                          :     Bloody stabs 9 (000002546904B188)
+[LOG] SoundI::release                          :  (000002546B46F8E8)
+[LOG] SoundI::release                          :     Healing 17 (0000025469048F68)
+[LOG] SoundI::release                          :  (0000025626D238A8)
+[LOG] SoundI::release                          :     Spell - Electric Hand 2 (0000025469046388)
+[LOG] SoundI::release                          :  (0000025626D25288)
+[LOG] SoundI::release                          :     TOOL_Impact_Wrench_Comperssed_Air_Short_Burst_No_Resistance_03_stereo (0000025469046528)
+[LOG] SoundI::release                          :  (0000025626D22D28)
+[LOG] SoundI::release                          :     Engine 5 Loop (00000254690488E8)
+[LOG] Thread::callback                         : FMOD Studio update thread finished.
+[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
+[LOG] LiveUpdate::release                      : 
+[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
+[LOG] Thread::callback                         : FMOD stream thread finished.
+[LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] SystemI::close                           : Closed.
 [LOG] Thread::callback                         : FMOD Studio bank load thread finished.
 [LOG] Thread::callback                         : FMOD Studio sample load thread finished.
 [LOG] LiveUpdate::release                      : 
@@ -25,3 +1662,5 @@
 [LOG] Thread::callback                         : FMOD stream thread finished.
 [LOG] Thread::callback                         : FMOD mixer thread finished.
 [LOG] SystemI::close                           : Closed.
+[LOG] Thread::callback                         : FMOD nonblocking thread (0) finished.
+[LOG] Thread::callback                         : FMOD file thread finished.

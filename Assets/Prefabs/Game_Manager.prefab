@@ -31,6 +31,8 @@ Transform:
   m_Children:
   - {fileID: 943234502}
   - {fileID: 1655414117}
+  - {fileID: 81344061858066811}
+  - {fileID: 7859780143120994389}
   m_Father: {fileID: 3852162812249718934}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -46,9 +48,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13dcbbe33eb05944698abcf4d736beba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemySpawnTransforms:
-  - {fileID: 943234502}
-  - {fileID: 1655414117}
+  EnemySpawnPositionPerNight:
+  - EnemySpawnPosition:
+    - {fileID: 943234502}
+    - {fileID: 1655414117}
 --- !u!1 &416173609
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,7 +296,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 943234501}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -97.5, y: 0, z: 0}
+  m_LocalPosition: {x: -731.4, y: -26.09, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -418,7 +421,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1655414116}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 104.1, y: 0, z: 0}
+  m_LocalPosition: {x: -95, y: -24.58, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -522,6 +525,37 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &101934359012590589
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7859780143120994389}
+  m_Layer: 0
+  m_Name: EnemyTransfom1 (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7859780143120994389
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 101934359012590589}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -154.8, y: -189.6, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 409205976}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &382997869959518624
 GameObject:
   m_ObjectHideFlags: 0
@@ -15265,6 +15299,37 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!1 &2980796223481927103
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 81344061858066811}
+  m_Layer: 0
+  m_Name: EnemyTransfom (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &81344061858066811
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2980796223481927103}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -582.1, y: -237.4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 409205976}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3852162812249718933
 GameObject:
   m_ObjectHideFlags: 0
@@ -15316,7 +15381,7 @@ Transform:
   - {fileID: 1957963999228688441}
   - {fileID: 409205976}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1470298975805987252
 MonoBehaviour:
@@ -15804,9 +15869,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _directionalLights: []
-  _howLongTheDayLast: 30
-  _nightWarningTime: 20
-  _howLongTheNightLast: 20
+  _howLongTheDayLast: 20
+  _nightWarningTime: 10
+  _howLongTheNightLast: 15
   _night: 6
   _lowFogDensity: 0.01
   _highFogDensity: 0.03
@@ -15827,12 +15892,12 @@ MonoBehaviour:
   _basePartLocations:
   - TurretLocations:
     - {fileID: 0}
-    ForgeLocations: []
-    GateLocations: []
-  - TurretLocations:
     - {fileID: 0}
-    ForgeLocations: []
-    GateLocations: []
+    ForgeLocations:
+    - {fileID: 0}
+    GateLocations:
+    - {fileID: 0}
+    - {fileID: 0}
 --- !u!114 &4738006863710148220
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -49,7 +49,7 @@ public class DepthManager : MonoBehaviour
         int depth = (int)Mathf.Abs(Ship.Instance.transform.position.y) - seaLevel;
         _currentDepth = depth;
 
-        DayNightManager.Instance.BrightnessLerpByShipDepth(Mathf.Abs(_currentDepth), Mathf.Abs(_seaAbyssDepth - _surfaceLevelDepth));
+        //DayNightManager.Instance.BrightnessLerpByShipDepth(Mathf.Abs(_currentDepth), Mathf.Abs(_seaAbyssDepth - _surfaceLevelDepth));
     }
 
     private void OnGUI()

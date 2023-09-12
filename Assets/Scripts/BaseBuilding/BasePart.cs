@@ -1,10 +1,6 @@
 using FMOD.Studio;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using static Codice.Client.Common.WebApi.WebApiEndpoints;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class BasePart : MonoBehaviour

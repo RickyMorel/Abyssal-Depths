@@ -466,6 +466,9 @@ public class Damageable : MonoBehaviour
         {
             this._renderer = renderer;
 
+
+            if (!renderer.material.HasColor("_EmissionColor")) { return; }
+
             _originalColor = renderer.material.GetColor("_EmissionColor");
 
             if(_originalColor == null)

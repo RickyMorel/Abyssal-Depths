@@ -39,7 +39,11 @@ public class BuildingMovement : MonoBehaviour
 
         GameAudioManager.Instance.PlaySound(GameAudioManager.Instance.TransformToBasePart, transform.position);
 
-        yield return new WaitForSeconds(1f);
+        ParticleSystem buildingSmokeParticle = Instantiate(GameAssetsManager.Instance.BuildingSmokeParticle, transform).GetComponent<ParticleSystem>();
+        buildingSmokeParticle.Play();
+        buildingSmokeParticle.transform.SetParent(null);
+
+        yield return new WaitForSeconds(3f);
 
         BasePart basePart = Instantiate(GameAssetsManager.Instance.BasePart).GetComponent<BasePart>();
         basePart.Initialize(gameObject, _basePartType);

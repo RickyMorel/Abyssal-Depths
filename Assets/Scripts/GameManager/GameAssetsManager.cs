@@ -29,6 +29,7 @@ public class GameAssetsManager : MonoBehaviour
     [SerializeField] private GameObject _minableHitDefault;
     [SerializeField] private GameObject _shootBubbleParticles;
     [SerializeField] private GameObject[] _stunnedParticles;
+    [SerializeField] private GameObject _buildingSmokeParticle;
     [ColorUsageAttribute(false, true), SerializeField] private Color _laserHeatColor;
 
     [Header("Scriptable Objects")]
@@ -65,6 +66,7 @@ public class GameAssetsManager : MonoBehaviour
     public GameObject MinableHitDefault => _minableHitDefault;
     public GameObject ShootBubbleParticles => _shootBubbleParticles;
     public GameObject[] StunnedParticles => _stunnedParticles;
+    public GameObject BuildingSmokeParticle => _buildingSmokeParticle;
     public Color LaserHeatColor => _laserHeatColor;
     public ChipDataSO ChipDataSO => _chipDataSO;
     public EnemyDamageDataSO EnemyDamageDataSO => _enemyDamageDataSOInstance;

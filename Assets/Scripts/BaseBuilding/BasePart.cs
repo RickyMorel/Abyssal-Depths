@@ -1,4 +1,5 @@
 using FMOD.Studio;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -38,11 +39,7 @@ public class BasePart : MonoBehaviour
 
         if (_agent.hasPath || _agent.velocity.sqrMagnitude != 0f) { return; }
 
-        _baseObj.transform.position = _currentLocationTransform.transform.position;
-        _baseObj.transform.rotation = _currentLocationTransform.transform.rotation;
-        _baseObj.gameObject.SetActive(true);
-
-        Destroy(gameObject); 
+        StartCoroutine(TransformToBaseObject());
     }
 
     private void OnDestroy()
@@ -81,5 +78,20 @@ public class BasePart : MonoBehaviour
         _currentLocationTransform = BasePartsManager.Instance.GetLocation(_partType);
 
         _agent.SetDestination(_currentLocationTransform.position);
+    }
+
+    private IEnumerator TransformToBaseObject()
+    {
+        ParticleSystem buildingSmokeParticle = Instantiate(GameAssetsManager.Instance.BuildingSmokeParticle, transform).GetComponent<ParticleSystem>();
+        buildingSmokeParticle.Play();
+        buildingSmokeParticle.transform.SetParent(null);
+
+        yield return new WaitForSeconds(3);
+
+        _baseObj.transform.position = _currentLocationTransform.transform.position;
+        _baseObj.transform.rotation = _currentLocationTransform.transform.rotation;
+        _baseObj.gameObject.SetActive(true);
+
+        Destroy(gameObject);
     }
 }

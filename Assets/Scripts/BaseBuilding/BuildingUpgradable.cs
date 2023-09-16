@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -99,6 +100,18 @@ public class BuildingUpgradable : BuildingInteractable
         BuildingUpgradeUI.Instance.LoadInventoryIngredients();
 
         if (!CraftingManager.CanCraft(wantedRecipe)) { return; }
+
+        StartCoroutine(CraftUpgrade(wantedRecipe));
+    }
+
+    private IEnumerator CraftUpgrade(CraftingRecipy wantedRecipe)
+    {
+        GetComponent<Outline>().enabled = false;
+
+        ParticleSystem buildingSmokeParticle = Instantiate(GameAssetsManager.Instance.BuildingSmokeParticle, transform).GetComponent<ParticleSystem>();
+        buildingSmokeParticle.Play();
+
+        yield return new WaitForSeconds(3);
 
         MainInventory.Instance.RemoveItems(wantedRecipe.CraftingIngredients);
 

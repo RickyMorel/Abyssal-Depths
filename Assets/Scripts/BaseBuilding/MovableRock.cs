@@ -9,6 +9,7 @@ public class MovableRock : MonoBehaviour
 {
     #region EditorFields
 
+    [SerializeField] private ParticleSystem _drillingParticles;
     [SerializeField] private GameObject _rockExplosionFxPrefab;
     [SerializeField] private GameObject _rockMesh;
 
@@ -33,9 +34,12 @@ public class MovableRock : MonoBehaviour
     {
         if (!other.gameObject.GetComponent<Drill>()) { return; }
 
+        Debug.Log("OnTriggerEnter: Drill");
+
         _drill = other.gameObject.GetComponent<Drill>();
 
         transform.SetParent(_drill.transform);
+        _drillingParticles.Play();
         _drill.OnDestroyCurrentRock += DestroyThisRock;
     }
 
@@ -54,6 +58,8 @@ public class MovableRock : MonoBehaviour
 
     private void DestroyFx()
     {
+        _drillingParticles.Stop();
+
         _rockMesh.GetComponent<PlayableDirector>().Play();
 
         if (_timer >= 1) { _rockExplosionFxPrefab.GetComponent<ParticleSystem>().Play(); Destroy(gameObject); }

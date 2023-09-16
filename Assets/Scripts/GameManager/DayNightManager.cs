@@ -19,8 +19,6 @@ public class DayNightManager : MonoBehaviour
     [Tooltip("This is measured in seconds")]
     [SerializeField] private int _howLongTheNightLast = 6;
     [SerializeField] private int _night = 6;
-    [SerializeField] private float _lowFogDensity = 0.01f;
-    [SerializeField] private float _highFogDensity = 0.03f;
     [Tooltip("Lower this value to increase transition time")]
     [SerializeField] private float _fogTransitionSpeed = 1;
     [SerializeField] private DayNightSO _dayNightSO;
@@ -39,6 +37,7 @@ public class DayNightManager : MonoBehaviour
     private List<float> _lightsOriginalIntensity = new List<float>();
     private List<ParticleSystem> _gameObjectsToDeactivateAtNight = new List<ParticleSystem>();
     private DayNightTime _currentTime;
+    [SerializeField] private DayNightSO _currentDayNightSO;
 
     #endregion
 
@@ -68,6 +67,8 @@ public class DayNightManager : MonoBehaviour
         {
             _instance = this;
         }
+
+        _currentDayNightSO = _dayNightSO;
     }
 
     private void Start()
@@ -93,8 +94,19 @@ public class DayNightManager : MonoBehaviour
     {
         if (_activateTimer) { BrightnessLerps(); }
 
-        if (Input.GetKeyDown(KeyCode.L)) { Time.timeScale = 8f; }
-        if (Input.GetKeyDown(KeyCode.J)) { Time.timeScale = 1f; }
+        if (Input.GetKeyDown(KeyCode.L)) 
+        {
+            if (IsNightTime)
+            {
+                DayEffectsTransition();
+            }
+            else
+            {
+                NightEffectsTransition();
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.J)) { Time.timeScale = 20f; }
     }
 
     #endregion
@@ -128,6 +140,8 @@ public class DayNightManager : MonoBehaviour
 
     private void DayNightCycle()
     {
+        Time.timeScale = 1f;
+
         if (_isNightTime)
         {
             Invoke(nameof(DayEffectsTransition), _howLongTheNightLast);
@@ -186,13 +200,13 @@ public class DayNightManager : MonoBehaviour
     private void SetLightColors(float depthRatio = 0f)
     {
         float ratio = _universalTimer;
-        List<Color> color_1 = _isNightTime ? new List<Color>(_dayNightSO.DayLightColors) : new List<Color>(_dayNightSO.NightLightColors);
-        List<Color> color_2 = _isNightTime ? new List<Color>(_dayNightSO.NightLightColors) : new List<Color>(_dayNightSO.DayLightColors);
+        List<Color> color_1 = _isNightTime ? new List<Color>(_currentDayNightSO.DayLightColors) : new List<Color>(_currentDayNightSO.NightLightColors);
+        List<Color> color_2 = _isNightTime ? new List<Color>(_currentDayNightSO.NightLightColors) : new List<Color>(_currentDayNightSO.DayLightColors);
 
         if (depthRatio != 0f)
         {
-            color_1 = new List<Color>(_dayNightSO.DayLightColors);
-            color_2 = new List<Color>(_dayNightSO.NightLightColors);
+            color_1 = new List<Color>(_currentDayNightSO.DayLightColors);
+            color_2 = new List<Color>(_currentDayNightSO.NightLightColors);
             ratio = depthRatio;
         }
 
@@ -211,7 +225,7 @@ public class DayNightManager : MonoBehaviour
 
         if (_isNightTime)
         {
-            RenderSettings.fogDensity = Mathf.Lerp(_lowFogDensity, _highFogDensity, _universalTimer);
+            RenderSettings.fogDensity = Mathf.Lerp(_currentDayNightSO.LowFogDensity, _currentDayNightSO.HighFogDensity, _universalTimer);
             for (int i = 0; i < _lights.Count; i++)
             {
                 _lights[i].intensity = Mathf.Lerp(_lightsOriginalIntensity[i], 0, _universalTimer);
@@ -220,7 +234,7 @@ public class DayNightManager : MonoBehaviour
         }
         else
         {
-            RenderSettings.fogDensity = Mathf.Lerp(_highFogDensity, _lowFogDensity, _universalTimer);
+            RenderSettings.fogDensity = Mathf.Lerp(_currentDayNightSO.HighFogDensity, _currentDayNightSO.LowFogDensity, _universalTimer);
             for (int i = 0; i < _lights.Count; i++)
             {
                 _lights[i].intensity = Mathf.Lerp(0, _lightsOriginalIntensity[i], _universalTimer);
@@ -234,7 +248,7 @@ public class DayNightManager : MonoBehaviour
     {
         float depthRatio = currentDepth / maxDepth;
 
-        RenderSettings.fogDensity = Mathf.Lerp(_lowFogDensity, _highFogDensity, depthRatio);
+        RenderSettings.fogDensity = Mathf.Lerp(_currentDayNightSO.LowFogDensity, _currentDayNightSO.HighFogDensity, depthRatio);
 
         Debug.Log($"BrightnessLerpByShipDepth: {currentDepth} ; {maxDepth} ; fogDensity: {RenderSettings.fogDensity}");
 
@@ -244,6 +258,20 @@ public class DayNightManager : MonoBehaviour
         }
 
         SetLightColors(depthRatio);
+    }
+
+    public void BrightnessLerpByBiome(DayNightSO biomeDayNightSO)
+    {
+        _currentDayNightSO = biomeDayNightSO;
+
+        EnableFogEffect();
+    }
+
+    public void ResetBiome()
+    {
+        _currentDayNightSO = _dayNightSO;
+
+        EnableFogEffect();
     }
 
     public enum DayNightTime { DayTime, AboutToBeNight, NightTime }

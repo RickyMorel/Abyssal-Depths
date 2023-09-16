@@ -105,6 +105,8 @@ public class DayNightManager : MonoBehaviour
                 NightEffectsTransition();
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.J)) { Time.timeScale = 20f; }
     }
 
     #endregion
@@ -138,6 +140,8 @@ public class DayNightManager : MonoBehaviour
 
     private void DayNightCycle()
     {
+        Time.timeScale = 1f;
+
         if (_isNightTime)
         {
             Invoke(nameof(DayEffectsTransition), _howLongTheNightLast);

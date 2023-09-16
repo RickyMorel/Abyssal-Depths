@@ -7,6 +7,8 @@ public class DayNightSO : ScriptableObject
 {
     public List<Color> DayLightColors = new List<Color>();
     public List<Color> NightLightColors = new List<Color>();
+    public float LowFogDensity;
+    public float HighFogDensity;
 
     public void SetLightColors(Light dirLight_1, Light dirLight_2, Light dirLight_3, bool IsNight)
     {

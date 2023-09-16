@@ -67,6 +67,8 @@ public class DayNightManager : MonoBehaviour
         {
             _instance = this;
         }
+
+        _currentDayNightSO = _dayNightSO;
     }
 
     private void Start()
@@ -92,8 +94,17 @@ public class DayNightManager : MonoBehaviour
     {
         if (_activateTimer) { BrightnessLerps(); }
 
-        if (Input.GetKeyDown(KeyCode.L)) { Time.timeScale = 8f; }
-        if (Input.GetKeyDown(KeyCode.J)) { Time.timeScale = 1f; }
+        if (Input.GetKeyDown(KeyCode.L)) 
+        {
+            if (IsNightTime)
+            {
+                DayEffectsTransition();
+            }
+            else
+            {
+                NightEffectsTransition();
+            }
+        }
     }
 
     #endregion

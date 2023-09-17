@@ -52,6 +52,9 @@ MonoBehaviour:
   - EnemySpawnPosition:
     - {fileID: 943234502}
     - {fileID: 1655414117}
+  - EnemySpawnPosition:
+    - {fileID: 81344061858066811}
+    - {fileID: 7859780143120994389}
 --- !u!1 &416173609
 GameObject:
   m_ObjectHideFlags: 0
@@ -296,7 +299,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 943234501}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -731.4, y: -26.09, z: 0}
+  m_LocalPosition: {x: -812.94, y: -22.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -421,7 +424,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1655414116}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -95, y: -24.58, z: 0}
+  m_LocalPosition: {x: -34.5, y: -31.44, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -549,7 +552,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 101934359012590589}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -154.8, y: -189.6, z: 0}
+  m_LocalPosition: {x: -154.8, y: -198.46, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15323,7 +15326,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2980796223481927103}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -582.1, y: -237.4, z: 0}
+  m_LocalPosition: {x: -482.9, y: -191.79, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15381,7 +15384,7 @@ Transform:
   - {fileID: 1957963999228688441}
   - {fileID: 409205976}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1470298975805987252
 MonoBehaviour:
@@ -15482,6 +15485,7 @@ MonoBehaviour:
   _stunnedParticles:
   - {fileID: 1334071670866236, guid: edf12e91890b8434eb8ea701f9bc40a2, type: 3}
   - {fileID: 1380238739168988, guid: e35f4911d07c78949bd6fcee2e707765, type: 3}
+  _buildingSmokeParticle: {fileID: 1095787749935704, guid: cc606b05b54463b41bd3f1744812102d, type: 3}
   _laserHeatColor: {r: 3.8580287, g: 0.05095489, b: 0.05095489, a: 0}
   _chipDataSO: {fileID: 11400000, guid: 96b9c6d13f586074a82a619b98aae03e, type: 2}
   _enemyDamageDataSOPrefab: {fileID: 11400000, guid: cfa562578269423438edac810d636dc0, type: 2}
@@ -15873,10 +15877,9 @@ MonoBehaviour:
   _nightWarningTime: 10
   _howLongTheNightLast: 15
   _night: 6
-  _lowFogDensity: 0.01
-  _highFogDensity: 0.03
   _fogTransitionSpeed: 0.1
   _dayNightSO: {fileID: 11400000, guid: 2086c78e2f48074439048e136374b9b6, type: 2}
+  _currentDayNightSO: {fileID: 0}
 --- !u!114 &7501770022225182219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15911,7 +15914,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _surfaceLevelDepth: -350
-  _seaAbyssDepth: -1000
+  _seaAbyssDepth: -4000
 --- !u!1 &3852162812439959518
 GameObject:
   m_ObjectHideFlags: 0
@@ -18527,6 +18530,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 469811261699334686, guid: cfab57151a7cda643b55453339523b08, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 815972547739239508, guid: cfab57151a7cda643b55453339523b08, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 839690850106892566, guid: cfab57151a7cda643b55453339523b08, type: 3}

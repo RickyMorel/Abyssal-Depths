@@ -86,6 +86,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void Update()
     {
+        IsPlayerActive = true;
         Move();
         Jump();
         Confirm();
@@ -171,15 +172,17 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (!_player.GetButtonDown("Jump")) { return; }
 
+        Debug.Log("Jump!: " + _player);
+
         if (CanPlayerSpawn)
         {
             OnTrySpawn?.Invoke(this);
         }
 
-        else if (IsPlayerActive)
-        {
-            OnJump?.Invoke();
-        }
+        //  else if (IsPlayerActive)
+        //  {
+        OnJump?.Invoke();
+       // }
     }
 
     public void Confirm()

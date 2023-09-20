@@ -75,9 +75,9 @@ public class Upgradable : Interactable
         if (wantedHealth > 0) { _health.FixInteractable(false); }
     }
 
-    public void RemoveUpgrades()
+    public void RemoveUpgrades(bool spawnPickups = true)
     {
-        InstantiateChipPickups();
+        if (spawnPickups) { InstantiateChipPickups(); }
 
         if (_humbleUpgradable.RemoveUpgrades() == false) { return; }
 

@@ -187,6 +187,7 @@ public class ShipCamera : BaseCamera
 
     public void ChangeZoom()
     {
+        Debug.Log("ChangeZoom");
         _currentZoomDistanceIndex++;
 
         if(_currentZoomDistanceIndex > _zoomDistancesArray.Length - 1) { _currentZoomDistanceIndex = 0; }

@@ -123,6 +123,8 @@ public class WeaponShoot : MonoBehaviour
 
     public void PlayShootFX()
     {
+		if (_shootTransforms.Count < 1) { return; }
+
         WeaponFX.PlayShootFX(this, _shootTransforms[0], _turretHead, _timeBetweenShots, _originalWeaponHeadPosition, _projectileShellPrefab, _shootingSfx, _shootBubbleParticles);
 
         //if (_shootBubbleParticles != null) { _shootBubbleParticles.Play(); }

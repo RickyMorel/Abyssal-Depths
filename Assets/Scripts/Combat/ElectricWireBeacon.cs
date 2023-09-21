@@ -33,6 +33,6 @@ public class ElectricWireBeacon : Projectile
             return; 
         }
 
-        if(Rb.velocity.magnitude < 3f) { Rb.isKinematic = true; }
+      //  if(Rb.velocity.magnitude < 3f) { Rb.isKinematic = true; }
     }
 }

@@ -231,7 +231,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5087046893464569124}
-  m_Layer: 26
+  m_Layer: 25
   m_Name: HarpoonVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -959,6 +959,9 @@ MonoBehaviour:
   _harpoonCollider: {fileID: 2412982502216605696}
   _grappleSpeed: 4000
   _maxElectricBeaconDistance: 30
+  _collisionLayers:
+    serializedVersion: 2
+    m_Bits: 65601
   _trackEnemiesZone: {fileID: 5294540007985942012}
   _electructionZonePrefab: {fileID: 1306905336849389043, guid: 1ea2a4d60501ff5499a6bf141faf054a, type: 3}
   _electricWireBeaconPrefab: {fileID: 7746866216529117493, guid: 670fbdf495ba7f5439faf8e0c27272f7, type: 3}
@@ -1167,9 +1170,9 @@ GameObject:
   - component: {fileID: 8030778638241805277}
   - component: {fileID: 4332175771043188135}
   - component: {fileID: 2343371034734874906}
-  m_Layer: 25
+  m_Layer: 21
   m_Name: DamageDetectionTrigger
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2990,7 +2993,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2888934743135333237}
-  m_Layer: 26
+  m_Layer: 25
   m_Name: BendPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5835,7 +5838,7 @@ GameObject:
   - component: {fileID: 2278509194196778140}
   - component: {fileID: 4459330080047979800}
   - component: {fileID: 253313336085726348}
-  m_Layer: 26
+  m_Layer: 25
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5936,7 +5939,7 @@ SpringJoint:
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 1.0336025, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.206721, y: 0.20000592, z: -0.000000047683717}
+  m_ConnectedAnchor: {x: -0.2067211, y: 0.20000772, z: 0}
   serializedVersion: 2
   m_Spring: 10
   m_Damper: 0.2
@@ -6159,8 +6162,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.22353408, y: 0.66467726, z: 0.5}
-  m_Center: {x: 0.000000050944365, y: 0.5050333, z: -0.00000001983222}
+  m_Size: {x: 0.22353408, y: 0.83001864, z: 0.5}
+  m_Center: {x: 0.00000008259961, y: 0.5928958, z: -0.0000006976632}
 --- !u!54 &3660345452368755846
 Rigidbody:
   m_ObjectHideFlags: 0

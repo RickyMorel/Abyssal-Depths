@@ -48,6 +48,7 @@ public class DayNightManager : MonoBehaviour
     public int HowLongTheNightLast => _howLongTheNightLast;
     public int NightWarningTime => _nightWarningTime;
     public bool IsNightTime => _isNightTime;
+    public bool ActivateTimer => _activateTimer;
     public int DayCount => _dayCount;
     public DayNightTime CurrentTime => _currentTime;
     public event Action OnCycleChange;
@@ -88,25 +89,6 @@ public class DayNightManager : MonoBehaviour
     private void OnDisable()
     {
         OnCycleChange -= DayNightCycle;
-    }
-
-    private void Update()
-    {
-        if (_activateTimer) { BrightnessLerps(); }
-
-        if (Input.GetKeyDown(KeyCode.L)) 
-        {
-            if (IsNightTime)
-            {
-                DayEffectsTransition();
-            }
-            else
-            {
-                NightEffectsTransition();
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.J)) { Time.timeScale = 20f; }
     }
 
     #endregion
@@ -159,7 +141,7 @@ public class DayNightManager : MonoBehaviour
         OnNightComingWarning?.Invoke();
     }
 
-    private void DayEffectsTransition()
+    public void DayEffectsTransition()
     {
         _isNightTime = false;
         _currentTime = DayNightTime.DayTime;
@@ -167,7 +149,7 @@ public class DayNightManager : MonoBehaviour
         EnableFogEffect();
     }
 
-    private void NightEffectsTransition()
+    public void NightEffectsTransition()
     {
         _isNightTime = true;
         _currentTime = DayNightTime.NightTime;
@@ -217,7 +199,7 @@ public class DayNightManager : MonoBehaviour
         RenderSettings.fogColor = Color.Lerp(color_1[3], color_2[3], ratio);
     }
 
-    private void BrightnessLerps()
+    public void BrightnessLerps()
     {
         _universalTimer += Time.deltaTime * _fogTransitionSpeed;
 

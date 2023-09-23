@@ -22,6 +22,12 @@ public class DevHacks : MonoBehaviour
 
     private void Update()
     {
+        DayNightHacks();
+        UpgradeHacks();
+    }
+
+    private void UpgradeHacks()
+    {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             RemoveUpgrades();
@@ -50,6 +56,25 @@ public class DevHacks : MonoBehaviour
             _shipWeapons[0].TryUpgrade(_baseChipMK1, null);
             _shipWeapons[1].TryUpgrade(_electricChipMK1, null);
         }
+    }
+
+    private void DayNightHacks()
+    {
+        if (DayNightManager.Instance.ActivateTimer) { DayNightManager.Instance.BrightnessLerps(); }
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            if (DayNightManager.Instance.IsNightTime)
+            {
+                DayNightManager.Instance.DayEffectsTransition();
+            }
+            else
+            {
+                DayNightManager.Instance.NightEffectsTransition();
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.J)) { Time.timeScale = 20f; }
     }
 
     private void RemoveUpgrades()

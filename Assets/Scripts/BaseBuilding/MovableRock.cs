@@ -34,13 +34,19 @@ public class MovableRock : MonoBehaviour
     {
         if (!other.gameObject.GetComponent<Drill>()) { return; }
 
-        Debug.Log("OnTriggerEnter: Drill");
+        Debug.Log("OnTriggerEnter: Drill: " + other.gameObject.name);
 
         _drill = other.gameObject.GetComponent<Drill>();
 
         transform.SetParent(_drill.transform);
-        _drillingParticles.Play();
         _drill.OnDestroyCurrentRock += DestroyThisRock;
+    }
+
+    public void PlayDrillParticles(Collider other)
+    {
+        if (!other.gameObject.GetComponent<Drill>()) { return; }
+
+        _drillingParticles.Play();
     }
 
     #endregion
@@ -51,9 +57,7 @@ public class MovableRock : MonoBehaviour
 
         _rockExplosionFxPrefab.transform.SetParent(null);
 
-        _wantToDestroyRock = true;
-
-        
+        _wantToDestroyRock = true; 
     }
 
     private void DestroyFx()

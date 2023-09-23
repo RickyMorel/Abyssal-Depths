@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -923035277647292803}
   - component: {fileID: -1112327538686530391}
   - component: {fileID: 7797093439678085605}
-  m_Layer: 25
+  m_Layer: 26
   m_Name: ElectricWireBeacon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,12 +78,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 50
   _damageTypes: 0000000000000000
+  _stunPlayersInShipOnHit: 0
   _particles: []
+  _muzzleFlash: {fileID: 0}
   _shouldUnparentParticle: 0
   _shakeCameraOnHit: 0
-  _attachLayers:
-    serializedVersion: 2
-    m_Bits: 65
+  _impactSfx:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!1001 &6314916805301139229
 PrefabInstance:
   m_ObjectHideFlags: 0

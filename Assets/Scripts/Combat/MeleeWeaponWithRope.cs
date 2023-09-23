@@ -49,6 +49,7 @@ public class MeleeWeaponWithRope : MeleeWeapon
         ReturnWeaponHead();
 
         //25 = orthographic
+        //26 = LightSaber
         _ogLayer = 25;
     }
 
@@ -91,7 +92,8 @@ public class MeleeWeaponWithRope : MeleeWeapon
     {
         if (_throwState != ThrowState.Attached)
         {
-            if (_throwState == ThrowState.Arrived || _throwState == ThrowState.Stuck || _throwState == ThrowState.GrabbingEnemy) { ReturnWeaponHead(); }
+            ReturnWeaponHead();
+            //if (_throwState == ThrowState.Arrived || _throwState == ThrowState.Stuck || _throwState == ThrowState.GrabbingEnemy) { ReturnWeaponHead(); }
 
             return;
         }

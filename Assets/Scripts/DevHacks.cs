@@ -27,6 +27,7 @@ public class DevHacks : MonoBehaviour
             RemoveUpgrades();
             _shipWeapons[0].TryUpgrade(_laserChipMK1, null);
             _shipWeapons[1].TryUpgrade(_electricChipMK1, null);
+            _shipWeapons[1].TryUpgrade(_electricChipMK1, null);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
@@ -42,6 +43,12 @@ public class DevHacks : MonoBehaviour
             _shipWeapons[0].TryUpgrade(_laserChipMK1, null);
             _shipWeapons[1].TryUpgrade(_fireChipMK1, null);
             _shipWeapons[1].TryUpgrade(_baseChipMK1, null);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            RemoveUpgrades();
+            _shipWeapons[0].TryUpgrade(_baseChipMK1, null);
+            _shipWeapons[1].TryUpgrade(_electricChipMK1, null);
         }
     }
 

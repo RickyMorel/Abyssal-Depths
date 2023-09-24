@@ -51,8 +51,6 @@ public class GPlanner
 
         bool success = BuildGraph(start, leaves, usableActions, goal);
 
-        Debug.Log("usableActions: " + usableActions.Count + $"success: {success}");
-
         if (!success) { return null; }
 
         Node cheapest = null;

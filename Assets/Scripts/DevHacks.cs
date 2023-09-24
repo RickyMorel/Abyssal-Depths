@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class DevHacks : MonoBehaviour
 {
+    #region Editor Fields
+
+    [SerializeField] private GameObject _gateKeyPickupPrefab;
+
+    #endregion
+
     #region Private Variables
 
     private Weapon[] _shipWeapons;
@@ -24,6 +30,7 @@ public class DevHacks : MonoBehaviour
     {
         DayNightHacks();
         UpgradeHacks();
+        if (Input.GetKeyDown(KeyCode.K)) { Instantiate(_gateKeyPickupPrefab, ShipMovingStaticManager.Instance.transform.position, Quaternion.identity); }
     }
 
     private void UpgradeHacks()

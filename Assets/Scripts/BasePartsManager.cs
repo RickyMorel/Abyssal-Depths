@@ -81,8 +81,8 @@ public class BasePartsManager : MonoBehaviour
 
     public Transform GetLocation(BasePartType partType)
     {
-        BuildingUpgradeUI.Instance.EnableUpgradesPanel(false);
-        BuildingFarmUI.Instance.EnablePanel(false);
+        if (BuildingUpgradeUI.Instance != null) { BuildingUpgradeUI.Instance.EnableUpgradesPanel(false); }
+        if (BuildingFarmUI.Instance != null) { BuildingFarmUI.Instance.EnablePanel(false); }
 
         return _basePartLocations[_currentLocationIndex].GetLocation(partType);
     }

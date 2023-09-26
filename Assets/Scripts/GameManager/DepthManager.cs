@@ -54,7 +54,7 @@ public class DepthManager : MonoBehaviour
 
     private void OnGUI()
     {
-        GameStatsPanelUI.Instance.UpdateDepth((int)_currentDepth);
+        if (GameStatsPanelUI.Instance) { GameStatsPanelUI.Instance.UpdateDepth((int)_currentDepth); }
     }
 
     #endregion

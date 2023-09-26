@@ -89,6 +89,6 @@ public class GameAssetsManager : MonoBehaviour
         }
 
         _enemyDamageDataSOInstance = new EnemyDamageDataSO(_enemyDamageDataSOPrefab);
-        //_buildingDamageDataSOInstance = new EnemyDamageDataSO(_buildingDamageDataSOPrefab);
+        _buildingDamageDataSOInstance = new EnemyDamageDataSO(_buildingDamageDataSOPrefab);
     }
 }

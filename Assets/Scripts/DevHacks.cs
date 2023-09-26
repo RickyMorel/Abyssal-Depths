@@ -7,6 +7,7 @@ public class DevHacks : MonoBehaviour
     #region Editor Fields
 
     [SerializeField] private GameObject _gateKeyPickupPrefab;
+    [SerializeField] private GameObject[] _objectsToSetActiveOnKeyPress;
 
     #endregion
 
@@ -30,7 +31,31 @@ public class DevHacks : MonoBehaviour
     {
         DayNightHacks();
         UpgradeHacks();
+        BuildingUpgradeHacks();
+        SetActiveObjects();
         if (Input.GetKeyDown(KeyCode.K)) { Instantiate(_gateKeyPickupPrefab, ShipMovingStaticManager.Instance.transform.position, Quaternion.identity); }
+    }
+
+    private void SetActiveObjects()
+    {
+        if (!Input.GetKeyDown(KeyCode.Alpha0)) { return; }
+
+        foreach (GameObject obj in _objectsToSetActiveOnKeyPress)
+        {
+            obj.SetActive(true);
+        }
+    }
+
+    private void BuildingUpgradeHacks()
+    {
+        if (!Input.GetKeyDown(KeyCode.U)) { return; }
+
+        BuildingUpgradable[] buildings = FindObjectsOfType<BuildingUpgradable>();
+
+        foreach (BuildingUpgradable building in buildings)
+        {
+            building.TryUpgrade(true);
+        }
     }
 
     private void UpgradeHacks()

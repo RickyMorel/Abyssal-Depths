@@ -982,12 +982,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2402305470423791049}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.411, z: 0}
+  m_LocalPosition: {x: 218.79, y: -417.182, z: -9.606}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1904559158525941805}
-  m_RootOrder: 6
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2466645675662963668
 GameObject:
@@ -15357,6 +15357,7 @@ GameObject:
   - component: {fileID: 5518618001817704406}
   - component: {fileID: 7501770022225182219}
   - component: {fileID: 4738006863710148220}
+  - component: {fileID: 1954799534}
   m_Layer: 0
   m_Name: Game_Manager
   m_TagString: Untagged
@@ -15384,7 +15385,7 @@ Transform:
   - {fileID: 1957963999228688441}
   - {fileID: 409205976}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1470298975805987252
 MonoBehaviour:
@@ -15489,7 +15490,7 @@ MonoBehaviour:
   _laserHeatColor: {r: 3.8580287, g: 0.05095489, b: 0.05095489, a: 0}
   _chipDataSO: {fileID: 11400000, guid: 96b9c6d13f586074a82a619b98aae03e, type: 2}
   _enemyDamageDataSOPrefab: {fileID: 11400000, guid: cfa562578269423438edac810d636dc0, type: 2}
-  _buildingDamageDataSOPrefab: {fileID: 0}
+  _buildingDamageDataSOPrefab: {fileID: 11400000, guid: 891336b0a02ec594fba829a8f3289f36, type: 2}
   _damageType: {fileID: 11400000, guid: 10f678d6cd0b642488241d5f76d2b3eb, type: 2}
 --- !u!114 &607561777
 MonoBehaviour:
@@ -15915,6 +15916,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _surfaceLevelDepth: -350
   _seaAbyssDepth: -4000
+--- !u!114 &1954799534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3852162812249718933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 090096ea330bf7043bbcf184e15846e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gateKeyPickupPrefab: {fileID: 7978070899682122034, guid: 02b68d271f384184f8d18fcee6b304b0, type: 3}
 --- !u!1 &3852162812439959518
 GameObject:
   m_ObjectHideFlags: 0
@@ -19199,6 +19213,10 @@ PrefabInstance:
     - target: {fileID: 7356807008713917258, guid: cfab57151a7cda643b55453339523b08, type: 3}
       propertyPath: m_Name
       value: ShipCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7356807008713917258, guid: cfab57151a7cda643b55453339523b08, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7356807008713917262, guid: cfab57151a7cda643b55453339523b08, type: 3}
       propertyPath: m_Pivot.x

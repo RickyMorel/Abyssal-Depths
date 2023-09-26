@@ -44,6 +44,8 @@ public class GameManager : MonoBehaviour
     {
         _deathManager = GetComponent<DeathManager>();
         _levelData = GetComponent<LevelData>();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     public void GameOver()

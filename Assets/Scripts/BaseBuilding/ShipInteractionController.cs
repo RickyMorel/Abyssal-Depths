@@ -52,9 +52,12 @@ public class ShipInteractionController : MonoBehaviour
 
     private void TryUpgrade()
     {
+        Debug.Log("TryUpgrade");
         if ((_currentInteractable is BuildingUpgradable) == false) { return; }
 
         BuildingUpgradable upgradable = _currentInteractable as BuildingUpgradable;
+
+        Debug.Log("TryUpgrade: " + upgradable);
 
         upgradable.TryUpgrade();
     }

@@ -83,7 +83,7 @@ public class BuildingUpgradable : BuildingInteractable
         }
     }
 
-    public void TryUpgrade()
+    public void TryUpgrade(bool forceUpgrade = false)
     {
         //Cant upgrade if building is broken
         if(BuildingHealth != null && BuildingHealth.IsDead()) { return; }
@@ -91,9 +91,11 @@ public class BuildingUpgradable : BuildingInteractable
         //Dont try to upgrade when there are none left
         if (_upgrades.Length - 1 == _currentUpgradeIndex) { return; }
 
-        if (!BuildingUpgradeUI.Instance.IsEnabled()) { BuildingUpgradeUI.Instance.Initialize(GetCurrentUpgrade().CraftingRecipy, GetCurrentUpgrade().SpentMaterials); return; }
+        if (BuildingUpgradeUI.Instance != null && !BuildingUpgradeUI.Instance.IsEnabled()) { BuildingUpgradeUI.Instance.Initialize(GetCurrentUpgrade().CraftingRecipy, GetCurrentUpgrade().SpentMaterials); return; }
 
         CraftingRecipy wantedRecipe = _upgrades[_currentUpgradeIndex].CraftingRecipy;
+
+        if (forceUpgrade) { StartCoroutine(CraftUpgrade(wantedRecipe)); return; }
 
         AddToSpentMaterials(_upgrades[_currentUpgradeIndex]);
 
@@ -108,10 +110,12 @@ public class BuildingUpgradable : BuildingInteractable
     {
         GetComponent<Outline>().enabled = false;
 
-        ParticleSystem buildingSmokeParticle = Instantiate(GameAssetsManager.Instance.BuildingSmokeParticle, transform).GetComponent<ParticleSystem>();
-        buildingSmokeParticle.Play();
+       //ParticleSystem buildingSmokeParticle = Instantiate(GameAssetsManager.Instance.BuildingSmokeParticle, transform).GetComponent<ParticleSystem>();
+       //buildingSmokeParticle.Play();
 
-        yield return new WaitForSeconds(3);
+        BuildingUpgradeUI.Instance.EnableUpgradesPanel(false);
+
+        yield return new WaitForSeconds(0.1f);
 
         MainInventory.Instance.RemoveItems(wantedRecipe.CraftingIngredients);
 
@@ -120,8 +124,6 @@ public class BuildingUpgradable : BuildingInteractable
         _currentUpgradeIndex++;
 
         _upgrades[_currentUpgradeIndex].Mesh.SetActive(true);
-
-        BuildingUpgradeUI.Instance.EnableUpgradesPanel(false);
     }
 
     public override bool CanUse()

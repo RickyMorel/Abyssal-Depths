@@ -91,7 +91,7 @@ public class BuildingUpgradable : BuildingInteractable
         //Dont try to upgrade when there are none left
         if (_upgrades.Length - 1 == _currentUpgradeIndex) { return; }
 
-        if (BuildingUpgradeUI.Instance != null && !BuildingUpgradeUI.Instance.IsEnabled()) { BuildingUpgradeUI.Instance.Initialize(GetCurrentUpgrade().CraftingRecipy, GetCurrentUpgrade().SpentMaterials); return; }
+        if (BuildingUpgradeUI.Instance != null && !BuildingUpgradeUI.Instance.IsEnabled() && !forceUpgrade) { BuildingUpgradeUI.Instance.Initialize(GetCurrentUpgrade().CraftingRecipy, GetCurrentUpgrade().SpentMaterials); return; }
 
         CraftingRecipy wantedRecipe = _upgrades[_currentUpgradeIndex].CraftingRecipy;
 

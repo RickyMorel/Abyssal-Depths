@@ -203,7 +203,7 @@ public class GAgent : MonoBehaviour
         }
         else
         {
-            //_actionQueue = null;
+            _actionQueue = null;
 #if GOAL_DEBUGS
             UpdateActionQueueList();
 #endif

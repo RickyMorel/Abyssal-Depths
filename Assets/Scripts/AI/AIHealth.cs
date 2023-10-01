@@ -86,17 +86,21 @@ public class AIHealth : PlayerHealth
         _microPauseCoroutine = null;
     }
 
-    private IEnumerator PushWhenShot()
+    public IEnumerator PushWhenShot()
     {
-        _gAgent.StateMachine.CanMove = false;
-        _rb.isKinematic = false;
+        SetCanMove(false);
 
         _rb.AddForce(-transform.forward * 40, ForceMode.VelocityChange);
 
         yield return new WaitForSeconds(1f);
 
-        _gAgent.StateMachine.CanMove = true;
-        _rb.isKinematic = true;
+        SetCanMove(true);
+    }
+
+    public void SetCanMove(bool canMove)
+    {
+        _gAgent.StateMachine.CanMove = canMove;
+        _rb.isKinematic = canMove;
     }
 
     public override void Die()

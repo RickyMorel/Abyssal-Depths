@@ -7,6 +7,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(AICombat))]
 [RequireComponent(typeof(AIAudio))]
+[RequireComponent(typeof(AIHealth))]
 public class AIStateMachine : BaseStateMachine
 {
     #region Private Variables
@@ -14,8 +15,9 @@ public class AIStateMachine : BaseStateMachine
     private GAgent _gAgent;
     private NavMeshAgent _agent;
     private AICombat _aiCombat;
+    private AIHealth _aiHealth;
     private AIAudio _aiAudio;
-    private bool _isBouncingOffShield = false;
+    [SerializeField] private bool _isBouncingOffShield = false;
     private float _movementSpeed = 1f;
 
     #endregion
@@ -25,6 +27,7 @@ public class AIStateMachine : BaseStateMachine
     public NavMeshAgent Agent => _agent;
     public AIAudio AIAudio => _aiAudio;
     public AICombat AICombat => _aiCombat;
+    public AIHealth AIHealth => _aiHealth;
     public bool IsBouncingOffShield => _isBouncingOffShield;
 
     #endregion
@@ -37,6 +40,7 @@ public class AIStateMachine : BaseStateMachine
         _aiCombat = GetComponent<AICombat>();
         _gAgent = GetComponent<GAgent>();
         _aiAudio = GetComponent<AIAudio>();
+        _aiHealth = GetComponent<AIHealth>();
     }
 
     public override void Move()
@@ -110,10 +114,25 @@ public class AIStateMachine : BaseStateMachine
             _rb.AddForce(pushDir.normalized * _rb.mass * pushForce, ForceMode.Impulse);
         }
 
-        yield return new WaitForSeconds(3f);
+        _aiHealth.StopAllCoroutines();
 
-        if (!IsOnGround()) { StartCoroutine(SetBouncingOffShieldCoroutine(pushDir, pushForce)); }
-        else { _isBouncingOffShield = false; }
+        yield return new WaitForSeconds(1f);
+
+        while(!IsOnGround(out NavMeshHit groundPos))
+        {
+            yield return null;
+        }
+
+        IsOnGround(out NavMeshHit groundPosConfirmed);
+
+        transform.position = groundPosConfirmed.position;
+        transform.rotation = Quaternion.identity;
+
+        _isBouncingOffShield = false;
+
+        StopAllCoroutines();
+        _aiHealth.SetCanMove(true);
+       // StartCoroutine(_aiHealth.PushWhenShot());
     }
 
     public void SetMovementSpeed(float newSpeed)
@@ -121,11 +140,13 @@ public class AIStateMachine : BaseStateMachine
         _movementSpeed = newSpeed;
     }
 
-    private bool IsOnGround()
+    private bool IsOnGround(out NavMeshHit groundPos)
     {
         NavMeshHit hit;
 
         bool isOnNavMesh = NavMesh.SamplePosition(transform.position, out hit, 5f, _agent.areaMask);
+
+        groundPos = hit;
 
         return isOnNavMesh;
     }

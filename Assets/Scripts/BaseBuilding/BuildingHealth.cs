@@ -10,6 +10,7 @@ public class BuildingHealth : Damageable
     [SerializeField] private BuildingUpgradable.Upgrade _fixCost;
     [SerializeField] private GameObject[] _objectsToDeactivateWhenDamaged;
     [SerializeField] private GameObject[] _objectsToActivateWhenDamaged;
+    [SerializeField] private ParticleSystem _destroyedParticles;
 
     #endregion
 
@@ -88,5 +89,7 @@ public class BuildingHealth : Damageable
         BuildingUpgradeUI.Instance.EnableUpgradesPanel(false);
 
         EnableDamagedObjects(true);
+
+        _destroyedParticles.Play();
     }
 }

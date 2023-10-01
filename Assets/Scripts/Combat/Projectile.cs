@@ -126,9 +126,9 @@ public class Projectile : MonoBehaviour
     public void Launch(Vector3 direction, Vector3 lookDir = default(Vector3))
     {
         //Forces projectile to always be in Z = 0f
-        direction.z = 0f;
-        lookDir.z = 0f;
-        transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
+        //direction.z = 0f;
+        //lookDir.z = 0f;
+        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 
         _rb.velocity = Vector3.zero;
         _rb.AddForce(direction.normalized * _rb.mass * _speed, ForceMode.Impulse);

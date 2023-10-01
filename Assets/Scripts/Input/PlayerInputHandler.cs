@@ -172,8 +172,6 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (!_player.GetButtonDown("Jump")) { return; }
 
-        Debug.Log("Jump!: " + _player);
-
         if (CanPlayerSpawn)
         {
             OnTrySpawn?.Invoke(this);

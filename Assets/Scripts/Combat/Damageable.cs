@@ -25,8 +25,6 @@ public class Damageable : MonoBehaviour
 
     #region Private Variables
 
-    [ColorUsageAttribute(false, true)] private Color _originalColor;
-
     private Coroutine _fireRoutine = null;
     private Coroutine _electricRoutine = null;
 

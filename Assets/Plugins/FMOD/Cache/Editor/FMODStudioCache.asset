@@ -967,7 +967,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 90
-  Length: 0
+  Length: 1250
 --- !u!114 &-477762706927662196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1100,13 +1100,13 @@ MonoBehaviour:
   - {fileID: -8274253440812647375}
   - {fileID: -2981286050374695080}
   - {fileID: -2943742431323370490}
-  - {fileID: -2036270840429582592}
+  - {fileID: 1104368284618811868}
   EditorParameters: []
   MasterBanks:
   - {fileID: 1153421836587018489}
   StringsBanks:
   - {fileID: 7358886339440077305}
-  cacheTime: 638324778334082378
+  cacheTime: 638322779814179582
   cacheVersion: 131605
 --- !u!114 &178084702203512825
 MonoBehaviour:
@@ -1189,6 +1189,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 100
   Length: 1718
+--- !u!114 &1104368284618811868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Weapons/Shoot/Shoot_FireShotgun
+  m_EditorClassIdentifier: 
+  Path: event:/Weapons/Shoot/Shoot_FireShotgun
+  Guid:
+    Data1: 1013114537
+    Data2: 1306130207
+    Data3: -395372663
+    Data4: -1060362237
+  Banks:
+  - {fileID: 1153421836587018489}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &1153421836587018489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1204,10 +1231,10 @@ MonoBehaviour:
   Path: AbyssalDepthsFMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638324778333860721
+  lastModified: 638322779814129715
   FileSizes:
   - Name: Desktop
-    Value: 6083552
+    Value: 6152576
   Exists: 1
 --- !u!114 &1321281900555705600
 MonoBehaviour:
@@ -1602,7 +1629,7 @@ MonoBehaviour:
   Path: AbyssalDepthsFMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638324778334082378
+  lastModified: 638322779814179582
   FileSizes:
   - Name: Desktop
     Value: 3982

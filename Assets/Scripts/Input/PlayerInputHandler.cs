@@ -86,6 +86,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void Update()
     {
+        IsPlayerActive = true;
         Move();
         Jump();
         Confirm();
@@ -162,7 +163,7 @@ public class PlayerInputHandler : MonoBehaviour
         //If is inside ship, don't allow z movement
         float y = CameraManager.Instance.IsInOrthoMode ? 0f : moveVertical;
 
-        _moveDirection = new Vector2(moveHorizontal, y).normalized;
+        _moveDirection = new Vector2(moveHorizontal, 0f).normalized;
         _interactableMoveDirection = new Vector2(moveHorizontal, moveVertical).normalized;
         _interactableMoveDirection2 = new Vector2(moveHorizontal2, moveVertical2).normalized;
     }
@@ -176,10 +177,10 @@ public class PlayerInputHandler : MonoBehaviour
             OnTrySpawn?.Invoke(this);
         }
 
-        else if (IsPlayerActive)
-        {
-            OnJump?.Invoke();
-        }
+        //  else if (IsPlayerActive)
+        //  {
+        OnJump?.Invoke();
+       // }
     }
 
     public void Confirm()

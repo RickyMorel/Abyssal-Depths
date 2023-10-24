@@ -12,6 +12,7 @@ public class AICombat : PlayerCombat
     [SerializeField] private float _attackRange = 10f;
 
     [SerializeField] private ParticleSystem _hitParticle;
+    [SerializeField] private bool _startWithAggro = false;
 
     #endregion
 
@@ -34,7 +35,9 @@ public class AICombat : PlayerCombat
     private void Start()
     {
         _gAgent = GetComponent<GAgent>();
-        _enemyPushAttackCollider = GetComponentInChildren<EnemyPushAttackCollider>();  
+        _enemyPushAttackCollider = GetComponentInChildren<EnemyPushAttackCollider>();
+
+        if (_startWithAggro) { Aggro(); }
     }
 
     public override void Hit()
@@ -95,6 +98,6 @@ public class AICombat : PlayerCombat
 
         _gAgent.Beliefs.AddState("aggro", 1);
 
-        _gAgent.StateMachine.AIAudio.PlayShootSFX();
+        //_gAgent.StateMachine.AIAudio.PlayShootSFX();
     }
 }

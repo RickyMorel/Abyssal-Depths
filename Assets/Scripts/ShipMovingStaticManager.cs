@@ -76,10 +76,10 @@ public class ShipMovingStaticManager : MonoBehaviour
     private void SetShipParentToCorrectStartingPosition()
     {
 #if UNITY_EDITOR
-        if (!Ship.Instance.ShipData.LoadData) { return; }
+       // if (!Ship.Instance.ShipData.LoadData) { return; }
 #endif
         //Always set ShipParent position to Original SpaceStation location, it prevents sceneloading bugs
-        transform.position = new Vector3(151.6f, -328.8f, 0f);
+        //transform.position = new Vector3(151.6f, -328.8f, 0f);
     }
 
     public void SetShipState(bool isInGarage)

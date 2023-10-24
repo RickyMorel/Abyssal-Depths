@@ -84,11 +84,7 @@ public class DeathManager : MonoBehaviour
 
         yield return new WaitForSeconds((float)DeathPanelUI.Instance.DeathPanelTimeLine.duration);
 
-        Ship.Instance.ShipHealth.Respawn();
-
-        yield return new WaitForEndOfFrame();
-
-        ReloadScene();
+        GameManager.Instance.GameOver();
     }
 
     private void ShowDeathScreen()

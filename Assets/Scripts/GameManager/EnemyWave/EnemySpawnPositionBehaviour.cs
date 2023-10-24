@@ -12,22 +12,19 @@ public class EnemySpawnPositionBehaviour : MonoBehaviour
 {
     #region Editor Fields
 
-    [SerializeField] private List<Transform> _enemySpawnTransforms = new List<Transform>();
+    [SerializeField] private List<DayEnemySpawnPositionsClass> EnemySpawnPositionPerNight = new List<DayEnemySpawnPositionsClass>();
 
     #endregion
 
     #region Private Variables
 
-    private GameObject _shipMoving;
     private static EnemySpawnPositionBehaviour _instance;
 
     #endregion
 
     #region Public Properties
 
-    public List<Transform> EnemySpawnTransforms => _enemySpawnTransforms;
     public static EnemySpawnPositionBehaviour Instance { get { return _instance; } }
-    public event Action OnTransformCheck;
 
     #endregion
 
@@ -45,37 +42,20 @@ public class EnemySpawnPositionBehaviour : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        _shipMoving = GameObject.FindGameObjectWithTag("MainShip");
-        OnTransformCheck?.Invoke();
+    #endregion
 
-        EnemyWaveSystem.Instance.OnEnemyAboutToSpawn += CheckForShipDistance;
+    public List<Transform> GetWhereToSpawn()
+    {
+        return EnemySpawnPositionPerNight[DayNightManager.Instance.DayCount - 1].EnemySpawnPosition;
     }
 
-    private void OnDisable()
+    #region Helper Class
+
+    [Serializable]
+    public class DayEnemySpawnPositionsClass
     {
-        EnemyWaveSystem.Instance.OnEnemyAboutToSpawn -= CheckForShipDistance;
+        public List<Transform> EnemySpawnPosition;
     }
 
     #endregion
-
-    private void CheckForShipDistance()
-    {
-        if (!DayNightManager.Instance.IsNightTime) { return; }
-
-        foreach (Transform enemySpawnTransform in _enemySpawnTransforms)
-        {
-            if ((Vector2.Distance(new Vector2(enemySpawnTransform.position.x, enemySpawnTransform.position.y), new Vector2(_shipMoving.transform.position.x, _shipMoving.transform.position.y)) < 80) && enemySpawnTransform.gameObject.activeInHierarchy)
-            {
-                enemySpawnTransform.gameObject.SetActive(false);
-                OnTransformCheck?.Invoke();
-            }
-            else if ((Vector2.Distance(new Vector2(enemySpawnTransform.position.x, enemySpawnTransform.position.y), new Vector2(_shipMoving.transform.position.x, _shipMoving.transform.position.y)) > 80) && !enemySpawnTransform.gameObject.activeInHierarchy)
-            {
-                enemySpawnTransform.gameObject.SetActive(true);
-                OnTransformCheck?.Invoke();
-            }
-        }
-    }
 }

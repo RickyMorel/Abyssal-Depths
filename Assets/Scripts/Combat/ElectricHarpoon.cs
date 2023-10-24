@@ -13,6 +13,7 @@ public class ElectricHarpoon : MeleeWeaponWithRope
     [Header("Floats")]
     [SerializeField] private float _grappleSpeed;
     [SerializeField] private float _maxElectricBeaconDistance;
+    [SerializeField] private LayerMask _collisionLayers;
     [Header("GameObject Related")]
     [SerializeField] private Collider _trackEnemiesZone;
     [SerializeField] private GameObject _electructionZonePrefab;
@@ -50,7 +51,6 @@ public class ElectricHarpoon : MeleeWeaponWithRope
         //set's harpoon collider to trigger when grabbing enemy to prevent weird physics collisions
         _harpoonCollider.isTrigger = _throwState == ThrowState.GrabbingEnemy;
 
-
         if (_throwState == ThrowState.GrabbingEnemy && _tetheredEnemy != null) { _weaponHeadRb.transform.position = _tetheredEnemy.transform.position; }
 
         ThrowWeaponHead();
@@ -69,6 +69,8 @@ public class ElectricHarpoon : MeleeWeaponWithRope
     //Invoked by UnityEvent
     public void OnCollide(Collider collider)
     {
+        if (_collisionLayers != (_collisionLayers | (1 << collider.gameObject.layer))) { return; }
+
         if (_throwState == ThrowState.Attached) { return; }
         if (_throwState == ThrowState.Returning) { return; }
         if (_throwState == ThrowState.GrabbingEnemy) { return; }
@@ -88,6 +90,8 @@ public class ElectricHarpoon : MeleeWeaponWithRope
 
     public override void CheckShootInput()
     {
+        if(_weapon.CurrentPlayer == null) { return; }
+
         //Grapple ship towards harpoon
         if (_weapon.CurrentPlayer.IsUsing_2 && _throwState == ThrowState.Stuck)
         {

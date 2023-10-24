@@ -11,7 +11,7 @@ public class MonsterPlant : GAgent
         SubGoal s4 = new SubGoal("destroyShip", 1, false);
         Goals.Add(s4, 5);
 
-        SubGoal s3 = new SubGoal("healthy", 1, false);
-        Goals.Add(s3, 10);
+        //SubGoal s3 = new SubGoal("healthy", 1, false);
+        //Goals.Add(s3, 10);
     }
 }

@@ -13,6 +13,17 @@ public class UpgradeChip : Item
     {
         return $"{ChipType.ToString()} Chip MK{Level}";
     }
+
+    public UpgradeChip(ChipType chipType, int level)
+    {
+        ChipType = chipType;
+        Level = level;  
+    }
+
+    public UpgradeChip()
+    {
+
+    }
 }
 
 public enum ChipType

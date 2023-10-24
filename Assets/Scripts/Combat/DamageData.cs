@@ -61,7 +61,14 @@ public class DamageData
 
         DamageData damageData = null;
 
-        if (weapon == null) { GameAssetsManager.Instance.EnemyDamageDataSO.CreateDamageForEnemies(damageTypes, aiCombatID, ref damageData); }
+        if (weapon == null) 
+        {
+            //DamageSO for buildings
+            if(aiCombatID >= 100) { GameAssetsManager.Instance.BuildingDamageDataSO.CreateDamageForEnemies(damageTypes, aiCombatID, ref damageData); }
+            //DamageSO for enemies
+            else { GameAssetsManager.Instance.EnemyDamageDataSO.CreateDamageForEnemies(damageTypes, aiCombatID, ref damageData); }
+        }
+        //DamageSO for chip upgradables
         else { GameAssetsManager.Instance.ChipDataSO.CreateDamageDataFromChip(damageTypes, weapon, ref damageData); }
 
         return damageData;

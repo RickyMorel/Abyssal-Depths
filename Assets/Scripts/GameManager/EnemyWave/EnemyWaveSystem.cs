@@ -42,16 +42,16 @@ public class EnemyWaveSystem : MonoBehaviour
             _instance = this;
         }
 
-        EnemySpawnPositionBehaviour.Instance.OnTransformCheck += GetEnemySpawnTransforms;
         DayNightManager.Instance.OnCycleChange += KillCurrentNightEnemiesIfDayTime;
         DayNightManager.Instance.OnCycleChange += CheckIfEnemiesShouldSpawn;
+        DayNightManager.Instance.OnCycleChange += GetEnemySpawnTransforms;
     }
 
     private void OnDisable()
     {
-        EnemySpawnPositionBehaviour.Instance.OnTransformCheck -= GetEnemySpawnTransforms;
         DayNightManager.Instance.OnCycleChange -= KillCurrentNightEnemiesIfDayTime;
         DayNightManager.Instance.OnCycleChange -= CheckIfEnemiesShouldSpawn;
+        DayNightManager.Instance.OnCycleChange -= GetEnemySpawnTransforms;
     }
 
     private void Update()
@@ -63,7 +63,7 @@ public class EnemyWaveSystem : MonoBehaviour
 
     private void GetEnemySpawnTransforms()
     {
-        _enemySpawnTranforms = EnemySpawnPositionBehaviour.Instance.EnemySpawnTransforms;
+        _enemySpawnTranforms = EnemySpawnPositionBehaviour.Instance.GetWhereToSpawn();
     }
     private void CheckIfEnemiesShouldSpawn()
     {

@@ -147,6 +147,7 @@ public abstract class Inventory : MonoBehaviour
 
     public virtual void AddItems(List<ItemQuantity> addedItems, bool displayAddedItems = true)
     {
+        Debug.Log("AddItems");
         foreach (ItemQuantity itemQuantity in addedItems)
         {
             AddItem(itemQuantity);
@@ -155,13 +156,14 @@ public abstract class Inventory : MonoBehaviour
 
     public void AddItem(ItemQuantity itemQuantity)
     {
-        if (_inventory.ContainsKey(itemQuantity.Item))
+        if (_inventory.TryGetValue(itemQuantity.Item, out ItemQuantity inventoryItem))
         {
-            _inventory[itemQuantity.Item].Amount += itemQuantity.Amount;
+            inventoryItem.Amount = inventoryItem.Amount + itemQuantity.Amount;
         }
         else
         {
-            _inventory.Add(itemQuantity.Item, itemQuantity);
+            ItemQuantity newItem = new ItemQuantity(itemQuantity.Item, itemQuantity.Amount);
+            _inventory.Add(newItem.Item, newItem);
         }
 
         OnUpdatedInventory?.Invoke();
@@ -207,6 +209,13 @@ public abstract class Inventory : MonoBehaviour
         OnUpdatedInventory?.Invoke();
 
         LoadItems();
+    }
+
+    public int GetItemAmount(Item item)
+    {
+        if(_inventory.TryGetValue(item, out ItemQuantity itemQuantity)) { return itemQuantity.Amount; }
+
+        return 0;
     }
 
     private void HandleUpdateInventory()

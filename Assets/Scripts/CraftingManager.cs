@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Analytics;
+using System;
 
 public class CraftingManager : MonoBehaviour
 {
@@ -36,6 +37,7 @@ public class CraftingManager : MonoBehaviour
     #region Public Properties
 
     public static CraftingManager Instance { get { return _instance; } }
+    public List<CraftingRecipy> CraftingRecipyList => _craftingRecipyList;
 
     #endregion
 
@@ -70,6 +72,23 @@ public class CraftingManager : MonoBehaviour
         return true;
     }
 
+    public bool TryCraftAndAddToInventory(CraftingRecipy craftingRecipy)
+    {
+        if (!CanCraft(craftingRecipy)) { return false; }
+
+        MainInventory.Instance.RemoveItems(craftingRecipy.CraftingIngredients);
+
+        List<ItemQuantity> craftedItems = new List<ItemQuantity>();
+        craftedItems.Add(craftingRecipy.CraftedItem);
+
+        Debug.Log("Crafted:" + craftingRecipy.CraftedItem.Amount);
+
+        MainInventory.Instance.AddItems(craftedItems);
+
+        return true;
+    }
+
+    [Obsolete]
     public void DisplayItemInfo(CraftingRecipy craftingRecipy)
     {
         _itemNameText.text = craftingRecipy.CraftedItem.Item.GetItemName();
@@ -78,7 +97,8 @@ public class CraftingManager : MonoBehaviour
         LoadIngredients(craftingRecipy, _ingredientsContentTransform);
     }
 
-    public void EnableCanvas(bool isEnabled, PlayerInputHandler currentPlayer, CraftingStation craftingStation)
+    [Obsolete]
+    public void EnableCanvas(bool isEnabled, PlayerInputHandler currentPlayer, CraftingStation craftingStation = null)
     {
         _craftingPanel.SetActive(isEnabled);
         _currentPlayer = currentPlayer;
@@ -89,34 +109,24 @@ public class CraftingManager : MonoBehaviour
         if (isEnabled)
         {
             LoadItems();
-            LoadInventory();
         }
+
+        InventoryUI.Instance.EnableInventory(isEnabled);
     }
 
+    [Obsolete]
     public static void LoadIngredients(CraftingRecipy craftingRecipy, Transform contentTransform)
     {
         DestroyItemsUI(contentTransform);
 
         foreach (ItemQuantity ingredient in craftingRecipy.CraftingIngredients)
         {
-            Debug.Log(_itemUIPrefab);
-            Debug.Log(contentTransform);
             GameObject itemUI = Instantiate(_itemUIPrefab, contentTransform);
             itemUI.GetComponent<ItemUI>().Initialize(ingredient);
         }
     }
 
-    public void LoadInventory()
-    {
-        DestroyItemsUI(_inventoryContentTransform);
-
-        foreach (ItemQuantity material in MainInventory.Instance.InventoryDictionary.Values)
-        {
-            GameObject itemUI = Instantiate(_itemUIPrefab, _inventoryContentTransform);
-            itemUI.GetComponent<ItemUI>().Initialize(material, null);
-        }
-    }
-
+    [Obsolete]
     private void LoadItems()
     {
         DestroyItemsUI(_contentTransform);
@@ -125,10 +135,11 @@ public class CraftingManager : MonoBehaviour
         {
             if (craftable.IsRepair) { continue; }
             GameObject itemUI = Instantiate(_craftingItemUIPrefab, _contentTransform);
-            itemUI.GetComponent<CraftingItemUI>().Initialize(craftable, _currentPlayer, _currentCraftingStation);
+            itemUI.GetComponent<CraftingItemUI>().InitializeItem(craftable, _currentPlayer, _currentCraftingStation);
         }
     }
 
+    [Obsolete]
     public static void DestroyItemsUI(Transform contentTransform)
     {
         foreach (Transform child in contentTransform)

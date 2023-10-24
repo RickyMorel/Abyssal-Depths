@@ -85,9 +85,11 @@ public class Interactable : MonoBehaviour
         SetCurrentInteractable(other, false);
     }
 
+    #endregion
+
     public void SetCurrentInteractable(Collider other, bool isSetting)
     {
-        if(!_humble.SetCurrentInteractable(other, isSetting, out BaseInteractionController interactionController, out bool setInteractable, out bool setOutline)) { return; }
+        if (!_humble.SetCurrentInteractable(other, isSetting, out BaseInteractionController interactionController, out bool setInteractable, out bool setOutline)) { return; }
 
         interactionController?.SetCurrentInteractable(setInteractable ? this : null);
 
@@ -99,7 +101,7 @@ public class Interactable : MonoBehaviour
         _humble.SetCurrentPlayer(interactionController);
         GameAudioManager.Instance.PlaySound(GameAudioManager.Instance.InteractableAttackMonitorSfx, transform.position);
 
-        if(_onInteractParticles != null) { _onInteractParticles.Play(); }
+        if (_onInteractParticles != null) { _onInteractParticles.Play(); }
     }
 
     public void Uninteract()
@@ -111,8 +113,6 @@ public class Interactable : MonoBehaviour
     {
         _humble.RemoveCurrentPlayer();
     }
-
-    #endregion
 
     public bool IsBroken()
     {

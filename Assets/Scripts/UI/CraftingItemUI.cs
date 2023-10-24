@@ -6,12 +6,21 @@ using TMPro;
 using UnityEngine.EventSystems;
 using System;
 
-public class CraftingItemUI : ItemUI, IPointerEnterHandler
+public class CraftingItemUI : FarmResourceItemUI, IPointerEnterHandler
 {
+    #region Editor Fields
+
+    [SerializeField] protected TextMeshProUGUI _damageText;
+    [SerializeField] protected Image _damageIcon;
+
+    #endregion
+
     #region Private Variables
 
     private CraftingRecipy _craftingRecipy;
     private CraftingStation _currentCraftingStation;
+    private PlayerInputHandler _currentPlayer;
+    private bool _gotClicked = false;
 
     #endregion
 
@@ -21,49 +30,57 @@ public class CraftingItemUI : ItemUI, IPointerEnterHandler
 
     #endregion
 
-    private void Start()
+    #region Unity Loops
+
+    private void Awake()
     {
-        CraftingStation.OnCraft += HandleItemCrafted;
+        PlayerInputHandler.OnClick += HandleClick;
     }
 
     private void OnDestroy()
     {
-        CraftingStation.OnCraft -= HandleItemCrafted;
+        PlayerInputHandler.OnClick -= HandleClick;
     }
 
-    private void HandleItemCrafted()
-    {
-        if(_craftingRecipy == null || _currentCraftingStation == null) { return; }
+    #endregion
 
-        if (CraftingManager.CanCraft(_craftingRecipy)) SetGreyScale(0); else SetGreyScale(1);
-    }
-
-    public override void Initialize(CraftingRecipy craftingRecipy, PlayerInputHandler currentPlayer, CraftingStation craftingStation)
+    public void InitializeItem(CraftingRecipy craftingRecipy, PlayerInputHandler currentPlayer, CraftingStation craftingStation)
     {
+        Debug.Log("Craft Initialize:" + craftingRecipy.CraftedItem.Item.DisplayName + " " + craftingRecipy.CraftedItem.Amount);
         _itemQuantity = craftingRecipy.CraftedItem;
+        _currentPlayer = currentPlayer;
 
         _icon.sprite = _itemQuantity.Item.Icon;
-        _amountText.text = $"x{_itemQuantity.Amount}";
+        _itemNameText.text = _itemQuantity.Item.DisplayName;
+        _amountText.text = $"x{MainInventory.Instance.GetItemAmount(_itemQuantity.Item)} In Inventory";
 
-        _currentPlayer = currentPlayer;
+        if(_itemQuantity.Item is not UpgradeChip) { _damageText.enabled = false;  _damageIcon.enabled = false; }
+
         _currentCraftingStation = craftingStation;
         _craftingRecipy = craftingRecipy;
-
-        if (CraftingManager.CanCraft(craftingRecipy)) SetGreyScale(0); else SetGreyScale(1);
     }
 
+    private void HandleClick(PlayerInputHandler playerThatClicked)
+    {
+        if (playerThatClicked != _currentPlayer) { return; }
 
-    public override void OnClick()
+        _gotClicked = true;
+    }
+
+    public void OnClick()
     {
         if (!_gotClicked) { return; }
 
         _gotClicked = false;
 
-        _currentCraftingStation.TryCraft(CraftingRecipy);
+        bool didCraft = CraftingManager.Instance.TryCraftAndAddToInventory(CraftingRecipy);
+
+        //Refresh UI
+        if (didCraft) { CraftingUI.Instance.Initialize(_currentPlayer); }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        CraftingManager.Instance.DisplayItemInfo(CraftingRecipy);
+        CraftingUI.Instance.DisplayItemInfo(CraftingRecipy);
     }
 }

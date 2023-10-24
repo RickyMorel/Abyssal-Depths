@@ -38,6 +38,9 @@ public class GameAudioManager : MonoBehaviour
     [SerializeField] private EventReference _portalGateShaking;
     [SerializeField] private EventReference _portalGateInteraction;
 
+    [Header("Building Sounds")]
+    [SerializeField] private EventReference _transformToBasePart;
+
     [Header("Crafting Sounds")]
     [SerializeField] private EventReference _craftingTableCrafting;
     [SerializeField] private EventReference _craftingTableCrafted;
@@ -66,6 +69,9 @@ public class GameAudioManager : MonoBehaviour
     [SerializeField] private EventReference _fogIsComingSfx;
     [SerializeField] private EventReference _dayTransitionSfx;
 
+    [Header("Base Sounds")]
+    [SerializeField] private EventReference _drillingSfx;
+
     #endregion
 
     #region Private Variables
@@ -88,6 +94,7 @@ public class GameAudioManager : MonoBehaviour
     public EventReference StunnedSfx => _stunnedSfx;
     public EventReference RagdollCollisionSfx => _ragdollCollisionSfx;
     public EventReference PunchSwingSfx => _punchSwingSfx;
+    public EventReference TransformToBasePart => _transformToBasePart;
     public EventReference PunchImpactSfx => _punchImpactSfx;
     public EventReference ShipSirenSlowSfx => _shipSirenSlowSfx;
     public EventReference ShipSirenFastSfx => _shipSirenFastSfx;
@@ -112,6 +119,7 @@ public class GameAudioManager : MonoBehaviour
     public EventReference PickaxeBoostSfx => _pickaxeBoostSfx;
     public EventReference FogIsComing => _fogIsComingSfx;
     public EventReference DayTransition => _dayTransitionSfx;
+    public EventReference DrillingSfx => _drillingSfx;
 
     #endregion
 

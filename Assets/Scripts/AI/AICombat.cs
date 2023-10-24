@@ -98,6 +98,6 @@ public class AICombat : PlayerCombat
 
         _gAgent.Beliefs.AddState("aggro", 1);
 
-        _gAgent.StateMachine.AIAudio.PlayShootSFX();
+        //_gAgent.StateMachine.AIAudio.PlayShootSFX();
     }
 }

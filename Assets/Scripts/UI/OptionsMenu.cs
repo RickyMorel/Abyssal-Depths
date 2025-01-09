@@ -215,11 +215,11 @@ namespace AbyssalDepths.UI
             _textureQualitySelector.SetIndex(index, false);
 
             if (index == 0)         //Full res
-                QualitySettings.masterTextureLimit = 0;
+                QualitySettings.globalTextureMipmapLimit = 0;
             else if (index == 1)    //1/2 res    
-                QualitySettings.masterTextureLimit = 1;
+                QualitySettings.globalTextureMipmapLimit = 1;
             else                    //1/4 res
-                QualitySettings.masterTextureLimit = 2;
+                QualitySettings.globalTextureMipmapLimit = 2;
         }
 
         public void SetShadowsQuality(int index)

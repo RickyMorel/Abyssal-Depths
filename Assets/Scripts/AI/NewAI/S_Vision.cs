@@ -5,6 +5,7 @@ public class S_Vision : S_Base
 	#region Editor Fields
 
 	[SerializeField] private float _visionRange = 10f;
+	[SerializeField] private Transform _visionTransform;
 
 	#endregion
 
@@ -22,11 +23,13 @@ public class S_Vision : S_Base
 
 	private void DoRaycast()
 	{
-		Vector3 raycastDirection = Ship.Instance.transform.position - transform.position;
+		Vector3 raycastDirection = Ship.Instance.transform.position - _visionTransform.position;
 
-		if (Physics.Raycast(transform.position, raycastDirection, out RaycastHit hit, _visionRange))
+		if (Physics.Raycast(_visionTransform.position, raycastDirection, out RaycastHit hit, _visionRange))
 		{
-			Debug.DrawLine(transform.position, hit.point, Color.red);
+			Debug.Log("Hitting shipp!");
+
+			Debug.DrawLine(_visionTransform.position, hit.point, Color.red);
 			CheckHitPlayer(hit);
 		}
 	}

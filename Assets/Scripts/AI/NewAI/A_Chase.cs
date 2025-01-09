@@ -33,22 +33,17 @@ public class A_Chase : A_Base
 
 	public override void DoAction()
 	{
-		Debug.Log("Do Chase");
 		if (_isAttacking) { return; }
-		Debug.Log("Do Chase is not attacking");
 
 		CheckSwitchAction();
 
 		if (!_aiCues.Ship) { return; }
-		Debug.Log("Do Chase knows where ship is");
 
 		ChasePlayer();
 	}
 
 	private void ChasePlayer()
 	{
-		Debug.Log("_aiCues.Ship: " + _aiCues.Ship.gameObject.name);
-
 		float distanceFromPlayer = Vector3.Distance(_aiCues.Ship.transform.position, transform.position);
 
 		if (distanceFromPlayer <= _attackDistance) { StartCoroutine(AttackPlayer()); return; }

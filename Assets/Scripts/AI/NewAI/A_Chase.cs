@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -26,9 +27,9 @@ public class A_Chase : A_Base
 		_aiShootController = GetComponent<AI_ShootController>();
 	}
 
-	public override void StartAction()
+	public override void StartAction(Dictionary<string, object> data = null)
 	{
-		base.StartAction();
+		base.StartAction(data);
 	}
 
 	public override void DoAction()

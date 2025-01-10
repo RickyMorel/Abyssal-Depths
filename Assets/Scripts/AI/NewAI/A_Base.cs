@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class A_Base : MonoBehaviour
@@ -11,7 +12,7 @@ public class A_Base : MonoBehaviour
 		_aiStateMachine = GetComponent<AI_StateMachine>();
 	}
 
-	public virtual void StartAction()
+	public virtual void StartAction(Dictionary<string, object> data = null)
 	{
 
 	}

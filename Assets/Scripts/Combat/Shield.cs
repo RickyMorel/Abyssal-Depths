@@ -4,115 +4,115 @@ using UnityEngine;
 
 public class Shield : MonoBehaviour
 {
-    #region Editor Fields
+	#region Editor Fields
 
-    [Header("Stats")]
-    [SerializeField] private float _enemyPushForce = 20f;
-    [SerializeField] private float _shipPushForce = 10f;
+	[Header("Stats")]
+	[SerializeField] private float _enemyPushForce = 20f;
+	[SerializeField] private float _shipPushForce = 10f;
 
-    [Header("FX")]
-    [SerializeField] private ParticleSystem _pushParticles;
-    [SerializeField] private EventReference _shieldBounceSfx;
+	[Header("FX")]
+	[SerializeField] private ParticleSystem _pushParticles;
+	[SerializeField] private EventReference _shieldBounceSfx;
 
-    #endregion
+	#endregion
 
-    #region Private Variables
+	#region Private Variables
 
-    private int _getComponentTries = 4;
-    private ShipHealth _shipHealth;
-    private float _timeSincePushEnemy;
+	private int _getComponentTries = 4;
+	private ShipHealth _shipHealth;
+	private float _timeSincePushEnemy;
 
-    #endregion
+	#endregion
 
-    private void Start()
-    {
-        _shipHealth = Ship.Instance.ShipHealth;
-    }
+	private void Start()
+	{
+		_shipHealth = Ship.Instance.ShipHealth;
+	}
 
-    private void Update()
-    {
-        _timeSincePushEnemy += Time.deltaTime;
-    }
+	private void Update()
+	{
+		_timeSincePushEnemy += Time.deltaTime;
+	}
 
-    private void OnCollisionStay(Collision collision)
-    {
-        if (collision.gameObject.TryGetComponent(out Projectile projectile)) { ReflectProjectile(projectile); }
+	private void OnCollisionStay(Collision collision)
+	{
+		if (collision.gameObject.TryGetComponent(out Projectile projectile)) { ReflectProjectile(projectile); }
 
-        if(LayerMask.LayerToName(collision.gameObject.layer) == "NPC") { CheckForEnemyCollision(collision); }
+		if (LayerMask.LayerToName(collision.gameObject.layer) == "NPC") { CheckForEnemyCollision(collision); }
 
 
-        //Will uncomment later
-        //If object layer is one of the crash layers, except for NPC
-        //if (_shipHealth.CrashLayers == (_shipHealth.CrashLayers | (1 << collision.gameObject.layer))) { CheckForSceneCollision(collision); }
-    }
+		//Will uncomment later
+		//If object layer is one of the crash layers, except for NPC
+		//if (_shipHealth.CrashLayers == (_shipHealth.CrashLayers | (1 << collision.gameObject.layer))) { CheckForSceneCollision(collision); }
+	}
 
-    private void ReflectProjectile(Projectile projectile)
-    {
-        projectile.ReflectFromShield(_shipHealth.tag);
+	private void ReflectProjectile(Projectile projectile)
+	{
+		projectile.ReflectFromShield(_shipHealth.tag);
 
-        _pushParticles.Play();
-        GameAudioManager.Instance.PlaySound(_shieldBounceSfx, transform.position);
-    }
+		_pushParticles.Play();
+		GameAudioManager.Instance.PlaySound(_shieldBounceSfx, transform.position);
+	}
 
-    private void CheckForSceneCollision(Collision collision)
-    {
-        if(_timeSincePushEnemy < 1f) { return; }
+	private void CheckForSceneCollision(Collision collision)
+	{
+		if (_timeSincePushEnemy < 1f) { return; }
 
-        PushShip(collision);
-    }
+		PushShip(collision);
+	}
 
-    private void CheckForEnemyCollision(Collision collision)
-    {
-        Ship.Instance.ShipHealth.SetInvunerableToCrash();
+	private void CheckForEnemyCollision(Collision collision)
+	{
+		Ship.Instance.ShipHealth.SetInvunerableToCrash();
 
-        //Recursively tries to fetch the root gameobject of the collision
-        Transform parentTransform = collision.transform.parent;
+		//Recursively tries to fetch the root gameobject of the collision
+		Transform parentTransform = collision.transform.parent;
 
-        if(parentTransform == null) { return; }
+		if (parentTransform == null) { return; }
 
-        for (int i = 0; i < _getComponentTries; i++)
-        {
-            if (parentTransform.TryGetComponent(out AIStateMachine aIStateMachine)) { PushEnemy(aIStateMachine, collision); break; }
+		for (int i = 0; i < _getComponentTries; i++)
+		{
+			if (parentTransform.TryGetComponent(out AI_StateMachine aIStateMachine)) { PushEnemy(aIStateMachine, collision); break; }
 
-            parentTransform = parentTransform.parent;
+			parentTransform = parentTransform.parent;
 
-            if (parentTransform == null) { break; }
-        }
-    }
+			if (parentTransform == null) { break; }
+		}
+	}
 
-    private void PushShip(Collision collision)
-    {
-        Vector3 pushDir = _shipHealth.transform.position - collision.contacts[0].point;
+	private void PushShip(Collision collision)
+	{
+		Vector3 pushDir = _shipHealth.transform.position - collision.contacts[0].point;
 
-        _shipHealth.Rb.AddForce(pushDir.normalized * _shipHealth.Rb.mass * _shipPushForce, ForceMode.Impulse);
+		_shipHealth.Rb.AddForce(pushDir.normalized * _shipHealth.Rb.mass * _shipPushForce, ForceMode.Impulse);
 
-        _pushParticles.Play();
-        GameAudioManager.Instance.PlaySound(_shieldBounceSfx, transform.position);
-    }
+		_pushParticles.Play();
+		GameAudioManager.Instance.PlaySound(_shieldBounceSfx, transform.position);
+	}
 
-    private void PushEnemy(AIStateMachine aIStateMachine, Collision collision)
-    {
-        StartCoroutine(PushEnemyDelay(aIStateMachine, collision.contacts[0].point));
-    }
+	private void PushEnemy(AI_StateMachine aIStateMachine, Collision collision)
+	{
+		StartCoroutine(PushEnemyDelay(aIStateMachine, collision.contacts[0].point));
+	}
 
-    private IEnumerator PushEnemyDelay(AIStateMachine aIStateMachine, Vector3 contanctPoint)
-    {
-        yield return new WaitForEndOfFrame();
+	private IEnumerator PushEnemyDelay(AI_StateMachine aIStateMachine, Vector3 contanctPoint)
+	{
+		yield return new WaitForEndOfFrame();
 
-        _timeSincePushEnemy = 0f;
+		_timeSincePushEnemy = 0f;
 
-        _pushParticles.Play();
-        GameAudioManager.Instance.PlaySound(_shieldBounceSfx, transform.position);
+		_pushParticles.Play();
+		GameAudioManager.Instance.PlaySound(_shieldBounceSfx, transform.position);
 
-        //Makes ship invunerable so ship doesn't recive damage when hitting enemies with the shield
-        Ship.Instance.ShipHealth.SetInvunerableToCrash(1f);
+		//Makes ship invunerable so ship doesn't recive damage when hitting enemies with the shield
+		Ship.Instance.ShipHealth.SetInvunerableToCrash(1f);
 
-        Rigidbody rb = aIStateMachine.GetComponent<Rigidbody>();
+		Rigidbody rb = aIStateMachine.GetComponent<Rigidbody>();
 
-        Vector3 pushDir = aIStateMachine.transform.position - contanctPoint;
+		Vector3 pushDir = aIStateMachine.transform.position - contanctPoint;
 
-        Ship.Instance.Rb.AddForce(-pushDir.normalized * rb.mass, ForceMode.Impulse);
+		Ship.Instance.Rb.AddForce(-pushDir.normalized * rb.mass, ForceMode.Impulse);
 
-        aIStateMachine.BounceOffShield(pushDir, _enemyPushForce + Ship.Instance.Rb.velocity.magnitude);
-    }
+		aIStateMachine.DoRagdoll(pushDir, _enemyPushForce + Ship.Instance.Rb.velocity.magnitude);
+	}
 }

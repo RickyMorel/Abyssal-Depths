@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -57,15 +58,23 @@ public class AI_StateMachine : MonoBehaviour
 		_anim.SetFloat("Moving", _agent.velocity.magnitude / _agent.speed);
 	}
 
-	private void DoNewAction(A_Base actionToDo)
+	private void DoNewAction(A_Base actionToDo, Dictionary<string, object> data = null)
 	{
-		actionToDo.StartAction();
+		actionToDo.StartAction(data);
 
 		_currentAction = actionToDo;
 	}
 
 	public void DoPatrol() { DoNewAction(_actions[0]); }
 	public void DoChase() { DoNewAction(_actions[1]); }
+	public void DoRagdoll(Vector3 pushDir, float pushForce)
+	{
+		Dictionary<string, object> data = new Dictionary<string, object>();
+		data["pushDir"] = pushDir;
+		data["pushForce"] = pushForce;
+
+		DoNewAction(_actions[2], data);
+	}
 	public void DoSearch() { DoNewAction(_actions[2]); }
 	public void DoGoToPlayerLastSeenSpot()
 	{

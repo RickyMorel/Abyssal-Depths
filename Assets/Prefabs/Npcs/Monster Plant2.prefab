@@ -1689,6 +1689,7 @@ GameObject:
   - component: {fileID: 9054009217671395294}
   - component: {fileID: 8707134067690419915}
   - component: {fileID: 5946626683680989737}
+  - component: {fileID: 6822200644275831533}
   m_Layer: 16
   m_Name: Monster Plant2
   m_TagString: Enemy
@@ -1826,6 +1827,7 @@ MonoBehaviour:
   _actions:
   - {fileID: 4204525653877769488}
   - {fileID: 1413515161018864984}
+  - {fileID: 6822200644275831533}
 --- !u!114 &8456954498478745988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1932,6 +1934,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _visionRange: 200
   _visionTransform: {fileID: 5807305311339477148}
+--- !u!114 &6822200644275831533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2028690528299777028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f27c0ea6114a51442a9e703290fb79ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _headTrasform: {fileID: 1908735139544331565}
 --- !u!1 &2028695502240877416
 GameObject:
   m_ObjectHideFlags: 0
